@@ -20,7 +20,7 @@ export default function HomePage() {
     ko: {
       hero: {
         title: <>세상에서 가장 쉽고<br />안전한 기업용 지갑</>,
-        subtitle: '글로벌 토큰화의 초석. Non-Custody API로 대량 지급을 자동화하고, MPC Custody로 자산을 안전하게 보관하세요. AI 로보어드바이저로 포트폴리오를 최적화하고, 토큰증권 지갑으로 증권형 토큰에 투자하세요.',
+        subtitle: '글로벌 토큰화의 초석, 신뢰비용 제로의 세상을 위하여. Non-Custody API로 대량 지급을 자동화하고, MPC Custody로 자산을 안전하게 보관하세요. 토큰증권 지갑으로 증권형 토큰에 투자하세요.',
       },
       nav: {
         solutions: '솔루션',
@@ -162,7 +162,7 @@ export default function HomePage() {
     en: {
       hero: {
         title: <>The Easiest and<br />Most Secure Enterprise Wallet</>,
-        subtitle: 'Foundation of global tokenization. Automate mass distributions with Non-Custody API, secure corporate assets with MPC Custody, optimize portfolios with AI Robo-Advisor, and trade compliant security tokens with STO Wallet.',
+        subtitle: 'Foundation of global tokenization, for a world of zero trust costs. Automate mass distributions with Non-Custody API, secure corporate assets with MPC Custody, and trade compliant security tokens with STO Wallet.',
       },
       nav: {
         solutions: 'Solutions',
@@ -327,7 +327,7 @@ export default function HomePage() {
                 {language === 'ko' ? '개인용' : 'Personal'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-                AI, STO Wallet
+                STO Wallet
               </span>
             </div>
           </div>
@@ -385,18 +385,27 @@ export default function HomePage() {
                   <div className="w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
                     <a href="http://localhost:3101/login" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                       <div className="font-semibold text-gray-900 dark:text-white">
-                        {language === 'ko' ? '개인 투자자 로그인' : 'Personal Investor Login'}
+                        {language === 'ko' ? 'STO 토큰 지갑' : 'STO Token Wallet'}
                       </div>
                       <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                        {language === 'ko' ? 'STO 토큰 거래 및 AI 로보어드바이저' : 'STO token trading & AI robo-advisor'}
+                        {language === 'ko' ? '증권형 토큰 거래 및 관리' : 'Security token trading & management'}
                       </div>
                     </a>
-                    <a href="http://localhost:3102/login" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                    <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
+                    <a href="http://localhost:3103/login" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                       <div className="font-semibold text-gray-900 dark:text-white">
-                        {language === 'ko' ? '기업 고객 로그인' : 'Enterprise Customer Login'}
+                        {language === 'ko' ? 'Non-Custody 지갑' : 'Non-Custody Wallet'}
                       </div>
                       <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                        {language === 'ko' ? 'Custody 및 Non-Custody 지갑 관리' : 'Custody & Non-Custody wallet management'}
+                        {language === 'ko' ? 'API 기반 대량 지급' : 'API-based mass distribution'}
+                      </div>
+                    </a>
+                    <a href="http://localhost:3104/login" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                      <div className="font-semibold text-gray-900 dark:text-white">
+                        {language === 'ko' ? 'Custody 지갑' : 'Custody Wallet'}
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                        {language === 'ko' ? 'MPC 2-of-3 안전 보관' : 'MPC 2-of-3 secure storage'}
                       </div>
                     </a>
                   </div>
@@ -421,7 +430,7 @@ export default function HomePage() {
           <div className="flex items-center justify-center mb-6">
             <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
               <span className="text-white/90 text-sm font-medium">
-                {language === 'ko' ? '전 세계 500개 이상의 기관이 신뢰합니다' : 'Trusted by 500+ institutions worldwide'}
+                {language === 'ko' ? '신뢰의 가치를 당신과 나눕니다' : 'Sharing the value of trust with you'}
               </span>
             </div>
           </div>
@@ -462,121 +471,107 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Non-Custody Card */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 bg-white dark:bg-gray-800 hover:shadow-xl transition-all group">
-              <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
-                {copy.nonCustodyVsCustody.basicTitle}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-md border border-gray-900 dark:border-gray-600">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gray-900 dark:bg-gray-600">
+                  <span className="text-white font-bold text-xl">N</span>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
+                    {copy.nonCustodyVsCustody.basicTitle}
+                  </h3>
+                  <p className="text-base text-gray-700 dark:text-gray-300">
+                    {language === 'ko' ? '독립 계정 기반 · 집금 없음' : 'Independent accounts · No pooling'}
+                  </p>
+                </div>
+              </div>
+              <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
                 {copy.nonCustodyVsCustody.basicDesc}
               </p>
-              <div className="space-y-3 mb-8">
+              <ul className="space-y-3 text-base text-gray-800 dark:text-gray-300">
                 {copy.nonCustodyVsCustody.basicFeatures.map((feature, i) => (
-                  <div key={i} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
-                    <span className="text-gray-900 dark:text-white mr-3 mt-0.5">✓</span>
-                    <span>{feature}</span>
-                  </div>
+                  <li key={i}>• {feature}</li>
                 ))}
+              </ul>
+              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
+                {language === 'ko' ? '게임/앱에 최적화 · API 기반' : 'Optimized for Apps/Games · API-based'}
               </div>
-              <a
-                href="http://localhost:3102/login"
-                className="inline-flex items-center text-gray-900 dark:text-white font-medium group-hover:gap-3 gap-2 transition-all"
-              >
-                <span>{language === 'ko' ? '자세히 보기' : 'Learn More'}</span>
-                <span className="text-xl">→</span>
-              </a>
             </div>
 
             {/* Custody Card */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 bg-white dark:bg-gray-800 hover:shadow-xl transition-all group">
-              <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
-                {copy.nonCustodyVsCustody.proTitle}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-md border border-gray-900 dark:border-gray-600">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gray-900 dark:bg-gray-600">
+                  <span className="text-white font-bold text-xl">C</span>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
+                    {copy.nonCustodyVsCustody.proTitle}
+                  </h3>
+                  <p className="text-base text-gray-700 dark:text-gray-300">
+                    {language === 'ko' ? '집금(Omnibus) · 정책 기반 출금' : 'Omnibus pooling · Policy-based withdrawals'}
+                  </p>
+                </div>
+              </div>
+              <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
                 {copy.nonCustodyVsCustody.proDesc}
               </p>
-              <div className="space-y-3 mb-8">
+              <ul className="space-y-3 text-base text-gray-800 dark:text-gray-300">
                 {copy.nonCustodyVsCustody.proFeatures.map((feature, i) => (
-                  <div key={i} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
-                    <span className="text-gray-900 dark:text-white mr-3 mt-0.5">✓</span>
-                    <span>{feature}</span>
-                  </div>
+                  <li key={i}>• {feature}</li>
                 ))}
+              </ul>
+              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
+                {language === 'ko' ? '기업 재무 관리 · 고객 자산 보관' : 'Corporate Treasury · Customer Asset Custody'}
               </div>
-              <a
-                href="http://localhost:3102/login"
-                className="inline-flex items-center text-gray-900 dark:text-white font-medium group-hover:gap-3 gap-2 transition-all"
-              >
-                <span>{language === 'ko' ? '자세히 보기' : 'Learn More'}</span>
-                <span className="text-xl">→</span>
-              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Personal Wallets Section */}
+      {/* STO Wallet Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-              {language === 'ko' ? '개인용 지갑' : 'Personal Wallets'}
+              {language === 'ko' ? 'STO 토큰 지갑' : 'STO Token Wallet'}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              {copy.aiVsSto.subtitle}
+              {language === 'ko' ? '규제 준수 증권형 토큰을 안전하게 거래하고 관리하세요' : 'Safely trade and manage regulatory-compliant security tokens'}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* AI Card */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 bg-white dark:bg-gray-800 hover:shadow-xl transition-all group">
-              <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
-                {copy.aiVsSto.aiTitle}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                {copy.aiVsSto.aiDesc}
-              </p>
-              <div className="space-y-3 mb-8">
-                {copy.aiVsSto.aiFeatures.map((feature, i) => (
-                  <div key={i} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
-                    <span className="text-gray-900 dark:text-white mr-3 mt-0.5">✓</span>
-                    <span>{feature}</span>
-                  </div>
-                ))}
-              </div>
-              <a
-                href="http://localhost:3101/login"
-                className="inline-flex items-center text-gray-900 dark:text-white font-medium group-hover:gap-3 gap-2 transition-all"
-              >
-                <span>{language === 'ko' ? '자세히 보기' : 'Learn More'}</span>
-                <span className="text-xl">→</span>
-              </a>
-            </div>
-
+          <div className="max-w-3xl mx-auto">
             {/* STO Card */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 bg-white dark:bg-gray-800 hover:shadow-xl transition-all group">
-              <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
-                {copy.aiVsSto.stoTitle}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-xl border border-gray-900 dark:border-gray-600">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gray-900 dark:bg-gray-600">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
+                    {copy.aiVsSto.stoTitle}
+                  </h3>
+                  <p className="text-base text-gray-700 dark:text-gray-300">
+                    {language === 'ko' ? '토큰증권 · KYC/AML 준수' : 'Security Tokens · KYC/AML Compliant'}
+                  </p>
+                </div>
+              </div>
+              <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
                 {copy.aiVsSto.stoDesc}
               </p>
-              <div className="space-y-3 mb-8">
+              <ul className="space-y-3 text-base text-gray-800 dark:text-gray-300">
                 {copy.aiVsSto.stoFeatures.map((feature, i) => (
-                  <div key={i} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
-                    <span className="text-gray-900 dark:text-white mr-3 mt-0.5">✓</span>
-                    <span>{feature}</span>
-                  </div>
+                  <li key={i}>• {feature}</li>
                 ))}
+              </ul>
+              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
+                {language === 'ko' ? '증권형 토큰 투자자 · 기관 투자자' : 'Security Token Investors · Institutional'}
               </div>
-              <a
-                href="http://localhost:3101/login"
-                className="inline-flex items-center text-gray-900 dark:text-white font-medium group-hover:gap-3 gap-2 transition-all"
-              >
-                <span>{language === 'ko' ? '자세히 보기' : 'Learn More'}</span>
-                <span className="text-xl">→</span>
-              </a>
             </div>
           </div>
         </div>
@@ -631,36 +626,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {/* AI Robo-Advisor Plan */}
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                  {copy.pricing.plans.ai.name}
-                </h3>
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-4xl font-bold text-gray-900 dark:text-white">
-                    {copy.pricing.plans.ai.price}
-                  </span>
-                  <span className="text-gray-600 dark:text-gray-400">/{copy.pricing.monthly}</span>
-                </div>
-              </div>
-              <ul className="space-y-3 mb-8">
-                {copy.pricing.plans.ai.features.map((feature, i) => (
-                  <li key={i} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
-                    <span className="text-gray-900 dark:text-white mr-2 mt-1">✓</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="http://localhost:3101/login"
-                className="block w-full text-center py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 font-medium transition-colors"
-              >
-                {copy.pricing.getStarted}
-              </a>
-            </div>
-
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* STO Token Plan */}
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
               <div className="text-center mb-6">
