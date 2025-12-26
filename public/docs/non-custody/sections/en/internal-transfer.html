@@ -1,0 +1,52 @@
+<h1 class="text-4xl font-bold mb-6">Internal Transfer</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Execute Transfer</h2>
+        <pre><code class="language-bash">POST /api/internal-transfers
+X-API-Key: bbit_live_xxx
+X-Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
+
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": "100"
+}
+
+# Response (in ~50ms)
+{
+  "id": "txf_abc123",
+  "status": "COMPLETED",
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": "100",
+  "fromBalance": "900",
+  "toBalance": "600",
+  "executedAt": "2024-12-09T10:00:00.050Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Transfer with Memo</h2>
+        <pre><code class="language-bash">POST /api/internal-transfers
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": "50",
+  "memo": "Payment for premium sword"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Error Handling</h2>
+        <pre><code class="language-json">{
+  "error": "INSUFFICIENT_BALANCE",
+  "message": "Account acc_001 has balance 50, but attempted to send 100",
+  "details": {
+    "currentBalance": "50",
+    "requestedAmount": "100"
+  }
+}
+        </code></pre>
+      </section>
+
+      <!-- Withdrawal -->

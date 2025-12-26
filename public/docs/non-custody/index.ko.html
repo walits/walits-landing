@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walits Non-Custody Wallet - API 문서</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-solidity.min.js"></script>
+  <style>
+    .menu-item.active { background-color: rgb(34 197 94); color: white; }
+    pre[class*="language-"] { border-radius: 8px; margin: 1rem 0; }
+    .method-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+    .method-get { background-color: #3b82f6; color: white; }
+    .method-post { background-color: #22c55e; color: white; }
+    .method-put { background-color: #f59e0b; color: white; }
+    .method-delete { background-color: #ef4444; color: white; }
+    .endpoint-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    .endpoint-card:hover { border-color: #22c55e; background-color: #f9fafb; }
+    #loading-indicator {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: #6b7280;
+    }
+    #loading-indicator.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-green-600 text-white shadow-md">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="/" class="text-2xl font-bold hover:text-green-200">Walits</a>
+          <span class="text-green-200 text-sm">Non-Custody Wallet API</span>
+        </div>
+        <nav class="flex items-center space-x-6">
+          <a href="/" class="hover:text-green-200">홈</a>
+          <a href="/docs/custody" class="hover:text-green-200">Custody</a>
+          <a href="/docs/non-custody" class="hover:text-green-200 font-semibold underline">Non-Custody</a>
+          <div class="flex items-center space-x-2 ml-4 border-l border-green-400 pl-4">
+            <span class="text-white font-semibold text-sm">한</span>
+            <span class="text-green-300">|</span>
+            <a href="/docs/non-custody/index.html" class="hover:text-green-200 text-sm">EN</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white h-screen sticky top-0 shadow-lg overflow-y-auto">
+      <div class="p-6">
+        <div class="space-y-1">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">소개</div>
+          <a href="#introduction" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer active">개요</a>
+          <a href="#quick-start" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">빠른 시작</a>
+          <a href="#authentication" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">인증</a>
+          <a href="#rate-limiting" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">속도 제한</a>
+          <a href="#idempotency" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">멱등성</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">핵심 개념</div>
+          <a href="#tee-architecture" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">TEE 아키텍처</a>
+          <a href="#hd-wallet" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">HD Wallet & BIP44</a>
+          <a href="#virtual-balance-concept" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">가상 잔액</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">지갑 관리</div>
+          <a href="#wallet-create" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">마스터 지갑 생성</a>
+          <a href="#sub-accounts" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">서브 계정 관리</a>
+          <a href="#balance-management" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">잔액 관리</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">트랜잭션</div>
+          <a href="#internal-transfer" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">내부 전송</a>
+          <a href="#withdrawal" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">온체인 출금</a>
+          <a href="#token-deployment" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">ERC-20 토큰</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">API 레퍼런스</div>
+          <a href="#api-customer" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">고객 API</a>
+          <a href="#api-wallet" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">지갑 API</a>
+          <a href="#api-account" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">계정 API</a>
+          <a href="#api-transfer" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">전송 API</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">코드 예제</div>
+          <a href="#example-setup" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">완전한 설정</a>
+          <a href="#example-game" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">게임 통합</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">오류 처리</div>
+          <a href="#error-codes" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">오류 코드</a>
+          <a href="#error-handling" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">모범 사례</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">SDK & 도구</div>
+          <a href="#sdk-javascript" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">JavaScript SDK</a>
+          <a href="#sdk-python" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Python SDK</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">보안</div>
+          <a href="#security-best-practices" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">모범 사례</a>
+          <a href="#key-management" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">키 관리</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">부록</div>
+          <a href="#use-cases" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">사용 사례</a>
+          <a href="#data-objects" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">데이터 객체</a>
+          <a href="#integration-checklist" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">통합 체크리스트</a>
+          <a href="#faq" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">자주 묻는 질문</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 max-w-5xl">
+      <!-- Loading Indicator -->
+      <div id="loading-indicator">
+        <svg class="animate-spin h-8 w-8 mx-auto mb-2 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p>콘텐츠 로딩 중...</p>
+      </div>
+
+      <!-- Dynamic Content Container -->
+      <div id="content-container"></div>
+    </main>
+  </div>
+
+  <footer class="border-t border-gray-200 py-8 bg-white mt-auto">
+    <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
+      <p>© 2024 Walits. All rights reserved.</p>
+      <p class="mt-2">도움이 필요하신가요? <a href="mailto:support@walits.com" class="text-green-600 hover:underline">support@walits.com</a>으로 문의하세요</p>
+    </div>
+  </footer>
+
+  <script>
+    // Section mapping
+    const sectionMap = {
+      'introduction': 'introduction',
+      'quick-start': 'quick-start',
+      'authentication': 'authentication',
+      'rate-limiting': 'rate-limiting',
+      'idempotency': 'idempotency',
+      'tee-architecture': 'tee-architecture',
+      'hd-wallet': 'hd-wallet',
+      'virtual-balance-concept': 'virtual-balance-concept',
+      'wallet-create': 'wallet-create',
+      'sub-accounts': 'sub-accounts',
+      'balance-management': 'balance-management',
+      'internal-transfer': 'internal-transfer',
+      'withdrawal': 'withdrawal',
+      'token-deployment': 'token-deployment',
+      'api-customer': 'api-customer',
+      'api-wallet': 'api-wallet',
+      'api-account': 'api-account',
+      'api-transfer': 'api-transfer',
+      'example-setup': 'example-setup',
+      'example-game': 'example-game',
+      'error-codes': 'error-codes',
+      'error-handling': 'error-handling',
+      'sdk-javascript': 'sdk-javascript',
+      'sdk-python': 'sdk-python',
+      'security-best-practices': 'security-best-practices',
+      'key-management': 'key-management',
+      'use-cases': 'use-cases',
+      'data-objects': 'data-objects',
+      'integration-checklist': 'integration-checklist',
+      'faq': 'faq'
+    };
+
+    // Load section dynamically
+    async function loadSection(sectionId) {
+      const lang = 'ko'; // Korean version
+      const filename = sectionMap[sectionId] || sectionId;
+      const contentContainer = document.getElementById('content-container');
+      const loadingIndicator = document.getElementById('loading-indicator');
+
+      try {
+        // Show loading indicator
+        loadingIndicator.classList.add('active');
+        contentContainer.style.display = 'none';
+
+        // Fetch section content
+        const response = await fetch(`/docs/non-custody/sections/${lang}/${filename}.html`);
+
+        if (!response.ok) {
+          throw new Error(`섹션 로딩 실패: ${response.status} ${response.statusText}`);
+        }
+
+        const html = await response.text();
+        contentContainer.innerHTML = html;
+
+        // Hide loading indicator
+        loadingIndicator.classList.remove('active');
+        contentContainer.style.display = 'block';
+
+        // Re-highlight code blocks
+        if (window.Prism) {
+          Prism.highlightAll();
+        }
+
+        // Update active menu item
+        document.querySelectorAll('.menu-item').forEach(item => {
+          item.classList.remove('active');
+        });
+
+        const activeMenuItem = document.querySelector(`[href="#${sectionId}"]`);
+        if (activeMenuItem) {
+          activeMenuItem.classList.add('active');
+        }
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+
+      } catch (error) {
+        console.error('섹션 로딩 오류:', error);
+        loadingIndicator.classList.remove('active');
+        contentContainer.style.display = 'block';
+        contentContainer.innerHTML = `
+          <div class="bg-red-50 border-l-4 border-red-500 p-6">
+            <h2 class="text-2xl font-bold text-red-900 mb-2">콘텐츠 로딩 오류</h2>
+            <p class="text-red-800">요청하신 섹션을 로드하지 못했습니다. 다시 시도하거나 지원팀에 문의하세요.</p>
+            <p class="text-red-600 text-sm mt-2">${error.message}</p>
+          </div>
+        `;
+      }
+    }
+
+    // Handle hash changes
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.slice(1) || 'introduction';
+      loadSection(hash);
+    });
+
+    // Handle menu clicks
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = item.getAttribute('href').substring(1);
+        window.location.hash = targetId;
+      });
+    });
+
+    // Load initial section on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.slice(1) || 'introduction';
+      loadSection(hash);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<h1 class="text-4xl font-bold mb-6">Integration Checklist</h1>
+
+        <div class="space-y-4">
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Pre-Integration</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Register as customer, receive API credentials</li>
+              <li>Store API secret in secure vault (AWS Secrets Manager, etc.)</li>
+              <li>Set up sandbox environment for testing</li>
+              <li>Review rate limits and plan for scaling</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Wallet Setup</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Create master wallet via API</li>
+              <li>Backup mnemonic in encrypted format (critical!)</li>
+              <li>Test wallet creation on sandbox (Sepolia testnet)</li>
+              <li>Fund master wallet with initial balance</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Account Management</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Integrate sub-account creation on user registration</li>
+              <li>Link sub-account IDs to your user database</li>
+              <li>Test balance queries and updates</li>
+              <li>Implement deposit detection webhook/polling</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Transactions</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Implement internal transfer API calls with idempotency</li>
+              <li>Add error handling and retry logic</li>
+              <li>Test withdrawal flow to external addresses</li>
+              <li>Verify gas fee deduction logic</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Security</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Never expose API secret in client-side code</li>
+              <li>Implement IP whitelisting for production API keys</li>
+              <li>Set up monitoring and alerts for large transactions</li>
+              <li>Add two-factor authentication for admin operations</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Go-Live</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Switch from sandbox to production API keys</li>
+              <li>Fund production master wallet</li>
+              <li>Monitor first 100 transactions closely</li>
+              <li>Set up customer support flow for withdrawal issues</li>
+            </ul>
+          </div>
+        </div>
+      </section>

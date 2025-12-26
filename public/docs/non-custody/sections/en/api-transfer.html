@@ -1,0 +1,40 @@
+<h1 class="text-4xl font-bold mb-6">Transfer API</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/internal-transfers</h2>
+        <p class="mb-4">Execute instant internal transfer (virtual balance).</p>
+        <pre><code class="language-bash">POST /api/internal-transfers
+X-API-Key: bbit_live_xxx
+X-Idempotency-Key: uuid
+
+{
+  "fromAccountId": "string",
+  "toAccountId": "string",
+  "asset": "native" | "0xtoken_address",
+  "amount": "string",
+  "memo": "string (optional)"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/withdrawals</h2>
+        <p class="mb-4">Execute on-chain withdrawal to external address.</p>
+        <pre><code class="language-bash">POST /api/withdrawals
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+X-Idempotency-Key: uuid
+
+{
+  "accountId": "string",
+  "toAddress": "string",
+  "asset": "native" | "0xtoken_address",
+  "amount": "string"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/withdrawals/:id</h2>
+        <p class="mb-4">Get withdrawal status and transaction hash.</p>
+        <pre><code class="language-bash">GET /api/withdrawals/wth_xyz789
+X-API-Key: bbit_live_xxx
+        </code></pre>
+      </section>
+
+      <!-- Code Examples -->

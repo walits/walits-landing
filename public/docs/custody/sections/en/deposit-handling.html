@@ -1,0 +1,120 @@
+<h1 class="text-4xl font-bold mb-6">Deposit Handling</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">2-Stage Deposit Processing</p>
+          <p>Walits uses a two-stage deposit confirmation process to protect against blockchain reorganizations (reorgs) while providing early notifications.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Deposit Stages</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Stage</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Event</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Confirmations</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Balance Update</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Stage 1</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">DEPOSIT_DETECTED</td>
+              <td class="border border-gray-200 px-4 py-2">1</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">No change</td>
+              <td class="border border-gray-200 px-4 py-2">Early notification only</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Stage 2</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">DEPOSIT_CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2">6-12 (Sepolia: 6, Mainnet: 12)</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">Balance increased</td>
+              <td class="border border-gray-200 px-4 py-2">Safe to credit user</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Why 2 Stages?</h2>
+        <div class="bg-gray-100 p-6 rounded-lg mb-6">
+          <p class="font-semibold mb-3">Blockchain Reorg Risk</p>
+          <p class="mb-4">In rare cases, blocks can be reorganized (reorg), potentially reversing transactions with few confirmations. By waiting for sufficient confirmations (Sepolia 6, Mainnet 12) before updating balances, we protect against this risk.</p>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>DEPOSIT_DETECTED</strong> → Show "Pending deposit" in UI, don't credit balance yet</li>
+            <li><strong>DEPOSIT_CONFIRMED</strong> → Safe to credit user balance and allow withdrawals</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">xScanner Blockchain Monitoring</h2>
+        <p class="mb-4">Walits Custody uses <strong>xScanner</strong> (Rust-based blockchain monitor) to detect and track deposits in real-time:</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">xScanner Operating Mechanism</h3>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>Block Polling</strong>: Checks new blocks every 10 seconds via eth_getBlockByNumber</li>
+            <li><strong>Deposit Detection</strong>: Detects transactions to customer deposit addresses</li>
+            <li><strong>UnconfirmedDeposit DB</strong>: Stores detected deposits in DB to track confirmations</li>
+            <li><strong>1 conf reached</strong>: Sends DEPOSIT_DETECTED webhook</li>
+            <li><strong>6+ conf reached</strong>: Sends DEPOSIT_CONFIRMED webhook, removes from DB</li>
+            <li><strong>Backend Sync</strong>: Updates availableBalance and triggers auto-sweep (if enabled)</li>
+          </ul>
+        </div>
+
+        <pre><code class="language-rust">
+// xScanner pseudo-code (Rust)
+loop {
+    let latest_block = eth_client.get_block_by_number("latest").await?;
+
+    // Check all transactions
+    for tx in latest_block.transactions {
+        if is_customer_deposit_address(tx.to) {
+            // Store in UnconfirmedDeposit DB
+            db.insert_unconfirmed_deposit(tx.hash, tx.to, tx.value).await?;
+        }
+    }
+
+    // Track confirmations
+    let unconfirmed = db.get_all_unconfirmed_deposits().await?;
+    for deposit in unconfirmed {
+        let confirmations = latest_block.number - deposit.block_number + 1;
+
+        if confirmations == 1 {
+            webhook::send(DepositDetected { ... }).await?;
+        } else if confirmations >= REQUIRED_CONFIRMATIONS {  // 6 or 12
+            webhook::send(DepositConfirmed { ... }).await?;
+            db.delete_unconfirmed_deposit(deposit.id).await?;
+        }
+    }
+
+    tokio::time::sleep(Duration::from_secs(10)).await;
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Balance Updates</h2>
+        <pre><code class="language-typescript">
+// DEPOSIT_CONFIRMED handler (backend)
+async handleDepositConfirmed(event: DepositEventDto) {
+  const depositAmount = new Decimal(event.amount);
+
+  await prisma.wallet.update({
+    where: { id: walletId },
+    data: {
+      balance: { increment: depositAmount },              // total balance
+      availableBalance: { increment: depositAmount },     // withdrawable balance
+      lastSyncedAt: new Date(),
+      lastSyncMethod: 'DEPOSIT'
+    }
+  });
+
+  // Trigger auto-sweep if enabled
+  if (wallet.autoSweep) {
+    await triggerAutoSweep(accountId);
+  }
+
+  // Send webhook to customer
+  await sendWebhook('DEPOSIT_CONFIRMED', {
+    accountId: event.accountId,
+    amount: event.amount,
+    txHash: event.txHash
+  });
+}
+        </code></pre>

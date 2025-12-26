@@ -1,0 +1,70 @@
+<h1 class="text-4xl font-bold mb-6">인증</h1>
+
+        <p class="mb-6">모든 API 요청은 요청 헤더에 API Key와 API Secret을 통한 인증이 필요합니다.</p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">고객 등록</h2>
+        <pre><code class="language-bash">POST /api/customers
+Content-Type: application/json
+
+{
+  "name": "Game Company",
+  "email": "admin@game.com",
+  "plan": "ENTERPRISE"
+}
+
+# Response
+{
+  "id": "cust_abc123",
+  "name": "Game Company",
+  "email": "admin@game.com",
+  "apiKey": "bbit_live_a1b2c3d4e5f6g7h8i9j0",
+  "apiSecret": "sk_x1y2z3a4b5c6d7e8f9g0",
+  "status": "ACTIVE",
+  "createdAt": "2024-12-09T10:00:00Z"
+}
+        </code></pre>
+
+        <div class="bg-red-50 border-l-4 border-red-500 p-6 mt-4 mb-6">
+          <p class="font-semibold text-red-900">🔴 중요: API Secret 보안</p>
+          <ul class="list-disc list-inside text-red-800 mt-2 space-y-1">
+            <li><strong>apiSecret</strong>은 등록 중 한 번만 반환됩니다</li>
+            <li>환경 변수 또는 AWS Secrets Manager에 안전하게 저장하세요</li>
+            <li>Git에 커밋하거나 클라이언트 측 코드에 노출하지 마세요</li>
+            <li>분실한 경우 새 고객 계정을 생성해야 합니다</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">API 요청 형식</h2>
+        <pre><code class="language-bash">curl -X POST https://api.walits.com/api/wallets \
+  -H "X-API-Key: bbit_live_xxx" \
+  -H "X-API-Secret: sk_xxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "customerId": "cust_abc123",
+    "name": "My Wallet",
+    "chain": "ETHEREUM"
+  }'
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">API Key 유형</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">환경</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Key 접두사</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">목적</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">샌드박스</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">bbit_test_...</td>
+              <td class="border border-gray-200 px-4 py-2">Sepolia/Devnet에서 테스트</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">프로덕션</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">bbit_live_...</td>
+              <td class="border border-gray-200 px-4 py-2">메인넷의 실제 자산</td>
+            </tr>
+          </tbody>
+        </table>

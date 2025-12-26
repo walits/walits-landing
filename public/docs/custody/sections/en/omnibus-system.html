@@ -1,0 +1,81 @@
+<h1 class="text-4xl font-bold mb-6">Omnibus System</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">💡 What is Omnibus?</p>
+          <p>All customer funds are pooled into a single master address (Omnibus Address) protected by MPC 2-of-3, while individual balances are tracked via Virtual Accounts at the database level.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Architecture</h2>
+        <div class="grid grid-cols-2 gap-6 mb-6">
+          <div class="border-2 border-blue-500 rounded-lg p-6 bg-blue-50">
+            <h3 class="text-xl font-semibold mb-3">🏦 Omnibus Address</h3>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Single on-chain address per asset</li>
+              <li>Protected by MPC 2-of-3 threshold signature</li>
+              <li>All customer deposits flow here via auto-sweep</li>
+              <li>All withdrawals originate from here</li>
+            </ul>
+          </div>
+          <div class="border-2 border-green-500 rounded-lg p-6 bg-green-50">
+            <h3 class="text-xl font-semibold mb-3">📊 Virtual Accounts</h3>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Database-level balance records</li>
+              <li>Each customer gets unique deposit addresses</li>
+              <li>Instant internal transfers (no gas fees)</li>
+              <li>Real-time balance updates</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Benefits</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Feature</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Benefit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Gas Optimization</td>
+              <td class="border border-gray-200 px-4 py-2">Batch withdrawals from single address → 60-80% gas savings</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Instant Internal Transfers</td>
+              <td class="border border-gray-200 px-4 py-2">User A → User B transfers are instant database updates (0 gas cost)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Liquidity Management</td>
+              <td class="border border-gray-200 px-4 py-2">Centralized pool → Easy to manage reserves and liquidity</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Simplified Reconciliation</td>
+              <td class="border border-gray-200 px-4 py-2">Single on-chain balance to track, virtual balances in DB</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Example Flow</h2>
+        <pre><code class="language-plaintext">
+1. Customer A deposits 10 ETH to their unique deposit address (0xABC...)
+   → Auto-sweep triggers after 1 confirmation
+   → Funds move to Omnibus Address (0xOMNI...)
+   → Virtual Account A balance: +10 ETH (database)
+
+2. Customer B deposits 5 ETH to their deposit address (0xDEF...)
+   → Auto-sweep to Omnibus Address
+   → Virtual Account B balance: +5 ETH (database)
+   → Total Omnibus Balance: 15 ETH (on-chain)
+
+3. Customer A transfers 3 ETH to Customer B (internal)
+   → Virtual Account A: 10 - 3 = 7 ETH ✅
+   → Virtual Account B: 5 + 3 = 8 ETH ✅
+   → Omnibus Balance: Still 15 ETH (no on-chain tx!)
+   → Execution time: <100ms (database update only)
+
+4. Customer B withdraws 8 ETH to external address (0xEXTERNAL...)
+   → Approval workflow triggered (if policy requires)
+   → After approval: Omnibus sends 8 ETH on-chain
+   → Virtual Account B: 8 - 8 = 0 ETH
+   → Omnibus Balance: 15 - 8 = 7 ETH
+        </code></pre>

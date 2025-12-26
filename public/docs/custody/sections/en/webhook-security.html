@@ -1,0 +1,226 @@
+<h1 class="text-4xl font-bold mb-6">Webhook Security</h1>
+
+        <div class="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">🔒 Always Verify Signatures</p>
+          <p>NEVER trust webhook payloads without verifying the HMAC-SHA256 signature. This prevents attackers from spoofing deposits/withdrawals.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">HMAC-SHA256 Signature Verification</h2>
+        <p class="mb-4">Walits signs all webhook payloads with HMAC-SHA256 using your webhook secret. The signature is computed as:</p>
+
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm mb-6">
+          <div class="text-green-400 mb-2">// Signature formula:</div>
+          <div>message = timestamp + "." + event + "." + JSON.stringify(data)</div>
+          <div>signature = HMAC-SHA256(webhookSecret, message)</div>
+        </div>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">HTTP Headers</h3>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Header</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Description</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">X-Walits-Signature</td>
+              <td class="border border-gray-200 px-4 py-2">HMAC-SHA256 signature</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-xs">sha256=abc123...</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">X-Walits-Timestamp</td>
+              <td class="border border-gray-200 px-4 py-2">Unix timestamp (milliseconds)</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-xs">1702345678901</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">X-Walits-Event</td>
+              <td class="border border-gray-200 px-4 py-2">Event type</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-xs">WITHDRAWAL_EXECUTED</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">Node.js/Express Example</h3>
+        <pre><code class="language-javascript">
+const crypto = require('crypto');
+const express = require('express');
+
+const app = express();
+app.use(express.json());
+
+const WEBHOOK_SECRET = process.env.WALITS_WEBHOOK_SECRET;
+
+// Signature verification function
+function verifyWebhookSignature(timestamp, event, data, receivedSignature) {
+  const message = `${timestamp}.${event}.${JSON.stringify(data)}`;
+  const expectedSignature = `sha256=${crypto
+    .createHmac('sha256', WEBHOOK_SECRET)
+    .update(message)
+    .digest('hex')}`;
+
+  return crypto.timingSafeEqual(
+    Buffer.from(expectedSignature),
+    Buffer.from(receivedSignature)
+  );
+}
+
+// Webhook handler
+app.post('/webhooks/walits', async (req, res) => {
+  const signature = req.headers['x-walits-signature'];
+  const timestamp = req.headers['x-walits-timestamp'];
+  const event = req.headers['x-walits-event'];
+  const { data } = req.body;
+
+  // 1. Verify signature
+  if (!verifyWebhookSignature(timestamp, event, data, signature)) {
+    console.error('Invalid signature');
+    return res.status(401).send('Invalid signature');
+  }
+
+  // 2. Verify timestamp (reject if older than 5 minutes)
+  const now = Date.now();
+  if (Math.abs(now - parseInt(timestamp)) > 5 * 60 * 1000) {
+    console.error('Timestamp too old');
+    return res.status(401).send('Timestamp too old');
+  }
+
+  // 3. Process webhook by event type
+  try {
+    switch (event) {
+      case 'DEPOSIT_DETECTED':
+        await handleDepositDetected(data);
+        break;
+
+      case 'DEPOSIT_CONFIRMED':
+        await handleDepositConfirmed(data);
+        break;
+
+      case 'WITHDRAWAL_REQUESTED':
+        await handleWithdrawalRequested(data);
+        break;
+
+      case 'WITHDRAWAL_EXECUTED':
+        await handleWithdrawalExecuted(data);
+        break;
+
+      case 'WITHDRAWAL_CONFIRMED':
+        await handleWithdrawalConfirmed(data);
+        break;
+
+      case 'WITHDRAWAL_FAILED':
+        await handleWithdrawalFailed(data);
+        break;
+
+      default:
+        console.warn(`Unknown event: ${event}`);
+    }
+
+    res.status(200).send('OK');
+  } catch (error) {
+    console.error('Webhook processing error:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+// Event handlers
+async function handleDepositDetected(data) {
+  console.log('Deposit detected (notification only):', data);
+  // Show "Pending deposit" in UI
+  await updateCustomerUI(data.accountId, {
+    status: 'DETECTING',
+    amount: data.amount,
+    txHash: data.txHash
+  });
+}
+
+async function handleDepositConfirmed(data) {
+  console.log('Deposit confirmed - crediting balance:', data);
+  // Credit customer balance
+  await db.customers.update({
+    where: { accountId: data.accountId },
+    data: { balance: { increment: parseFloat(data.amount) } }
+  });
+  await sendNotification(data.accountId, 'Deposit confirmed!');
+}
+
+async function handleWithdrawalRequested(data) {
+  console.log('Withdrawal requested (balance already held):', data);
+  // Update UI: "Withdrawal requested, awaiting approval"
+  await updateWithdrawalStatus(data.approvalRequestId, 'PENDING');
+}
+
+async function handleWithdrawalExecuted(data) {
+  console.log('Withdrawal executed (mempool):', data);
+  // Update UI with txHash
+  await updateWithdrawalStatus(data.approvalRequestId, 'PENDING', data.txHash);
+}
+
+async function handleWithdrawalConfirmed(data) {
+  console.log('Withdrawal confirmed on-chain:', data);
+  // Mark as complete
+  await updateWithdrawalStatus(data.approvalRequestId, 'CONFIRMED');
+  await sendNotification(data.userId, 'Withdrawal completed!');
+}
+
+async function handleWithdrawalFailed(data) {
+  console.error('Withdrawal failed (balance auto-restored):', data);
+  // Notify customer
+  await sendNotification(data.userId, `Withdrawal failed: ${data.errorMessage}`);
+}
+
+app.listen(3000, () => {
+  console.log('Webhook server running on port 3000');
+});
+        </code></pre>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">Python Example</h3>
+        <pre><code class="language-python">
+import hmac
+import hashlib
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/webhooks/walits', methods=['POST'])
+def handle_webhook():
+    signature = request.headers.get('X-Walits-Signature')
+    webhook_secret = os.environ['WALITS_WEBHOOK_SECRET']
+    payload = request.get_data()
+
+    # Compute expected signature
+    expected_signature = hmac.new(
+        webhook_secret.encode('utf-8'),
+        payload,
+        hashlib.sha256
+    ).hexdigest()
+
+    # Verify signature
+    if not hmac.compare_digest(signature, expected_signature):
+        print('❌ Invalid webhook signature!')
+        return 'Invalid signature', 401
+
+    # ✅ Signature valid, process the webhook
+    event_data = request.get_json()
+    event = event_data['event']
+    data = event_data['data']
+
+    if event == 'deposit.confirmed':
+        # Credit user balance
+        db.users.update(
+            user_id=data['userId'],
+            balance=db.users.balance + Decimal(data['amount'])
+        )
+
+    return 'OK', 200
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Best Practices</h2>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+          <li><strong>Use HTTPS only:</strong> Webhooks sent over HTTP are vulnerable to man-in-the-middle attacks</li>
+          <li><strong>Implement idempotency:</strong> Walits may send duplicate webhooks; store processed event IDs to avoid double-crediting</li>
+          <li><strong>Return 200 quickly:</strong> Process webhooks asynchronously; respond within 5 seconds or Walits will retry</li>
+          <li><strong>Retry logic:</strong> Walits retries failed webhooks (non-200 responses) up to 10 times with exponential backoff</li>
+          <li><strong>IP Whitelisting:</strong> Restrict webhook endpoint to Walits IPs: <code>52.1.2.3/32, 54.5.6.7/32</code></li>
+        </ul>

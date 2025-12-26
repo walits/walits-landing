@@ -1,0 +1,199 @@
+<h1 class="text-4xl font-bold mb-6">출금 처리</h1>
+
+        <div class="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">즉시 잔액 홀드</p>
+          <p>이중 지출을 방지하기 위해 출금 요청은 <strong>즉시 자금을 잠급니다</strong>. <code class="bg-red-100 px-2 py-1 rounded">availableBalance</code>를 감소시키고 <code class="bg-red-100 px-2 py-1 rounded">pendingWithdrawalBalance</code>를 증가시킵니다. 이는 승인이나 블록체인 트랜잭션 이전에 발생합니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">출금 상태 전환</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">이벤트</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">availableBalance</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">pendingWithdrawalBalance</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_REQUESTED</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">↓ 감소</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">↑ 증가</td>
+              <td class="border border-gray-200 px-4 py-2">이중 지출 방지를 위한 즉시 홀드</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">APPROVAL_PROGRESS</td>
+              <td class="border border-gray-200 px-4 py-2">변경 없음</td>
+              <td class="border border-gray-200 px-4 py-2">변경 없음</td>
+              <td class="border border-gray-200 px-4 py-2">승인 진행 중 (선택적 이벤트)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_APPROVED</td>
+              <td class="border border-gray-200 px-4 py-2">변경 없음</td>
+              <td class="border border-gray-200 px-4 py-2">변경 없음</td>
+              <td class="border border-gray-200 px-4 py-2">승인 임계값 충족, 실행 준비</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_EXECUTED</td>
+              <td class="border border-gray-200 px-4 py-2">변경 없음</td>
+              <td class="border border-gray-200 px-4 py-2">변경 없음</td>
+              <td class="border border-gray-200 px-4 py-2">블록체인에 트랜잭션 브로드캐스트 (멤풀)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2">변경 없음</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">↓ 감소</td>
+              <td class="border border-gray-200 px-4 py-2">온체인 확정 (6-12 컨펌)</td>
+            </tr>
+            <tr class="bg-red-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_FAILED</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">↑ 증가 (롤백)</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">↓ 감소 (롤백)</td>
+              <td class="border border-gray-200 px-4 py-2">실패 시 자동 잔액 복원</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">예시: 출금 생명주기</h2>
+        <pre><code class="language-javascript">
+// 초기 상태
+{
+  "availableBalance": "10.0",
+  "pendingWithdrawalBalance": "0.0"
+}
+
+// 1. WITHDRAWAL_REQUESTED (즉시 홀드)
+{
+  "availableBalance": "5.0",         // 10.0 - 5.0
+  "pendingWithdrawalBalance": "5.0"  // 0.0 + 5.0
+}
+// ✅ 6.0 ETH에 대한 두 번째 요청은 이제 실패합니다 (5.0만 사용 가능)
+
+// 2. WITHDRAWAL_APPROVED (잔액 변경 없음)
+// 3. WITHDRAWAL_EXECUTED (잔액 변경 없음, txHash 저장됨)
+
+// 4a. 성공: WITHDRAWAL_CONFIRMED
+{
+  "availableBalance": "5.0",         // 변경 없음
+  "pendingWithdrawalBalance": "0.0"  // 5.0 - 5.0
+}
+
+// 4b. 실패: WITHDRAWAL_FAILED (자동 롤백)
+{
+  "availableBalance": "10.0",        // 5.0 + 5.0 (복원됨)
+  "pendingWithdrawalBalance": "0.0"  // 5.0 - 5.0 (해제됨)
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">walits-provider 출금 추적</h2>
+        <p class="mb-4">walits-provider는 NestJS로 작성된 RPC Router이자 출금 추적 시스템입니다:</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">출금 추적 메커니즘</h3>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>브로드캐스트</strong>: MPC 서명 완료 후 eth_sendRawTransaction으로 트랜잭션 전송</li>
+            <li><strong>In-Memory Map</strong>: pending withdrawals를 메모리에 저장 (txHash → approvalRequestId)</li>
+            <li><strong>30초마다 폴링</strong>: eth_getTransactionReceipt로 트랜잭션 상태 조회</li>
+            <li><strong>Confirmation 계산</strong>: confirmations = latestBlock - txBlock + 1</li>
+            <li><strong>1 conf</strong>: MINED 상태로 업데이트 (로그만 기록, 웹훅 없음)</li>
+            <li><strong>6+ conf</strong>: CONFIRMED 상태 (pendingWithdrawalBalance 차감, 웹훅 전송)</li>
+            <li><strong>Revert 감지</strong>: receipt.status === 0 → FAILED (잔액 롤백)</li>
+            <li><strong>Dropped 감지</strong>: 장시간 pending → FAILED (잔액 롤백)</li>
+          </ul>
+        </div>
+
+        <pre><code class="language-typescript">
+// walits-provider 의사 코드 (NestJS)
+class WithdrawalTracker {
+  private pendingWithdrawals = new Map<string, ApprovalRequest>();
+
+  async broadcastWithdrawal(signedTx: string, approvalRequestId: string) {
+    const txHash = await eth.sendRawTransaction(signedTx);
+    this.pendingWithdrawals.set(txHash, approvalRequestId);
+    return txHash;
+  }
+
+  @Cron('*/30 * * * * *')  // 30초마다 실행
+  async trackPendingWithdrawals() {
+    const latestBlock = await eth.getBlockNumber();
+
+    for (const [txHash, approvalRequestId] of this.pendingWithdrawals) {
+      const receipt = await eth.getTransactionReceipt(txHash);
+
+      if (!receipt) continue;  // 아직 pending
+
+      const confirmations = latestBlock - receipt.blockNumber + 1;
+
+      if (receipt.status === 0) {
+        // Revert 발생
+        await this.handleWithdrawalFailed(approvalRequestId, 'Transaction reverted');
+        this.pendingWithdrawals.delete(txHash);
+      } else if (confirmations === 1) {
+        // MINED (로그만)
+        logger.info(`Withdrawal ${txHash} mined at block ${receipt.blockNumber}`);
+      } else if (confirmations >= REQUIRED_CONFIRMATIONS) {  // 6 or 12
+        // CONFIRMED
+        await this.handleWithdrawalConfirmed(approvalRequestId, txHash);
+        this.pendingWithdrawals.delete(txHash);
+      }
+    }
+  }
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">실패 시 자동 롤백</h2>
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
+          <p class="font-semibold text-green-900 mb-2">수동 개입 불필요</p>
+          <p class="text-green-800">출금이 실패하면 (MPC 서명 오류, RPC 오류, 가스 부족 등) 시스템이 <strong>자동으로</strong> 홀드된 자금을 <code class="bg-green-100 px-2 py-1 rounded">availableBalance</code>로 복원합니다. 수동 재무조정이 필요하지 않습니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">구현 코드</h2>
+        <pre><code class="language-typescript">
+// WITHDRAWAL_REQUESTED: 즉시 잔액 홀드
+async createWithdrawalRequest(walletId: string, amount: string) {
+  const wallet = await prisma.wallet.findUnique({ where: { id: walletId } });
+  const requestAmount = new Decimal(amount);
+
+  // 사용 가능한 잔액 확인
+  if (wallet.availableBalance.lessThan(requestAmount)) {
+    throw new Error('Insufficient available balance');
+  }
+
+  // 즉시 홀드 (이중 지출 방지)
+  await prisma.wallet.update({
+    where: { id: walletId },
+    data: {
+      availableBalance: { decrement: requestAmount },
+      pendingWithdrawalBalance: { increment: requestAmount }
+    }
+  });
+
+  await sendWebhook('WITHDRAWAL_REQUESTED', { ... });
+}
+
+// WITHDRAWAL_FAILED: 자동 롤백
+async handleWithdrawalFailed(approvalRequestId: string, error: Error) {
+  const request = await prisma.approvalRequest.findUnique({
+    where: { id: approvalRequestId },
+    include: { wallet: true }
+  });
+
+  const amount = new Decimal(request.amount);
+
+  // 롤백: 사용 가능 복원, 보류 해제
+  await prisma.wallet.update({
+    where: { id: request.walletId },
+    data: {
+      availableBalance: { increment: amount },
+      pendingWithdrawalBalance: { decrement: amount }
+    }
+  });
+
+  await sendWebhook('WITHDRAWAL_FAILED', {
+    approvalRequestId,
+    amount: request.amount,
+    errorMessage: error.message
+  });
+}
+        </code></pre>

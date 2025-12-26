@@ -1,0 +1,35 @@
+<h1 class="text-4xl font-bold mb-6">Account API</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/accounts</h2>
+        <p class="mb-4">Create a sub-account for an end-user.</p>
+        <pre><code class="language-bash">POST /api/accounts
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "walletId": "string",
+  "userId": "string",
+  "label": "string"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/accounts/:id/balance</h2>
+        <p class="mb-4">Get account balance (virtual + on-chain).</p>
+        <pre><code class="language-bash">GET /api/accounts/acc_001/balance
+X-API-Key: bbit_live_xxx
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/accounts/:id/adjust-balance</h2>
+        <p class="mb-4">Admin-only: Manually adjust virtual balance.</p>
+        <pre><code class="language-bash">POST /api/accounts/acc_001/adjust-balance
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "asset": "native",
+  "amount": "100",
+  "type": "CREDIT" | "DEBIT",
+  "reason": "string"
+}
+        </code></pre>
+      </section>

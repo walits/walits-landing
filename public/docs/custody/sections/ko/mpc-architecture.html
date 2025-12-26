@@ -1,0 +1,91 @@
+<h1 class="text-4xl font-bold mb-4">MPC 아키텍처</h1>
+        <p class="text-gray-600 text-lg mb-6">Walits의 CGGMP24 MPC 2-of-3 임계값 서명 시스템 이해하기</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">MPC란?</h2>
+        <p class="text-gray-600 mb-4">다자간 연산(MPC)은 여러 당사자가 완전한 개인 키에 접근하지 않고도 암호화 서명을 공동으로 계산할 수 있게 합니다. 이는 단일 장애점을 제거합니다.</p>
+
+        <div class="bg-gray-50 border-l-4 border-gray-500 p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">기술 스택</h3>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>MPC 서버</strong>: Rust로 작성된 고성능 CGGMP24 구현</li>
+            <li><strong>walits-provider</strong>: NestJS 기반 RPC Router 및 트랜잭션 추적</li>
+            <li><strong>xScanner</strong>: Rust 기반 블록체인 모니터링 시스템</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">키 공유 분배</h2>
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="border-2 border-blue-500 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">🔑</div>
+            <h3 class="font-semibold mb-2">귀사의 키 공유</h3>
+            <p class="text-sm text-gray-600">귀사의 인프라에 저장 (HSM 권장)</p>
+          </div>
+          <div class="border-2 border-green-500 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">🔐</div>
+            <h3 class="font-semibold mb-2">Walits HSM 공유</h3>
+            <p class="text-sm text-gray-600">Walits의 AWS HSM에 저장</p>
+          </div>
+          <div class="border-2 border-purple-500 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">🔒</div>
+            <h3 class="font-semibold mb-2">백업 공유</h3>
+            <p class="text-sm text-gray-600">재해 복구를 위해 암호화 및 저장</p>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">서명 프로세스</h2>
+        <p class="text-gray-600 mb-4">트랜잭션을 실행하려면 3개의 키 공유 중 2개가 서명 프로세스에 참여해야 합니다:</p>
+        <div class="bg-gray-100 p-6 rounded-lg">
+          <ol class="list-decimal list-inside space-y-3 text-gray-700">
+            <li><strong>출금 요청:</strong> API 또는 대시보드를 통해 시작됨</li>
+            <li><strong>정책 확인:</strong> 지갑 정책에 따라 승인 워크플로우 트리거됨</li>
+            <li><strong>승인 완료:</strong> 필요한 승인 충족 (예: 2-of-3)</li>
+            <li><strong>MPC 서명:</strong> 귀사의 공유 + Walits 공유 → 서명 생성</li>
+            <li><strong>브로드캐스트:</strong> 서명된 트랜잭션이 블록체인으로 전송됨</li>
+          </ol>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">자가 복구 (SPOF 제거)</h2>
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-blue-900 text-lg mb-2">자가 복구 메커니즘</p>
+          <p class="text-blue-800 mb-4">Walits은 귀사가 항상 키 공유의 1/3을 보유하도록 보장하여, 벤더 종속성을 제거합니다.</p>
+          <p class="text-blue-900 font-semibold">재해 시나리오: Walits 서비스 종료</p>
+          <ul class="list-disc list-inside text-blue-800 mt-2 space-y-2">
+            <li>보유: 귀사의 키 공유 (1/3) + 백업 공유 (1/3) = 2/3</li>
+            <li>가능: 전체 키 재구성 후 다른 지갑 솔루션으로 마이그레이션</li>
+            <li>다운타임 제로: 귀사의 자금은 항상 접근 가능</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">기술 사양</h2>
+        <table class="min-w-full border border-gray-200 mt-4">
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">프로토콜</td>
+              <td class="border border-gray-200 px-4 py-2">CGGMP24 (2024 표준)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">커브</td>
+              <td class="border border-gray-200 px-4 py-2">secp256k1 (Ethereum, Bitcoin)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">임계값</td>
+              <td class="border border-gray-200 px-4 py-2">2-of-3 (t=2, n=3)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">키 생성 시간</td>
+              <td class="border border-gray-200 px-4 py-2">&lt;30초</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">서명 시간</td>
+              <td class="border border-gray-200 px-4 py-2">~1.5초</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">처리량</td>
+              <td class="border border-gray-200 px-4 py-2">100+ 서명/초 (병렬 처리)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">구현 언어</td>
+              <td class="border border-gray-200 px-4 py-2">Rust (MPC), NestJS (Provider)</td>
+            </tr>
+          </tbody>
+        </table>

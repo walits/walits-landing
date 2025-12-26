@@ -1,0 +1,51 @@
+<h1 class="text-4xl font-bold mb-6">Idempotency</h1>
+
+        <p class="mb-6">Idempotency ensures that duplicate API requests produce the same result, preventing double-spending and duplicate transactions.</p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">How It Works</h2>
+        <p class="mb-4">Include an <code class="bg-gray-100 px-2 py-1 rounded">X-Idempotency-Key</code> header with a unique UUID for each transaction:</p>
+
+        <pre><code class="language-bash">POST /api/internal-transfers
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+X-Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
+
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": 100
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Behavior</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Scenario</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Response</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">First request with new key</td>
+              <td class="border border-gray-200 px-4 py-2">Executes transaction, returns 201 Created</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Duplicate key (within 24h)</td>
+              <td class="border border-gray-200 px-4 py-2">Returns cached result, status 200 OK</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">No idempotency key</td>
+              <td class="border border-gray-200 px-4 py-2">Treats as new request (not recommended)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+          <p class="font-semibold text-yellow-900">💡 Best Practice</p>
+          <p class="text-yellow-800 mt-2">Always use idempotency keys for withdrawals and internal transfers to prevent double-spending.</p>
+        </div>
+      </section>
+
+      <!-- TEE Architecture -->

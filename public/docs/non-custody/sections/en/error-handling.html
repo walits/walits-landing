@@ -1,0 +1,84 @@
+<h1 class="text-4xl font-bold mb-6">Error Handling Best Practices</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Retry Logic</h2>
+        <pre><code class="language-javascript">async function apiCallWithRetry(fn, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (error.response?.status === 429) {
+        const retryAfter = parseInt(error.response.headers['retry-after']) || 30;
+        console.log(`Rate limited, waiting ${retryAfter}s...`);
+        await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+        continue;
+      }
+
+      if (error.response?.status >= 500 && i < maxRetries - 1) {
+        console.log(`Server error, retrying (${i + 1}/${maxRetries})...`);
+        await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1)));
+        continue;
+      }
+
+      throw error;
+    }
+  }
+}
+
+// Usage
+const result = await apiCallWithRetry(() =>
+  axios.post('/api/internal-transfers', transferData)
+);
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Balance Check Before Transfer</h2>
+        <pre><code class="language-javascript">async function safeTransfer(fromId, toId, amount) {
+  // 1. Check balance first
+  const { data: balance } = await axios.get(`/api/accounts/${fromId}/balance`);
+
+  if (parseFloat(balance.balances.native) < amount) {
+    throw new Error(`Insufficient balance: ${balance.balances.native} < ${amount}`);
+  }
+
+  // 2. Execute transfer with idempotency
+  const { data } = await axios.post('/api/internal-transfers', {
+    fromAccountId: fromId,
+    toAccountId: toId,
+    asset: 'native',
+    amount: amount.toString()
+  }, {
+    headers: { 'X-Idempotency-Key': crypto.randomUUID() }
+  });
+
+  return data;
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Idempotency for Critical Operations</h2>
+        <pre><code class="language-javascript">// ALWAYS use idempotency keys for withdrawals
+async function withdraw(accountId, toAddress, amount) {
+  const idempotencyKey = crypto.randomUUID();
+
+  // Store in DB to prevent duplicate submission
+  await db.saveWithdrawal({ accountId, toAddress, amount, idempotencyKey });
+
+  try {
+    const { data } = await axios.post('/api/withdrawals', {
+      accountId,
+      toAddress,
+      asset: 'native',
+      amount: amount.toString()
+    }, {
+      headers: { 'X-Idempotency-Key': idempotencyKey }
+    });
+
+    await db.updateWithdrawalStatus(idempotencyKey, 'PENDING', data.id);
+    return data;
+  } catch (error) {
+    await db.updateWithdrawalStatus(idempotencyKey, 'FAILED', null);
+    throw error;
+  }
+}
+        </code></pre>
+      </section>
+
+      <!-- SDK sections -->

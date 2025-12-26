@@ -1,0 +1,226 @@
+<h1 class="text-4xl font-bold mb-6">웹훅 보안</h1>
+
+        <div class="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">🔒 항상 서명 검증</p>
+          <p>HMAC-SHA256 서명을 검증하지 않고는 웹훅 페이로드를 절대 신뢰하지 마세요. 이는 공격자가 입금/출금을 위조하는 것을 방지합니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">HMAC-SHA256 서명 검증</h2>
+        <p class="mb-4">Walits은 웹훅 시크릿을 사용하여 HMAC-SHA256으로 모든 웹훅 페이로드에 서명합니다. 서명은 다음과 같이 계산됩니다:</p>
+
+        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm mb-6">
+          <div class="text-green-400 mb-2">// 서명 공식:</div>
+          <div>message = timestamp + "." + event + "." + JSON.stringify(data)</div>
+          <div>signature = HMAC-SHA256(webhookSecret, message)</div>
+        </div>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">HTTP 헤더</h3>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">헤더</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">설명</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">예시</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">X-Walits-Signature</td>
+              <td class="border border-gray-200 px-4 py-2">HMAC-SHA256 서명</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-xs">sha256=abc123...</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">X-Walits-Timestamp</td>
+              <td class="border border-gray-200 px-4 py-2">Unix 타임스탬프 (밀리초)</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-xs">1702345678901</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">X-Walits-Event</td>
+              <td class="border border-gray-200 px-4 py-2">이벤트 유형</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-xs">WITHDRAWAL_EXECUTED</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">Node.js/Express 예시</h3>
+        <pre><code class="language-javascript">
+const crypto = require('crypto');
+const express = require('express');
+
+const app = express();
+app.use(express.json());
+
+const WEBHOOK_SECRET = process.env.WALITS_WEBHOOK_SECRET;
+
+// 서명 검증 함수
+function verifyWebhookSignature(timestamp, event, data, receivedSignature) {
+  const message = `${timestamp}.${event}.${JSON.stringify(data)}`;
+  const expectedSignature = `sha256=${crypto
+    .createHmac('sha256', WEBHOOK_SECRET)
+    .update(message)
+    .digest('hex')}`;
+
+  return crypto.timingSafeEqual(
+    Buffer.from(expectedSignature),
+    Buffer.from(receivedSignature)
+  );
+}
+
+// 웹훅 핸들러
+app.post('/webhooks/walits', async (req, res) => {
+  const signature = req.headers['x-walits-signature'];
+  const timestamp = req.headers['x-walits-timestamp'];
+  const event = req.headers['x-walits-event'];
+  const { data } = req.body;
+
+  // 1. 서명 검증
+  if (!verifyWebhookSignature(timestamp, event, data, signature)) {
+    console.error('Invalid signature');
+    return res.status(401).send('Invalid signature');
+  }
+
+  // 2. 타임스탬프 검증 (5분 이상 오래된 것 거부)
+  const now = Date.now();
+  if (Math.abs(now - parseInt(timestamp)) > 5 * 60 * 1000) {
+    console.error('Timestamp too old');
+    return res.status(401).send('Timestamp too old');
+  }
+
+  // 3. 이벤트 유형별 웹훅 처리
+  try {
+    switch (event) {
+      case 'DEPOSIT_DETECTED':
+        await handleDepositDetected(data);
+        break;
+
+      case 'DEPOSIT_CONFIRMED':
+        await handleDepositConfirmed(data);
+        break;
+
+      case 'WITHDRAWAL_REQUESTED':
+        await handleWithdrawalRequested(data);
+        break;
+
+      case 'WITHDRAWAL_EXECUTED':
+        await handleWithdrawalExecuted(data);
+        break;
+
+      case 'WITHDRAWAL_CONFIRMED':
+        await handleWithdrawalConfirmed(data);
+        break;
+
+      case 'WITHDRAWAL_FAILED':
+        await handleWithdrawalFailed(data);
+        break;
+
+      default:
+        console.warn(`Unknown event: ${event}`);
+    }
+
+    res.status(200).send('OK');
+  } catch (error) {
+    console.error('Webhook processing error:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+// 이벤트 핸들러
+async function handleDepositDetected(data) {
+  console.log('Deposit detected (notification only):', data);
+  // UI에 "보류 중인 입금" 표시
+  await updateCustomerUI(data.accountId, {
+    status: 'DETECTING',
+    amount: data.amount,
+    txHash: data.txHash
+  });
+}
+
+async function handleDepositConfirmed(data) {
+  console.log('Deposit confirmed - crediting balance:', data);
+  // 고객 잔액 크레딧
+  await db.customers.update({
+    where: { accountId: data.accountId },
+    data: { balance: { increment: parseFloat(data.amount) } }
+  });
+  await sendNotification(data.accountId, 'Deposit confirmed!');
+}
+
+async function handleWithdrawalRequested(data) {
+  console.log('Withdrawal requested (balance already held):', data);
+  // UI 업데이트: "출금 요청됨, 승인 대기 중"
+  await updateWithdrawalStatus(data.approvalRequestId, 'PENDING');
+}
+
+async function handleWithdrawalExecuted(data) {
+  console.log('Withdrawal executed (mempool):', data);
+  // txHash로 UI 업데이트
+  await updateWithdrawalStatus(data.approvalRequestId, 'PENDING', data.txHash);
+}
+
+async function handleWithdrawalConfirmed(data) {
+  console.log('Withdrawal confirmed on-chain:', data);
+  // 완료로 표시
+  await updateWithdrawalStatus(data.approvalRequestId, 'CONFIRMED');
+  await sendNotification(data.userId, 'Withdrawal completed!');
+}
+
+async function handleWithdrawalFailed(data) {
+  console.error('Withdrawal failed (balance auto-restored):', data);
+  // 고객에게 알림
+  await sendNotification(data.userId, `Withdrawal failed: ${data.errorMessage}`);
+}
+
+app.listen(3000, () => {
+  console.log('Webhook server running on port 3000');
+});
+        </code></pre>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">Python 예시</h3>
+        <pre><code class="language-python">
+import hmac
+import hashlib
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/webhooks/walits', methods=['POST'])
+def handle_webhook():
+    signature = request.headers.get('X-Walits-Signature')
+    webhook_secret = os.environ['WALITS_WEBHOOK_SECRET']
+    payload = request.get_data()
+
+    # 예상 서명 계산
+    expected_signature = hmac.new(
+        webhook_secret.encode('utf-8'),
+        payload,
+        hashlib.sha256
+    ).hexdigest()
+
+    # 서명 검증
+    if not hmac.compare_digest(signature, expected_signature):
+        print('❌ Invalid webhook signature!')
+        return 'Invalid signature', 401
+
+    # ✅ 서명 유효, 웹훅 처리
+    event_data = request.get_json()
+    event = event_data['event']
+    data = event_data['data']
+
+    if event == 'deposit.confirmed':
+        # 사용자 잔액 크레딧
+        db.users.update(
+            user_id=data['userId'],
+            balance=db.users.balance + Decimal(data['amount'])
+        )
+
+    return 'OK', 200
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">모범 사례</h2>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+          <li><strong>HTTPS만 사용:</strong> HTTP로 전송되는 웹훅은 중간자 공격에 취약합니다</li>
+          <li><strong>멱등성 구현:</strong> Walits은 중복 웹훅을 전송할 수 있습니다; 처리된 이벤트 ID를 저장하여 이중 크레딧을 방지하세요</li>
+          <li><strong>빠르게 200 반환:</strong> 웹훅을 비동기로 처리하세요; 5초 내에 응답하지 않으면 Walits이 재시도합니다</li>
+          <li><strong>재시도 로직:</strong> Walits은 실패한 웹훅(200이 아닌 응답)을 지수 백오프로 최대 10회 재시도합니다</li>
+          <li><strong>IP 화이트리스팅:</strong> 웹훅 엔드포인트를 Walits IP로 제한: <code>52.1.2.3/32, 54.5.6.7/32</code></li>
+        </ul>

@@ -1,0 +1,63 @@
+<h1 class="text-4xl font-bold mb-6">Python SDK</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Installation</h2>
+        <pre><code class="language-bash">pip install walits-non-custody
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Quick Start</h2>
+        <pre><code class="language-python">from walits import WalitsClient
+
+client = WalitsClient(
+    api_key='bbit_live_xxx',
+    api_secret='sk_xxx',
+    environment='production'  # or 'sandbox'
+)
+
+# Create wallet
+wallet = client.wallets.create(
+    customer_id='cust_abc',
+    name='Game Wallet',
+    chain='ETHEREUM'
+)
+
+# Create account
+account = client.accounts.create(
+    wallet_id=wallet.id,
+    user_id='player_001',
+    label='Alice'
+)
+
+# Transfer
+transfer = client.transfers.internal(
+    from_account_id='acc_001',
+    to_account_id='acc_002',
+    asset='native',
+    amount='100'
+)
+
+print(f'Transfer completed: {transfer.id}')
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Async Support</h2>
+        <pre><code class="language-python">from walits import AsyncWalitsClient
+
+async def main():
+    client = AsyncWalitsClient(
+        api_key='bbit_live_xxx',
+        api_secret='sk_xxx'
+    )
+
+    wallet = await client.wallets.create(
+        customer_id='cust_abc',
+        name='Game Wallet',
+        chain='ETHEREUM'
+    )
+
+    print(f'Wallet created: {wallet.id}')
+
+import asyncio
+asyncio.run(main())
+        </code></pre>
+      </section>
+
+      <!-- Security sections -->

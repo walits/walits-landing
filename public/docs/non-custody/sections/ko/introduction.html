@@ -1,0 +1,85 @@
+<h1 class="text-4xl font-bold mb-6">Walits Non-Custody API</h1>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">💎 관리형 B2B 솔루션</p>
+          <p>게임 스튜디오, 커뮤니티 앱, 리워드 플랫폼에서 수천 명의 사용자 지갑을 가상 잔액 전송과 최소 가스 비용으로 관리할 수 있습니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Non-Custody란?</h2>
+        <p class="mb-4">Walits Non-Custody는 다음과 같은 B2B 지갑 인프라입니다:</p>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+          <li><strong>플랫폼</strong>이 마스터 지갑과 모든 파생 서브 계정을 소유합니다</li>
+          <li><strong>최종 사용자</strong>는 HD 지갑 파생(BIP32/BIP44)을 통해 고유한 블록체인 주소를 받습니다</li>
+          <li><strong>가상 잔액</strong>을 통해 가스 비용 없이 즉시 P2P 전송이 가능합니다 (1,000+ TPS)</li>
+          <li><strong>TEE 보안</strong> (AWS Nitro Enclave)이 개인 키를 보호합니다</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">주요 기능</h2>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="border-2 border-green-500 rounded-lg p-6 bg-green-50">
+            <h3 class="text-xl font-semibold mb-3">🔑 HD Wallet</h3>
+            <p>BIP32/BIP44 표준을 사용하여 단일 니모닉에서 무제한 서브 계정을 자동 생성합니다</p>
+          </div>
+          <div class="border-2 border-blue-500 rounded-lg p-6 bg-blue-50">
+            <h3 class="text-xl font-semibold mb-3">⚡ Virtual Balance</h3>
+            <p>데이터베이스 레벨 잔액 업데이트를 통해 즉시 전송 (50-100ms), 1,000+ TPS, 가스 비용 무료</p>
+          </div>
+          <div class="border-2 border-purple-500 rounded-lg p-6 bg-purple-50">
+            <h3 class="text-xl font-semibold mb-3">🔒 TEE Security</h3>
+            <p>AWS Nitro Enclave에서 개인 키를 암호화하여 저장 (하드웨어 레벨 격리)</p>
+          </div>
+          <div class="border-2 border-orange-500 rounded-lg p-6 bg-orange-50">
+            <h3 class="text-xl font-semibold mb-3">🪙 Custom Tokens</h3>
+            <p>하나의 API 호출로 Ethereum/Base에 자체 ERC-20 토큰을 배포합니다</p>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">지원 블록체인</h2>
+        <div class="flex gap-3 mb-6">
+          <span class="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium">Ethereum (ETH)</span>
+          <span class="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium">Base (ETH L2)</span>
+          <span class="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium">Solana (SOL)</span>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">vs Custody Wallet</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">기능</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Non-Custody</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Custody</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">사용 사례</td>
+              <td class="border border-gray-200 px-4 py-2">게임, 커뮤니티 앱, 리워드</td>
+              <td class="border border-gray-200 px-4 py-2">거래소, 기관 커스터디</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">지갑 소유권</td>
+              <td class="border border-gray-200 px-4 py-2">플랫폼이 모든 서브 지갑 소유 (HD)</td>
+              <td class="border border-gray-200 px-4 py-2">Omnibus + Virtual Accounts</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">전송 속도</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">50-100ms (가상 잔액)</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">&lt;100ms (가상 계정)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">보안</td>
+              <td class="border border-gray-200 px-4 py-2">TEE (AWS Nitro Enclave)</td>
+              <td class="border border-gray-200 px-4 py-2">MPC 2-of-3 임계값 서명</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">승인 워크플로</td>
+              <td class="border border-gray-200 px-4 py-2">불필요 (플랫폼 제어)</td>
+              <td class="border border-gray-200 px-4 py-2">N-of-M 다중 서명 승인</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Gas 최적화</td>
+              <td class="border border-gray-200 px-4 py-2">내부 전송 무료</td>
+              <td class="border border-gray-200 px-4 py-2">배치 스윕, 가스 절감</td>
+            </tr>
+          </tbody>
+        </table>

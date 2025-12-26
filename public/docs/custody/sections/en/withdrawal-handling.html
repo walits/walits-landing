@@ -1,0 +1,199 @@
+<h1 class="text-4xl font-bold mb-6">Withdrawal Handling</h1>
+
+        <div class="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">Immediate Balance Hold</p>
+          <p>To prevent double-spending, withdrawal requests <strong>immediately lock funds</strong> by reducing <code class="bg-red-100 px-2 py-1 rounded">availableBalance</code> and increasing <code class="bg-red-100 px-2 py-1 rounded">pendingWithdrawalBalance</code>. This happens BEFORE any approvals or blockchain transactions.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Withdrawal State Transitions</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Event</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">availableBalance</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">pendingWithdrawalBalance</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_REQUESTED</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">↓ Decrease</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">↑ Increase</td>
+              <td class="border border-gray-200 px-4 py-2">Immediate hold to prevent double-spend</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">APPROVAL_PROGRESS</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">Approval in progress (optional event)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_APPROVED</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">Approval threshold met, ready for execution</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_EXECUTED</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">Transaction broadcast to blockchain (mempool)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">↓ Decrease</td>
+              <td class="border border-gray-200 px-4 py-2">On-chain confirmed (6-12 confirmations)</td>
+            </tr>
+            <tr class="bg-red-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_FAILED</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">↑ Increase (rollback)</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">↓ Decrease (rollback)</td>
+              <td class="border border-gray-200 px-4 py-2">Automatic balance restoration on failure</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Example: Withdrawal Lifecycle</h2>
+        <pre><code class="language-javascript">
+// Initial State
+{
+  "availableBalance": "10.0",
+  "pendingWithdrawalBalance": "0.0"
+}
+
+// 1. WITHDRAWAL_REQUESTED (immediate hold)
+{
+  "availableBalance": "5.0",         // 10.0 - 5.0
+  "pendingWithdrawalBalance": "5.0"  // 0.0 + 5.0
+}
+// ✅ Second request for 6.0 ETH will now FAIL (only 5.0 available)
+
+// 2. WITHDRAWAL_APPROVED (no balance change)
+// 3. WITHDRAWAL_EXECUTED (no balance change, txHash stored)
+
+// 4a. SUCCESS: WITHDRAWAL_CONFIRMED
+{
+  "availableBalance": "5.0",         // unchanged
+  "pendingWithdrawalBalance": "0.0"  // 5.0 - 5.0
+}
+
+// 4b. FAILURE: WITHDRAWAL_FAILED (automatic rollback)
+{
+  "availableBalance": "10.0",        // 5.0 + 5.0 (restored)
+  "pendingWithdrawalBalance": "0.0"  // 5.0 - 5.0 (released)
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">walits-provider Withdrawal Tracking</h2>
+        <p class="mb-4">walits-provider is a NestJS-based RPC Router and withdrawal tracking system:</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">Withdrawal Tracking Mechanism</h3>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>Broadcast</strong>: Sends transaction via eth_sendRawTransaction after MPC signing</li>
+            <li><strong>In-Memory Map</strong>: Stores pending withdrawals in memory (txHash → approvalRequestId)</li>
+            <li><strong>Polling every 30s</strong>: Queries transaction status via eth_getTransactionReceipt</li>
+            <li><strong>Confirmation Calculation</strong>: confirmations = latestBlock - txBlock + 1</li>
+            <li><strong>1 conf</strong>: Updates to MINED status (logs only, no webhook)</li>
+            <li><strong>6+ conf</strong>: CONFIRMED status (deducts pendingWithdrawalBalance, sends webhook)</li>
+            <li><strong>Revert Detection</strong>: receipt.status === 0 → FAILED (rolls back balance)</li>
+            <li><strong>Dropped Detection</strong>: Long-pending transaction → FAILED (rolls back balance)</li>
+          </ul>
+        </div>
+
+        <pre><code class="language-typescript">
+// walits-provider pseudo-code (NestJS)
+class WithdrawalTracker {
+  private pendingWithdrawals = new Map<string, ApprovalRequest>();
+
+  async broadcastWithdrawal(signedTx: string, approvalRequestId: string) {
+    const txHash = await eth.sendRawTransaction(signedTx);
+    this.pendingWithdrawals.set(txHash, approvalRequestId);
+    return txHash;
+  }
+
+  @Cron('*/30 * * * * *')  // Run every 30 seconds
+  async trackPendingWithdrawals() {
+    const latestBlock = await eth.getBlockNumber();
+
+    for (const [txHash, approvalRequestId] of this.pendingWithdrawals) {
+      const receipt = await eth.getTransactionReceipt(txHash);
+
+      if (!receipt) continue;  // Still pending
+
+      const confirmations = latestBlock - receipt.blockNumber + 1;
+
+      if (receipt.status === 0) {
+        // Transaction reverted
+        await this.handleWithdrawalFailed(approvalRequestId, 'Transaction reverted');
+        this.pendingWithdrawals.delete(txHash);
+      } else if (confirmations === 1) {
+        // MINED (log only)
+        logger.info(`Withdrawal ${txHash} mined at block ${receipt.blockNumber}`);
+      } else if (confirmations >= REQUIRED_CONFIRMATIONS) {  // 6 or 12
+        // CONFIRMED
+        await this.handleWithdrawalConfirmed(approvalRequestId, txHash);
+        this.pendingWithdrawals.delete(txHash);
+      }
+    }
+  }
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Automatic Rollback on Failure</h2>
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
+          <p class="font-semibold text-green-900 mb-2">Zero Manual Intervention Required</p>
+          <p class="text-green-800">If a withdrawal fails (MPC signature error, RPC error, insufficient gas, etc.), the system <strong>automatically</strong> restores the held funds to <code class="bg-green-100 px-2 py-1 rounded">availableBalance</code>. No manual reconciliation needed.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Implementation Code</h2>
+        <pre><code class="language-typescript">
+// WITHDRAWAL_REQUESTED: Immediate balance hold
+async createWithdrawalRequest(walletId: string, amount: string) {
+  const wallet = await prisma.wallet.findUnique({ where: { id: walletId } });
+  const requestAmount = new Decimal(amount);
+
+  // Check available balance
+  if (wallet.availableBalance.lessThan(requestAmount)) {
+    throw new Error('Insufficient available balance');
+  }
+
+  // Immediate hold (prevents double-spend)
+  await prisma.wallet.update({
+    where: { id: walletId },
+    data: {
+      availableBalance: { decrement: requestAmount },
+      pendingWithdrawalBalance: { increment: requestAmount }
+    }
+  });
+
+  await sendWebhook('WITHDRAWAL_REQUESTED', { ... });
+}
+
+// WITHDRAWAL_FAILED: Automatic rollback
+async handleWithdrawalFailed(approvalRequestId: string, error: Error) {
+  const request = await prisma.approvalRequest.findUnique({
+    where: { id: approvalRequestId },
+    include: { wallet: true }
+  });
+
+  const amount = new Decimal(request.amount);
+
+  // Rollback: restore available, release pending
+  await prisma.wallet.update({
+    where: { id: request.walletId },
+    data: {
+      availableBalance: { increment: amount },
+      pendingWithdrawalBalance: { decrement: amount }
+    }
+  });
+
+  await sendWebhook('WITHDRAWAL_FAILED', {
+    approvalRequestId,
+    amount: request.amount,
+    errorMessage: error.message
+  });
+}
+        </code></pre>

@@ -1,0 +1,160 @@
+<h1 class="text-4xl font-bold mb-6">입금 플로우</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">2단계 입금 프로세스</p>
+          <p class="mb-3">Walits은 블록체인 재구성으로부터 보호하기 위해 2단계 확인 프로세스를 사용합니다:</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>1단계 (DEPOSIT_DETECTED)</strong>: 1 컨펌 - 알림만, 잔액 변경 없음</li>
+            <li><strong>2단계 (DEPOSIT_CONFIRMED)</strong>: 6-12 컨펌 (네트워크별: Sepolia 6, Mainnet 12) - 잔액 업데이트, 사용자 크레딧 안전</li>
+          </ul>
+          <p class="mt-3 text-blue-800">기술적 세부사항은 <a href="#deposit-handling" class="underline">잔액 관리: 입금 처리</a>를 참조하세요.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">단계별 프로세스</h2>
+        <div class="space-y-6">
+          <div class="border-l-4 border-blue-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">1단계: 가상 계정 생성</h3>
+            <pre><code class="language-bash">
+POST /wallets/custody/{walletId}/virtual-accounts
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "userId": "user_12345",
+  "label": "User John Doe - ETH Account"
+}
+
+# 응답
+{
+  "virtualAccountId": "va_abc123",
+  "depositAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+  "walletId": "wal_abc123",
+  "userId": "user_12345",
+  "balance": "0.0"
+}
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-green-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">2단계: 사용자 자금 전송</h3>
+            <pre><code class="language-plaintext">
+사용자가 10 ETH를 0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb로 전송
+→ 트랜잭션이 블록에 포함됨
+→ xScanner가 입금 감지 (10초마다 블록 폴링)
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-gray-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">2.5단계: xScanner 블록체인 모니터링</h3>
+            <p class="mb-3">xScanner는 Rust로 작성된 블록체인 모니터링 시스템으로 입금을 감지합니다:</p>
+            <ul class="list-disc list-inside space-y-2 mb-3">
+              <li><strong>블록 폴링 방식</strong>: eth_getBlockByNumber로 10초마다 새 블록 체크</li>
+              <li><strong>UnconfirmedDeposit DB</strong>: 감지된 입금을 DB에 저장하여 confirmation 추적</li>
+              <li><strong>1 conf 도달</strong>: DEPOSIT_DETECTED 웹훅 전송</li>
+              <li><strong>6+ conf 도달</strong>: DEPOSIT_CONFIRMED 웹훅 전송, DB에서 삭제</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-yellow-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">3단계: DEPOSIT_DETECTED (1 컨펌)</h3>
+            <pre><code class="language-json">
+// 웹훅 전송 - 알림만, 아직 잔액 변경 없음
+{
+  "event": "DEPOSIT_DETECTED",
+  "data": {
+    "accountId": "acc_123",
+    "amount": "10.0",
+    "txHash": "0x123abc...",
+    "confirmations": 1
+  }
+}
+
+// 권장 조치: UI에 "보류 중인 입금" 표시
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-purple-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">4단계: DEPOSIT_CONFIRMED (6-12 컨펌)</h3>
+            <pre><code class="language-json">
+// 웹훅 전송 - 이제 잔액이 업데이트됨
+{
+  "event": "DEPOSIT_CONFIRMED",
+  "data": {
+    "accountId": "acc_123",
+    "amount": "10.0",
+    "balance": "10.0",
+    "autoSweep": true,
+    "txHash": "0x123abc...",
+    "confirmations": 6  // Sepolia: 6, Mainnet: 12
+  }
+}
+
+// 백엔드 업데이트:
+// - balance += 10.0
+// - availableBalance += 10.0
+// - 활성화된 경우 자동 스윕 트리거
+
+// 권장 조치: 사용자 잔액 크레딧, 출금 허용
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-orange-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">5단계: 자동 스윕 (활성화된 경우)</h3>
+            <pre><code class="language-plaintext">
+→ DEPOSIT_CONFIRMED 후 스윕 트랜잭션 시작
+   FROM: 0x742d35Cc (입금 주소)
+   TO: 0xOMNIBUS... (옴니버스 주소)
+   AMOUNT: 10 ETH (가스 수수료 차감 ~0.001 ETH)
+→ SWEEP_EXECUTED 웹훅 전송
+→ 옴니버스 지갑에 자금 통합
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-gray-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">6단계: 고객 잔액 확인</h3>
+            <pre><code class="language-json">
+// 가상 계정 잔액 업데이트 (데이터베이스)
+{
+  "virtualAccountId": "va_abc123",
+  "balance": "9.999",  // 10 - 0.001 가스
+  "omnibusBalance": "9.999",
+  "lastDeposit": {
+    "amount": "10.0",
+    "txHash": "0x123abc...",
+    "timestamp": "2024-12-09T10:30:00Z"
+  }
+}
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-red-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">5단계: 웹훅 알림</h3>
+            <pre><code class="language-json">
+// 귀사 서버가 웹훅 수신
+POST https://your-server.com/webhooks/walits
+{
+  "event": "deposit.confirmed",
+  "data": {
+    "virtualAccountId": "va_abc123",
+    "userId": "user_12345",
+    "amount": "10.0",
+    "asset": "ETH",
+    "txHash": "0x123abc...",
+    "confirmations": 1,
+    "timestamp": "2024-12-09T10:30:00Z"
+  }
+}
+            </code></pre>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">입금 프로세스 타임라인</h2>
+        <div class="bg-gray-100 p-6 rounded-lg mb-6">
+          <ul class="space-y-3">
+            <li><strong>입금 주소 생성</strong>: &lt;1초 (즉시 API 응답)</li>
+            <li><strong>입금 감지</strong>: 10초 이내 (블록 폴링 간격)</li>
+            <li><strong>DEPOSIT_DETECTED 웹훅</strong>: 1 컨펌 도달 시</li>
+            <li><strong>DEPOSIT_CONFIRMED 웹훅</strong>: 6-12 컨펌 도달 시 (네트워크별)</li>
+            <li><strong>자동 스윕 트리거</strong>: DEPOSIT_CONFIRMED 직후 (활성화된 경우)</li>
+          </ul>
+        </div>

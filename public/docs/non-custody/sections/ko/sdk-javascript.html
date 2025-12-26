@@ -1,0 +1,55 @@
+<h1 class="text-4xl font-bold mb-6">JavaScript SDK</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Installation</h2>
+        <pre><code class="language-bash">npm install @walits/non-custody-sdk
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Quick Start</h2>
+        <pre><code class="language-javascript">const { WalitsClient } = require('@walits/non-custody-sdk');
+
+const client = new WalitsClient({
+  apiKey: 'bbit_live_xxx',
+  apiSecret: 'sk_xxx',
+  environment: 'production' // or 'sandbox'
+});
+
+// Create wallet
+const wallet = await client.wallets.create({
+  customerId: 'cust_abc',
+  name: 'Game Wallet',
+  chain: 'ETHEREUM'
+});
+
+// Create account
+const account = await client.accounts.create({
+  walletId: wallet.id,
+  userId: 'player_001',
+  label: 'Alice'
+});
+
+// Transfer
+const transfer = await client.transfers.internal({
+  fromAccountId: 'acc_001',
+  toAccountId: 'acc_002',
+  asset: 'native',
+  amount: '100'
+});
+
+console.log('Transfer completed:', transfer.id);
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">TypeScript Support</h2>
+        <pre><code class="language-typescript">import { WalitsClient, Wallet, Account } from '@walits/non-custody-sdk';
+
+const client = new WalitsClient({
+  apiKey: process.env.WALITS_API_KEY!,
+  apiSecret: process.env.WALITS_API_SECRET!
+});
+
+const wallet: Wallet = await client.wallets.create({
+  customerId: 'cust_abc',
+  name: 'Game Wallet',
+  chain: 'ETHEREUM'
+});
+        </code></pre>
+      </section>

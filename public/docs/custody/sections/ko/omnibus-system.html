@@ -1,0 +1,81 @@
+<h1 class="text-4xl font-bold mb-6">옴니버스 시스템</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">💡 옴니버스란?</p>
+          <p>모든 고객 자금은 MPC 2-of-3로 보호되는 단일 마스터 주소(옴니버스 주소)에 통합되며, 개별 잔액은 데이터베이스 수준의 가상 계정을 통해 추적됩니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">아키텍처</h2>
+        <div class="grid grid-cols-2 gap-6 mb-6">
+          <div class="border-2 border-blue-500 rounded-lg p-6 bg-blue-50">
+            <h3 class="text-xl font-semibold mb-3">🏦 옴니버스 주소</h3>
+            <ul class="list-disc list-inside space-y-2">
+              <li>자산당 단일 온체인 주소</li>
+              <li>MPC 2-of-3 임계값 서명으로 보호</li>
+              <li>모든 고객 입금이 자동 스윕을 통해 이곳으로 유입</li>
+              <li>모든 출금이 이곳에서 시작</li>
+            </ul>
+          </div>
+          <div class="border-2 border-green-500 rounded-lg p-6 bg-green-50">
+            <h3 class="text-xl font-semibold mb-3">📊 가상 계정</h3>
+            <ul class="list-disc list-inside space-y-2">
+              <li>데이터베이스 수준 잔액 레코드</li>
+              <li>각 고객이 고유한 입금 주소 보유</li>
+              <li>즉시 내부 이체 (가스 수수료 없음)</li>
+              <li>실시간 잔액 업데이트</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">이점</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">기능</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">이점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">가스 최적화</td>
+              <td class="border border-gray-200 px-4 py-2">단일 주소에서 일괄 출금 → 60-80% 가스 절감</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">즉시 내부 이체</td>
+              <td class="border border-gray-200 px-4 py-2">사용자 A → 사용자 B 이체는 즉시 데이터베이스 업데이트 (가스 비용 0)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">유동성 관리</td>
+              <td class="border border-gray-200 px-4 py-2">중앙 집중식 풀 → 예비금 및 유동성 관리 용이</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">간소화된 재무조정</td>
+              <td class="border border-gray-200 px-4 py-2">추적할 단일 온체인 잔액, DB의 가상 잔액</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">예시 플로우</h2>
+        <pre><code class="language-plaintext">
+1. 고객 A가 고유 입금 주소(0xABC...)로 10 ETH 입금
+   → 1 컨펌 후 자동 스윕 트리거
+   → 자금이 옴니버스 주소(0xOMNI...)로 이동
+   → 가상 계정 A 잔액: +10 ETH (데이터베이스)
+
+2. 고객 B가 입금 주소(0xDEF...)로 5 ETH 입금
+   → 옴니버스 주소로 자동 스윕
+   → 가상 계정 B 잔액: +5 ETH (데이터베이스)
+   → 총 옴니버스 잔액: 15 ETH (온체인)
+
+3. 고객 A가 고객 B에게 3 ETH 이체 (내부)
+   → 가상 계정 A: 10 - 3 = 7 ETH ✅
+   → 가상 계정 B: 5 + 3 = 8 ETH ✅
+   → 옴니버스 잔액: 여전히 15 ETH (온체인 tx 없음!)
+   → 실행 시간: <100ms (데이터베이스 업데이트만)
+
+4. 고객 B가 외부 주소(0xEXTERNAL...)로 8 ETH 출금
+   → 승인 워크플로우 트리거 (정책이 요구하는 경우)
+   → 승인 후: 옴니버스가 온체인으로 8 ETH 전송
+   → 가상 계정 B: 8 - 8 = 0 ETH
+   → 옴니버스 잔액: 15 - 8 = 7 ETH
+        </code></pre>

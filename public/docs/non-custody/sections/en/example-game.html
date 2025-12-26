@@ -1,0 +1,90 @@
+<h1 class="text-4xl font-bold mb-6">Game Integration Example</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Use Case: In-Game Currency</h2>
+        <pre><code class="language-javascript">class GameWalletService {
+  constructor(apiKey, walletId) {
+    this.apiKey = apiKey;
+    this.walletId = walletId;
+    this.baseUrl = 'https://api.walits.com/api';
+  }
+
+  // Player registration
+  async onPlayerRegister(playerId, username) {
+    const account = await this.createAccount(playerId, username);
+    // Give welcome bonus
+    await this.adjustBalance(account.id, 1000, 'Welcome bonus');
+    return account;
+  }
+
+  // In-game purchase
+  async buyItem(buyerId, sellerId, itemPrice, itemName) {
+    const transfer = await axios.post(`${this.baseUrl}/internal-transfers`, {
+      fromAccountId: buyerId,
+      toAccountId: sellerId,
+      asset: 'native',
+      amount: itemPrice.toString(),
+      memo: `Purchase: ${itemName}`
+    }, {
+      headers: { 'X-API-Key': this.apiKey, 'X-Idempotency-Key': crypto.randomUUID() }
+    });
+
+    if (transfer.data.status === 'COMPLETED') {
+      // Grant item in game database
+      await this.grantItem(buyerId, itemName);
+    }
+
+    return transfer.data;
+  }
+
+  // Daily login reward
+  async dailyReward(accountId) {
+    const reward = 50;
+    await this.adjustBalance(accountId, reward, 'Daily login reward');
+    return { reward, message: `+${reward} coins!` };
+  }
+
+  // Cashout to external wallet
+  async cashout(accountId, toAddress, amount) {
+    const withdrawal = await axios.post(`${this.baseUrl}/withdrawals`, {
+      accountId,
+      toAddress,
+      asset: 'native',
+      amount: amount.toString()
+    }, {
+      headers: {
+        'X-API-Key': this.apiKey,
+        'X-API-Secret': process.env.API_SECRET,
+        'X-Idempotency-Key': crypto.randomUUID()
+      }
+    });
+
+    return withdrawal.data;
+  }
+
+  async adjustBalance(accountId, amount, reason) {
+    return axios.post(`${this.baseUrl}/accounts/${accountId}/adjust-balance`, {
+      asset: 'native',
+      amount: amount.toString(),
+      type: 'CREDIT',
+      reason
+    }, {
+      headers: { 'X-API-Key': this.apiKey, 'X-API-Secret': process.env.API_SECRET }
+    });
+  }
+}
+
+// Usage
+const gameWallet = new GameWalletService('bbit_live_xxx', 'wal_eth_xyz');
+
+// New player joins
+await gameWallet.onPlayerRegister('player_001', 'Alice');
+
+// Player buys sword from marketplace
+await gameWallet.buyItem('acc_001', 'acc_002', 150, 'Diamond Sword');
+
+// Daily reward
+await gameWallet.dailyReward('acc_001');
+        </code></pre>
+      </section>
+
+      <!-- Error Handling -->

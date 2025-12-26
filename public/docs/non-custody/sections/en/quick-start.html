@@ -1,0 +1,104 @@
+<h1 class="text-4xl font-bold mb-6">Quick Start</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">🚀 Get Started in 4 Steps</p>
+          <p>Follow this guide to create your first wallet and execute internal transfers in under 5 minutes.</p>
+        </div>
+
+        <div class="space-y-6">
+          <div class="border-l-4 border-green-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">Step 1: Register as Customer</h2>
+            <pre><code class="language-bash">POST https://api.walits.com/api/customers
+Content-Type: application/json
+
+{
+  "name": "My Game Studio",
+  "email": "admin@mygame.com",
+  "plan": "ENTERPRISE"
+}
+
+# Response
+{
+  "id": "cust_abc123",
+  "apiKey": "bbit_live_a1b2c3d4e5",
+  "apiSecret": "sk_x1y2z3a4b5",  // ⚠️ Store securely! Shown only once
+  "status": "ACTIVE"
+}
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-blue-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">Step 2: Create Master Wallet</h2>
+            <pre><code class="language-bash">POST https://api.walits.com/api/wallets
+X-API-Key: bbit_live_a1b2c3d4e5
+X-API-Secret: sk_x1y2z3a4b5
+
+{
+  "customerId": "cust_abc123",
+  "name": "Game Token Wallet",
+  "chain": "ETHEREUM"
+}
+
+# Response
+{
+  "id": "wal_eth_xyz",
+  "address": "0x1234...5678",
+  "mnemonic": "abandon abandon ... about",  // ⚠️ BACKUP SECURELY!
+  "chain": "ETHEREUM"
+}
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-purple-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">Step 3: Create Sub-Accounts for Users</h2>
+            <pre><code class="language-bash">POST https://api.walits.com/api/accounts
+X-API-Key: bbit_live_a1b2c3d4e5
+X-API-Secret: sk_x1y2z3a4b5
+
+{
+  "walletId": "wal_eth_xyz",
+  "userId": "player_001",
+  "label": "Alice"
+}
+
+# Response
+{
+  "id": "acc_001",
+  "address": "0xabcd...ef12",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "balances": {}
+}
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-orange-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">Step 4: Execute Internal Transfer</h2>
+            <pre><code class="language-bash">POST https://api.walits.com/api/internal-transfers
+X-API-Key: bbit_live_a1b2c3d4e5
+
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": 100
+}
+
+# Response (completed in ~50ms)
+{
+  "id": "txf_xyz",
+  "status": "COMPLETED",
+  "fromBalance": "900",
+  "toBalance": "100",
+  "executedAt": "2024-12-09T10:00:00.050Z"
+}
+            </code></pre>
+          </div>
+        </div>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mt-6">
+          <p class="font-semibold text-green-800">✅ Success!</p>
+          <p class="text-green-700 mt-2">You've just created a master wallet, 2 sub-accounts, and executed an instant internal transfer with zero gas fees!</p>
+        </div>
+      </section>
+
+      <!-- Authentication -->

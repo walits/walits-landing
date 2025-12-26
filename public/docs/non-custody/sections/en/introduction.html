@@ -1,0 +1,88 @@
+<h1 class="text-4xl font-bold mb-6">Walits Non-Custody API</h1>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">💎 Managed Custody B2B Solution</p>
+          <p>Game Studios, Community Apps, and Reward Platforms can manage thousands of user wallets with instant virtual balance transfers and minimal gas fees.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">What is Non-Custody?</h2>
+        <p class="mb-4">Walits Non-Custody is a B2B wallet infrastructure where:</p>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+          <li><strong>You</strong> (the platform) own the master wallet and all derived sub-accounts</li>
+          <li><strong>End-users</strong> get unique blockchain addresses via HD wallet derivation (BIP32/BIP44)</li>
+          <li><strong>Virtual balances</strong> enable instant P2P transfers without gas fees (1,000+ TPS)</li>
+          <li><strong>TEE security</strong> (AWS Nitro Enclave) protects private keys</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Key Features</h2>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="border-2 border-green-500 rounded-lg p-6 bg-green-50">
+            <h3 class="text-xl font-semibold mb-3">🔑 HD Wallet</h3>
+            <p>Auto-generate unlimited sub-accounts from single mnemonic using BIP32/BIP44 standard</p>
+          </div>
+          <div class="border-2 border-blue-500 rounded-lg p-6 bg-blue-50">
+            <h3 class="text-xl font-semibold mb-3">⚡ Virtual Balance</h3>
+            <p>Instant transfers (50-100ms) with 1,000+ TPS, zero gas fees via database-level balance updates</p>
+          </div>
+          <div class="border-2 border-purple-500 rounded-lg p-6 bg-purple-50">
+            <h3 class="text-xl font-semibold mb-3">🔒 TEE Security</h3>
+            <p>Private keys encrypted and stored in AWS Nitro Enclave (hardware-level isolation)</p>
+          </div>
+          <div class="border-2 border-orange-500 rounded-lg p-6 bg-orange-50">
+            <h3 class="text-xl font-semibold mb-3">🪙 Custom Tokens</h3>
+            <p>Deploy your own ERC-20 tokens on Ethereum/Base with one API call</p>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Supported Blockchains</h2>
+        <div class="flex gap-3 mb-6">
+          <span class="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium">Ethereum (ETH)</span>
+          <span class="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium">Base (ETH L2)</span>
+          <span class="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium">Solana (SOL)</span>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">vs Custody Wallet</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Feature</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Non-Custody</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Custody</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Use Case</td>
+              <td class="border border-gray-200 px-4 py-2">Games, Community Apps, Rewards</td>
+              <td class="border border-gray-200 px-4 py-2">Exchanges, Institutional Custody</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Wallet Ownership</td>
+              <td class="border border-gray-200 px-4 py-2">Platform owns all sub-wallets (HD)</td>
+              <td class="border border-gray-200 px-4 py-2">Omnibus + Virtual Accounts</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Transfer Speed</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">50-100ms (virtual balance)</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">&lt;100ms (virtual account)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Security</td>
+              <td class="border border-gray-200 px-4 py-2">TEE (AWS Nitro Enclave)</td>
+              <td class="border border-gray-200 px-4 py-2">MPC 2-of-3 Threshold Sig</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Approval Workflow</td>
+              <td class="border border-gray-200 px-4 py-2">Not needed (platform controlled)</td>
+              <td class="border border-gray-200 px-4 py-2">N-of-M multisig approval</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Gas Optimization</td>
+              <td class="border border-gray-200 px-4 py-2">Internal transfers free</td>
+              <td class="border border-gray-200 px-4 py-2">Batch sweeps, gas savings</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Quick Start -->

@@ -1,0 +1,79 @@
+<h1 class="text-4xl font-bold mb-6">속도 제한</h1>
+
+        <p class="mb-6">Walits enforces rate limits to ensure fair API usage and prevent abuse.</p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Rate Limit Tiers</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Endpoint Type</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Per Second</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Per Minute</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Per Hour</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Read (GET)</td>
+              <td class="border border-gray-200 px-4 py-2">50</td>
+              <td class="border border-gray-200 px-4 py-2">500</td>
+              <td class="border border-gray-200 px-4 py-2">5,000</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Write (POST/PUT)</td>
+              <td class="border border-gray-200 px-4 py-2">20</td>
+              <td class="border border-gray-200 px-4 py-2">200</td>
+              <td class="border border-gray-200 px-4 py-2">2,000</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Internal Transfers</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">1,000</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">Unlimited</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">Unlimited</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Withdrawals</td>
+              <td class="border border-gray-200 px-4 py-2">5</td>
+              <td class="border border-gray-200 px-4 py-2">50</td>
+              <td class="border border-gray-200 px-4 py-2">500</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">응답 헤더</h2>
+        <pre><code class="language-http">HTTP/1.1 200 OK
+X-RateLimit-Limit: 20
+X-RateLimit-Remaining: 15
+X-RateLimit-Reset: 1702123456
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">429 Rate Limit Exceeded</h2>
+        <pre><code class="language-json">{
+  "error": "RATE_LIMIT_EXCEEDED",
+  "message": "Too many requests. Retry after 30 seconds.",
+  "retryAfter": 30
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">속도 제한 처리</h2>
+        <pre><code class="language-javascript">async function makeApiCall(url, options) {
+  try {
+    const response = await fetch(url, options);
+
+    if (response.status === 429) {
+      const retryAfter = parseInt(response.headers.get('Retry-After')) || 30;
+      console.log(`Rate limited. Retrying after ${retryAfter}s...`);
+      await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+      return makeApiCall(url, options); // Retry
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('API call failed:', error);
+    throw error;
+  }
+}
+        </code></pre>
+      </section>
+
+      <!-- Idempotency -->

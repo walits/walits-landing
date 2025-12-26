@@ -1,0 +1,120 @@
+<h1 class="text-4xl font-bold mb-6">입금 처리</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">2단계 입금 처리</p>
+          <p>Walits은 블록체인 재구성(reorg)으로부터 보호하면서 조기 알림을 제공하기 위해 2단계 입금 확인 프로세스를 사용합니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">입금 단계</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">단계</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">이벤트</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">컨펌 수</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">잔액 업데이트</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">목적</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">1단계</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">DEPOSIT_DETECTED</td>
+              <td class="border border-gray-200 px-4 py-2">1</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">변경 없음</td>
+              <td class="border border-gray-200 px-4 py-2">조기 알림만</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">2단계</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">DEPOSIT_CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2">6-12 (Sepolia: 6, Mainnet: 12)</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">잔액 증가</td>
+              <td class="border border-gray-200 px-4 py-2">사용자 크레딧 안전</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">왜 2단계인가?</h2>
+        <div class="bg-gray-100 p-6 rounded-lg mb-6">
+          <p class="font-semibold mb-3">블록체인 재구성 위험</p>
+          <p class="mb-4">드문 경우이지만 블록이 재구성(reorg)되어 적은 컨펌 수의 트랜잭션이 취소될 수 있습니다. 잔액을 업데이트하기 전에 충분한 컨펌(Sepolia 6, Mainnet 12)을 기다림으로써 이 위험으로부터 보호합니다.</p>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>DEPOSIT_DETECTED</strong> → UI에 "보류 중인 입금" 표시, 아직 잔액 크레딧하지 않음</li>
+            <li><strong>DEPOSIT_CONFIRMED</strong> → 사용자 잔액 크레딧 및 출금 허용 안전</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">xScanner 블록체인 모니터링</h2>
+        <p class="mb-4">Walits Custody는 <strong>xScanner</strong> (Rust 기반 블록체인 모니터)를 사용하여 실시간으로 입금을 감지하고 추적합니다:</p>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">xScanner 동작 메커니즘</h3>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>블록 폴링 방식</strong>: eth_getBlockByNumber를 사용하여 10초마다 새 블록 체크</li>
+            <li><strong>입금 감지</strong>: 고객 입금 주소로의 트랜잭션 감지</li>
+            <li><strong>UnconfirmedDeposit DB</strong>: 감지된 입금을 DB에 저장하여 confirmation 추적</li>
+            <li><strong>1 conf 도달</strong>: DEPOSIT_DETECTED 웹훅 전송</li>
+            <li><strong>6+ conf 도달</strong>: DEPOSIT_CONFIRMED 웹훅 전송, DB에서 삭제</li>
+            <li><strong>백엔드 동기화</strong>: availableBalance 업데이트 및 자동 스윕 트리거 (활성화된 경우)</li>
+          </ul>
+        </div>
+
+        <pre><code class="language-rust">
+// xScanner 의사 코드 (Rust)
+loop {
+    let latest_block = eth_client.get_block_by_number("latest").await?;
+
+    // 모든 트랜잭션 검사
+    for tx in latest_block.transactions {
+        if is_customer_deposit_address(tx.to) {
+            // UnconfirmedDeposit DB에 저장
+            db.insert_unconfirmed_deposit(tx.hash, tx.to, tx.value).await?;
+        }
+    }
+
+    // confirmation 추적
+    let unconfirmed = db.get_all_unconfirmed_deposits().await?;
+    for deposit in unconfirmed {
+        let confirmations = latest_block.number - deposit.block_number + 1;
+
+        if confirmations == 1 {
+            webhook::send(DepositDetected { ... }).await?;
+        } else if confirmations >= REQUIRED_CONFIRMATIONS {  // 6 or 12
+            webhook::send(DepositConfirmed { ... }).await?;
+            db.delete_unconfirmed_deposit(deposit.id).await?;
+        }
+    }
+
+    tokio::time::sleep(Duration::from_secs(10)).await;
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">잔액 업데이트</h2>
+        <pre><code class="language-typescript">
+// DEPOSIT_CONFIRMED 핸들러 (백엔드)
+async handleDepositConfirmed(event: DepositEventDto) {
+  const depositAmount = new Decimal(event.amount);
+
+  await prisma.wallet.update({
+    where: { id: walletId },
+    data: {
+      balance: { increment: depositAmount },              // 총 잔액
+      availableBalance: { increment: depositAmount },     // 출금 가능 잔액
+      lastSyncedAt: new Date(),
+      lastSyncMethod: 'DEPOSIT'
+    }
+  });
+
+  // 활성화된 경우 자동 스윕 트리거
+  if (wallet.autoSweep) {
+    await triggerAutoSweep(accountId);
+  }
+
+  // 고객에게 웹훅 전송
+  await sendWebhook('DEPOSIT_CONFIRMED', {
+    accountId: event.accountId,
+    amount: event.amount,
+    txHash: event.txHash
+  });
+}
+        </code></pre>

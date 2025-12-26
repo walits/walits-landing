@@ -1,0 +1,91 @@
+<h1 class="text-4xl font-bold mb-4">MPC Architecture</h1>
+        <p class="text-gray-600 text-lg mb-6">Understanding Walits's CGGMP24 MPC 2-of-3 Threshold Signature System</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">What is MPC?</h2>
+        <p class="text-gray-600 mb-4">Multi-Party Computation (MPC) allows multiple parties to jointly compute a cryptographic signature without any single party having access to the complete private key. This eliminates single points of failure.</p>
+
+        <div class="bg-gray-50 border-l-4 border-gray-500 p-6 mb-6">
+          <h3 class="text-lg font-semibold mb-3">Technology Stack</h3>
+          <ul class="list-disc list-inside space-y-2">
+            <li><strong>MPC Server</strong>: High-performance CGGMP24 implementation written in Rust</li>
+            <li><strong>walits-provider</strong>: NestJS-based RPC Router and transaction tracking</li>
+            <li><strong>xScanner</strong>: Rust-based blockchain monitoring system</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">Key Share Distribution</h2>
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="border-2 border-blue-500 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">🔑</div>
+            <h3 class="font-semibold mb-2">Your Key Share</h3>
+            <p class="text-sm text-gray-600">Stored on your infrastructure (HSM recommended)</p>
+          </div>
+          <div class="border-2 border-green-500 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">🔐</div>
+            <h3 class="font-semibold mb-2">Walits HSM Share</h3>
+            <p class="text-sm text-gray-600">Stored in Walits's AWS HSM</p>
+          </div>
+          <div class="border-2 border-purple-500 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">🔒</div>
+            <h3 class="font-semibold mb-2">Backup Share</h3>
+            <p class="text-sm text-gray-600">Encrypted and stored for disaster recovery</p>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">Signature Process</h2>
+        <p class="text-gray-600 mb-4">To execute a transaction, 2 out of 3 key shares must participate in the signing process:</p>
+        <div class="bg-gray-100 p-6 rounded-lg">
+          <ol class="list-decimal list-inside space-y-3 text-gray-700">
+            <li><strong>Withdrawal Request:</strong> Initiated via API or dashboard</li>
+            <li><strong>Policy Check:</strong> Approval workflow triggered based on wallet policy</li>
+            <li><strong>Approval Reached:</strong> Required approvals met (e.g., 2-of-3)</li>
+            <li><strong>MPC Signing:</strong> Your share + Walits share → Generate signature</li>
+            <li><strong>Broadcast:</strong> Signed transaction sent to blockchain</li>
+          </ol>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">Self-Recovery (SPOF Elimination)</h2>
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-blue-900 text-lg mb-2">Self-Recovery Mechanism</p>
+          <p class="text-blue-800 mb-4">Walits ensures you always retain 1/3 of the key share, eliminating vendor lock-in.</p>
+          <p class="text-blue-900 font-semibold">Disaster Scenario: Walits Service Shutdown</p>
+          <ul class="list-disc list-inside text-blue-800 mt-2 space-y-2">
+            <li>You have: Your key share (1/3) + Backup share (1/3) = 2/3</li>
+            <li>You can: Reconstruct the full key and migrate to another wallet solution</li>
+            <li>Zero downtime: Your funds are always accessible</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4">Technical Specifications</h2>
+        <table class="min-w-full border border-gray-200 mt-4">
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">Protocol</td>
+              <td class="border border-gray-200 px-4 py-2">CGGMP24 (2024 Standard)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">Curve</td>
+              <td class="border border-gray-200 px-4 py-2">secp256k1 (Ethereum, Bitcoin)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">Threshold</td>
+              <td class="border border-gray-200 px-4 py-2">2-of-3 (t=2, n=3)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">Key Generation Time</td>
+              <td class="border border-gray-200 px-4 py-2">&lt;30 seconds</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">Signature Time</td>
+              <td class="border border-gray-200 px-4 py-2">~1.5 seconds</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">Throughput</td>
+              <td class="border border-gray-200 px-4 py-2">100+ signatures/second (parallel processing)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold bg-gray-50">Implementation Language</td>
+              <td class="border border-gray-200 px-4 py-2">Rust (MPC), NestJS (Provider)</td>
+            </tr>
+          </tbody>
+        </table>

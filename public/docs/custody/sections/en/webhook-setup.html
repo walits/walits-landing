@@ -1,0 +1,81 @@
+<h1 class="text-4xl font-bold mb-6">Webhook Setup</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">1. Configure Webhook URL</h2>
+        <div class="border rounded-lg p-4 mb-6">
+          <p class="mb-4"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-mono mr-2">POST</span><code class="bg-gray-100 px-2 py-1 rounded">/organizations/{orgId}/webhooks</code></p>
+          <pre><code class="language-bash">
+POST /organizations/org_xyz789/webhooks
+X-API-Key: bbit_live_xxx
+
+{
+  "url": "https://api.yourplatform.com/webhooks/walits",
+  "events": [
+    "deposit.confirmed",
+    "withdrawal.requested",
+    "withdrawal.confirmed",
+    "withdrawal.rejected"
+  ],
+  "description": "Production webhook endpoint"
+}
+
+# Response
+{
+  "webhookId": "wh_abc123",
+  "url": "https://api.yourplatform.com/webhooks/walits",
+  "secret": "whsec_1234567890abcdef",  // Store this securely!
+  "events": ["deposit.confirmed", "withdrawal.requested", ...],
+  "status": "active",
+  "createdAt": "2024-12-09T10:00:00Z"
+}
+          </code></pre>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">2. Test Webhook</h2>
+        <div class="border rounded-lg p-4 mb-6">
+          <p class="mb-4"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-mono mr-2">POST</span><code class="bg-gray-100 px-2 py-1 rounded">/webhooks/{webhookId}/test</code></p>
+          <pre><code class="language-bash">
+POST /webhooks/wh_abc123/test
+X-API-Key: bbit_live_xxx
+
+{
+  "event": "deposit.confirmed"
+}
+
+# Response
+{
+  "message": "Test webhook sent",
+  "statusCode": 200,
+  "latency": "150ms"
+}
+          </code></pre>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">3. Monitor Webhook Logs</h2>
+        <div class="border rounded-lg p-4 mb-6">
+          <p class="mb-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-mono mr-2">GET</span><code class="bg-gray-100 px-2 py-1 rounded">/webhooks/{webhookId}/logs</code></p>
+          <pre><code class="language-bash">
+GET /webhooks/wh_abc123/logs?limit=20
+X-API-Key: bbit_live_xxx
+
+# Response
+{
+  "logs": [
+    {
+      "event": "deposit.confirmed",
+      "sentAt": "2024-12-09T10:30:00Z",
+      "statusCode": 200,
+      "latency": "120ms",
+      "retries": 0
+    },
+    {
+      "event": "withdrawal.confirmed",
+      "sentAt": "2024-12-09T11:00:00Z",
+      "statusCode": 500,
+      "latency": "5000ms",
+      "retries": 3,
+      "lastError": "Connection timeout"
+    }
+  ]
+}
+          </code></pre>
+        </div>

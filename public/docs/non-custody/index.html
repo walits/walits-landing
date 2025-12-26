@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walits Non-Custody Wallet - API Documentation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-solidity.min.js"></script>
+  <style>
+    .menu-item.active { background-color: rgb(34 197 94); color: white; }
+    pre[class*="language-"] { border-radius: 8px; margin: 1rem 0; }
+    .method-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+    .method-get { background-color: #3b82f6; color: white; }
+    .method-post { background-color: #22c55e; color: white; }
+    .method-put { background-color: #f59e0b; color: white; }
+    .method-delete { background-color: #ef4444; color: white; }
+    .endpoint-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    .endpoint-card:hover { border-color: #22c55e; background-color: #f9fafb; }
+    #loading-indicator {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: #6b7280;
+    }
+    #loading-indicator.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-green-600 text-white shadow-md">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="/" class="text-2xl font-bold hover:text-green-200">Walits</a>
+          <span class="text-green-200 text-sm">Non-Custody Wallet API</span>
+        </div>
+        <nav class="flex items-center space-x-6">
+          <a href="/" class="hover:text-green-200">Home</a>
+          <a href="/docs/custody" class="hover:text-green-200">Custody</a>
+          <a href="/docs/non-custody" class="hover:text-green-200 font-semibold underline">Non-Custody</a>
+          <div class="flex items-center space-x-2 ml-4 border-l border-green-400 pl-4">
+            <a href="/docs/non-custody/index.ko.html" class="hover:text-green-200 text-sm">한</a>
+            <span class="text-green-300">|</span>
+            <span class="text-white font-semibold text-sm">EN</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white h-screen sticky top-0 shadow-lg overflow-y-auto">
+      <div class="p-6">
+        <div class="space-y-1">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Introduction</div>
+          <a href="#introduction" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer active">Overview</a>
+          <a href="#quick-start" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Quick Start</a>
+          <a href="#authentication" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Authentication</a>
+          <a href="#rate-limiting" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Rate Limiting</a>
+          <a href="#idempotency" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Idempotency</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Core Concepts</div>
+          <a href="#tee-architecture" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">TEE Architecture</a>
+          <a href="#hd-wallet" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">HD Wallet & BIP44</a>
+          <a href="#virtual-balance-concept" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Virtual Balance</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Wallet Management</div>
+          <a href="#wallet-create" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Create Master Wallet</a>
+          <a href="#sub-accounts" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Sub-Account Management</a>
+          <a href="#balance-management" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Balance Management</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Transactions</div>
+          <a href="#internal-transfer" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Internal Transfer</a>
+          <a href="#withdrawal" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">On-chain Withdrawal</a>
+          <a href="#token-deployment" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">ERC-20 Token</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">API Reference</div>
+          <a href="#api-customer" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Customer API</a>
+          <a href="#api-wallet" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Wallet API</a>
+          <a href="#api-account" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Account API</a>
+          <a href="#api-transfer" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Transfer API</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Code Examples</div>
+          <a href="#example-setup" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Complete Setup</a>
+          <a href="#example-game" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Game Integration</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Error Handling</div>
+          <a href="#error-codes" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Error Codes</a>
+          <a href="#error-handling" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Best Practices</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">SDK & Tools</div>
+          <a href="#sdk-javascript" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">JavaScript SDK</a>
+          <a href="#sdk-python" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Python SDK</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Security</div>
+          <a href="#security-best-practices" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Best Practices</a>
+          <a href="#key-management" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Key Management</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Appendix</div>
+          <a href="#use-cases" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Use Cases</a>
+          <a href="#data-objects" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Data Objects</a>
+          <a href="#integration-checklist" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Integration Checklist</a>
+          <a href="#faq" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">FAQ</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 max-w-5xl">
+      <!-- Loading Indicator -->
+      <div id="loading-indicator">
+        <svg class="animate-spin h-8 w-8 mx-auto mb-2 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p>Loading content...</p>
+      </div>
+
+      <!-- Dynamic Content Container -->
+      <div id="content-container"></div>
+    </main>
+  </div>
+
+  <footer class="border-t border-gray-200 py-8 bg-white mt-auto">
+    <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
+      <p>© 2024 Walits. All rights reserved.</p>
+      <p class="mt-2">Need help? Contact <a href="mailto:support@walits.com" class="text-green-600 hover:underline">support@walits.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Section mapping
+    const sectionMap = {
+      'introduction': 'introduction',
+      'quick-start': 'quick-start',
+      'authentication': 'authentication',
+      'rate-limiting': 'rate-limiting',
+      'idempotency': 'idempotency',
+      'tee-architecture': 'tee-architecture',
+      'hd-wallet': 'hd-wallet',
+      'virtual-balance-concept': 'virtual-balance-concept',
+      'wallet-create': 'wallet-create',
+      'sub-accounts': 'sub-accounts',
+      'balance-management': 'balance-management',
+      'internal-transfer': 'internal-transfer',
+      'withdrawal': 'withdrawal',
+      'token-deployment': 'token-deployment',
+      'api-customer': 'api-customer',
+      'api-wallet': 'api-wallet',
+      'api-account': 'api-account',
+      'api-transfer': 'api-transfer',
+      'example-setup': 'example-setup',
+      'example-game': 'example-game',
+      'error-codes': 'error-codes',
+      'error-handling': 'error-handling',
+      'sdk-javascript': 'sdk-javascript',
+      'sdk-python': 'sdk-python',
+      'security-best-practices': 'security-best-practices',
+      'key-management': 'key-management',
+      'use-cases': 'use-cases',
+      'data-objects': 'data-objects',
+      'integration-checklist': 'integration-checklist',
+      'faq': 'faq'
+    };
+
+    // Load section dynamically
+    async function loadSection(sectionId) {
+      const lang = 'en'; // or 'ko' based on current page
+      const filename = sectionMap[sectionId] || sectionId;
+      const contentContainer = document.getElementById('content-container');
+      const loadingIndicator = document.getElementById('loading-indicator');
+
+      try {
+        // Show loading indicator
+        loadingIndicator.classList.add('active');
+        contentContainer.style.display = 'none';
+
+        // Fetch section content
+        const response = await fetch(`/docs/non-custody/sections/${lang}/${filename}.html`);
+
+        if (!response.ok) {
+          throw new Error(`Failed to load section: ${response.status} ${response.statusText}`);
+        }
+
+        const html = await response.text();
+        contentContainer.innerHTML = html;
+
+        // Hide loading indicator
+        loadingIndicator.classList.remove('active');
+        contentContainer.style.display = 'block';
+
+        // Re-highlight code blocks
+        if (window.Prism) {
+          Prism.highlightAll();
+        }
+
+        // Update active menu item
+        document.querySelectorAll('.menu-item').forEach(item => {
+          item.classList.remove('active');
+        });
+
+        const activeMenuItem = document.querySelector(`[href="#${sectionId}"]`);
+        if (activeMenuItem) {
+          activeMenuItem.classList.add('active');
+        }
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+
+      } catch (error) {
+        console.error('Error loading section:', error);
+        loadingIndicator.classList.remove('active');
+        contentContainer.style.display = 'block';
+        contentContainer.innerHTML = `
+          <div class="bg-red-50 border-l-4 border-red-500 p-6">
+            <h2 class="text-2xl font-bold text-red-900 mb-2">Error Loading Content</h2>
+            <p class="text-red-800">Failed to load the requested section. Please try again or contact support.</p>
+            <p class="text-red-600 text-sm mt-2">${error.message}</p>
+          </div>
+        `;
+      }
+    }
+
+    // Handle hash changes
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.slice(1) || 'introduction';
+      loadSection(hash);
+    });
+
+    // Handle menu clicks
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = item.getAttribute('href').substring(1);
+        window.location.hash = targetId;
+      });
+    });
+
+    // Load initial section on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.slice(1) || 'introduction';
+      loadSection(hash);
+    });
+  </script>
+</body>
+</html>

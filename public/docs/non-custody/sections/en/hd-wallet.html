@@ -1,0 +1,92 @@
+<h1 class="text-4xl font-bold mb-6">HD Wallet & BIP44</h1>
+
+        <p class="mb-6">Hierarchical Deterministic (HD) wallets allow unlimited sub-account generation from a single mnemonic phrase using BIP32/BIP44 standards.</p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Derivation Path Structure</h2>
+        <pre><code class="language-plaintext">m / purpose' / coin_type' / account' / change / address_index
+
+Example (Ethereum):
+m / 44' / 60' / 0' / 0 / 0  → First user account
+m / 44' / 60' / 0' / 0 / 1  → Second user account
+m / 44' / 60' / 0' / 0 / 2  → Third user account
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Supported Chains</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Chain</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Coin Type</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Example Path</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Ethereum</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono">60'</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">m/44'/60'/0'/0/0</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Base</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono">60'</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">m/44'/60'/0'/0/0</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Solana</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono">501'</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">m/44'/501'/0'/0'</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Master Wallet Creation</h2>
+        <pre><code class="language-bash">POST /api/wallets
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "customerId": "cust_abc",
+  "name": "Game Master Wallet",
+  "chain": "ETHEREUM"
+}
+
+# Response
+{
+  "id": "wal_eth_xyz",
+  "address": "0x1234...5678",
+  "mnemonic": "abandon abandon ... about",  // 12 or 24 words
+  "chain": "ETHEREUM",
+  "derivationPath": "m/44'/60'/0'/0/0"
+}
+        </code></pre>
+
+        <div class="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
+          <p class="font-semibold text-red-900">🔴 Critical: Mnemonic Backup</p>
+          <ul class="list-disc list-inside text-red-800 mt-2 space-y-1">
+            <li>The <strong>mnemonic</strong> is shown only once during wallet creation</li>
+            <li>Store it in a secure vault (AWS Secrets Manager, HashiCorp Vault)</li>
+            <li>If lost, all sub-accounts become inaccessible permanently</li>
+            <li>Never store in plain text or commit to version control</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Sub-Account Auto-Generation</h2>
+        <p class="mb-4">Each user gets a unique address derived from the master wallet:</p>
+        <pre><code class="language-bash">POST /api/accounts
+{
+  "walletId": "wal_eth_xyz",
+  "userId": "player_001",
+  "label": "Alice"
+}
+
+# Response
+{
+  "id": "acc_001",
+  "address": "0xabcd...ef12",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "userId": "player_001"
+}
+        </code></pre>
+      </section>
+
+      <!-- Virtual Balance Concept -->

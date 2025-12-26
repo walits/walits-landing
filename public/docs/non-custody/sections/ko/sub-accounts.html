@@ -1,0 +1,74 @@
+<h1 class="text-4xl font-bold mb-6">서브 계정 관리</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Create Sub-Account</h2>
+        <pre><code class="language-bash">POST /api/accounts
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "walletId": "wal_eth_xyz",
+  "userId": "player_12345",
+  "label": "Alice"
+}
+
+# Response
+{
+  "id": "acc_001",
+  "walletId": "wal_eth_xyz",
+  "userId": "player_12345",
+  "label": "Alice",
+  "address": "0xabcdef1234567890abcdef1234567890abcdef12",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "balances": {
+    "native": "0",
+    "tokens": {}
+  },
+  "createdAt": "2024-12-09T10:01:00Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">List Sub-Accounts</h2>
+        <pre><code class="language-bash">GET /api/wallets/wal_eth_xyz/accounts
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+# Response
+{
+  "accounts": [
+    {
+      "id": "acc_001",
+      "userId": "player_001",
+      "label": "Alice",
+      "address": "0xabc...",
+      "balances": { "native": "1000" }
+    },
+    {
+      "id": "acc_002",
+      "userId": "player_002",
+      "label": "Bob",
+      "address": "0xdef...",
+      "balances": { "native": "500" }
+    }
+  ],
+  "total": 2
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Get Account Balance</h2>
+        <pre><code class="language-bash">GET /api/accounts/acc_001/balance
+X-API-Key: bbit_live_xxx
+
+# Response
+{
+  "accountId": "acc_001",
+  "balances": {
+    "native": "1000.5",
+    "tokens": {
+      "0xtoken_contract_address": "250.0"
+    }
+  }
+}
+        </code></pre>
+      </section>
+
+      <!-- Balance Management -->

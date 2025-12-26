@@ -1,0 +1,71 @@
+<h1 class="text-4xl font-bold mb-6">Balance Structure</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">Double-Entry Accounting System</p>
+          <p>Walits Custody uses enterprise-grade balance management following the same patterns as BitGo and Fireblocks. This prevents double-spending and ensures accurate accounting.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Balance Types</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Balance Type</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Description</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Update Timing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">balance</td>
+              <td class="border border-gray-200 px-4 py-2">Total balance (on-chain cached value)</td>
+              <td class="border border-gray-200 px-4 py-2">Deposit confirmed, Sweep completed</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">availableBalance</td>
+              <td class="border border-gray-200 px-4 py-2">Withdrawable balance (not held)</td>
+              <td class="border border-gray-200 px-4 py-2">Deposit/Withdrawal requested/confirmed</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">pendingWithdrawalBalance</td>
+              <td class="border border-gray-200 px-4 py-2">Funds held for pending withdrawals</td>
+              <td class="border border-gray-200 px-4 py-2">Withdrawal requested/confirmed/failed</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Balance Invariant</h2>
+        <div class="bg-gray-900 text-gray-100 p-6 rounded-lg font-mono mb-6">
+          <div class="text-green-400 mb-4">// This relationship MUST always hold true:</div>
+          <div class="text-xl">totalBalance = availableBalance + pendingWithdrawalBalance</div>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+          <p class="font-semibold text-yellow-900 mb-2">Important: Double-Spend Prevention</p>
+          <p class="text-yellow-800">When a withdrawal is requested, <code class="bg-yellow-100 px-2 py-1 rounded">availableBalance</code> is <strong>immediately reduced</strong> and <code class="bg-yellow-100 px-2 py-1 rounded">pendingWithdrawalBalance</code> is increased. This ensures a second withdrawal request for the same funds will fail due to insufficient available balance.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Example Scenario</h2>
+        <pre><code class="language-javascript">
+// Initial state
+{
+  "balance": "10.0",
+  "availableBalance": "10.0",
+  "pendingWithdrawalBalance": "0.0"
+}
+
+// User requests withdrawal of 3.0 ETH
+// → Balance hold happens IMMEDIATELY
+{
+  "balance": "10.0",                    // unchanged
+  "availableBalance": "7.0",            // 10.0 - 3.0 = 7.0
+  "pendingWithdrawalBalance": "3.0"     // 0.0 + 3.0 = 3.0
+}
+
+// Withdrawal confirmed on-chain (12 confirmations)
+// → Pending balance released
+{
+  "balance": "7.0",                     // actual on-chain balance
+  "availableBalance": "7.0",            // unchanged
+  "pendingWithdrawalBalance": "0.0"     // 3.0 - 3.0 = 0.0
+}
+        </code></pre>

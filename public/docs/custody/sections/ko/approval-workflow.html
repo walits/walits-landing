@@ -1,0 +1,122 @@
+<h1 class="text-4xl font-bold mb-6">승인 워크플로우</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">🔐 N-of-M 승인 프로세스</p>
+          <p>출금과 같은 민감한 작업에 대해 여러 관리자 승인을 요구하여 거버넌스 통제를 구현합니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">승인 요청 생명주기</h2>
+        <pre><code class="language-plaintext">
+1. PENDING → 승인 대기 중 (currentApprovals < requiredApprovals)
+2. APPROVED → 임계값 충족, MPC 서명 생성 시작
+3. BROADCASTING → 블록체인에 트랜잭션 전송됨
+4. CONFIRMED → 온체인 확인 수신 ✅
+5. REJECTED → 관리자가 요청 거부 (최종 상태) ❌
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">API 엔드포인트</h2>
+        <div class="space-y-4">
+          <div class="border rounded-lg p-4">
+            <h3 class="text-lg font-semibold mb-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-mono mr-2">GET</span>보류 중인 승인 목록</h3>
+            <pre><code class="language-bash">GET /approvals?status=PENDING
+X-API-Key: bbit_live_xxx
+
+# 응답
+{
+  "approvals": [
+    {
+      "id": "apr_xyz789",
+      "walletId": "wal_abc123",
+      "type": "WITHDRAWAL",
+      "amount": "5.0",
+      "toAddress": "0xRECIPIENT",
+      "status": "PENDING",
+      "requiredApprovals": 2,
+      "currentApprovals": 1,
+      "approvers": [
+        {
+          "adminId": "admin_001",
+          "approvedAt": "2024-12-09T10:00:00Z",
+          "comment": "Verified"
+        }
+      ],
+      "createdAt": "2024-12-09T09:55:00Z"
+    }
+  ]
+}
+            </code></pre>
+          </div>
+
+          <div class="border rounded-lg p-4">
+            <h3 class="text-lg font-semibold mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-mono mr-2">POST</span>요청 승인</h3>
+            <pre><code class="language-bash">POST /approvals/{approvalRequestId}/approve
+X-API-Key: bbit_live_xxx
+
+{
+  "comment": "Approved after verification"
+}
+
+# 응답
+{
+  "approvalRequestId": "apr_xyz789",
+  "status": "APPROVED",  // PENDING에서 변경됨
+  "currentApprovals": 2,
+  "requiredApprovals": 2,
+  "message": "Threshold met. Transaction will be broadcast shortly."
+}
+            </code></pre>
+          </div>
+
+          <div class="border rounded-lg p-4">
+            <h3 class="text-lg font-semibold mb-2"><span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm font-mono mr-2">POST</span>요청 거부</h3>
+            <pre><code class="language-bash">POST /approvals/{approvalRequestId}/reject
+X-API-Key: bbit_live_xxx
+
+{
+  "reason": "Suspicious withdrawal pattern"
+}
+
+# 응답
+{
+  "approvalRequestId": "apr_xyz789",
+  "status": "REJECTED",
+  "rejectedBy": "admin_002",
+  "reason": "Suspicious withdrawal pattern",
+  "rejectedAt": "2024-12-09T10:10:00Z"
+}
+            </code></pre>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">사용 사례</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">시나리오</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">권장 임계값</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">근거</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">소규모 거래소</td>
+              <td class="border border-gray-200 px-4 py-2">2-of-3</td>
+              <td class="border border-gray-200 px-4 py-2">보안과 운영 속도 간 균형</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">대규모 거래소</td>
+              <td class="border border-gray-200 px-4 py-2">3-of-5 또는 4-of-7</td>
+              <td class="border border-gray-200 px-4 py-2">높은 이해관계에는 더 많은 감독 필요</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">기업 재무</td>
+              <td class="border border-gray-200 px-4 py-2">2-of-4</td>
+              <td class="border border-gray-200 px-4 py-2">CFO + 재무 담당자 승인 필요</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">결제 프로세서</td>
+              <td class="border border-gray-200 px-4 py-2">1-of-2 + 화이트리스트</td>
+              <td class="border border-gray-200 px-4 py-2">화이트리스트 주소에 대한 빠른 승인</td>
+            </tr>
+          </tbody>
+        </table>

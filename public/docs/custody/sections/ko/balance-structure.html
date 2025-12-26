@@ -1,0 +1,71 @@
+<h1 class="text-4xl font-bold mb-6">잔액 구조</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">복식 부기 시스템</p>
+          <p>Walits Custody는 BitGo 및 Fireblocks와 동일한 패턴을 따르는 엔터프라이즈급 잔액 관리를 사용합니다. 이는 이중 지출을 방지하고 정확한 회계를 보장합니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">잔액 유형</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">잔액 유형</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">설명</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">업데이트 시점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">balance</td>
+              <td class="border border-gray-200 px-4 py-2">총 잔액 (온체인 캐시된 값)</td>
+              <td class="border border-gray-200 px-4 py-2">입금 확정, 스윕 완료</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">availableBalance</td>
+              <td class="border border-gray-200 px-4 py-2">출금 가능 잔액 (홀드되지 않음)</td>
+              <td class="border border-gray-200 px-4 py-2">입금/출금 요청/확정</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">pendingWithdrawalBalance</td>
+              <td class="border border-gray-200 px-4 py-2">보류 중인 출금을 위해 홀드된 자금</td>
+              <td class="border border-gray-200 px-4 py-2">출금 요청/확정/실패</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">잔액 불변성</h2>
+        <div class="bg-gray-900 text-gray-100 p-6 rounded-lg font-mono mb-6">
+          <div class="text-green-400 mb-4">// 이 관계는 항상 참이어야 합니다:</div>
+          <div class="text-xl">totalBalance = availableBalance + pendingWithdrawalBalance</div>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+          <p class="font-semibold text-yellow-900 mb-2">중요: 이중 지출 방지</p>
+          <p class="text-yellow-800">출금이 요청되면 <code class="bg-yellow-100 px-2 py-1 rounded">availableBalance</code>가 <strong>즉시 감소</strong>하고 <code class="bg-yellow-100 px-2 py-1 rounded">pendingWithdrawalBalance</code>가 증가합니다. 이는 동일한 자금에 대한 두 번째 출금 요청이 사용 가능한 잔액 부족으로 실패하도록 보장합니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">예시 시나리오</h2>
+        <pre><code class="language-javascript">
+// 초기 상태
+{
+  "balance": "10.0",
+  "availableBalance": "10.0",
+  "pendingWithdrawalBalance": "0.0"
+}
+
+// 사용자가 3.0 ETH 출금 요청
+// → 잔액 홀드가 즉시 발생
+{
+  "balance": "10.0",                    // 변경 없음
+  "availableBalance": "7.0",            // 10.0 - 3.0 = 7.0
+  "pendingWithdrawalBalance": "3.0"     // 0.0 + 3.0 = 3.0
+}
+
+// 온체인 출금 확정 (12 컨펌)
+// → 보류 잔액 해제
+{
+  "balance": "7.0",                     // 실제 온체인 잔액
+  "availableBalance": "7.0",            // 변경 없음
+  "pendingWithdrawalBalance": "0.0"     // 3.0 - 3.0 = 0.0
+}
+        </code></pre>

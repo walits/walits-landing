@@ -1,0 +1,60 @@
+<h1 class="text-4xl font-bold mb-6">ERC-20 Token Deployment</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Deploy Custom Token</h2>
+        <pre><code class="language-bash">POST /api/tokens/deploy
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "walletId": "wal_eth_xyz",
+  "chain": "ETHEREUM",
+  "name": "Game Gold Coin",
+  "symbol": "GGC",
+  "decimals": 18,
+  "initialSupply": "1000000"
+}
+
+# Response
+{
+  "id": "token_ggc_001",
+  "contractAddress": "0xtoken1234567890abcdeftoken1234567890abcdef",
+  "name": "Game Gold Coin",
+  "symbol": "GGC",
+  "decimals": 18,
+  "totalSupply": "1000000",
+  "deploymentTxHash": "0xdeploy123...",
+  "deployedAt": "2024-12-09T10:00:30Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Mint Additional Tokens</h2>
+        <pre><code class="language-bash">POST /api/tokens/0xtoken.../mint
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "toAccountId": "acc_001",
+  "amount": "50000"
+}
+
+# Response
+{
+  "txHash": "0xmint456...",
+  "toAddress": "0xabc...ef12",
+  "amount": "50000",
+  "newTotalSupply": "1050000"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Transfer Custom Tokens</h2>
+        <pre><code class="language-bash">POST /api/internal-transfers
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "0xtoken1234...abcdef",  // Token contract address
+  "amount": "100"
+}
+        </code></pre>
+      </section>
+
+      <!-- API Reference sections -->

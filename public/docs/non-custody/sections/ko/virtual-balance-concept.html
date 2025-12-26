@@ -1,0 +1,98 @@
+<h1 class="text-4xl font-bold mb-6">Virtual Balance Concept</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">⚡ Database-Level Balance Tracking</p>
+          <p>Virtual balances enable instant P2P transfers without on-chain transactions, achieving 1,000+ TPS with 50-100ms latency.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">작동 방식</h2>
+        <pre><code class="language-plaintext">┌─────────────────────────────────────────────┐
+│         Blockchain (On-chain)               │
+│  ┌───────────────────────────────────────┐  │
+│  │  Master Wallet: 10,000 ETH            │  │
+│  │  Sub-Account 1: 0 ETH (empty)         │  │
+│  │  Sub-Account 2: 0 ETH (empty)         │  │
+│  └───────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+         ↓ (virtual balance mapping)
+┌─────────────────────────────────────────────┐
+│         Walits Database                   │
+│  ┌───────────────────────────────────────┐  │
+│  │  acc_001 (Alice):  5,000 ETH          │  │
+│  │  acc_002 (Bob):    3,000 ETH          │  │
+│  │  acc_003 (Carol):  2,000 ETH          │  │
+│  └───────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Internal Transfer (Virtual)</h2>
+        <p class="mb-4">Updates database only, no blockchain transaction:</p>
+        <pre><code class="language-bash">POST /api/internal-transfers
+{
+  "fromAccountId": "acc_001",  // Alice
+  "toAccountId": "acc_002",    // Bob
+  "asset": "native",
+  "amount": 100
+}
+
+# Result (in ~50ms):
+# Database: Alice 5000 → 4900, Bob 3000 → 3100
+# Blockchain: No transaction, 0 gas fees
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Withdrawal (On-chain)</h2>
+        <p class="mb-4">Actual blockchain transaction to external wallet:</p>
+        <pre><code class="language-bash">POST /api/withdrawals
+{
+  "accountId": "acc_001",
+  "toAddress": "0x9999...external",
+  "asset": "native",
+  "amount": 500
+}
+
+# Result (in ~15 seconds on Ethereum):
+# 1. Database: Alice 4900 → 4400
+# 2. Blockchain: Master wallet sends 500 ETH to 0x9999...
+# 3. Gas fees deducted from Alice's virtual balance
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Performance Comparison</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Metric</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Internal Transfer</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">On-chain Withdrawal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Latency</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">50-100ms</td>
+              <td class="border border-gray-200 px-4 py-2">15-60 seconds</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Throughput</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">1,000+ TPS</td>
+              <td class="border border-gray-200 px-4 py-2">~10 TPS (batched)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Gas Fees</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">$0</td>
+              <td class="border border-gray-200 px-4 py-2">$0.50-$5 (varies)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Blockchain State</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">On-chain transaction</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
+          <p class="font-semibold text-green-900">💡 Best Practice</p>
+          <p class="text-green-800 mt-2">Use internal transfers for 99% of game/app transactions. Reserve withdrawals for users cashing out to external wallets.</p>
+        </div>
+      </section>
+
+      <!-- Wallet Create -->

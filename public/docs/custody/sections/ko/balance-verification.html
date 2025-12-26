@@ -1,0 +1,138 @@
+<h1 class="text-4xl font-bold mb-6">잔액 검증</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">다층 검증 전략</p>
+          <p>Walits은 정확성, 성능 및 블록체인 RPC 비용의 균형을 맞추는 비용 효율적인 검증 전략을 사용합니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">검증 계층</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">계층</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">트리거</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">RPC 호출</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">목적</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">실시간 업데이트</td>
+              <td class="border border-gray-200 px-4 py-2">모든 입금/출금</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">아니오</td>
+              <td class="border border-gray-200 px-4 py-2">빠른 DB 기반 잔액 추적</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">스윕 검증</td>
+              <td class="border border-gray-200 px-4 py-2">모든 스윕 이전</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">예</td>
+              <td class="border border-gray-200 px-4 py-2">자금 이동 전 정확한 온체인 잔액 검증</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">대량 출금 확인</td>
+              <td class="border border-gray-200 px-4 py-2">출금 ≥ 1.0 ETH</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">예</td>
+              <td class="border border-gray-200 px-4 py-2">고액 트랜잭션에 대한 추가 안전</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">일일 재무조정</td>
+              <td class="border border-gray-200 px-4 py-2">자동 크론 (오전 2시)</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">예 (모든 지갑)</td>
+              <td class="border border-gray-200 px-4 py-2">불일치 감지 및 경고</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">재무조정 프로세스</h2>
+        <p class="mb-4">매일 오전 2시(구성 가능)에 자동 재무조정 서비스:</p>
+        <div class="bg-gray-100 p-6 rounded-lg mb-6">
+          <ol class="list-decimal list-inside space-y-3">
+            <li>데이터베이스에서 모든 커스터디 지갑 주소 조회</li>
+            <li>각 주소에 대해 <code class="bg-gray-200 px-2 py-1 rounded">eth_getBalance</code> 호출</li>
+            <li>온체인 잔액과 데이터베이스 잔액 비교</li>
+            <li>불일치 감지 시:
+              <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                <li>보류 중인 스윕 트랜잭션 확인</li>
+                <li>보류 중인 출금 확인</li>
+                <li>최근 트랜잭션 활동 분석 (최근 30분)</li>
+                <li>운영팀에 경고 전송</li>
+              </ul>
+            </li>
+            <li>재무조정 보고서 생성:
+              <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                <li>확인된 총 지갑 수</li>
+                <li>일치하는 지갑</li>
+                <li>불일치 (가능한 이유 포함)</li>
+                <li>권장 조치</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">비용 최적화</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">전략</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">월간 RPC 호출</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">예상 비용</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-red-50">
+              <td class="border border-gray-200 px-4 py-2">모든 입금 검증</td>
+              <td class="border border-gray-200 px-4 py-2">86,400,000</td>
+              <td class="border border-gray-200 px-4 py-2">$500-1,000</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600">권장하지 않음</td>
+            </tr>
+            <tr class="bg-green-50">
+              <td class="border border-gray-200 px-4 py-2">스윕 + 대량 출금만</td>
+              <td class="border border-gray-200 px-4 py-2">~10,000</td>
+              <td class="border border-gray-200 px-4 py-2">$5-15</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">✅ 현재 구현</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">일일 재무조정</td>
+              <td class="border border-gray-200 px-4 py-2">~1,500</td>
+              <td class="border border-gray-200 px-4 py-2">$1-3</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">✅ 현재 구현</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
+          <p class="font-semibold text-green-900 mb-2">총 월간 비용: $6-18</p>
+          <p class="text-green-800">온체인 잔액을 검증할 시점을 전략적으로 선택함으로써 Walits은 순진한 검증 방식의 2% 미만 비용으로 99.9% 정확도를 달성합니다.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">재무조정 보고서 액세스</h2>
+        <pre><code class="language-bash">
+# 최신 재무조정 보고서 가져오기
+GET /api/reconciliation/latest
+Authorization: Bearer {ADMIN_JWT_TOKEN}
+
+# 응답
+{
+  "id": "rec_abc123",
+  "reportDate": "2025-12-12T02:00:00Z",
+  "status": "COMPLETED",
+  "totalWallets": 100,
+  "matchedWallets": 98,
+  "discrepancies": 2,
+  "totalDiscrepancyAmount": "0.05",
+  "items": [
+    {
+      "walletId": "wal_xyz",
+      "walletName": "Main Custody",
+      "dbBalance": "1.5000",
+      "chainBalance": "1.5200",
+      "difference": "0.0200",
+      "matched": false,
+      "possibleReasons": [
+        "1 Sweep transaction pending (BROADCAST status)"
+      ]
+    }
+  ]
+}
+        </code></pre>

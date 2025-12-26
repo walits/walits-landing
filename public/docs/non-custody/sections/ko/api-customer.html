@@ -1,0 +1,32 @@
+<h1 class="text-4xl font-bold mb-6">고객 API</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/customers</h2>
+        <p class="mb-4">Register a new customer and receive API credentials.</p>
+        <pre><code class="language-bash">POST /api/customers
+Content-Type: application/json
+
+{
+  "name": "string",
+  "email": "string",
+  "plan": "STARTER" | "ENTERPRISE"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/customers/:id</h2>
+        <p class="mb-4">Retrieve customer details.</p>
+        <pre><code class="language-bash">GET /api/customers/cust_abc123
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">PUT /api/customers/:id</h2>
+        <p class="mb-4">Update customer information.</p>
+        <pre><code class="language-bash">PUT /api/customers/cust_abc123
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "name": "Updated Company Name"
+}
+        </code></pre>
+      </section>

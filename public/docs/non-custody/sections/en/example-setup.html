@@ -1,0 +1,136 @@
+<h1 class="text-4xl font-bold mb-6">Complete Setup Example</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">JavaScript/Node.js</h2>
+        <pre><code class="language-javascript">const axios = require('axios');
+
+const API_BASE = 'https://api.walits.com/api';
+const API_KEY = 'bbit_live_xxx';
+const API_SECRET = 'sk_xxx';
+
+// 1. Create Master Wallet
+async function createWallet() {
+  const { data } = await axios.post(`${API_BASE}/wallets`, {
+    customerId: 'cust_abc123',
+    name: 'Game Wallet',
+    chain: 'ETHEREUM'
+  }, {
+    headers: {
+      'X-API-Key': API_KEY,
+      'X-API-Secret': API_SECRET
+    }
+  });
+
+  console.log('Wallet created:', data.id);
+  console.log('BACKUP THIS MNEMONIC:', data.mnemonic);
+  return data.id;
+}
+
+// 2. Create Sub-Accounts
+async function createAccount(walletId, userId, label) {
+  const { data } = await axios.post(`${API_BASE}/accounts`, {
+    walletId,
+    userId,
+    label
+  }, {
+    headers: {
+      'X-API-Key': API_KEY,
+      'X-API-Secret': API_SECRET
+    }
+  });
+
+  console.log(`Account created for ${label}:`, data.address);
+  return data.id;
+}
+
+// 3. Execute Transfer
+async function transfer(fromId, toId, amount) {
+  const { data } = await axios.post(`${API_BASE}/internal-transfers`, {
+    fromAccountId: fromId,
+    toAccountId: toId,
+    asset: 'native',
+    amount: amount.toString()
+  }, {
+    headers: {
+      'X-API-Key': API_KEY,
+      'X-Idempotency-Key': crypto.randomUUID()
+    }
+  });
+
+  console.log('Transfer completed:', data.id);
+  return data;
+}
+
+// Main flow
+(async () => {
+  const walletId = await createWallet();
+  const alice = await createAccount(walletId, 'player_001', 'Alice');
+  const bob = await createAccount(walletId, 'player_002', 'Bob');
+  await transfer(alice, bob, 100);
+})();
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Python</h2>
+        <pre><code class="language-python">import requests
+import uuid
+
+API_BASE = 'https://api.walits.com/api'
+API_KEY = 'bbit_live_xxx'
+API_SECRET = 'sk_xxx'
+
+def create_wallet():
+    response = requests.post(f'{API_BASE}/wallets',
+        json={
+            'customerId': 'cust_abc123',
+            'name': 'Game Wallet',
+            'chain': 'ETHEREUM'
+        },
+        headers={
+            'X-API-Key': API_KEY,
+            'X-API-Secret': API_SECRET
+        }
+    )
+    data = response.json()
+    print(f"Wallet created: {data['id']}")
+    print(f"BACKUP THIS MNEMONIC: {data['mnemonic']}")
+    return data['id']
+
+def create_account(wallet_id, user_id, label):
+    response = requests.post(f'{API_BASE}/accounts',
+        json={
+            'walletId': wallet_id,
+            'userId': user_id,
+            'label': label
+        },
+        headers={
+            'X-API-Key': API_KEY,
+            'X-API-Secret': API_SECRET
+        }
+    )
+    data = response.json()
+    print(f"Account created for {label}: {data['address']}")
+    return data['id']
+
+def transfer(from_id, to_id, amount):
+    response = requests.post(f'{API_BASE}/internal-transfers',
+        json={
+            'fromAccountId': from_id,
+            'toAccountId': to_id,
+            'asset': 'native',
+            'amount': str(amount)
+        },
+        headers={
+            'X-API-Key': API_KEY,
+            'X-Idempotency-Key': str(uuid.uuid4())
+        }
+    )
+    data = response.json()
+    print(f"Transfer completed: {data['id']}")
+    return data
+
+# Main flow
+wallet_id = create_wallet()
+alice = create_account(wallet_id, 'player_001', 'Alice')
+bob = create_account(wallet_id, 'player_002', 'Bob')
+transfer(alice, bob, 100)
+        </code></pre>
+      </section>

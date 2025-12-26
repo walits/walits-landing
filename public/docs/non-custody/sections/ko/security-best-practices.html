@@ -1,0 +1,54 @@
+<h1 class="text-4xl font-bold mb-6">Security Best Practices</h1>
+
+        <div class="space-y-6">
+          <div class="border-l-4 border-red-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">1. API Secret Protection</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Store API secrets in environment variables or secret management systems (AWS Secrets Manager, HashiCorp Vault)</li>
+              <li>Never commit secrets to Git repositories</li>
+              <li>Rotate API keys quarterly</li>
+              <li>Use different API keys for staging and production</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-orange-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">2. Mnemonic Backup</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Backup mnemonic immediately after wallet creation</li>
+              <li>Store in encrypted format in multiple secure locations</li>
+              <li>Consider hardware security modules (HSM) for high-value wallets</li>
+              <li>Never expose mnemonic in API responses or logs</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-yellow-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">3. Transaction Security</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Always use idempotency keys for withdrawals and critical transfers</li>
+              <li>Implement withdrawal limits and velocity checks</li>
+              <li>Add two-factor authentication for large withdrawals</li>
+              <li>Whitelist withdrawal addresses when possible</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-green-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">4. Access Control</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Limit API secret access to backend servers only</li>
+              <li>Never expose API secrets in client-side code (web/mobile apps)</li>
+              <li>Use IP whitelisting for production API keys</li>
+              <li>Implement role-based access control (RBAC) for admin operations</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-blue-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">5. Monitoring & Alerts</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Monitor for unusual withdrawal patterns</li>
+              <li>Set up alerts for large transactions (&gt;$10k)</li>
+              <li>Track API usage and detect anomalies</li>
+              <li>Log all admin balance adjustments with reason codes</li>
+            </ul>
+          </div>
+        </div>
+      </section>

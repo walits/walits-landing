@@ -1,0 +1,74 @@
+<h1 class="text-4xl font-bold mb-6">On-chain Withdrawal</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Request Withdrawal</h2>
+        <pre><code class="language-bash">POST /api/withdrawals
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+X-Idempotency-Key: 660e8400-e29b-41d4-a716-446655440001
+
+{
+  "accountId": "acc_001",
+  "toAddress": "0x9876543210fedcba9876543210fedcba98765432",
+  "asset": "native",
+  "amount": "500"
+}
+
+# Response
+{
+  "id": "wth_xyz789",
+  "status": "PENDING",
+  "accountId": "acc_001",
+  "toAddress": "0x9876...",
+  "amount": "500",
+  "estimatedGasFee": "0.002",
+  "netAmount": "499.998",
+  "createdAt": "2024-12-09T10:00:00Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Check Withdrawal Status</h2>
+        <pre><code class="language-bash">GET /api/withdrawals/wth_xyz789
+X-API-Key: bbit_live_xxx
+
+# Response
+{
+  "id": "wth_xyz789",
+  "status": "CONFIRMED",
+  "txHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "blockNumber": 18234567,
+  "confirmations": 12,
+  "completedAt": "2024-12-09T10:00:15Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Withdrawal States</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Status</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono">PENDING</td>
+              <td class="border border-gray-200 px-4 py-2">Transaction submitted to blockchain</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono">CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2">12+ confirmations, finalized</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono">FAILED</td>
+              <td class="border border-gray-200 px-4 py-2">Transaction reverted or rejected</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+          <p class="font-semibold text-yellow-900">⚠️ Gas Fees</p>
+          <p class="text-yellow-800 mt-2">Gas fees are automatically deducted from the user's virtual balance. Ensure sufficient balance to cover both amount + gas.</p>
+        </div>
+      </section>
+
+      <!-- Token Deployment -->

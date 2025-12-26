@@ -1,0 +1,27 @@
+<h1 class="text-4xl font-bold mb-6">Wallet API</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/wallets</h2>
+        <p class="mb-4">Create a master wallet with HD derivation.</p>
+        <pre><code class="language-bash">POST /api/wallets
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "customerId": "string",
+  "name": "string",
+  "chain": "ETHEREUM" | "BASE" | "SOLANA"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/wallets/:id</h2>
+        <p class="mb-4">Get wallet details (mnemonic not included in response).</p>
+        <pre><code class="language-bash">GET /api/wallets/wal_eth_xyz
+X-API-Key: bbit_live_xxx
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/wallets</h2>
+        <p class="mb-4">List all wallets for a customer.</p>
+        <pre><code class="language-bash">GET /api/wallets?customerId=cust_abc123
+X-API-Key: bbit_live_xxx
+        </code></pre>
+      </section>

@@ -1,0 +1,48 @@
+<h1 class="text-4xl font-bold mb-6">Balance Management</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Deposit to Sub-Account</h2>
+        <p class="mb-4">Users can deposit by sending crypto to their sub-account address. Walits auto-detects deposits and updates virtual balance:</p>
+
+        <pre><code class="language-bash"># User sends 10 ETH to their address
+Blockchain Tx: 0x9999... sends 10 ETH to 0xabcd...ef12 (Alice's sub-account)
+
+# Walits auto-detects and updates (within 30 seconds):
+GET /api/accounts/acc_001/balance
+{
+  "balances": {
+    "native": "10.0"  // Updated automatically
+  }
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Manual Balance Adjustment (Admin)</h2>
+        <p class="mb-4">Platform admins can manually adjust balances for rewards, airdrops, etc:</p>
+
+        <pre><code class="language-bash">POST /api/accounts/acc_001/adjust-balance
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "asset": "native",
+  "amount": "100",
+  "reason": "Daily login reward",
+  "type": "CREDIT"  // or "DEBIT"
+}
+
+# Response
+{
+  "accountId": "acc_001",
+  "previousBalance": "1000",
+  "newBalance": "1100",
+  "adjustment": "+100",
+  "reason": "Daily login reward"
+}
+        </code></pre>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+          <p class="font-semibold text-yellow-900">⚠️ Warning</p>
+          <p class="text-yellow-800 mt-2">Manual adjustments create virtual balance not backed by on-chain assets. Ensure your master wallet has sufficient reserves before users withdraw.</p>
+        </div>
+      </section>
+
+      <!-- Internal Transfer -->

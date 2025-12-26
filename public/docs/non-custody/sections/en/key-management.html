@@ -1,0 +1,55 @@
+<h1 class="text-4xl font-bold mb-6">Key Management</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Environment Variables (Recommended)</h2>
+        <pre><code class="language-bash"># .env file (DO NOT COMMIT)
+WALITS_API_KEY=bbit_live_xxx
+WALITS_API_SECRET=sk_xxx
+WALITS_MASTER_MNEMONIC=abandon abandon ... about
+
+# .gitignore
+.env
+.env.local
+secrets/
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">AWS Secrets Manager (Production)</h2>
+        <pre><code class="language-javascript">const AWS = require('aws-sdk');
+const secretsManager = new AWS.SecretsManager({ region: 'us-east-1' });
+
+async function getApiCredentials() {
+  const secret = await secretsManager.getSecretValue({
+    SecretId: 'walits/production/api-credentials'
+  }).promise();
+
+  return JSON.parse(secret.SecretString);
+}
+
+const { apiKey, apiSecret } = await getApiCredentials();
+const client = new WalitsClient({ apiKey, apiSecret });
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">HashiCorp Vault</h2>
+        <pre><code class="language-javascript">const vault = require('node-vault')({
+  endpoint: 'https://vault.company.com',
+  token: process.env.VAULT_TOKEN
+});
+
+async function getApiCredentials() {
+  const result = await vault.read('secret/walits/production');
+  return result.data;
+}
+
+const { apiKey, apiSecret } = await getApiCredentials();
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Key Rotation Process</h2>
+        <ol class="list-decimal list-inside space-y-2 mb-6">
+          <li>Generate new API credentials via Walits dashboard</li>
+          <li>Update secret in AWS Secrets Manager / Vault</li>
+          <li>Deploy application with updated secret reference</li>
+          <li>Verify new credentials work in production</li>
+          <li>Revoke old API credentials</li>
+        </ol>
+      </section>
+
+      <!-- Appendix sections -->

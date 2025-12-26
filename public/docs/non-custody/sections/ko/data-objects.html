@@ -1,0 +1,66 @@
+<h1 class="text-4xl font-bold mb-6">데이터 객체</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Wallet Object</h2>
+        <pre><code class="language-json">{
+  "id": "wal_eth_xyz",
+  "customerId": "cust_abc123",
+  "name": "Game Wallet",
+  "chain": "ETHEREUM",
+  "address": "0x1234567890abcdef1234567890abcdef12345678",
+  "mnemonic": "abandon abandon ... about",  // Only in creation response
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "createdAt": "2024-12-09T10:00:00Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Account Object</h2>
+        <pre><code class="language-json">{
+  "id": "acc_001",
+  "walletId": "wal_eth_xyz",
+  "userId": "player_12345",
+  "label": "Alice",
+  "address": "0xabcdef1234567890abcdef1234567890abcdef12",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "balances": {
+    "native": "1000.5",
+    "tokens": {
+      "0xtoken_address": "250.0"
+    }
+  },
+  "createdAt": "2024-12-09T10:01:00Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Transfer Object</h2>
+        <pre><code class="language-json">{
+  "id": "txf_abc123",
+  "status": "COMPLETED",
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": "100",
+  "fromBalance": "900.5",
+  "toBalance": "600",
+  "memo": "Payment for sword",
+  "executedAt": "2024-12-09T10:00:00.050Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Withdrawal Object</h2>
+        <pre><code class="language-json">{
+  "id": "wth_xyz789",
+  "status": "CONFIRMED",
+  "accountId": "acc_001",
+  "toAddress": "0x9876543210fedcba9876543210fedcba98765432",
+  "asset": "native",
+  "amount": "500",
+  "gasFee": "0.002",
+  "netAmount": "499.998",
+  "txHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "blockNumber": 18234567,
+  "confirmations": 12,
+  "createdAt": "2024-12-09T10:00:00Z",
+  "completedAt": "2024-12-09T10:00:15Z"
+}
+        </code></pre>
+      </section>

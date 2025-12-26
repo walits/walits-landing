@@ -1,0 +1,2156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walits Non-Custody Wallet - API Documentation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-solidity.min.js"></script>
+  <style>
+    .menu-item.active { background-color: rgb(34 197 94); color: white; }
+    .content-section { display: none; }
+    .content-section.active { display: block; }
+    pre[class*="language-"] { border-radius: 8px; margin: 1rem 0; }
+  </style>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+  <!-- Header -->
+  <header class="bg-green-600 text-white shadow-md">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="/" class="text-2xl font-bold hover:text-green-200">Walits</a>
+          <span class="text-green-200 text-sm">Non-Custody Wallet API</span>
+        </div>
+        <nav class="flex items-center space-x-6">
+          <a href="/" class="hover:text-green-200">Home</a>
+          <a href="/docs/custody" class="hover:text-green-200">Custody</a>
+          <a href="/docs/non-custody" class="hover:text-green-200 font-semibold underline">Non-Custody</a>
+          <div class="flex items-center space-x-2 ml-4 border-l border-green-400 pl-4">
+            <a href="/docs/non-custody/index.ko.html" class="hover:text-green-200 text-sm">한</a>
+            <span class="text-green-300">|</span>
+            <span class="text-white font-semibold text-sm">EN</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-1">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white h-screen sticky top-0 shadow-lg overflow-y-auto">
+      <div class="p-6">
+        <div class="space-y-1">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Introduction</div>
+          <a href="#introduction" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer active">Overview</a>
+          <a href="#quick-start" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Quick Start</a>
+          <a href="#authentication" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Authentication</a>
+          <a href="#rate-limiting" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Rate Limiting</a>
+          <a href="#idempotency" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Idempotency</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Core Concepts</div>
+          <a href="#tee-architecture" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">TEE Architecture</a>
+          <a href="#hd-wallet" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">HD Wallet & BIP44</a>
+          <a href="#virtual-balance-concept" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Virtual Balance</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Wallet Management</div>
+          <a href="#wallet-create" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Create Master Wallet</a>
+          <a href="#sub-accounts" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Sub-Account Management</a>
+          <a href="#balance-management" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Balance Management</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Transactions</div>
+          <a href="#internal-transfer" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Internal Transfer</a>
+          <a href="#withdrawal" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">On-chain Withdrawal</a>
+          <a href="#token-deployment" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">ERC-20 Token</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">API Reference</div>
+          <a href="#api-customer" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Customer API</a>
+          <a href="#api-wallet" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Wallet API</a>
+          <a href="#api-account" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Account API</a>
+          <a href="#api-transfer" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Transfer API</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Code Examples</div>
+          <a href="#example-setup" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Complete Setup</a>
+          <a href="#example-game" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Game Integration</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Error Handling</div>
+          <a href="#error-codes" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Error Codes</a>
+          <a href="#error-handling" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Best Practices</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">SDK & Tools</div>
+          <a href="#sdk-javascript" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">JavaScript SDK</a>
+          <a href="#sdk-python" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Python SDK</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Security</div>
+          <a href="#security-best-practices" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Best Practices</a>
+          <a href="#key-management" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Key Management</a>
+        </div>
+
+        <div class="space-y-1 mt-6">
+          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Appendix</div>
+          <a href="#use-cases" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Use Cases</a>
+          <a href="#data-objects" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Data Objects</a>
+          <a href="#integration-checklist" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">Integration Checklist</a>
+          <a href="#faq" class="menu-item block px-4 py-2 rounded hover:bg-gray-100 cursor-pointer">FAQ</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 max-w-4xl">
+      <!-- Introduction -->
+      <section id="introduction" class="content-section active">
+        <h1 class="text-4xl font-bold mb-6">Walits Non-Custody API</h1>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">💎 Managed Custody B2B Solution</p>
+          <p>Game Studios, Community Apps, and Reward Platforms can manage thousands of user wallets with instant virtual balance transfers and minimal gas fees.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">What is Non-Custody?</h2>
+        <p class="mb-4">Walits Non-Custody is a B2B wallet infrastructure where:</p>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+          <li><strong>You</strong> (the platform) own the master wallet and all derived sub-accounts</li>
+          <li><strong>End-users</strong> get unique blockchain addresses via HD wallet derivation (BIP32/BIP44)</li>
+          <li><strong>Virtual balances</strong> enable instant P2P transfers without gas fees (1,000+ TPS)</li>
+          <li><strong>TEE security</strong> (AWS Nitro Enclave) protects private keys</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Key Features</h2>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="border-2 border-green-500 rounded-lg p-6 bg-green-50">
+            <h3 class="text-xl font-semibold mb-3">🔑 HD Wallet</h3>
+            <p>Auto-generate unlimited sub-accounts from single mnemonic using BIP32/BIP44 standard</p>
+          </div>
+          <div class="border-2 border-blue-500 rounded-lg p-6 bg-blue-50">
+            <h3 class="text-xl font-semibold mb-3">⚡ Virtual Balance</h3>
+            <p>Instant transfers (50-100ms) with 1,000+ TPS, zero gas fees via database-level balance updates</p>
+          </div>
+          <div class="border-2 border-purple-500 rounded-lg p-6 bg-purple-50">
+            <h3 class="text-xl font-semibold mb-3">🔒 TEE Security</h3>
+            <p>Private keys encrypted and stored in AWS Nitro Enclave (hardware-level isolation)</p>
+          </div>
+          <div class="border-2 border-orange-500 rounded-lg p-6 bg-orange-50">
+            <h3 class="text-xl font-semibold mb-3">🪙 Custom Tokens</h3>
+            <p>Deploy your own ERC-20 tokens on Ethereum/Base with one API call</p>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Supported Blockchains</h2>
+        <div class="flex gap-3 mb-6">
+          <span class="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium">Ethereum (ETH)</span>
+          <span class="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium">Base (ETH L2)</span>
+          <span class="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium">Solana (SOL)</span>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">vs Custody Wallet</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Feature</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Non-Custody</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Custody</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Use Case</td>
+              <td class="border border-gray-200 px-4 py-2">Games, Community Apps, Rewards</td>
+              <td class="border border-gray-200 px-4 py-2">Exchanges, Institutional Custody</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Wallet Ownership</td>
+              <td class="border border-gray-200 px-4 py-2">Platform owns all sub-wallets (HD)</td>
+              <td class="border border-gray-200 px-4 py-2">Omnibus + Virtual Accounts</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Transfer Speed</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">50-100ms (virtual balance)</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">&lt;100ms (virtual account)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Security</td>
+              <td class="border border-gray-200 px-4 py-2">TEE (AWS Nitro Enclave)</td>
+              <td class="border border-gray-200 px-4 py-2">MPC 2-of-3 Threshold Sig</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Approval Workflow</td>
+              <td class="border border-gray-200 px-4 py-2">Not needed (platform controlled)</td>
+              <td class="border border-gray-200 px-4 py-2">N-of-M multisig approval</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Gas Optimization</td>
+              <td class="border border-gray-200 px-4 py-2">Internal transfers free</td>
+              <td class="border border-gray-200 px-4 py-2">Batch sweeps, gas savings</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Quick Start -->
+      <section id="quick-start" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Quick Start</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">🚀 Get Started in 4 Steps</p>
+          <p>Follow this guide to create your first wallet and execute internal transfers in under 5 minutes.</p>
+        </div>
+
+        <div class="space-y-6">
+          <div class="border-l-4 border-green-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">Step 1: Register as Customer</h2>
+            <pre><code class="language-bash">POST https://api.walits.io/api/customers
+Content-Type: application/json
+
+{
+  "name": "My Game Studio",
+  "email": "admin@mygame.com",
+  "plan": "ENTERPRISE"
+}
+
+# Response
+{
+  "id": "cust_abc123",
+  "apiKey": "bbit_live_a1b2c3d4e5",
+  "apiSecret": "sk_x1y2z3a4b5",  // ⚠️ Store securely! Shown only once
+  "status": "ACTIVE"
+}
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-blue-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">Step 2: Create Master Wallet</h2>
+            <pre><code class="language-bash">POST https://api.walits.io/api/wallets
+X-API-Key: bbit_live_a1b2c3d4e5
+X-API-Secret: sk_x1y2z3a4b5
+
+{
+  "customerId": "cust_abc123",
+  "name": "Game Token Wallet",
+  "chain": "ETHEREUM"
+}
+
+# Response
+{
+  "id": "wal_eth_xyz",
+  "address": "0x1234...5678",
+  "mnemonic": "abandon abandon ... about",  // ⚠️ BACKUP SECURELY!
+  "chain": "ETHEREUM"
+}
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-purple-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">Step 3: Create Sub-Accounts for Users</h2>
+            <pre><code class="language-bash">POST https://api.walits.io/api/accounts
+X-API-Key: bbit_live_a1b2c3d4e5
+X-API-Secret: sk_x1y2z3a4b5
+
+{
+  "walletId": "wal_eth_xyz",
+  "userId": "player_001",
+  "label": "Alice"
+}
+
+# Response
+{
+  "id": "acc_001",
+  "address": "0xabcd...ef12",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "balances": {}
+}
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-orange-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">Step 4: Execute Internal Transfer</h2>
+            <pre><code class="language-bash">POST https://api.walits.io/api/internal-transfers
+X-API-Key: bbit_live_a1b2c3d4e5
+
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": 100
+}
+
+# Response (completed in ~50ms)
+{
+  "id": "txf_xyz",
+  "status": "COMPLETED",
+  "fromBalance": "900",
+  "toBalance": "100",
+  "executedAt": "2024-12-09T10:00:00.050Z"
+}
+            </code></pre>
+          </div>
+        </div>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mt-6">
+          <p class="font-semibold text-green-800">✅ Success!</p>
+          <p class="text-green-700 mt-2">You've just created a master wallet, 2 sub-accounts, and executed an instant internal transfer with zero gas fees!</p>
+        </div>
+      </section>
+
+      <!-- Authentication -->
+      <section id="authentication" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Authentication</h1>
+
+        <p class="mb-6">All API requests require authentication via API Key and API Secret in request headers.</p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Customer Registration</h2>
+        <pre><code class="language-bash">POST /api/customers
+Content-Type: application/json
+
+{
+  "name": "Game Company",
+  "email": "admin@game.com",
+  "plan": "ENTERPRISE"
+}
+
+# Response
+{
+  "id": "cust_abc123",
+  "name": "Game Company",
+  "email": "admin@game.com",
+  "apiKey": "bbit_live_a1b2c3d4e5f6g7h8i9j0",
+  "apiSecret": "sk_x1y2z3a4b5c6d7e8f9g0",
+  "status": "ACTIVE",
+  "createdAt": "2024-12-09T10:00:00Z"
+}
+        </code></pre>
+
+        <div class="bg-red-50 border-l-4 border-red-500 p-6 mt-4 mb-6">
+          <p class="font-semibold text-red-900">🔴 Critical: API Secret Security</p>
+          <ul class="list-disc list-inside text-red-800 mt-2 space-y-1">
+            <li><strong>apiSecret</strong> is returned only once during registration</li>
+            <li>Store it securely in environment variables or AWS Secrets Manager</li>
+            <li>Never commit to Git or expose in client-side code</li>
+            <li>If lost, you must generate a new customer account</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">API Request Format</h2>
+        <pre><code class="language-bash">curl -X POST https://api.walits.io/api/wallets \
+  -H "X-API-Key: bbit_live_xxx" \
+  -H "X-API-Secret: sk_xxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "customerId": "cust_abc123",
+    "name": "My Wallet",
+    "chain": "ETHEREUM"
+  }'
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">API Key Types</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Environment</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Key Prefix</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Sandbox</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">bbit_test_...</td>
+              <td class="border border-gray-200 px-4 py-2">Testing on Sepolia/Devnet</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Production</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">bbit_live_...</td>
+              <td class="border border-gray-200 px-4 py-2">Real assets on mainnet</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Rate Limiting -->
+      <section id="rate-limiting" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Rate Limiting</h1>
+
+        <p class="mb-6">Walits enforces rate limits to ensure fair API usage and prevent abuse.</p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Rate Limit Tiers</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Endpoint Type</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Per Second</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Per Minute</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Per Hour</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Read (GET)</td>
+              <td class="border border-gray-200 px-4 py-2">50</td>
+              <td class="border border-gray-200 px-4 py-2">500</td>
+              <td class="border border-gray-200 px-4 py-2">5,000</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Write (POST/PUT)</td>
+              <td class="border border-gray-200 px-4 py-2">20</td>
+              <td class="border border-gray-200 px-4 py-2">200</td>
+              <td class="border border-gray-200 px-4 py-2">2,000</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Internal Transfers</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">1,000</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">Unlimited</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">Unlimited</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Withdrawals</td>
+              <td class="border border-gray-200 px-4 py-2">5</td>
+              <td class="border border-gray-200 px-4 py-2">50</td>
+              <td class="border border-gray-200 px-4 py-2">500</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Response Headers</h2>
+        <pre><code class="language-http">HTTP/1.1 200 OK
+X-RateLimit-Limit: 20
+X-RateLimit-Remaining: 15
+X-RateLimit-Reset: 1702123456
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">429 Rate Limit Exceeded</h2>
+        <pre><code class="language-json">{
+  "error": "RATE_LIMIT_EXCEEDED",
+  "message": "Too many requests. Retry after 30 seconds.",
+  "retryAfter": 30
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Handling Rate Limits</h2>
+        <pre><code class="language-javascript">async function makeApiCall(url, options) {
+  try {
+    const response = await fetch(url, options);
+
+    if (response.status === 429) {
+      const retryAfter = parseInt(response.headers.get('Retry-After')) || 30;
+      console.log(`Rate limited. Retrying after ${retryAfter}s...`);
+      await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+      return makeApiCall(url, options); // Retry
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('API call failed:', error);
+    throw error;
+  }
+}
+        </code></pre>
+      </section>
+
+      <!-- Idempotency -->
+      <section id="idempotency" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Idempotency</h1>
+
+        <p class="mb-6">Idempotency ensures that duplicate API requests produce the same result, preventing double-spending and duplicate transactions.</p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">How It Works</h2>
+        <p class="mb-4">Include an <code class="bg-gray-100 px-2 py-1 rounded">X-Idempotency-Key</code> header with a unique UUID for each transaction:</p>
+
+        <pre><code class="language-bash">POST /api/internal-transfers
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+X-Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
+
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": 100
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Behavior</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Scenario</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Response</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">First request with new key</td>
+              <td class="border border-gray-200 px-4 py-2">Executes transaction, returns 201 Created</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Duplicate key (within 24h)</td>
+              <td class="border border-gray-200 px-4 py-2">Returns cached result, status 200 OK</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">No idempotency key</td>
+              <td class="border border-gray-200 px-4 py-2">Treats as new request (not recommended)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+          <p class="font-semibold text-yellow-900">💡 Best Practice</p>
+          <p class="text-yellow-800 mt-2">Always use idempotency keys for withdrawals and internal transfers to prevent double-spending.</p>
+        </div>
+      </section>
+
+      <!-- TEE Architecture -->
+      <section id="tee-architecture" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">TEE Architecture</h1>
+
+        <div class="bg-purple-50 border-l-4 border-purple-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">🔒 Trusted Execution Environment</p>
+          <p>Private keys are encrypted and stored in AWS Nitro Enclave, providing hardware-level isolation from the host OS.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Architecture Overview</h2>
+        <pre><code class="language-plaintext">┌─────────────────────────────────────────────┐
+│            AWS Nitro Enclave                │
+│  ┌───────────────────────────────────────┐  │
+│  │   Private Key Storage (Encrypted)     │  │
+│  │   - Master Wallet Mnemonic            │  │
+│  │   - HD Derived Private Keys           │  │
+│  └───────────────────────────────────────┘  │
+│              ↓ (attestation)                │
+│  ┌───────────────────────────────────────┐  │
+│  │   Signing Service                     │  │
+│  │   - Verifies API signatures           │  │
+│  │   - Signs transactions                │  │
+│  └───────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+         ↓ (signed transactions only)
+┌─────────────────────────────────────────────┐
+│         Walits API Server                 │
+│   - No access to private keys               │
+│   - Only receives signed transactions       │
+└─────────────────────────────────────────────┘
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Security Guarantees</h2>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+          <li><strong>Hardware Isolation</strong>: Private keys never leave the enclave</li>
+          <li><strong>Encrypted Memory</strong>: All data in enclave memory is encrypted</li>
+          <li><strong>Attestation</strong>: Cryptographic proof that code is running in genuine Nitro Enclave</li>
+          <li><strong>No Root Access</strong>: Even AWS root users cannot access enclave memory</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">vs MPC (Custody Wallet)</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Feature</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">TEE (Non-Custody)</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">MPC (Custody)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Key Storage</td>
+              <td class="border border-gray-200 px-4 py-2">Single encrypted key in enclave</td>
+              <td class="border border-gray-200 px-4 py-2">3 key shares (2-of-3 threshold)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Signing Speed</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">&lt;10ms</td>
+              <td class="border border-gray-200 px-4 py-2">~500ms (multi-party computation)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Use Case</td>
+              <td class="border border-gray-200 px-4 py-2">High-throughput B2B platforms</td>
+              <td class="border border-gray-200 px-4 py-2">Institutional custody, exchanges</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- HD Wallet & BIP44 -->
+      <section id="hd-wallet" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">HD Wallet & BIP44</h1>
+
+        <p class="mb-6">Hierarchical Deterministic (HD) wallets allow unlimited sub-account generation from a single mnemonic phrase using BIP32/BIP44 standards.</p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Derivation Path Structure</h2>
+        <pre><code class="language-plaintext">m / purpose' / coin_type' / account' / change / address_index
+
+Example (Ethereum):
+m / 44' / 60' / 0' / 0 / 0  → First user account
+m / 44' / 60' / 0' / 0 / 1  → Second user account
+m / 44' / 60' / 0' / 0 / 2  → Third user account
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Supported Chains</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Chain</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Coin Type</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Example Path</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Ethereum</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono">60'</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">m/44'/60'/0'/0/0</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Base</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono">60'</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">m/44'/60'/0'/0/0</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Solana</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono">501'</td>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">m/44'/501'/0'/0'</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Master Wallet Creation</h2>
+        <pre><code class="language-bash">POST /api/wallets
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "customerId": "cust_abc",
+  "name": "Game Master Wallet",
+  "chain": "ETHEREUM"
+}
+
+# Response
+{
+  "id": "wal_eth_xyz",
+  "address": "0x1234...5678",
+  "mnemonic": "abandon abandon ... about",  // 12 or 24 words
+  "chain": "ETHEREUM",
+  "derivationPath": "m/44'/60'/0'/0/0"
+}
+        </code></pre>
+
+        <div class="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
+          <p class="font-semibold text-red-900">🔴 Critical: Mnemonic Backup</p>
+          <ul class="list-disc list-inside text-red-800 mt-2 space-y-1">
+            <li>The <strong>mnemonic</strong> is shown only once during wallet creation</li>
+            <li>Store it in a secure vault (AWS Secrets Manager, HashiCorp Vault)</li>
+            <li>If lost, all sub-accounts become inaccessible permanently</li>
+            <li>Never store in plain text or commit to version control</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Sub-Account Auto-Generation</h2>
+        <p class="mb-4">Each user gets a unique address derived from the master wallet:</p>
+        <pre><code class="language-bash">POST /api/accounts
+{
+  "walletId": "wal_eth_xyz",
+  "userId": "player_001",
+  "label": "Alice"
+}
+
+# Response
+{
+  "id": "acc_001",
+  "address": "0xabcd...ef12",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "userId": "player_001"
+}
+        </code></pre>
+      </section>
+
+      <!-- Virtual Balance Concept -->
+      <section id="virtual-balance-concept" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Virtual Balance Concept</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">⚡ Database-Level Balance Tracking</p>
+          <p>Virtual balances enable instant P2P transfers without on-chain transactions, achieving 1,000+ TPS with 50-100ms latency.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">How It Works</h2>
+        <pre><code class="language-plaintext">┌─────────────────────────────────────────────┐
+│         Blockchain (On-chain)               │
+│  ┌───────────────────────────────────────┐  │
+│  │  Master Wallet: 10,000 ETH            │  │
+│  │  Sub-Account 1: 0 ETH (empty)         │  │
+│  │  Sub-Account 2: 0 ETH (empty)         │  │
+│  └───────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+         ↓ (virtual balance mapping)
+┌─────────────────────────────────────────────┐
+│         Walits Database                   │
+│  ┌───────────────────────────────────────┐  │
+│  │  acc_001 (Alice):  5,000 ETH          │  │
+│  │  acc_002 (Bob):    3,000 ETH          │  │
+│  │  acc_003 (Carol):  2,000 ETH          │  │
+│  └───────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Internal Transfer (Virtual)</h2>
+        <p class="mb-4">Updates database only, no blockchain transaction:</p>
+        <pre><code class="language-bash">POST /api/internal-transfers
+{
+  "fromAccountId": "acc_001",  // Alice
+  "toAccountId": "acc_002",    // Bob
+  "asset": "native",
+  "amount": 100
+}
+
+# Result (in ~50ms):
+# Database: Alice 5000 → 4900, Bob 3000 → 3100
+# Blockchain: No transaction, 0 gas fees
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Withdrawal (On-chain)</h2>
+        <p class="mb-4">Actual blockchain transaction to external wallet:</p>
+        <pre><code class="language-bash">POST /api/withdrawals
+{
+  "accountId": "acc_001",
+  "toAddress": "0x9999...external",
+  "asset": "native",
+  "amount": 500
+}
+
+# Result (in ~15 seconds on Ethereum):
+# 1. Database: Alice 4900 → 4400
+# 2. Blockchain: Master wallet sends 500 ETH to 0x9999...
+# 3. Gas fees deducted from Alice's virtual balance
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Performance Comparison</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Metric</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Internal Transfer</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">On-chain Withdrawal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Latency</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">50-100ms</td>
+              <td class="border border-gray-200 px-4 py-2">15-60 seconds</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Throughput</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">1,000+ TPS</td>
+              <td class="border border-gray-200 px-4 py-2">~10 TPS (batched)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Gas Fees</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600">$0</td>
+              <td class="border border-gray-200 px-4 py-2">$0.50-$5 (varies)</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2">Blockchain State</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">On-chain transaction</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-6">
+          <p class="font-semibold text-green-900">💡 Best Practice</p>
+          <p class="text-green-800 mt-2">Use internal transfers for 99% of game/app transactions. Reserve withdrawals for users cashing out to external wallets.</p>
+        </div>
+      </section>
+
+      <!-- Wallet Create -->
+      <section id="wallet-create" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Create Master Wallet</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">API Endpoint</h2>
+        <pre><code class="language-bash">POST /api/wallets
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+Content-Type: application/json
+
+{
+  "customerId": "cust_abc123",
+  "name": "Game Token Wallet",
+  "chain": "ETHEREUM"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Response</h2>
+        <pre><code class="language-json">{
+  "id": "wal_eth_xyz",
+  "customerId": "cust_abc123",
+  "name": "Game Token Wallet",
+  "chain": "ETHEREUM",
+  "address": "0x1234567890abcdef1234567890abcdef12345678",
+  "mnemonic": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "createdAt": "2024-12-09T10:00:00Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Supported Chains</h2>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+          <li><code class="bg-gray-100 px-2 py-1 rounded">ETHEREUM</code> - Ethereum mainnet</li>
+          <li><code class="bg-gray-100 px-2 py-1 rounded">BASE</code> - Base (Ethereum Layer 2)</li>
+          <li><code class="bg-gray-100 px-2 py-1 rounded">SOLANA</code> - Solana mainnet</li>
+          <li><code class="bg-gray-100 px-2 py-1 rounded">SEPOLIA</code> - Ethereum testnet (sandbox mode)</li>
+        </ul>
+      </section>
+
+      <!-- Sub-Account Management -->
+      <section id="sub-accounts" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Sub-Account Management</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Create Sub-Account</h2>
+        <pre><code class="language-bash">POST /api/accounts
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "walletId": "wal_eth_xyz",
+  "userId": "player_12345",
+  "label": "Alice"
+}
+
+# Response
+{
+  "id": "acc_001",
+  "walletId": "wal_eth_xyz",
+  "userId": "player_12345",
+  "label": "Alice",
+  "address": "0xabcdef1234567890abcdef1234567890abcdef12",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "balances": {
+    "native": "0",
+    "tokens": {}
+  },
+  "createdAt": "2024-12-09T10:01:00Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">List Sub-Accounts</h2>
+        <pre><code class="language-bash">GET /api/wallets/wal_eth_xyz/accounts
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+# Response
+{
+  "accounts": [
+    {
+      "id": "acc_001",
+      "userId": "player_001",
+      "label": "Alice",
+      "address": "0xabc...",
+      "balances": { "native": "1000" }
+    },
+    {
+      "id": "acc_002",
+      "userId": "player_002",
+      "label": "Bob",
+      "address": "0xdef...",
+      "balances": { "native": "500" }
+    }
+  ],
+  "total": 2
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Get Account Balance</h2>
+        <pre><code class="language-bash">GET /api/accounts/acc_001/balance
+X-API-Key: bbit_live_xxx
+
+# Response
+{
+  "accountId": "acc_001",
+  "balances": {
+    "native": "1000.5",
+    "tokens": {
+      "0xtoken_contract_address": "250.0"
+    }
+  }
+}
+        </code></pre>
+      </section>
+
+      <!-- Balance Management -->
+      <section id="balance-management" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Balance Management</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Deposit to Sub-Account</h2>
+        <p class="mb-4">Users can deposit by sending crypto to their sub-account address. Walits auto-detects deposits and updates virtual balance:</p>
+
+        <pre><code class="language-bash"># User sends 10 ETH to their address
+Blockchain Tx: 0x9999... sends 10 ETH to 0xabcd...ef12 (Alice's sub-account)
+
+# Walits auto-detects and updates (within 30 seconds):
+GET /api/accounts/acc_001/balance
+{
+  "balances": {
+    "native": "10.0"  // Updated automatically
+  }
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Manual Balance Adjustment (Admin)</h2>
+        <p class="mb-4">Platform admins can manually adjust balances for rewards, airdrops, etc:</p>
+
+        <pre><code class="language-bash">POST /api/accounts/acc_001/adjust-balance
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "asset": "native",
+  "amount": "100",
+  "reason": "Daily login reward",
+  "type": "CREDIT"  // or "DEBIT"
+}
+
+# Response
+{
+  "accountId": "acc_001",
+  "previousBalance": "1000",
+  "newBalance": "1100",
+  "adjustment": "+100",
+  "reason": "Daily login reward"
+}
+        </code></pre>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+          <p class="font-semibold text-yellow-900">⚠️ Warning</p>
+          <p class="text-yellow-800 mt-2">Manual adjustments create virtual balance not backed by on-chain assets. Ensure your master wallet has sufficient reserves before users withdraw.</p>
+        </div>
+      </section>
+
+      <!-- Internal Transfer -->
+      <section id="internal-transfer" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Internal Transfer</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Execute Transfer</h2>
+        <pre><code class="language-bash">POST /api/internal-transfers
+X-API-Key: bbit_live_xxx
+X-Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
+
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": "100"
+}
+
+# Response (in ~50ms)
+{
+  "id": "txf_abc123",
+  "status": "COMPLETED",
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": "100",
+  "fromBalance": "900",
+  "toBalance": "600",
+  "executedAt": "2024-12-09T10:00:00.050Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Transfer with Memo</h2>
+        <pre><code class="language-bash">POST /api/internal-transfers
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": "50",
+  "memo": "Payment for premium sword"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Error Handling</h2>
+        <pre><code class="language-json">{
+  "error": "INSUFFICIENT_BALANCE",
+  "message": "Account acc_001 has balance 50, but attempted to send 100",
+  "details": {
+    "currentBalance": "50",
+    "requestedAmount": "100"
+  }
+}
+        </code></pre>
+      </section>
+
+      <!-- Withdrawal -->
+      <section id="withdrawal" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">On-chain Withdrawal</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Request Withdrawal</h2>
+        <pre><code class="language-bash">POST /api/withdrawals
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+X-Idempotency-Key: 660e8400-e29b-41d4-a716-446655440001
+
+{
+  "accountId": "acc_001",
+  "toAddress": "0x9876543210fedcba9876543210fedcba98765432",
+  "asset": "native",
+  "amount": "500"
+}
+
+# Response
+{
+  "id": "wth_xyz789",
+  "status": "PENDING",
+  "accountId": "acc_001",
+  "toAddress": "0x9876...",
+  "amount": "500",
+  "estimatedGasFee": "0.002",
+  "netAmount": "499.998",
+  "createdAt": "2024-12-09T10:00:00Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Check Withdrawal Status</h2>
+        <pre><code class="language-bash">GET /api/withdrawals/wth_xyz789
+X-API-Key: bbit_live_xxx
+
+# Response
+{
+  "id": "wth_xyz789",
+  "status": "CONFIRMED",
+  "txHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "blockNumber": 18234567,
+  "confirmations": 12,
+  "completedAt": "2024-12-09T10:00:15Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Withdrawal States</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Status</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono">PENDING</td>
+              <td class="border border-gray-200 px-4 py-2">Transaction submitted to blockchain</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono">CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2">12+ confirmations, finalized</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono">FAILED</td>
+              <td class="border border-gray-200 px-4 py-2">Transaction reverted or rejected</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+          <p class="font-semibold text-yellow-900">⚠️ Gas Fees</p>
+          <p class="text-yellow-800 mt-2">Gas fees are automatically deducted from the user's virtual balance. Ensure sufficient balance to cover both amount + gas.</p>
+        </div>
+      </section>
+
+      <!-- Token Deployment -->
+      <section id="token-deployment" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">ERC-20 Token Deployment</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Deploy Custom Token</h2>
+        <pre><code class="language-bash">POST /api/tokens/deploy
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "walletId": "wal_eth_xyz",
+  "chain": "ETHEREUM",
+  "name": "Game Gold Coin",
+  "symbol": "GGC",
+  "decimals": 18,
+  "initialSupply": "1000000"
+}
+
+# Response
+{
+  "id": "token_ggc_001",
+  "contractAddress": "0xtoken1234567890abcdeftoken1234567890abcdef",
+  "name": "Game Gold Coin",
+  "symbol": "GGC",
+  "decimals": 18,
+  "totalSupply": "1000000",
+  "deploymentTxHash": "0xdeploy123...",
+  "deployedAt": "2024-12-09T10:00:30Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Mint Additional Tokens</h2>
+        <pre><code class="language-bash">POST /api/tokens/0xtoken.../mint
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "toAccountId": "acc_001",
+  "amount": "50000"
+}
+
+# Response
+{
+  "txHash": "0xmint456...",
+  "toAddress": "0xabc...ef12",
+  "amount": "50000",
+  "newTotalSupply": "1050000"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Transfer Custom Tokens</h2>
+        <pre><code class="language-bash">POST /api/internal-transfers
+{
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "0xtoken1234...abcdef",  // Token contract address
+  "amount": "100"
+}
+        </code></pre>
+      </section>
+
+      <!-- API Reference sections -->
+      <section id="api-customer" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Customer API</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/customers</h2>
+        <p class="mb-4">Register a new customer and receive API credentials.</p>
+        <pre><code class="language-bash">POST /api/customers
+Content-Type: application/json
+
+{
+  "name": "string",
+  "email": "string",
+  "plan": "STARTER" | "ENTERPRISE"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/customers/:id</h2>
+        <p class="mb-4">Retrieve customer details.</p>
+        <pre><code class="language-bash">GET /api/customers/cust_abc123
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">PUT /api/customers/:id</h2>
+        <p class="mb-4">Update customer information.</p>
+        <pre><code class="language-bash">PUT /api/customers/cust_abc123
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "name": "Updated Company Name"
+}
+        </code></pre>
+      </section>
+
+      <section id="api-wallet" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Wallet API</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/wallets</h2>
+        <p class="mb-4">Create a master wallet with HD derivation.</p>
+        <pre><code class="language-bash">POST /api/wallets
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "customerId": "string",
+  "name": "string",
+  "chain": "ETHEREUM" | "BASE" | "SOLANA"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/wallets/:id</h2>
+        <p class="mb-4">Get wallet details (mnemonic not included in response).</p>
+        <pre><code class="language-bash">GET /api/wallets/wal_eth_xyz
+X-API-Key: bbit_live_xxx
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/wallets</h2>
+        <p class="mb-4">List all wallets for a customer.</p>
+        <pre><code class="language-bash">GET /api/wallets?customerId=cust_abc123
+X-API-Key: bbit_live_xxx
+        </code></pre>
+      </section>
+
+      <section id="api-account" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Account API</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/accounts</h2>
+        <p class="mb-4">Create a sub-account for an end-user.</p>
+        <pre><code class="language-bash">POST /api/accounts
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "walletId": "string",
+  "userId": "string",
+  "label": "string"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/accounts/:id/balance</h2>
+        <p class="mb-4">Get account balance (virtual + on-chain).</p>
+        <pre><code class="language-bash">GET /api/accounts/acc_001/balance
+X-API-Key: bbit_live_xxx
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/accounts/:id/adjust-balance</h2>
+        <p class="mb-4">Admin-only: Manually adjust virtual balance.</p>
+        <pre><code class="language-bash">POST /api/accounts/acc_001/adjust-balance
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+
+{
+  "asset": "native",
+  "amount": "100",
+  "type": "CREDIT" | "DEBIT",
+  "reason": "string"
+}
+        </code></pre>
+      </section>
+
+      <section id="api-transfer" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Transfer API</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/internal-transfers</h2>
+        <p class="mb-4">Execute instant internal transfer (virtual balance).</p>
+        <pre><code class="language-bash">POST /api/internal-transfers
+X-API-Key: bbit_live_xxx
+X-Idempotency-Key: uuid
+
+{
+  "fromAccountId": "string",
+  "toAccountId": "string",
+  "asset": "native" | "0xtoken_address",
+  "amount": "string",
+  "memo": "string (optional)"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">POST /api/withdrawals</h2>
+        <p class="mb-4">Execute on-chain withdrawal to external address.</p>
+        <pre><code class="language-bash">POST /api/withdrawals
+X-API-Key: bbit_live_xxx
+X-API-Secret: sk_xxx
+X-Idempotency-Key: uuid
+
+{
+  "accountId": "string",
+  "toAddress": "string",
+  "asset": "native" | "0xtoken_address",
+  "amount": "string"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">GET /api/withdrawals/:id</h2>
+        <p class="mb-4">Get withdrawal status and transaction hash.</p>
+        <pre><code class="language-bash">GET /api/withdrawals/wth_xyz789
+X-API-Key: bbit_live_xxx
+        </code></pre>
+      </section>
+
+      <!-- Code Examples -->
+      <section id="example-setup" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Complete Setup Example</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">JavaScript/Node.js</h2>
+        <pre><code class="language-javascript">const axios = require('axios');
+
+const API_BASE = 'https://api.walits.io/api';
+const API_KEY = 'bbit_live_xxx';
+const API_SECRET = 'sk_xxx';
+
+// 1. Create Master Wallet
+async function createWallet() {
+  const { data } = await axios.post(`${API_BASE}/wallets`, {
+    customerId: 'cust_abc123',
+    name: 'Game Wallet',
+    chain: 'ETHEREUM'
+  }, {
+    headers: {
+      'X-API-Key': API_KEY,
+      'X-API-Secret': API_SECRET
+    }
+  });
+
+  console.log('Wallet created:', data.id);
+  console.log('BACKUP THIS MNEMONIC:', data.mnemonic);
+  return data.id;
+}
+
+// 2. Create Sub-Accounts
+async function createAccount(walletId, userId, label) {
+  const { data } = await axios.post(`${API_BASE}/accounts`, {
+    walletId,
+    userId,
+    label
+  }, {
+    headers: {
+      'X-API-Key': API_KEY,
+      'X-API-Secret': API_SECRET
+    }
+  });
+
+  console.log(`Account created for ${label}:`, data.address);
+  return data.id;
+}
+
+// 3. Execute Transfer
+async function transfer(fromId, toId, amount) {
+  const { data } = await axios.post(`${API_BASE}/internal-transfers`, {
+    fromAccountId: fromId,
+    toAccountId: toId,
+    asset: 'native',
+    amount: amount.toString()
+  }, {
+    headers: {
+      'X-API-Key': API_KEY,
+      'X-Idempotency-Key': crypto.randomUUID()
+    }
+  });
+
+  console.log('Transfer completed:', data.id);
+  return data;
+}
+
+// Main flow
+(async () => {
+  const walletId = await createWallet();
+  const alice = await createAccount(walletId, 'player_001', 'Alice');
+  const bob = await createAccount(walletId, 'player_002', 'Bob');
+  await transfer(alice, bob, 100);
+})();
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Python</h2>
+        <pre><code class="language-python">import requests
+import uuid
+
+API_BASE = 'https://api.walits.io/api'
+API_KEY = 'bbit_live_xxx'
+API_SECRET = 'sk_xxx'
+
+def create_wallet():
+    response = requests.post(f'{API_BASE}/wallets',
+        json={
+            'customerId': 'cust_abc123',
+            'name': 'Game Wallet',
+            'chain': 'ETHEREUM'
+        },
+        headers={
+            'X-API-Key': API_KEY,
+            'X-API-Secret': API_SECRET
+        }
+    )
+    data = response.json()
+    print(f"Wallet created: {data['id']}")
+    print(f"BACKUP THIS MNEMONIC: {data['mnemonic']}")
+    return data['id']
+
+def create_account(wallet_id, user_id, label):
+    response = requests.post(f'{API_BASE}/accounts',
+        json={
+            'walletId': wallet_id,
+            'userId': user_id,
+            'label': label
+        },
+        headers={
+            'X-API-Key': API_KEY,
+            'X-API-Secret': API_SECRET
+        }
+    )
+    data = response.json()
+    print(f"Account created for {label}: {data['address']}")
+    return data['id']
+
+def transfer(from_id, to_id, amount):
+    response = requests.post(f'{API_BASE}/internal-transfers',
+        json={
+            'fromAccountId': from_id,
+            'toAccountId': to_id,
+            'asset': 'native',
+            'amount': str(amount)
+        },
+        headers={
+            'X-API-Key': API_KEY,
+            'X-Idempotency-Key': str(uuid.uuid4())
+        }
+    )
+    data = response.json()
+    print(f"Transfer completed: {data['id']}")
+    return data
+
+# Main flow
+wallet_id = create_wallet()
+alice = create_account(wallet_id, 'player_001', 'Alice')
+bob = create_account(wallet_id, 'player_002', 'Bob')
+transfer(alice, bob, 100)
+        </code></pre>
+      </section>
+
+      <section id="example-game" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Game Integration Example</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Use Case: In-Game Currency</h2>
+        <pre><code class="language-javascript">class GameWalletService {
+  constructor(apiKey, walletId) {
+    this.apiKey = apiKey;
+    this.walletId = walletId;
+    this.baseUrl = 'https://api.walits.io/api';
+  }
+
+  // Player registration
+  async onPlayerRegister(playerId, username) {
+    const account = await this.createAccount(playerId, username);
+    // Give welcome bonus
+    await this.adjustBalance(account.id, 1000, 'Welcome bonus');
+    return account;
+  }
+
+  // In-game purchase
+  async buyItem(buyerId, sellerId, itemPrice, itemName) {
+    const transfer = await axios.post(`${this.baseUrl}/internal-transfers`, {
+      fromAccountId: buyerId,
+      toAccountId: sellerId,
+      asset: 'native',
+      amount: itemPrice.toString(),
+      memo: `Purchase: ${itemName}`
+    }, {
+      headers: { 'X-API-Key': this.apiKey, 'X-Idempotency-Key': crypto.randomUUID() }
+    });
+
+    if (transfer.data.status === 'COMPLETED') {
+      // Grant item in game database
+      await this.grantItem(buyerId, itemName);
+    }
+
+    return transfer.data;
+  }
+
+  // Daily login reward
+  async dailyReward(accountId) {
+    const reward = 50;
+    await this.adjustBalance(accountId, reward, 'Daily login reward');
+    return { reward, message: `+${reward} coins!` };
+  }
+
+  // Cashout to external wallet
+  async cashout(accountId, toAddress, amount) {
+    const withdrawal = await axios.post(`${this.baseUrl}/withdrawals`, {
+      accountId,
+      toAddress,
+      asset: 'native',
+      amount: amount.toString()
+    }, {
+      headers: {
+        'X-API-Key': this.apiKey,
+        'X-API-Secret': process.env.API_SECRET,
+        'X-Idempotency-Key': crypto.randomUUID()
+      }
+    });
+
+    return withdrawal.data;
+  }
+
+  async adjustBalance(accountId, amount, reason) {
+    return axios.post(`${this.baseUrl}/accounts/${accountId}/adjust-balance`, {
+      asset: 'native',
+      amount: amount.toString(),
+      type: 'CREDIT',
+      reason
+    }, {
+      headers: { 'X-API-Key': this.apiKey, 'X-API-Secret': process.env.API_SECRET }
+    });
+  }
+}
+
+// Usage
+const gameWallet = new GameWalletService('bbit_live_xxx', 'wal_eth_xyz');
+
+// New player joins
+await gameWallet.onPlayerRegister('player_001', 'Alice');
+
+// Player buys sword from marketplace
+await gameWallet.buyItem('acc_001', 'acc_002', 150, 'Diamond Sword');
+
+// Daily reward
+await gameWallet.dailyReward('acc_001');
+        </code></pre>
+      </section>
+
+      <!-- Error Handling -->
+      <section id="error-codes" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Error Codes</h1>
+
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Code</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">HTTP</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">INVALID_API_KEY</td>
+              <td class="border border-gray-200 px-4 py-2">401</td>
+              <td class="border border-gray-200 px-4 py-2">API key is missing or invalid</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">INSUFFICIENT_BALANCE</td>
+              <td class="border border-gray-200 px-4 py-2">400</td>
+              <td class="border border-gray-200 px-4 py-2">Account balance too low for transaction</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">ACCOUNT_NOT_FOUND</td>
+              <td class="border border-gray-200 px-4 py-2">404</td>
+              <td class="border border-gray-200 px-4 py-2">Account ID does not exist</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">RATE_LIMIT_EXCEEDED</td>
+              <td class="border border-gray-200 px-4 py-2">429</td>
+              <td class="border border-gray-200 px-4 py-2">Too many requests, retry after delay</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">INVALID_ADDRESS</td>
+              <td class="border border-gray-200 px-4 py-2">400</td>
+              <td class="border border-gray-200 px-4 py-2">Blockchain address format invalid</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">DUPLICATE_IDEMPOTENCY_KEY</td>
+              <td class="border border-gray-200 px-4 py-2">200</td>
+              <td class="border border-gray-200 px-4 py-2">Request already processed, returning cached result</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_PENDING</td>
+              <td class="border border-gray-200 px-4 py-2">400</td>
+              <td class="border border-gray-200 px-4 py-2">Account has pending withdrawal, wait for completion</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Error Response Format</h2>
+        <pre><code class="language-json">{
+  "error": "INSUFFICIENT_BALANCE",
+  "message": "Account acc_001 has balance 50 ETH, but attempted to send 100 ETH",
+  "details": {
+    "accountId": "acc_001",
+    "currentBalance": "50",
+    "requestedAmount": "100",
+    "asset": "native"
+  },
+  "timestamp": "2024-12-09T10:00:00Z"
+}
+        </code></pre>
+      </section>
+
+      <section id="error-handling" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Error Handling Best Practices</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Retry Logic</h2>
+        <pre><code class="language-javascript">async function apiCallWithRetry(fn, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (error.response?.status === 429) {
+        const retryAfter = parseInt(error.response.headers['retry-after']) || 30;
+        console.log(`Rate limited, waiting ${retryAfter}s...`);
+        await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+        continue;
+      }
+
+      if (error.response?.status >= 500 && i < maxRetries - 1) {
+        console.log(`Server error, retrying (${i + 1}/${maxRetries})...`);
+        await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1)));
+        continue;
+      }
+
+      throw error;
+    }
+  }
+}
+
+// Usage
+const result = await apiCallWithRetry(() =>
+  axios.post('/api/internal-transfers', transferData)
+);
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Balance Check Before Transfer</h2>
+        <pre><code class="language-javascript">async function safeTransfer(fromId, toId, amount) {
+  // 1. Check balance first
+  const { data: balance } = await axios.get(`/api/accounts/${fromId}/balance`);
+
+  if (parseFloat(balance.balances.native) < amount) {
+    throw new Error(`Insufficient balance: ${balance.balances.native} < ${amount}`);
+  }
+
+  // 2. Execute transfer with idempotency
+  const { data } = await axios.post('/api/internal-transfers', {
+    fromAccountId: fromId,
+    toAccountId: toId,
+    asset: 'native',
+    amount: amount.toString()
+  }, {
+    headers: { 'X-Idempotency-Key': crypto.randomUUID() }
+  });
+
+  return data;
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Idempotency for Critical Operations</h2>
+        <pre><code class="language-javascript">// ALWAYS use idempotency keys for withdrawals
+async function withdraw(accountId, toAddress, amount) {
+  const idempotencyKey = crypto.randomUUID();
+
+  // Store in DB to prevent duplicate submission
+  await db.saveWithdrawal({ accountId, toAddress, amount, idempotencyKey });
+
+  try {
+    const { data } = await axios.post('/api/withdrawals', {
+      accountId,
+      toAddress,
+      asset: 'native',
+      amount: amount.toString()
+    }, {
+      headers: { 'X-Idempotency-Key': idempotencyKey }
+    });
+
+    await db.updateWithdrawalStatus(idempotencyKey, 'PENDING', data.id);
+    return data;
+  } catch (error) {
+    await db.updateWithdrawalStatus(idempotencyKey, 'FAILED', null);
+    throw error;
+  }
+}
+        </code></pre>
+      </section>
+
+      <!-- SDK sections -->
+      <section id="sdk-javascript" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">JavaScript SDK</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Installation</h2>
+        <pre><code class="language-bash">npm install @walits/non-custody-sdk
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Quick Start</h2>
+        <pre><code class="language-javascript">const { WalitsClient } = require('@walits/non-custody-sdk');
+
+const client = new WalitsClient({
+  apiKey: 'bbit_live_xxx',
+  apiSecret: 'sk_xxx',
+  environment: 'production' // or 'sandbox'
+});
+
+// Create wallet
+const wallet = await client.wallets.create({
+  customerId: 'cust_abc',
+  name: 'Game Wallet',
+  chain: 'ETHEREUM'
+});
+
+// Create account
+const account = await client.accounts.create({
+  walletId: wallet.id,
+  userId: 'player_001',
+  label: 'Alice'
+});
+
+// Transfer
+const transfer = await client.transfers.internal({
+  fromAccountId: 'acc_001',
+  toAccountId: 'acc_002',
+  asset: 'native',
+  amount: '100'
+});
+
+console.log('Transfer completed:', transfer.id);
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">TypeScript Support</h2>
+        <pre><code class="language-typescript">import { WalitsClient, Wallet, Account } from '@walits/non-custody-sdk';
+
+const client = new WalitsClient({
+  apiKey: process.env.BLOCKBIT_API_KEY!,
+  apiSecret: process.env.BLOCKBIT_API_SECRET!
+});
+
+const wallet: Wallet = await client.wallets.create({
+  customerId: 'cust_abc',
+  name: 'Game Wallet',
+  chain: 'ETHEREUM'
+});
+        </code></pre>
+      </section>
+
+      <section id="sdk-python" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Python SDK</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Installation</h2>
+        <pre><code class="language-bash">pip install walits-non-custody
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Quick Start</h2>
+        <pre><code class="language-python">from walits import WalitsClient
+
+client = WalitsClient(
+    api_key='bbit_live_xxx',
+    api_secret='sk_xxx',
+    environment='production'  # or 'sandbox'
+)
+
+# Create wallet
+wallet = client.wallets.create(
+    customer_id='cust_abc',
+    name='Game Wallet',
+    chain='ETHEREUM'
+)
+
+# Create account
+account = client.accounts.create(
+    wallet_id=wallet.id,
+    user_id='player_001',
+    label='Alice'
+)
+
+# Transfer
+transfer = client.transfers.internal(
+    from_account_id='acc_001',
+    to_account_id='acc_002',
+    asset='native',
+    amount='100'
+)
+
+print(f'Transfer completed: {transfer.id}')
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Async Support</h2>
+        <pre><code class="language-python">from walits import AsyncWalitsClient
+
+async def main():
+    client = AsyncWalitsClient(
+        api_key='bbit_live_xxx',
+        api_secret='sk_xxx'
+    )
+
+    wallet = await client.wallets.create(
+        customer_id='cust_abc',
+        name='Game Wallet',
+        chain='ETHEREUM'
+    )
+
+    print(f'Wallet created: {wallet.id}')
+
+import asyncio
+asyncio.run(main())
+        </code></pre>
+      </section>
+
+      <!-- Security sections -->
+      <section id="security-best-practices" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Security Best Practices</h1>
+
+        <div class="space-y-6">
+          <div class="border-l-4 border-red-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">1. API Secret Protection</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Store API secrets in environment variables or secret management systems (AWS Secrets Manager, HashiCorp Vault)</li>
+              <li>Never commit secrets to Git repositories</li>
+              <li>Rotate API keys quarterly</li>
+              <li>Use different API keys for staging and production</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-orange-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">2. Mnemonic Backup</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Backup mnemonic immediately after wallet creation</li>
+              <li>Store in encrypted format in multiple secure locations</li>
+              <li>Consider hardware security modules (HSM) for high-value wallets</li>
+              <li>Never expose mnemonic in API responses or logs</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-yellow-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">3. Transaction Security</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Always use idempotency keys for withdrawals and critical transfers</li>
+              <li>Implement withdrawal limits and velocity checks</li>
+              <li>Add two-factor authentication for large withdrawals</li>
+              <li>Whitelist withdrawal addresses when possible</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-green-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">4. Access Control</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Limit API secret access to backend servers only</li>
+              <li>Never expose API secrets in client-side code (web/mobile apps)</li>
+              <li>Use IP whitelisting for production API keys</li>
+              <li>Implement role-based access control (RBAC) for admin operations</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-blue-500 pl-6">
+            <h2 class="text-2xl font-semibold mb-3">5. Monitoring & Alerts</h2>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Monitor for unusual withdrawal patterns</li>
+              <li>Set up alerts for large transactions (&gt;$10k)</li>
+              <li>Track API usage and detect anomalies</li>
+              <li>Log all admin balance adjustments with reason codes</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="key-management" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Key Management</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Environment Variables (Recommended)</h2>
+        <pre><code class="language-bash"># .env file (DO NOT COMMIT)
+BLOCKBIT_API_KEY=bbit_live_xxx
+BLOCKBIT_API_SECRET=sk_xxx
+BLOCKBIT_MASTER_MNEMONIC=abandon abandon ... about
+
+# .gitignore
+.env
+.env.local
+secrets/
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">AWS Secrets Manager (Production)</h2>
+        <pre><code class="language-javascript">const AWS = require('aws-sdk');
+const secretsManager = new AWS.SecretsManager({ region: 'us-east-1' });
+
+async function getApiCredentials() {
+  const secret = await secretsManager.getSecretValue({
+    SecretId: 'walits/production/api-credentials'
+  }).promise();
+
+  return JSON.parse(secret.SecretString);
+}
+
+const { apiKey, apiSecret } = await getApiCredentials();
+const client = new WalitsClient({ apiKey, apiSecret });
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">HashiCorp Vault</h2>
+        <pre><code class="language-javascript">const vault = require('node-vault')({
+  endpoint: 'https://vault.company.com',
+  token: process.env.VAULT_TOKEN
+});
+
+async function getApiCredentials() {
+  const result = await vault.read('secret/walits/production');
+  return result.data;
+}
+
+const { apiKey, apiSecret } = await getApiCredentials();
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Key Rotation Process</h2>
+        <ol class="list-decimal list-inside space-y-2 mb-6">
+          <li>Generate new API credentials via Walits dashboard</li>
+          <li>Update secret in AWS Secrets Manager / Vault</li>
+          <li>Deploy application with updated secret reference</li>
+          <li>Verify new credentials work in production</li>
+          <li>Revoke old API credentials</li>
+        </ol>
+      </section>
+
+      <!-- Appendix sections -->
+      <section id="use-cases" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Use Cases</h1>
+
+        <div class="space-y-6">
+          <div class="border-2 border-green-500 rounded-lg p-6 bg-green-50">
+            <h3 class="text-xl font-semibold mb-3">🎮 Game Studios</h3>
+            <p class="mb-2">Manage in-game currency, NFT items, and player-to-player trading:</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>1 master wallet per game</li>
+              <li>1 sub-account per player (auto-created on registration)</li>
+              <li>Instant P2P item trading via internal transfers</li>
+              <li>Cashout earnings to external wallets</li>
+            </ul>
+          </div>
+
+          <div class="border-2 border-blue-500 rounded-lg p-6 bg-blue-50">
+            <h3 class="text-xl font-semibold mb-3">🏆 Reward Platforms</h3>
+            <p class="mb-2">Distribute tokens, points, or crypto rewards to users:</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Deploy custom ERC-20 reward token</li>
+              <li>Auto-credit rewards via balance adjustment API</li>
+              <li>Users can withdraw to their personal wallets</li>
+              <li>Track all reward distribution in audit logs</li>
+            </ul>
+          </div>
+
+          <div class="border-2 border-purple-500 rounded-lg p-6 bg-purple-50">
+            <h3 class="text-xl font-semibold mb-3">👥 Community Apps</h3>
+            <p class="mb-2">Enable wallet features in social/community platforms:</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Tipping between community members</li>
+              <li>NFT badge/achievement distribution</li>
+              <li>Crowdfunding with instant settlements</li>
+              <li>DAO voting with token balances</li>
+            </ul>
+          </div>
+
+          <div class="border-2 border-orange-500 rounded-lg p-6 bg-orange-50">
+            <h3 class="text-xl font-semibold mb-3">🛒 Marketplaces</h3>
+            <p class="mb-2">Escrow and settlement for peer-to-peer marketplaces:</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Buyer sends payment to platform-controlled escrow account</li>
+              <li>Release payment to seller upon delivery confirmation</li>
+              <li>Instant settlement with zero gas fees</li>
+              <li>Platform fee deduction via internal transfer</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="data-objects" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Data Objects</h1>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Wallet Object</h2>
+        <pre><code class="language-json">{
+  "id": "wal_eth_xyz",
+  "customerId": "cust_abc123",
+  "name": "Game Wallet",
+  "chain": "ETHEREUM",
+  "address": "0x1234567890abcdef1234567890abcdef12345678",
+  "mnemonic": "abandon abandon ... about",  // Only in creation response
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "createdAt": "2024-12-09T10:00:00Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Account Object</h2>
+        <pre><code class="language-json">{
+  "id": "acc_001",
+  "walletId": "wal_eth_xyz",
+  "userId": "player_12345",
+  "label": "Alice",
+  "address": "0xabcdef1234567890abcdef1234567890abcdef12",
+  "derivationPath": "m/44'/60'/0'/0/0",
+  "balances": {
+    "native": "1000.5",
+    "tokens": {
+      "0xtoken_address": "250.0"
+    }
+  },
+  "createdAt": "2024-12-09T10:01:00Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Transfer Object</h2>
+        <pre><code class="language-json">{
+  "id": "txf_abc123",
+  "status": "COMPLETED",
+  "fromAccountId": "acc_001",
+  "toAccountId": "acc_002",
+  "asset": "native",
+  "amount": "100",
+  "fromBalance": "900.5",
+  "toBalance": "600",
+  "memo": "Payment for sword",
+  "executedAt": "2024-12-09T10:00:00.050Z"
+}
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Withdrawal Object</h2>
+        <pre><code class="language-json">{
+  "id": "wth_xyz789",
+  "status": "CONFIRMED",
+  "accountId": "acc_001",
+  "toAddress": "0x9876543210fedcba9876543210fedcba98765432",
+  "asset": "native",
+  "amount": "500",
+  "gasFee": "0.002",
+  "netAmount": "499.998",
+  "txHash": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "blockNumber": 18234567,
+  "confirmations": 12,
+  "createdAt": "2024-12-09T10:00:00Z",
+  "completedAt": "2024-12-09T10:00:15Z"
+}
+        </code></pre>
+      </section>
+
+      <section id="integration-checklist" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">Integration Checklist</h1>
+
+        <div class="space-y-4">
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Pre-Integration</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Register as customer, receive API credentials</li>
+              <li>Store API secret in secure vault (AWS Secrets Manager, etc.)</li>
+              <li>Set up sandbox environment for testing</li>
+              <li>Review rate limits and plan for scaling</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Wallet Setup</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Create master wallet via API</li>
+              <li>Backup mnemonic in encrypted format (critical!)</li>
+              <li>Test wallet creation on sandbox (Sepolia testnet)</li>
+              <li>Fund master wallet with initial balance</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Account Management</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Integrate sub-account creation on user registration</li>
+              <li>Link sub-account IDs to your user database</li>
+              <li>Test balance queries and updates</li>
+              <li>Implement deposit detection webhook/polling</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Transactions</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Implement internal transfer API calls with idempotency</li>
+              <li>Add error handling and retry logic</li>
+              <li>Test withdrawal flow to external addresses</li>
+              <li>Verify gas fee deduction logic</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Security</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Never expose API secret in client-side code</li>
+              <li>Implement IP whitelisting for production API keys</li>
+              <li>Set up monitoring and alerts for large transactions</li>
+              <li>Add two-factor authentication for admin operations</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded">
+            <h3 class="font-semibold mb-2">☐ Go-Live</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>Switch from sandbox to production API keys</li>
+              <li>Fund production master wallet</li>
+              <li>Monitor first 100 transactions closely</li>
+              <li>Set up customer support flow for withdrawal issues</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="content-section">
+        <h1 class="text-4xl font-bold mb-6">FAQ</h1>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: What's the difference between Non-Custody and Custody wallets?</h3>
+            <p class="ml-4">Non-Custody is for B2B platforms (games, apps) where you own all wallets. Custody is for exchanges/institutions where users own their wallets with MPC security and approval workflows.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: How do internal transfers work without gas fees?</h3>
+            <p class="ml-4">Internal transfers only update database balances, with no on-chain transaction. The actual blockchain state shows all funds in the master wallet. Users only see their virtual balance slice.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: What happens if I lose the mnemonic?</h3>
+            <p class="ml-4">All funds become permanently inaccessible. Always backup the mnemonic immediately after wallet creation in multiple secure locations.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: Can users withdraw more than the master wallet balance?</h3>
+            <p class="ml-4">No. Total virtual balances can exceed on-chain balance (via manual adjustments), but withdrawals are limited by actual master wallet funds. Monitor reserves carefully.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: How fast are internal transfers?</h3>
+            <p class="ml-4">50-100ms latency with 1,000+ TPS throughput. Perfect for real-time game economies and social tipping.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: Can I deploy my own ERC-20 token?</h3>
+            <p class="ml-4">Yes, use <code class="bg-gray-100 px-2 py-1 rounded">POST /api/tokens/deploy</code> to create custom tokens on Ethereum/Base. You can then mint and distribute to users.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: How are private keys protected?</h3>
+            <p class="ml-4">Private keys are encrypted and stored in AWS Nitro Enclave (TEE), providing hardware-level isolation. Even AWS root users cannot access enclave memory.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: What chains are supported?</h3>
+            <p class="ml-4">Ethereum, Base (ETH L2), and Solana. Testnets: Sepolia (ETH), Base Sepolia, Solana Devnet.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: How do I handle rate limits?</h3>
+            <p class="ml-4">Implement exponential backoff retry logic. Internal transfers have 1,000 TPS limit. For higher throughput, contact us for enterprise plans.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: Can I audit all transactions?</h3>
+            <p class="ml-4">Yes, use <code class="bg-gray-100 px-2 py-1 rounded">GET /api/transactions</code> to retrieve full transaction history with timestamps, balances, and memos.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="border-t border-gray-200 py-8 bg-white mt-auto">
+    <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
+      <p>© 2024 Walits. All rights reserved.</p>
+      <p class="mt-2">Need help? Contact <a href="mailto:support@walits.com" class="text-blue-600 hover:underline">support@walits.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = item.getAttribute('href').substring(1);
+        document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+        window.scrollTo(0, 0);
+      });
+    });
+    Prism.highlightAll();
+  </script>
+</body>
+</html>

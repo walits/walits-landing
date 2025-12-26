@@ -1,0 +1,252 @@
+<h1 class="text-4xl font-bold mb-6">Webhook Events</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">📡 Real-Time Notifications</p>
+          <p>Walits sends webhooks to your server for critical events like deposits, withdrawals, and approval status changes.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Supported Events (15 Total)</h2>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">Deposit & Withdrawal Events (8)</h3>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Event</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Description</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Typical Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">DEPOSIT_DETECTED</td>
+              <td class="border border-gray-200 px-4 py-2">Incoming deposit detected (1 confirmation)</td>
+              <td class="border border-gray-200 px-4 py-2">Show "pending deposit" in UI</td>
+            </tr>
+            <tr class="bg-green-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">DEPOSIT_CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2">Deposit confirmed (12 confirmations)</td>
+              <td class="border border-gray-200 px-4 py-2">Credit user balance ✅</td>
+            </tr>
+            <tr class="bg-blue-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_REQUESTED</td>
+              <td class="border border-gray-200 px-4 py-2">Withdrawal request created, balance held immediately</td>
+              <td class="border border-gray-200 px-4 py-2">Notify admins to approve</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">APPROVAL_PROGRESS</td>
+              <td class="border border-gray-200 px-4 py-2">Partial approval received (optional event)</td>
+              <td class="border border-gray-200 px-4 py-2">Show "1/3 approvals" in UI</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_APPROVED</td>
+              <td class="border border-gray-200 px-4 py-2">Approval threshold met, ready to execute</td>
+              <td class="border border-gray-200 px-4 py-2">Update status to "approved"</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_EXECUTED</td>
+              <td class="border border-gray-200 px-4 py-2">Transaction broadcast to blockchain (mempool)</td>
+              <td class="border border-gray-200 px-4 py-2">Show txHash, track on explorer</td>
+            </tr>
+            <tr class="bg-green-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2">On-chain confirmed (12 confirmations)</td>
+              <td class="border border-gray-200 px-4 py-2">Release pending balance, mark complete</td>
+            </tr>
+            <tr class="bg-red-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_FAILED</td>
+              <td class="border border-gray-200 px-4 py-2">Withdrawal failed, balance automatically restored</td>
+              <td class="border border-gray-200 px-4 py-2">Notify user, log error</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">Wallet & Account Events (4)</h3>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Event</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Description</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Typical Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WALLET_CREATED</td>
+              <td class="border border-gray-200 px-4 py-2">New custody wallet created (MPC keygen complete)</td>
+              <td class="border border-gray-200 px-4 py-2">Record wallet address, notify admins</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">ACCOUNT_CREATED</td>
+              <td class="border border-gray-200 px-4 py-2">New virtual account (deposit address) created</td>
+              <td class="border border-gray-200 px-4 py-2">Provide deposit address to customer</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">SWEEP_EXECUTED</td>
+              <td class="border border-gray-200 px-4 py-2">Auto-sweep from deposit address to omnibus completed</td>
+              <td class="border border-gray-200 px-4 py-2">Reconciliation, logging</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">SWEEP_FAILED</td>
+              <td class="border border-gray-200 px-4 py-2">Auto-sweep failed (insufficient gas, RPC error)</td>
+              <td class="border border-gray-200 px-4 py-2">Alert operations team</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">Risk & Operations Events (3)</h3>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Event</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Description</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Typical Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">LOW_BALANCE_WARNING</td>
+              <td class="border border-gray-200 px-4 py-2">Gas reserve balance below threshold</td>
+              <td class="border border-gray-200 px-4 py-2">Alert ops team to refill gas tank</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">POLICY_CHANGED</td>
+              <td class="border border-gray-200 px-4 py-2">Wallet policy updated (approval threshold, limits)</td>
+              <td class="border border-gray-200 px-4 py-2">Audit logging, compliance</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">LARGE_WITHDRAWAL</td>
+              <td class="border border-gray-200 px-4 py-2">Withdrawal exceeds configured threshold</td>
+              <td class="border border-gray-200 px-4 py-2">Extra verification, compliance check</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Balance Adjustment Timing</h2>
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-6">
+          <p class="font-semibold text-yellow-900 mb-2">Critical: Understanding When Balances Change</p>
+          <p class="text-yellow-800">Incorrectly timing balance updates can lead to double-spending or insufficient balance errors. Follow this table carefully.</p>
+        </div>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">Deposit Balance Updates</h3>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Event</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Balance Adjustment</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">DEPOSIT_DETECTED</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600 font-semibold">No change</td>
+              <td class="border border-gray-200 px-4 py-2">Notification only, protect against reorgs</td>
+            </tr>
+            <tr class="bg-green-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">DEPOSIT_CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600 font-semibold">availableBalance ↑</td>
+              <td class="border border-gray-200 px-4 py-2">Safe to credit after 12 confirmations</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="text-xl font-semibold mt-6 mb-3">Withdrawal Balance Updates</h3>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Event</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">availableBalance</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">pendingWithdrawalBalance</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-blue-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_REQUESTED</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600 font-semibold">↓ Decrease</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600 font-semibold">↑ Increase</td>
+              <td class="border border-gray-200 px-4 py-2">Immediate hold prevents double-spend</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">APPROVAL_PROGRESS</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">Already held</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_APPROVED</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">Already held, waiting for execution</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_EXECUTED</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2">In mempool, still held</td>
+            </tr>
+            <tr class="bg-green-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_CONFIRMED</td>
+              <td class="border border-gray-200 px-4 py-2">No change</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600 font-semibold">↓ Decrease</td>
+              <td class="border border-gray-200 px-4 py-2">Release hold, accounting complete</td>
+            </tr>
+            <tr class="bg-red-50">
+              <td class="border border-gray-200 px-4 py-2 font-mono text-sm">WITHDRAWAL_FAILED</td>
+              <td class="border border-gray-200 px-4 py-2 text-green-600 font-semibold">↑ Increase (rollback)</td>
+              <td class="border border-gray-200 px-4 py-2 text-red-600 font-semibold">↓ Decrease (rollback)</td>
+              <td class="border border-gray-200 px-4 py-2">Automatic balance restoration</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-blue-900 mb-2">Double-Entry Accounting Invariant</p>
+          <p class="text-blue-800 font-mono">totalBalance = availableBalance + pendingWithdrawalBalance</p>
+          <p class="text-blue-800 mt-2">This relationship MUST always hold true. Walits's balance system is designed following the same patterns as BitGo and Fireblocks.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Event Payload Examples</h2>
+        <div class="space-y-6">
+          <div class="border-l-4 border-green-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">deposit.confirmed</h3>
+            <pre><code class="language-json">
+{
+  "event": "deposit.confirmed",
+  "timestamp": "2024-12-09T10:30:00Z",
+  "data": {
+    "virtualAccountId": "va_xyz789",
+    "userId": "user_12345",
+    "walletId": "wal_abc123",
+    "amount": "10.0",
+    "asset": "ETH",
+    "txHash": "0x123abc...",
+    "confirmations": 1,
+    "depositAddress": "0x742d35Cc...",
+    "newBalance": "20.5"
+  }
+}
+            </code></pre>
+          </div>
+
+          <div class="border-l-4 border-blue-500 pl-6">
+            <h3 class="text-xl font-semibold mb-2">withdrawal.confirmed</h3>
+            <pre><code class="language-json">
+{
+  "event": "withdrawal.confirmed",
+  "timestamp": "2024-12-09T11:00:00Z",
+  "data": {
+    "approvalRequestId": "apr_xyz789",
+    "walletId": "wal_abc123",
+    "amount": "5.0",
+    "asset": "ETH",
+    "toAddress": "0xRecipient...",
+    "txHash": "0x789def...",
+    "confirmations": 12,
+    "gasPaid": "0.00189",
+    "status": "CONFIRMED"
+  }
+}
+            </code></pre>
+          </div>
+        </div>

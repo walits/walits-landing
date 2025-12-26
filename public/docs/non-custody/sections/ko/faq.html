@@ -1,0 +1,54 @@
+<h1 class="text-4xl font-bold mb-6">자주 묻는 질문</h1>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: What's the difference between Non-Custody and Custody wallets?</h3>
+            <p class="ml-4">Non-Custody is for B2B platforms (games, apps) where you own all wallets. Custody is for exchanges/institutions where users own their wallets with MPC security and approval workflows.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: How do internal transfers work without gas fees?</h3>
+            <p class="ml-4">Internal transfers only update database balances, with no on-chain transaction. The actual blockchain state shows all funds in the master wallet. Users only see their virtual balance slice.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: What happens if I lose the mnemonic?</h3>
+            <p class="ml-4">All funds become permanently inaccessible. Always backup the mnemonic immediately after wallet creation in multiple secure locations.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: Can users withdraw more than the master wallet balance?</h3>
+            <p class="ml-4">No. Total virtual balances can exceed on-chain balance (via manual adjustments), but withdrawals are limited by actual master wallet funds. Monitor reserves carefully.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: How fast are internal transfers?</h3>
+            <p class="ml-4">50-100ms latency with 1,000+ TPS throughput. Perfect for real-time game economies and social tipping.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: Can I deploy my own ERC-20 token?</h3>
+            <p class="ml-4">Yes, use <code class="bg-gray-100 px-2 py-1 rounded">POST /api/tokens/deploy</code> to create custom tokens on Ethereum/Base. You can then mint and distribute to users.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: How are private keys protected?</h3>
+            <p class="ml-4">Private keys are encrypted and stored in AWS Nitro Enclave (TEE), providing hardware-level isolation. Even AWS root users cannot access enclave memory.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: What chains are supported?</h3>
+            <p class="ml-4">Ethereum, Base (ETH L2), and Solana. Testnets: Sepolia (ETH), Base Sepolia, Solana Devnet.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: How do I handle rate limits?</h3>
+            <p class="ml-4">Implement exponential backoff retry logic. Internal transfers have 1,000 TPS limit. For higher throughput, contact us for enterprise plans.</p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Q: Can I audit all transactions?</h3>
+            <p class="ml-4">Yes, use <code class="bg-gray-100 px-2 py-1 rounded">GET /api/transactions</code> to retrieve full transaction history with timestamps, balances, and memos.</p>
+          </div>
+        </div>
+      </section>

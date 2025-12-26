@@ -1,0 +1,122 @@
+<h1 class="text-4xl font-bold mb-6">Approval Workflow</h1>
+
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
+          <p class="font-semibold text-lg mb-2">🔐 N-of-M Approval Process</p>
+          <p>Implement governance controls by requiring multiple admin approvals for sensitive operations like withdrawals.</p>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Approval Request Lifecycle</h2>
+        <pre><code class="language-plaintext">
+1. PENDING → Waiting for approvals (currentApprovals < requiredApprovals)
+2. APPROVED → Threshold met, MPC signature generation starts
+3. BROADCASTING → Transaction sent to blockchain
+4. CONFIRMED → On-chain confirmation received ✅
+5. REJECTED → Admin(s) rejected the request (terminal state) ❌
+        </code></pre>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">API Endpoints</h2>
+        <div class="space-y-4">
+          <div class="border rounded-lg p-4">
+            <h3 class="text-lg font-semibold mb-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-mono mr-2">GET</span>List Pending Approvals</h3>
+            <pre><code class="language-bash">GET /approvals?status=PENDING
+X-API-Key: bbit_live_xxx
+
+# Response
+{
+  "approvals": [
+    {
+      "id": "apr_xyz789",
+      "walletId": "wal_abc123",
+      "type": "WITHDRAWAL",
+      "amount": "5.0",
+      "toAddress": "0xRECIPIENT",
+      "status": "PENDING",
+      "requiredApprovals": 2,
+      "currentApprovals": 1,
+      "approvers": [
+        {
+          "adminId": "admin_001",
+          "approvedAt": "2024-12-09T10:00:00Z",
+          "comment": "Verified"
+        }
+      ],
+      "createdAt": "2024-12-09T09:55:00Z"
+    }
+  ]
+}
+            </code></pre>
+          </div>
+
+          <div class="border rounded-lg p-4">
+            <h3 class="text-lg font-semibold mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-mono mr-2">POST</span>Approve Request</h3>
+            <pre><code class="language-bash">POST /approvals/{approvalRequestId}/approve
+X-API-Key: bbit_live_xxx
+
+{
+  "comment": "Approved after verification"
+}
+
+# Response
+{
+  "approvalRequestId": "apr_xyz789",
+  "status": "APPROVED",  // Changed from PENDING
+  "currentApprovals": 2,
+  "requiredApprovals": 2,
+  "message": "Threshold met. Transaction will be broadcast shortly."
+}
+            </code></pre>
+          </div>
+
+          <div class="border rounded-lg p-4">
+            <h3 class="text-lg font-semibold mb-2"><span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm font-mono mr-2">POST</span>Reject Request</h3>
+            <pre><code class="language-bash">POST /approvals/{approvalRequestId}/reject
+X-API-Key: bbit_live_xxx
+
+{
+  "reason": "Suspicious withdrawal pattern"
+}
+
+# Response
+{
+  "approvalRequestId": "apr_xyz789",
+  "status": "REJECTED",
+  "rejectedBy": "admin_002",
+  "reason": "Suspicious withdrawal pattern",
+  "rejectedAt": "2024-12-09T10:10:00Z"
+}
+            </code></pre>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4">Use Cases</h2>
+        <table class="w-full border border-gray-200 mb-6">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="border border-gray-200 px-4 py-3 text-left">Scenario</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Recommended Threshold</th>
+              <th class="border border-gray-200 px-4 py-3 text-left">Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Small Exchange</td>
+              <td class="border border-gray-200 px-4 py-2">2-of-3</td>
+              <td class="border border-gray-200 px-4 py-2">Balance between security and operational speed</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Large Exchange</td>
+              <td class="border border-gray-200 px-4 py-2">3-of-5 or 4-of-7</td>
+              <td class="border border-gray-200 px-4 py-2">Higher stakes require more oversight</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Corporate Treasury</td>
+              <td class="border border-gray-200 px-4 py-2">2-of-4</td>
+              <td class="border border-gray-200 px-4 py-2">CFO + Controller approval required</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 px-4 py-2 font-semibold">Payment Processor</td>
+              <td class="border border-gray-200 px-4 py-2">1-of-2 + Whitelist</td>
+              <td class="border border-gray-200 px-4 py-2">Fast approvals for whitelisted addresses</td>
+            </tr>
+          </tbody>
+        </table>
