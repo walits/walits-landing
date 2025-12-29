@@ -377,7 +377,7 @@ export default function HomePage() {
     },
   }[language];
 
-  const structuredData = {
+  const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Walits",
@@ -437,12 +437,104 @@ export default function HomePage() {
     ]
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: language === 'ko' ? [
+      {
+        "@type": "Question",
+        name: "가상자산 지갑이란 무엇인가요?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "가상자산 지갑은 비트코인, 이더리움 등 암호화폐를 보관하고 관리하는 디지털 지갑입니다. Walits는 기업용 Non-Custody 지갑과 Custody 지갑을 제공하여 안전한 자산 관리를 지원합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Non-Custody 지갑과 Custody 지갑의 차이는 무엇인가요?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Non-Custody 지갑은 계정별로 독립된 지갑을 제공하여 API로 대량 지급이 가능하며, 집금 없이 운영됩니다. Custody 지갑은 고객 자산을 MPC 2-of-3 방식으로 안전하게 집금하여 보관하며, 승인 정책 기반으로 출금을 관리합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "MPC 2-of-3란 무엇인가요?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "MPC(Multi-Party Computation) 2-of-3는 프라이빗 키를 3개의 조각으로 나누어 분산 보관하고, 거래 시 2개의 조각만으로 서명이 가능한 최고 수준의 보안 방식입니다. 단일 실패점이 없어 해킹이나 내부자 사고를 원천 차단합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "토큰증권(ST) 지갑은 무엇인가요?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "토큰증권(Security Token) 지갑은 규제를 준수하는 증권형 토큰을 안전하게 거래하고 관리할 수 있는 전문 지갑입니다. 부동산, 주식 등 실물 자산을 토큰화한 증권을 보관하고, 배당금을 자동으로 수령할 수 있습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "기업용 코인 지갑은 왜 필요한가요?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "게임 리워드 지급, NFT 에어드랍, 직원 인센티브 배포 등 기업에서 대량의 토큰을 안전하게 관리하고 배포해야 할 때 필요합니다. Walits는 API로 간편하게 대량 지급이 가능하며, 기관급 보안으로 자산을 보호합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "에어드랍은 어떻게 진행하나요?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Walits Non-Custody API를 사용하면 단 몇 줄의 코드로 수백~수천 명에게 동시에 토큰을 에어드랍할 수 있습니다. Virtual Balance 시스템으로 가스비 없이 즉시 지급이 가능합니다."
+        }
+      }
+    ] : [
+      {
+        "@type": "Question",
+        name: "What is a crypto wallet?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A crypto wallet is a digital wallet for storing and managing cryptocurrencies like Bitcoin and Ethereum. Walits provides enterprise-grade Non-Custody and Custody wallets for secure asset management."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What's the difference between Non-Custody and Custody wallets?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Non-Custody wallets provide independent wallets per account for API-based mass distribution without pooling. Custody wallets securely pool customer assets using MPC 2-of-3 and manage withdrawals through approval policies."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What is MPC 2-of-3?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "MPC (Multi-Party Computation) 2-of-3 is the highest level of security where the private key is split into 3 shares, and only 2 shares are needed for signing. It eliminates single points of failure and prevents hacking or insider threats."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What is a Security Token (ST) wallet?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A Security Token wallet is a specialized wallet for safely trading and managing regulatory-compliant security tokens. It can store tokenized real-world assets like real estate and stocks, and automatically receive dividends."
+        }
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* Navigation */}
