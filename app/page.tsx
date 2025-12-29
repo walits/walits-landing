@@ -528,15 +528,12 @@ export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Under Construction Ribbon */}
-      <div className="fixed top-0 right-0 z-[9999] overflow-hidden pointer-events-none">
-        <div className="relative">
-          <div
-            className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 font-bold text-sm py-2 px-16 shadow-lg transform rotate-45 translate-x-12 translate-y-7"
-            style={{ transformOrigin: 'center' }}
-          >
-            <span className="drop-shadow-sm">
-              {language === 'ko' ? '개발중' : 'UNDER CONSTRUCTION'}
-            </span>
+      <div className="fixed top-0 right-0 w-40 h-40 z-[9999] overflow-hidden pointer-events-none">
+        <div
+          className="absolute top-8 -right-10 w-48 bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 text-gray-900 font-bold text-xs py-2.5 text-center shadow-2xl transform rotate-45"
+        >
+          <div className="tracking-wide">
+            {language === 'ko' ? '🚧 개발중 🚧' : '🚧 BETA 🚧'}
           </div>
         </div>
       </div>
@@ -588,20 +585,20 @@ export default function HomePage() {
                 API Docs
                 <span className="text-xs">▼</span>
               </button>
-              <div className="absolute top-full left-0 pt-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              <div className="absolute top-full left-0 pt-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all pointer-events-auto">
                 <div className="w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
-                  <a href="/docs/custody/index.html" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                  <Link href="/docs/custody" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                     <div className="font-semibold text-gray-900 dark:text-white">Custody Wallet API</div>
                     <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                       {language === 'ko' ? 'MPC 기반 커스터디 지갑' : 'MPC-based custody wallet'}
                     </div>
-                  </a>
-                  <a href="/docs/non-custody/index.html" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                  </Link>
+                  <Link href="/docs/non-custody" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                     <div className="font-semibold text-gray-900 dark:text-white">Non-Custody Wallet API</div>
                     <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                       {language === 'ko' ? 'API 기반 대량 지급' : 'API-based mass distribution'}
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
