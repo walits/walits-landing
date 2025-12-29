@@ -1,0 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Disallow: /login/
+Disallow: /inquiry/thank-you
+
+# Crawl delay
+Crawl-delay: 0
+
+# Sitemap
+Sitemap: https://walits.com/sitemap.xml

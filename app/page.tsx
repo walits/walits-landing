@@ -60,7 +60,7 @@ export default function HomePage() {
         proUseCases: '✓ 고객 자산 집금\n✓ 운영 자금 관리\n✓ 기업 재무 관리\n✓ 토큰 발행사 운영',
       },
       aiVsSto: {
-        title: 'AI Robo-Advisor vs STO Token Wallet',
+        title: 'AI Robo-Advisor vs ST Token Wallet',
         subtitle: '개인 투자자를 위한 두 가지 혁신적인 지갑 서비스',
         aiTitle: 'AI 로보어드바이저 지갑',
         aiSubtitle: 'AI가 관리하는 스마트 투자',
@@ -72,7 +72,7 @@ export default function HomePage() {
           '맞춤 전략: 투자 성향에 맞는 포트폴리오',
         ],
         aiUseCases: '✓ 자동 포트폴리오 관리\n✓ 리스크 기반 투자\n✓ 수익 극대화 전략\n✓ 시장 분석 리포트',
-        stoTitle: 'STO 토큰 거래 지갑',
+        stoTitle: '토큰증권 거래 지갑',
         stoSubtitle: '증권형 토큰 안전 거래',
         stoDesc: '규제 준수 증권형 토큰을 안전하게 거래하고 관리합니다.',
         stoFeatures: [
@@ -151,7 +151,7 @@ export default function HomePage() {
             ],
           },
           sto: {
-            name: 'STO 토큰 지갑',
+            name: '토큰증권 지갑',
             price: '무료',
             features: [
               '증권형 토큰 계정 관리',
@@ -203,7 +203,7 @@ export default function HomePage() {
     en: {
       hero: {
         title: <>The Easiest and<br />Most Secure Enterprise Wallet</>,
-        subtitle: 'Foundation of global tokenization, for a world of zero trust costs. Automate mass distributions with Non-Custody API, secure corporate assets with MPC Custody, and trade compliant security tokens with STO Wallet.',
+        subtitle: 'Foundation of global tokenization, for a world of zero trust costs. Automate mass distributions with Non-Custody API, secure corporate assets with MPC Custody, and trade compliant security tokens with ST Wallet.',
       },
       nav: {
         solutions: 'Solutions',
@@ -237,7 +237,7 @@ export default function HomePage() {
         proUseCases: '✓ Customer Asset Custody\n✓ Operating Fund Management\n✓ Corporate Treasury\n✓ Token Issuer Operations',
       },
       aiVsSto: {
-        title: 'AI Robo-Advisor vs STO Token Wallet',
+        title: 'AI Robo-Advisor vs ST Token Wallet',
         subtitle: 'Two innovative wallet services for individual investors',
         aiTitle: 'AI Robo-Advisor Wallet',
         aiSubtitle: 'Smart Investment Managed by AI',
@@ -249,7 +249,7 @@ export default function HomePage() {
           'Custom Strategy: Portfolio tailored to your investment style',
         ],
         aiUseCases: '✓ Automated Portfolio Management\n✓ Risk-based Investment\n✓ Profit Maximization Strategy\n✓ Market Analysis Reports',
-        stoTitle: 'STO Token Trading Wallet',
+        stoTitle: 'ST Token Trading Wallet',
         stoSubtitle: 'Safe Security Token Trading',
         stoDesc: 'Safely trade and manage regulatory-compliant security tokens.',
         stoFeatures: [
@@ -328,7 +328,7 @@ export default function HomePage() {
             ],
           },
           sto: {
-            name: 'STO Token Wallet',
+            name: 'ST Wallet',
             price: 'Free',
             features: [
               'Security token trading',
@@ -377,8 +377,74 @@ export default function HomePage() {
     },
   }[language];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Walits",
+    description: language === 'ko'
+      ? "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Non-Custody API 대량 지급, MPC Custody 안전 보관, AI 로보어드바이저, 토큰증권(ST) 지갑"
+      : "Enterprise crypto wallet platform featuring Non-Custody API for mass distribution, MPC Custody for secure storage, AI Robo-Advisor, and Security Token (ST) wallet",
+    url: "https://walits.com",
+    logo: "https://walits.com/logo.png",
+    sameAs: [
+      "https://github.com/walits",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+82-2-1234-5678",
+      contactType: "customer service",
+      email: "contact@walits.com",
+      availableLanguage: ["Korean", "English"]
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "KR",
+      addressLocality: "Seoul"
+    },
+    offers: [
+      {
+        "@type": "Offer",
+        name: language === 'ko' ? "Non-Custody 지갑" : "Non-Custody Wallet",
+        description: language === 'ko' ? "API 기반 대량 지급 솔루션" : "API-based mass distribution solution",
+        price: "55000",
+        priceCurrency: "KRW",
+        category: language === 'ko' ? "기업용 코인 지갑" : "Enterprise Crypto Wallet"
+      },
+      {
+        "@type": "Offer",
+        name: language === 'ko' ? "Custody 지갑" : "Custody Wallet",
+        description: language === 'ko' ? "MPC 2-of-3 안전 보관" : "MPC 2-of-3 secure storage",
+        price: "550000",
+        priceCurrency: "KRW",
+        category: language === 'ko' ? "가상자산 보관" : "Crypto Asset Custody"
+      },
+      {
+        "@type": "Offer",
+        name: language === 'ko' ? "AI 로보어드바이저" : "AI Robo-Advisor",
+        description: language === 'ko' ? "AI 기반 포트폴리오 관리" : "AI-powered portfolio management",
+        price: "0",
+        priceCurrency: "KRW",
+        category: language === 'ko' ? "암호화폐 지갑" : "Cryptocurrency Wallet"
+      },
+      {
+        "@type": "Offer",
+        name: language === 'ko' ? "토큰증권 지갑" : "ST Wallet",
+        description: language === 'ko' ? "증권형 토큰 거래 및 관리" : "Security token trading and management",
+        price: "0",
+        priceCurrency: "KRW",
+        category: language === 'ko' ? "토큰증권" : "Security Token"
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -401,7 +467,7 @@ export default function HomePage() {
                 {language === 'ko' ? '개인용' : 'Personal'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-                AI, STO Wallet
+                AI, ST Wallet
               </span>
             </div>
           </div>
@@ -492,7 +558,7 @@ export default function HomePage() {
                     </div>
                     <div className="block px-4 py-3 opacity-60 cursor-not-allowed">
                       <div className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                        {language === 'ko' ? 'STO 토큰 지갑' : 'STO Token Wallet'}
+                        {language === 'ko' ? '토큰증권 지갑' : 'ST Token Wallet'}
                         <span className="bg-yellow-500 text-white px-2 py-0.5 rounded-full text-xs font-semibold">
                           {language === 'ko' ? '준비중' : 'Soon'}
                         </span>

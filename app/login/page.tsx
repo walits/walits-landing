@@ -30,13 +30,13 @@ export default function LoginSelectionPage() {
                 개인 투자자 로그인
               </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                STO 토큰 거래 및 AI 로보어드바이저 서비스
+                토큰증권 거래 및 AI 로보어드바이저 서비스
               </p>
 
               <div className="space-y-3 mb-6 text-left">
                 <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                   <span className="mr-3 text-blue-600">✓</span>
-                  <span>STO 토큰 거래 지갑</span>
+                  <span>토큰증권 거래 지갑</span>
                 </div>
                 <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                   <span className="mr-3 text-blue-600">✓</span>
