@@ -165,7 +165,7 @@ export default function HomePage() {
           nonCustody: {
             name: 'Non-Custody 지갑',
             originalPrice: '₩200,000',
-            price: '₩55,000',
+            price: '₩77,000',
             features: [
               'TEE 환경 보안',
               'API 기반 대량 지급',
@@ -195,9 +195,9 @@ export default function HomePage() {
         personal: '개인 투자자',
         enterprise: '기업 고객',
         contact: '문의',
-        email: '이메일: contact@walits.com',
-        phone: '전화: 02-1234-5678',
-        rights: '© 2024 Walits. All rights reserved.',
+        email: '이메일: walits.co@gmail.com',
+        phone: '전화: 010-3298-5823',
+        rights: '© 2026 Walits. All rights reserved.',
       },
     },
     en: {
@@ -341,7 +341,7 @@ export default function HomePage() {
           nonCustody: {
             name: 'Non-Custody Wallet',
             originalPrice: '$150',
-            price: '$42',
+            price: '$58',
             features: [
               'TEE environment security',
               'API-based mass distribution',
@@ -370,9 +370,9 @@ export default function HomePage() {
         personal: 'Personal',
         enterprise: 'Enterprise',
         contact: 'Contact',
-        email: 'Email: contact@walits.com',
-        phone: 'Phone: 02-1234-5678',
-        rights: '© 2024 Walits. All rights reserved.',
+        email: 'Email: walits.co@gmail.com',
+        phone: 'Phone: 010-3298-5823',
+        rights: '© 2026 Walits. All rights reserved.',
       },
     },
   }[language];
@@ -391,9 +391,9 @@ export default function HomePage() {
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+82-2-1234-5678",
+      telephone: "+82-10-3298-5823",
       contactType: "customer service",
-      email: "contact@walits.com",
+      email: "walits.co@gmail.com",
       availableLanguage: ["Korean", "English"]
     },
     address: {
@@ -406,7 +406,7 @@ export default function HomePage() {
         "@type": "Offer",
         name: language === 'ko' ? "Non-Custody 지갑" : "Non-Custody Wallet",
         description: language === 'ko' ? "API 기반 대량 지급 솔루션" : "API-based mass distribution solution",
-        price: "55000",
+        price: "77000",
         priceCurrency: "KRW",
         category: language === 'ko' ? "기업용 코인 지갑" : "Enterprise Crypto Wallet"
       },
@@ -1069,7 +1069,7 @@ export default function HomePage() {
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-300 dark:border-gray-600 hover:shadow-lg transition-shadow relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                  {language === 'ko' ? '2025년 2월 출시' : 'Launch Feb 2025'}
+                  {language === 'ko' ? '2026년 2월 출시' : 'Launch Feb 2026'}
                 </span>
               </div>
               <div className="text-center mb-6">
@@ -1108,7 +1108,7 @@ export default function HomePage() {
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-100 dark:to-gray-200 rounded-xl p-8 border-2 border-gray-700 dark:border-gray-400 hover:shadow-2xl transition-shadow relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 flex gap-2 whitespace-nowrap">
                 <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
-                  {language === 'ko' ? '2025년 4월 출시' : 'Launch Apr 2025'}
+                  {language === 'ko' ? '2026년 4월 출시' : 'Launch Apr 2026'}
                 </span>
                 <span className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
                   {language === 'ko' ? '프리미엄' : 'Premium'}
