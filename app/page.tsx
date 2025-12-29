@@ -527,6 +527,19 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Under Construction Ribbon */}
+      <div className="fixed top-0 right-0 z-[9999] overflow-hidden pointer-events-none">
+        <div className="relative">
+          <div
+            className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 font-bold text-sm py-2 px-16 shadow-lg transform rotate-45 translate-x-12 translate-y-7"
+            style={{ transformOrigin: 'center' }}
+          >
+            <span className="drop-shadow-sm">
+              {language === 'ko' ? '개발중' : 'UNDER CONSTRUCTION'}
+            </span>
+          </div>
+        </div>
+      </div>
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
