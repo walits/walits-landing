@@ -1068,8 +1068,8 @@ export default function HomePage() {
             {/* Non-Custody Plan */}
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-300 dark:border-gray-600 hover:shadow-lg transition-shadow relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                  {language === 'ko' ? '첫 한달 무료' : '1st Month Free'}
+                <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                  {language === 'ko' ? '2025년 2월 출시' : 'Launch Feb 2025'}
                 </span>
               </div>
               <div className="text-center mb-6">
@@ -1086,9 +1086,6 @@ export default function HomePage() {
                     </span>
                     <span className="text-gray-600 dark:text-gray-400">/{copy.pricing.monthly}</span>
                   </div>
-                </div>
-                <div className="mt-2 text-emerald-600 dark:text-emerald-400 text-sm font-medium">
-                  {language === 'ko' ? '→ 첫 달 ₩0' : '→ $0 first month'}
                 </div>
               </div>
               <ul className="space-y-3 mb-8">
@@ -1110,8 +1107,8 @@ export default function HomePage() {
             {/* Custody Plan */}
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-100 dark:to-gray-200 rounded-xl p-8 border-2 border-gray-700 dark:border-gray-400 hover:shadow-2xl transition-shadow relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 flex gap-2 whitespace-nowrap">
-                <span className="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
-                  {language === 'ko' ? '첫달 무료' : 'Free'}
+                <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
+                  {language === 'ko' ? '2025년 4월 출시' : 'Launch Apr 2025'}
                 </span>
                 <span className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
                   {language === 'ko' ? '프리미엄' : 'Premium'}
@@ -1131,9 +1128,6 @@ export default function HomePage() {
                     </span>
                     <span className="text-gray-400 dark:text-gray-600">/{copy.pricing.monthly}</span>
                   </div>
-                </div>
-                <div className="mt-2 text-emerald-400 text-sm font-medium">
-                  {language === 'ko' ? '→ 첫 달 ₩0' : '→ $0 first month'}
                 </div>
               </div>
               <ul className="space-y-3 mb-8">
