@@ -587,18 +587,18 @@ export default function HomePage() {
               </button>
               <div className="absolute top-full left-0 pt-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all pointer-events-auto">
                 <div className="w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
-                  <Link href="/docs/custody" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                  <a href="/docs/custody/index.html" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                     <div className="font-semibold text-gray-900 dark:text-white">Custody Wallet API</div>
                     <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                       {language === 'ko' ? 'MPC 기반 커스터디 지갑' : 'MPC-based custody wallet'}
                     </div>
-                  </Link>
-                  <Link href="/docs/non-custody" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                  </a>
+                  <a href="/docs/non-custody/index.html" target="_blank" rel="noopener noreferrer" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                     <div className="font-semibold text-gray-900 dark:text-white">Non-Custody Wallet API</div>
                     <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                       {language === 'ko' ? 'API 기반 대량 지급' : 'API-based mass distribution'}
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
