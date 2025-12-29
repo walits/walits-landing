@@ -196,7 +196,6 @@ export default function HomePage() {
         enterprise: '기업 고객',
         contact: '문의',
         email: '이메일: walits.co@gmail.com',
-        phone: '전화: 010-3298-5823',
         rights: '© 2026 Walits. All rights reserved.',
       },
     },
@@ -371,7 +370,6 @@ export default function HomePage() {
         enterprise: 'Enterprise',
         contact: 'Contact',
         email: 'Email: walits.co@gmail.com',
-        phone: 'Phone: 010-3298-5823',
         rights: '© 2026 Walits. All rights reserved.',
       },
     },
@@ -1182,7 +1180,6 @@ export default function HomePage() {
               <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">{copy.footer.contact}</h4>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                 <li>{copy.footer.email}</li>
-                <li>{copy.footer.phone}</li>
               </ul>
             </div>
           </div>
