@@ -113,7 +113,7 @@ export default function HomePage() {
         features: [
           {
             title: 'xScanner (Rust)',
-            desc: '실시간 블록 폴링으로 입금 감지. 10초 주기로 블록체인을 모니터링하여 1 confirmation부터 즉시 탐지',
+            desc: '실시간 블록 폴링으로 입금 즉시 감지. 1 confirmation부터 빠르게 탐지하여 사용자 경험 향상',
           },
           {
             title: 'MPC 서명 서버 (Rust)',
@@ -128,8 +128,8 @@ export default function HomePage() {
             desc: '입출금 모두 실시간 confirmation 계산. latestBlock - txBlock + 1 방식으로 정확한 확정 상태 추적',
           },
           {
-            title: 'Redis 분산 락',
-            desc: '멱등성 보장으로 중복 처리 방지. 동시성 이슈 원천 차단',
+            title: '이중지불 방지',
+            desc: 'Redis 분산 락과 트랜잭션 락으로 이중지불 원천 차단. 멱등성 보장으로 동시성 이슈 완벽 방지',
           },
           {
             title: '자동 집금 (Auto-Sweep)',
@@ -294,7 +294,7 @@ export default function HomePage() {
         features: [
           {
             title: 'xScanner (Rust)',
-            desc: 'Real-time block polling for deposit detection. Monitors blockchain every 10 seconds, detecting from 1 confirmation instantly',
+            desc: 'Real-time block polling for instant deposit detection. Fast detection from 1 confirmation for enhanced user experience',
           },
           {
             title: 'MPC Signing Server (Rust)',
@@ -309,8 +309,8 @@ export default function HomePage() {
             desc: 'Real-time confirmation calculation for both deposits and withdrawals. Accurate finality tracking with latestBlock - txBlock + 1',
           },
           {
-            title: 'Redis Distributed Lock',
-            desc: 'Idempotency guaranteed to prevent duplicate processing. Eliminates concurrency issues at the source',
+            title: 'Double-Spend Prevention',
+            desc: 'Prevents double-spending with Redis distributed locks and transaction locks. Idempotency guarantee completely eliminates concurrency issues',
           },
           {
             title: 'Auto-Sweep',
