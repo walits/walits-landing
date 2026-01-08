@@ -104,6 +104,10 @@ export default function HomePage() {
             title: '단일 실패점 제거',
             desc: '1개의 키가 손실되어도 나머지 2개로 정상 운영',
           },
+          {
+            title: '다중 알고리즘 지원',
+            desc: 'ECDSA, EdDSA 서명 알고리즘 지원. 이더리움부터 솔라나까지 모든 주요 체인 호환',
+          },
         ],
       },
       techStack: {
@@ -284,6 +288,10 @@ export default function HomePage() {
           {
             title: 'No Single Point of Failure',
             desc: 'Normal operation continues with remaining 2 keys even if 1 is lost',
+          },
+          {
+            title: 'Multi-Algorithm Support',
+            desc: 'Supports ECDSA and EdDSA signature algorithms. Compatible with all major chains from Ethereum to Solana',
           },
         ],
       },
