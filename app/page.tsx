@@ -60,20 +60,20 @@ export default function HomePage() {
         proUseCases: '✓ 고객 자산 집금\n✓ 운영 자금 관리\n✓ 기업 재무 관리\n✓ 토큰 발행사 운영',
       },
       aiVsSto: {
-        title: 'Messenger Wallet vs AI ST Token Wallet',
+        title: 'Auto Chat Wallet vs AI ST Token Wallet',
         subtitle: '개인 투자자를 위한 두 가지 혁신적인 지갑 서비스',
-        aiTitle: '메신저 지갑',
-        aiSubtitle: '메신저로 간편하게 송금',
-        aiDesc: '카카오톡, 텔레그램으로 친구에게 암호화폐를 송금하듯 쉽게 보내세요. 스마트 라우팅으로 가장 효율적인 결제 경로를 자동 선택하여 수수료를 최소화합니다.',
+        aiTitle: 'Auto Chat 지갑',
+        aiSubtitle: '채팅 + 자동 결제',
+        aiDesc: '카카오톡, 텔레그램으로 대화하듯 송금하세요. AI가 자동으로 최적 결제 경로를 선택하고, 반복 결제를 자동 처리합니다. 스마트 라우팅으로 수수료를 최소화합니다.',
         aiFeatures: [
-          '메신저 송금: 카톡/텔레그램으로 간편 송금',
-          '최적 결제 경로: 가장 저렴한 수수료로 자동 거래',
+          '자동 결제: AI가 반복 결제 자동 처리',
+          '채팅 송금: 카톡/텔레그램으로 간편 송금',
+          '최적 경로: 가장 저렴한 수수료로 자동 라우팅',
           '실시간 알림: 송금/입금 즉시 알림',
           '간편 인증: 생체 인증으로 빠른 송금',
-          '다중 토큰 지원: 주요 암호화폐 모두 지원',
-          '송금 기록: 메신저 대화처럼 쉬운 내역 확인',
+          '다중 토큰: 주요 암호화폐 모두 지원',
         ],
-        aiUseCases: '✓ 친구에게 송금\n✓ 소액 결제\n✓ 일상 거래\n✓ 그룹 정산',
+        aiUseCases: '✓ 채팅으로 송금\n✓ 구독료 자동 결제\n✓ 소액 결제\n✓ 그룹 정산',
         stoTitle: 'AI 토큰증권 지갑',
         stoSubtitle: 'AI 투자 + 증권형 토큰',
         stoDesc: 'AI가 토큰증권 포트폴리오를 자동으로 관리하고 최적화합니다. 부동산, 주식 등 실물 자산 기반 증권형 토큰에 투자하세요.',
@@ -148,15 +148,15 @@ export default function HomePage() {
         getStarted: '시작하기',
         plans: {
           ai: {
-            name: '메신저 지갑',
+            name: 'Auto Chat 지갑',
             price: '무료',
             features: [
-              '카톡/텔레그램 송금',
-              '최적 결제 경로 자동 선택',
+              'AI 자동 결제',
+              '카톡/텔레그램 채팅 송금',
+              '최적 경로 자동 선택',
               '실시간 송금 알림',
               '생체 인증 지원',
               '다중 토큰 지원',
-              '간편한 송금 내역',
             ],
           },
           sto: {
@@ -245,20 +245,20 @@ export default function HomePage() {
         proUseCases: '✓ Customer Asset Custody\n✓ Operating Fund Management\n✓ Corporate Treasury\n✓ Token Issuer Operations',
       },
       aiVsSto: {
-        title: 'Messenger Wallet vs AI ST Token Wallet',
+        title: 'Auto Chat Wallet vs AI ST Token Wallet',
         subtitle: 'Two innovative wallet services for individual investors',
-        aiTitle: 'Messenger Wallet',
-        aiSubtitle: 'Easy Transfers via Messenger',
-        aiDesc: 'Send crypto to friends as easily as messaging on KakaoTalk or Telegram. Smart routing automatically selects the most efficient payment paths to minimize transaction fees.',
+        aiTitle: 'Auto Chat Wallet',
+        aiSubtitle: 'Chat + Auto Payment',
+        aiDesc: 'Send crypto as easily as chatting on KakaoTalk or Telegram. AI automatically selects optimal payment routes and processes recurring payments. Smart routing minimizes transaction fees.',
         aiFeatures: [
-          'Messenger Transfers: Easy transfers via KakaoTalk/Telegram',
-          'Optimal Payment Routing: Automatic trading via lowest-cost paths',
-          'Real-time Notifications: Instant alerts for transfers',
+          'Auto Payment: AI handles recurring payments automatically',
+          'Chat Transfer: Easy transfers via KakaoTalk/Telegram',
+          'Optimal Routing: Automatic routing via lowest-cost paths',
+          'Real-time Alerts: Instant notifications for transfers',
           'Biometric Auth: Fast transfers with fingerprint/face ID',
-          'Multi-Token Support: All major cryptocurrencies',
-          'Transfer History: Easy tracking like chat history',
+          'Multi-Token: All major cryptocurrencies supported',
         ],
-        aiUseCases: '✓ Send to Friends\n✓ Micropayments\n✓ Daily Transactions\n✓ Group Settlements',
+        aiUseCases: '✓ Chat Transfers\n✓ Auto Subscriptions\n✓ Micropayments\n✓ Group Settlements',
         stoTitle: 'AI ST Token Wallet',
         stoSubtitle: 'AI Investment + Security Tokens',
         stoDesc: 'AI automatically manages and optimizes your security token portfolio. Invest in real-world asset-backed tokens like real estate and stocks.',
@@ -333,15 +333,15 @@ export default function HomePage() {
         getStarted: 'Get Started',
         plans: {
           ai: {
-            name: 'Messenger Wallet',
+            name: 'Auto Chat Wallet',
             price: 'Free',
             features: [
-              'KakaoTalk/Telegram transfers',
-              'Optimal payment routing',
+              'AI auto payment',
+              'KakaoTalk/Telegram chat transfer',
+              'Optimal route selection',
               'Real-time notifications',
               'Biometric authentication',
               'Multi-token support',
-              'Easy transfer history',
             ],
           },
           sto: {
@@ -399,8 +399,8 @@ export default function HomePage() {
     "@type": "Organization",
     name: "Walits",
     description: language === 'ko'
-      ? "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Non-Custody API 대량 지급, MPC Custody 안전 보관, 메신저 지갑, AI 토큰증권(ST) 지갑"
-      : "Enterprise crypto wallet platform featuring Non-Custody API for mass distribution, MPC Custody for secure storage, Messenger Wallet, and AI Security Token (ST) wallet",
+      ? "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Non-Custody API 대량 지급, MPC Custody 안전 보관, Auto Chat 지갑, AI 토큰증권(ST) 지갑"
+      : "Enterprise crypto wallet platform featuring Non-Custody API for mass distribution, MPC Custody for secure storage, Auto Chat Wallet, and AI Security Token (ST) wallet",
     url: "https://walits.com",
     logo: "https://walits.com/logo.png",
     sameAs: [
@@ -437,8 +437,8 @@ export default function HomePage() {
       },
       {
         "@type": "Offer",
-        name: language === 'ko' ? "메신저 지갑" : "Messenger Wallet",
-        description: language === 'ko' ? "카카오톡/텔레그램 간편 송금" : "Easy transfers via KakaoTalk/Telegram",
+        name: language === 'ko' ? "Auto Chat 지갑" : "Auto Chat Wallet",
+        description: language === 'ko' ? "채팅 송금 + AI 자동 결제" : "Chat transfer + AI auto payment",
         price: "0",
         priceCurrency: "KRW",
         category: language === 'ko' ? "암호화폐 지갑" : "Cryptocurrency Wallet"
@@ -586,7 +586,7 @@ export default function HomePage() {
                 {language === 'ko' ? '개인용' : 'Personal'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-                Messenger, AI ST Wallet
+                Auto Chat, AI ST Wallet
               </span>
             </div>
           </div>
@@ -666,13 +666,13 @@ export default function HomePage() {
                   <div className="w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
                     <div className="block px-4 py-3 opacity-60 cursor-not-allowed">
                       <div className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                        {language === 'ko' ? '메신저 지갑' : 'Messenger Wallet'}
+                        {language === 'ko' ? 'Auto Chat 지갑' : 'Auto Chat Wallet'}
                         <span className="bg-yellow-500 text-white px-2 py-0.5 rounded-full text-xs font-semibold">
                           {language === 'ko' ? '준비중' : 'Soon'}
                         </span>
                       </div>
                       <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                        {language === 'ko' ? '카톡/텔레그램 간편 송금' : 'Easy transfers via messenger'}
+                        {language === 'ko' ? '채팅 송금 + AI 자동 결제' : 'Chat transfer + AI auto payment'}
                       </div>
                     </div>
                     <div className="block px-4 py-3 opacity-60 cursor-not-allowed">
@@ -870,7 +870,7 @@ export default function HomePage() {
                 ))}
               </ul>
               <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
-                {language === 'ko' ? '일상 송금 · 소액 결제' : 'Daily Transfers · Micropayments'}
+                {language === 'ko' ? 'AI 자동 결제 · 채팅 송금' : 'AI Auto Payment · Chat Transfer'}
               </div>
             </div>
 
