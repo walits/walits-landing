@@ -794,7 +794,7 @@ export default function HomePage() {
                 ))}
               </ul>
               <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
-                {language === 'ko' ? '게임/앱에 최적화 · API 기반' : 'Optimized for Apps/Games · API-based'}
+                {language === 'ko' ? '고객 포인트 지급 및 관리' : 'Customer Points Distribution & Management'}
               </div>
             </div>
 
