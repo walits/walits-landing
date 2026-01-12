@@ -5,6 +5,29 @@ export const metadata: Metadata = {
   title: 'Non-Custody vs Custody 지갑 완벽 비교 | Walits',
   description: 'Non-Custody와 Custody 암호화폐 지갑의 차이점을 완벽하게 비교합니다. 보안, 비용, 사용 사례까지 한눈에 정리.',
   keywords: 'Non-Custody 지갑, Custody 지갑, 암호화폐 지갑 비교, 기업용 지갑, MPC 지갑, API 지갑',
+  openGraph: {
+    title: 'Non-Custody vs Custody 지갑 완벽 비교',
+    description: 'Non-Custody와 Custody 암호화폐 지갑의 차이점을 완벽하게 비교합니다. 보안, 비용, 사용 사례까지 한눈에 정리.',
+    url: 'https://walits.com/blog/non-custody-vs-custody-wallet',
+    siteName: 'Walits',
+    images: [
+      {
+        url: 'https://walits.com/blog/wallet-comparison.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Non-Custody vs Custody 지갑 비교',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'article',
+    publishedTime: '2026-01-11T00:00:00.000Z',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Non-Custody vs Custody 지갑 완벽 비교',
+    description: 'Non-Custody와 Custody 암호화폐 지갑의 차이점을 완벽하게 비교합니다.',
+    images: ['https://walits.com/blog/wallet-comparison.jpg'],
+  },
 };
 
 export default function NonCustodyVsCustodyWalletPage() {

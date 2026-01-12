@@ -5,6 +5,29 @@ export const metadata: Metadata = {
   title: 'AI 자동 결제로 구독료 관리 - 스마트 자동 결제 시스템 | Walits',
   description: 'AI가 자동으로 구독료를 결제하고, 가장 저렴한 경로를 선택합니다. Netflix, Spotify, 클라우드 서비스까지 한 번에 관리하세요.',
   keywords: 'AI 자동 결제, 구독료 관리, 자동 결제, 반복 결제, Auto Chat 지갑, 스마트 페이먼트',
+  openGraph: {
+    title: 'AI 자동 결제로 구독료 관리하기',
+    description: 'AI가 자동으로 구독료를 결제하고, 가장 저렴한 경로를 선택합니다. Netflix, Spotify, AWS까지 한 번에 관리하세요.',
+    url: 'https://walits.com/blog/ai-auto-payment-subscription',
+    siteName: 'Walits',
+    images: [
+      {
+        url: 'https://walits.com/blog/ai-payment.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'AI 자동 결제 구독료 관리',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'article',
+    publishedTime: '2026-01-11T00:00:00.000Z',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI 자동 결제로 구독료 관리하기',
+    description: 'Netflix, Spotify, AWS 구독료를 AI가 자동 결제. 환율 최적화까지.',
+    images: ['https://walits.com/blog/ai-payment.jpg'],
+  },
 };
 
 export default function AIAutoPaymentSubscriptionPage() {

@@ -5,6 +5,29 @@ export const metadata: Metadata = {
   title: 'ICO 토큰 발행을 위한 암호화폐 지갑 솔루션 | Walits',
   description: 'ICO 프로젝트를 위한 완벽한 지갑 솔루션. 투자자별 자동 지갑 생성, 커스텀 토큰 배포, API 자동화까지. 5만 명 투자자도 5분 만에 토큰 배포.',
   keywords: 'ICO 지갑, 토큰 발행, 커스텀 토큰, 토큰 배포, 크라우드세일, 프리세일, 에어드랍, Non-Custody 지갑',
+  openGraph: {
+    title: 'ICO 토큰 발행을 위한 암호화폐 지갑 솔루션',
+    description: 'ICO 프로젝트를 위한 완벽한 지갑 솔루션. 투자자별 자동 지갑 생성, 커스텀 토큰 배포, API 자동화. 5만 명 투자자도 5분 만에 토큰 배포.',
+    url: 'https://walits.com/blog/ico-token-issuance-wallet',
+    siteName: 'Walits',
+    images: [
+      {
+        url: 'https://walits.com/blog/ico-wallet.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'ICO 토큰 발행 지갑',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'article',
+    publishedTime: '2026-01-11T00:00:00.000Z',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ICO 토큰 발행을 위한 암호화폐 지갑 솔루션',
+    description: 'ICO 프로젝트를 위한 완벽한 지갑 솔루션. 5만 명 투자자도 5분 만에 토큰 배포.',
+    images: ['https://walits.com/blog/ico-wallet.jpg'],
+  },
 };
 
 export default function ICOTokenIssuanceWalletPage() {

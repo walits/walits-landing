@@ -5,6 +5,29 @@ export const metadata: Metadata = {
   title: '카카오톡/텔레그램으로 암호화폐 송금하는 법 | Walits Auto Chat 지갑',
   description: '메신저로 암호화폐를 송금하세요. 복잡한 지갑 주소 없이 카카오톡이나 텔레그램에서 대화하듯 간편 송금. Auto Chat 지갑으로 시작하세요.',
   keywords: '메신저 송금, 카카오톡 송금, 텔레그램 지갑, 암호화폐 간편 송금, Auto Chat 지갑, 채팅 송금',
+  openGraph: {
+    title: '카카오톡/텔레그램으로 암호화폐 송금하는 법',
+    description: '메신저로 암호화폐를 송금하세요. 복잡한 지갑 주소 없이 카카오톡이나 텔레그램에서 대화하듯 간편 송금.',
+    url: 'https://walits.com/blog/messenger-crypto-transfer',
+    siteName: 'Walits',
+    images: [
+      {
+        url: 'https://walits.com/blog/messenger-transfer.jpg',
+        width: 1200,
+        height: 630,
+        alt: '메신저 암호화폐 송금',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'article',
+    publishedTime: '2026-01-11T00:00:00.000Z',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '카카오톡/텔레그램으로 암호화폐 송금하는 법',
+    description: '복잡한 지갑 주소 없이 메신저에서 대화하듯 간편 송금.',
+    images: ['https://walits.com/blog/messenger-transfer.jpg'],
+  },
 };
 
 export default function MessengerCryptoTransferPage() {

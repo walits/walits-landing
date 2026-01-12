@@ -5,6 +5,29 @@ export const metadata: Metadata = {
   title: 'AI로 실물자산(RWA) 포트폴리오 관리하는 법 | Walits AI ST 지갑',
   description: 'AI가 자동으로 부동산, 채권, 주식 STO를 분석하고 최적 포트폴리오를 구성합니다. 자동 리밸런싱, 리스크 관리, 수익 재투자까지.',
   keywords: 'AI 포트폴리오, RWA, Real World Assets, 실물자산, 자산관리, 자동투자, 리밸런싱, AI ST 지갑',
+  openGraph: {
+    title: 'AI로 실물자산(RWA) 포트폴리오 관리하는 법',
+    description: 'AI가 자동으로 부동산, 채권, 주식 STO를 분석하고 최적 포트폴리오를 구성합니다. 자동 리밸런싱, 리스크 관리, 수익 재투자까지.',
+    url: 'https://walits.com/blog/ai-portfolio-management-rwa',
+    siteName: 'Walits',
+    images: [
+      {
+        url: 'https://walits.com/blog/ai-portfolio.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'AI 포트폴리오 관리',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'article',
+    publishedTime: '2026-01-11T00:00:00.000Z',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI로 실물자산(RWA) 포트폴리오 관리하는 법',
+    description: 'AI 자동 리밸런싱, 리스크 관리, 수익 재투자. 감정 없는 최적 투자.',
+    images: ['https://walits.com/blog/ai-portfolio.jpg'],
+  },
 };
 
 export default function AIPortfolioManagementRWAPage() {

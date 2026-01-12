@@ -5,6 +5,29 @@ export const metadata: Metadata = {
   title: 'STO(증권형 토큰) 완벽 가이드 - 실물 자산 토큰화 | Walits',
   description: 'STO(Security Token Offering)와 증권형 토큰의 모든 것. 부동산, 채권, 주식을 블록체인으로 토큰화하는 방법과 AI ST 지갑 활용법.',
   keywords: 'STO, 증권형 토큰, Security Token, 토큰증권, 실물자산토큰화, RWA, Real World Assets, AI ST 지갑',
+  openGraph: {
+    title: 'STO(증권형 토큰) 완벽 가이드 - 실물 자산 토큰화',
+    description: 'STO(Security Token Offering)와 증권형 토큰의 모든 것. 부동산, 채권, 주식을 블록체인으로 토큰화하는 방법.',
+    url: 'https://walits.com/blog/security-token-sto-guide',
+    siteName: 'Walits',
+    images: [
+      {
+        url: 'https://walits.com/blog/sto-guide.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'STO 증권형 토큰 가이드',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'article',
+    publishedTime: '2026-01-11T00:00:00.000Z',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'STO(증권형 토큰) 완벽 가이드',
+    description: '부동산, 채권, 주식을 블록체인으로 토큰화. RWA 투자의 모든 것.',
+    images: ['https://walits.com/blog/sto-guide.jpg'],
+  },
 };
 
 export default function SecurityTokenSTOGuidePage() {

@@ -5,6 +5,29 @@ export const metadata: Metadata = {
   title: '2026년 기업용 암호화폐 지갑 선택 완벽 가이드 | Walits',
   description: '기업용 암호화폐 지갑 선택 시 고려해야 할 모든 것. Non-Custody vs Custody 비교, MPC 보안, API 통합, ICO 지원까지. 게임사, 거래소, 토큰 발행사를 위한 완벽 가이드.',
   keywords: '기업용 지갑, 암호화폐 지갑, 기업 지갑, Non-Custody, Custody, MPC, API 지갑, ICO 지갑',
+  openGraph: {
+    title: '2026년 기업용 암호화폐 지갑 선택 완벽 가이드',
+    description: '기업용 암호화폐 지갑 선택 시 고려해야 할 모든 것. Non-Custody vs Custody 비교, MPC 보안, API 통합, ICO 지원까지.',
+    url: 'https://walits.com/blog/enterprise-crypto-wallet-guide',
+    siteName: 'Walits',
+    images: [
+      {
+        url: 'https://walits.com/blog/enterprise-wallet.jpg',
+        width: 1200,
+        height: 630,
+        alt: '기업용 암호화폐 지갑 가이드',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'article',
+    publishedTime: '2026-01-11T00:00:00.000Z',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '2026년 기업용 암호화폐 지갑 선택 완벽 가이드',
+    description: '기업용 암호화폐 지갑 선택 시 고려해야 할 모든 것. Non-Custody vs Custody 비교, MPC 보안, API 통합, ICO 지원까지.',
+    images: ['https://walits.com/blog/enterprise-wallet.jpg'],
+  },
 };
 
 export default function EnterpriseCryptoWalletGuidePage() {

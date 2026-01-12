@@ -5,6 +5,29 @@ export const metadata: Metadata = {
   title: 'MPC 지갑 보안 완벽 가이드 - 2-of-3 다중 서명 | Walits',
   description: 'MPC 2-of-3 지갑이 단일 실패점을 제거하는 방법. ECDSA와 EdDSA 알고리즘으로 이더리움부터 솔라나까지 안전하게 보관하세요.',
   keywords: 'MPC 지갑, Multi-Party Computation, 2-of-3, 다중 서명, ECDSA, EdDSA, 암호화폐 보안, Custody 지갑',
+  openGraph: {
+    title: 'MPC 지갑 보안 완벽 가이드 - 2-of-3 다중 서명',
+    description: 'MPC 2-of-3 지갑이 단일 실패점을 제거하는 방법. ECDSA와 EdDSA 알고리즘으로 이더리움부터 솔라나까지 안전하게 보관하세요.',
+    url: 'https://walits.com/blog/mpc-wallet-security-guide',
+    siteName: 'Walits',
+    images: [
+      {
+        url: 'https://walits.com/blog/mpc-security.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'MPC 지갑 보안 가이드',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'article',
+    publishedTime: '2026-01-11T00:00:00.000Z',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MPC 지갑 보안 완벽 가이드 - 2-of-3 다중 서명',
+    description: 'MPC 2-of-3로 단일 실패점을 제거하는 방법. ECDSA와 EdDSA 알고리즘 지원.',
+    images: ['https://walits.com/blog/mpc-security.jpg'],
+  },
 };
 
 export default function MPCWalletSecurityGuidePage() {
