@@ -36,7 +36,7 @@ export default function MPCWalletSecurityGuidePage() {
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
           <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <Link href="/blog" className="hover:underline">블로그</Link> / 보안
+            <Link href="/blog/" className="hover:underline">블로그</Link> / 보안
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
             MPC 지갑 보안 완벽 가이드

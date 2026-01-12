@@ -36,7 +36,7 @@ export default function MessengerCryptoTransferPage() {
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
           <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <Link href="/blog" className="hover:underline">블로그</Link> / 메신저 송금
+            <Link href="/blog/" className="hover:underline">블로그</Link> / 메신저 송금
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
             카카오톡/텔레그램으로 암호화폐 송금하는 법

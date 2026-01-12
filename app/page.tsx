@@ -597,7 +597,7 @@ export default function HomePage() {
             <a href="#solutions" className={`text-lg font-semibold hover:underline transition-colors ${scrolled ? 'text-gray-800' : 'text-white'}`}>
               {copy.nav.solutions}
             </a>
-            <Link href="/blog" className={`text-lg font-semibold hover:underline transition-colors ${scrolled ? 'text-gray-800' : 'text-white'}`}>
+            <Link href="/blog/" className={`text-lg font-semibold hover:underline transition-colors ${scrolled ? 'text-gray-800' : 'text-white'}`}>
               {copy.nav.blog}
             </Link>
             <div className="relative group">

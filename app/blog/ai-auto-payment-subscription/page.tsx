@@ -36,7 +36,7 @@ export default function AIAutoPaymentSubscriptionPage() {
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
           <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <Link href="/blog" className="hover:underline">블로그</Link> / AI 자동 결제
+            <Link href="/blog/" className="hover:underline">블로그</Link> / AI 자동 결제
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
             AI 자동 결제로 구독료 관리하기

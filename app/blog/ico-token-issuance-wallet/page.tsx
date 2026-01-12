@@ -36,7 +36,7 @@ export default function ICOTokenIssuanceWalletPage() {
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
           <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <Link href="/blog" className="hover:underline">블로그</Link> / ICO & 토큰 발행
+            <Link href="/blog/" className="hover:underline">블로그</Link> / ICO & 토큰 발행
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
             ICO 토큰 발행을 위한 암호화폐 지갑 솔루션

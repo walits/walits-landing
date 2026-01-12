@@ -36,7 +36,7 @@ export default function EnterpriseCryptoWalletGuidePage() {
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
           <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <Link href="/blog" className="hover:underline">블로그</Link> / 기업용 지갑
+            <Link href="/blog/" className="hover:underline">블로그</Link> / 기업용 지갑
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
             2026년 기업용 암호화폐 지갑 선택 완벽 가이드

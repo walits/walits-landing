@@ -36,7 +36,7 @@ export default function AIPortfolioManagementRWAPage() {
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
           <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <Link href="/blog" className="hover:underline">블로그</Link> / AI 자산관리
+            <Link href="/blog/" className="hover:underline">블로그</Link> / AI 자산관리
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
             AI로 실물자산(RWA) 포트폴리오 관리하는 법
