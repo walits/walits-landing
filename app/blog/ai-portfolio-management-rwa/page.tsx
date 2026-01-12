@@ -25,6 +25,15 @@ export default function AIPortfolioManagementRWAPage() {
           </div>
         </header>
 
+        {/* Hero Image */}
+        <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
+          <img
+            src="/blog/ai-portfolio.jpg"
+            alt="AI 포트폴리오 관리"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead text-xl text-gray-700 dark:text-gray-300">
             부동산 10%, 채권 30%, 주식 60%... 자산 배분 비율을 어떻게 정해야 할까요?

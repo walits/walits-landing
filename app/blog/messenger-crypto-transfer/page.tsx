@@ -25,6 +25,15 @@ export default function MessengerCryptoTransferPage() {
           </div>
         </header>
 
+        {/* Hero Image */}
+        <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
+          <img
+            src="/blog/messenger-transfer.jpg"
+            alt="메신저 암호화폐 송금"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead text-xl text-gray-700 dark:text-gray-300">
             친구에게 1만 원 빌려달라고 카톡으로 보내듯, 암호화폐도 메신저로 송금할 수 있다면?

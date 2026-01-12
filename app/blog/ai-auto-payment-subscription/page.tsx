@@ -25,6 +25,15 @@ export default function AIAutoPaymentSubscriptionPage() {
           </div>
         </header>
 
+        {/* Hero Image */}
+        <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
+          <img
+            src="/blog/ai-payment.jpg"
+            alt="AI 자동 결제 구독료 관리"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead text-xl text-gray-700 dark:text-gray-300">
             Netflix, Spotify, YouTube Premium, ChatGPT Plus... 구독 서비스만 10개.

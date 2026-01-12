@@ -25,6 +25,15 @@ export default function NonCustodyVsCustodyWalletPage() {
           </div>
         </header>
 
+        {/* Hero Image */}
+        <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
+          <img
+            src="/blog/wallet-comparison.jpg"
+            alt="Non-Custody vs Custody 지갑 비교"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead text-xl text-gray-700 dark:text-gray-300">
             암호화폐 지갑을 선택할 때 가장 먼저 마주하는 선택: Non-Custody vs Custody.

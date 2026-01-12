@@ -25,6 +25,15 @@ export default function ICOTokenIssuanceWalletPage() {
           </div>
         </header>
 
+        {/* Hero Image */}
+        <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
+          <img
+            src="/blog/ico-wallet.jpg"
+            alt="ICO 토큰 발행 지갑"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead text-xl text-gray-700 dark:text-gray-300">
             ICO나 토큰 발행 프로젝트를 시작하셨나요? 5만 명의 투자자에게 토큰을 어떻게 배포할 건가요?

@@ -25,6 +25,15 @@ export default function EnterpriseCryptoWalletGuidePage() {
           </div>
         </header>
 
+        {/* Hero Image */}
+        <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
+          <img
+            src="/blog/enterprise-wallet.jpg"
+            alt="기업용 암호화폐 지갑 가이드"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead text-xl text-gray-700 dark:text-gray-300">
             암호화폐를 다루는 기업이라면 반드시 지갑 솔루션이 필요합니다. 하지만 게임사, 거래소, 토큰 발행사마다

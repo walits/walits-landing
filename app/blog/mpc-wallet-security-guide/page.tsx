@@ -25,6 +25,15 @@ export default function MPCWalletSecurityGuidePage() {
           </div>
         </header>
 
+        {/* Hero Image */}
+        <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
+          <img
+            src="/blog/mpc-security.jpg"
+            alt="MPC 지갑 보안 가이드"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead text-xl text-gray-700 dark:text-gray-300">
             100억 원의 암호화폐를 어떻게 안전하게 보관하시겠습니까? 단일 개인키로는 너무 위험합니다.
