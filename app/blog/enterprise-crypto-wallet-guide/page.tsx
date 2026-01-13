@@ -180,8 +180,8 @@ export default function EnterpriseCryptoWalletGuidePage() {
             기업용 암호화폐 지갑은 용도에 따라 선택해야 합니다:
           </p>
           <ul>
-            <li><strong>대량 지급이 필요하다면:</strong> Non-Custody 지갑</li>
-            <li><strong>자산을 안전하게 보관해야 한다면:</strong> Custody 지갑</li>
+            <li><strong>고객 포인트 지급을 코인으로 하고 싶다면:</strong> Non-Custody 지갑</li>
+            <li><strong>기업 자산을 안전하게 보관 관리 해야 한다면:</strong> Custody 지갑</li>
             <li><strong>둘 다 필요하다면:</strong> 두 가지 모두 사용</li>
           </ul>
 
