@@ -317,8 +317,14 @@ export default function BlogPage() {
               href={`/blog/${post.id}`}
               className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700"
             >
-              {/* Image Placeholder */}
-              <div className="h-64 bg-gray-100 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600"></div>
+              {/* Blog Post Image */}
+              <div className="h-64 bg-gray-100 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600 overflow-hidden">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
 
               <div className="p-6">
                 {/* Category Badge */}
