@@ -101,7 +101,7 @@ export default function InquiryPage() {
             </h1>
             <p className="text-gray-600 text-lg">
               Walits 기업용 지갑 서비스에 대해 상담을 원하시면<br />
-              아래 양식을 작성해주세요.
+              아래 양식을 작성해주시거나 walits.co@gmail.com 으로 메일 주세요.
             </p>
           </div>
 
@@ -262,7 +262,7 @@ export default function InquiryPage() {
 
           {/* Additional Info */}
           <div className="mt-8 text-center text-gray-500 text-sm">
-            <p>문의사항이 있으시면 contact@walits.com으로 연락주세요.</p>
+            <p>문의사항이 있으시면 walits.co@gmail.com 으로 메일 주세요.</p>
           </div>
         </div>
       </main>
