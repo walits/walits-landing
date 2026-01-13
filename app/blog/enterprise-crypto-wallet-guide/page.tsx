@@ -96,6 +96,8 @@ export default function EnterpriseCryptoWalletGuidePage() {
               <li>NFT 프로젝트 (에어드랍)</li>
               <li>ICO 프로젝트 (토큰 발행)</li>
               <li>메타버스 플랫폼 (리워드)</li>
+              <li>커뮤니티 플랫폼 (콘텐츠 기여 보상)</li>
+              <li>이커머스/O2O (멤버십 포인트)</li>
             </ul>
           </div>
 
@@ -117,35 +119,12 @@ export default function EnterpriseCryptoWalletGuidePage() {
               <li>커스터디 서비스</li>
               <li>토큰 발행사 (재무 관리)</li>
               <li>기관 투자자</li>
+              <li>멀티체인 보유 기업 (통합 재무 관리)</li>
+              <li>자산관리사 (세무·회계 처리)</li>
             </ul>
           </div>
 
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">3. 선택 시 체크리스트</h2>
-
-          <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">보안</h3>
-          <ul>
-            <li>✅ MPC 또는 TEE 환경 지원</li>
-            <li>✅ 다중 서명 지원</li>
-            <li>✅ 이중지불 방지 메커니즘</li>
-            <li>✅ Redis 분산 락 및 트랜잭션 락</li>
-          </ul>
-
-          <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">기능</h3>
-          <ul>
-            <li>✅ RESTful API 제공</li>
-            <li>✅ Webhook 지원 (입출금 알림)</li>
-            <li>✅ 대량 트랜잭션 처리 능력</li>
-            <li>✅ 다중 체인 지원 (ECDSA, EdDSA)</li>
-          </ul>
-
-          <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">규제 대응</h3>
-          <ul>
-            <li>✅ KYC/AML 통합 지원</li>
-            <li>✅ 거래 이력 추적 및 리포팅</li>
-            <li>✅ 금융기관급 컴플라이언스</li>
-          </ul>
-
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">4. 실제 사용 사례</h2>
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">3. 실제 사용 사례</h2>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">케이스 1: 게임사 A</h3>
           <p>
@@ -168,7 +147,7 @@ export default function EnterpriseCryptoWalletGuidePage() {
             <strong>결과:</strong> 투자자별 지갑 자동 생성, 토큰 배포 자동화
           </p>
 
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">5. Walits 솔루션</h2>
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">4. Walits 솔루션</h2>
 
           <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Non-Custody Wallet</h3>
