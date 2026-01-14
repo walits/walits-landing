@@ -77,13 +77,13 @@ export default function NonCustodyVsCustodyWalletPage() {
               <tbody>
                 <tr>
                   <td className="border border-gray-300 dark:border-gray-700 p-4 font-semibold">자산 보관</td>
-                  <td className="border border-gray-300 dark:border-gray-700 p-4">사용자별 독립 지갑</td>
-                  <td className="border border-gray-300 dark:border-gray-700 p-4">중앙 집중 보관</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-4">일반용</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-4">수탁용</td>
                 </tr>
                 <tr>
                   <td className="border border-gray-300 dark:border-gray-700 p-4 font-semibold">개인키 관리</td>
-                  <td className="border border-gray-300 dark:border-gray-700 p-4">사용자별 독립 키</td>
-                  <td className="border border-gray-300 dark:border-gray-700 p-4">MPC 2-of-3 공유 키</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-4">TEE, MPC</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-4">MPC</td>
                 </tr>
                 <tr>
                   <td className="border border-gray-300 dark:border-gray-700 p-4 font-semibold">주요 용도</td>
