@@ -264,25 +264,67 @@ export default function NonCustodyVsCustodyWalletPage() {
           <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Custody 지갑 상세</h2>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">작동 방식</h3>
-          <p>
-            회사가 고객 자산을 중앙에서 보관합니다. MPC 2-of-3 기술로 단일 실패점을 제거하고,
-            다중 승인 워크플로우로 내부 통제를 강화합니다.
+          <p className="mb-6">
+            Custody 지갑은 두 가지 독립적인 보안 레이어로 작동합니다:
+            <strong>암호학적 키 분산 (MPC)</strong>과 <strong>비즈니스 정책 (승인 워크플로우)</strong>입니다.
           </p>
 
-          <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg my-8">
-            <h4 className="font-bold mb-4 text-gray-900 dark:text-white">예시: 거래소 콜드월렛</h4>
-            <pre className="text-sm overflow-x-auto">
+          <div className="space-y-6">
+            {/* 레이어 1: MPC 키 분산 */}
+            <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg border border-purple-200 dark:border-purple-800">
+              <h4 className="font-bold mb-3 text-gray-900 dark:text-white">레이어 1: 암호학적 키 분산 (MPC 2-of-3)</h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                개인키를 3개의 조각으로 분산하여 보관합니다. 서명할 때 3개 중 2개만 있으면 가능하므로,
+                하나가 분실되어도 안전합니다. 단일 실패점이 없습니다.
+              </p>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                <pre className="text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
 {`메인 콜드월렛: 0xAAAA...BBBB
- ├─ Key Share 1: CEO 승인
- ├─ Key Share 2: CFO 승인
- └─ Key Share 3: 백업 (오프라인)
+ ├─ Key Share 1: Walits 서버 (AWS KMS)
+ ├─ Key Share 2: 고객사 서버 (자체 관리)
+ └─ Key Share 3: 백업 (오프라인 하드웨어 지갑)
 
-출금 요청 → CEO + CFO 승인 → 실행
+✓ 3개 중 2개로 서명 가능
+✓ 1개 분실해도 복구 가능
+✓ 해커가 1개만 탈취해도 무용지물`}
+                </pre>
+              </div>
+            </div>
 
-✓ 2-of-3 승인 필요
-✓ 단일 실패점 제거
+            {/* 레이어 2: 승인 워크플로우 */}
+            <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+              <h4 className="font-bold mb-3 text-gray-900 dark:text-white">레이어 2: 비즈니스 정책 (승인 워크플로우)</h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                MPC와 별개로, 백엔드에서 인증과 MFA 기반의 승인 정책을 관리합니다.
+                CEO, CFO 등이 로그인하고 MFA 인증을 거쳐 승인해야만 트랜잭션이 실행됩니다.
+              </p>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                <pre className="text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
+{`출금 요청: 1억 원 출금
+ ↓
+CEO 로그인 → MFA 인증 → 승인 ✓
+ ↓
+CFO 로그인 → MFA 인증 → 승인 ✓
+ ↓
+백엔드 정책 엔진: 2-of-2 승인 완료 확인
+ ↓
+MPC 서명 시작 (Key Share 1 + Key Share 2)
+ ↓
+트랜잭션 실행 → 블록체인 전송
+
+✓ 인증 + MFA 기반
+✓ 금액별 승인 규칙 설정 가능
 ✓ 완벽한 감사 추적`}
-            </pre>
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 p-5 rounded-lg border border-purple-300 dark:border-purple-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              <strong>💡 핵심:</strong> MPC는 암호학적 보안, 승인 워크플로우는 비즈니스 정책입니다.
+              둘은 독립적으로 작동하며, 함께 사용하면 최고 수준의 보안과 거버넌스를 제공합니다.
+            </p>
           </div>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">언제 사용?</h3>
