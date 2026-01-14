@@ -136,7 +136,7 @@ export default function NonCustodyVsCustodyWalletPage() {
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">언제 사용?</h3>
           <ul className="space-y-2">
             <li>게임에서 플레이어들에게 보상을 대량으로 지급해야 할 때 가장 효과적입니다.</li>
-            <li>NFT 에어드랍 이벤트에서 수천 명의 참가자에게 동시에 배포할 때 적합합니다.</li>
+            <li>NFT 리워드를 수천 명의 참가자에게 대량으로 지급할 때 적합합니다.</li>
             <li>ICO나 토큰 발행 프로젝트에서 투자자들에게 토큰을 배포하는 용도로 활용할 수 있습니다.</li>
             <li>메타버스 플랫폼에서 유저들에게 리워드를 실시간으로 지급하는 시스템에 최적화되어 있습니다.</li>
             <li>대규모 마케팅 프로모션에서 참여자들에게 보상을 즉시 지급하고 싶을 때 유용합니다.</li>
@@ -243,7 +243,7 @@ export default function NonCustodyVsCustodyWalletPage() {
               <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Q5. 둘 다 필요해요!</h4>
               <p className="mb-2"><strong>답변:</strong> 두 가지 모두 사용</p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Non-Custody로 일일 운영 (보상 지급, 에어드랍) + Custody로 재무 자금 보관. 많은 기업이 이렇게 사용합니다.
+                Non-Custody로 일일 운영 (보상 지급, 대량 배포) + Custody로 재무 자금 보관. 많은 기업이 이렇게 사용합니다.
               </p>
             </div>
           </div>
@@ -287,7 +287,7 @@ export default function NonCustodyVsCustodyWalletPage() {
             <strong>핵심 질문 하나로 결정하세요:</strong>
           </p>
           <ul className="space-y-2">
-            <li><strong>대량 지급이나 배포가 주요 목적이라면:</strong> Non-Custody 지갑을 선택하시는 것이 가장 효율적입니다. 게임 보상, NFT 에어드랍, ICO 토큰 배포 등에 최적화되어 있습니다.</li>
+            <li><strong>대량 지급이나 배포가 주요 목적이라면:</strong> Non-Custody 지갑을 선택하시는 것이 가장 효율적입니다. 게임 보상, NFT 리워드 지급, ICO 토큰 배포 등에 최적화되어 있습니다.</li>
             <li><strong>대량 자산의 안전한 보관이 주요 목적이라면:</strong> Custody 지갑을 선택하시는 것이 권장됩니다. 거래소 운영, 기업 재무 관리, 기관 투자자의 자산 보관 등에 적합합니다.</li>
           </ul>
 
