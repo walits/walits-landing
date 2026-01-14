@@ -232,7 +232,7 @@ Response:
 
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-8 rounded-xl my-8">
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Non-Custody Wallet</h3>
-            <div className="text-4xl font-bold text-blue-600 mb-4">₩77,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
+            <div className="text-4xl font-bold text-blue-600 mb-4">₩99,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
             <p className="text-lg mb-4">첫 달 무료 • 무제한 트랜잭션 • ICO 완벽 지원</p>
             <ul className="mb-6 space-y-2">
               <li>지갑 생성에는 아무런 제한이 없어서, 필요한 만큼의 투자자 계정을 자유롭게 만들 수 있습니다.</li>

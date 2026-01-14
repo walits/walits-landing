@@ -203,7 +203,7 @@ export default function NonCustodyWalletPage() {
               <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Non-Custody 지갑</h3>
               <div className="flex items-baseline justify-center gap-2">
                 <span className="text-2xl text-gray-400 line-through">₩200,000</span>
-                <span className="text-5xl font-bold text-blue-600">₩77,000</span>
+                <span className="text-5xl font-bold text-blue-600">₩99,000</span>
                 <span className="text-gray-600 dark:text-gray-400">/월</span>
               </div>
             </div>

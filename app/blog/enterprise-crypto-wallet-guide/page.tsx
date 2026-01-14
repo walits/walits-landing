@@ -154,7 +154,7 @@ export default function EnterpriseCryptoWalletGuidePage() {
           <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Non-Custody Wallet</h3>
             <ul className="mb-4 space-y-2">
-              <li>월 이용료는 77,000원이며, 처음 한 달은 무료로 모든 기능을 체험하실 수 있습니다.</li>
+              <li>월 이용료는 99,000원이며, 처음 한 달은 무료로 모든 기능을 체험하실 수 있습니다.</li>
               <li>트랜잭션 처리에는 횟수 제한이 전혀 없어서, 대량 처리가 필요한 상황에서도 추가 비용 걱정 없이 사용하실 수 있습니다.</li>
               <li>ICO나 커스텀 토큰 발행을 계획하고 계신다면 완벽하게 지원되는 시스템을 갖추고 있습니다.</li>
               <li>TEE(Trusted Execution Environment) 환경에서 모든 개인키가 안전하게 관리되어 외부 접근으로부터 완전히 차단됩니다.</li>

@@ -102,7 +102,7 @@ export default function NonCustodyVsCustodyWalletPage() {
                 </tr>
                 <tr>
                   <td className="border border-gray-300 dark:border-gray-700 p-4 font-semibold">가격</td>
-                  <td className="border border-gray-300 dark:border-gray-700 p-4">₩77,000/월</td>
+                  <td className="border border-gray-300 dark:border-gray-700 p-4">₩99,000/월</td>
                   <td className="border border-gray-300 dark:border-gray-700 p-4">₩550,000/월</td>
                 </tr>
               </tbody>
@@ -144,7 +144,7 @@ export default function NonCustodyVsCustodyWalletPage() {
             <li><strong>규제 리스크 최소화</strong>: 고객 자산을 집금하지 않아 금융 규제 대상 아님</li>
             <li><strong>빠른 처리</strong>: 다중 승인 불필요, API로 즉시 처리</li>
             <li><strong>무제한 확장</strong>: 사용자 수 무제한, 트랜잭션 무제한</li>
-            <li><strong>저렴한 비용</strong>: 월 ₩77,000 (무제한 사용)</li>
+            <li><strong>저렴한 비용</strong>: 월 ₩99,000 (무제한 사용)</li>
           </ul>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">단점</h3>
@@ -250,7 +250,7 @@ export default function NonCustodyVsCustodyWalletPage() {
           <div className="grid md:grid-cols-2 gap-6 my-8">
             <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl">
               <h3 className="text-2xl font-bold mb-4 text-blue-600">Non-Custody</h3>
-              <div className="text-4xl font-bold mb-4">₩77,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
+              <div className="text-4xl font-bold mb-4">₩99,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
               <ul className="space-y-2 mb-6">
                 <li>지갑을 개수 제한 없이 무제한으로 생성할 수 있습니다.</li>
                 <li>트랜잭션 처리 횟수에 제한이 없어 자유롭게 사용하실 수 있습니다.</li>

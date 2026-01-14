@@ -175,7 +175,7 @@ export default function HomePage() {
           nonCustody: {
             name: 'Non-Custody 지갑',
             originalPrice: '₩200,000',
-            price: '₩77,000',
+            price: '₩99,000',
             features: [
               'TEE 환경 보안',
               'API 기반 대량 지급',
@@ -426,7 +426,7 @@ export default function HomePage() {
         "@type": "Offer",
         name: language === 'ko' ? "Non-Custody 지갑" : "Non-Custody Wallet",
         description: language === 'ko' ? "API 기반 대량 지급 솔루션" : "API-based mass distribution solution",
-        price: "77000",
+        price: "99000",
         priceCurrency: "KRW",
         category: language === 'ko' ? "기업용 코인 지갑" : "Enterprise Crypto Wallet"
       },
