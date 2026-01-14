@@ -113,24 +113,100 @@ export default function NonCustodyVsCustodyWalletPage() {
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">작동 방식</h3>
           <p>
-            Virtual Balance 시스템으로 작동합니다. 고객의 고객(최종 사용자)에게는 포인트가 가상 잔액으로 적립되고,
-            실제 출금을 요청할 때만 온체인 주소로 전송됩니다. 회사는 자산을 집금하지 않습니다.
+            Non-Custody 지갑은 <strong>Virtual Balance + Account 시스템</strong>으로 작동합니다.
+            고객의 고객(최종 사용자)별로 계정을 생성하고, 계정 생성 시 온체인 주소를 선택적으로 등록할 수 있습니다.
+            이를 통해 세 가지 서로 다른 작동 모드를 지원합니다.
           </p>
 
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
-            <h4 className="font-bold mb-4 text-gray-900 dark:text-white">예시: 게임 보상 지급</h4>
-            <pre className="text-sm overflow-x-auto">
-{`플레이어 A: Virtual Balance +100 COIN (DB 기록)
-플레이어 B: Virtual Balance +200 COIN (DB 기록)
-플레이어 C: Virtual Balance +150 COIN (DB 기록)
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-lg my-8 border border-blue-200 dark:border-blue-800">
+            <h4 className="font-bold text-xl mb-6 text-gray-900 dark:text-white">세 가지 작동 모드</h4>
 
-출금 요청 시:
-플레이어 A → 0x1111...aaaa 주소로 100 COIN 온체인 전송
+            <div className="space-y-6">
+              {/* 모드 1 */}
+              <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="bg-green-500 text-white text-sm font-bold px-3 py-1 rounded-full">모드 1</span>
+                  <h5 className="font-bold text-lg text-gray-900 dark:text-white">포인트 지급 (Virtual Balance)</h5>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">
+                  가장 많이 사용되는 모드입니다. DB에만 기록하고 온체인 트랜잭션은 발생하지 않습니다.
+                </p>
+                <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm font-mono">
+{`POST /api/internal-transfers
+{ "toAccountId": "acc_001", "amount": 100 }
 
-✓ 내부는 Virtual Balance로 관리
-✓ 출금 시에만 온체인 트랜잭션 발생
-✓ API로 자동화 가능`}
-            </pre>
+처리:
+Account.virtualBalance["native"] = 0 → 100 ✅
+Master Wallet = 변화 없음 ❌
+블록체인 = 변화 없음 ❌
+가스비 = $0`}
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
+                  <strong>사용 케이스:</strong> 게임 보상, 출석 체크, 이벤트 리워드
+                </p>
+              </div>
+
+              {/* 모드 2 */}
+              <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="bg-blue-500 text-white text-sm font-bold px-3 py-1 rounded-full">모드 2</span>
+                  <h5 className="font-bold text-lg text-gray-900 dark:text-white">개별 출금 (Virtual → 온체인)</h5>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">
+                  최종 사용자가 자신의 Virtual Balance를 실제 암호화폐로 출금할 때 사용합니다.
+                </p>
+                <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm font-mono">
+{`POST /api/accounts/acc_001/withdraw
+{ "toAddress": "0x999...", "amount": 50 }
+
+처리:
+Account.virtualBalance["native"] = 100 → 50 ✅ 차감
+Master Wallet → 0x999... ✅ 온체인 전송
+블록체인 트랜잭션 = 1개
+가스비 = ~$1`}
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
+                  <strong>사용 케이스:</strong> 사용자가 게임 포인트를 실제 토큰으로 출금
+                </p>
+              </div>
+
+              {/* 모드 3 */}
+              <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="bg-purple-500 text-white text-sm font-bold px-3 py-1 rounded-full">모드 3</span>
+                  <h5 className="font-bold text-lg text-gray-900 dark:text-white">대량 에어드랍 (Account 주소 → 온체인)</h5>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">
+                  계정 생성 시 등록한 온체인 주소로 직접 토큰을 대량 전송합니다. Virtual Balance는 건드리지 않습니다.
+                </p>
+                <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm font-mono">
+{`POST /api/batch-transfers/airdrop-to-accounts
+{ "accountIds": ["acc_001", "acc_002", ...], "amount": "10" }
+
+전제조건:
+Account 생성 시 주소 등록:
+├─ acc_001.address = "0x111..." ✅ 에어드랍 대상
+├─ acc_002.address = "0x222..." ✅ 에어드랍 대상
+└─ acc_003.address = null ❌ 제외
+
+처리:
+Account.virtualBalance = 변화 없음 ❌
+Master Wallet → [0x111..., 0x222...] ✅ 배치 전송
+블록체인 트랜잭션 = 1개 (BatchTransfer)
+가스비 = ~$10-100 (수량에 따라)`}
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
+                  <strong>사용 케이스:</strong> NFT 홀더 에어드랍, 투자자 배당, 커뮤니티 리워드
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border border-yellow-300 dark:border-yellow-700">
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                <strong>💡 핵심 포인트:</strong> 회사는 자산을 집금하지 않습니다. Master Wallet의 자산은 회사가 미리 준비한 것으로,
+                사용자에게 지급/출금/에어드랍할 때만 사용됩니다. 따라서 금융 규제 대상이 아닙니다.
+              </p>
+            </div>
           </div>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">언제 사용?</h3>
