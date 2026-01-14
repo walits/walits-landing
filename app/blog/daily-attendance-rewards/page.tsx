@@ -158,19 +158,6 @@ export default function DailyAttendancePost() {
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     유저별 출석 기록을 추적하는 테이블을 만듭니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`CREATE TABLE user_attendance (
-  user_id BIGINT PRIMARY KEY,
-  walits_account_id VARCHAR(255),
-  current_streak INT DEFAULT 0,  -- 현재 연속 출석 일수
-  last_check_in_date DATE,       -- 마지막 출석 날짜
-  total_check_ins INT DEFAULT 0, -- 총 출석 일수
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE INDEX idx_last_check_in ON user_attendance(last_check_in_date);`}</code>
-                  </pre>
                 </div>
 
                 <div className="border-l-4 border-gray-900 dark:border-white pl-6">
@@ -178,44 +165,6 @@ CREATE INDEX idx_last_check_in ON user_attendance(last_check_in_date);`}</code>
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     유저가 게임에 로그인할 때 출석 체크 버튼을 누르면 호출되는 API입니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`// POST /api/attendance/check-in
-app.post('/attendance/check-in', async (req, res) => {
-  const { userId } = req.body;
-  const today = new Date().toISOString().split('T')[0];
-
-  const attendance = await db.query(
-    'SELECT * FROM user_attendance WHERE user_id = ?',
-    [userId]
-  );
-
-  let currentStreak = 1;
-  if (attendance && attendance.last_check_in_date) {
-    const lastDate = new Date(attendance.last_check_in_date);
-    const todayDate = new Date(today);
-    const diffDays = Math.floor((todayDate - lastDate) / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) {
-      return res.status(400).json({ error: '오늘 이미 출석했습니다.' });
-    } else if (diffDays === 1) {
-      currentStreak = attendance.current_streak + 1;  // 연속 출석
-    } else {
-      currentStreak = 1;  // 연속 끊김, 다시 1일차
-    }
-  }
-
-  await db.query(\`
-    INSERT INTO user_attendance (user_id, walits_account_id, current_streak, last_check_in_date, total_check_ins)
-    VALUES (?, ?, ?, ?, 1)
-    ON DUPLICATE KEY UPDATE
-      current_streak = ?,
-      last_check_in_date = ?,
-      total_check_ins = total_check_ins + 1
-  \`, [userId, req.user.walitsAccountId, currentStreak, today, currentStreak, today]);
-
-  res.json({ success: true, currentStreak });
-});`}</code>
-                  </pre>
                 </div>
 
                 <div className="border-l-4 border-gray-900 dark:border-white pl-6">
@@ -223,89 +172,6 @@ app.post('/attendance/check-in', async (req, res) => {
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     매일 자정 00:05에 실행되어 당일 출석한 모든 유저에게 보상을 지급합니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`// Node.js + node-cron
-const cron = require('node-cron');
-const axios = require('axios');
-
-// 매일 자정 00:05에 실행
-cron.schedule('5 0 * * *', async () => {
-  console.log('출석 보상 지급 시작:', new Date());
-
-  try {
-    const today = new Date().toISOString().split('T')[0];
-
-    // 오늘 출석한 유저 조회
-    const attendees = await db.query(\`
-      SELECT user_id, walits_account_id, current_streak
-      FROM user_attendance
-      WHERE last_check_in_date = ?
-    \`, [today]);
-
-    console.log(\`오늘 출석 유저: \${attendees.length}명\`);
-
-    // 출석 일수별 보상 계산
-    const transfers = attendees.map(user => {
-      let goldAmount = '10';  // 기본 보상
-
-      if (user.current_streak >= 30) {
-        goldAmount = '1000';
-      } else if (user.current_streak >= 14) {
-        goldAmount = '250';
-      } else if (user.current_streak >= 7) {
-        goldAmount = '100';
-      } else if (user.current_streak >= 3) {
-        goldAmount = '30';
-      }
-
-      return {
-        toAccountId: user.walits_account_id,
-        amount: goldAmount,
-        asset: 'Gold',
-        metadata: {
-          type: 'daily_attendance',
-          streak: user.current_streak,
-          date: today
-        }
-      };
-    });
-
-    // Walits Batch Transfer API 호출
-    const response = await axios.post('https://api.walits.io/api/internal-transfers/batch', {
-      fromAccountId: 'acc_dragon_quest_master',
-      transfers: transfers,
-      idempotencyKey: \`daily_attendance_\${today}\`,
-      description: \`Daily Attendance Rewards - \${today}\`
-    }, {
-      headers: {
-        'Authorization': \`Bearer \${process.env.WALITS_API_KEY}\`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    console.log('보상 지급 완료:', response.data);
-
-    // 슬랙 알림
-    await sendSlackNotification({
-      channel: '#game-operations',
-      text: \`출석 보상 지급 완료\\n- 대상: \${attendees.length}명\\n- 총 지급액: \${response.data.totalAmount} Gold\\n- 처리 시간: \${response.data.processedAt}\`
-    });
-
-  } catch (error) {
-    console.error('출석 보상 지급 실패:', error);
-
-    // 슬랙 에러 알림
-    await sendSlackNotification({
-      channel: '#game-operations',
-      text: \`출석 보상 지급 실패\\n\${error.message}\`
-    });
-  }
-}, {
-  timezone: "Asia/Seoul"
-});
-
-console.log('출석 보상 Cron Job 시작됨 (매일 00:05 KST)');`}</code>
-                  </pre>
                 </div>
 
                 <div className="border-l-4 border-gray-900 dark:border-white pl-6">
@@ -313,23 +179,6 @@ console.log('출석 보상 Cron Job 시작됨 (매일 00:05 KST)');`}</code>
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     매일 실행 결과를 슬랙으로 받아 문제가 있으면 즉시 대응합니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`async function sendSlackNotification({ channel, text }) {
-  await axios.post(process.env.SLACK_WEBHOOK_URL, {
-    channel: channel,
-    text: text,
-    username: 'Dragon Quest Bot',
-    icon_emoji: ':dragon:'
-  });
-}
-
-// 슬랙 알림 예시
-// 출석 보상 지급 완료
-// - 대상: 3,542명
-// - 총 지급액: 48,320 Gold
-// - 처리 시간: 2024-12-13T00:05:03Z
-// - 소요 시간: 3.2초`}</code>
-                  </pre>
                 </div>
               </div>
 
@@ -340,45 +189,6 @@ console.log('출석 보상 Cron Job 시작됨 (매일 00:05 KST)');`}</code>
                   30일 연속 출석자에게는 Gold 외에 NFT 아이템(Legendary Armor)도 함께 지급하고 싶다면?
                   Walits는 FT(Fungible Token)와 NFT(Non-Fungible Token)를 동시에 지급할 수 있습니다.
                 </p>
-                <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`// 30일 연속 출석자 필터링
-const streak30Users = attendees.filter(u => u.current_streak === 30);
-
-// NFT 민팅 및 지급 (별도 API 호출)
-for (const user of streak30Users) {
-  // 1. NFT 민팅
-  const nftResponse = await axios.post('https://api.walits.io/api/nfts/mint', {
-    accountId: user.walits_account_id,
-    collectionId: 'col_legendary_armors',
-    metadata: {
-      name: 'Legendary Armor',
-      description: '30일 연속 출석 달성 기념 아이템',
-      image: 'https://cdn.dragonquest.com/items/legendary_armor.png',
-      attributes: [
-        { trait_type: 'Defense', value: 500 },
-        { trait_type: 'Rarity', value: 'Legendary' },
-        { trait_type: 'Earned Date', value: today }
-      ]
-    }
-  }, {
-    headers: { 'Authorization': \`Bearer \${process.env.WALITS_API_KEY}\` }
-  });
-
-  console.log(\`NFT 지급 완료: User \${user.user_id}, Token \${nftResponse.data.tokenId}\`);
-
-  // 2. 게임 내 아이템 인벤토리에도 추가
-  await db.query(\`
-    INSERT INTO user_items (user_id, item_id, nft_token_id, acquired_date)
-    VALUES (?, 'legendary_armor', ?, ?)
-  \`, [user.user_id, nftResponse.data.tokenId, today]);
-
-  // 3. 특별 칭호 부여
-  await db.query(\`
-    INSERT INTO user_titles (user_id, title_id)
-    VALUES (?, 'attendance_master')
-  \`, [user.user_id]);
-}`}</code>
-                </pre>
               </div>
 
               <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">ROI 분석: 출석 시스템의 효과</h2>

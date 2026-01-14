@@ -149,18 +149,6 @@ export default function CommunityAirdropPost() {
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     CryptoVerse의 마스터 지갑에 충분한 BASE 토큰이 있는지 확인합니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`GET /api/wallets/wal_cryptoverse_master/balance
-
-Response:
-{
-  "walletId": "wal_cryptoverse_master",
-  "balance": "100000",  // 충분한 잔액
-  "asset": "BASE",
-  "blockchain": "Base",
-  "lastUpdated": "2024-12-14T10:00:00Z"
-}`}</code>
-                  </pre>
                 </div>
 
                 <div className="border-l-4 border-gray-900 dark:border-white pl-6">
@@ -168,36 +156,6 @@ Response:
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     데이터베이스에서 최근 30일 활성 유저 1,000명을 조회하고, 얼리어답터 보너스를 계산합니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`// SQL 쿼리
-SELECT
-  user_id,
-  walits_account_id,
-  login_count,
-  created_at
-FROM users
-WHERE last_login >= NOW() - INTERVAL '30 days'
-  AND login_count >= 10
-ORDER BY created_at ASC
-LIMIT 1000;
-
-// 에어드랍 리스트 생성
-const airdropList = activeUsers.map((user, index) => {
-  const isEarlyAdopter = index < 100;  // 최초 100명
-  const amount = isEarlyAdopter ? "30" : "10";  // 30 BASE vs 10 BASE
-
-  return {
-    toAccountId: user.walits_account_id,
-    amount: amount,
-    asset: "BASE",
-    metadata: {
-      campaignId: "base_migration_2024",
-      earlyAdopter: isEarlyAdopter,
-      loginCount: user.login_count
-    }
-  };
-});`}</code>
-                  </pre>
                 </div>
 
                 <div className="border-l-4 border-gray-900 dark:border-white pl-6">
@@ -205,51 +163,6 @@ const airdropList = activeUsers.map((user, index) => {
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     단 하나의 API 호출로 1,000명의 유저에게 차등 에어드랍을 동시에 실행합니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`POST /api/internal-transfers/batch
-
-{
-  "fromAccountId": "acc_cryptoverse_master",
-  "transfers": [
-    {
-      "toAccountId": "acc_user_001",
-      "amount": "30",  // Early adopter
-      "asset": "BASE",
-      "metadata": { "campaignId": "base_migration_2024", "earlyAdopter": true }
-    },
-    {
-      "toAccountId": "acc_user_002",
-      "amount": "30",
-      "asset": "BASE",
-      "metadata": { "campaignId": "base_migration_2024", "earlyAdopter": true }
-    },
-    // ... 98개 더 (early adopters)
-    {
-      "toAccountId": "acc_user_101",
-      "amount": "10",  // Regular user
-      "asset": "BASE",
-      "metadata": { "campaignId": "base_migration_2024", "earlyAdopter": false }
-    },
-    // ... 899개 더
-  ],
-  "idempotencyKey": "base_migration_airdrop_2024",
-  "description": "BASE Migration Celebration Airdrop"
-}
-
-Response (처리 시간: 3-4초):
-{
-  "batchId": "batch_xyz789",
-  "status": "COMPLETED",
-  "successCount": 1000,
-  "failureCount": 0,
-  "totalAmount": "12000",  // 100×30 + 900×10
-  "processedAt": "2024-12-14T10:05:04Z",
-  "breakdown": {
-    "earlyAdopters": { "count": 100, "amount": "3000" },
-    "regularUsers": { "count": 900, "amount": "9000" }
-  }
-}`}</code>
-                  </pre>
                   <p className="text-sm mt-4 text-gray-600 dark:text-gray-400">
                     1,000명에게 지급 완료까지 단 3-4초! 가스비는 $0!
                   </p>
@@ -260,35 +173,6 @@ Response (처리 시간: 3-4초):
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     Walits Webhook을 받아 유저들에게 에어드랍 완료 알림을 전송합니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`// Webhook 핸들러
-app.post('/webhooks/walits', async (req, res) => {
-  const { event, batchId, transfers } = req.body;
-
-  if (event === 'TRANSFER_COMPLETED') {
-    // 이메일 전송
-    for (const transfer of transfers) {
-      const user = await getUserByAccountId(transfer.accountId);
-      const isEarlyAdopter = transfer.metadata.earlyAdopter;
-
-      await sendEmail({
-        to: user.email,
-        subject: "BASE 에어드랍이 도착했습니다!",
-        body: \`
-          축하합니다!
-
-          BASE 마이그레이션을 기념하여 \${transfer.amount} BASE가 지급되었습니다.
-          \${isEarlyAdopter ? '얼리어답터 보너스 20 BASE가 포함되었습니다!' : ''}
-
-          지금 바로 CryptoVerse에 로그인하여 확인하세요!
-        \`
-      });
-    }
-  }
-
-  res.status(200).send('OK');
-});`}</code>
-                  </pre>
                 </div>
               </div>
 

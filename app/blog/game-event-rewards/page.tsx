@@ -149,18 +149,6 @@ export default function GameEventRewardsPost() {
                     게임사의 마스터 지갑에 충분한 GameCoin이 있는지 확인합니다.
                     Walits 대시보드 또는 API로 간단히 조회할 수 있습니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`GET /api/wallets/wal_game_master/balance
-
-Response:
-{
-  "walletId": "wal_game_master",
-  "balance": "1000000",  // 충분한 잔액 보유
-  "asset": "GameCoin",
-  "blockchain": "Polygon",
-  "lastUpdated": "2024-12-24T20:05:00Z"
-}`}</code>
-                  </pre>
                 </div>
 
                 <div className="border-l-4 border-gray-900 dark:border-white pl-6">
@@ -168,29 +156,6 @@ Response:
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     게임 서버에서 레이드 참여자 데이터를 조회하여 Walits API 형식에 맞게 변환합니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`// Node.js 예제
-const participants = await db.query(\`
-  SELECT user_id, deal_damage
-  FROM raid_participants
-  WHERE event_id = 'xmas_ice_dragon'
-\`);
-
-const transfers = participants.map(p => ({
-  toAccountId: \`acc_user_\${p.user_id}\`,
-  amount: "100",  // 기본 보상
-  asset: "GameCoin",
-  metadata: {
-    eventId: "xmas_ice_dragon",
-    damage: p.deal_damage
-  }
-}));
-
-// 딜량 1등 추가 보상
-transfers[0].amount = "600";  // 100 + 500
-// 막타 유저 추가 보상
-transfers.find(t => t.toAccountId === 'acc_user_12345').amount = "400";  // 100 + 300`}</code>
-                  </pre>
                 </div>
 
                 <div className="border-l-4 border-gray-900 dark:border-white pl-6">
@@ -199,40 +164,6 @@ transfers.find(t => t.toAccountId === 'acc_user_12345').amount = "400";  // 100 
                     단 하나의 API 호출로 500명의 유저에게 동시에 보상을 지급합니다.
                     처리 시간은 단 2-3초!
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`POST /api/internal-transfers/batch
-
-{
-  "fromAccountId": "acc_master",
-  "transfers": [
-    {
-      "toAccountId": "acc_user_001",
-      "amount": "600",
-      "asset": "GameCoin",
-      "metadata": { "rank": 1, "reward": "top_damage" }
-    },
-    {
-      "toAccountId": "acc_user_002",
-      "amount": "100",
-      "asset": "GameCoin",
-      "metadata": { "rank": 2 }
-    },
-    // ... 498개 더
-  ],
-  "idempotencyKey": "xmas_ice_dragon_2024_rewards",
-  "description": "Christmas Ice Dragon Raid Rewards"
-}
-
-Response (처리 시간: 2-3초):
-{
-  "batchId": "batch_abc123",
-  "status": "COMPLETED",
-  "successCount": 500,
-  "failureCount": 0,
-  "totalAmount": "50800",
-  "processedAt": "2024-12-24T20:05:03Z"
-}`}</code>
-                  </pre>
                   <p className="text-sm mt-4 text-gray-600 dark:text-gray-400">
                     <span className="font-semibold">Idempotency Key</span>를 사용하면 실수로 API를 여러 번 호출해도 중복 지급이 발생하지 않습니다.
                     같은 키로 다시 요청하면 이전 결과가 반환됩니다.
@@ -244,26 +175,6 @@ Response (처리 시간: 2-3초):
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     모든 유저의 지갑에 즉시 GameCoin이 반영됩니다. 가스비는 0원!
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`// 유저가 즉시 잔액 확인 가능
-GET /api/accounts/acc_user_001/balance
-
-Response:
-{
-  "accountId": "acc_user_001",
-  "balance": "1600",  // 기존 1000 + 보상 600
-  "asset": "GameCoin",
-  "transactions": [
-    {
-      "type": "INTERNAL_TRANSFER",
-      "amount": "600",
-      "from": "acc_master",
-      "description": "Christmas Ice Dragon Raid Rewards",
-      "timestamp": "2024-12-24T20:05:03Z"
-    }
-  ]
-}`}</code>
-                  </pre>
                 </div>
 
                 <div className="border-l-4 border-gray-900 dark:border-white pl-6">
@@ -271,27 +182,6 @@ Response:
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     Webhook을 활용하여 유저에게 푸시 알림을 전송할 수 있습니다.
                   </p>
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
-<code>{`// Walits Webhook이 게임 서버로 전송
-POST https://your-game-server.com/webhooks/walits
-
-{
-  "event": "TRANSFER_COMPLETED",
-  "batchId": "batch_abc123",
-  "transfers": [
-    { "accountId": "acc_user_001", "amount": "600", "status": "SUCCESS" },
-    // ...
-  ]
-}
-
-// 게임 서버에서 푸시 알림 발송
-for (const transfer of webhook.transfers) {
-  await sendPushNotification(transfer.accountId, {
-    title: "크리스마스 보상 도착!",
-    body: \`Ice Dragon 레이드 보상 \${transfer.amount} GameCoin이 지급되었습니다!\`
-  });
-}`}</code>
-                  </pre>
                 </div>
               </div>
 

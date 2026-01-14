@@ -232,17 +232,6 @@ export default function CryptoCustodyServicePost() {
                   <div className="space-y-4">
                     <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
                       <p className="font-semibold mb-2">1단계: 입금 주소 생성</p>
-                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-xs overflow-x-auto">
-{`POST /api/wallets
-{
-  "userId": "user_12345",
-  "asset": "BTC"
-}
-
-Response:
-{
-  "depositAddress": "bc1q...(HD Path m/44'/0'/0'/0/12345)"
-}`}</pre>
                       <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
                         각 고객에게 고유한 입금 주소가 발급됩니다. 이는 BIP32 HD Wallet을 통해 마스터 주소로부터 파생된 주소입니다.
                       </p>
@@ -253,15 +242,6 @@ Response:
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                         Walits xScanner가 블록체인을 실시간으로 모니터링하여 입금을 감지합니다.
                       </p>
-                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-xs overflow-x-auto">
-{`// xScanner가 Webhook 전송
-{
-  "event": "DEPOSIT_DETECTED",
-  "txHash": "0xabc...",
-  "amount": "0.5",
-  "confirmations": 1,
-  "userId": "user_12345"
-}`}</pre>
                       <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
                         1 컨펌에서는 아직 고객 잔액에 반영하지 않고, 관리자 대시보드에만 표시됩니다.
                       </p>
@@ -269,20 +249,6 @@ Response:
 
                     <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
                       <p className="font-semibold mb-2">3단계: 입금 확정 (6-12 Confirmations)</p>
-                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-xs overflow-x-auto">
-{`// 충분한 컨펌 후 Webhook 전송
-{
-  "event": "DEPOSIT_CONFIRMED",
-  "txHash": "0xabc...",
-  "amount": "0.5",
-  "confirmations": 6,
-  "userId": "user_12345"
-}
-
-// 고객 잔액 업데이트
-UPDATE user_balances
-SET btc_balance = btc_balance + 0.5
-WHERE user_id = 'user_12345'`}</pre>
                       <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
                         이제 고객은 거래소에서 해당 BTC를 거래하거나 출금할 수 있습니다.
                       </p>
@@ -293,16 +259,6 @@ WHERE user_id = 'user_12345'`}</pre>
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                         입금된 BTC는 개별 주소에 그대로 두지 않고, Omnibus 마스터 주소로 자동 이체됩니다.
                       </p>
-                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-xs overflow-x-auto">
-{`// 매일 새벽 2시, 또는 임계값($10,000) 초과 시
-POST /api/internal/sweep
-{
-  "fromAddresses": ["bc1q...(user_12345 deposit address)"],
-  "toAddress": "bc1q...(Omnibus Master)",
-  "amount": "0.5"
-}
-
-// MPC 2-of-3 서명으로 트랜잭션 생성 및 브로드캐스트`}</pre>
                       <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
                         이제 모든 고객의 BTC가 하나의 안전한 마스터 주소에 통합되어 관리됩니다.
                         개별 주소에는 잔액이 거의 남지 않으므로 해킹 위험이 최소화됩니다.
@@ -320,21 +276,6 @@ POST /api/internal/sweep
                   <div className="space-y-4">
                     <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
                       <p className="font-semibold mb-2">1단계: 출금 요청 및 잔액 홀드</p>
-                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-xs overflow-x-auto">
-{`POST /api/withdrawals
-{
-  "userId": "user_12345",
-  "asset": "BTC",
-  "amount": "0.3",
-  "toAddress": "bc1q...(external address)"
-}
-
-Response:
-{
-  "withdrawalId": "wd_abc123",
-  "status": "PENDING",
-  "holdBalance": "0.3"  // 즉시 잔액 차감 및 홀드
-}`}</pre>
                       <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
                         출금 요청과 동시에 고객 잔액에서 즉시 차감되어 중복 출금을 방지합니다.
                       </p>
@@ -345,22 +286,6 @@ Response:
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                         사전에 설정된 출금 정책을 자동으로 검증합니다.
                       </p>
-                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-xs overflow-x-auto">
-{`// Policy 설정 예시
-{
-  "autoApprovalLimit": "1 BTC",  // 1 BTC 이하 자동 승인
-  "whitelistOnly": false,        // 화이트리스트 주소만 허용 여부
-  "requireApprovers": ["cfo@company.com", "cto@company.com"],  // 2-of-2 승인
-  "dailyLimit": "10 BTC",        // 일일 출금 한도
-  "timeLock": "1 hour"          // 출금 요청 후 1시간 대기 (타임락)
-}
-
-// 검증 결과
-{
-  "policyCheck": "PASSED",
-  "autoApproved": false,  // 0.3 BTC < 1 BTC이지만 requireApprovers 때문에 수동 승인 필요
-  "requiredApprovals": 2
-}`}</pre>
                     </div>
 
                     <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
@@ -368,27 +293,6 @@ Response:
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                         CFO와 CTO가 Walits 대시보드에서 출금 요청을 검토하고 승인합니다.
                       </p>
-                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-xs overflow-x-auto">
-{`// CFO 승인
-POST /api/withdrawals/wd_abc123/approve
-{
-  "approverId": "cfo@company.com",
-  "otp": "123456"
-}
-
-// CTO 승인 (2-of-2 완료)
-POST /api/withdrawals/wd_abc123/approve
-{
-  "approverId": "cto@company.com",
-  "otp": "654321"
-}
-
-Response:
-{
-  "status": "APPROVED",
-  "approvals": 2,
-  "readyForSigning": true
-}`}</pre>
                     </div>
 
                     <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
@@ -396,18 +300,6 @@ Response:
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                         승인이 완료되면 Customer Key Share와 Walits Key Share가 협업하여 트랜잭션에 서명합니다.
                       </p>
-                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-xs overflow-x-auto">
-{`// 1. Customer Key Share가 Partial Signature 생성
-PartialSig1 = Sign(TxHash, CustomerKeyShare)
-
-// 2. Walits Key Share가 Partial Signature 생성 (TEE 내부)
-PartialSig2 = Sign(TxHash, WalitsKeyShare)
-
-// 3. 두 Partial Signature를 결합하여 완전한 서명 생성
-FinalSignature = Combine(PartialSig1, PartialSig2)
-
-// 4. 서명된 트랜잭션을 블록체인에 브로드캐스트
-broadcastTransaction(signedTx)`}</pre>
                       <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
                         전 과정에서 완전한 프라이빗 키는 메모리에 존재하지 않습니다.
                       </p>
@@ -415,20 +307,6 @@ broadcastTransaction(signedTx)`}</pre>
 
                     <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
                       <p className="font-semibold mb-2">5단계: 상태 추적 및 완료</p>
-                      <pre className="bg-gray-900 text-gray-100 p-3 rounded text-xs overflow-x-auto">
-{`// 트랜잭션 상태 업데이트
-{
-  "status": "BROADCASTED",
-  "txHash": "0xdef...",
-  "confirmations": 0
-}
-
-// 충분한 컨펌 후
-{
-  "status": "COMPLETED",
-  "txHash": "0xdef...",
-  "confirmations": 6
-}`}</pre>
                       <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
                         고객은 대시보드에서 실시간으로 출금 진행 상황을 확인할 수 있습니다.
                       </p>
