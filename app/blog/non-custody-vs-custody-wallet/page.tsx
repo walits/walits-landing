@@ -113,19 +113,22 @@ export default function NonCustodyVsCustodyWalletPage() {
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">작동 방식</h3>
           <p>
-            각 사용자가 독립적인 지갑을 가집니다. 회사는 자산을 모으지 않고(집금 없음),
-            사용자별로 독립된 주소에서 입출금이 이루어집니다.
+            Virtual Balance 시스템으로 작동합니다. 고객의 고객(최종 사용자)에게는 포인트가 가상 잔액으로 적립되고,
+            실제 출금을 요청할 때만 온체인 주소로 전송됩니다. 회사는 자산을 집금하지 않습니다.
           </p>
 
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
             <h4 className="font-bold mb-4 text-gray-900 dark:text-white">예시: 게임 보상 지급</h4>
             <pre className="text-sm overflow-x-auto">
-{`플레이어 A: 0x1111...aaaa → 100 COIN 지급
-플레이어 B: 0x2222...bbbb → 200 COIN 지급
-플레이어 C: 0x3333...cccc → 150 COIN 지급
+{`플레이어 A: Virtual Balance +100 COIN (DB 기록)
+플레이어 B: Virtual Balance +200 COIN (DB 기록)
+플레이어 C: Virtual Balance +150 COIN (DB 기록)
 
-✓ 각자 독립된 지갑 주소
-✓ 집금 없이 직접 지급
+출금 요청 시:
+플레이어 A → 0x1111...aaaa 주소로 100 COIN 온체인 전송
+
+✓ 내부는 Virtual Balance로 관리
+✓ 출금 시에만 온체인 트랜잭션 발생
 ✓ API로 자동화 가능`}
             </pre>
           </div>
