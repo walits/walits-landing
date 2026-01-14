@@ -130,16 +130,27 @@ export default function NonCustodyVsCustodyWalletPage() {
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
                   가장 많이 사용되는 모드입니다. DB에만 기록하고 온체인 트랜잭션은 발생하지 않습니다.
+                  따라서 가스비가 전혀 들지 않으며, 수백만 건의 거래도 즉시 처리할 수 있습니다.
                 </p>
-                <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm font-mono">
-{`POST /api/internal-transfers
-{ "toAccountId": "acc_001", "amount": 100 }
-
-처리:
-Account.virtualBalance["native"] = 0 → 100 ✅
-Master Wallet = 변화 없음 ❌
-블록체인 = 변화 없음 ❌
-가스비 = $0`}
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 p-4 rounded-lg border-l-4 border-green-500">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ Virtual Balance</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">DB에만 기록</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ 가스비</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">$0 (무료)</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ 처리 속도</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">즉시</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ 확장성</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">무제한</p>
+                    </div>
+                  </div>
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
                   <strong>사용 케이스:</strong> 게임 보상, 출석 체크, 이벤트 리워드
@@ -154,16 +165,27 @@ Master Wallet = 변화 없음 ❌
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
                   최종 사용자가 자신의 Virtual Balance를 실제 암호화폐로 출금할 때 사용합니다.
+                  사용자의 Virtual Balance가 차감되고, Master Wallet에서 사용자가 지정한 지갑 주소로 실제 암호화폐가 전송됩니다.
                 </p>
-                <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm font-mono">
-{`POST /api/accounts/acc_001/withdraw
-{ "toAddress": "0x999...", "amount": 50 }
-
-처리:
-Account.virtualBalance["native"] = 100 → 50 ✅ 차감
-Master Wallet → 0x999... ✅ 온체인 전송
-블록체인 트랜잭션 = 1개
-가스비 = ~$1`}
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-4 rounded-lg border-l-4 border-blue-500">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ Virtual Balance</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">차감됨</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ 온체인 전송</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">사용자 지갑으로</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ 가스비</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">~$1</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ 트랜잭션</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">1건</p>
+                    </div>
+                  </div>
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
                   <strong>사용 케이스:</strong> 사용자가 게임 포인트를 실제 토큰으로 출금
@@ -179,23 +201,28 @@ Master Wallet → 0x999... ✅ 온체인 전송
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
                   계정 생성 시 등록한 온체인 주소로 직접 토큰을 대량 전송합니다. Virtual Balance는 건드리지 않습니다.
-                  현재 Ethereum 네트워크에서만 BatchTransfer 기능을 제공합니다.
+                  현재 Ethereum 네트워크에서만 BatchTransfer 기능을 제공합니다. 주소를 미리 등록한 계정에만 전송되며,
+                  수백~수천 명에게 한 번의 트랜잭션으로 일괄 전송할 수 있습니다.
                 </p>
-                <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm font-mono">
-{`POST /api/batch-transfers/airdrop-to-accounts
-{ "accountIds": ["acc_001", "acc_002", ...], "amount": "10" }
-
-전제조건:
-Account 생성 시 주소 등록:
-├─ acc_001.address = "0x111..." ✅ 에어드랍 대상
-├─ acc_002.address = "0x222..." ✅ 에어드랍 대상
-└─ acc_003.address = null ❌ 제외
-
-처리:
-Account.virtualBalance = 변화 없음 ❌
-Master Wallet → [0x111..., 0x222...] ✅ 배치 전송
-블록체인 트랜잭션 = 1개 (BatchTransfer)
-가스비 = ~$10-100 (수량에 따라)`}
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-4 rounded-lg border-l-4 border-purple-500">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ Virtual Balance</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">변화 없음</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ 온체인 전송</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">등록된 주소로 직접</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ 가스비</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">~$10-100 (수량에 따라)</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">✓ 트랜잭션</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-xs">1건 (BatchTransfer)</p>
+                    </div>
+                  </div>
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
                   <strong>사용 케이스:</strong> NFT 홀더 에어드랍, 투자자 배당, 커뮤니티 리워드
@@ -259,13 +286,184 @@ Master Wallet → [0x111..., 0x222...] ✅ 배치 전송
           </div>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">언제 사용?</h3>
-          <ul className="space-y-2">
-            <li>암호화폐 거래소를 운영하면서 고객 자산을 안전하게 보관해야 할 때 필수적입니다.</li>
-            <li>전문 커스터디 서비스를 제공하는 기업이 고객의 자산을 위탁 관리하는 용도로 적합합니다.</li>
-            <li>기관 투자자가 대규모 암호화폐 자산을 안전하게 보유하고 관리해야 할 때 권장됩니다.</li>
-            <li>기업의 재무팀에서 회사 자산을 안전하게 보관하고 다중 승인으로 통제해야 할 때 유용합니다.</li>
-            <li>토큰 발행사가 회사 재무로 보유한 대량의 토큰을 안전하게 보관하는 용도로 활용할 수 있습니다.</li>
-          </ul>
+
+          <p className="mb-6 text-gray-700 dark:text-gray-300">
+            Custody 지갑은 크게 두 가지 시나리오에서 필수적입니다: <strong>타인의 자산을 위탁 관리하는 수탁 비즈니스</strong>와
+            <strong>암호화폐로 재무를 운영하는 일반 기업</strong>입니다.
+          </p>
+
+          <div className="space-y-8">
+            {/* 카테고리 A: 수탁 비즈니스 */}
+            <div>
+              <h4 className="text-xl font-bold mb-4 text-purple-600 dark:text-purple-400">A. 수탁 비즈니스 (타인 자산 관리)</h4>
+              <div className="space-y-4 pl-4 border-l-4 border-purple-300 dark:border-purple-700">
+                <div className="bg-purple-50 dark:bg-purple-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">1. 암호화폐 거래소</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    수천 명의 고객 자산을 보관하는 거래소의 콜드월렛. 고객 입출금은 별도 핫월렛으로 처리하고,
+                    대량 자산은 Custody에서 MPC 2-of-3로 안전하게 보관합니다.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>승인 예시:</strong> 1억 원 이상 출금 시 CEO + CTO 승인 필수
+                  </p>
+                </div>
+
+                <div className="bg-purple-50 dark:bg-purple-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">2. 디지털 자산 은행</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    기관 고객(기업, 펀드)의 암호화폐를 위탁 관리하는 서비스. 고객별로 논리적으로 분리된 계정을 생성하고,
+                    출금 시 고객 승인 + 은행 내부 승인을 동시에 받아 이중 안전장치를 구축합니다.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>규제 대응:</strong> 감사 추적 완벽 보존, 금융당국 보고 자동화
+                  </p>
+                </div>
+
+                <div className="bg-purple-50 dark:bg-purple-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">3. 가족 자산 관리 서비스 (Family Office)</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    고액 자산가의 암호화폐 포트폴리오를 위탁 관리. 자산가 본인 + 재무 어드바이저 승인으로 투자 집행.
+                    상속 계획에 따라 다중 서명 권한을 가족 구성원에게 배분할 수 있습니다.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>사용 케이스:</strong> 100억 원 이상 자산가의 BTC, ETH 장기 보관
+                  </p>
+                </div>
+
+                <div className="bg-purple-50 dark:bg-purple-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">4. NFT 마켓플레이스 에스크로</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    고가 NFT 거래 시 마켓플레이스가 중간에서 에스크로 역할. 구매자가 대금 입금 → 판매자가 NFT 전송 확인 →
+                    마켓플레이스 운영팀이 검증 후 승인 → 자동 정산. 분쟁 발생 시 다중 승인으로 해결.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>신뢰 구축:</strong> 판매자/구매자 모두 안심할 수 있는 제3자 보관
+                  </p>
+                </div>
+
+                <div className="bg-purple-50 dark:bg-purple-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">5. 기업 연금 펀드 관리</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    직원 퇴직연금의 일부를 암호화폐로 운용하는 기업. 연금 위원회 + 투자 담당자 + 준법감시인 3자 승인으로
+                    투자 집행. 모든 거래가 온체인에 기록되어 투명성 확보.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>규제 준수:</strong> 금융감독원 보고 자료 자동 생성
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* 카테고리 B: 기업 재무 운영 */}
+            <div>
+              <h4 className="text-xl font-bold mb-4 text-blue-600 dark:text-blue-400">B. 기업 재무 운영 (자사 자산 관리)</h4>
+              <div className="space-y-4 pl-4 border-l-4 border-blue-300 dark:border-blue-700">
+                <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">1. 직원 급여 지급</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    매월 1일, 200명의 직원에게 암호화폐로 월급 지급. HR팀이 급여 명세서 작성 → CFO 승인 → 일괄 송금.
+                    지역별로 다른 스테이블코인 사용 (한국: USDT, 미국: USDC, 유럽: EURC).
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>효율성:</strong> 국제 송금 수수료 제로, 급여일 당일 즉시 입금
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">2. 세금 납부</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    부가세, 법인세를 암호화폐로 직접 납부 (정부가 암호화폐 납부를 허용하는 미래 시나리오).
+                    회계사가 세액 계산 → CFO 검토 → CEO 최종 승인 → 국세청 지갑으로 전송.
+                    모든 과정이 블록체인에 기록되어 세무 감사 시 투명하게 증명.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>감사 추적:</strong> 영수증 대신 온체인 트랜잭션 해시 제출
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">3. 공급업체 결제</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    월말 정산 시 50개 협력사에게 대금 지급. 구매팀이 검수 완료 → 재무팀이 금액 확인 →
+                    CFO 승인 → BatchTransfer로 일괄 송금. 해외 공급업체도 은행 수수료 없이 즉시 송금.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>비용 절감:</strong> 국제 송금 수수료 연간 수천만 원 절감
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">4. 투자 포트폴리오 관리</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    회사 유동성의 20%를 DeFi 수익 상품에 투자. 투자위원회(CEO, CFO, CTO)가 주 1회 회의 →
+                    투자 결정 → 3명 모두 승인 시에만 스마트 컨트랙트 실행.
+                    연 5-10% 수익률로 회사 재무 건전성 강화.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>리스크 관리:</strong> 투자 한도 설정, 손실 시 자동 청산 규칙
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">5. 다국적 자금 이동</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    한국 본사에서 미국 지사로 운영비 10억 원 송금. 은행을 거치면 3-5일 + 수수료 100만 원.
+                    Custody 지갑으로는 CEO + CFO 승인만으로 10분 안에 송금 완료. 수수료 1만 원 미만.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>속도:</strong> 은행 송금 대비 99% 빠름, 비용 99% 절감
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">6. DAO 재무 관리</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    탈중앙화 자율 조직(DAO)의 재무 관리. 커뮤니티가 투표로 예산안 통과 →
+                    선출된 재무 위원 3명이 다중 서명으로 집행. 모든 지출이 온체인에 투명하게 공개되어
+                    커뮤니티가 실시간 모니터링 가능.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>투명성:</strong> 예산 집행 내역 100% 온체인 공개
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">7. 스타트업 투자금 관리</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    VC로부터 받은 100억 원 투자금을 안전하게 보관하고 체계적으로 집행.
+                    5천만 원 이상 지출 시 CEO + 이사회 의장 승인 필요. 번다운 레이트를 추적하여
+                    런웨이(남은 운영 기간)를 실시간으로 계산.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>투자자 신뢰:</strong> 자금 사용 내역을 투자자에게 투명하게 공개
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg">
+                  <h5 className="font-bold text-gray-900 dark:text-white mb-2">8. 토큰 발행사 재무 관리</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    자사가 발행한 토큰 중 회사 보유분(Treasury)을 안전하게 보관.
+                    마케팅 에어드랍, 파트너십 지급, 팀 베스팅 등 용도별로 지갑을 분리하고
+                    각각 다른 승인 규칙 적용. 토큰 가격에 영향을 주는 대량 매도는 이사회 승인 필수.
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <strong>토큰 이코노미 보호:</strong> 무분별한 토큰 유통 방지
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-6 rounded-lg border border-purple-200 dark:border-purple-800">
+            <h5 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">💼 미래는 이미 시작되었습니다</h5>
+            <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+              많은 Web3 기업들은 이미 급여, 투자, 결제를 암호화폐로 처리하고 있습니다.
+              전통 기업들도 점차 암호화폐를 재무에 통합하는 추세입니다.
+            </p>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Custody 지갑은 단순한 보관 솔루션이 아니라, <strong>암호화폐 기반 재무 운영을 위한 필수 인프라</strong>입니다.
+            </p>
+          </div>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">장점</h3>
           <ul>
