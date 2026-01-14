@@ -273,7 +273,7 @@ app.post('/webhooks/walits', async (req, res) => {
 
       await sendEmail({
         to: user.email,
-        subject: "🎉 BASE 에어드랍이 도착했습니다!",
+        subject: "BASE 에어드랍이 도착했습니다!",
         body: \`
           축하합니다!
 

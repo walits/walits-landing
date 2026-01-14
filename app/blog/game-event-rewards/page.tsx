@@ -287,7 +287,7 @@ POST https://your-game-server.com/webhooks/walits
 // 게임 서버에서 푸시 알림 발송
 for (const transfer of webhook.transfers) {
   await sendPushNotification(transfer.accountId, {
-    title: "🎄 크리스마스 보상 도착!",
+    title: "크리스마스 보상 도착!",
     body: \`Ice Dragon 레이드 보상 \${transfer.amount} GameCoin이 지급되었습니다!\`
   });
 }`}</code>

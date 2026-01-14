@@ -78,7 +78,7 @@ export default function AIPortfolioManagementRWAPage() {
           </ul>
 
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8 border-l-4 border-blue-500">
-            <h4 className="font-bold mb-2 text-gray-900 dark:text-white">💡 왜 RWA가 중요한가?</h4>
+            <h4 className="font-bold mb-2 text-gray-900 dark:text-white">왜 RWA가 중요한가?</h4>
             <p className="mb-0">
               비트코인/이더리움 같은 암호화폐는 변동성이 너무 큽니다 (하루 10% 등락도 흔함).
               반면 RWA는 실물 자산에 기반하므로 안정적이고, 배당 수익도 있습니다.
@@ -321,14 +321,14 @@ AI 자동 재투자:
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">1. 시장 데이터 분석</h3>
           <p>
-            AI가 24/7 모니터링하는 데이터:
+            AI가 24시간 연중무휴로 모니터링하는 주요 데이터:
           </p>
-          <ul>
-            <li>✅ <strong>가격 변동</strong>: 보유 자산 실시간 가격</li>
-            <li>✅ <strong>거래량</strong>: 비정상적 거래량 감지</li>
-            <li>✅ <strong>뉴스</strong>: 부동산 규제, 금리 변동 등</li>
-            <li>✅ <strong>경제 지표</strong>: GDP, 실업률, 인플레이션</li>
-            <li>✅ <strong>감정 분석</strong>: SNS/뉴스에서 투자 심리 파악</li>
+          <ul className="space-y-2">
+            <li><strong>가격 변동</strong>: 보유하고 있는 모든 자산의 실시간 가격을 지속적으로 추적합니다.</li>
+            <li><strong>거래량</strong>: 비정상적인 거래량 급증이나 급감을 자동으로 감지하여 이상 신호를 포착합니다.</li>
+            <li><strong>뉴스 모니터링</strong>: 부동산 규제 변경, 금리 변동 등 시장에 영향을 미치는 뉴스를 실시간으로 분석합니다.</li>
+            <li><strong>경제 지표</strong>: GDP 성장률, 실업률, 인플레이션율 등 거시 경제 지표를 종합적으로 고려합니다.</li>
+            <li><strong>감정 분석</strong>: SNS와 뉴스 기사를 분석하여 시장 참여자들의 전반적인 투자 심리를 파악합니다.</li>
           </ul>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2. 개인화 추천</h3>
@@ -430,18 +430,18 @@ AI 추천:
 
           <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8">
             <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
-              🚀 Coming Soon
+              곧 출시 예정
             </div>
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">AI ST 지갑 - 자동 포트폴리오 관리</h3>
             <div className="text-4xl font-bold text-purple-600 mb-4">₩9,900<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
             <p className="text-lg mb-4">또는 운용 자산의 0.5% (연)</p>
-            <ul className="mb-6">
-              <li>✅ AI 자동 리밸런싱</li>
-              <li>✅ 24/7 시장 모니터링</li>
-              <li>✅ 리스크 기반 조정</li>
-              <li>✅ 수익 자동 재투자</li>
-              <li>✅ 세금 최적화</li>
-              <li>✅ 개인화 전략</li>
+            <ul className="mb-6 space-y-2">
+              <li>AI가 자동으로 포트폴리오를 최적 비율로 재조정하여 균형을 유지합니다.</li>
+              <li>24시간 연중무휴로 시장을 모니터링하여 중요한 변화를 즉시 감지합니다.</li>
+              <li>시장 리스크 수준에 따라 자산 배분을 자동으로 조정하여 안정성을 확보합니다.</li>
+              <li>배당이나 임대료 등의 수익을 자동으로 재투자하여 복리 효과를 극대화합니다.</li>
+              <li>세금 효율을 고려한 매매 타이밍을 제안하여 세금 부담을 최소화합니다.</li>
+              <li>개인의 투자 성향과 목표에 맞춘 맞춤형 전략을 제공합니다.</li>
             </ul>
             <Link
               href="/ai-st-wallet"

@@ -131,12 +131,12 @@ export default function NonCustodyVsCustodyWalletPage() {
           </div>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">언제 사용?</h3>
-          <ul>
-            <li>✅ 게임 보상 지급</li>
-            <li>✅ NFT 에어드랍</li>
-            <li>✅ ICO 토큰 발행</li>
-            <li>✅ 메타버스 리워드</li>
-            <li>✅ 대량 프로모션</li>
+          <ul className="space-y-2">
+            <li>게임에서 플레이어들에게 보상을 대량으로 지급해야 할 때 가장 효과적입니다.</li>
+            <li>NFT 에어드랍 이벤트에서 수천 명의 참가자에게 동시에 배포할 때 적합합니다.</li>
+            <li>ICO나 토큰 발행 프로젝트에서 투자자들에게 토큰을 배포하는 용도로 활용할 수 있습니다.</li>
+            <li>메타버스 플랫폼에서 유저들에게 리워드를 실시간으로 지급하는 시스템에 최적화되어 있습니다.</li>
+            <li>대규모 마케팅 프로모션에서 참여자들에게 보상을 즉시 지급하고 싶을 때 유용합니다.</li>
           </ul>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">장점</h3>
@@ -178,12 +178,12 @@ export default function NonCustodyVsCustodyWalletPage() {
           </div>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">언제 사용?</h3>
-          <ul>
-            <li>✅ 암호화폐 거래소</li>
-            <li>✅ 커스터디 서비스</li>
-            <li>✅ 기관 투자자</li>
-            <li>✅ 기업 재무 관리</li>
-            <li>✅ 토큰 발행사 (재무 보관)</li>
+          <ul className="space-y-2">
+            <li>암호화폐 거래소를 운영하면서 고객 자산을 안전하게 보관해야 할 때 필수적입니다.</li>
+            <li>전문 커스터디 서비스를 제공하는 기업이 고객의 자산을 위탁 관리하는 용도로 적합합니다.</li>
+            <li>기관 투자자가 대규모 암호화폐 자산을 안전하게 보유하고 관리해야 할 때 권장됩니다.</li>
+            <li>기업의 재무팀에서 회사 자산을 안전하게 보관하고 다중 승인으로 통제해야 할 때 유용합니다.</li>
+            <li>토큰 발행사가 회사 재무로 보유한 대량의 토큰을 안전하게 보관하는 용도로 활용할 수 있습니다.</li>
           </ul>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">장점</h3>
@@ -252,11 +252,11 @@ export default function NonCustodyVsCustodyWalletPage() {
               <h3 className="text-2xl font-bold mb-4 text-blue-600">Non-Custody</h3>
               <div className="text-4xl font-bold mb-4">₩77,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
               <ul className="space-y-2 mb-6">
-                <li>✅ 무제한 지갑 생성</li>
-                <li>✅ 무제한 트랜잭션</li>
-                <li>✅ ICO 지원</li>
-                <li>✅ RESTful API</li>
-                <li>✅ Webhook</li>
+                <li>지갑을 개수 제한 없이 무제한으로 생성할 수 있습니다.</li>
+                <li>트랜잭션 처리 횟수에 제한이 없어 자유롭게 사용하실 수 있습니다.</li>
+                <li>ICO나 토큰 발행 프로젝트를 완벽하게 지원합니다.</li>
+                <li>RESTful API를 통해 시스템 통합이 간편합니다.</li>
+                <li>Webhook 기능으로 실시간 이벤트 알림을 받을 수 있습니다.</li>
               </ul>
               <Link href="/non-custody-wallet" className="block text-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                 자세히 보기
@@ -267,11 +267,11 @@ export default function NonCustodyVsCustodyWalletPage() {
               <h3 className="text-2xl font-bold mb-4 text-purple-600">Custody</h3>
               <div className="text-4xl font-bold mb-4">₩550,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
               <ul className="space-y-2 mb-6">
-                <li>✅ MPC 2-of-3 보안</li>
-                <li>✅ 다중 승인</li>
-                <li>✅ 정책 기반 거버넌스</li>
-                <li>✅ 완벽한 감사 추적</li>
-                <li>✅ 전담 매니저</li>
+                <li>MPC 2-of-3 보안 방식으로 단일 실패점을 완전히 제거했습니다.</li>
+                <li>다중 승인 시스템으로 금액별 승인 규칙을 유연하게 설정할 수 있습니다.</li>
+                <li>정책 기반 거버넌스를 통해 내부 통제를 강화할 수 있습니다.</li>
+                <li>모든 거래가 완벽하게 감사 추적되어 투명성이 보장됩니다.</li>
+                <li>전담 매니저가 배정되어 기술 지원과 운영 컨설팅을 제공합니다.</li>
               </ul>
               <Link href="/custody-wallet" className="block text-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
                 자세히 보기
@@ -283,9 +283,9 @@ export default function NonCustodyVsCustodyWalletPage() {
           <p>
             <strong>핵심 질문 하나로 결정하세요:</strong>
           </p>
-          <ul>
-            <li>✅ <strong>대량 지급/배포가 목적이라면:</strong> Non-Custody 지갑</li>
-            <li>✅ <strong>대량 자산 안전 보관이 목적이라면:</strong> Custody 지갑</li>
+          <ul className="space-y-2">
+            <li><strong>대량 지급이나 배포가 주요 목적이라면:</strong> Non-Custody 지갑을 선택하시는 것이 가장 효율적입니다. 게임 보상, NFT 에어드랍, ICO 토큰 배포 등에 최적화되어 있습니다.</li>
+            <li><strong>대량 자산의 안전한 보관이 주요 목적이라면:</strong> Custody 지갑을 선택하시는 것이 권장됩니다. 거래소 운영, 기업 재무 관리, 기관 투자자의 자산 보관 등에 적합합니다.</li>
           </ul>
 
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl my-12 text-center">

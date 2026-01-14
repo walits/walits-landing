@@ -164,11 +164,11 @@ Response:
           </p>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">3. 실시간 배포 모니터링</h3>
-          <ul>
-            <li>✅ 전체 진행률 실시간 확인</li>
-            <li>✅ 실패한 트랜잭션 자동 재시도</li>
-            <li>✅ 가스비 최적화 자동 조정</li>
-            <li>✅ Webhook으로 완료 알림</li>
+          <ul className="space-y-2">
+            <li>전체 진행률을 실시간으로 확인할 수 있어 배포 상황을 한눈에 파악하실 수 있습니다.</li>
+            <li>실패한 트랜잭션은 시스템이 자동으로 감지하여 재시도하므로 수동 개입이 필요 없습니다.</li>
+            <li>네트워크 상황에 따라 가스비를 자동으로 최적화하여 불필요한 비용을 절감할 수 있습니다.</li>
+            <li>Webhook을 통해 배포 완료 시 즉시 알림을 받아 후속 작업을 바로 진행하실 수 있습니다.</li>
           </ul>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">실제 사용 사례</h2>
@@ -181,23 +181,23 @@ Response:
               <li>에어드랍 대상자: 35,000명</li>
               <li>총 토큰 배포: 5천만 개</li>
             </ul>
-            <p><strong>Before Walits:</strong></p>
-            <ul>
-              <li>❌ 투자자 지갑 주소 수집 3주</li>
-              <li>❌ 주소 검증 및 오류 수정 1주</li>
-              <li>❌ 배포 스크립트 작성 및 테스트 1주</li>
-              <li>❌ 실제 배포 진행 2일</li>
-              <li>❌ 실패 건 재처리 3일</li>
+            <p><strong>Walits 도입 전:</strong></p>
+            <ul className="space-y-1">
+              <li>투자자들의 지갑 주소를 수집하는 데만 3주가 소요되었습니다.</li>
+              <li>수집한 주소들을 검증하고 오류를 수정하는 데 추가로 1주가 필요했습니다.</li>
+              <li>배포 스크립트를 작성하고 테스트하는 과정에 1주가 더 걸렸습니다.</li>
+              <li>실제 배포를 진행하는 데 2일이 소요되었습니다.</li>
+              <li>실패한 건들을 재처리하는 데 3일이 추가로 필요했습니다.</li>
             </ul>
-            <p><strong>After Walits:</strong></p>
-            <ul>
-              <li>✅ 투자자 이메일 수집만 진행</li>
-              <li>✅ API 통합 1일</li>
-              <li>✅ 전체 배포 완료 10분</li>
-              <li>✅ 실패율 0% (자동 재시도)</li>
+            <p><strong>Walits 도입 후:</strong></p>
+            <ul className="space-y-1">
+              <li>투자자의 이메일 주소만 수집하면 되므로 과정이 매우 단순해졌습니다.</li>
+              <li>API 통합 작업은 단 하루 만에 완료할 수 있습니다.</li>
+              <li>전체 토큰 배포가 단 10분 만에 완료됩니다.</li>
+              <li>자동 재시도 기능 덕분에 실패율이 0%로 유지됩니다.</li>
             </ul>
             <p className="text-lg font-semibold mt-4">
-              📊 결과: 5주 작업이 2일로 단축 (96% 시간 절약)
+              최종 결과: 5주가 걸리던 작업이 2일로 단축되어 96%의 시간을 절약할 수 있었습니다.
             </p>
           </div>
 
@@ -213,11 +213,11 @@ Response:
           </ul>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">보안</h3>
-          <ul>
-            <li>✅ TEE 환경에서 개인키 생성 및 관리</li>
-            <li>✅ Redis 분산 락으로 이중지불 방지</li>
-            <li>✅ 트랜잭션 멱등성 보장</li>
-            <li>✅ 모든 API 호출 감사 로그 기록</li>
+          <ul className="space-y-2">
+            <li>TEE(Trusted Execution Environment) 환경에서 개인키를 생성하고 관리하여 외부 접근을 완전히 차단합니다.</li>
+            <li>Redis 분산 락 시스템을 활용하여 동시 처리 시에도 이중지불이 발생하지 않도록 보장합니다.</li>
+            <li>트랜잭션의 멱등성을 보장하여 같은 요청이 여러 번 실행되어도 중복 처리되지 않습니다.</li>
+            <li>모든 API 호출 내역이 감사 로그에 자동으로 기록되어 완벽한 추적이 가능합니다.</li>
           </ul>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">성능</h3>
@@ -234,13 +234,13 @@ Response:
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Non-Custody Wallet</h3>
             <div className="text-4xl font-bold text-blue-600 mb-4">₩77,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
             <p className="text-lg mb-4">첫 달 무료 • 무제한 트랜잭션 • ICO 완벽 지원</p>
-            <ul className="mb-6">
-              <li>✅ 무제한 지갑 생성</li>
-              <li>✅ 무제한 토큰 배포</li>
-              <li>✅ 커스텀 토큰 지원</li>
-              <li>✅ RESTful API 제공</li>
-              <li>✅ Webhook 알림</li>
-              <li>✅ 24/7 기술 지원</li>
+            <ul className="mb-6 space-y-2">
+              <li>지갑 생성에는 아무런 제한이 없어서, 필요한 만큼의 투자자 계정을 자유롭게 만들 수 있습니다.</li>
+              <li>토큰 배포 역시 횟수나 수량에 제한이 없어, 대규모 에어드랍도 부담 없이 진행하실 수 있습니다.</li>
+              <li>ERC-20, BEP-20 등 다양한 표준의 커스텀 토큰을 모두 지원하여 귀사만의 토큰 이코노미를 구축할 수 있습니다.</li>
+              <li>RESTful API를 제공하여 기존 시스템과의 통합이 간편하고 빠릅니다.</li>
+              <li>Webhook 알림을 통해 중요한 이벤트 발생 시 실시간으로 알림을 받을 수 있습니다.</li>
+              <li>24시간 연중무휴 기술 지원팀이 대기하고 있어 언제든지 도움을 받으실 수 있습니다.</li>
             </ul>
             <Link
               href="/non-custody-wallet"

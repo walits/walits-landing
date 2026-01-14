@@ -90,14 +90,15 @@ export default function EnterpriseCryptoWalletGuidePage() {
           </ul>
 
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8 border-l-4 border-blue-500">
-            <p className="text-lg font-semibold mb-2">✅ Non-Custody 추천 대상</p>
-            <ul className="mb-0">
-              <li>게임사 (보상 지급)</li>
-              <li>NFT 프로젝트 (에어드랍)</li>
-              <li>ICO 프로젝트 (토큰 발행)</li>
-              <li>메타버스 플랫폼 (리워드)</li>
-              <li>커뮤니티 플랫폼 (콘텐츠 기여 보상)</li>
-              <li>이커머스/O2O (멤버십 포인트)</li>
+            <p className="text-lg font-semibold mb-2">Non-Custody 지갑이 적합한 비즈니스</p>
+            <p className="mb-4">다음과 같은 사업 모델을 운영하고 계신다면 Non-Custody 지갑이 가장 효과적인 솔루션이 될 것입니다. 대량의 토큰 배포와 실시간 보상 지급이 핵심 요구사항인 경우 특히 유용합니다.</p>
+            <ul className="mb-0 space-y-2">
+              <li>게임사의 경우 플레이어들에게 실시간으로 게임 내 보상을 지급해야 하는데, Non-Custody 지갑을 활용하면 수천 명의 유저에게 동시에 보상을 분배할 수 있습니다.</li>
+              <li>NFT 프로젝트를 진행하시는 경우 대규모 에어드랍 캠페인을 진행할 때 각 참여자에게 자동으로 지갑을 생성하고 토큰을 배포하는 과정이 필요합니다.</li>
+              <li>ICO나 토큰 발행 프로젝트에서는 투자자별로 독립된 지갑을 자동 생성하고 토큰을 배분하는 시스템이 반드시 필요합니다.</li>
+              <li>메타버스 플랫폼 운영자라면 사용자 활동에 따른 리워드를 즉시 지급할 수 있는 유연한 시스템이 필요할 것입니다.</li>
+              <li>커뮤니티 플랫폼에서 양질의 콘텐츠를 작성하거나 기여한 멤버들에게 토큰 보상을 지급하려는 경우 자동화된 배포 시스템이 효율적입니다.</li>
+              <li>이커머스나 O2O 서비스를 운영하신다면 멤버십 포인트를 토큰 형태로 관리하여 투명성을 높이고 사용자 참여를 유도할 수 있습니다.</li>
             </ul>
           </div>
 
@@ -113,14 +114,15 @@ export default function EnterpriseCryptoWalletGuidePage() {
           </ul>
 
           <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg my-8 border-l-4 border-purple-500">
-            <p className="text-lg font-semibold mb-2">✅ Custody 추천 대상</p>
-            <ul className="mb-0">
-              <li>암호화폐 거래소</li>
-              <li>커스터디 서비스</li>
-              <li>토큰 발행사 (재무 관리)</li>
-              <li>기관 투자자</li>
-              <li>멀티체인 보유 기업 (통합 재무 관리)</li>
-              <li>자산관리사 (세무·회계 처리)</li>
+            <p className="text-lg font-semibold mb-2">Custody 지갑이 필요한 기업</p>
+            <p className="mb-4">고객 자산을 직접 보관하거나 대규모 운영 자금을 관리해야 하는 기업에게는 Custody 지갑의 강력한 보안 체계가 필수적입니다. 다음과 같은 비즈니스 모델에서 특히 중요한 역할을 합니다.</p>
+            <ul className="mb-0 space-y-2">
+              <li>암호화폐 거래소를 운영하시는 경우 수천억 원에 달하는 고객 자산을 안전하게 보관하고 관리해야 하는 책임이 있으며, 이를 위해 MPC 기반의 다중 승인 시스템이 반드시 필요합니다.</li>
+              <li>커스터디 서비스 제공업체라면 제3자의 자산을 수탁 관리하는 만큼 더욱 엄격한 보안 기준과 내부 통제 프로세스가 요구됩니다.</li>
+              <li>토큰 발행사의 경우 프로젝트 운영 자금이나 토큰 재무 관리를 위해 안전한 보관 솔루션이 필요하며, 특히 대규모 자금 이동 시 다중 승인 워크플로우가 중요합니다.</li>
+              <li>기관 투자자들은 대량의 암호화폐 자산을 장기 보유하면서도 언제든 안전하게 인출할 수 있는 시스템을 원하며, 이때 MPC 2-of-3 구조가 이상적입니다.</li>
+              <li>여러 블록체인에 걸쳐 자산을 보유한 기업이라면 모든 체인의 자산을 하나의 통합된 Custody 시스템에서 관리하면 재무 관리 효율성이 크게 향상됩니다.</li>
+              <li>자산관리사나 회계법인에서 고객의 암호화폐 자산을 관리하는 경우 세무 처리와 회계 감사를 위한 완벽한 거래 기록과 추적 시스템이 필수적입니다.</li>
             </ul>
           </div>
 
@@ -151,11 +153,11 @@ export default function EnterpriseCryptoWalletGuidePage() {
 
           <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Non-Custody Wallet</h3>
-            <ul className="mb-4">
-              <li>월 ₩77,000 (첫 달 무료)</li>
-              <li>무제한 트랜잭션</li>
-              <li>ICO/커스텀 토큰 지원</li>
-              <li>TEE 환경 보안</li>
+            <ul className="mb-4 space-y-2">
+              <li>월 이용료는 77,000원이며, 처음 한 달은 무료로 모든 기능을 체험하실 수 있습니다.</li>
+              <li>트랜잭션 처리에는 횟수 제한이 전혀 없어서, 대량 처리가 필요한 상황에서도 추가 비용 걱정 없이 사용하실 수 있습니다.</li>
+              <li>ICO나 커스텀 토큰 발행을 계획하고 계신다면 완벽하게 지원되는 시스템을 갖추고 있습니다.</li>
+              <li>TEE(Trusted Execution Environment) 환경에서 모든 개인키가 안전하게 관리되어 외부 접근으로부터 완전히 차단됩니다.</li>
             </ul>
             <Link href="/non-custody-wallet" className="text-blue-600 hover:underline font-semibold">
               자세히 보기 →
@@ -164,11 +166,11 @@ export default function EnterpriseCryptoWalletGuidePage() {
 
           <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Custody Wallet</h3>
-            <ul className="mb-4">
-              <li>월 ₩550,000 (첫 달 무료)</li>
-              <li>MPC 2-of-3 보안</li>
-              <li>다중 승인 워크플로우</li>
-              <li>전담 계정 매니저</li>
+            <ul className="mb-4 space-y-2">
+              <li>월 이용료는 550,000원이며, 처음 한 달은 무료로 전체 시스템을 테스트해보실 수 있습니다.</li>
+              <li>MPC 2-of-3 보안 방식을 채택하여 단일 실패점을 완전히 제거하고, 3개의 키 조각 중 2개만 있으면 서명이 가능한 구조로 설계되었습니다.</li>
+              <li>다중 승인 워크플로우를 통해 금액별로 서로 다른 승인 규칙을 설정할 수 있어, CEO와 CFO의 승인이 모두 필요한 경우에도 유연하게 대응 가능합니다.</li>
+              <li>전담 계정 매니저가 배정되어 기술 지원부터 운영 컨설팅까지 모든 과정을 함께 진행해드립니다.</li>
             </ul>
             <Link href="/custody-wallet" className="text-purple-600 hover:underline font-semibold">
               자세히 보기 →

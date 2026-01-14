@@ -137,17 +137,17 @@ export default function SecurityTokenSTOGuidePage() {
             고가 자산을 소액으로 나눠서 투자 가능:
           </p>
           <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-6">
-            <h4 className="font-bold mb-4 text-gray-900 dark:text-white">Before STO</h4>
-            <ul>
-              <li>❌ 강남 빌딩 투자: 최소 100억 원 필요</li>
-              <li>❌ 일반인은 투자 불가</li>
-              <li>❌ 부자만 투자 가능</li>
+            <h4 className="font-bold mb-4 text-gray-900 dark:text-white">STO 도입 전</h4>
+            <ul className="space-y-1">
+              <li>강남 빌딩에 투자하려면 최소 100억 원 전액이 필요합니다.</li>
+              <li>일반인은 이런 고가 자산에 투자할 기회 자체가 없습니다.</li>
+              <li>결국 매우 부유한 투자자만 접근할 수 있습니다.</li>
             </ul>
-            <h4 className="font-bold mb-4 mt-6 text-gray-900 dark:text-white">After STO</h4>
-            <ul>
-              <li>✅ 강남 빌딩 투자: 1억 원부터 가능</li>
-              <li>✅ 일반인도 투자 가능</li>
-              <li>✅ 포트폴리오 다각화</li>
+            <h4 className="font-bold mb-4 mt-6 text-gray-900 dark:text-white">STO 도입 후</h4>
+            <ul className="space-y-1">
+              <li>강남 빌딩에 1억 원부터 투자할 수 있어 진입 장벽이 크게 낮아집니다.</li>
+              <li>일반인도 프리미엄 부동산에 투자할 수 있는 기회가 열립니다.</li>
+              <li>여러 자산에 분산 투자하여 포트폴리오를 다각화할 수 있습니다.</li>
             </ul>
           </div>
 
@@ -276,10 +276,10 @@ AI: "50만 원으로 추가 투자 가능한 STO:"
           </div>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">3. 리스크 모니터링</h3>
-          <ul>
-            <li>✅ <strong>가격 하락 알림</strong>: 보유 토큰 10% 하락 시 즉시 알림</li>
-            <li>✅ <strong>신용등급 변동</strong>: 채권 발행사 신용등급 하락 시 경고</li>
-            <li>✅ <strong>시장 위험</strong>: 부동산 시장 과열 시 매도 추천</li>
+          <ul className="space-y-2">
+            <li><strong>가격 하락 알림</strong>: 보유하고 있는 토큰 가격이 10% 이상 하락하면 즉시 알림을 받아 적절한 조치를 취할 수 있습니다.</li>
+            <li><strong>신용등급 변동</strong>: 채권 발행사의 신용등급이 하락하면 자동으로 경고가 발송되어 리스크를 미리 파악할 수 있습니다.</li>
+            <li><strong>시장 위험 감지</strong>: 부동산 시장이 과열 조짐을 보이면 AI가 매도를 추천하여 손실을 최소화할 수 있습니다.</li>
           </ul>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">규제 및 컴플라이언스</h2>
@@ -296,10 +296,10 @@ AI: "50만 원으로 추가 투자 가능한 STO:"
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">한국 규제 현황 (2026년)</h3>
           <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg my-6 border-l-4 border-yellow-500">
-            <ul>
-              <li>✅ <strong>자본시장법</strong>: STO는 증권으로 분류, 금융위 규제</li>
-              <li>✅ <strong>거래소 상장</strong>: 인가받은 거래소에서만 거래 가능</li>
-              <li>✅ <strong>투자자 보호</strong>: 손실 발생 시 법적 보호</li>
+            <ul className="space-y-2">
+              <li><strong>자본시장법</strong>: STO는 증권으로 분류되어 금융위원회의 규제를 받으므로 법적 안정성이 확보됩니다.</li>
+              <li><strong>거래소 상장</strong>: 정부로부터 인가받은 거래소에서만 거래가 가능하여 투자자 보호가 강화됩니다.</li>
+              <li><strong>투자자 보호</strong>: 만약 손실이 발생하더라도 기존 증권법에 따라 법적 보호를 받을 수 있습니다.</li>
             </ul>
           </div>
 
@@ -307,35 +307,35 @@ AI: "50만 원으로 추가 투자 가능한 STO:"
 
           <div className="space-y-6 my-8">
             <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg">
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">🏢 Case 1: 싱가포르 상업용 빌딩 STO</h4>
+              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">사례 1: 싱가포르 상업용 빌딩 STO</h4>
               <p><strong>자산:</strong> 싱가포르 오차드 로드 오피스 빌딩 (₩500억)</p>
               <p><strong>토큰 발행:</strong> 50,000개 (1토큰 = ₩100만 원)</p>
               <p><strong>투자자:</strong> 2,000명 (평균 투자액 ₩2,500만 원)</p>
               <p><strong>수익:</strong> 연 임대료 5% (매월 자동 분배)</p>
               <p className="text-lg font-semibold mt-4">
-                📊 결과: 소액 투자자도 프리미엄 부동산 투자 가능
+                최종 결과: 소액 투자자들도 프리미엄 상업용 부동산에 투자할 수 있는 기회가 열렸습니다.
               </p>
             </div>
 
             <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">💰 Case 2: 미국 국채 STO</h4>
+              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">사례 2: 미국 국채 STO</h4>
               <p><strong>자산:</strong> 미국 10년 국채 (안정적 수익)</p>
               <p><strong>토큰 발행:</strong> 100,000개 (1토큰 = $1,000)</p>
               <p><strong>이자:</strong> 연 4% (반기별 자동 지급)</p>
               <p><strong>만기:</strong> 10년 후 원금 상환</p>
               <p className="text-lg font-semibold mt-4">
-                📊 결과: 해외 투자자도 미국 국채에 쉽게 투자
+                최종 결과: 전 세계 해외 투자자들도 미국 국채에 쉽고 빠르게 투자할 수 있게 되었습니다.
               </p>
             </div>
 
             <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg">
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">🎨 Case 3: 피카소 그림 STO</h4>
+              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">사례 3: 피카소 그림 STO</h4>
               <p><strong>자산:</strong> 피카소 \"Blue Period\" (₩100억)</p>
               <p><strong>토큰 발행:</strong> 10,000개 (1토큰 = ₩100만 원)</p>
               <p><strong>투자자:</strong> 500명</p>
               <p><strong>수익:</strong> 미술품 가치 상승 (3년 후 ₩150억 평가)</p>
               <p className="text-lg font-semibold mt-4">
-                📊 결과: 일반인도 명품 미술품 투자로 50% 수익
+                최종 결과: 일반 투자자들도 명품 미술품에 투자하여 50%의 수익을 올릴 수 있었습니다.
               </p>
             </div>
           </div>
@@ -344,16 +344,16 @@ AI: "50만 원으로 추가 투자 가능한 STO:"
 
           <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8">
             <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
-              🚀 Coming Soon
+              곧 출시 예정
             </div>
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">AI ST 지갑</h3>
             <div className="text-4xl font-bold text-purple-600 mb-4">무료<span className="text-lg text-gray-600 dark:text-gray-400"> (베타 기간)</span></div>
             <ul className="mb-6">
-              <li>✅ 증권형 토큰(STO) 보관</li>
-              <li>✅ AI 포트폴리오 관리</li>
-              <li>✅ 자동 배당 수령</li>
-              <li>✅ 리스크 모니터링</li>
-              <li>✅ 자동 수익 재투자</li>
+              <li>증권형 토큰(STO)을 안전하게 보관하고 관리할 수 있습니다.</li>
+              <li>AI가 자동으로 포트폴리오를 분석하고 최적화된 투자 전략을 제안합니다.</li>
+              <li>배당금이나 임대료 등의 수익을 자동으로 지갑에 수령할 수 있습니다.</li>
+              <li>실시간으로 리스크를 모니터링하여 위험 요소를 조기에 파악합니다.</li>
+              <li>받은 수익을 자동으로 재투자하여 복리 효과를 극대화합니다.</li>
             </ul>
             <Link
               href="/ai-st-wallet"

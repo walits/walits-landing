@@ -70,11 +70,11 @@ export default function MessengerCryptoTransferPage() {
             <p className="font-mono text-sm break-all mb-2">
               0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb7
             </p>
-            <ul className="mb-0">
-              <li>❌ 42자리 영숫자 조합</li>
-              <li>❌ 한 글자만 틀려도 영구 손실</li>
-              <li>❌ 복사/붙여넣기 필수</li>
-              <li>❌ 초보자는 사용 불가</li>
+            <ul className="mb-0 space-y-1">
+              <li>42자리의 영문자와 숫자가 무작위로 조합된 형태로, 일반인이 외우기는 사실상 불가능합니다.</li>
+              <li>단 한 글자라도 잘못 입력하면 자산이 영구적으로 손실되며, 되돌릴 방법이 전혀 없습니다.</li>
+              <li>매번 복사와 붙여넣기를 해야 하는데, 이 과정에서 클립보드 해킹 위험에 노출될 수 있습니다.</li>
+              <li>암호화폐를 처음 접하는 초보자들에게는 진입 장벽이 너무 높아서 실제로 사용하기 어렵습니다.</li>
             </ul>
           </div>
 
@@ -86,10 +86,11 @@ export default function MessengerCryptoTransferPage() {
           </ul>
 
           <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg my-8 border-l-4 border-yellow-500">
-            <p className="font-semibold mb-2">💡 왜 이렇게 복잡할까?</p>
+            <p className="font-semibold mb-2">왜 이렇게 복잡할까요?</p>
             <p className="mb-0">
-              블록체인은 원래 기술 중심으로 설계되었습니다. 사용자 경험은 2순위였죠.
-              하지만 2026년 지금, 일반인도 쉽게 쓸 수 있어야 합니다.
+              블록체인 기술은 초기부터 보안과 탈중앙화에 초점을 맞춰 설계되었기 때문에, 사용자 편의성은 상대적으로 우선순위가 낮았습니다.
+              하지만 2026년인 지금, 일반인들도 쉽게 사용할 수 있는 직관적인 인터페이스가 반드시 필요한 시점입니다.
+              기술이 아무리 훌륭해도 사람들이 쉽게 접근할 수 없다면 대중화될 수 없기 때문입니다.
             </p>
           </div>
 
@@ -107,10 +108,11 @@ export default function MessengerCryptoTransferPage() {
      → 자동으로 USDT로 환전 후 전송
 
 [Auto Chat 봇]
-✅ 10,000 KRW → 7.5 USDT 전송 완료
-   수신: 친구이름 (김철수)
-   네트워크: Polygon (가스비 ₩50)
-   완료 시간: 5초
+전송이 완료되었습니다
+   10,000원이 7.5 USDT로 환전되어 전송되었습니다
+   수신자: 친구이름 (김철수)
+   네트워크: Polygon (가스비 약 50원)
+   처리 시간: 5초
 
 친구: 받았어! 고마워~`}
             </pre>
@@ -128,12 +130,13 @@ Bob: /send @Alice 25 USD
      → Automatically converts to USDT
 
 [Walits Bot]
-✅ $25 USD → 25 USDT sent
+Transfer completed successfully
+   $25 USD has been converted to 25 USDT and sent
    To: @Alice
-   Network: Arbitrum (gas $0.10)
-   Time: 3 seconds
+   Network: Arbitrum (gas fee $0.10)
+   Processing time: 3 seconds
 
-Alice: Received! Thanks Bob 🙏`}
+Alice: Received! Thanks Bob!`}
             </pre>
           </div>
 
@@ -170,19 +173,19 @@ Alice: Received! Thanks Bob 🙏`}
                   <td className="p-2">Ethereum</td>
                   <td className="p-2">₩3,000</td>
                   <td className="p-2">1분</td>
-                  <td className="p-2">❌</td>
+                  <td className="p-2">선택 안 함</td>
                 </tr>
                 <tr className="border-b border-gray-300 dark:border-gray-700">
                   <td className="p-2">Polygon</td>
                   <td className="p-2">₩50</td>
                   <td className="p-2">5초</td>
-                  <td className="p-2">✅ 선택!</td>
+                  <td className="p-2">AI 선택됨</td>
                 </tr>
                 <tr className="border-b border-gray-300 dark:border-gray-700">
                   <td className="p-2">Arbitrum</td>
                   <td className="p-2">₩100</td>
                   <td className="p-2">3초</td>
-                  <td className="p-2">❌</td>
+                  <td className="p-2">선택 안 함</td>
                 </tr>
               </tbody>
             </table>
@@ -201,16 +204,16 @@ Alice: Received! Thanks Bob 🙏`}
     → 자동으로 1/4 = 25,000원씩 계산
 
 [Auto Chat 봇]
-✅ 정산 요청 발송
-   철수: 25,000원
-   영희: 25,000원
-   민수: 25,000원
+정산 요청이 발송되었습니다
+   철수님께: 25,000원
+   영희님께: 25,000원
+   민수님께: 25,000원
 
-[철수 승인] ✅ 25,000원 전송 완료
-[영희 승인] ✅ 25,000원 전송 완료
-[민수 승인] ✅ 25,000원 전송 완료
+[철수님 승인] 25,000원 전송이 완료되었습니다
+[영희님 승인] 25,000원 전송이 완료되었습니다
+[민수님 승인] 25,000원 전송이 완료되었습니다
 
-총 75,000원 수령 완료!`}
+총 75,000원을 모두 수령하셨습니다`}
             </pre>
           </div>
 
@@ -230,10 +233,10 @@ Alice: Received! Thanks Bob 🙏`}
           <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">보안은 어떻게?</h2>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">다단계 인증</h3>
-          <ul>
-            <li>✅ <strong>생체인증</strong>: 지문/얼굴 인식 (1만 원 이상)</li>
-            <li>✅ <strong>PIN 코드</strong>: 6자리 핀 (10만 원 이상)</li>
-            <li>✅ <strong>2FA</strong>: 이메일/SMS 인증 (100만 원 이상)</li>
+          <ul className="space-y-2">
+            <li><strong>생체인증</strong>: 1만 원 이상 송금 시 지문이나 얼굴 인식을 통한 본인 확인이 필요합니다.</li>
+            <li><strong>PIN 코드</strong>: 10만 원 이상의 금액에서는 6자리 PIN 코드를 추가로 입력해야 합니다.</li>
+            <li><strong>2단계 인증(2FA)</strong>: 100만 원 이상의 고액 거래에서는 이메일이나 SMS로 전송되는 인증 코드를 입력해야 최종 승인됩니다.</li>
           </ul>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">일일 한도</h3>
@@ -268,15 +271,15 @@ Alice: Received! Thanks Bob 🙏`}
           </p>
           <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-6">
             <pre className="text-sm">
-{`[나쁜 시나리오 - 방지됨]
+{`[이중지불 시도 시나리오 - 자동 방지]
 
-잔액: 10,000원
+현재 잔액: 10,000원
 
-동시에 두 번 송금 시도:
- ├─ /send 친구A 10000 → ⏳ 대기
- └─ /send 친구B 10000 → ❌ 차단 (잔액 부족)
+동시에 두 건의 송금을 시도하는 경우:
+ 첫 번째: /send 친구A 10000 → 처리 중 대기
+ 두 번째: /send 친구B 10000 → 차단됨 (잔액 부족)
 
-✅ 첫 번째만 실행, 두 번째 자동 차단`}
+결과: 첫 번째 거래만 실행되고, 두 번째는 자동으로 차단됩니다`}
             </pre>
           </div>
 
@@ -284,7 +287,7 @@ Alice: Received! Thanks Bob 🙏`}
 
           <div className="space-y-6 my-8">
             <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">📱 Case 1: 대학생 A (22세)</h4>
+              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">사례 1: 대학생 A (22세)</h4>
               <p className="mb-2">
                 <strong>상황:</strong> 친구들과 배달 음식 시켜먹고 더치페이
               </p>
@@ -299,7 +302,7 @@ Alice: Received! Thanks Bob 🙏`}
             </div>
 
             <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg">
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">🌏 Case 2: 해외 프리랜서 B</h4>
+              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">사례 2: 해외 프리랜서 B</h4>
               <p className="mb-2">
                 <strong>상황:</strong> 한국 클라이언트에게 작업비 받기
               </p>
@@ -314,7 +317,7 @@ Alice: Received! Thanks Bob 🙏`}
             </div>
 
             <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg">
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">🎨 Case 3: 콘텐츠 크리에이터 C</h4>
+              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">사례 3: 콘텐츠 크리에이터 C</h4>
               <p className="mb-2">
                 <strong>상황:</strong> 팬들에게 소액 후원 받기
               </p>
@@ -333,16 +336,16 @@ Alice: Received! Thanks Bob 🙏`}
 
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-8 rounded-xl my-8">
             <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
-              🚀 Coming Soon
+              곧 출시 예정
             </div>
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Auto Chat 지갑</h3>
             <div className="text-4xl font-bold text-blue-600 mb-4">무료<span className="text-lg text-gray-600 dark:text-gray-400"> (베타 기간)</span></div>
-            <ul className="mb-6">
-              <li>✅ 카카오톡/텔레그램 연동</li>
-              <li>✅ AI 자동 최적 경로</li>
-              <li>✅ 그룹 정산 기능</li>
-              <li>✅ 소액 결제 지원</li>
-              <li>✅ 무제한 송금</li>
+            <ul className="mb-6 space-y-2">
+              <li>카카오톡과 텔레그램에서 바로 사용할 수 있도록 완벽하게 연동됩니다.</li>
+              <li>AI가 자동으로 가스비가 가장 저렴한 최적의 경로를 선택하여 송금합니다.</li>
+              <li>그룹 정산 기능으로 여러 명과 함께한 식사비나 여행 경비를 쉽게 나눌 수 있습니다.</li>
+              <li>100원부터 시작하는 소액 결제도 가능하여 크리에이터 후원이나 팁 전송에 최적화되어 있습니다.</li>
+              <li>송금 횟수나 금액에 제한이 없어 얼마든지 자유롭게 거래할 수 있습니다.</li>
             </ul>
             <Link
               href="/auto-chat-wallet"

@@ -77,7 +77,7 @@ export default function MPCWalletSecurityGuidePage() {
           </ul>
 
           <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg my-8 border-l-4 border-red-500">
-            <h4 className="font-bold mb-2 text-gray-900 dark:text-white">❌ 실제 사례: 거래소 해킹</h4>
+            <h4 className="font-bold mb-2 text-gray-900 dark:text-white">실제 사례: 거래소 해킹</h4>
             <p className="mb-0">
               2022년 X거래소: 핫월렛 개인키 탈취로 300억 원 손실. 단일 개인키 의존이 원인.
               2-of-3 시스템이었다면 해커가 1개 키를 탈취해도 자산은 안전했을 것입니다.
@@ -144,7 +144,7 @@ Key Share 3 (오프라인 백업)
           </ul>
 
           <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-8 border-l-4 border-green-500">
-            <h4 className="font-bold mb-2 text-gray-900 dark:text-white">✅ Walits의 장점</h4>
+            <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Walits의 장점</h4>
             <p className="mb-0">
               ECDSA와 EdDSA 모두 지원하므로, 이더리움부터 솔라나까지 모든 주요 체인의 자산을
               단일 MPC 시스템에서 안전하게 보관할 수 있습니다.
@@ -202,12 +202,12 @@ Key Share 3 (오프라인 백업)
           <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">감사 추적 시스템</h2>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">모든 액션 기록</h3>
-          <ul>
-            <li>✅ 누가 (Who): 요청자, 승인자 신원 확인</li>
-            <li>✅ 언제 (When): 요청 시각, 승인 시각, 실행 시각</li>
-            <li>✅ 무엇을 (What): 금액, 수신 주소, 자산 종류</li>
-            <li>✅ 왜 (Why): 출금 사유, 첨부 문서</li>
-            <li>✅ 어떻게 (How): 어떤 키로 서명했는지</li>
+          <ul className="space-y-2">
+            <li><strong>누가 (Who)</strong>: 요청자와 승인자의 신원이 명확하게 기록되어 책임 소재가 분명합니다.</li>
+            <li><strong>언제 (When)</strong>: 요청 시각, 승인 시각, 실행 시각이 모두 타임스탬프와 함께 저장됩니다.</li>
+            <li><strong>무엇을 (What)</strong>: 정확한 금액, 수신 주소, 자산 종류 등 모든 거래 세부 사항이 기록됩니다.</li>
+            <li><strong>왜 (Why)</strong>: 출금 사유와 관련 첨부 문서가 함께 보관되어 나중에 확인할 수 있습니다.</li>
+            <li><strong>어떻게 (How)</strong>: 어떤 키 조합으로 서명했는지 기록되어 감사 추적이 가능합니다.</li>
           </ul>
 
           <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-6">
@@ -292,11 +292,11 @@ Key Share 3 (오프라인 백업)
           <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">보안 베스트 프랙티스</h2>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Key Share 보관 원칙</h3>
-          <ul>
-            <li>✅ <strong>물리적 분리</strong>: 3개 키를 다른 장소에 보관</li>
-            <li>✅ <strong>역할 분리</strong>: 서로 다른 사람이 관리</li>
-            <li>✅ <strong>다양한 형태</strong>: 모바일 + 하드웨어 + 오프라인</li>
-            <li>✅ <strong>정기 테스트</strong>: 월 1회 복구 테스트</li>
+          <ul className="space-y-2">
+            <li><strong>물리적 분리</strong>: 3개의 키를 서로 다른 물리적 장소에 보관하여 한 곳이 침해되어도 안전합니다.</li>
+            <li><strong>역할 분리</strong>: 각 키를 서로 다른 책임자가 관리하도록 하여 내부 통제를 강화합니다.</li>
+            <li><strong>다양한 형태</strong>: 모바일 기기, 하드웨어 키, 오프라인 백업 등 다양한 형태로 보관합니다.</li>
+            <li><strong>정기 테스트</strong>: 월 1회 정기적으로 복구 테스트를 실시하여 비상 상황에 대비합니다.</li>
           </ul>
 
           <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">추천 구성</h3>
@@ -334,7 +334,7 @@ Key Share 3 (오프라인 백업)
               <li>모든 승인 기록 블록체인에 기록</li>
             </ul>
             <p className="text-lg font-semibold mt-4">
-              📊 결과: 내부 통제 강화, 해킹 시도 3건 차단 성공
+              최종 결과: 내부 통제가 크게 강화되었고, 실제로 해킹 시도 3건을 성공적으로 차단할 수 있었습니다.
             </p>
           </div>
 
@@ -344,13 +344,13 @@ Key Share 3 (오프라인 백업)
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Custody Wallet (MPC 2-of-3)</h3>
             <div className="text-4xl font-bold text-purple-600 mb-4">₩550,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
             <p className="text-lg mb-4">첫 달 무료 • 전담 매니저 지원</p>
-            <ul className="mb-6">
-              <li>✅ MPC 2-of-3 보안</li>
-              <li>✅ ECDSA & EdDSA 지원</li>
-              <li>✅ 다중 승인 워크플로우</li>
-              <li>✅ 정책 기반 거버넌스</li>
-              <li>✅ 완벽한 감사 추적</li>
-              <li>✅ 24/7 기술 지원</li>
+            <ul className="mb-6 space-y-2">
+              <li>MPC 2-of-3 보안 방식으로 단일 실패점을 완전히 제거했습니다.</li>
+              <li>ECDSA와 EdDSA 알고리즘을 모두 지원하여 모든 주요 블록체인과 호환됩니다.</li>
+              <li>다중 승인 워크플로우를 통해 금액별로 차등화된 승인 규칙을 적용할 수 있습니다.</li>
+              <li>정책 기반 거버넌스 시스템으로 내부 통제를 체계적으로 관리합니다.</li>
+              <li>모든 거래와 승인 과정이 완벽하게 감사 추적되어 투명성이 보장됩니다.</li>
+              <li>24시간 연중무휴 기술 지원팀이 대기하고 있어 언제든지 도움을 받을 수 있습니다.</li>
             </ul>
             <Link
               href="/custody-wallet"

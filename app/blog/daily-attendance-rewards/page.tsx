@@ -288,7 +288,7 @@ cron.schedule('5 0 * * *', async () => {
     // 슬랙 알림
     await sendSlackNotification({
       channel: '#game-operations',
-      text: \`✅ 출석 보상 지급 완료\\n- 대상: \${attendees.length}명\\n- 총 지급액: \${response.data.totalAmount} Gold\\n- 처리 시간: \${response.data.processedAt}\`
+      text: \`출석 보상 지급 완료\\n- 대상: \${attendees.length}명\\n- 총 지급액: \${response.data.totalAmount} Gold\\n- 처리 시간: \${response.data.processedAt}\`
     });
 
   } catch (error) {
@@ -297,7 +297,7 @@ cron.schedule('5 0 * * *', async () => {
     // 슬랙 에러 알림
     await sendSlackNotification({
       channel: '#game-operations',
-      text: \`❌ 출석 보상 지급 실패\\n\${error.message}\`
+      text: \`출석 보상 지급 실패\\n\${error.message}\`
     });
   }
 }, {
@@ -324,7 +324,7 @@ console.log('출석 보상 Cron Job 시작됨 (매일 00:05 KST)');`}</code>
 }
 
 // 슬랙 알림 예시
-// ✅ 출석 보상 지급 완료
+// 출석 보상 지급 완료
 // - 대상: 3,542명
 // - 총 지급액: 48,320 Gold
 // - 처리 시간: 2024-12-13T00:05:03Z

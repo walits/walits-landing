@@ -101,7 +101,7 @@ export default function AIAutoPaymentSubscriptionPage() {
           </ul>
 
           <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg my-8 border-l-4 border-yellow-500">
-            <h4 className="font-bold mb-2 text-gray-900 dark:text-white">💸 실제 사례</h4>
+            <h4 className="font-bold mb-2 text-gray-900 dark:text-white">실제 사례</h4>
             <p className="mb-0">
               프리랜서 A씨: 월말에 AWS 청구서 50만 원, Netflix/Spotify 등 소액 구독 10개.
               체크카드 잔액 부족으로 모든 서비스 일시 중단. 프로젝트 데모 당일 AWS 서버 다운.
@@ -117,7 +117,7 @@ export default function AIAutoPaymentSubscriptionPage() {
 {`[Auto Chat 지갑]
 
 나: /subscribe Netflix 15.49 USD monthly
-AI: ✅ Netflix 구독 등록 완료
+AI: Netflix 구독이 성공적으로 등록되었습니다
     금액: $15.49 (약 ₩20,137)
     결제일: 매월 3일
     다음 결제: 2026-02-03`}
@@ -142,12 +142,12 @@ AI: ✅ Netflix 구독 등록 완료
    ✗ Arbitrum: 가스비 $0.05
 
 4. 자동 결제 실행
-   ✅ 15.49 USDT 전송 (Polygon)
-   ✅ 가스비: $0.01
-   ✅ 총 비용: $15.50
+   15.49 USDT가 Polygon 네트워크를 통해 전송되었습니다
+   가스비는 단 $0.01만 소요되었습니다
+   총 결제 금액: $15.50
 
 5. 알림 발송
-   📧 Netflix 구독료 결제 완료
+   Netflix 구독료 결제가 완료되었다는 확인 메일이 발송되었습니다
       다음 결제: 2026-03-03`}
             </pre>
           </div>
@@ -166,7 +166,7 @@ AI: ✅ Netflix 구독 등록 완료
 AI 환율 모니터링:
  2월 1일: 1 USD = 1,350 KRW → ₩20,912 (대기)
  2월 2일: 1 USD = 1,330 KRW → ₩20,602 (대기)
- 2월 3일: 1 USD = 1,310 KRW → ₩20,292 ✅ 결제!
+ 2월 3일: 1 USD = 1,310 KRW → ₩20,292 결제가 완료되었습니다
 
 → AI가 가장 낮은 환율 시점을 포착해 자동 결제
 → 절감: ₩620 (3%)`}
@@ -184,7 +184,7 @@ AI 환율 모니터링:
             <pre className="text-sm">
 {`[2026-01-28 - AI 알림]
 
-⚠️ 잔액 부족 경고
+잔액 부족 경고
    현재 잔액: 30 USDT
    예정 결제 (2월 1~5일):
     - Netflix: 15.49 USD
@@ -210,13 +210,13 @@ AI 환율 모니터링:
 구독 서비스: 7개
 
 사용 빈도 분석:
- ✅ Netflix: 매일 사용 → 유지 추천
- ✅ Spotify: 매일 사용 → 유지 추천
- ⚠️ YouTube Premium: 주 1회 → 재고려 추천
- ⚠️ Adobe CC: 월 1회 → 필요시 구매 추천
- ❌ iCloud 200GB: 사용률 30% → 50GB 요금제로 변경 추천
+ Netflix는 매일 사용하고 있으니 계속 유지하는 것이 좋습니다
+ Spotify도 매일 활발하게 사용 중이므로 유지를 추천합니다
+ YouTube Premium은 주 1회만 사용하고 있어 필요성을 재검토해보시기 바랍니다
+ Adobe CC는 월 1회만 사용하고 있으니 필요할 때마다 구매하는 것이 더 경제적일 수 있습니다
+ iCloud 200GB는 30%만 사용 중이므로 50GB 요금제로 변경하면 비용을 절감할 수 있습니다
 
-💡 AI 추천:
+AI 분석 결과 및 추천사항:
 1. YouTube Premium 해지 시 ₩14,900 절약
 2. iCloud 요금제 다운그레이드 시 ₩2,200 절약
 3. Adobe 연 구독으로 변경 시 월 ₩5,000 절약
@@ -307,9 +307,9 @@ AI 환율 모니터링:
  ├─ Adobe CC: $150
 
 AI가 자동으로:
-✅ 팀별 예산 초과 알림
-✅ 미사용 서비스 해지 추천
-✅ 더 저렴한 대안 제안`}
+팀별로 설정된 예산을 초과할 경우 즉시 알림이 발송됩니다
+사용하지 않는 서비스를 AI가 자동으로 감지하여 해지를 추천해드립니다
+현재 사용 중인 서비스보다 더 저렴한 대안이 있으면 자동으로 제안해드립니다`}
             </pre>
           </div>
 
@@ -335,7 +335,7 @@ AI가 자동으로:
 
 예시:
 나: /pause Netflix
-AI: ✅ Netflix 자동 결제 일시 정지
+AI: Netflix 자동 결제가 일시 정지되었습니다
     다음 결제 예정일에 알림만 보냅니다.
     재개: /resume Netflix`}
             </pre>
@@ -345,17 +345,17 @@ AI: ✅ Netflix 자동 결제 일시 정지
 
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-8 rounded-xl my-8">
             <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
-              🚀 Coming Soon
+              곧 출시 예정
             </div>
             <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Auto Chat 지갑 - AI 자동 결제</h3>
             <div className="text-4xl font-bold text-blue-600 mb-4">₩5,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
             <p className="text-lg mb-4">구독 서비스 10개 이상 사용 시 가치 있는 투자</p>
             <ul className="mb-6">
-              <li>✅ 무제한 구독 등록</li>
-              <li>✅ AI 환율 최적화</li>
-              <li>✅ AI 지출 분석</li>
-              <li>✅ 자동 결제 및 알림</li>
-              <li>✅ 팀 예산 관리</li>
+              <li>구독 서비스를 개수 제한 없이 무제한으로 등록하고 관리할 수 있습니다.</li>
+              <li>AI가 실시간 환율을 모니터링하여 가장 유리한 시점에 자동으로 결제를 진행합니다.</li>
+              <li>매월 지출 패턴을 AI가 분석하여 불필요한 구독이나 절감 가능한 항목을 찾아드립니다.</li>
+              <li>결제일이 다가오면 자동으로 알림을 보내드리고, 설정에 따라 자동 결제도 가능합니다.</li>
+              <li>팀 단위로 예산을 설정하고 관리할 수 있어 회사나 팀 프로젝트에 최적화되어 있습니다.</li>
             </ul>
             <Link
               href="/auto-chat-wallet"
