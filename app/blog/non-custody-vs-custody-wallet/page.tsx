@@ -175,9 +175,11 @@ Master Wallet → 0x999... ✅ 온체인 전송
                 <div className="flex items-center gap-2 mb-3">
                   <span className="bg-purple-500 text-white text-sm font-bold px-3 py-1 rounded-full">모드 3</span>
                   <h5 className="font-bold text-lg text-gray-900 dark:text-white">대량 에어드랍 (Account 주소 → 온체인)</h5>
+                  <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-semibold px-2 py-1 rounded">Ethereum만 지원</span>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
                   계정 생성 시 등록한 온체인 주소로 직접 토큰을 대량 전송합니다. Virtual Balance는 건드리지 않습니다.
+                  현재 Ethereum 네트워크에서만 BatchTransfer 기능을 제공합니다.
                 </p>
                 <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm font-mono">
 {`POST /api/batch-transfers/airdrop-to-accounts
