@@ -16,12 +16,16 @@ export const metadata: Metadata = {
     "블록체인 보안",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/crypto-custody-service",
+  },
   openGraph: {
     title: "가상자산 수탁서비스 완벽 가이드 | MPC 2-of-3 커스터디 지갑",
     description: "MPC 2-of-3 보안 기술과 Omnibus 구조로 구현한 기업용 가상자산 수탁서비스 완벽 가이드",
     type: "article",
     publishedTime: "2024-12-12T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/crypto-custody-service",
     images: [
       {
         url: "https://walits.com/blog/custody-service.jpg",

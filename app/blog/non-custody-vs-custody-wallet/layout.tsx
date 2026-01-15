@@ -12,12 +12,16 @@ export const metadata: Metadata = {
     "지갑 선택",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/non-custody-vs-custody-wallet",
+  },
   openGraph: {
     title: "Non-Custody vs Custody 지갑 비교 가이드",
     description: "Non-Custody와 Custody 지갑의 차이점과 3가지 운영 모드",
     type: "article",
     publishedTime: "2026-01-08T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/non-custody-vs-custody-wallet",
     images: [
       {
         url: "https://walits.com/blog/wallet-comparison.jpg",

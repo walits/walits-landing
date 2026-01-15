@@ -13,12 +13,16 @@ export const metadata: Metadata = {
     "증권 토큰",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/security-token-sto-guide",
+  },
   openGraph: {
     title: "STO 증권형 토큰 발행 가이드",
     description: "STO 증권형 토큰 발행 완벽 가이드. ICO vs STO 비교와 규제 준수",
     type: "article",
     publishedTime: "2026-01-07T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/security-token-sto-guide",
     images: [
       {
         url: "https://walits.com/blog/sto-guide.jpg",

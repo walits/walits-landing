@@ -12,12 +12,16 @@ export const metadata: Metadata = {
     "포트폴리오 관리",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/ai-portfolio-management-rwa",
+  },
   openGraph: {
     title: "AI 포트폴리오 자산 관리와 RWA",
     description: "AI가 RWA 포트폴리오를 자동으로 관리하고 최적화하는 시스템",
     type: "article",
     publishedTime: "2026-01-12T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/ai-portfolio-management-rwa",
     images: [
       {
         url: "https://walits.com/blog/ai-portfolio.jpg",

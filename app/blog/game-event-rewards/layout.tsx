@@ -15,12 +15,16 @@ export const metadata: Metadata = {
     "게임 코인",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/game-event-rewards",
+  },
   openGraph: {
     title: "게임 이벤트 보상 지급 API 가이드 | Non-Custody 지갑",
     description: "API로 게임 보상을 대량 지급하는 실전 가이드. 단 몇 줄의 코드로 500명에게 토큰 배포",
     type: "article",
     publishedTime: "2024-12-15T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/game-event-rewards",
     images: [
       {
         url: "https://walits.com/blog/game-rewards.jpg",

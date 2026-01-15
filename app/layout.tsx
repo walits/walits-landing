@@ -52,20 +52,11 @@ export const metadata: Metadata = {
     title: "Walits - 기업용 가상자산 지갑 | 토큰증권 · 코인지갑 플랫폼",
     description: "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Non-Custody API 대량 지급, MPC Custody 안전 보관, AI 로보어드바이저, 토큰증권(ST) 지갑",
     siteName: "Walits",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Walits - 기업용 가상자산 지갑 플랫폼",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Walits - 기업용 가상자산 지갑 | 토큰증권 · 코인지갑 플랫폼",
     description: "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Non-Custody API 대량 지급, MPC Custody 안전 보관",
-    images: ["/og-image.png"],
   },
   robots: {
     index: true,

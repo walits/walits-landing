@@ -15,12 +15,16 @@ export const metadata: Metadata = {
     "자동화",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/daily-attendance-rewards",
+  },
   openGraph: {
     title: "자동 출석 보상 시스템 구축 가이드 | 매일 자정 리워드 배포",
     description: "스케줄러와 API로 매일 자동으로 출석 보상을 지급하는 완벽한 시스템 구축 가이드",
     type: "article",
     publishedTime: "2024-12-13T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/daily-attendance-rewards",
     images: [
       {
         url: "https://walits.com/blog/attendance.jpg",

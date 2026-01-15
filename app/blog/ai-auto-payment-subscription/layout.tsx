@@ -12,12 +12,16 @@ export const metadata: Metadata = {
     "AI 결제",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/ai-auto-payment-subscription",
+  },
   openGraph: {
     title: "AI 자동 결제로 구독료 관리하기",
     description: "AI가 자동으로 구독료를 관리하고 결제하는 시스템",
     type: "article",
     publishedTime: "2026-01-11T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/ai-auto-payment-subscription",
     images: [
       {
         url: "https://walits.com/blog/ai-payment.jpg",

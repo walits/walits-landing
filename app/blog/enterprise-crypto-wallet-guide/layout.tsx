@@ -12,12 +12,16 @@ export const metadata: Metadata = {
     "커스터디 지갑",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/enterprise-crypto-wallet-guide",
+  },
   openGraph: {
     title: "기업용 가상자산 지갑 도입 가이드",
     description: "기업이 가상자산 지갑을 도입할 때 고려해야 할 모든 것",
     type: "article",
     publishedTime: "2026-01-13T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/enterprise-crypto-wallet-guide",
     images: [
       {
         url: "https://walits.com/blog/enterprise-wallet.jpg",

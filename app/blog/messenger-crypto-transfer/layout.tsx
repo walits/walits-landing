@@ -12,12 +12,16 @@ export const metadata: Metadata = {
     "채팅 송금",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/messenger-crypto-transfer",
+  },
   openGraph: {
     title: "메신저로 암호화폐 송금하기",
     description: "카카오톡, 텔레그램 등 메신저로 암호화폐를 주고받는 방법",
     type: "article",
     publishedTime: "2026-01-10T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/messenger-crypto-transfer",
     images: [
       {
         url: "https://walits.com/blog/messenger-transfer.jpg",

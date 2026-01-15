@@ -13,12 +13,16 @@ export const metadata: Metadata = {
     "EdDSA",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/mpc-wallet-security-guide",
+  },
   openGraph: {
     title: "MPC 지갑 보안 완벽 가이드 | 2-of-3 다중 승인 시스템",
     description: "MPC 지갑의 보안 원리와 2-of-3 다중 승인 시스템",
     type: "article",
     publishedTime: "2026-01-09T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/mpc-wallet-security-guide",
     images: [
       {
         url: "https://walits.com/blog/mpc-security.jpg",

@@ -15,12 +15,16 @@ export const metadata: Metadata = {
     "토큰 분배",
   ],
   authors: [{ name: "Walits Team" }],
+  alternates: {
+    canonical: "/blog/community-airdrop",
+  },
   openGraph: {
     title: "커뮤니티 에어드랍 대량 지급 가이드 | 1,000명 동시 배포",
     description: "Virtual Balance로 1,000명에게 가스비 없이 즉시 토큰 에어드랍하는 실전 가이드",
     type: "article",
     publishedTime: "2024-12-14T00:00:00Z",
     authors: ["Walits Team"],
+    url: "https://walits.com/blog/community-airdrop",
     images: [
       {
         url: "https://walits.com/blog/airdrop.jpg",
