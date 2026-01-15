@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 export default function StablecoinRegulation2026() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
+
   return (
     <article className="min-h-screen bg-white dark:bg-gray-900 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
