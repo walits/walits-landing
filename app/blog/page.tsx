@@ -44,6 +44,16 @@ export default function BlogPage() {
           image: '/blog/ico-wallet.jpg',
         },
         {
+          id: 'stablecoin-rwa-tokenization-2026',
+          category: '금융 분석',
+          categoryColor: 'bg-orange-100 text-orange-800',
+          title: '2026년 미국 스테이블코인 규제와 RWA 토크나이제이션 전망',
+          excerpt: '37조 달러 부채 위기 속 연준-정부 갈등, GENIUS Act 시행, 그리고 모든 자산이 토큰화되는 미래. 새로운 금융 질서의 탄생을 분석합니다.',
+          date: '2026년 1월 15일',
+          readTime: '25분',
+          image: '/blog/tokenized.jpg',
+        },
+        {
           id: 'mpc-wallet-security-guide',
           category: '보안',
           categoryColor: 'bg-red-100 text-red-800',
@@ -170,6 +180,16 @@ export default function BlogPage() {
           date: 'January 11, 2026',
           readTime: '7 min read',
           image: '/blog/ico-wallet.jpg',
+        },
+        {
+          id: 'stablecoin-rwa-tokenization-2026',
+          category: 'Financial Analysis',
+          categoryColor: 'bg-orange-100 text-orange-800',
+          title: '2026 US Stablecoin Regulation and RWA Tokenization Outlook',
+          excerpt: 'Fed-government conflict amid $37T debt crisis, GENIUS Act implementation, and the future where all assets are tokenized. Analyzing the birth of a new financial order.',
+          date: 'January 15, 2026',
+          readTime: '25 min read',
+          image: '/blog/tokenized.jpg',
         },
         {
           id: 'mpc-wallet-security-guide',
