@@ -44,16 +44,6 @@ export default function BlogPage() {
           image: '/blog/tokenize.jpg',
         },
         {
-          id: 'ico-token-issuance-wallet',
-          category: 'ICO & 토큰',
-          categoryColor: 'bg-yellow-100 text-yellow-800',
-          title: 'ICO 토큰 발행을 위한 암호화폐 지갑 솔루션',
-          excerpt: '투자자별 자동 지갑 생성, 커스텀 토큰 배포, API 자동화. 5만 명 투자자도 5분 만에 토큰 배포.',
-          date: '2026년 1월 11일',
-          readTime: '7분',
-          image: '/blog/ico-wallet.jpg',
-        },
-        {
           id: 'mpc-wallet-security-guide',
           category: '보안',
           categoryColor: 'bg-red-100 text-red-800',
@@ -180,16 +170,6 @@ export default function BlogPage() {
           date: 'January 15, 2026',
           readTime: '25 min read',
           image: '/blog/tokenize.jpg',
-        },
-        {
-          id: 'ico-token-issuance-wallet',
-          category: 'ICO & Token',
-          categoryColor: 'bg-yellow-100 text-yellow-800',
-          title: 'Crypto Wallet Solution for ICO Token Issuance',
-          excerpt: 'Auto wallet creation per investor, custom token distribution, API automation. Distribute to 50K investors in 5 minutes.',
-          date: 'January 11, 2026',
-          readTime: '7 min read',
-          image: '/blog/ico-wallet.jpg',
         },
         {
           id: 'mpc-wallet-security-guide',
