@@ -19,7 +19,7 @@ export default function StablecoinRegulation2026() {
 
       <div className="my-8">
         <Image
-          src="/blog/tokenized.jpg"
+          src="/blog/tokenize.jpg"
           alt="Stablecoin Regulation and RWA Tokenization 2026"
           width={1200}
           height={630}
