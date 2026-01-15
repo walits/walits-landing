@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/wallet-comparison.jpg",
+        url: "https://walits.com/blog/wallet-comparison.jpg",
         width: 1200,
         height: 630,
         alt: "Non-Custody vs Custody Wallet Comparison",

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/attendance.jpg",
+        url: "https://walits.com/blog/attendance.jpg",
         width: 1200,
         height: 630,
         alt: "Daily Attendance Rewards System",

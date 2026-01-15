@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/ai-portfolio.jpg",
+        url: "https://walits.com/blog/ai-portfolio.jpg",
         width: 1200,
         height: 630,
         alt: "AI Portfolio Management RWA",

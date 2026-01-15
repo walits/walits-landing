@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/messenger-transfer.jpg",
+        url: "https://walits.com/blog/messenger-transfer.jpg",
         width: 1200,
         height: 630,
         alt: "Messenger Crypto Transfer",

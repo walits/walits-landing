@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/game-rewards.jpg",
+        url: "https://walits.com/blog/game-rewards.jpg",
         width: 1200,
         height: 630,
         alt: "Game Event Rewards Guide",

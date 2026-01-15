@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/airdrop.jpg",
+        url: "https://walits.com/blog/airdrop.jpg",
         width: 1200,
         height: 630,
         alt: "Community Airdrop Guide",

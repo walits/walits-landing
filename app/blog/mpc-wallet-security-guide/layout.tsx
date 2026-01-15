@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/mpc-security.jpg",
+        url: "https://walits.com/blog/mpc-security.jpg",
         width: 1200,
         height: 630,
         alt: "MPC Wallet Security Guide",

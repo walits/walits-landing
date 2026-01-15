@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/sto-guide.jpg",
+        url: "https://walits.com/blog/sto-guide.jpg",
         width: 1200,
         height: 630,
         alt: "STO Security Token Offering Guide",

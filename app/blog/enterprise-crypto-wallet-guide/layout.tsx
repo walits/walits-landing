@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/enterprise-wallet.jpg",
+        url: "https://walits.com/blog/enterprise-wallet.jpg",
         width: 1200,
         height: 630,
         alt: "Enterprise Crypto Wallet Guide",

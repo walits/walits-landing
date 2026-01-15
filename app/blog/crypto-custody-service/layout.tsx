@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/custody-service.jpg",
+        url: "https://walits.com/blog/custody-service.jpg",
         width: 1200,
         height: 630,
         alt: "Crypto Custody Service Guide",

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/ai-payment.jpg",
+        url: "https://walits.com/blog/ai-payment.jpg",
         width: 1200,
         height: 630,
         alt: "AI Auto Payment Subscription",

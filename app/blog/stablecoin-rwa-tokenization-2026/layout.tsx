@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     authors: ["Walits Team"],
     images: [
       {
-        url: "/blog/tokenize.jpg",
+        url: "https://walits.com/blog/tokenize.jpg",
         width: 1200,
         height: 630,
         alt: "Stablecoin and RWA Tokenization 2026",
