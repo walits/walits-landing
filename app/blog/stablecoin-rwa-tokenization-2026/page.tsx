@@ -2,10 +2,10 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '2026년 미국 스테이블코인 규제와 RWA 토크나이제이션 전망 | Walits',
+  title: '2026년 미국 정부와 연준 & 스테이블코인과 RWA 토크나이제이션 전망 | Walits',
   description: '미국 부채 위기 속에서 펼쳐지는 스테이블코인 혁명과 자산 토큰화의 미래. GENIUS Act 시행과 연준-정부 갈등이 만들어갈 새로운 금융 질서를 분석합니다.',
   openGraph: {
-    title: '2026년 미국 스테이블코인 규제와 RWA 토크나이제이션 전망',
+    title: '2026년 미국 정부와 연준 & 스테이블코인과 RWA 토크나이제이션 전망',
     description: '미국 부채 위기 속에서 펼쳐지는 스테이블코인 혁명과 자산 토큰화의 미래를 분석합니다.',
     type: 'article',
     publishedTime: '2026-01-15T00:00:00.000Z',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function StablecoinRegulation2026() {
   return (
     <article className="prose prose-lg max-w-4xl mx-auto">
-      <h1>2026년 미국 스테이블코인 규제와 RWA 토크나이제이션 전망</h1>
+      <h1>2026년 미국 정부와 연준 & 스테이블코인과 RWA 토크나이제이션 전망</h1>
 
       <div className="my-8">
         <Image
