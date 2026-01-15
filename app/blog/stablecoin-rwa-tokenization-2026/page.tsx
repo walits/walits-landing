@@ -141,7 +141,7 @@ export default function StablecoinRegulation2026() {
       <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">트래핀 딜레마의 재현</h3>
 
       <div className="not-prose my-6 p-5 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-        <p className="text-sm text-blue-900 dark:text-blue-200 mb-2 font-semibold">💡 트래핀 딜레마란?</p>
+        <p className="text-sm text-blue-900 dark:text-blue-200 mb-2 font-semibold">트래핀 딜레마란?</p>
         <p className="text-sm text-blue-800 dark:text-blue-300">
           달러가 기축통화로 기능하려면 미국이 무역적자를 지속해야 하지만, 무역적자가 누적되면
           결국 달러에 대한 신뢰가 무너진다는 모순. 1970년대 브레턴우즈 체제 붕괴의 원인.
@@ -156,7 +156,7 @@ export default function StablecoinRegulation2026() {
       </p>
 
       <div className="not-prose my-8 p-6 bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 rounded-r-lg">
-        <h4 className="text-base font-bold text-yellow-900 dark:text-yellow-200 mb-3">⚠️ 2026년 재융자 위기</h4>
+        <h4 className="text-base font-bold text-yellow-900 dark:text-yellow-200 mb-3">2026년 재융자 위기</h4>
         <div className="space-y-2 text-sm text-yellow-800 dark:text-yellow-300">
           <p>• 1년 내 만기 도래 국채: <strong className="text-yellow-900 dark:text-yellow-200">11조 달러</strong></p>
           <p>• 중국 미국 국채 보유: 2013년 대비 <strong className="text-yellow-900 dark:text-yellow-200">50% 이하로 감소</strong></p>
@@ -237,7 +237,7 @@ export default function StablecoinRegulation2026() {
       <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">3장. GENIUS Act: 스테이블코인이 부채 관리 도구가 되다</h2>
 
       <div className="not-prose my-8 p-6 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
-        <h3 className="text-xl font-bold text-purple-900 dark:text-purple-200 mb-3">🏛️ GENIUS Act</h3>
+        <h3 className="text-xl font-bold text-purple-900 dark:text-purple-200 mb-3">GENIUS Act</h3>
         <p className="text-sm text-purple-800 dark:text-purple-300 mb-2">
           <strong>Guiding and Establishing National Innovation for US Stablecoins Act</strong>
         </p>
@@ -269,7 +269,7 @@ export default function StablecoinRegulation2026() {
         <div className="bg-white dark:bg-gray-900">
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">1️⃣</span>
+              
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">자금세탁방지(AML) 및 제재 준수</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">발행사의 법적 의무 강화</p>
@@ -278,7 +278,7 @@ export default function StablecoinRegulation2026() {
           </div>
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-purple-50 dark:bg-purple-900/20">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">2️⃣</span>
+              
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">100% 담보 의무</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">USD 현금 또는 단기 국채(T-bills)로 전액 보유</p>
@@ -287,7 +287,7 @@ export default function StablecoinRegulation2026() {
           </div>
           <div className="px-6 py-4">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">3️⃣</span>
+              
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">월별 감사 및 공시</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">투명성 확보를 위한 정기 보고</p>
@@ -308,7 +308,7 @@ export default function StablecoinRegulation2026() {
       <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">단기 국채 수요 창출이라는 숨은 의도</h3>
 
       <div className="not-prose my-8 p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-2 border-green-300 dark:border-green-700">
-        <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4">📈 스테이블코인 시장 전망</h4>
+        <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4">스테이블코인 시장 전망</h4>
         <div className="flex items-center justify-between">
           <div className="text-center flex-1">
             <div className="text-3xl font-bold text-green-700 dark:text-green-400">$1,500억</div>
@@ -331,14 +331,14 @@ export default function StablecoinRegulation2026() {
 
       <div className="not-prose my-8 grid md:grid-cols-2 gap-4">
         <div className="p-5 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-700">
-          <div className="text-3xl mb-3">💰</div>
+          
           <h5 className="font-bold text-blue-900 dark:text-blue-200 mb-2">재융자 부담 완화</h5>
           <p className="text-sm text-blue-800 dark:text-blue-300">
             11조 달러 재융자 물량을 소화할 새로운 수요처 확보. 중국·일본 이탈 공백 메우기.
           </p>
         </div>
         <div className="p-5 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-700">
-          <div className="text-3xl mb-3">📉</div>
+          
           <h5 className="font-bold text-purple-900 dark:text-purple-200 mb-2">금리 안정화</h5>
           <p className="text-sm text-purple-800 dark:text-purple-300">
             수요 증가 → 국채 가격 상승 → 금리 하락 → 정부 이자 비용 감소
@@ -354,7 +354,7 @@ export default function StablecoinRegulation2026() {
       </p>
 
       <div className="not-prose my-6 p-5 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 border-l-4 border-orange-500 rounded-r-lg">
-        <p className="text-sm font-semibold text-orange-900 dark:text-orange-200 mb-2">🎯 핵심 인사이트</p>
+        <p className="text-sm font-semibold text-orange-900 dark:text-orange-200 mb-2">핵심 인사이트</p>
         <p className="text-sm text-orange-800 dark:text-orange-300">
           스테이블코인은 단순한 암호화폐가 아니라 <strong>정부의 유동성 조달 메커니즘</strong>의 일부가 되었다.
           연준의 양적완화 없이도 부채 관리가 가능한 새로운 도구의 탄생.
@@ -403,7 +403,7 @@ export default function StablecoinRegulation2026() {
       <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Securities Clarity Act: RWA 토크나이제이션의 법적 기반</h3>
 
       <div className="not-prose my-8 p-6 bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-lg border border-teal-200 dark:border-teal-800">
-        <h3 className="text-xl font-bold text-teal-900 dark:text-teal-200 mb-3">⚖️ Securities Clarity Act</h3>
+        <h3 className="text-xl font-bold text-teal-900 dark:text-teal-200 mb-3">Securities Clarity Act</h3>
         <p className="text-sm text-teal-800 dark:text-teal-300 mb-2">
           <strong>증권형 토큰의 법적 지위 명확화 법안</strong>
         </p>
@@ -432,7 +432,7 @@ export default function StablecoinRegulation2026() {
         <div className="bg-white dark:bg-gray-900">
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">📋</span>
+              
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">Howey Test 현대화</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">1946년 대법원 판례를 디지털 자산에 맞게 재해석</p>
@@ -441,7 +441,7 @@ export default function StablecoinRegulation2026() {
           </div>
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-teal-50 dark:bg-teal-900/20">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">🎯</span>
+              
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">Safe Harbor 조항</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">충분히 분산된 네트워크의 토큰은 증권이 아님을 명시</p>
@@ -450,7 +450,7 @@ export default function StablecoinRegulation2026() {
           </div>
           <div className="px-6 py-4">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">🏢</span>
+              
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">RWA 토큰 가이드라인</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">부동산·채권·주식 토큰의 증권 등록 절차 간소화</p>
@@ -468,15 +468,15 @@ export default function StablecoinRegulation2026() {
       </p>
 
       <div className="not-prose my-6 p-5 bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 rounded-r-lg">
-        <p className="text-sm font-semibold text-yellow-900 dark:text-yellow-200 mb-2">🔑 왜 2026년이 중요한가?</p>
+        <p className="text-sm font-semibold text-yellow-900 dark:text-yellow-200 mb-2">왜 2026년이 중요한가?</p>
         <p className="text-sm text-yellow-800 dark:text-yellow-300 mb-3">
           GENIUS Act + Securities Clarity Act의 조합은 스테이블코인부터 RWA 토큰까지
           전체 디지털 자산 생태계의 법적 기반을 완성한다.
         </p>
         <ul className="text-sm text-yellow-800 dark:text-yellow-300 space-y-2 list-none">
-          <li>✓ 스테이블코인: GENIUS Act로 규제 명확성 확보</li>
-          <li>✓ RWA 토큰: Securities Clarity Act로 발행 절차 간소화</li>
-          <li>✓ 결과: BlackRock, Fidelity 등 대형 기관의 대규모 시장 진입</li>
+          <li>스테이블코인: GENIUS Act로 규제 명확성 확보</li>
+          <li>RWA 토큰: Securities Clarity Act로 발행 절차 간소화</li>
+          <li>결과: BlackRock, Fidelity 등 대형 기관의 대규모 시장 진입</li>
         </ul>
       </div>
 
@@ -528,7 +528,7 @@ export default function StablecoinRegulation2026() {
 
       <div className="not-prose my-8">
         <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-6 rounded-lg border border-indigo-200 dark:border-indigo-800">
-          <h4 className="text-lg font-bold text-indigo-900 dark:text-indigo-200 mb-4">📅 2026년 분기별 로드맵</h4>
+          <h4 className="text-lg font-bold text-indigo-900 dark:text-indigo-200 mb-4">2026년 분기별 로드맵</h4>
           <div className="space-y-4">
             <div className="flex gap-4">
               <div className="flex-shrink-0 w-16 h-16 bg-indigo-600 dark:bg-indigo-700 rounded-lg flex items-center justify-center text-white font-bold">Q1</div>
@@ -581,43 +581,43 @@ export default function StablecoinRegulation2026() {
 
       <div className="not-prose my-8 grid md:grid-cols-2 gap-6">
         <div className="p-5 bg-cyan-50 dark:bg-cyan-900/20 rounded-lg border-2 border-cyan-300 dark:border-cyan-700">
-          <div className="text-3xl mb-3">🏦</div>
+          
           <h5 className="font-bold text-cyan-900 dark:text-cyan-200 mb-2">국채 & T-bills</h5>
           <ul className="text-sm text-cyan-800 dark:text-cyan-300 space-y-2">
-            <li>✓ 스테이블코인 담보 수요 창출</li>
-            <li>✓ 재융자 용이</li>
-            <li>✓ 이자 비용 절감</li>
-            <li>✓ 부채 관리 유연성 확보</li>
+            <li>스테이블코인 담보 수요 창출</li>
+            <li>재융자 용이</li>
+            <li>이자 비용 절감</li>
+            <li>부채 관리 유연성 확보</li>
           </ul>
         </div>
         <div className="p-5 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-2 border-emerald-300 dark:border-emerald-700">
-          <div className="text-3xl mb-3">🏢</div>
+          
           <h5 className="font-bold text-emerald-900 dark:text-emerald-200 mb-2">부동산</h5>
           <ul className="text-sm text-emerald-800 dark:text-emerald-300 space-y-2">
-            <li>✓ 소액 투자자 진입 장벽 하락</li>
-            <li>✓ 자본 유입 촉진</li>
-            <li>✓ 거래량 증가</li>
-            <li>✓ 경제 활성화</li>
+            <li>소액 투자자 진입 장벽 하락</li>
+            <li>자본 유입 촉진</li>
+            <li>거래량 증가</li>
+            <li>경제 활성화</li>
           </ul>
         </div>
         <div className="p-5 bg-amber-50 dark:bg-amber-900/20 rounded-lg border-2 border-amber-300 dark:border-amber-700">
-          <div className="text-3xl mb-3">📈</div>
+          
           <h5 className="font-bold text-amber-900 dark:text-amber-200 mb-2">주식</h5>
           <ul className="text-sm text-amber-800 dark:text-amber-300 space-y-2">
-            <li>✓ 글로벌 24시간 거래</li>
-            <li>✓ 즉시 결제</li>
-            <li>✓ 거래 효율성 극대화</li>
-            <li>✓ 거래세 수입 증가</li>
+            <li>글로벌 24시간 거래</li>
+            <li>즉시 결제</li>
+            <li>거래 효율성 극대화</li>
+            <li>거래세 수입 증가</li>
           </ul>
         </div>
         <div className="p-5 bg-rose-50 dark:bg-rose-900/20 rounded-lg border-2 border-rose-300 dark:border-rose-700">
-          <div className="text-3xl mb-3">🌾</div>
+          
           <h5 className="font-bold text-rose-900 dark:text-rose-200 mb-2">상품</h5>
           <ul className="text-sm text-rose-800 dark:text-rose-300 space-y-2">
-            <li>✓ 글로벌 접근성 향상</li>
-            <li>✓ 스테이블코인 결제</li>
-            <li>✓ GDP 기여도 증가</li>
-            <li>✓ 달러 디지털 패권 강화</li>
+            <li>글로벌 접근성 향상</li>
+            <li>스테이블코인 결제</li>
+            <li>GDP 기여도 증가</li>
+            <li>달러 디지털 패권 강화</li>
           </ul>
         </div>
       </div>
@@ -657,7 +657,7 @@ export default function StablecoinRegulation2026() {
       <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">스테이블코인-토크나이제이션-GDP 성장의 선순환</h3>
 
       <div className="not-prose my-8 p-6 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 dark:from-green-900/20 dark:via-blue-900/20 dark:to-purple-900/20 rounded-lg border-2 border-green-300 dark:border-green-700">
-        <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4 text-center">🔄 선순환 구조</h4>
+        <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4 text-center">선순환 구조</h4>
         <div className="space-y-3">
           <div className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800 rounded">
             <div className="flex-shrink-0 w-8 h-8 bg-green-600 dark:bg-green-700 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
@@ -681,7 +681,7 @@ export default function StablecoinRegulation2026() {
           <div className="text-center text-2xl text-pink-600 dark:text-pink-500">↓</div>
           <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-green-100 to-blue-100 dark:from-green-800 dark:to-blue-800 rounded font-bold">
             <div className="flex-shrink-0 w-8 h-8 bg-orange-600 dark:bg-orange-700 rounded-full flex items-center justify-center text-white text-sm font-bold">5</div>
-            <p className="text-sm text-gray-900 dark:text-white">GDP 성장 → 부채/GDP 비율 안정화 🎯</p>
+            <p className="text-sm text-gray-900 dark:text-white">GDP 성장 → 부채/GDP 비율 안정화</p>
           </div>
         </div>
       </div>
@@ -695,7 +695,7 @@ export default function StablecoinRegulation2026() {
       </p>
 
       <div className="not-prose my-6 p-5 bg-indigo-50 dark:bg-indigo-900/20 border-l-4 border-indigo-600 rounded-r-lg">
-        <p className="text-sm font-semibold text-indigo-900 dark:text-indigo-200 mb-2">💡 결론</p>
+        <p className="text-sm font-semibold text-indigo-900 dark:text-indigo-200 mb-2">결론</p>
         <p className="text-sm text-indigo-800 dark:text-indigo-300">
           이 선순환이 작동하면, 정부는 연준의 금리 정책에 의존하지 않고도 경제를 관리할 수 있게 된다.
           <strong className="block mt-2">연준 시대의 종말 → 정부 주도 경제 시대의 본격화</strong>
@@ -726,17 +726,17 @@ export default function StablecoinRegulation2026() {
       <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">6장. Walits의 기회: 규제 준수 Custody의 시대</h2>
 
       <div className="not-prose my-8 p-6 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 rounded-lg text-white">
-        <h3 className="text-2xl font-bold mb-3">🔐 Walits: 토큰화 시대의 핵심 인프라</h3>
+        <h3 className="text-2xl font-bold mb-3">Walits: 토큰화 시대의 핵심 인프라</h3>
         <p className="text-blue-100 mb-4">
           전통 금융의 증권 보관소처럼, 디지털 자산 시대의 필수 인프라
         </p>
         <div className="grid md:grid-cols-2 gap-3">
           <div className="bg-white/10 backdrop-blur p-3 rounded">
-            <p className="font-semibold">🇰🇷 한국</p>
+            <p className="font-semibold">한국</p>
             <p className="text-sm text-blue-100">자본시장법 준수</p>
           </div>
           <div className="bg-white/10 backdrop-blur p-3 rounded">
-            <p className="font-semibold">🇺🇸 미국</p>
+            <p className="font-semibold">미국</p>
             <p className="text-sm text-blue-100">GENIUS Act 준수</p>
           </div>
         </div>
@@ -776,10 +776,10 @@ export default function StablecoinRegulation2026() {
       <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">토크나이즈 자산 지원과 수익 모델</h3>
 
       <div className="not-prose my-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">🛠️ Walits 핵심 기능</h4>
+        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Walits 핵심 기능</h4>
         <div className="space-y-4">
           <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 rounded border-l-4 border-blue-500">
-            <span className="text-2xl">🌐</span>
+            
             <div>
               <p className="font-semibold text-gray-900 dark:text-white">다양한 블록체인 네트워크 지원</p>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -788,7 +788,7 @@ export default function StablecoinRegulation2026() {
             </div>
           </div>
           <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 rounded border-l-4 border-purple-500">
-            <span className="text-2xl">⚡</span>
+            
             <div>
               <p className="font-semibold text-gray-900 dark:text-white">스마트 컨트랙트 통합</p>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -797,7 +797,7 @@ export default function StablecoinRegulation2026() {
             </div>
           </div>
           <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 rounded border-l-4 border-green-500">
-            <span className="text-2xl">📋</span>
+            
             <div>
               <p className="font-semibold text-gray-900 dark:text-white">규제 보고 기능</p>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -823,20 +823,20 @@ export default function StablecoinRegulation2026() {
       </p>
 
       <div className="not-prose my-8 p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-2 border-green-300 dark:border-green-700">
-        <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4">💰 수익 모델</h4>
+        <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4">수익 모델</h4>
         <div className="grid md:grid-cols-3 gap-4">
           <div className="text-center">
-            <div className="text-3xl mb-2">🔐</div>
+            
             <p className="font-semibold text-green-900 dark:text-green-200 text-sm">Custody 수수료</p>
             <p className="text-xs text-green-700 dark:text-green-300 mt-1">자산 보관료</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl mb-2">💸</div>
+            
             <p className="font-semibold text-green-900 dark:text-green-200 text-sm">거래 수수료</p>
             <p className="text-xs text-green-700 dark:text-green-300 mt-1">온체인 거래 수수료</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl mb-2">📊</div>
+            
             <p className="font-semibold text-green-900 dark:text-green-200 text-sm">부가 서비스</p>
             <p className="text-xs text-green-700 dark:text-green-300 mt-1">결제/스왑/스테이킹</p>
           </div>
@@ -866,39 +866,33 @@ export default function StablecoinRegulation2026() {
 
       <div className="not-prose my-8 grid md:grid-cols-2 gap-6">
         <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-2 border-green-400 dark:border-green-600">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="text-3xl">✅</div>
-            <div>
-              <h4 className="text-lg font-bold text-green-900 dark:text-green-200">HIGH 확률 (70%)</h4>
-              <p className="text-sm text-green-700 dark:text-green-400">선순환 달성</p>
-            </div>
+          <div className="mb-4">
+            <h4 className="text-lg font-bold text-green-900 dark:text-green-200">HIGH 확률 (70%)</h4>
+            <p className="text-sm text-green-700 dark:text-green-400">선순환 달성</p>
           </div>
           <ul className="space-y-2 text-sm text-green-800 dark:text-green-300">
-            <li>✓ GENIUS Act 성공적 시행</li>
-            <li>✓ 스테이블코인 TVL $1조 돌파</li>
-            <li>✓ 재융자 압박 완화</li>
-            <li>✓ BlackRock 등 RWA 토큰 출시</li>
-            <li>✓ GDP 3~4% 성장</li>
-            <li>✓ 부채/GDP 비율 안정화</li>
-            <li>✓ <strong>Walits Custody 수요 급증</strong></li>
+            <li>GENIUS Act 성공적 시행</li>
+            <li>스테이블코인 TVL $1조 돌파</li>
+            <li>재융자 압박 완화</li>
+            <li>BlackRock 등 RWA 토큰 출시</li>
+            <li>GDP 3~4% 성장</li>
+            <li>부채/GDP 비율 안정화</li>
+            <li><strong>Walits Custody 수요 급증</strong></li>
           </ul>
         </div>
         <div className="p-6 bg-red-50 dark:bg-red-900/20 rounded-lg border-2 border-red-400 dark:border-red-600">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="text-3xl">⚠️</div>
-            <div>
-              <h4 className="text-lg font-bold text-red-900 dark:text-red-200">LOW 확률 (30%)</h4>
-              <p className="text-sm text-red-700 dark:text-red-400">뱅크런 & 긴축 재개</p>
-            </div>
+          <div className="mb-4">
+            <h4 className="text-lg font-bold text-red-900 dark:text-red-200">LOW 확률 (30%)</h4>
+            <p className="text-sm text-red-700 dark:text-red-400">뱅크런 & 긴축 재개</p>
           </div>
           <ul className="space-y-2 text-sm text-red-800 dark:text-red-300">
-            <li>✗ 스테이블코인 담보 검증 실패</li>
-            <li>✗ 뱅크런 발생 → 신뢰 붕괴</li>
-            <li>✗ 재융자 실패 → 금리 폭등</li>
-            <li>✗ 연준 금리 인상 재개</li>
-            <li>✗ AI 생산성 미실현</li>
-            <li>✗ 부채 위기 현실화</li>
-            <li>✗ 2008년식 금융위기 재현</li>
+            <li>스테이블코인 담보 검증 실패</li>
+            <li>뱅크런 발생 → 신뢰 붕괴</li>
+            <li>재융자 실패 → 금리 폭등</li>
+            <li>연준 금리 인상 재개</li>
+            <li>AI 생산성 미실현</li>
+            <li>부채 위기 현실화</li>
+            <li>2008년식 금융위기 재현</li>
           </ul>
         </div>
       </div>
@@ -979,8 +973,8 @@ export default function StablecoinRegulation2026() {
               언제든 연락주세요.
             </p>
             <ul className="list-none space-y-2 text-blue-900 dark:text-blue-200">
-              <li>📧 이메일: contact@walits.io</li>
-              <li>🌐 웹사이트: www.walits.io</li>
+              <li>이메일: contact@walits.io</li>
+              <li>웹사이트: www.walits.io</li>
             </ul>
           </div>
         </div>
