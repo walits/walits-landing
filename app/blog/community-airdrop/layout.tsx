@@ -21,6 +21,14 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2024-12-14T00:00:00Z",
     authors: ["Walits Team"],
+    images: [
+      {
+        url: "/blog/airdrop.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Community Airdrop Guide",
+      },
+    ],
   },
 };
 

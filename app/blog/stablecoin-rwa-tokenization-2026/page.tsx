@@ -1576,210 +1576,371 @@ export default function StablecoinRegulation2026() {
                 )}
               </p>
 
-      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">토크나이즈 자산 지원과 수익 모델</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? '토크나이즈 자산 지원과 수익 모델' : 'Tokenized Asset Support and Revenue Model'}
+              </h3>
 
-      <div className="not-prose my-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-        <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Walits 핵심 기능</h4>
-        <div className="space-y-4">
-          <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 rounded border-l-4 border-blue-500">
-            
-            <div>
-              <p className="font-semibold text-gray-900 dark:text-white">다양한 블록체인 네트워크 지원</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                Ethereum, Polygon, Avalanche, Solana 등 주요 RWA 토큰 체인 전체 지원
+              <div className="not-prose my-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+                  {language === 'ko' ? 'Walits 핵심 기능' : 'Walits Core Features'}
+                </h4>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 rounded border-l-4 border-blue-500">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white">
+                        {language === 'ko' ? '다양한 블록체인 네트워크 지원' : 'Multi-Chain Network Support'}
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        {language === 'ko' ? 'Ethereum, Polygon, Avalanche, Solana 등 주요 RWA 토큰 체인 전체 지원' : 'Full support for major RWA token chains: Ethereum, Polygon, Avalanche, Solana, etc.'}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 rounded border-l-4 border-purple-500">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white">
+                        {language === 'ko' ? '스마트 컨트랙트 통합' : 'Smart Contract Integration'}
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        {language === 'ko' ? '락업, 베스팅, 배당 지급 등 자동 실행 기능' : 'Automated execution: lockups, vesting, dividend payments, etc.'}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 rounded border-l-4 border-green-500">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white">
+                        {language === 'ko' ? '규제 보고 기능' : 'Regulatory Reporting'}
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        {language === 'ko' ? '한국 금융당국 & 미국 SEC 감사 보고서 자동 생성' : 'Auto-generate audit reports for Korean financial authorities & US SEC'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    Walits는 단순히 스테이블코인만 지원하는 것이 아니라, 토큰화된 국채, 부동산,
+                    주식 등 다양한 RWA 토큰을 안전하게 보관하고 관리할 수 있는 시스템을 구축해야 한다.
+                    이를 위해서는 다음과 같은 기능이 필요하다.
+                  </>
+                ) : (
+                  <>
+                    Walits must build a system that not only supports stablecoins but can securely store and manage
+                    various RWA tokens including tokenized Treasuries, real estate, and equities. This requires the
+                    following capabilities.
+                  </>
+                )}
               </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 rounded border-l-4 border-purple-500">
-            
-            <div>
-              <p className="font-semibold text-gray-900 dark:text-white">스마트 컨트랙트 통합</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                락업, 베스팅, 배당 지급 등 자동 실행 기능
+
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    첫째, 다양한 블록체인 네트워크 지원. Ethereum뿐만 아니라 Polygon, Avalanche,
+                    Solana 등 RWA 토큰이 발행되는 주요 체인을 모두 지원해야 한다. 둘째, 스마트 컨트랙트
+                    통합. 토큰의 락업, 베스팅, 배당 지급 등이 자동으로 실행되도록 스마트 컨트랙트와
+                    연동해야 한다. 셋째, 규제 보고 기능. 한국 금융당국과 미국 SEC에 제출할 감사 보고서를
+                    자동으로 생성할 수 있어야 한다.
+                  </>
+                ) : (
+                  <>
+                    First, multi-chain network support. Not just Ethereum, but all major chains where RWA tokens are
+                    issued: Polygon, Avalanche, Solana, etc. Second, smart contract integration. Token lockups, vesting,
+                    dividend payments, etc. must execute automatically through smart contract integration. Third,
+                    regulatory reporting. Must auto-generate audit reports for Korean financial authorities and the US SEC.
+                  </>
+                )}
               </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 rounded border-l-4 border-green-500">
-            
-            <div>
-              <p className="font-semibold text-gray-900 dark:text-white">규제 보고 기능</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                한국 금융당국 & 미국 SEC 감사 보고서 자동 생성
+
+              <div className="not-prose my-8 p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-2 border-green-300 dark:border-green-700">
+                <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4">
+                  {language === 'ko' ? '수익 모델' : 'Revenue Model'}
+                </h4>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <p className="font-semibold text-green-900 dark:text-green-200 text-sm">
+                      {language === 'ko' ? 'Custody 수수료' : 'Custody Fees'}
+                    </p>
+                    <p className="text-xs text-green-700 dark:text-green-300 mt-1">
+                      {language === 'ko' ? '자산 보관료' : 'Asset storage fees'}
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-semibold text-green-900 dark:text-green-200 text-sm">
+                      {language === 'ko' ? '거래 수수료' : 'Transaction Fees'}
+                    </p>
+                    <p className="text-xs text-green-700 dark:text-green-300 mt-1">
+                      {language === 'ko' ? '온체인 거래 수수료' : 'On-chain transaction fees'}
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-semibold text-green-900 dark:text-green-200 text-sm">
+                      {language === 'ko' ? '부가 서비스' : 'Value-Added Services'}
+                    </p>
+                    <p className="text-xs text-green-700 dark:text-green-300 mt-1">
+                      {language === 'ko' ? '결제/스왑/스테이킹' : 'Payment/swap/staking'}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-sm text-green-800 dark:text-green-300 mt-4 text-center font-medium">
+                  {language === 'ko' ? '기관 고객: 월 구독 모델 → 안정적인 반복 수익(Recurring Revenue)' : 'Institutional clients: Monthly subscription → Stable recurring revenue'}
+                </p>
+              </div>
+
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    수익 모델은 명확하다. Custody 수수료, 거래 수수료, 그리고 부가 서비스(자동 결제,
+                    스왑, 스테이킹 등) 수수료를 통해 안정적인 수익을 창출할 수 있다. 특히 기관 고객
+                    대상으로는 월 구독 모델을 적용하여 반복 수익(Recurring Revenue)을 확보할 수 있다.
+                  </>
+                ) : (
+                  <>
+                    The revenue model is clear. Stable revenue can be generated through custody fees, transaction fees,
+                    and value-added service fees (automated payments, swaps, staking, etc.). Especially for institutional
+                    clients, a monthly subscription model can secure recurring revenue.
+                  </>
+                )}
               </p>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <p>
-        Walits는 단순히 스테이블코인만 지원하는 것이 아니라, 토큰화된 국채, 부동산,
-        주식 등 다양한 RWA 토큰을 안전하게 보관하고 관리할 수 있는 시스템을 구축해야 한다.
-        이를 위해서는 다음과 같은 기능이 필요하다.
-      </p>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? '한국-미국 Cross-Border Compliance' : 'Korea-US Cross-Border Compliance'}
+              </h3>
 
-      <p>
-        첫째, 다양한 블록체인 네트워크 지원. Ethereum뿐만 아니라 Polygon, Avalanche,
-        Solana 등 RWA 토큰이 발행되는 주요 체인을 모두 지원해야 한다. 둘째, 스마트 컨트랙트
-        통합. 토큰의 락업, 베스팅, 배당 지급 등이 자동으로 실행되도록 스마트 컨트랙트와
-        연동해야 한다. 셋째, 규제 보고 기능. 한국 금융당국과 미국 SEC에 제출할 감사 보고서를
-        자동으로 생성할 수 있어야 한다.
-      </p>
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    Walits의 경쟁력은 한국과 미국 양쪽의 규제를 모두 이해하고 준수할 수 있다는 점이다.
+                    한국에서 STO를 발행하고 미국 투자자에게 판매하려는 프로젝트, 또는 미국에서 토큰화된
+                    자산을 한국 투자자에게 제공하려는 프로젝트 모두에게 Walits는 필수적인 파트너가 될 수
+                    있다. Cross-Border 거래에서 가장 큰 장애물은 규제 준수인데, Walits가 이를 원스톱으로
+                    해결해준다면 엄청난 가치를 제공하는 셈이다.
+                  </>
+                ) : (
+                  <>
+                    Walits' competitive advantage is its ability to understand and comply with regulations in both Korea
+                    and the US. For projects seeking to issue STOs in Korea and sell to US investors, or provide US
+                    tokenized assets to Korean investors, Walits can be an essential partner. The biggest obstacle in
+                    cross-border transactions is regulatory compliance, and if Walits solves this one-stop, it provides
+                    tremendous value.
+                  </>
+                )}
+              </p>
 
-      <div className="not-prose my-8 p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-2 border-green-300 dark:border-green-700">
-        <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4">수익 모델</h4>
-        <div className="grid md:grid-cols-3 gap-4">
-          <div className="text-center">
-            
-            <p className="font-semibold text-green-900 dark:text-green-200 text-sm">Custody 수수료</p>
-            <p className="text-xs text-green-700 dark:text-green-300 mt-1">자산 보관료</p>
-          </div>
-          <div className="text-center">
-            
-            <p className="font-semibold text-green-900 dark:text-green-200 text-sm">거래 수수료</p>
-            <p className="text-xs text-green-700 dark:text-green-300 mt-1">온체인 거래 수수료</p>
-          </div>
-          <div className="text-center">
-            
-            <p className="font-semibold text-green-900 dark:text-green-200 text-sm">부가 서비스</p>
-            <p className="text-xs text-green-700 dark:text-green-300 mt-1">결제/스왑/스테이킹</p>
-          </div>
-        </div>
-        <p className="text-sm text-green-800 dark:text-green-300 mt-4 text-center font-medium">
-          기관 고객: 월 구독 모델 → 안정적인 반복 수익(Recurring Revenue)
-        </p>
-      </div>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">
+                {language === 'ko' ? '7장. 리스크와 시나리오 분석' : 'Chapter 7. Risk and Scenario Analysis'}
+              </h2>
 
-      <p>
-        수익 모델은 명확하다. Custody 수수료, 거래 수수료, 그리고 부가 서비스(자동 결제,
-        스왑, 스테이킹 등) 수수료를 통해 안정적인 수익을 창출할 수 있다. 특히 기관 고객
-        대상으로는 월 구독 모델을 적용하여 반복 수익(Recurring Revenue)을 확보할 수 있다.
-      </p>
+              <div className="not-prose my-8 grid md:grid-cols-2 gap-6">
+                <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-2 border-green-400 dark:border-green-600">
+                  <div className="mb-4">
+                    <h4 className="text-lg font-bold text-green-900 dark:text-green-200">
+                      {language === 'ko' ? 'HIGH 확률 (70%)' : 'HIGH Probability (70%)'}
+                    </h4>
+                    <p className="text-sm text-green-700 dark:text-green-400">
+                      {language === 'ko' ? '선순환 달성' : 'Virtuous Cycle Achieved'}
+                    </p>
+                  </div>
+                  <ul className="space-y-2 text-sm text-green-800 dark:text-green-300">
+                    <li>{language === 'ko' ? 'GENIUS Act 성공적 시행' : 'Successful GENIUS Act implementation'}</li>
+                    <li>{language === 'ko' ? '스테이블코인 TVL $1조 돌파' : 'Stablecoin TVL surpasses $1T'}</li>
+                    <li>{language === 'ko' ? '재융자 압박 완화' : 'Refinancing pressure eased'}</li>
+                    <li>{language === 'ko' ? 'BlackRock 등 RWA 토큰 출시' : 'BlackRock etc. launch RWA tokens'}</li>
+                    <li>{language === 'ko' ? 'GDP 3~4% 성장' : 'GDP growth 3-4%'}</li>
+                    <li>{language === 'ko' ? '부채/GDP 비율 안정화' : 'Debt/GDP ratio stabilizes'}</li>
+                    <li><strong>{language === 'ko' ? 'Walits Custody 수요 급증' : 'Walits Custody demand surges'}</strong></li>
+                  </ul>
+                </div>
+                <div className="p-6 bg-red-50 dark:bg-red-900/20 rounded-lg border-2 border-red-400 dark:border-red-600">
+                  <div className="mb-4">
+                    <h4 className="text-lg font-bold text-red-900 dark:text-red-200">
+                      {language === 'ko' ? 'LOW 확률 (30%)' : 'LOW Probability (30%)'}
+                    </h4>
+                    <p className="text-sm text-red-700 dark:text-red-400">
+                      {language === 'ko' ? '뱅크런 & 긴축 재개' : 'Bank Run & Tightening Resumes'}
+                    </p>
+                  </div>
+                  <ul className="space-y-2 text-sm text-red-800 dark:text-red-300">
+                    <li>{language === 'ko' ? '스테이블코인 담보 검증 실패' : 'Stablecoin collateral verification fails'}</li>
+                    <li>{language === 'ko' ? '뱅크런 발생 → 신뢰 붕괴' : 'Bank run occurs → Trust collapses'}</li>
+                    <li>{language === 'ko' ? '재융자 실패 → 금리 폭등' : 'Refinancing fails → Rates surge'}</li>
+                    <li>{language === 'ko' ? '연준 금리 인상 재개' : 'Fed resumes rate hikes'}</li>
+                    <li>{language === 'ko' ? 'AI 생산성 미실현' : 'AI productivity unrealized'}</li>
+                    <li>{language === 'ko' ? '부채 위기 현실화' : 'Debt crisis materializes'}</li>
+                    <li>{language === 'ko' ? '2008년식 금융위기 재현' : '2008-style financial crisis repeats'}</li>
+                  </ul>
+                </div>
+              </div>
 
-      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">한국-미국 Cross-Border Compliance</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? 'HIGH 확률 시나리오 (70%): 선순환 달성' : 'HIGH Probability Scenario (70%): Virtuous Cycle Achieved'}
+              </h3>
 
-      <p>
-        Walits의 경쟁력은 한국과 미국 양쪽의 규제를 모두 이해하고 준수할 수 있다는 점이다.
-        한국에서 STO를 발행하고 미국 투자자에게 판매하려는 프로젝트, 또는 미국에서 토큰화된
-        자산을 한국 투자자에게 제공하려는 프로젝트 모두에게 Walits는 필수적인 파트너가 될 수
-        있다. Cross-Border 거래에서 가장 큰 장애물은 규제 준수인데, Walits가 이를 원스톱으로
-        해결해준다면 엄청난 가치를 제공하는 셈이다.
-      </p>
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    GENIUS Act가 성공적으로 시행되고, 스테이블코인 TVL이 1조 달러를 돌파하며,
+                    단기 국채 수요가 안정적으로 창출된다. 재융자 압박이 완화되고 이자 비용이 관리
+                    가능한 수준으로 유지된다. BlackRock, Fidelity 등 대형 자산운용사들이 RWA 토큰
+                    상품을 속속 출시하고, 토크나이제이션 시장이 폭발적으로 성장한다. GDP 성장률이
+                    3~4%대로 회복되고, 부채/GDP 비율이 안정화된다. Walits 같은 규제 준수 Custody
+                    솔루션에 대한 수요가 급증하며, 디지털 자산 인프라 기업들의 가치가 급등한다.
+                  </>
+                ) : (
+                  <>
+                    The GENIUS Act is successfully implemented, stablecoin TVL surpasses $1 trillion, and T-bill demand
+                    is stably created. Refinancing pressure eases and interest costs are maintained at manageable levels.
+                    Major asset managers like BlackRock and Fidelity successively launch RWA token products, and the
+                    tokenization market grows explosively. GDP growth recovers to 3-4%, and the debt/GDP ratio stabilizes.
+                    Demand for compliant custody solutions like Walits surges, and digital asset infrastructure companies'
+                    valuations soar.
+                  </>
+                )}
+              </p>
 
-      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">7장. 리스크와 시나리오 분석</h2>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? 'LOW 확률 시나리오 (30%): 뱅크런과 긴축 재개' : 'LOW Probability Scenario (30%): Bank Run and Tightening Resumes'}
+              </h3>
 
-      <div className="not-prose my-8 grid md:grid-cols-2 gap-6">
-        <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-2 border-green-400 dark:border-green-600">
-          <div className="mb-4">
-            <h4 className="text-lg font-bold text-green-900 dark:text-green-200">HIGH 확률 (70%)</h4>
-            <p className="text-sm text-green-700 dark:text-green-400">선순환 달성</p>
-          </div>
-          <ul className="space-y-2 text-sm text-green-800 dark:text-green-300">
-            <li>GENIUS Act 성공적 시행</li>
-            <li>스테이블코인 TVL $1조 돌파</li>
-            <li>재융자 압박 완화</li>
-            <li>BlackRock 등 RWA 토큰 출시</li>
-            <li>GDP 3~4% 성장</li>
-            <li>부채/GDP 비율 안정화</li>
-            <li><strong>Walits Custody 수요 급증</strong></li>
-          </ul>
-        </div>
-        <div className="p-6 bg-red-50 dark:bg-red-900/20 rounded-lg border-2 border-red-400 dark:border-red-600">
-          <div className="mb-4">
-            <h4 className="text-lg font-bold text-red-900 dark:text-red-200">LOW 확률 (30%)</h4>
-            <p className="text-sm text-red-700 dark:text-red-400">뱅크런 & 긴축 재개</p>
-          </div>
-          <ul className="space-y-2 text-sm text-red-800 dark:text-red-300">
-            <li>스테이블코인 담보 검증 실패</li>
-            <li>뱅크런 발생 → 신뢰 붕괴</li>
-            <li>재융자 실패 → 금리 폭등</li>
-            <li>연준 금리 인상 재개</li>
-            <li>AI 생산성 미실현</li>
-            <li>부채 위기 현실화</li>
-            <li>2008년식 금융위기 재현</li>
-          </ul>
-        </div>
-      </div>
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    스테이블코인 발행사 중 일부가 담보 자산 검증에 실패하거나 부실 운영이 드러나
+                    뱅크런이 발생한다. 투자자 신뢰가 무너지고 스테이블코인 시장이 위축된다.
+                    단기 국채 수요 창출이 기대에 미치지 못하고, 재융자 실패로 금리가 폭등한다.
+                    연준은 인플레이션 재점화 우려로 금리 인상을 재개하고, 정부의 이자 부담이
+                    기하급수적으로 증가한다. AI 생산성이 기대만큼 발현되지 않아 GDP 성장이 더디고,
+                    부채 위기가 현실화된다. 시스템 리스크가 금융 시장 전반으로 확산되며,
+                    2008년식 금융위기 재현 가능성이 대두된다.
+                  </>
+                ) : (
+                  <>
+                    Some stablecoin issuers fail collateral asset verification or reveal mismanagement, triggering a
+                    bank run. Investor confidence collapses and the stablecoin market contracts. T-bill demand creation
+                    falls short of expectations, and refinancing failure causes rates to surge. The Fed resumes rate
+                    hikes amid inflation reignition concerns, and the government's interest burden grows exponentially.
+                    AI productivity doesn't materialize as expected, GDP growth stalls, and the debt crisis becomes real.
+                    Systemic risk spreads across financial markets, raising the possibility of a 2008-style financial
+                    crisis repeat.
+                  </>
+                )}
+              </p>
 
-      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">HIGH 확률 시나리오 (70%): 선순환 달성</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? 'Walits의 리스크 관리 전략' : "Walits' Risk Management Strategy"}
+              </h3>
 
-      <p>
-        GENIUS Act가 성공적으로 시행되고, 스테이블코인 TVL이 1조 달러를 돌파하며,
-        단기 국채 수요가 안정적으로 창출된다. 재융자 압박이 완화되고 이자 비용이 관리
-        가능한 수준으로 유지된다. BlackRock, Fidelity 등 대형 자산운용사들이 RWA 토큰
-        상품을 속속 출시하고, 토크나이제이션 시장이 폭발적으로 성장한다. GDP 성장률이
-        3~4%대로 회복되고, 부채/GDP 비율이 안정화된다. Walits 같은 규제 준수 Custody
-        솔루션에 대한 수요가 급증하며, 디지털 자산 인프라 기업들의 가치가 급등한다.
-      </p>
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    어떤 시나리오가 현실화되든, Walits는 리스크 관리를 철저히 해야 한다.
+                    첫째, 과도한 레버리지 사용을 지양하고, 보수적인 재무 구조를 유지한다.
+                    둘째, 다양한 블록체인 네트워크와 자산 클래스를 지원하여 특정 시장 의존도를
+                    낮춘다. 셋째, 규제 변화에 신속하게 대응할 수 있도록 법무 및 컴플라이언스
+                    팀을 강화한다. 넷째, 보안 사고에 대비한 보험 가입과 비상 대응 매뉴얼을
+                    구비한다.
+                  </>
+                ) : (
+                  <>
+                    Whichever scenario materializes, Walits must manage risks rigorously. First, avoid excessive leverage
+                    and maintain conservative financial structure. Second, support diverse blockchain networks and asset
+                    classes to reduce specific market dependence. Third, strengthen legal and compliance teams to respond
+                    swiftly to regulatory changes. Fourth, secure insurance against security incidents and prepare
+                    emergency response manuals.
+                  </>
+                )}
+              </p>
 
-      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">LOW 확률 시나리오 (30%): 뱅크런과 긴축 재개</h3>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">
+                {language === 'ko' ? '에필로그: 토큰화된 세계의 도래' : 'Epilogue: The Arrival of a Tokenized World'}
+              </h2>
 
-      <p>
-        스테이블코인 발행사 중 일부가 담보 자산 검증에 실패하거나 부실 운영이 드러나
-        뱅크런이 발생한다. 투자자 신뢰가 무너지고 스테이블코인 시장이 위축된다.
-        단기 국채 수요 창출이 기대에 미치지 못하고, 재융자 실패로 금리가 폭등한다.
-        연준은 인플레이션 재점화 우려로 금리 인상을 재개하고, 정부의 이자 부담이
-        기하급수적으로 증가한다. AI 생산성이 기대만큼 발현되지 않아 GDP 성장이 더디고,
-        부채 위기가 현실화된다. 시스템 리스크가 금융 시장 전반으로 확산되며,
-        2008년식 금융위기 재현 가능성이 대두된다.
-      </p>
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    2026년은 금융 역사에서 중요한 전환점으로 기록될 것이다. 연준 중심의 통화정책
+                    시대가 막을 내리고, 정부 주도 재정정책과 디지털 자산이 결합된 새로운 시대가
+                    열리고 있다. 스테이블코인은 단순한 암호화폐가 아니라 정부의 부채 관리 도구이자
+                    달러 패권 연장의 수단이 되었다. 모든 자산이 토큰화되는 미래는 더 이상 SF가
+                    아니라 현실이 되어가고 있다.
+                  </>
+                ) : (
+                  <>
+                    2026 will be recorded as a critical turning point in financial history. The Fed-centric monetary
+                    policy era closes, and a new era combining government-led fiscal policy and digital assets opens.
+                    Stablecoins have become not just cryptocurrencies but government debt management tools and instruments
+                    for extending dollar hegemony. A future where all assets are tokenized is no longer science fiction
+                    but becoming reality.
+                  </>
+                )}
+              </p>
 
-      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Walits의 리스크 관리 전략</h3>
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    이 거대한 변화의 물결 속에서 기회를 잡을 것인가, 아니면 방관할 것인가.
+                    Walits는 규제 준수 Custody라는 핵심 인프라를 제공함으로써 토큰화 시대의
+                    필수 파트너로 자리매김할 수 있다. 트럼프 행정부의 정책 방향, GENIUS Act의
+                    시행 경과, 그리고 RWA 토크나이제이션 시장의 성장을 면밀히 모니터링하며,
+                    발 빠르게 대응해야 할 시점이다.
+                  </>
+                ) : (
+                  <>
+                    In this massive wave of change, will you seize the opportunity or stand aside? By providing compliant
+                    custody as core infrastructure, Walits can position itself as an essential partner in the tokenization
+                    era. It's time to closely monitor the Trump administration's policy direction, GENIUS Act implementation
+                    progress, and RWA tokenization market growth, responding swiftly.
+                  </>
+                )}
+              </p>
 
-      <p>
-        어떤 시나리오가 현실화되든, Walits는 리스크 관리를 철저히 해야 한다.
-        첫째, 과도한 레버리지 사용을 지양하고, 보수적인 재무 구조를 유지한다.
-        둘째, 다양한 블록체인 네트워크와 자산 클래스를 지원하여 특정 시장 의존도를
-        낮춘다. 셋째, 규제 변화에 신속하게 대응할 수 있도록 법무 및 컴플라이언스
-        팀을 강화한다. 넷째, 보안 사고에 대비한 보험 가입과 비상 대응 매뉴얼을
-        구비한다.
-      </p>
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    역사는 준비된 자의 것이다. 2026년, 토큰화된 세계가 본격적으로 펼쳐진다.
+                    이 새로운 금융 질서에서 Walits가 어떤 역할을 할 것인지, 그 여정이 지금
+                    시작되었다.
+                  </>
+                ) : (
+                  <>
+                    History belongs to the prepared. In 2026, a tokenized world unfolds in earnest. The journey of
+                    what role Walits will play in this new financial order begins now.
+                  </>
+                )}
+              </p>
 
-      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">에필로그: 토큰화된 세계의 도래</h2>
+              <div className="mt-12 p-6 bg-gray-50 rounded-lg">
+                <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                  {language === 'ko' ? '참고자료' : 'References'}
+                </h3>
+                <ul className="text-sm">
+                  <li>{language === 'ko' ? '미국 재무부 부채 통계 (2025년 8월 기준)' : 'US Treasury Debt Statistics (as of August 2025)'}</li>
+                  <li>{language === 'ko' ? 'GENIUS Act 법안 전문 (2025년 7월 공표)' : 'GENIUS Act Full Text (Published July 2025)'}</li>
+                  <li>{language === 'ko' ? 'BlackRock BUIDL 펀드 백서' : 'BlackRock BUIDL Fund Whitepaper'}</li>
+                  <li>{language === 'ko' ? '연준 SOFR 및 역레포 시장 데이터' : 'Federal Reserve SOFR and Reverse Repo Market Data'}</li>
+                  <li>{language === 'ko' ? '트럼프 행정부 디지털 자산 정책 로드맵' : 'Trump Administration Digital Asset Policy Roadmap'}</li>
+                </ul>
+              </div>
 
-      <p>
-        2026년은 금융 역사에서 중요한 전환점으로 기록될 것이다. 연준 중심의 통화정책
-        시대가 막을 내리고, 정부 주도 재정정책과 디지털 자산이 결합된 새로운 시대가
-        열리고 있다. 스테이블코인은 단순한 암호화폐가 아니라 정부의 부채 관리 도구이자
-        달러 패권 연장의 수단이 되었다. 모든 자산이 토큰화되는 미래는 더 이상 SF가
-        아니라 현실이 되어가고 있다.
-      </p>
-
-      <p>
-        이 거대한 변화의 물결 속에서 기회를 잡을 것인가, 아니면 방관할 것인가.
-        Walits는 규제 준수 Custody라는 핵심 인프라를 제공함으로써 토큰화 시대의
-        필수 파트너로 자리매김할 수 있다. 트럼프 행정부의 정책 방향, GENIUS Act의
-        시행 경과, 그리고 RWA 토크나이제이션 시장의 성장을 면밀히 모니터링하며,
-        발 빠르게 대응해야 할 시점이다.
-      </p>
-
-      <p>
-        역사는 준비된 자의 것이다. 2026년, 토큰화된 세계가 본격적으로 펼쳐진다.
-        이 새로운 금융 질서에서 Walits가 어떤 역할을 할 것인지, 그 여정이 지금
-        시작되었다.
-      </p>
-
-      <div className="mt-12 p-6 bg-gray-50 rounded-lg">
-        <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">참고자료</h3>
-        <ul className="text-sm">
-          <li>미국 재무부 부채 통계 (2025년 8월 기준)</li>
-          <li>GENIUS Act 법안 전문 (2025년 7월 공표)</li>
-          <li>BlackRock BUIDL 펀드 백서</li>
-          <li>연준 SOFR 및 역레포 시장 데이터</li>
-          <li>트럼프 행정부 디지털 자산 정책 로드맵</li>
-        </ul>
-      </div>
-
-          <div className="not-prose mt-12 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-700">
-            <h3 className="text-xl font-bold text-blue-900 dark:text-blue-200 mb-3">Walits와 함께하는 토큰화 시대</h3>
-            <p className="text-blue-800 dark:text-blue-300 mb-4">
-              STO 발행, RWA 토크나이제이션, 그리고 규제 준수 Custody에 대한 상담이 필요하시면
-              언제든 연락주세요.
-            </p>
-            <ul className="list-none space-y-2 text-blue-900 dark:text-blue-200">
-              <li>이메일: contact@walits.io</li>
-              <li>웹사이트: www.walits.io</li>
-            </ul>
-          </div>
+              <div className="not-prose mt-12 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-700">
+                <h3 className="text-xl font-bold text-blue-900 dark:text-blue-200 mb-3">
+                  {language === 'ko' ? 'Walits와 함께하는 토큰화 시대' : 'The Tokenization Era with Walits'}
+                </h3>
+                <p className="text-blue-800 dark:text-blue-300 mb-4">
+                  {language === 'ko' ? (
+                    <>STO 발행, RWA 토크나이제이션, 그리고 규제 준수 Custody에 대한 상담이 필요하시면 언제든 연락주세요.</>
+                  ) : (
+                    <>For consultation on STO issuance, RWA tokenization, and compliant custody, please contact us anytime.</>
+                  )}
+                </p>
+                <ul className="list-none space-y-2 text-blue-900 dark:text-blue-200">
+                  <li>{language === 'ko' ? '이메일' : 'Email'}: contact@walits.io</li>
+                  <li>{language === 'ko' ? '웹사이트' : 'Website'}: www.walits.io</li>
+                </ul>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </article>

@@ -21,6 +21,14 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2024-12-15T00:00:00Z",
     authors: ["Walits Team"],
+    images: [
+      {
+        url: "/blog/game-rewards.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Game Event Rewards Guide",
+      },
+    ],
   },
 };
 

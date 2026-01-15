@@ -22,6 +22,14 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2024-12-12T00:00:00Z",
     authors: ["Walits Team"],
+    images: [
+      {
+        url: "/blog/custody-service.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Crypto Custody Service Guide",
+      },
+    ],
   },
 };
 
