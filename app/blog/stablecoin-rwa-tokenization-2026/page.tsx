@@ -8,7 +8,7 @@ export default function StablecoinRegulation2026() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
 
   return (
-    <article className="min-h-screen bg-white dark:bg-gray-900 py-12">
+    <div className="min-h-screen bg-white dark:bg-gray-900 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
           <div className="flex justify-between items-center mb-4">
@@ -1929,10 +1929,8 @@ export default function StablecoinRegulation2026() {
                   <li>{language === 'ko' ? '웹사이트' : 'Website'}: www.walits.io</li>
                 </ul>
               </div>
-            </>
-          )}
         </div>
       </div>
-    </article>
+    </div>
   );
 }
