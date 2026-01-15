@@ -42,7 +42,7 @@ export default function StablecoinRegulation2026() {
 
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead text-xl text-gray-700 dark:text-gray-300">
-        2026년이 시작되면서 미국 금융 시스템은 역사적 전환점을 맞이하고 있다. 37조 달러를 넘어선
+        2026년이 시작되면서 미국 금융 시스템은 역사적 전환점을 맞이하고 있다. 38.5조 달러를 넘어선
         연방 부채, 약화되는 연준의 독립성, 그리고 트럼프 2기 행정부의 스테이블코인 제도화 전략이
         교차하는 지점에서 우리는 새로운 금융 질서의 탄생을 목격하고 있다. 이 글은 연준과 정부 간의
         갈등, 스테이블코인이 부채 관리 도구로 부상하는 과정, 그리고 모든 자산이 토큰화되는 미래에
@@ -62,7 +62,7 @@ export default function StablecoinRegulation2026() {
         <h3 className="text-lg font-bold text-red-900 dark:text-red-200 mb-3">2026년 미국 경제 위기 지표</h3>
         <div className="grid md:grid-cols-3 gap-4 text-center">
           <div>
-            <div className="text-3xl font-bold text-red-600 dark:text-red-400">$37조</div>
+            <div className="text-3xl font-bold text-red-600 dark:text-red-400">$38.5조</div>
             <div className="text-sm text-red-800 dark:text-red-300 mt-1">연방 부채</div>
           </div>
           <div>
@@ -70,15 +70,15 @@ export default function StablecoinRegulation2026() {
             <div className="text-sm text-red-800 dark:text-red-300 mt-1">GDP 대비 부채 비율</div>
           </div>
           <div>
-            <div className="text-3xl font-bold text-red-600 dark:text-red-400">$9,490억</div>
-            <div className="text-sm text-red-800 dark:text-red-300 mt-1">연간 이자 비용</div>
+            <div className="text-3xl font-bold text-red-600 dark:text-red-400">$1조 2,160억</div>
+            <div className="text-sm text-red-800 dark:text-red-300 mt-1">연간 총이자 비용</div>
           </div>
         </div>
       </div>
 
       <p>
         하지만 2026년을 맞이한 지금, 이러한 패러다임은 근본적으로 흔들리고 있다. 미국 연방 부채가
-        37조 달러를 돌파하면서 GDP 대비 부채 비율이 120%를 넘어섰고, 연간 이자 비용만 9,490억 달러로
+        38.5조 달러를 돌파하면서 GDP 대비 부채 비율이 120%를 넘어섰고, 연간 총이자 비용만 1조 2,160억 달러로
         국방비를 초월하는 상황이 되었다. 이는 단순한 숫자의 문제가 아니다. 2차 세계대전 이후 처음으로
         미국 정부가 부채 문제로 인해 경제 정책의 주도권을 연준으로부터 되찾아와야 하는 상황에 놓인
         것이다.
@@ -94,10 +94,10 @@ export default function StablecoinRegulation2026() {
 
       <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">1장. 부채의 딜레마: 트래핀과 재융자의 악순환</h2>
 
-      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">37조 달러의 무게</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">38.5조 달러의 무게</h3>
 
       <p>
-        2025년 8월, 미국 연방 부채가 37조 달러를 돌파했다는 뉴스가 전 세계를 강타했다. 한화로
+        2025년 12월, 미국 연방 부채가 38.5조 달러를 돌파했다는 뉴스가 전 세계를 강타했다. 한화로
         환산하면 약 5경 원에 달하는 이 천문학적 숫자는 이제 단순한 통계가 아니라 미국 경제의
         구조적 취약성을 상징하는 지표가 되었다. GDP 대비 부채 비율 120%는 2차 세계대전 당시와
         비슷한 수준이다. 그러나 당시와 결정적으로 다른 점이 있다. 1940년대에는 전쟁이 끝나고
@@ -115,8 +115,12 @@ export default function StablecoinRegulation2026() {
           </thead>
           <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
             <tr className="bg-red-50 dark:bg-red-900/20">
-              <td className="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white">부채 이자 비용</td>
-              <td className="px-6 py-4 text-sm text-right font-bold text-red-600 dark:text-red-400">$9,490억</td>
+              <td className="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white">부채 총이자 비용</td>
+              <td className="px-6 py-4 text-sm text-right font-bold text-red-600 dark:text-red-400">$1조 2,160억</td>
+            </tr>
+            <tr className="bg-red-50 dark:bg-red-900/20">
+              <td className="px-6 py-4 text-sm font-semibold text-gray-900 dark:text-white pl-10">순이자 비용</td>
+              <td className="px-6 py-4 text-sm text-right font-bold text-red-600 dark:text-red-400">$9,700억</td>
             </tr>
             <tr>
               <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-300">국방비</td>
@@ -124,18 +128,18 @@ export default function StablecoinRegulation2026() {
             </tr>
             <tr className="bg-gray-50 dark:bg-gray-800">
               <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-400 italic">금리 1% 인상 시 추가 이자</td>
-              <td className="px-6 py-4 text-sm text-right text-orange-600 dark:text-orange-400 font-semibold">+$3,700억</td>
+              <td className="px-6 py-4 text-sm text-right text-orange-600 dark:text-orange-400 font-semibold">+$3,850억</td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <p>
-        더욱 심각한 문제는 이자 비용이다. 2024년 미국 정부가 지출한 이자 비용은 9,490억 달러로,
-        국방비 8,860억 달러를 초과했다. 이는 메디케어, 교육, 인프라 투자 등 다른 모든 예산 항목에
-        압박을 가하고 있다. 만약 연준이 금리를 1% 포인트 더 올린다면 부채 37조 달러에 대한 이자
-        비용은 연간 3,700억 달러가 추가로 증가하게 된다. 이는 정치적으로나 재정적으로나 감당하기
-        어려운 수준이다.
+        더욱 심각한 문제는 이자 비용이다. 2024년 미국 정부가 지출한 총이자 비용은 1조 2,160억 달러로,
+        순이자 비용만 9,700억 달러에 달해 국방비 8,860억 달러를 훨씬 초과했다. 이는 메디케어, 교육,
+        인프라 투자 등 다른 모든 예산 항목에 압박을 가하고 있다. 만약 연준이 금리를 1% 포인트 더 올린다면
+        부채 38.5조 달러에 대한 이자 비용은 연간 3,850억 달러가 추가로 증가하게 된다. 이는 정치적으로나
+        재정적으로나 감당하기 어려운 수준이다.
       </p>
 
       <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">트래핀 딜레마의 재현</h3>
@@ -641,7 +645,7 @@ export default function StablecoinRegulation2026() {
       <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">부채 총량이 아닌 비율 관리</h3>
 
       <p>
-        미국 정부는 37조 달러의 부채를 갚을 생각이 없다. 아니, 갚을 수도 없다. 대신
+        미국 정부는 38.5조 달러의 부채를 갚을 생각이 없다. 아니, 갚을 수도 없다. 대신
         GDP를 빠르게 성장시켜 부채/GDP 비율을 낮추는 전략을 택하고 있다. 현재 120% 수준인
         부채 비율을 100% 이하로 낮추려면, 부채를 줄이거나 GDP를 늘려야 한다. 정치적으로
         부채 삭감은 불가능하므로, 유일한 답은 GDP 성장이다.
