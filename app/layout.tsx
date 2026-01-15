@@ -42,9 +42,6 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL("https://walits.com"),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "ko_KR",
