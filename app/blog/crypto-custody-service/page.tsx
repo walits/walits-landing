@@ -422,13 +422,352 @@ export default function CryptoCustodyServicePost() {
             <>
               <div className="mb-12">
                 <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
-                  The 2022 FTX collapse and 2023 Silicon Valley Bank bankruptcy taught the crypto industry one crucial lesson:
-                  "Secure asset storage is paramount."
+                  The 2022 FTX collapse and 2023 Silicon Valley Bank bankruptcy. A series of incidents in the crypto industry taught us one lesson:
+                  "Secure asset storage is the most important thing."
                 </p>
                 <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                  For exchanges, securities firms, and asset managers, custody service is the most critical aspect of storing customer assets.
-                  It requires not just wallet addresses, but institution-grade security, regulatory compliance, and efficient operational processes.
+                  When exchanges, securities firms, and asset managers store customer assets, the most critical aspect is custody service.
+                  Beyond simply creating wallet addresses to store assets, it requires institution-grade security, regulatory compliance, and efficient operational processes.
                 </p>
+              </div>
+
+              <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Why is Custody Service Necessary?</h2>
+                <div className="space-y-6 text-gray-700 dark:text-gray-300">
+                  <div>
+                    <h4 className="font-bold mb-3 text-lg">1. Regulatory Compliance</h4>
+                    <p className="mb-2">Regulatory authorities around the world, including Korea's Special Act, the US BSA, and Europe's MiCA, mandate safe storage of customer assets by virtual asset service providers.</p>
+                    <p className="text-sm bg-white dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-600 mt-3">
+                      Article 7-3 of the Special Act: Virtual asset operators must store customer assets separately from their own assets and manage them in a safe manner such as cold wallets.
+                      Violations can result in imprisonment of up to 5 years or fines of up to 50 million won.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-3 text-lg">2. Building Customer Trust</h4>
+                    <p className="mb-2">Concrete evidence such as "We protect assets with MPC 2-of-3 custody" gives customers strong confidence.
+                    This is why companies using global custody solutions like Fireblocks and BitGo leverage this as a marketing point.</p>
+                    <p className="text-sm mt-2">
+                      In fact, after Upbit introduced MPC technology in 2023, they emphasized their strengthened customer asset protection system,
+                      which became a key factor in enhancing their credibility as Korea's leading exchange.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-3 text-lg">3. Preventing Insider Threats</h4>
+                    <p className="mb-2">By preventing any single individual or department from accessing assets, insider incidents are fundamentally blocked.</p>
+                    <p className="text-sm bg-white dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-600 mt-3">
+                      In 2021, AfreecaTV had an incident where an internal employee unauthorized used the company wallet's private key to withdraw 6.9 billion won worth of virtual assets.
+                      With an MPC 2-of-3 system, such solo crimes would have been fundamentally impossible.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-3 text-lg">4. Operational Efficiency</h4>
+                    <p className="mb-2">Using the Omnibus structure, you can manage all assets from a single master address without needing to manage millions of wallet addresses per customer.</p>
+                    <p className="text-sm mt-2">
+                      Typically, exchanges have customers holding an average of 3-5 coins each, and with 100,000 customers, they would need to manage 300,000-500,000 wallet addresses.
+                      The Omnibus method consolidates this to one master address per coin, such as 1 for BTC, 1 for ETH, and 1 for USDT.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Limitations of Traditional Custody Methods</h2>
+
+              <div className="mb-12 space-y-6">
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">1. Single Private Key Method</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    The most basic method of managing wallets with a single private key. While simple to implement, it has critical security weaknesses.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm space-y-2">
+                    <p className="font-semibold text-red-600 dark:text-red-400">Risk Factors:</p>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Anyone with the private key can withdraw assets alone</li>
+                      <li>If an insider or hacker steals the key, immediate asset loss occurs</li>
+                      <li>Unrecoverable if the person in charge leaves or has an accident</li>
+                      <li>All assets leaked if the server storing the key is hacked</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">2. Multi-Signature</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    A method using Bitcoin or Ethereum smart contracts requiring M signatures out of N keys to execute transactions.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm space-y-2">
+                    <p className="font-semibold text-yellow-600 dark:text-yellow-400">Limitations:</p>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Support varies by chain (Solana, Ripple, etc. lack native multisig support)</li>
+                      <li>Transaction size increases, raising gas fees (3-of-5 multisig is 3-5x normal transactions)</li>
+                      <li>Increased operational complexity as each signer must be online</li>
+                      <li>Difficult or impossible recovery if keys are lost</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">3. HSM (Hardware Security Module)</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    A method storing private keys in dedicated hardware devices and performing signatures. Mainly used by banks.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm space-y-2">
+                    <p className="font-semibold text-yellow-600 dark:text-yellow-400">Problems:</p>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Very high initial adoption cost ($10,000-$50,000 per device)</li>
+                      <li>Requires physical device management (data center, redundancy, backup)</li>
+                      <li>Difficult to use in cloud environments</li>
+                      <li>Still risky if a single device is hacked (Side Channel Attack)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Walits Custody: MPC 2-of-3 Architecture</h2>
+
+              <div className="mb-8">
+                <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
+                  Walits uses a 2-of-3 Threshold Signature method based on MPC (Multi-Party Computation) technology.
+                  This divides the private key into 3 pieces (Key Shares), stores each in different locations, and requires only 2 pieces to sign transactions.
+                </p>
+                <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                  The key is that "a complete private key never exists in memory, not even for a moment."
+                  Each Key Share is meaningless independently, and only when 2 pieces come together can a valid signature be generated.
+                </p>
+              </div>
+
+              <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Key Share Distribution Structure</h3>
+                <div className="space-y-4 text-gray-700 dark:text-gray-300">
+                  <div className="flex items-start gap-4 p-4 bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-600">
+                    <div className="text-2xl font-bold text-gray-400">1</div>
+                    <div>
+                      <h4 className="font-bold mb-2">Customer Key Share</h4>
+                      <p className="text-sm">Held by the customer (exchange, securities firm). Stored encrypted in AWS KMS, Google Cloud KMS, etc.</p>
+                      <p className="text-xs mt-2 text-gray-500 dark:text-gray-400">
+                        Example: CoinEx Korea stores its Customer Key Share in their own AWS account's KMS,
+                        and Walits cannot access this key.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-600">
+                    <div className="text-2xl font-bold text-gray-400">2</div>
+                    <div>
+                      <h4 className="font-bold mb-2">Walits Key Share</h4>
+                      <p className="text-sm">Stored by Walits inside AWS Nitro Enclave (TEE). External access impossible.</p>
+                      <p className="text-xs mt-2 text-gray-500 dark:text-gray-400">
+                        AWS Nitro Enclave is a CPU-level isolated execution environment where SSH access, API calls, and even AWS administrators cannot access internal memory.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-600">
+                    <div className="text-2xl font-bold text-gray-400">3</div>
+                    <div>
+                      <h4 className="font-bold mb-2">Backup Key Share</h4>
+                      <p className="text-sm">For disaster recovery. Further split 3-of-5 using Shamir's Secret Sharing, with each piece held by 5 customer executives.</p>
+                      <p className="text-xs mt-2 text-gray-500 dark:text-gray-400">
+                        Example: CEO, CFO, CTO, CISO, and board chairman each hold one piece.
+                        Even if both Customer Key Share and Walits Key Share are lost, recovery is possible if 3 out of 5 executives come together.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Omnibus System: Efficient Asset Management</h2>
+
+              <div className="mb-8">
+                <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-4">
+                  Walits Custody uses an Omnibus (consolidated) structure.
+                  All customer assets are stored in one master address, and each customer's balance is managed virtually in the database.
+                </p>
+                <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                  This is the same method as securities firms storing customer stocks in a consolidated manner at Korea Securities Depository and managing each customer account virtually.
+                </p>
+              </div>
+
+              <div className="space-y-8 mb-12">
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Deposit Process</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Let's take the example of a customer depositing BTC to an exchange.
+                  </p>
+
+                  <div className="space-y-4">
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                      <p className="font-semibold mb-2">Step 1: Generate Deposit Address</p>
+                      <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                        Each customer is issued a unique deposit address. This is an address derived from the master address through BIP32 HD Wallet.
+                      </p>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                      <p className="font-semibold mb-2">Step 2: Deposit Detection (1 Confirmation)</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        Walits xScanner monitors the blockchain in real-time to detect deposits.
+                      </p>
+                      <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                        At 1 confirmation, it's not yet reflected in the customer balance, only displayed on the admin dashboard.
+                      </p>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                      <p className="font-semibold mb-2">Step 3: Deposit Confirmation (6-12 Confirmations)</p>
+                      <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                        Now the customer can trade or withdraw that BTC on the exchange.
+                      </p>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                      <p className="font-semibold mb-2">Step 4: Auto-Sweep (Automatic Consolidation)</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        The deposited BTC is not left in the individual address but automatically transferred to the Omnibus master address.
+                      </p>
+                      <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                        Now all customers' BTC is managed in one secure master address.
+                        Individual addresses have almost no balance remaining, minimizing hacking risk.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Withdrawal Process</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    A customer withdrawing BTC from the exchange to an external address.
+                  </p>
+
+                  <div className="space-y-4">
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                      <p className="font-semibold mb-2">Step 1: Withdrawal Request and Balance Hold</p>
+                      <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                        Upon withdrawal request, it's immediately deducted from the customer balance to prevent duplicate withdrawals.
+                      </p>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                      <p className="font-semibold mb-2">Step 2: Policy Verification</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        Automatically verifies pre-configured withdrawal policies.
+                      </p>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                      <p className="font-semibold mb-2">Step 3: N-of-M Approval</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        CFO and CTO review and approve the withdrawal request on the Walits dashboard.
+                      </p>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                      <p className="font-semibold mb-2">Step 4: MPC 2-of-3 Signature</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        Once approved, Customer Key Share and Walits Key Share collaborate to sign the transaction.
+                      </p>
+                      <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                        Throughout the entire process, the complete private key never exists in memory.
+                      </p>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                      <p className="font-semibold mb-2">Step 5: Status Tracking and Completion</p>
+                      <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                        Customers can check withdrawal progress in real-time on the dashboard.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Real Case: CoinEx Korea</h2>
+
+              <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <p className="text-gray-700 dark:text-gray-300 mb-6">
+                  CoinEx Korea has adopted Walits Custody to securely process an average of 5,000 deposits and withdrawals per month.
+                </p>
+
+                <div className="space-y-4 text-sm">
+                  <div className="p-4 bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-bold mb-2">Problems Before Adoption</h4>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Single private key stored on server, creating hacking risk</li>
+                      <li>Manual withdrawal approvals taking an average of 30 minutes to process</li>
+                      <li>DB load from managing tens of thousands of deposit addresses per coin</li>
+                    </ul>
+                  </div>
+
+                  <div className="p-4 bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-bold mb-2">Improvements After Adoption</h4>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>MPC 2-of-3 eliminates single point of failure, fundamentally blocks insider hacking</li>
+                      <li>Policy-based auto-approval processes withdrawals under 1 BTC immediately (average 5 minutes)</li>
+                      <li>Omnibus structure manages only 1 BTC master address, 1 ETH master address</li>
+                      <li>Passed Financial Supervisory Service security audit through AWS Nitro Enclave</li>
+                    </ul>
+                  </div>
+
+                  <div className="p-4 bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-bold mb-2">Operational Metrics</h4>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Monthly average deposits: 3,500 transactions (cumulative $2.5M)</li>
+                      <li>Monthly average withdrawals: 1,500 transactions (cumulative $1.8M)</li>
+                      <li>Average withdrawal processing time: 5 minutes (auto-approval), 20 minutes (manual approval)</li>
+                      <li>Security incidents: 0 (24 months of operation)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Walits vs Competitors</h2>
+
+              <div className="mb-12 overflow-x-auto">
+                <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-800">
+                    <tr>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Item</th>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Walits</th>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Fireblocks</th>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">BitGo</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-700 dark:text-gray-300">
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Security Method</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">MPC 2-of-3 + TEE</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">MPC + SGX</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Multisig (on-chain)</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Gas Fees</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Same as regular transactions</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Same as regular transactions</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">3-5x increase due to multisig</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Supported Chains</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">BTC, ETH, major EVM chains</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">60+ chains</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">BTC, ETH focused</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Monthly Cost</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">$500-2,000 (volume-based)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">$5,000-20,000</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">$3,000-15,000</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Korean Support</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Yes (dedicated CS team)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">No</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">No</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Domestic Regulation Response</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Full compliance with Special Act</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Customer handles directly</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Customer handles directly</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
               <div className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 p-8 rounded-lg text-center">

@@ -298,15 +298,247 @@ export default function GameEventRewardsPost() {
               </div>
             </>
           ) : (
-            <div className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 p-8 rounded-lg text-center">
-              <h2 className="text-2xl font-bold mb-4">Start Now</h2>
-              <p className="mb-6 text-gray-300 dark:text-gray-600">
-                Walits Non-Custody API is free for the first month.
-              </p>
-              <Link href="/inquiry" className="inline-block px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                Start Free →
-              </Link>
-            </div>
+            <>
+              <div className="mb-12">
+                <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
+                  During the Christmas season, game companies face a critical moment: "How do we distribute rewards to 500 event participants?"
+                  In the traditional way, you'd have to create each transaction, calculate gas fees, and send them one by one.
+                </p>
+                <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                  But with Walits Non-Custody wallet, the story changes.
+                  Using the Virtual Balance system, you can instantly distribute rewards to hundreds or thousands of people with just one API call.
+                  Without worrying about gas fees, in real-time, and with perfect traceability.
+                </p>
+              </div>
+
+              <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Real Scenario: Christmas Boss Raid Event</h2>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                  An RPG game called "Fantasy Kingdom" hosts a Christmas event.
+                  On December 24th at 8 PM, a special boss "Ice Dragon" appears and 500 users participate in the raid.
+                </p>
+                <div className="bg-white dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-600 mt-4">
+                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Reward Distribution Conditions</h4>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>All raid participants: 100 GameCoin</li>
+                    <li>Top damage dealer: Additional 500 GameCoin + Rare Item NFT</li>
+                    <li>Last hit player: Additional 300 GameCoin</li>
+                    <li>Total distribution: Approx. 50,800 GameCoin + 1 NFT</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Problems with Traditional Approach</h2>
+
+              <div className="mb-12 space-y-6">
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">1. Time Consumption and Operational Burden</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Processing 500 transactions on-chain requires enormous time.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm space-y-2">
+                    <p className="font-semibold">Estimated Time Calculation:</p>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Ethereum: 12 seconds per block × 500 transactions = At least 1.7 hours (sequential processing)</li>
+                      <li>Even with parallel processing, nonce management complexity increases</li>
+                      <li>Need to implement retry logic for failed transactions</li>
+                      <li>Operator must manually monitor progress</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">2. Astronomical Gas Fees</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Since gas fees occur for each transaction, large-scale events cause costs to skyrocket.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm space-y-2">
+                    <p className="font-semibold">Actual Cost Calculation (Based on Ethereum):</p>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>ERC-20 transfer gas: Approx. 65,000 gas</li>
+                      <li>Assuming Gas Price 30 gwei</li>
+                      <li>1 transaction cost: 65,000 × 30 = 1,950,000 gwei = 0.00195 ETH = approx. $4.5</li>
+                      <li>500 transactions total cost: $4.5 × 500 = $2,250</li>
+                      <li>During network congestion Gas Price 100 gwei+: Over $7,500!</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">3. Complex Management and Tracking</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Managing individual transactions requires complex logic and monitoring systems.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm space-y-2">
+                    <p className="font-semibold">Management Complexity:</p>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Track status of each transaction (Pending, Confirmed, Failed)</li>
+                      <li>Implement retry mechanism for failed transactions</li>
+                      <li>Ensure idempotency to prevent duplicate payments</li>
+                      <li>Build logging and reporting system for audits</li>
+                      <li>Customer support: Handle "When will I receive it?" inquiries</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Solving with Walits Non-Custody</h2>
+
+              <div className="space-y-8 mb-12">
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">1. Prepare Master Wallet</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Check if the game company's master wallet has enough GameCoin.
+                    You can easily check via Walits dashboard or API.
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">2. Generate Reward Recipients List</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Query raid participant data from the game server and convert it to Walits API format.
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">3. Call Batch Transfer API</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Distribute rewards to 500 users simultaneously with just one API call.
+                    Processing time is only 2-3 seconds!
+                  </p>
+                  <p className="text-sm mt-4 text-gray-600 dark:text-gray-400">
+                    <span className="font-semibold">Idempotency Key</span> ensures that even if you accidentally call the API multiple times, duplicate payments won't occur.
+                    If you request with the same key again, the previous result is returned.
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">4. Instant Reflection Complete</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    GameCoin is instantly reflected in all users' wallets. Gas fee is zero!
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">5. Send Real-time Notifications (Optional)</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    You can send push notifications to users using Webhook.
+                  </p>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">How Virtual Balance Works</h2>
+
+              <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  Walits Non-Custody uses the Virtual Balance system.
+                  Each user's balance is recorded in the Walits database, not on the blockchain.
+                </p>
+                <div className="space-y-4 text-sm">
+                  <div className="p-4 bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-semibold mb-2">Internal Transfer (Virtual Balance Movement)</h4>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      In-game user-to-user trading, reward distribution, etc. are all processed with Virtual Balance.
+                      Since no blockchain transactions occur, gas fees are zero and processing is instant.
+                    </p>
+                  </div>
+                  <div className="p-4 bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-semibold mb-2">Blockchain Withdrawal (Actual Withdrawal)</h4>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Blockchain transactions only occur when users want to withdraw assets outside the game.
+                      Example: Transfer GameCoin to MetaMask
+                    </p>
+                  </div>
+                  <div className="p-4 bg-white dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-semibold mb-2">Advantage</h4>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Since 99% of in-game transactions are processed with Virtual Balance, you can build a real-time economy system without gas fee burden.
+                      Users actually withdraw less than 5% of the time.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Cost Comparison: On-Chain vs Walits</h2>
+
+              <div className="mb-12 overflow-x-auto">
+                <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-800">
+                    <tr>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Item</th>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">On-Chain Method</th>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Walits Non-Custody</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-700 dark:text-gray-300">
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Processing Time</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">1-2 hours (sequential)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">2-3 seconds</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Gas Fee (500 people)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">$2,250-$7,500</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">$0</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Development Complexity</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">High (nonce management, retry logic)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Low (single API call)</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Failure Risk</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Transaction can fail</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Atomicity guaranteed (All or Nothing)</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">User Experience</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Delayed, uncertain</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Instant, certain</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Real Use Cases</h2>
+
+              <div className="mb-12 space-y-6">
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">Case 1: "Crypto Racer" (Racing Game)</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Average 800 participants in Friday evening tournaments. Tiered rewards to top 100.
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Before Walits: Spent $8,000/month on gas fees, average 2 hours for reward distribution</li>
+                    <li>After Walits: $0 gas fees, instant reward distribution</li>
+                    <li>Result: 35% increase in user satisfaction, 50% increase in re-participation rate</li>
+                  </ul>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">Case 2: "Metaverse City" (Metaverse Platform)</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Daily automatic rewards to 1,500 daily quest completers.
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Automated with Batch Transfer API + Cron Job</li>
+                    <li>Monthly gas fee savings: $45,000 → $0</li>
+                    <li>Operations staff: 2 people → 0 people (full automation)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 p-8 rounded-lg text-center">
+                <h2 className="text-2xl font-bold mb-4">Start Now</h2>
+                <p className="mb-6 text-gray-300 dark:text-gray-600">
+                  Walits Non-Custody API is free for the first month.
+                  If you want to successfully complete your Christmas event, start now.
+                </p>
+                <Link href="/inquiry" className="inline-block px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                  Start Free →
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </article>

@@ -281,15 +281,230 @@ export default function DailyAttendancePost() {
               </div>
             </>
           ) : (
-            <div className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 p-8 rounded-lg text-center">
-              <h2 className="text-2xl font-bold mb-4">Start Now</h2>
-              <p className="mb-6 text-gray-300 dark:text-gray-600">
-                Walits Non-Custody API is free for the first month.
-              </p>
-              <Link href="/inquiry" className="inline-block px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                Start Free →
-              </Link>
-            </div>
+            <>
+              <div className="mb-12">
+                <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
+                  One of the most effective ways to increase user retention in games or apps is the attendance check system.
+                  Just giving small rewards to users who log in daily can encourage habitual visits.
+                </p>
+                <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                  However, automatically distributing rewards to thousands of users every midnight is more complex than it seems.
+                  Processing thousands of blockchain transactions would incur astronomical gas fees, and the risk of failure is high.
+                  Combining Walits Non-Custody with Cron Job completely automates this entire process, and gas fees are zero.
+                </p>
+              </div>
+
+              <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Real Scenario: Mobile RPG "Dragon Quest Mobile"</h2>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                  "Dragon Quest Mobile" is a mobile RPG game with 5,000 daily active users (DAU).
+                  Every day at midnight (00:00), rewards are automatically distributed to users who checked in that day, based on their consecutive attendance days.
+                  On average, 3,500 people check in daily.
+                </p>
+                <div className="bg-white dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-600 mt-4">
+                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Attendance Reward System</h4>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Day 1: 10 Gold</li>
+                    <li>3 days consecutive: 30 Gold + 5 Potion</li>
+                    <li>7 days consecutive: 100 Gold + 10 Potion + Rare Item Box</li>
+                    <li>14 days consecutive: 250 Gold + Epic Weapon</li>
+                    <li>30 days consecutive: 1,000 Gold + Legendary Armor + Exclusive Title</li>
+                  </ul>
+                  <p className="text-xs mt-2 text-gray-500 dark:text-gray-400">
+                    * If consecutive attendance is broken, it restarts from day 1
+                  </p>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Limitations of On-Chain Approach</h2>
+
+              <div className="mb-12 space-y-6">
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">1. Massive Daily Gas Fees</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    If you distribute rewards to 3,500 people daily, monthly gas fees become unbearable.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm space-y-2">
+                    <p className="font-semibold">Monthly Gas Fee Calculation (Based on Polygon):</p>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Daily attendees: 3,500 people</li>
+                      <li>ERC-20 transfer gas: 50,000 gas (Polygon optimized)</li>
+                      <li>Gas Price: 30 gwei</li>
+                      <li>Daily gas fee: 3,500 × 0.0015 MATIC = 5.25 MATIC = approx. $4</li>
+                      <li>Monthly gas fee (30 days): 157.5 MATIC = approx. $120</li>
+                      <li>Annual gas fee: 1,890 MATIC = approx. $1,440</li>
+                    </ul>
+                    <p className="text-xs mt-2 text-gray-500 dark:text-gray-400">
+                      * On Ethereum mainnet, monthly gas fees would skyrocket to over $5,000!
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">2. Complex Implementation</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Building a system that runs automatically every midnight requires various tech stacks.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm space-y-2">
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Cron server setup and management</li>
+                      <li>Web3 transaction script development</li>
+                      <li>Nonce collision prevention logic</li>
+                      <li>Failed transaction retry mechanism</li>
+                      <li>Attendance day tracking database</li>
+                      <li>Logging and monitoring system</li>
+                      <li>Development + maintenance cost: $2,000-3,000 per month</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">3. Operational Risks</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Since it runs automatically every day, even a single failure leads to thousands of user complaints.
+                  </p>
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm space-y-2">
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
+                      <li>Delays due to network congestion</li>
+                      <li>RPC node downtime</li>
+                      <li>Duplicate payments or omissions due to script errors</li>
+                      <li>Consecutive attendance day calculation errors</li>
+                      <li>24/7 monitoring required</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Full Automation with Walits + Cron Job</h2>
+
+              <div className="space-y-8 mb-12">
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">1. Attendance Data DB Design</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Create a table to track attendance records per user.
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">2. Attendance Check API Implementation</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    API called when users press the attendance check button when logging into the game.
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">3. Cron Job Setup (Daily Midnight Execution)</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Runs at 00:05 every midnight to distribute rewards to all users who attended that day.
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-gray-900 dark:border-white pl-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">4. Monitoring and Notifications</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Receive daily execution results via Slack and respond immediately if there are issues.
+                  </p>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Advanced Features: Tiered Rewards and NFT Distribution</h2>
+
+              <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <p className="text-gray-700 dark:text-gray-300 mb-6">
+                  Want to give 30-day consecutive attendees not only Gold but also NFT items (Legendary Armor)?
+                  Walits can distribute both FT (Fungible Token) and NFT (Non-Fungible Token) simultaneously.
+                </p>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">ROI Analysis: Effect of Attendance System</h2>
+
+              <div className="mb-12 overflow-x-auto">
+                <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-800">
+                    <tr>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Metric</th>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Before Introduction</th>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">After 3 Months</th>
+                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Improvement</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-700 dark:text-gray-300">
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">DAU (Daily Active Users)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">3,200</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">5,000</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-green-600">+56%</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">7-Day Retention</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">28%</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">52%</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-green-600">+86%</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">30-Day Retention</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">12%</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">35%</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-green-600">+192%</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Avg Session Length</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">18 min</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">27 min</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-green-600">+50%</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Monthly Gas Fee</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">-</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">$0 (Walits)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-green-600">Saved $120</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Best Practices</h2>
+
+              <div className="mb-12 space-y-6">
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">1. Reward Balance Adjustment</h3>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Set early rewards (1-7 days) low, late rewards (14-30 days) attractive</li>
+                    <li>Place "big rewards" at 7, 14, and 30-day milestones to provide goals</li>
+                    <li>Monitor and adjust impact on in-game economy</li>
+                  </ul>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">2. User Feedback Collection</h3>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Display "next reward preview" in attendance UI for motivation</li>
+                    <li>Sell "recovery ticket" items when consecutive attendance breaks (monetization)</li>
+                    <li>Create monthly top attendance leaderboard to encourage competition</li>
+                  </ul>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">3. Failure Prevention</h3>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Use Idempotency Key to prevent duplicate payments</li>
+                    <li>Automatic retry on Cron Job failure (up to 3 times)</li>
+                    <li>Notify operations team immediately via Slack</li>
+                    <li>Prepare manual reward distribution API (for emergencies)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 p-8 rounded-lg text-center">
+                <h2 className="text-2xl font-bold mb-4">Start Now</h2>
+                <p className="mb-6 text-gray-300 dark:text-gray-600">
+                  Walits Non-Custody API is free for the first month. If you want to successfully complete your Christmas event, start now.
+                </p>
+                <Link href="/inquiry" className="inline-block px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                  Start Free →
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </article>

@@ -1,50 +1,48 @@
-import { Metadata } from 'next';
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: '2026년 기업용 암호화폐 지갑 선택 완벽 가이드 | Walits',
-  description: '기업용 암호화폐 지갑 선택 시 고려해야 할 모든 것. Non-Custody vs Custody 비교, MPC 보안, API 통합, ICO 지원까지. 게임사, 거래소, 토큰 발행사를 위한 완벽 가이드.',
-  keywords: '기업용 지갑, 암호화폐 지갑, 기업 지갑, Non-Custody, Custody, MPC, API 지갑, ICO 지갑',
-  openGraph: {
-    title: '2026년 기업용 암호화폐 지갑 선택 완벽 가이드',
-    description: '기업용 암호화폐 지갑 선택 시 고려해야 할 모든 것. Non-Custody vs Custody 비교, MPC 보안, API 통합, ICO 지원까지.',
-    url: 'https://walits.com/blog/enterprise-crypto-wallet-guide',
-    siteName: 'Walits',
-    images: [
-      {
-        url: 'https://walits.com/blog/enterprise-wallet.jpg',
-        width: 1200,
-        height: 630,
-        alt: '기업용 암호화폐 지갑 가이드',
-      },
-    ],
-    locale: 'ko_KR',
-    type: 'article',
-    publishedTime: '2026-01-11T00:00:00.000Z',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: '2026년 기업용 암호화폐 지갑 선택 완벽 가이드',
-    description: '기업용 암호화폐 지갑 선택 시 고려해야 할 모든 것. Non-Custody vs Custody 비교, MPC 보안, API 통합, ICO 지원까지.',
-    images: ['https://walits.com/blog/enterprise-wallet.jpg'],
-  },
-};
-
 export default function EnterpriseCryptoWalletGuidePage() {
+  const [language, setLanguage] = useState<'ko' | 'en'>('ko');
+
+  const copy = {
+    ko: {
+      breadcrumb: '블로그',
+      category: '기업용 지갑',
+      title: '2026년 기업용 암호화폐 지갑 선택 완벽 가이드',
+      date: '2026년 1월 11일',
+      readTime: '8분 읽기',
+    },
+    en: {
+      breadcrumb: 'Blog',
+      category: 'Enterprise Wallet',
+      title: 'Complete Guide to Choosing Enterprise Crypto Wallets in 2026',
+      date: 'January 11, 2026',
+      readTime: '8 min read',
+    },
+  }[language];
+
   return (
     <article className="min-h-screen bg-white dark:bg-gray-900 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
-          <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <Link href="/blog/" className="hover:underline">블로그</Link> / 기업용 지갑
+          <div className="flex items-center justify-between mb-4">
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              <Link href="/blog/" className="hover:underline">{copy.breadcrumb}</Link> / {copy.category}
+            </div>
+            <div className="flex items-center gap-2">
+              <button onClick={() => setLanguage('ko')} className={`px-3 py-1 rounded ${language === 'ko' ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900' : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300'}`}>한</button>
+              <button onClick={() => setLanguage('en')} className={`px-3 py-1 rounded ${language === 'en' ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900' : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300'}`}>EN</button>
+            </div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
-            2026년 기업용 암호화폐 지갑 선택 완벽 가이드
+            {copy.title}
           </h1>
           <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 text-sm">
-            <time>2026년 1월 11일</time>
+            <time>{copy.date}</time>
             <span>•</span>
-            <span>8분 읽기</span>
+            <span>{copy.readTime}</span>
           </div>
         </header>
 
@@ -52,16 +50,18 @@ export default function EnterpriseCryptoWalletGuidePage() {
         <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
           <img
             src="/blog/enterprise-wallet.jpg"
-            alt="기업용 암호화폐 지갑 가이드"
+            alt={language === 'ko' ? '기업용 암호화폐 지갑 가이드' : 'Enterprise Crypto Wallet Guide'}
             className="w-full h-auto object-cover"
           />
         </div>
 
         <div className="prose prose-lg dark:prose-invert max-w-none">
-          <p className="lead text-xl text-gray-700 dark:text-gray-300">
-            암호화폐를 다루는 기업이라면 반드시 지갑 솔루션이 필요합니다. 하지만 게임사, 거래소, 토큰 발행사마다
-            필요한 지갑이 다릅니다. 이 가이드에서 기업용 암호화폐 지갑 선택의 모든 것을 알려드립니다.
-          </p>
+          {language === 'ko' ? (
+            <>
+              <p className="lead text-xl text-gray-700 dark:text-gray-300">
+                암호화폐를 다루는 기업이라면 반드시 지갑 솔루션이 필요합니다. 하지만 게임사, 거래소, 토큰 발행사마다
+                필요한 지갑이 다릅니다. 이 가이드에서 기업용 암호화폐 지갑 선택의 모든 것을 알려드립니다.
+              </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">1. 기업용 지갑이 필요한 이유</h2>
 
@@ -199,18 +199,173 @@ export default function EnterpriseCryptoWalletGuidePage() {
               지금 상담 신청
             </Link>
           </div>
+            </>
+          ) : (
+            <>
+              <p className="lead text-xl text-gray-700 dark:text-gray-300">
+                If your company deals with cryptocurrency, you need a wallet solution. However, gaming companies, exchanges, and token issuers each require different types of wallets. This guide covers everything you need to know about choosing enterprise crypto wallets.
+              </p>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">1. Why Enterprise Wallets Are Necessary</h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Personal Wallets vs Enterprise Wallets</h3>
+              <p>
+                Personal wallets like MetaMask cannot support enterprise operations:
+              </p>
+              <ul>
+                <li><strong>No Bulk Processing</strong>: Difficult to pay hundreds of people simultaneously</li>
+                <li><strong>Security Vulnerabilities</strong>: Risk of managing all assets with a single private key</li>
+                <li><strong>No Audit Trail</strong>: Difficult to track who did what and when</li>
+                <li><strong>No API</strong>: Automation impossible, manual work required</li>
+              </ul>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">2. Types of Enterprise Wallets</h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Non-Custody Wallet: For Mass Distribution</h3>
+              <p>
+                <strong>When to use?</strong> When you need mass distribution such as game rewards, NFT airdrops, or ICO token issuance
+              </p>
+              <ul>
+                <li>Automatic wallet creation for each account</li>
+                <li>Handle thousands of transactions simultaneously via API</li>
+                <li>Operate without custody (minimize regulatory risk)</li>
+                <li>Secure bulk transactions in TEE environment</li>
+              </ul>
+
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8 border-l-4 border-blue-500">
+                <p className="text-lg font-semibold mb-2">Businesses Suited for Non-Custody Wallets</p>
+                <p className="mb-4">If you operate the following business models, a Non-Custody wallet will be the most effective solution. It's particularly useful when mass token distribution and real-time reward payments are core requirements.</p>
+                <ul className="mb-0 space-y-2">
+                  <li>Game companies need to distribute in-game rewards to players in real-time, and with Non-Custody wallets, you can distribute rewards to thousands of users simultaneously.</li>
+                  <li>For NFT projects, when running large-scale airdrop campaigns, you need a system to automatically create wallets for each participant and distribute tokens.</li>
+                  <li>For ICO or token issuance projects, a system to automatically generate independent wallets for each investor and distribute tokens is essential.</li>
+                  <li>Metaverse platform operators need flexible systems to instantly distribute rewards based on user activities.</li>
+                  <li>For community platforms, an automated distribution system is efficient when rewarding members who create quality content or contribute.</li>
+                  <li>If you operate e-commerce or O2O services, you can manage membership points in token form to increase transparency and encourage user participation.</li>
+                </ul>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Custody Wallet: For Asset Storage</h3>
+              <p>
+                <strong>When to use?</strong> When secure storage is needed such as customer asset custody, operational fund management, or corporate treasury
+              </p>
+              <ul>
+                <li>Eliminate single point of failure with MPC 2-of-3</li>
+                <li>Multi-approval workflow (CEO, CFO approval)</li>
+                <li>Policy-based governance (approval rules by amount)</li>
+                <li>Complete audit trail (record of all transaction history)</li>
+              </ul>
+
+              <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg my-8 border-l-4 border-purple-500">
+                <p className="text-lg font-semibold mb-2">Companies That Need Custody Wallets</p>
+                <p className="mb-4">For companies that directly store customer assets or manage large-scale operational funds, the robust security framework of Custody wallets is essential. It plays a particularly important role in the following business models.</p>
+                <ul className="mb-0 space-y-2">
+                  <li>If you operate a cryptocurrency exchange, you have the responsibility to safely store and manage customer assets worth hundreds of billions of won, and for this, an MPC-based multi-approval system is essential.</li>
+                  <li>For custody service providers, since you manage third-party assets under trust, even stricter security standards and internal control processes are required.</li>
+                  <li>Token issuers need secure storage solutions for project operational funds or token treasury management, and multi-approval workflows are particularly important for large fund transfers.</li>
+                  <li>Institutional investors want systems that can safely withdraw assets at any time while holding large amounts of cryptocurrency long-term, and the MPC 2-of-3 structure is ideal.</li>
+                  <li>Companies with assets across multiple blockchains can significantly improve financial management efficiency by managing all chain assets in one integrated Custody system.</li>
+                  <li>For asset management firms or accounting firms managing clients' cryptocurrency assets, a complete transaction record and tracking system is essential for tax processing and accounting audits.</li>
+                </ul>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">3. Real Use Cases</h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Case 1: Game Company A</h3>
+              <p>
+                <strong>Problem:</strong> Distribute rewards to 100,000 players daily<br/>
+                <strong>Solution:</strong> Automated with Non-Custody API<br/>
+                <strong>Result:</strong> Zero manual work, payment time reduced from 1 hour to 5 minutes
+              </p>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Case 2: Exchange B</h3>
+              <p>
+                <strong>Problem:</strong> Secure storage of 10 billion won in customer assets<br/>
+                <strong>Solution:</strong> MPC 2-of-3 Custody wallet<br/>
+                <strong>Result:</strong> Eliminated single point of failure, strengthened internal controls
+              </p>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Case 3: ICO Project C</h3>
+              <p>
+                <strong>Problem:</strong> Distribute custom tokens to 50,000 investors<br/>
+                <strong>Solution:</strong> Non-Custody ICO support (automatic wallet creation)<br/>
+                <strong>Result:</strong> Automatic wallet creation per investor, automated token distribution
+              </p>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">4. Walits Solutions</h2>
+
+              <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Non-Custody Wallet</h3>
+                <ul className="mb-4 space-y-2">
+                  <li>Monthly fee is 99,000 won, with the first month free to experience all features.</li>
+                  <li>No limit on transaction processing, so you can use it without worrying about additional costs even when bulk processing is needed.</li>
+                  <li>Perfect support for ICO or custom token issuance if you're planning one.</li>
+                  <li>All private keys are securely managed in a TEE (Trusted Execution Environment), completely isolated from external access.</li>
+                </ul>
+                <Link href="/non-custody-wallet" className="text-blue-600 hover:underline font-semibold">
+                  Learn More →
+                </Link>
+              </div>
+
+              <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Custody Wallet</h3>
+                <ul className="mb-4 space-y-2">
+                  <li>Monthly fee is 550,000 won, with the first month free to test the entire system.</li>
+                  <li>Adopts MPC 2-of-3 security method to completely eliminate single point of failure, designed so that signing is possible with just 2 out of 3 key shares.</li>
+                  <li>Through multi-approval workflow, you can set different approval rules by amount, flexibly responding even when both CEO and CFO approval is required.</li>
+                  <li>A dedicated account manager is assigned to support everything from technical support to operational consulting.</li>
+                </ul>
+                <Link href="/custody-wallet" className="text-purple-600 hover:underline font-semibold">
+                  Learn More →
+                </Link>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Conclusion</h2>
+              <p>
+                Choose enterprise crypto wallets based on your use case:
+              </p>
+              <ul>
+                <li><strong>If you want to distribute customer points as coins:</strong> Non-Custody wallet</li>
+                <li><strong>If you need to safely store and manage corporate assets:</strong> Custody wallet</li>
+                <li><strong>If you need both:</strong> Use both</li>
+              </ul>
+
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl my-12 text-center">
+                <h3 className="text-2xl font-bold mb-4">Request a Free Consultation</h3>
+                <p className="mb-6">
+                  We'll suggest the optimal wallet solution for your company.
+                </p>
+                <Link
+                  href="/inquiry"
+                  className="inline-block px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  Request Consultation Now
+                </Link>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">관련 글</h3>
+          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+            {language === 'ko' ? '관련 글' : 'Related Articles'}
+          </h3>
           <div className="grid md:grid-cols-2 gap-4">
             <Link href="/blog/non-custody-vs-custody-wallet" className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow-lg transition-shadow">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Non-Custody vs Custody 완벽 비교</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">두 지갑의 차이점을 한눈에</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                {language === 'ko' ? 'Non-Custody vs Custody 완벽 비교' : 'Complete Comparison: Non-Custody vs Custody'}
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {language === 'ko' ? '두 지갑의 차이점을 한눈에' : 'Differences between two wallets at a glance'}
+              </p>
             </Link>
             <Link href="/blog/ico-token-issuance-wallet" className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow-lg transition-shadow">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">ICO 프로젝트를 위한 지갑</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">토큰 발행에 최적화된 솔루션</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                {language === 'ko' ? 'ICO 프로젝트를 위한 지갑' : 'Wallets for ICO Projects'}
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {language === 'ko' ? '토큰 발행에 최적화된 솔루션' : 'Solutions optimized for token issuance'}
+              </p>
             </Link>
           </div>
         </div>

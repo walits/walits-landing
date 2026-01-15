@@ -1,50 +1,48 @@
+'use client';
+
+import { useState } from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: '카카오톡/텔레그램으로 암호화폐 송금하는 법 | Walits Auto Chat 지갑',
-  description: '메신저로 암호화폐를 송금하세요. 복잡한 지갑 주소 없이 카카오톡이나 텔레그램에서 대화하듯 간편 송금. Auto Chat 지갑으로 시작하세요.',
-  keywords: '메신저 송금, 카카오톡 송금, 텔레그램 지갑, 암호화폐 간편 송금, Auto Chat 지갑, 채팅 송금',
-  openGraph: {
-    title: '카카오톡/텔레그램으로 암호화폐 송금하는 법',
-    description: '메신저로 암호화폐를 송금하세요. 복잡한 지갑 주소 없이 카카오톡이나 텔레그램에서 대화하듯 간편 송금.',
-    url: 'https://walits.com/blog/messenger-crypto-transfer',
-    siteName: 'Walits',
-    images: [
-      {
-        url: 'https://walits.com/blog/messenger-transfer.jpg',
-        width: 1200,
-        height: 630,
-        alt: '메신저 암호화폐 송금',
-      },
-    ],
-    locale: 'ko_KR',
-    type: 'article',
-    publishedTime: '2026-01-11T00:00:00.000Z',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: '카카오톡/텔레그램으로 암호화폐 송금하는 법',
-    description: '복잡한 지갑 주소 없이 메신저에서 대화하듯 간편 송금.',
-    images: ['https://walits.com/blog/messenger-transfer.jpg'],
-  },
-};
-
 export default function MessengerCryptoTransferPage() {
+  const [language, setLanguage] = useState<'ko' | 'en'>('ko');
+
+  const copy = {
+    ko: {
+      category: '메신저 송금',
+      title: '카카오톡/텔레그램으로 암호화폐 송금하는 법',
+      date: '2026년 1월 11일',
+      readTime: '5분 읽기',
+      backToBlog: '← 블로그로 돌아가기',
+    },
+    en: {
+      category: 'Messenger Transfer',
+      title: 'How to Send Crypto via KakaoTalk/Telegram',
+      date: 'January 11, 2026',
+      readTime: '5 min read',
+      backToBlog: '← Back to Blog',
+    },
+  }[language];
   return (
     <article className="min-h-screen bg-white dark:bg-gray-900 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
-          <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            <Link href="/blog/" className="hover:underline">블로그</Link> / 메신저 송금
+          <div className="flex items-center justify-between mb-4">
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              <Link href="/blog/" className="hover:underline">{language === 'ko' ? '블로그' : 'Blog'}</Link> / {copy.category}
+            </div>
+            <div className="flex items-center gap-2">
+              <button onClick={() => setLanguage('ko')} className={`px-3 py-1 rounded ${language === 'ko' ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-600'}`}>한</button>
+              <button onClick={() => setLanguage('en')} className={`px-3 py-1 rounded ${language === 'en' ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-600'}`}>EN</button>
+            </div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
-            카카오톡/텔레그램으로 암호화폐 송금하는 법
+            {copy.title}
           </h1>
           <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 text-sm">
-            <time>2026년 1월 11일</time>
+            <time>{copy.date}</time>
             <span>•</span>
-            <span>5분 읽기</span>
+            <span>{copy.readTime}</span>
           </div>
         </header>
 
@@ -52,12 +50,14 @@ export default function MessengerCryptoTransferPage() {
         <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
           <img
             src="/blog/messenger-transfer.jpg"
-            alt="메신저 암호화폐 송금"
+            alt={language === 'ko' ? '메신저 암호화폐 송금' : 'Messenger Crypto Transfer'}
             className="w-full h-auto object-cover"
           />
         </div>
 
-        <div className="prose prose-lg dark:prose-invert max-w-none">
+        {language === 'ko' ? (
+          <>
+            <div className="prose prose-lg dark:prose-invert max-w-none">
           <p className="lead text-xl text-gray-700 dark:text-gray-300">
             친구에게 1만 원 빌려달라고 카톡으로 보내듯, 암호화폐도 메신저로 송금할 수 있다면?
             Auto Chat 지갑으로 카카오톡/텔레그램에서 대화하듯 암호화폐를 주고받으세요.
@@ -417,6 +417,372 @@ Alice: Received! Thanks Bob!`}
             </Link>
           </div>
         </div>
+      </div>
+          </>
+        ) : (
+          <>
+            <div className="prose prose-lg dark:prose-invert max-w-none">
+              <p className="lead text-xl text-gray-700 dark:text-gray-300">
+                Just like sending a text asking to borrow $10 on KakaoTalk, what if you could send cryptocurrency via messenger?
+                Send and receive crypto as easily as chatting with Auto Chat wallet on KakaoTalk/Telegram.
+              </p>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Problems with Traditional Crypto Transfers</h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Complex Wallet Addresses</h3>
+              <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg my-6 border-l-4 border-red-500">
+                <p className="font-mono text-sm break-all mb-2">
+                  0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb7
+                </p>
+                <ul className="mb-0 space-y-1">
+                  <li>A random combination of 42 alphanumeric characters that is virtually impossible for ordinary people to memorize.</li>
+                  <li>A single character mistake results in permanent asset loss with absolutely no way to reverse it.</li>
+                  <li>Every transfer requires copy-paste, exposing you to clipboard hijacking risks during this process.</li>
+                  <li>For beginners encountering cryptocurrency for the first time, the entry barrier is so high that practical use becomes extremely difficult.</li>
+                </ul>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Common Mistakes</h3>
+              <ul>
+                <li><strong>Wrong address copied</strong>: Lost entire $1,000</li>
+                <li><strong>Wrong network</strong>: Sent BEP-20 to ERC-20 address</li>
+                <li><strong>Typo</strong>: Sent without checking last few characters</li>
+              </ul>
+
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg my-8 border-l-4 border-yellow-500">
+                <p className="font-semibold mb-2">Why is it so complicated?</p>
+                <p className="mb-0">
+                  Blockchain technology was designed from the beginning with a focus on security and decentralization, so user convenience was relatively low priority.
+                  But in 2026, an intuitive interface that ordinary people can easily use is absolutely necessary.
+                  No matter how excellent the technology, it cannot become mainstream if people cannot easily access it.
+                </p>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Solution: Messenger Transfer</h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Send via KakaoTalk</h3>
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
+                <pre className="text-sm">
+{`[KakaoTalk Chat]
+
+Me: Sending 10,000 won for yesterday's meal
+Friend: Thanks!
+
+Me: /send FriendName 10000 KRW
+     → Auto converts to USDT and transfers
+
+[Auto Chat Bot]
+Transfer completed
+   10,000 won converted to 7.5 USDT and transferred
+   Recipient: FriendName (Kim Chul-su)
+   Network: Polygon (gas fee ~50 won)
+   Processing time: 5 seconds
+
+Friend: Got it! Thanks~`}
+                </pre>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Send via Telegram</h3>
+              <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg my-8">
+                <pre className="text-sm">
+{`[Telegram Group Chat]
+
+Alice: I'll pay for dinner, $50
+Bob: Thanks! I'll send you my share
+
+Bob: /send @Alice 25 USD
+     → Automatically converts to USDT
+
+[Walits Bot]
+Transfer completed successfully
+   $25 USD has been converted to 25 USDT and sent
+   To: @Alice
+   Network: Arbitrum (gas fee $0.10)
+   Processing time: 3 seconds
+
+Alice: Received! Thanks Bob!`}
+                </pre>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Auto Chat Wallet Core Features</h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">1. Conversation-Based UI</h3>
+              <p>
+                Simple commands in messenger without complex app installation:
+              </p>
+              <ul>
+                <li><code>/send [recipient] [amount] [currency]</code> - Transfer</li>
+                <li><code>/balance</code> - Check balance</li>
+                <li><code>/history</code> - Transaction history</li>
+                <li><code>/request [amount]</code> - Request payment</li>
+              </ul>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2. Auto Conversion & Optimal Route</h3>
+              <p>
+                AI automatically selects the optimal transfer route:
+              </p>
+              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-6">
+                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">Transfer Scenario: Send 10,000 won</h4>
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-300 dark:border-gray-700">
+                      <th className="text-left p-2">Network</th>
+                      <th className="text-left p-2">Gas Fee</th>
+                      <th className="text-left p-2">Speed</th>
+                      <th className="text-left p-2">AI Choice</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-gray-300 dark:border-gray-700">
+                      <td className="p-2">Ethereum</td>
+                      <td className="p-2">₩3,000</td>
+                      <td className="p-2">1 min</td>
+                      <td className="p-2">Not selected</td>
+                    </tr>
+                    <tr className="border-b border-gray-300 dark:border-gray-700">
+                      <td className="p-2">Polygon</td>
+                      <td className="p-2">₩50</td>
+                      <td className="p-2">5 sec</td>
+                      <td className="p-2">AI selected</td>
+                    </tr>
+                    <tr className="border-b border-gray-300 dark:border-gray-700">
+                      <td className="p-2">Arbitrum</td>
+                      <td className="p-2">₩100</td>
+                      <td className="p-2">3 sec</td>
+                      <td className="p-2">Not selected</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
+                  → AI selects Polygon with lowest gas fee (₩50 vs ₩3,000 = 98% savings)
+                </p>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">3. Group Split</h3>
+              <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-8">
+                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">Example: 4 people dinner</h4>
+                <pre className="text-sm">
+{`Total cost: 100,000 won (I paid)
+
+Me: /split 100000 @Chulsu @Younghee @Minsu
+    → Auto calculates 1/4 = 25,000 won each
+
+[Auto Chat Bot]
+Split requests sent
+   To Chulsu: 25,000 won
+   To Younghee: 25,000 won
+   To Minsu: 25,000 won
+
+[Chulsu approved] 25,000 won transfer completed
+[Younghee approved] 25,000 won transfer completed
+[Minsu approved] 25,000 won transfer completed
+
+Total 75,000 won received`}
+                </pre>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">4. Micro Payments</h3>
+              <p>
+                Send tips to content creators:
+              </p>
+              <ul>
+                <li>100 won tip to YouTuber</li>
+                <li>500 won coffee money to webtoon artist</li>
+                <li>1,000 won donation to open source developer</li>
+              </ul>
+              <p>
+                Traditional payment systems (card, bank transfer) have minimum 300 won fees, making this impossible. Auto Chat makes it possible!
+              </p>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">What About Security?</h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Multi-Factor Authentication</h3>
+              <ul className="space-y-2">
+                <li><strong>Biometric</strong>: Transfers over 10,000 won require fingerprint or face recognition for identity verification.</li>
+                <li><strong>PIN code</strong>: Amounts over 100,000 won require additional 6-digit PIN code entry.</li>
+                <li><strong>2FA</strong>: High-value transactions over 1,000,000 won require email or SMS verification code for final approval.</li>
+              </ul>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Daily Limits</h3>
+              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-6">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-300 dark:border-gray-700">
+                      <th className="text-left p-2">Verification Level</th>
+                      <th className="text-left p-2">Daily Limit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-gray-300 dark:border-gray-700">
+                      <td className="p-2">Basic (Email)</td>
+                      <td className="p-2">100,000 won</td>
+                    </tr>
+                    <tr className="border-b border-gray-300 dark:border-gray-700">
+                      <td className="p-2">KYC Level 1 (ID)</td>
+                      <td className="p-2">1,000,000 won</td>
+                    </tr>
+                    <tr>
+                      <td className="p-2">KYC Level 2 (Video Call)</td>
+                      <td className="p-2">10,000,000 won</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Double-Spend Prevention</h3>
+              <p>
+                Redis distributed lock blocks concurrent transfers:
+              </p>
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-6">
+                <pre className="text-sm">
+{`[Double-spend attempt scenario - Auto prevention]
+
+Current balance: 10,000 won
+
+Attempting two simultaneous transfers:
+ First: /send FriendA 10000 → Processing wait
+ Second: /send FriendB 10000 → Blocked (insufficient balance)
+
+Result: Only first transaction executes, second is automatically blocked`}
+                </pre>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Real Use Cases</h2>
+
+              <div className="space-y-6 my-8">
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
+                  <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Case 1: College Student A (22 years old)</h4>
+                  <p className="mb-2">
+                    <strong>Situation:</strong> Split delivery food cost with friends
+                  </p>
+                  <p>
+                    <strong>Before:</strong> Toss/KakaoPay → Share account numbers → Transfer → Confirm<br/>
+                    (Time: 5 min, Fee: Free but bank account required)
+                  </p>
+                  <p>
+                    <strong>After Auto Chat:</strong> In KakaoTalk <code>/split 30000 @Friend1 @Friend2</code><br/>
+                    (Time: 10 sec, No bank account needed)
+                  </p>
+                </div>
+
+                <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg">
+                  <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Case 2: Overseas Freelancer B</h4>
+                  <p className="mb-2">
+                    <strong>Situation:</strong> Receive payment from Korean client
+                  </p>
+                  <p>
+                    <strong>Before:</strong> PayPal → 5% fee + 3% exchange fee = 8% total loss<br/>
+                    Lose 80,000 won from 1 million won payment
+                  </p>
+                  <p>
+                    <strong>After Auto Chat:</strong> In Telegram <code>/invoice 1000000 KRW</code><br/>
+                    Fee: 100 won gas fee (0.01%)
+                  </p>
+                </div>
+
+                <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg">
+                  <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Case 3: Content Creator C</h4>
+                  <p className="mb-2">
+                    <strong>Situation:</strong> Receive small tips from fans
+                  </p>
+                  <p>
+                    <strong>Before:</strong> Toss tips → Minimum 1,000 won (due to fees)<br/>
+                    Small tips impossible
+                  </p>
+                  <p>
+                    <strong>After Auto Chat:</strong> Tips from 100 won possible<br/>
+                    "That was fun, here's 100 won!" → <code>/tip @Creator 100</code>
+                  </p>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Pricing (Coming Soon)</h2>
+
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-8 rounded-xl my-8">
+                <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
+                  Coming Soon
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Auto Chat Wallet</h3>
+                <div className="text-4xl font-bold text-blue-600 mb-4">Free<span className="text-lg text-gray-600 dark:text-gray-400"> (Beta Period)</span></div>
+                <ul className="mb-6 space-y-2">
+                  <li>Seamlessly integrated to work directly in KakaoTalk and Telegram.</li>
+                  <li>AI automatically selects the optimal route with the lowest gas fees for transfers.</li>
+                  <li>Group split feature makes it easy to divide meal costs or travel expenses with multiple people.</li>
+                  <li>Optimized for micro-payments starting from 100 won, perfect for creator tips or donations.</li>
+                  <li>No limits on transfer frequency or amounts, giving you complete freedom in transactions.</li>
+                </ul>
+                <Link
+                  href="/auto-chat-wallet"
+                  className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Sign Up for Launch Alert
+                </Link>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">FAQ</h2>
+
+              <div className="space-y-4 my-8">
+                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q1. Aren't my assets exposed in the messenger?</h4>
+                  <p className="mb-0 text-gray-600 dark:text-gray-400">
+                    No. The messenger is just the UI; actual assets are stored in a secure wallet in TEE environment.
+                    Even if the messenger is hacked, your assets remain safe.
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q2. Does the recipient also need Auto Chat wallet?</h4>
+                  <p className="mb-0 text-gray-600 dark:text-gray-400">
+                    Yes. But signing up takes just 1 minute. Simply chat with the bot in messenger and a wallet is automatically created.
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q3. Can I cancel if I send to the wrong person?</h4>
+                  <p className="mb-0 text-gray-600 dark:text-gray-400">
+                    Due to blockchain nature, cancellation after transfer is impossible. However, there's a confirmation step before transfer
+                    to prevent mistakes (confirm amount, recipient, network).
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q4. Which coins are supported?</h4>
+                  <p className="mb-0 text-gray-600 dark:text-gray-400">
+                    Mainly USDT and USDC (stablecoins). Displayed in fiat currency (won, dollars) but
+                    actually transferred as stablecoins.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl my-12 text-center">
+                <h3 className="text-2xl font-bold mb-4">Auto Chat Wallet Launch Alert</h3>
+                <p className="mb-6">
+                  Beta testers wanted! Use it free before official launch.
+                </p>
+                <Link
+                  href="/inquiry"
+                  className="inline-block px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  Apply for Beta
+                </Link>
+              </div>
+            </div>
+
+            <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Related Articles</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <Link href="/blog/ai-auto-payment-subscription" className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow-lg transition-shadow">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Manage Subscriptions with AI Auto Payment</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Automate recurring payments</p>
+                </Link>
+                <Link href="/blog/enterprise-crypto-wallet-guide" className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow-lg transition-shadow">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Enterprise Wallet Selection Guide</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Complete guide in 8 minutes</p>
+                </Link>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </article>
   );
