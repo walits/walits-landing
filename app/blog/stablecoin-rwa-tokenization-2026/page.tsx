@@ -4,17 +4,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const metadata = {
-  ko: {
-    title: '2026년 미국 정부와 연준 & 스테이블코인과 RWA 토크나이제이션 전망 | Walits',
-    description: '미국 부채 위기 속에서 펼쳐지는 스테이블코인 혁명과 자산 토큰화의 미래. GENIUS Act 시행과 연준-정부 갈등이 만들어갈 새로운 금융 질서를 분석합니다.',
-  },
-  en: {
-    title: '2026 US Government vs Fed & Stablecoin and RWA Tokenization Outlook | Walits',
-    description: 'The stablecoin revolution and future of asset tokenization amid the US debt crisis. Analyzing the new financial order shaped by GENIUS Act implementation and Fed-government conflict.',
-  },
-};
-
 export default function StablecoinRegulation2026() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
   return (
