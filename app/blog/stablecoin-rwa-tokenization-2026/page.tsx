@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -14,20 +15,33 @@ export const metadata: Metadata = {
 
 export default function StablecoinRegulation2026() {
   return (
-    <article className="prose prose-lg max-w-4xl mx-auto">
-      <h1>2026년 미국 정부와 연준 & 스테이블코인과 RWA 토크나이제이션 전망</h1>
+    <article className="min-h-screen bg-white dark:bg-gray-900 py-12">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <header className="mb-12">
+          <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            <Link href="/blog/" className="hover:underline">블로그</Link> / 금융 분석
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">
+            2026년 미국 정부와 연준 & 스테이블코인과 RWA 토크나이제이션 전망
+          </h1>
+          <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 text-sm">
+            <time>2026년 1월 15일</time>
+            <span>•</span>
+            <span>25분 읽기</span>
+          </div>
+        </header>
 
-      <div className="my-8">
-        <Image
-          src="/blog/tokenize.jpg"
-          alt="Stablecoin Regulation and RWA Tokenization 2026"
-          width={1200}
-          height={630}
-          className="rounded-lg"
-        />
-      </div>
+        {/* Hero Image */}
+        <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
+          <img
+            src="/blog/tokenize.jpg"
+            alt="Stablecoin and RWA Tokenization 2026"
+            className="w-full h-auto object-cover"
+          />
+        </div>
 
-      <p className="lead">
+        <div className="prose prose-lg dark:prose-invert max-w-none">
+          <p className="lead text-xl text-gray-700 dark:text-gray-300">
         2026년이 시작되면서 미국 금융 시스템은 역사적 전환점을 맞이하고 있다. 37조 달러를 넘어선
         연방 부채, 약화되는 연준의 독립성, 그리고 트럼프 2기 행정부의 스테이블코인 제도화 전략이
         교차하는 지점에서 우리는 새로운 금융 질서의 탄생을 목격하고 있다. 이 글은 연준과 정부 간의
@@ -35,7 +49,7 @@ export default function StablecoinRegulation2026() {
         대한 종합적 분석을 담고 있다.
       </p>
 
-      <h2>프롤로그: 연준 시대의 종말과 정부 주도 경제의 시작</h2>
+      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">프롤로그: 연준 시대의 종말과 정부 주도 경제의 시작</h2>
 
       <p>
         지난 40여 년간 금융 시장을 지배해온 것은 연방준비제도(연준)였다. 폴 볼커 이후 앨런 그린스펀,
@@ -78,9 +92,9 @@ export default function StablecoinRegulation2026() {
         것이다.
       </p>
 
-      <h2>1장. 부채의 딜레마: 트래핀과 재융자의 악순환</h2>
+      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">1장. 부채의 딜레마: 트래핀과 재융자의 악순환</h2>
 
-      <h3>37조 달러의 무게</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">37조 달러의 무게</h3>
 
       <p>
         2025년 8월, 미국 연방 부채가 37조 달러를 돌파했다는 뉴스가 전 세계를 강타했다. 한화로
@@ -124,7 +138,7 @@ export default function StablecoinRegulation2026() {
         어려운 수준이다.
       </p>
 
-      <h3>트래핀 딜레마의 재현</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">트래핀 딜레마의 재현</h3>
 
       <div className="not-prose my-6 p-5 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
         <p className="text-sm text-blue-900 dark:text-blue-200 mb-2 font-semibold">💡 트래핀 딜레마란?</p>
@@ -158,7 +172,7 @@ export default function StablecoinRegulation2026() {
         이 물량을 누가 어떻게 매수할 것인가가 2026년 미국 경제의 최대 관건이다.
       </p>
 
-      <h3>연준의 딜레마: 긴축이냐 완화냐</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">연준의 딜레마: 긴축이냐 완화냐</h3>
 
       <p>
         제롬 파월 연준 의장은 진퇴양난에 빠져 있다. 인플레이션을 잡기 위해서는 금리를 높게 유지하거나
@@ -175,9 +189,9 @@ export default function StablecoinRegulation2026() {
         여부를 놓고 고민 중이지만, 어떤 선택을 하든 부작용은 불가피하다.
       </p>
 
-      <h2>2장. 연준 독립성의 종말: 정부 압박의 현실화</h2>
+      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">2장. 연준 독립성의 종말: 정부 압박의 현실화</h2>
 
-      <h3>트럼프의 연준 비판 재개</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">트럼프의 연준 비판 재개</h3>
 
       <p>
         도널드 트럼프 대통령은 1기 재임 시절에도 연준을 공개적으로 비판한 바 있다. "파월은 금리를
@@ -194,7 +208,7 @@ export default function StablecoinRegulation2026() {
         펼칠 수 있을까?
       </p>
 
-      <h3>연준 독립성의 역사적 고찰</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">연준 독립성의 역사적 고찰</h3>
 
       <p>
         연준의 독립성은 1951년 재무부-연준 합의(Treasury-Fed Accord)를 통해 확립되었다.
@@ -210,7 +224,7 @@ export default function StablecoinRegulation2026() {
         안정화를 무시할 수 없는 구조가 되어버렸다.
       </p>
 
-      <h3>전 연준 수장들의 경고</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">전 연준 수장들의 경고</h3>
 
       <p>
         전직 연준 의장들도 현재 상황에 대해 우려를 표명하고 있다. 벤 버냉키는 "금리 정책만으로는
@@ -220,7 +234,7 @@ export default function StablecoinRegulation2026() {
         점점 더 강해지고 있고, 연준은 선택의 여지가 줄어들고 있다.
       </p>
 
-      <h2>3장. GENIUS Act: 스테이블코인이 부채 관리 도구가 되다</h2>
+      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">3장. GENIUS Act: 스테이블코인이 부채 관리 도구가 되다</h2>
 
       <div className="not-prose my-8 p-6 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
         <h3 className="text-xl font-bold text-purple-900 dark:text-purple-200 mb-3">🏛️ GENIUS Act</h3>
@@ -239,7 +253,7 @@ export default function StablecoinRegulation2026() {
         </div>
       </div>
 
-      <h3>스테이블코인 제도화의 시작</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">스테이블코인 제도화의 시작</h3>
 
       <p>
         2025년 7월, 트럼프 대통령은 역사적인 법안에 서명했다. GENIUS Act(Guiding and Establishing
@@ -291,7 +305,7 @@ export default function StablecoinRegulation2026() {
         숨어 있다.
       </p>
 
-      <h3>단기 국채 수요 창출이라는 숨은 의도</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">단기 국채 수요 창출이라는 숨은 의도</h3>
 
       <div className="not-prose my-8 p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-2 border-green-300 dark:border-green-700">
         <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4">📈 스테이블코인 시장 전망</h4>
@@ -353,7 +367,7 @@ export default function StablecoinRegulation2026() {
         메커니즘의 일부가 된 것이다.
       </p>
 
-      <h3>달러 패권 강화 전략</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">달러 패권 강화 전략</h3>
 
       <p>
         GENIUS Act의 또 다른 목적은 달러의 글로벌 패권을 디지털 시대에도 유지하는 것이다.
@@ -370,7 +384,7 @@ export default function StablecoinRegulation2026() {
         이는 달러 패권의 확장으로 이어진다.
       </p>
 
-      <h3>2026년 시행 타임라인과 시장 반응</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2026년 시행 타임라인과 시장 반응</h3>
 
       <p>
         GENIUS Act는 2026년 1분기부터 본격 시행된다. 발행사들은 규제 준수를 위해 준비에
@@ -386,9 +400,9 @@ export default function StablecoinRegulation2026() {
         핵심 파트너가 탄생하는 셈이다.
       </p>
 
-      <h2>4장. 스테이블코인 확산과 자산 토크나이제이션의 미래</h2>
+      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">4장. 스테이블코인 확산과 자산 토크나이제이션의 미래</h2>
 
-      <h3>스테이블코인에서 RWA 토크나이제이션으로</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">스테이블코인에서 RWA 토크나이제이션으로</h3>
 
       <p>
         스테이블코인의 제도화는 더 큰 변화의 시작일 뿐이다. 일단 스테이블코인이 규제 체계
@@ -405,7 +419,7 @@ export default function StablecoinRegulation2026() {
         디지털 자산 플랫폼 개발에 수억 달러를 투자하고 있다.
       </p>
 
-      <h3>토크나이제이션의 메커니즘과 경제적 효과</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">토크나이제이션의 메커니즘과 경제적 효과</h3>
 
       <p>
         자산 토크나이제이션이란 무엇인가? 간단히 말해, 전통적으로 종이 증서나 중앙화된
@@ -423,7 +437,7 @@ export default function StablecoinRegulation2026() {
         후자에 집중할 수밖에 없다. 자산 토크나이제이션은 GDP 성장의 새로운 동력이 되는 것이다.
       </p>
 
-      <h3>2026년 토크나이제이션 시나리오</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2026년 토크나이제이션 시나리오</h3>
 
       <div className="not-prose my-8">
         <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-6 rounded-lg border border-indigo-200 dark:border-indigo-800">
@@ -476,7 +490,7 @@ export default function StablecoinRegulation2026() {
         전망도 나온다.
       </p>
 
-      <h3>자산별 토크나이제이션 효과</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">자산별 토크나이제이션 효과</h3>
 
       <div className="not-prose my-8 grid md:grid-cols-2 gap-6">
         <div className="p-5 bg-cyan-50 dark:bg-cyan-900/20 rounded-lg border-2 border-cyan-300 dark:border-cyan-700">
@@ -535,9 +549,9 @@ export default function StablecoinRegulation2026() {
         공고히 한다.
       </p>
 
-      <h2>5장. 정부 주도 경제의 완성: GDP 성장과 부채비율 안정화</h2>
+      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">5장. 정부 주도 경제의 완성: GDP 성장과 부채비율 안정화</h2>
 
-      <h3>부채 총량이 아닌 비율 관리</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">부채 총량이 아닌 비율 관리</h3>
 
       <p>
         미국 정부는 37조 달러의 부채를 갚을 생각이 없다. 아니, 갚을 수도 없다. 대신
@@ -553,7 +567,7 @@ export default function StablecoinRegulation2026() {
         전체 GDP를 밀어올리는 효과가 발생한다.
       </p>
 
-      <h3>스테이블코인-토크나이제이션-GDP 성장의 선순환</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">스테이블코인-토크나이제이션-GDP 성장의 선순환</h3>
 
       <div className="not-prose my-8 p-6 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 dark:from-green-900/20 dark:via-blue-900/20 dark:to-purple-900/20 rounded-lg border-2 border-green-300 dark:border-green-700">
         <h4 className="text-lg font-bold text-green-900 dark:text-green-200 mb-4 text-center">🔄 선순환 구조</h4>
@@ -606,7 +620,7 @@ export default function StablecoinRegulation2026() {
         있게 된다. 연준 시대는 완전히 막을 내리고, 정부 주도 경제 시대가 본격화되는 것이다.
       </p>
 
-      <h3>AI 생산성과 인플레이션 리스크</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">AI 생산성과 인플레이션 리스크</h3>
 
       <p>
         물론 낙관적 시나리오만 있는 것은 아니다. 정부의 대규모 재정 지출이 GDP 성장으로
@@ -622,7 +636,7 @@ export default function StablecoinRegulation2026() {
         받게 된다. 그렇게 되면 정부-연준 갈등이 재격화되고, 부채 위기가 현실화될 수 있다.
       </p>
 
-      <h2>6장. Walits의 기회: 규제 준수 Custody의 시대</h2>
+      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">6장. Walits의 기회: 규제 준수 Custody의 시대</h2>
 
       <div className="not-prose my-8 p-6 bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 rounded-lg text-white">
         <h3 className="text-2xl font-bold mb-3">🔐 Walits: 토큰화 시대의 핵심 인프라</h3>
@@ -641,7 +655,7 @@ export default function StablecoinRegulation2026() {
         </div>
       </div>
 
-      <h3>STO와 RWA Custody의 필요성</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">STO와 RWA Custody의 필요성</h3>
 
       <p>
         스테이블코인과 토크나이제이션 시대가 열리면, 가장 중요한 인프라는 무엇일까?
@@ -656,7 +670,7 @@ export default function StablecoinRegulation2026() {
         Offering) 발행사와 RWA 토크나이제이션 프로젝트에 필수적인 파트너가 될 수 있다.
       </p>
 
-      <h3>GENIUS Act 준수 HSM/MPC 시스템</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">GENIUS Act 준수 HSM/MPC 시스템</h3>
 
       <p>
         GENIUS Act는 스테이블코인 발행사에게 담보 자산의 안전한 보관을 의무화한다.
@@ -672,7 +686,7 @@ export default function StablecoinRegulation2026() {
         제거하고 최고 수준의 보안을 달성할 수 있다.
       </p>
 
-      <h3>토크나이즈 자산 지원과 수익 모델</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">토크나이즈 자산 지원과 수익 모델</h3>
 
       <div className="not-prose my-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
         <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">🛠️ Walits 핵심 기능</h4>
@@ -751,7 +765,7 @@ export default function StablecoinRegulation2026() {
         대상으로는 월 구독 모델을 적용하여 반복 수익(Recurring Revenue)을 확보할 수 있다.
       </p>
 
-      <h3>한국-미국 Cross-Border Compliance</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">한국-미국 Cross-Border Compliance</h3>
 
       <p>
         Walits의 경쟁력은 한국과 미국 양쪽의 규제를 모두 이해하고 준수할 수 있다는 점이다.
@@ -761,7 +775,7 @@ export default function StablecoinRegulation2026() {
         해결해준다면 엄청난 가치를 제공하는 셈이다.
       </p>
 
-      <h2>7장. 리스크와 시나리오 분석</h2>
+      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">7장. 리스크와 시나리오 분석</h2>
 
       <div className="not-prose my-8 grid md:grid-cols-2 gap-6">
         <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-2 border-green-400 dark:border-green-600">
@@ -802,7 +816,7 @@ export default function StablecoinRegulation2026() {
         </div>
       </div>
 
-      <h3>HIGH 확률 시나리오 (70%): 선순환 달성</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">HIGH 확률 시나리오 (70%): 선순환 달성</h3>
 
       <p>
         GENIUS Act가 성공적으로 시행되고, 스테이블코인 TVL이 1조 달러를 돌파하며,
@@ -813,7 +827,7 @@ export default function StablecoinRegulation2026() {
         솔루션에 대한 수요가 급증하며, 디지털 자산 인프라 기업들의 가치가 급등한다.
       </p>
 
-      <h3>LOW 확률 시나리오 (30%): 뱅크런과 긴축 재개</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">LOW 확률 시나리오 (30%): 뱅크런과 긴축 재개</h3>
 
       <p>
         스테이블코인 발행사 중 일부가 담보 자산 검증에 실패하거나 부실 운영이 드러나
@@ -825,7 +839,7 @@ export default function StablecoinRegulation2026() {
         2008년식 금융위기 재현 가능성이 대두된다.
       </p>
 
-      <h3>Walits의 리스크 관리 전략</h3>
+      <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Walits의 리스크 관리 전략</h3>
 
       <p>
         어떤 시나리오가 현실화되든, Walits는 리스크 관리를 철저히 해야 한다.
@@ -836,7 +850,7 @@ export default function StablecoinRegulation2026() {
         구비한다.
       </p>
 
-      <h2>에필로그: 토큰화된 세계의 도래</h2>
+      <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">에필로그: 토큰화된 세계의 도래</h2>
 
       <p>
         2026년은 금융 역사에서 중요한 전환점으로 기록될 것이다. 연준 중심의 통화정책
@@ -861,7 +875,7 @@ export default function StablecoinRegulation2026() {
       </p>
 
       <div className="mt-12 p-6 bg-gray-50 rounded-lg">
-        <h3>참고자료</h3>
+        <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">참고자료</h3>
         <ul className="text-sm">
           <li>미국 재무부 부채 통계 (2025년 8월 기준)</li>
           <li>GENIUS Act 법안 전문 (2025년 7월 공표)</li>
@@ -871,16 +885,18 @@ export default function StablecoinRegulation2026() {
         </ul>
       </div>
 
-      <div className="mt-8 p-6 bg-blue-50 rounded-lg">
-        <h3>Walits와 함께하는 토큰화 시대</h3>
-        <p>
-          STO 발행, RWA 토크나이제이션, 그리고 규제 준수 Custody에 대한 상담이 필요하시면
-          언제든 연락주세요.
-        </p>
-        <ul>
-          <li>이메일: contact@walits.io</li>
-          <li>웹사이트: www.walits.io</li>
-        </ul>
+          <div className="not-prose mt-12 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-700">
+            <h3 className="text-xl font-bold text-blue-900 dark:text-blue-200 mb-3">Walits와 함께하는 토큰화 시대</h3>
+            <p className="text-blue-800 dark:text-blue-300 mb-4">
+              STO 발행, RWA 토크나이제이션, 그리고 규제 준수 Custody에 대한 상담이 필요하시면
+              언제든 연락주세요.
+            </p>
+            <ul className="list-none space-y-2 text-blue-900 dark:text-blue-200">
+              <li>📧 이메일: contact@walits.io</li>
+              <li>🌐 웹사이트: www.walits.io</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </article>
   );
