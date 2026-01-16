@@ -20,11 +20,11 @@ export default function IRPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm dark:bg-gray-900/95">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
             Walits
           </Link>
           <div className="flex items-center gap-6">
@@ -54,33 +54,23 @@ export default function IRPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-24 pb-12 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center text-white">
-            <div className="inline-block mb-4 px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
-              <span className="font-semibold text-sm">
-                {language === 'ko' ? '투자자 전용 자료' : 'Confidential - For Authorized Recipients Only'}
-              </span>
+      <section className="pt-24 pb-12 px-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center">
+            <div className="inline-block mb-4 px-4 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs font-medium text-gray-600 dark:text-gray-400">
+              {language === 'ko' ? '투자자 전용 자료' : 'Confidential'}
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              {language === 'ko' ? 'Walits Enterprise Wallet Solutions' : 'Walits Enterprise Wallet Solutions'}
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+              Walits
             </h1>
-            <p className="text-2xl mb-4 text-white/90">
-              {language === 'ko' ? 'Investment & Partnership Presentation' : 'Investment & Partnership Presentation'}
+            <p className="text-xl mb-2 text-gray-700 dark:text-gray-300">
+              {language === 'ko' ? 'Investor Relations' : 'Investor Relations'}
             </p>
-            <p className="text-lg text-white/80 max-w-3xl mx-auto">
+            <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
               {language === 'ko'
-                ? 'MPC 기반 기업/기관급 암호자산 관리 인프라 | 2026년 $12.8M → 2030년 $1.5B 전망'
-                : 'MPC-based Enterprise Crypto Infrastructure | $12.8M (2026) → $1.5B (2030) Projection'}
+                ? 'MPC 기반 기업급 암호자산 인프라'
+                : 'MPC-based Enterprise Crypto Infrastructure'}
             </p>
-            <div className="mt-8 flex gap-4 justify-center">
-              <a href="#contact" className="px-8 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-                {language === 'ko' ? '투자 문의' : 'Investment Inquiry'}
-              </a>
-              <a href="mailto:walits.co@gmail.com" className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors">
-                {language === 'ko' ? '파트너십 문의' : 'Partnership Inquiry'}
-              </a>
-            </div>
           </div>
         </div>
       </section>
@@ -112,14 +102,14 @@ export default function IRPage() {
           <section className="space-y-8">
             <div>
               <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">Executive Summary</h2>
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
                 <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                   {language === 'ko'
                     ? 'Walits는 기업/기관급 암호자산 관리 인프라를 제공하는 Web3 핵심 기술 회사입니다. MPC(Multi-Party Computation) 기반 보안 강화형 지갑 솔루션으로 게임/앱 개발사, 기관/정부, 개인 투자자를 타겟합니다.'
                     : 'Walits provides enterprise-grade crypto asset management infrastructure as a core Web3 technology company. Our MPC-based enhanced security wallet solutions target game/app developers, institutions/governments, and individual investors.'}
                 </p>
                 <div className="grid md:grid-cols-4 gap-6">
-                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6">
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
                     <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">4</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '핵심 서비스' : 'Core Services'}
@@ -128,21 +118,21 @@ export default function IRPage() {
                       Non-Custody, Custody, Auto Chat, AI ST
                     </div>
                   </div>
-                  <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6">
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
                     <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">$12.8M</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '2026 목표 매출' : '2026 Target Revenue'}
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">~165억원</div>
                   </div>
-                  <div className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6">
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
                     <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">$1.5B</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '2030 전망 매출' : '2030 Projected Revenue'}
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">200%+ CAGR</div>
                   </div>
-                  <div className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6">
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
                     <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">67%</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '2030 EBITDA 마진' : '2030 EBITDA Margin'}
@@ -165,9 +155,9 @@ export default function IRPage() {
                   </h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <li>✅ Non-Custody: 게임/앱 토큰 관리</li>
-                  <li>✅ Custody: STO/RWA 기관 보관</li>
-                  <li>✅ 월 1-4천만원 + 5천만-1억원</li>
+                  <li>Non-Custody: 게임/앱 토큰 관리</li>
+                  <li>Custody: STO/RWA 기관 보관</li>
+                  <li>월 1-4천만원 + 5천만-1억원</li>
                 </ul>
               </div>
 
@@ -181,9 +171,9 @@ export default function IRPage() {
                   </h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <li>✅ Auto Chat: 메시지 앱 결제</li>
-                  <li>✅ AI 토큰증권: RWA 투자</li>
-                  <li>✅ 월 2.5억원 + 연 50억원 (목표)</li>
+                  <li>Auto Chat: 메시지 앱 결제</li>
+                  <li>AI 토큰증권: RWA 투자</li>
+                  <li>월 2.5억원 + 연 50억원 (목표)</li>
                 </ul>
               </div>
 
@@ -197,9 +187,9 @@ export default function IRPage() {
                   </h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <li>✅ Clarity Act (STO 간소화)</li>
-                  <li>✅ GENIUS Act (스테이블코인)</li>
-                  <li>✅ Strategic Bitcoin Reserve</li>
+                  <li>Clarity Act (STO 간소화)</li>
+                  <li>GENIUS Act (스테이블코인)</li>
+                  <li>Strategic Bitcoin Reserve</li>
                 </ul>
               </div>
             </div>
@@ -214,7 +204,7 @@ export default function IRPage() {
             </h2>
 
             {/* Global Market */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
                 {language === 'ko' ? 'Global Web3 Infrastructure 시장' : 'Global Web3 Infrastructure Market'}
               </h3>
@@ -270,53 +260,41 @@ export default function IRPage() {
 
             {/* Korea Market */}
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-8 text-white shadow-xl">
-                <h3 className="text-2xl font-bold mb-4">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                   {language === 'ko' ? '한국 시장 기회' : 'Korea Market Opportunity'}
                 </h3>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex items-start gap-2">
-                    <span className="text-yellow-300 mt-1">✅</span>
-                    <span>카카오톡 (3천만) + 텔레그램 (8억) = 메시지 앱 최강국</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-yellow-300 mt-1">✅</span>
-                    <span>GENIUS Act + Clarity Act 준수로 글로벌 규제 선도</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-yellow-300 mt-1">✅</span>
-                    <span>부동산 토큰화 = 조 단위 시장 잠재력</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-yellow-300 mt-1">✅</span>
-                    <span>MPC/HSM 기술력 = 글로벌 경쟁력</span>
-                  </li>
+                <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                  <li>카카오톡 (3천만) + 텔레그램 (8억) = 메시지 앱 최강국</li>
+                  <li>GENIUS Act + Clarity Act 준수로 글로벌 규제 선도</li>
+                  <li>부동산 토큰화 = 조 단위 시장 잠재력</li>
+                  <li>MPC/HSM 기술력 = 글로벌 경쟁력</li>
                 </ul>
-                <div className="mt-6 pt-6 border-t border-white/20">
-                  <div className="text-3xl font-bold mb-1">$100B+</div>
-                  <div className="text-sm text-white/80">일일 암호자산 거래량</div>
+                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <div className="text-2xl font-bold mb-1 text-gray-900 dark:text-white">$100B+</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">일일 암호자산 거래량</div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-8 text-white shadow-xl">
-                <h3 className="text-2xl font-bold mb-4">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                   {language === 'ko' ? '2026 규제 순풍' : '2026 Regulatory Tailwind'}
                 </h3>
                 <div className="space-y-4">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                    <div className="font-bold mb-1">Clarity Act</div>
-                    <div className="text-xs text-white/80 mb-2">상원 심의 중</div>
-                    <div className="text-sm">→ STO/RWA 발행 간소화</div>
+                  <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                    <div className="font-bold mb-1 text-gray-900 dark:text-white">Clarity Act</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">상원 심의 중</div>
+                    <div className="text-sm text-gray-700 dark:text-gray-300">STO/RWA 발행 간소화</div>
                   </div>
-                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                    <div className="font-bold mb-1">GENIUS Act</div>
-                    <div className="text-xs text-white/80 mb-2">2026 Q1 시행</div>
-                    <div className="text-sm">→ 스테이블코인 100% 담보</div>
+                  <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                    <div className="font-bold mb-1 text-gray-900 dark:text-white">GENIUS Act</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">2026 Q1 시행</div>
+                    <div className="text-sm text-gray-700 dark:text-gray-300">스테이블코인 100% 담보</div>
                   </div>
-                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                    <div className="font-bold mb-1">Strategic Bitcoin Reserve</div>
-                    <div className="text-xs text-white/80 mb-2">정부 비축 확대</div>
-                    <div className="text-sm">→ HSM/MPC 보안 수요</div>
+                  <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                    <div className="font-bold mb-1 text-gray-900 dark:text-white">Strategic Bitcoin Reserve</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">정부 비축 확대</div>
+                    <div className="text-sm text-gray-700 dark:text-gray-300">HSM/MPC 보안 수요</div>
                   </div>
                 </div>
               </div>
@@ -332,7 +310,7 @@ export default function IRPage() {
             </h2>
 
             {/* MPC Stack */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
                 MPC 기술 스택 (CGGMP21)
               </h3>
@@ -348,18 +326,9 @@ export default function IRPage() {
                       <span className="text-green-600 dark:text-green-400">✅</span>
                       <span>2-of-3 다중 서명 - 금융기관급 보안</span>
                     </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-green-600 dark:text-green-400">✅</span>
-                      <span>HSM (Hardware Security Module) 통합</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-green-600 dark:text-green-400">✅</span>
-                      <span>TEE (Trusted Execution Environment) 활용</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-blue-600 dark:text-blue-400">✅</span>
-                      <span>CGGMP24 로드맵 준비 중</span>
-                    </li>
+                    <li>HSM (Hardware Security Module) 통합</li>
+                    <li>TEE (Trusted Execution Environment) 활용</li>
+                    <li>CGGMP24 로드맵 준비 중</li>
                   </ul>
                 </div>
                 <div>
@@ -373,8 +342,8 @@ export default function IRPage() {
                       <div className="font-semibold text-gray-900 dark:text-white mb-1">Ledger Enterprise</div>
                       <div className="text-gray-600 dark:text-gray-400">하드웨어 의존, 유연성 부족</div>
                     </div>
-                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border-2 border-green-500">
-                      <div className="font-semibold text-green-900 dark:text-green-400 mb-1">Walits ✅</div>
+                    <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3 border border-gray-300 dark:border-gray-600">
+                      <div className="font-semibold text-gray-900 dark:text-white mb-1">Walits</div>
                       <div className="text-gray-700 dark:text-gray-300">API 기반 개발자 친화 + 엔터프라이즈 보안</div>
                     </div>
                   </div>
@@ -383,7 +352,7 @@ export default function IRPage() {
             </div>
 
             {/* Architecture Diagram */}
-            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 shadow-xl text-white">
+            <div className="bg-gray-900 dark:bg-gray-800 rounded-lg p-8 border border-gray-700">
               <h3 className="text-2xl font-bold mb-6">기술 아키텍처</h3>
               <div className="space-y-4 font-mono text-sm">
                 <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
@@ -432,7 +401,7 @@ export default function IRPage() {
             </h2>
 
             {/* Non-Custody */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-l-4 border-blue-500">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <div className="flex items-start justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -484,7 +453,7 @@ export default function IRPage() {
             </div>
 
             {/* Custody */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-l-4 border-purple-500">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <div className="flex items-start justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -536,7 +505,7 @@ export default function IRPage() {
             </div>
 
             {/* Auto Chat */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-l-4 border-indigo-500">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <div className="flex items-start justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -586,7 +555,7 @@ export default function IRPage() {
             </div>
 
             {/* AI ST Wallet */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-l-4 border-emerald-500">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <div className="flex items-start justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -651,7 +620,7 @@ export default function IRPage() {
             </h2>
 
             {/* 2026 Revenue Breakdown */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">2026년 분기별 매출 전망</h3>
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -769,7 +738,7 @@ export default function IRPage() {
 
             {/* Funding Needs */}
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
                 <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">펀딩 계획</h3>
                 <div className="space-y-4">
                   <div>
@@ -849,23 +818,23 @@ export default function IRPage() {
                   <tbody className="text-sm">
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">CGGMP21</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Full</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Full</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Partial</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ Yes</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">Yes</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">HSM Integration</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Full</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ Full</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Full</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">Full</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ Full</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">Full</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">TEE (SGX/TDX)</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Yes</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Yes</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Limited</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
@@ -873,9 +842,9 @@ export default function IRPage() {
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">API Simplicity</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ High</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">High</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ Complex</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ High</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">High</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Medium</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ Very Complex</td>
                     </tr>
@@ -889,15 +858,15 @@ export default function IRPage() {
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">Cost</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Low</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Low</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ Very High</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ Low</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">Low</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ High</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ High</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">AI/Chat Payment</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Exclusive</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Exclusive</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
@@ -905,7 +874,7 @@ export default function IRPage() {
                     </tr>
                     <tr className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">RWA/STO Support</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Full</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Full</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Partial</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Partial</td>
@@ -918,39 +887,39 @@ export default function IRPage() {
 
             {/* Walits Differentiation */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white shadow-lg">
-                <h3 className="text-lg font-bold mb-2">기술 우위</h3>
-                <ul className="text-sm space-y-1 text-white/90">
-                  <li>• CGGMP21 구현</li>
-                  <li>• HSM + TEE 통합</li>
-                  <li>• CGGMP24 준비중</li>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">기술 우위</h3>
+                <ul className="text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                  <li>CGGMP21 구현</li>
+                  <li>HSM + TEE 통합</li>
+                  <li>CGGMP24 준비중</li>
                 </ul>
               </div>
 
-              <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-6 text-white shadow-lg">
-                <h3 className="text-lg font-bold mb-2">가격 우위</h3>
-                <ul className="text-sm space-y-1 text-white/90">
-                  <li>• Fireblocks의 1/10</li>
-                  <li>• 협상 가능한 가격</li>
-                  <li>• Chat 수수료 절반</li>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">가격 우위</h3>
+                <ul className="text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                  <li>Fireblocks의 1/10</li>
+                  <li>협상 가능한 가격</li>
+                  <li>Chat 수수료 절반</li>
                 </ul>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
-                <h3 className="text-lg font-bold mb-2">속도 우위</h3>
-                <ul className="text-sm space-y-1 text-white/90">
-                  <li>• API 배포 1주일</li>
-                  <li>• Chat 롤아웃 4주</li>
-                  <li>• 커스텀 기능 2주</li>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">속도 우위</h3>
+                <ul className="text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                  <li>API 배포 1주일</li>
+                  <li>Chat 롤아웃 4주</li>
+                  <li>커스텀 기능 2주</li>
                 </ul>
               </div>
 
-              <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 text-white shadow-lg">
-                <h3 className="text-lg font-bold mb-2">규제 우위</h3>
-                <ul className="text-sm space-y-1 text-white/90">
-                  <li>• 한국 자본시장법</li>
-                  <li>• Clarity Act 준비</li>
-                  <li>• KYC/AML 자동화</li>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">규제 우위</h3>
+                <ul className="text-sm space-y-1 text-gray-700 dark:text-gray-300">
+                  <li>한국 자본시장법</li>
+                  <li>Clarity Act 준비</li>
+                  <li>KYC/AML 자동화</li>
                 </ul>
               </div>
             </div>
@@ -966,7 +935,7 @@ export default function IRPage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               {/* Non-Custody GTM */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
                 <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                   Non-Custody Wallet
                 </h3>
@@ -993,7 +962,7 @@ export default function IRPage() {
               </div>
 
               {/* Custody GTM */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
                 <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                   Custody Wallet
                 </h3>
@@ -1020,7 +989,7 @@ export default function IRPage() {
               </div>
 
               {/* Auto Chat GTM */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
                 <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                   Auto Chat Wallet
                 </h3>
@@ -1055,7 +1024,7 @@ export default function IRPage() {
               </div>
 
               {/* AI ST Wallet GTM */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
                 <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                   AI 토큰증권 지갑
                 </h3>
@@ -1101,7 +1070,7 @@ export default function IRPage() {
             </h2>
 
             {/* Risk Matrix */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">주요 위험 요소</h3>
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -1186,7 +1155,7 @@ export default function IRPage() {
 
             {/* Technical Risks */}
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 rounded-xl p-6 border-2 border-red-200 dark:border-red-800">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
                 <div className="mb-4">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white">MPC 보안</h3>
                 </div>
@@ -1206,7 +1175,7 @@ export default function IRPage() {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 rounded-xl p-6 border-2 border-yellow-200 dark:border-yellow-800">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
                 <div className="mb-4">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white">스마트 컨트랙트</h3>
                 </div>
@@ -1226,7 +1195,7 @@ export default function IRPage() {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-xl p-6 border-2 border-blue-200 dark:border-blue-800">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
                 <div className="mb-4">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white">인프라</h3>
                 </div>
@@ -1312,7 +1281,7 @@ export default function IRPage() {
             </div>
 
             {/* Organization Growth */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">2026년 조직 확장 계획</h3>
               <div className="grid md:grid-cols-4 gap-6">
                 <div className="text-center">
