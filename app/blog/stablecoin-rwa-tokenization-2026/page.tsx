@@ -2235,8 +2235,8 @@ export default function StablecoinRegulation2026() {
                   )}
                 </p>
                 <ul className="list-none space-y-2 text-blue-900 dark:text-blue-200">
-                  <li>{language === 'ko' ? '이메일' : 'Email'}: contact@walits.io</li>
-                  <li>{language === 'ko' ? '웹사이트' : 'Website'}: www.walits.io</li>
+                  <li>{language === 'ko' ? '이메일' : 'Email'}: walits.co@gmail.com</li>
+                  <li>{language === 'ko' ? '웹사이트' : 'Website'}: www.walits.com</li>
                 </ul>
               </div>
         </div>
