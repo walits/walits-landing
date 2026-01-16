@@ -5,301 +5,48 @@ import Link from 'next/link';
 
 export default function IRPage() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
+  const [activeSection, setActiveSection] = useState('executive');
 
-  const copy = {
-    ko: {
-      title: 'Investor Relations',
-      subtitle: '2026년 암호화폐 시장의 4대 성장축을 정확히 겨냥한 전략적 포트폴리오',
-      hero: {
-        tag: '완벽한 포지셔닝',
-        headline: 'Walits 4가지 지갑 서비스',
-        description: '기업용과 개인용, 현재 수익과 미래 성장을 동시에 잡는 전략',
-      },
-      portfolio: {
-        title: 'Walits 포트폴리오 전략',
-        enterprise: '기업용 (현재 시장)',
-        personal: '개인용 (미래 시장)',
-        services: [
-          {
-            name: 'Non-Custody Wallet',
-            tag: '✅ 시장 검증됨',
-            target: '게임/앱 유저 토큰 관리',
-            status: '운영중',
-            revenue: '월 1-4천만원',
-          },
-          {
-            name: 'Custody Wallet',
-            tag: '✅ Clarity Act 수혜',
-            target: 'STO/RWA 기관 자산 보관',
-            status: '운영중',
-            revenue: '월 5천만-1억원',
-          },
-          {
-            name: 'Auto Chat Wallet',
-            tag: '🚀 대중화 포인트',
-            target: '메시지 앱 결제 혁신',
-            status: '2026 런칭',
-            revenue: '월 2.5억원 (목표)',
-          },
-          {
-            name: 'AI 토큰증권 Wallet',
-            tag: '🚀 RWA 투자자 진입',
-            target: '개인 RWA 소액 투자',
-            status: '2026 런칭',
-            revenue: '연 50억원 (장기)',
-          },
-        ],
-      },
-      market: {
-        title: '각 서비스별 시장 기회',
-      },
-      roadmap: {
-        title: '2026 Walits 로드맵',
-        quarters: [
-          {
-            period: 'Q1 2026',
-            items: [
-              { icon: '✅', text: 'Non-Custody: 운영 수익화 (월 1-4천만원)' },
-              { icon: '✅', text: 'Custody: Clarity Act 수요 포착 (월 5천만-1억)' },
-              { icon: '🚀', text: 'Auto Chat: 베타 테스트 (카카오톡 기업앱 연동)' },
-              { icon: '🚀', text: 'AI 토큰증권: 알파 테스트 (한국 부동산 RWA)' },
-            ],
-          },
-          {
-            period: 'Q2-Q3 2026',
-            items: [
-              { icon: '📈', text: 'Clarity Act 상원 통과 → STO 발행 급증' },
-              { icon: '📱', text: 'Auto Chat Wallet 정식 런칭 → 월 1만 유저' },
-              { icon: '🏢', text: 'AI 토큰증권 베타 → 기관 파일럿 테스트' },
-              { icon: '🌏', text: 'Non-Custody 글로벌 확장 (동남아)' },
-            ],
-          },
-          {
-            period: 'Q4 2026 - 2027',
-            items: [
-              { icon: '💰', text: 'Non-Custody: 월 $100-200만 (글로벌)' },
-              { icon: '🏦', text: 'Custody: 월 $500-1,000만 (기관 수주)' },
-              { icon: '💬', text: 'Auto Chat: 월 $100-300만 (한국+동남아)' },
-              { icon: '📊', text: 'AI 토큰증권: 월 $10-50만 (초기 AUM)' },
-            ],
-          },
-        ],
-        projection: '예상 연 수익: $15-30M (180-360억원)',
-      },
-      competitive: {
-        title: '경쟁사 비교',
-        companies: ['Walits', 'Thirdweb', 'Magic', 'Fireblocks'],
-        criteria: [
-          { name: '기술 스택', scores: ['MPC/HSM ✅', 'API ⭕', 'OAuth ⭕', 'Institutional ⭕'] },
-          { name: '보안 수준', scores: ['CGGMP21 ✅', '중간 ⭕', '중간 ⭕', '최고 ✅'] },
-          { name: '스타트업 친화', scores: ['API 쉬움 ✅', '같음 ✅', '같음 ✅', '어려움 ❌'] },
-          { name: 'AI/Chat 결제', scores: ['독점 ✅', '없음 ❌', '없음 ❌', '없음 ❌'] },
-          { name: 'RWA/STO', scores: ['토큰증권 ✅', '없음 ❌', '없음 ❌', '있음 ⭕'] },
-          { name: '한국 규제 대응', scores: ['최적 ✅', '미흡 ⭕', '미흡 ⭕', '과도 ❌'] },
-        ],
-      },
-      strategy: {
-        title: '전략적 우선순위',
-        focus: [
-          {
-            title: '1. Non-Custody: 게임사 확보',
-            desc: '게임/앱 스튜디오 20-30개 확보 목표',
-            detail: '각 프로젝트당 월 $500-2,000 수익, 영업 파이프라인 구축 중',
-          },
-          {
-            title: '2. Custody: STO 플랫폼 파트너십',
-            desc: 'Clarity Act 통과 대비 기관 고객 확보',
-            detail: '한국 자본시장법 준수 가이드 제공, 월 5천만원급 계약 타겟',
-          },
-          {
-            title: '3. Auto Chat: 메시지 앱 유통',
-            desc: '카카오톡 기업앱 및 텔레그램 봇 우선',
-            detail: '메시지 앱 = 최강 유통채널, 네트워크 효과 극대화',
-          },
-        ],
-        caution: [
-          {
-            title: '토큰증권 지갑은 장기 베팅',
-            desc: 'RWA 시장 성숙까지 2-3년 소요 예상 (2027-2028)',
-          },
-          {
-            title: 'AI 자동 리밸런싱 기술력 검증 필요',
-            desc: '초기 단순 관리로 시작, 점진적 고도화',
-          },
-          {
-            title: '규제 리스크 상시 모니터링',
-            desc: 'FSC, SEC, FCA 정책 변화 추적 및 대응',
-          },
-        ],
-      },
-      contact: {
-        title: 'Walits와 함께하는 토큰화 시대',
-        desc: 'STO 발행, RWA 토크나이제이션, 규제 준수 Custody 상담',
-        cta: '투자 문의하기',
-      },
-    },
-    en: {
-      title: 'Investor Relations',
-      subtitle: 'Strategic Portfolio Targeting 4 Major Growth Drivers in 2026 Crypto Market',
-      hero: {
-        tag: 'Perfect Positioning',
-        headline: 'Walits 4 Wallet Services',
-        description: 'Strategy capturing both current revenue (enterprise) and future growth (consumer)',
-      },
-      portfolio: {
-        title: 'Walits Portfolio Strategy',
-        enterprise: 'Enterprise (Current Market)',
-        personal: 'Consumer (Future Market)',
-        services: [
-          {
-            name: 'Non-Custody Wallet',
-            tag: '✅ Market Validated',
-            target: 'Game/App User Token Management',
-            status: 'Live',
-            revenue: '$10-40K/month',
-          },
-          {
-            name: 'Custody Wallet',
-            tag: '✅ Clarity Act Benefit',
-            target: 'STO/RWA Institutional Custody',
-            status: 'Live',
-            revenue: '$50-100K/month',
-          },
-          {
-            name: 'Auto Chat Wallet',
-            tag: '🚀 Mass Adoption Point',
-            target: 'Messaging App Payment Innovation',
-            status: 'Launch 2026',
-            revenue: '$250K/month (target)',
-          },
-          {
-            name: 'AI Security Token Wallet',
-            tag: '🚀 RWA Investor Entry',
-            target: 'Individual RWA Micro Investment',
-            status: 'Launch 2026',
-            revenue: '$5M/year (long-term)',
-          },
-        ],
-      },
-      market: {
-        title: 'Market Opportunity by Service',
-      },
-      roadmap: {
-        title: '2026 Walits Roadmap',
-        quarters: [
-          {
-            period: 'Q1 2026',
-            items: [
-              { icon: '✅', text: 'Non-Custody: Revenue generating ($10-40K/mo)' },
-              { icon: '✅', text: 'Custody: Clarity Act demand capture ($50-100K/mo)' },
-              { icon: '🚀', text: 'Auto Chat: Beta test (KakaoTalk enterprise API)' },
-              { icon: '🚀', text: 'AI ST: Alpha test (Korea real estate RWA)' },
-            ],
-          },
-          {
-            period: 'Q2-Q3 2026',
-            items: [
-              { icon: '📈', text: 'Clarity Act passes Senate → STO issuance surge' },
-              { icon: '📱', text: 'Auto Chat Wallet official launch → 10K users/mo' },
-              { icon: '🏢', text: 'AI ST Beta → Institutional pilot testing' },
-              { icon: '🌏', text: 'Non-Custody global expansion (Southeast Asia)' },
-            ],
-          },
-          {
-            period: 'Q4 2026 - 2027',
-            items: [
-              { icon: '💰', text: 'Non-Custody: $100-200K/mo (global)' },
-              { icon: '🏦', text: 'Custody: $500K-1M/mo (institutional contracts)' },
-              { icon: '💬', text: 'Auto Chat: $100-300K/mo (Korea+SEA)' },
-              { icon: '📊', text: 'AI ST: $10-50K/mo (initial AUM)' },
-            ],
-          },
-        ],
-        projection: 'Projected Annual Revenue: $15-30M',
-      },
-      competitive: {
-        title: 'Competitive Analysis',
-        companies: ['Walits', 'Thirdweb', 'Magic', 'Fireblocks'],
-        criteria: [
-          { name: 'Tech Stack', scores: ['MPC/HSM ✅', 'API ⭕', 'OAuth ⭕', 'Institutional ⭕'] },
-          { name: 'Security', scores: ['CGGMP21 ✅', 'Medium ⭕', 'Medium ⭕', 'Highest ✅'] },
-          { name: 'Startup Friendly', scores: ['Easy API ✅', 'Same ✅', 'Same ✅', 'Difficult ❌'] },
-          { name: 'AI/Chat Payment', scores: ['Exclusive ✅', 'None ❌', 'None ❌', 'None ❌'] },
-          { name: 'RWA/STO', scores: ['ST Wallet ✅', 'None ❌', 'None ❌', 'Yes ⭕'] },
-          { name: 'Korea Compliance', scores: ['Optimal ✅', 'Insufficient ⭕', 'Insufficient ⭕', 'Excessive ❌'] },
-        ],
-      },
-      strategy: {
-        title: 'Strategic Priorities',
-        focus: [
-          {
-            title: '1. Non-Custody: Game Studio Acquisition',
-            desc: 'Target: 20-30 game/app studios',
-            detail: '$500-2,000/mo per project, building sales pipeline',
-          },
-          {
-            title: '2. Custody: STO Platform Partnerships',
-            desc: 'Secure institutional clients for Clarity Act',
-            detail: 'Provide Korea Capital Markets Act compliance guide',
-          },
-          {
-            title: '3. Auto Chat: Messaging App Distribution',
-            desc: 'KakaoTalk enterprise app & Telegram bot first',
-            detail: 'Messaging apps = strongest distribution channel',
-          },
-        ],
-        caution: [
-          {
-            title: 'ST Wallet is long-term bet',
-            desc: 'RWA market maturation expected 2-3 years (2027-2028)',
-          },
-          {
-            title: 'AI auto-rebalancing tech validation needed',
-            desc: 'Start with simple management, gradual sophistication',
-          },
-          {
-            title: 'Constant regulatory risk monitoring',
-            desc: 'Track FSC, SEC, FCA policy changes',
-          },
-        ],
-      },
-      contact: {
-        title: 'Tokenization Era with Walits',
-        desc: 'Consultation on STO issuance, RWA tokenization, compliant custody',
-        cta: 'Investment Inquiry',
-      },
-    },
-  }[language];
+  const sections = [
+    { id: 'executive', label: language === 'ko' ? 'Executive Summary' : 'Executive Summary' },
+    { id: 'market', label: language === 'ko' ? '시장 기회' : 'Market Opportunity' },
+    { id: 'technology', label: language === 'ko' ? '기술 경쟁력' : 'Technology' },
+    { id: 'services', label: language === 'ko' ? '핵심 서비스' : 'Core Services' },
+    { id: 'financials', label: language === 'ko' ? '재무 예측' : 'Financials' },
+    { id: 'competitive', label: language === 'ko' ? '경쟁 분석' : 'Competition' },
+    { id: 'gtm', label: language === 'ko' ? 'Go-to-Market' : 'Go-to-Market' },
+    { id: 'risks', label: language === 'ko' ? '리스크 분석' : 'Risk Analysis' },
+    { id: 'team', label: language === 'ko' ? '팀 구성' : 'Team' },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm dark:bg-gray-900/90">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm dark:bg-gray-900/95">
+        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Walits
           </Link>
           <div className="flex items-center gap-6">
-            <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+            <Link href="/" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
               {language === 'ko' ? '홈' : 'Home'}
             </Link>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 border-l pl-6">
               <button
                 onClick={() => setLanguage('ko')}
-                className={`text-sm transition-all ${
-                  language === 'ko' ? 'font-bold text-gray-900 dark:text-white' : 'text-gray-500'
+                className={`text-sm px-3 py-1 rounded-md transition-all ${
+                  language === 'ko' ? 'bg-blue-600 text-white font-bold' : 'text-gray-500 hover:bg-gray-100'
                 }`}
               >
-                한
+                한국어
               </button>
-              <span className="text-gray-400">|</span>
               <button
                 onClick={() => setLanguage('en')}
-                className={`text-sm transition-all ${
-                  language === 'en' ? 'font-bold text-gray-900 dark:text-white' : 'text-gray-500'
+                className={`text-sm px-3 py-1 rounded-md transition-all ${
+                  language === 'en' ? 'bg-blue-600 text-white font-bold' : 'text-gray-500 hover:bg-gray-100'
                 }`}
               >
-                EN
+                English
               </button>
             </div>
           </div>
@@ -307,194 +54,1365 @@ export default function IRPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full">
-              <span className="text-white font-semibold text-sm">{copy.hero.tag}</span>
+      <section className="pt-24 pb-12 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center text-white">
+            <div className="inline-block mb-4 px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
+              <span className="font-semibold text-sm">
+                {language === 'ko' ? '투자자 전용 자료' : 'Confidential - For Authorized Recipients Only'}
+              </span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
-              {copy.title}
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              {language === 'ko' ? 'Walits Enterprise Wallet Solutions' : 'Walits Enterprise Wallet Solutions'}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto">
-              {copy.subtitle}
+            <p className="text-2xl mb-4 text-white/90">
+              {language === 'ko' ? 'Investment & Partnership Presentation' : 'Investment & Partnership Presentation'}
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Portfolio Overview */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-            {copy.portfolio.title}
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* Enterprise Services */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-2 border-blue-500">
-              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                {copy.portfolio.enterprise}
-              </h3>
-              {copy.portfolio.services.slice(0, 2).map((service, i) => (
-                <div key={i} className="mb-6 last:mb-0 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
-                  <div className="flex items-start justify-between mb-2">
-                    <h4 className="text-lg font-bold text-gray-900 dark:text-white">{service.name}</h4>
-                    <span className="text-xs bg-blue-600 text-white px-2 py-1 rounded-full">{service.status}</span>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{service.target}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">{service.tag}</span>
-                    <span className="text-sm font-bold text-green-600 dark:text-green-400">{service.revenue}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Consumer Services */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-2 border-purple-500">
-              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                {copy.portfolio.personal}
-              </h3>
-              {copy.portfolio.services.slice(2, 4).map((service, i) => (
-                <div key={i} className="mb-6 last:mb-0 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
-                  <div className="flex items-start justify-between mb-2">
-                    <h4 className="text-lg font-bold text-gray-900 dark:text-white">{service.name}</h4>
-                    <span className="text-xs bg-purple-600 text-white px-2 py-1 rounded-full">{service.status}</span>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{service.target}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-purple-600 dark:text-purple-400">{service.tag}</span>
-                    <span className="text-sm font-bold text-green-600 dark:text-green-400">{service.revenue}</span>
-                  </div>
-                </div>
-              ))}
+            <p className="text-lg text-white/80 max-w-3xl mx-auto">
+              {language === 'ko'
+                ? 'MPC 기반 기업/기관급 암호자산 관리 인프라 | 2026년 $12.8M → 2030년 $1.5B 전망'
+                : 'MPC-based Enterprise Crypto Infrastructure | $12.8M (2026) → $1.5B (2030) Projection'}
+            </p>
+            <div className="mt-8 flex gap-4 justify-center">
+              <a href="#contact" className="px-8 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+                {language === 'ko' ? '투자 문의' : 'Investment Inquiry'}
+              </a>
+              <a href="mailto:walits.co@gmail.com" className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors">
+                {language === 'ko' ? '파트너십 문의' : 'Partnership Inquiry'}
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Roadmap */}
-      <section className="py-16 px-4 bg-white/50 dark:bg-gray-800/50">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-            {copy.roadmap.title}
-          </h2>
+      {/* Section Navigation */}
+      <div className="sticky top-14 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <div className="container mx-auto px-4">
+          <div className="flex overflow-x-auto">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => setActiveSection(section.id)}
+                className={`px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
+                  activeSection === section.id
+                    ? 'border-blue-600 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                }`}
+              >
+                {section.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            {copy.roadmap.quarters.map((quarter, i) => (
-              <div key={i} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
-                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white border-b-2 border-blue-500 pb-2">
-                  {quarter.period}
-                </h3>
-                <ul className="space-y-3">
-                  {quarter.items.map((item, j) => (
-                    <li key={j} className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2">
-                      <span className="text-base">{item.icon}</span>
-                      <span>{item.text}</span>
-                    </li>
-                  ))}
+      <div className="container mx-auto max-w-7xl px-4 py-12">
+        {/* Executive Summary */}
+        {activeSection === 'executive' && (
+          <section className="space-y-8">
+            <div>
+              <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">Executive Summary</h2>
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                  {language === 'ko'
+                    ? 'Walits는 기업/기관급 암호자산 관리 인프라를 제공하는 Web3 핵심 기술 회사입니다. MPC(Multi-Party Computation) 기반 보안 강화형 지갑 솔루션으로 게임/앱 개발사, 기관/정부, 개인 투자자를 타겟합니다.'
+                    : 'Walits provides enterprise-grade crypto asset management infrastructure as a core Web3 technology company. Our MPC-based enhanced security wallet solutions target game/app developers, institutions/governments, and individual investors.'}
+                </p>
+                <div className="grid md:grid-cols-4 gap-6">
+                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">4</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      {language === 'ko' ? '핵심 서비스' : 'Core Services'}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+                      Non-Custody, Custody, Auto Chat, AI ST
+                    </div>
+                  </div>
+                  <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-6">
+                    <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">$12.8M</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      {language === 'ko' ? '2026 목표 매출' : '2026 Target Revenue'}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">~165억원</div>
+                  </div>
+                  <div className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6">
+                    <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">$1.5B</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      {language === 'ko' ? '2030 전망 매출' : '2030 Projected Revenue'}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">200%+ CAGR</div>
+                  </div>
+                  <div className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-6">
+                    <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">67%</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      {language === 'ko' ? '2030 EBITDA 마진' : '2030 EBITDA Margin'}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">High profitability</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Key Highlights */}
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                    <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">B2B</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    {language === 'ko' ? '기업용 (현재 수익)' : 'Enterprise (Current Revenue)'}
+                  </h3>
+                </div>
+                <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <li>✅ Non-Custody: 게임/앱 토큰 관리</li>
+                  <li>✅ Custody: STO/RWA 기관 보관</li>
+                  <li>✅ 월 1-4천만원 + 5천만-1억원</li>
                 </ul>
               </div>
-            ))}
-          </div>
 
-          <div className="text-center">
-            <div className="inline-block bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-2xl shadow-xl">
-              <p className="text-2xl font-bold">{copy.roadmap.projection}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Competitive Analysis */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-            {copy.competitive.title}
-          </h2>
-
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-                    <th className="px-6 py-4 text-left font-bold">{language === 'ko' ? '구분' : 'Criteria'}</th>
-                    {copy.competitive.companies.map((company, i) => (
-                      <th key={i} className="px-6 py-4 text-center font-bold">{company}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {copy.competitive.criteria.map((criterion, i) => (
-                    <tr key={i} className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
-                      <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">{criterion.name}</td>
-                      {criterion.scores.map((score, j) => (
-                        <td key={j} className="px-6 py-4 text-center text-sm text-gray-700 dark:text-gray-300">
-                          {score}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Strategic Focus */}
-      <section className="py-16 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-            {copy.strategy.title}
-          </h2>
-
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {copy.strategy.focus.map((item, i) => (
-              <div key={i} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border-l-4 border-green-500">
-                <div className="flex items-start gap-2 mb-3">
-                  <span className="text-2xl">✅</span>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">{item.title}</h3>
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+                    <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">B2C</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    {language === 'ko' ? '개인용 (2026 런칭)' : 'Consumer (Launch 2026)'}
+                  </h3>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{item.desc}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{item.detail}</p>
+                <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <li>✅ Auto Chat: 메시지 앱 결제</li>
+                  <li>✅ AI 토큰증권: RWA 투자</li>
+                  <li>✅ 월 2.5억원 + 연 50억원 (목표)</li>
+                </ul>
               </div>
-            ))}
-          </div>
 
-          <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-xl p-8 border-2 border-yellow-400 dark:border-yellow-600">
-            <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
-              <span>⚠️</span>
-              {language === 'ko' ? '주의사항' : 'Risk Factors'}
-            </h3>
-            <div className="space-y-4">
-              {copy.strategy.caution.map((item, i) => (
-                <div key={i}>
-                  <h4 className="font-bold text-gray-900 dark:text-white mb-1">{item.title}</h4>
-                  <p className="text-sm text-gray-700 dark:text-gray-300">{item.desc}</p>
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                    <span className="text-2xl font-bold text-green-600 dark:text-green-400">+</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    {language === 'ko' ? '규제 순풍' : 'Regulatory Tailwind'}
+                  </h3>
                 </div>
-              ))}
+                <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <li>✅ Clarity Act (STO 간소화)</li>
+                  <li>✅ GENIUS Act (스테이블코인)</li>
+                  <li>✅ Strategic Bitcoin Reserve</li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        )}
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
+        {/* Market Opportunity */}
+        {activeSection === 'market' && (
+          <section className="space-y-8">
+            <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              {language === 'ko' ? '시장 기회' : 'Market Opportunity'}
+            </h2>
+
+            {/* Global Market */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+                {language === 'ko' ? 'Global Web3 Infrastructure 시장' : 'Global Web3 Infrastructure Market'}
+              </h3>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b-2 border-gray-200 dark:border-gray-700">
+                      <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">
+                        {language === 'ko' ? '시장 영역' : 'Market Segment'}
+                      </th>
+                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">2024</th>
+                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">2026</th>
+                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">CAGR</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm">
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
+                        {language === 'ko' ? '암호자산 보관 (Custody)' : 'Crypto Custody'}
+                      </td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white font-semibold">$2.5B</td>
+                      <td className="text-right py-3 px-4 text-green-600 dark:text-green-400 font-bold">$8-12B</td>
+                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-semibold">40%+</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
+                        {language === 'ko' ? 'DeFi 프로토콜' : 'DeFi Protocols'}
+                      </td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white font-semibold">$5B TVL</td>
+                      <td className="text-right py-3 px-4 text-green-600 dark:text-green-400 font-bold">$20-30B TVL</td>
+                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-semibold">60%+</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
+                        {language === 'ko' ? 'RWA (실물자산 토큰화)' : 'RWA Tokenization'}
+                      </td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white font-semibold">$0.5B</td>
+                      <td className="text-right py-3 px-4 text-green-600 dark:text-green-400 font-bold">$10-50B</td>
+                      <td className="text-right py-3 px-4 text-purple-600 dark:text-purple-400 font-semibold">200%+</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
+                        {language === 'ko' ? '게임 Web3' : 'Gaming Web3'}
+                      </td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white font-semibold">$1B</td>
+                      <td className="text-right py-3 px-4 text-green-600 dark:text-green-400 font-bold">$5-10B</td>
+                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-semibold">70%+</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Korea Market */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-8 text-white shadow-xl">
+                <h3 className="text-2xl font-bold mb-4">
+                  {language === 'ko' ? '한국 시장 기회' : 'Korea Market Opportunity'}
+                </h3>
+                <ul className="space-y-3 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-yellow-300 mt-1">✅</span>
+                    <span>카카오톡 (3천만) + 텔레그램 (8억) = 메시지 앱 최강국</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-yellow-300 mt-1">✅</span>
+                    <span>GENIUS Act + Clarity Act 준수로 글로벌 규제 선도</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-yellow-300 mt-1">✅</span>
+                    <span>부동산 토큰화 = 조 단위 시장 잠재력</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-yellow-300 mt-1">✅</span>
+                    <span>MPC/HSM 기술력 = 글로벌 경쟁력</span>
+                  </li>
+                </ul>
+                <div className="mt-6 pt-6 border-t border-white/20">
+                  <div className="text-3xl font-bold mb-1">$100B+</div>
+                  <div className="text-sm text-white/80">일일 암호자산 거래량</div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-8 text-white shadow-xl">
+                <h3 className="text-2xl font-bold mb-4">
+                  {language === 'ko' ? '2026 규제 순풍' : '2026 Regulatory Tailwind'}
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <div className="font-bold mb-1">Clarity Act</div>
+                    <div className="text-xs text-white/80 mb-2">상원 심의 중</div>
+                    <div className="text-sm">→ STO/RWA 발행 간소화</div>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <div className="font-bold mb-1">GENIUS Act</div>
+                    <div className="text-xs text-white/80 mb-2">2026 Q1 시행</div>
+                    <div className="text-sm">→ 스테이블코인 100% 담보</div>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <div className="font-bold mb-1">Strategic Bitcoin Reserve</div>
+                    <div className="text-xs text-white/80 mb-2">정부 비축 확대</div>
+                    <div className="text-sm">→ HSM/MPC 보안 수요</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Technology */}
+        {activeSection === 'technology' && (
+          <section className="space-y-8">
+            <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              {language === 'ko' ? '기술 경쟁력' : 'Technology Advantage'}
+            </h2>
+
+            {/* MPC Stack */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+                MPC 기술 스택 (CGGMP21)
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-4">Walits 구현</h4>
+                  <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 dark:text-green-400">✅</span>
+                      <span>분산 키 생성 (DKG) - 단일 실패점 제거</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 dark:text-green-400">✅</span>
+                      <span>2-of-3 다중 서명 - 금융기관급 보안</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 dark:text-green-400">✅</span>
+                      <span>HSM (Hardware Security Module) 통합</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 dark:text-green-400">✅</span>
+                      <span>TEE (Trusted Execution Environment) 활용</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 dark:text-blue-400">✅</span>
+                      <span>CGGMP24 로드맵 준비 중</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-4">경쟁사 대비</h4>
+                  <div className="space-y-3 text-sm">
+                    <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
+                      <div className="font-semibold text-gray-900 dark:text-white mb-1">Fireblocks</div>
+                      <div className="text-gray-600 dark:text-gray-400">기관 전용, 가격 비쌈 (월 $100K+)</div>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
+                      <div className="font-semibold text-gray-900 dark:text-white mb-1">Ledger Enterprise</div>
+                      <div className="text-gray-600 dark:text-gray-400">하드웨어 의존, 유연성 부족</div>
+                    </div>
+                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border-2 border-green-500">
+                      <div className="font-semibold text-green-900 dark:text-green-400 mb-1">Walits ✅</div>
+                      <div className="text-gray-700 dark:text-gray-300">API 기반 개발자 친화 + 엔터프라이즈 보안</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Architecture Diagram */}
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 shadow-xl text-white">
+              <h3 className="text-2xl font-bold mb-6">기술 아키텍처</h3>
+              <div className="space-y-4 font-mono text-sm">
+                <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
+                  <div className="font-bold mb-2">Application Layer (API)</div>
+                  <div className="text-blue-300 pl-4">Non-Custody | Custody | Chat | RWA</div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="text-blue-400">↓</div>
+                </div>
+                <div className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-4">
+                  <div className="font-bold mb-2">MPC Orchestration Layer</div>
+                  <div className="text-purple-300 pl-4 space-y-1">
+                    <div>├─ Key Distribution</div>
+                    <div>├─ Transaction Signing</div>
+                    <div>└─ Policy Engine (승인 정책)</div>
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="text-purple-400">↓</div>
+                </div>
+                <div className="bg-green-900/30 border border-green-500/50 rounded-lg p-4">
+                  <div className="font-bold mb-2">Security Layer</div>
+                  <div className="text-green-300 pl-4 space-y-1">
+                    <div>├─ HSM (Hardware Security Module)</div>
+                    <div>├─ TEE (Trusted Execution)</div>
+                    <div>└─ Cryptographic Primitives</div>
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="text-green-400">↓</div>
+                </div>
+                <div className="bg-orange-900/30 border border-orange-500/50 rounded-lg p-4">
+                  <div className="font-bold mb-2">Blockchain Integration</div>
+                  <div className="text-orange-300 pl-4">Ethereum | Tron | Solana | Base ...</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Core Services */}
+        {activeSection === 'services' && (
+          <section className="space-y-8">
+            <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              {language === 'ko' ? '4가지 핵심 서비스' : '4 Core Services'}
+            </h2>
+
+            {/* Non-Custody */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-l-4 border-blue-500">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    1. Non-Custody Wallet
+                  </h3>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
+                      현재 수익
+                    </span>
+                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
+                      월 $65K+
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">타겟 고객</h4>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                    게임사, Web3 앱, 토큰 프로젝트
+                  </p>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">핵심 가치</h4>
+                  <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                    <li>• API 1줄 코드 → 자동 지갑 생성</li>
+                    <li>• TEE 환경 → 10,000 TPS 처리</li>
+                    <li>• 커스텀 토큰 자동 배포 (ICO/에어드랍)</li>
+                    <li>• 스마트 컨트랙트 자동 업그레이드</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">수익 모델</h4>
+                  <div className="space-y-3 text-sm">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
+                      <div className="font-semibold mb-1">구독료</div>
+                      <div className="text-gray-600 dark:text-gray-400">$500-5,000/월 (유저 수별)</div>
+                    </div>
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
+                      <div className="font-semibold mb-1">트랜잭션 수수료</div>
+                      <div className="text-gray-600 dark:text-gray-400">0.1-0.5% (거래액 기반)</div>
+                    </div>
+                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-500">
+                      <div className="font-semibold mb-1">2027 목표</div>
+                      <div className="text-green-700 dark:text-green-400 font-bold">$1-2M/월 (130-260억원)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Custody */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-l-4 border-purple-500">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    2. Custody Wallet
+                  </h3>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-semibold rounded-full">
+                      고수익
+                    </span>
+                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
+                      월 $500K-5M
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">타겟 고객</h4>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                    기관, 정부, 기업 자산 보관
+                  </p>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">핵심 가치</h4>
+                  <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                    <li>• MPC 2-of-3 (금융기관 표준)</li>
+                    <li>• 정책 기반 승인 (다단계 서명)</li>
+                    <li>• 자동 리포팅 (SEC/FCA/FSC)</li>
+                    <li>• 침투 테스트 & 보안 감사 (연 2회)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">2026 예상 계약</h4>
+                  <div className="space-y-3 text-sm">
+                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
+                      <div className="font-semibold mb-1">국내 STO 플랫폼 (3-5개)</div>
+                      <div className="text-gray-600 dark:text-gray-400">월 500만-5천만원</div>
+                    </div>
+                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
+                      <div className="font-semibold mb-1">글로벌 토큰 증권사 (2-3개)</div>
+                      <div className="text-gray-600 dark:text-gray-400">월 1천만-5천만원</div>
+                    </div>
+                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-500">
+                      <div className="font-semibold mb-1">2027 목표</div>
+                      <div className="text-green-700 dark:text-green-400 font-bold">월 5-10억원 (100-150억원/년)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Auto Chat */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-l-4 border-indigo-500">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    3. Auto Chat Wallet
+                  </h3>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 text-xs font-semibold rounded-full">
+                      2026 런칭
+                    </span>
+                    <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-semibold rounded-full">
+                      대중화 포인트
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">타겟 시장</h4>
+                  <div className="space-y-3 text-sm mb-4">
+                    <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-3">
+                      <div className="font-semibold mb-1">한국</div>
+                      <div className="text-gray-600 dark:text-gray-400">카톡 3천만 × 1% = 30만명</div>
+                      <div className="text-indigo-600 dark:text-indigo-400 font-bold mt-1">월 7.5억원</div>
+                    </div>
+                    <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-3">
+                      <div className="font-semibold mb-1">글로벌 (텔레그램)</div>
+                      <div className="text-gray-600 dark:text-gray-400">8억 × 0.1% = 800만명</div>
+                      <div className="text-indigo-600 dark:text-indigo-400 font-bold mt-1">월 40억원</div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">차별화 기능</h4>
+                  <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                    <li>• "카톡으로 @walits 송금" → 자동 처리</li>
+                    <li>• "매월 커피값 자동 송금" → AI 스케줄링</li>
+                    <li>• "가장 싼 경로로 송금" → 최적 라우팅</li>
+                    <li>• 앱 없음, 메시지 앱만 사용</li>
+                  </ul>
+                  <div className="mt-4 bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-500">
+                    <div className="font-semibold mb-1">연간 목표</div>
+                    <div className="text-green-700 dark:text-green-400 font-bold">월 47.5억원 (500억원+/년)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* AI ST Wallet */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border-l-4 border-emerald-500">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    4. AI 토큰증권 지갑
+                  </h3>
+                  <div className="flex gap-2">
+                    <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold rounded-full">
+                      2026 런칭
+                    </span>
+                    <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-semibold rounded-full">
+                      미래 성장
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">RWA 시장 전망</h4>
+                  <div className="space-y-2 text-sm mb-4">
+                    <div className="flex justify-between">
+                      <span className="text-gray-700 dark:text-gray-300">2024</span>
+                      <span className="font-semibold text-gray-900 dark:text-white">$0.5B</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-700 dark:text-gray-300">2026</span>
+                      <span className="font-semibold text-green-600 dark:text-green-400">$10-50B</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-700 dark:text-gray-300">2030</span>
+                      <span className="font-semibold text-purple-600 dark:text-purple-400">$1-5T</span>
+                    </div>
+                    <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                      <div className="text-blue-600 dark:text-blue-400 font-bold">CAGR: 200%+</div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">Walits 차별성</h4>
+                  <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300 mb-4">
+                    <li>• AI 자동 리밸런싱 (포트폴리오 최적화)</li>
+                    <li>• 규제 완벽 준수 (KYC/AML/세금)</li>
+                    <li>• 배당금 자동 분배</li>
+                    <li>• 1만원부터 투자 가능</li>
+                  </ul>
+                  <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-500">
+                    <div className="font-semibold mb-1">2027-2030 목표</div>
+                    <div className="text-gray-600 dark:text-gray-400 text-sm mb-1">AUM 10조원</div>
+                    <div className="text-green-700 dark:text-green-400 font-bold">연 50-100억원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Financials */}
+        {activeSection === 'financials' && (
+          <section className="space-y-8">
+            <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              {language === 'ko' ? '재무 예측' : 'Financial Projections'}
+            </h2>
+
+            {/* 2026 Revenue Breakdown */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">2026년 분기별 매출 전망</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b-2 border-gray-200 dark:border-gray-700">
+                      <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">서비스</th>
+                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Q1</th>
+                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Q2</th>
+                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Q3</th>
+                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Q4</th>
+                      <th className="text-right py-3 px-4 font-semibold text-green-600 dark:text-green-400">2026 Total</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm">
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Non-Custody</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$50K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$70K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$100K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$150K</td>
+                      <td className="text-right py-3 px-4 font-bold text-green-600 dark:text-green-400">$370K</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Custody</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$500K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$1.5M</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$3M</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$5M</td>
+                      <td className="text-right py-3 px-4 font-bold text-green-600 dark:text-green-400">$10M</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Chat Wallet</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$100K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$300K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$500K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$800K</td>
+                      <td className="text-right py-3 px-4 font-bold text-green-600 dark:text-green-400">$1.7M</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-3 px-4 text-gray-700 dark:text-gray-300">AI 토큰증권</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$0</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$50K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$200K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$500K</td>
+                      <td className="text-right py-3 px-4 font-bold text-green-600 dark:text-green-400">$750K</td>
+                    </tr>
+                    <tr className="bg-blue-50 dark:bg-blue-900/20 font-bold">
+                      <td className="py-3 px-4 text-gray-900 dark:text-white">총합</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$650K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$1.92M</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$3.8M</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$6.45M</td>
+                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 text-lg">$12.82M</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+                2026 Total: <span className="font-bold text-gray-900 dark:text-white">$12.82M (~165억원)</span>
+              </div>
+            </div>
+
+            {/* 5-Year Projection */}
+            <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-8 shadow-xl text-white">
+              <h3 className="text-2xl font-bold mb-6">5년 장기 전망 (2026-2030)</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b-2 border-white/20">
+                      <th className="text-left py-3 px-4 font-semibold">항목</th>
+                      <th className="text-right py-3 px-4 font-semibold">2026</th>
+                      <th className="text-right py-3 px-4 font-semibold">2027</th>
+                      <th className="text-right py-3 px-4 font-semibold">2028</th>
+                      <th className="text-right py-3 px-4 font-semibold">2029</th>
+                      <th className="text-right py-3 px-4 font-semibold">2030</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm">
+                    <tr className="border-b border-white/10">
+                      <td className="py-3 px-4">Revenue</td>
+                      <td className="text-right py-3 px-4">$12.8M</td>
+                      <td className="text-right py-3 px-4">$75M</td>
+                      <td className="text-right py-3 px-4">$350M</td>
+                      <td className="text-right py-3 px-4">$750M</td>
+                      <td className="text-right py-3 px-4 font-bold">$1.5B</td>
+                    </tr>
+                    <tr className="border-b border-white/10">
+                      <td className="py-3 px-4">Gross Margin</td>
+                      <td className="text-right py-3 px-4">84%</td>
+                      <td className="text-right py-3 px-4">89%</td>
+                      <td className="text-right py-3 px-4">90%</td>
+                      <td className="text-right py-3 px-4">90%</td>
+                      <td className="text-right py-3 px-4 font-bold">90%</td>
+                    </tr>
+                    <tr className="border-b border-white/10">
+                      <td className="py-3 px-4">EBITDA</td>
+                      <td className="text-right py-3 px-4">$3.8M</td>
+                      <td className="text-right py-3 px-4">$42M</td>
+                      <td className="text-right py-3 px-4">$215M</td>
+                      <td className="text-right py-3 px-4">$475M</td>
+                      <td className="text-right py-3 px-4 font-bold">$1B</td>
+                    </tr>
+                    <tr className="bg-white/10">
+                      <td className="py-3 px-4 font-bold">EBITDA Margin</td>
+                      <td className="text-right py-3 px-4 font-bold">30%</td>
+                      <td className="text-right py-3 px-4 font-bold">56%</td>
+                      <td className="text-right py-3 px-4 font-bold">61%</td>
+                      <td className="text-right py-3 px-4 font-bold">63%</td>
+                      <td className="text-right py-3 px-4 font-bold text-yellow-300 text-lg">67%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Funding Needs */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">펀딩 계획</h3>
+                <div className="space-y-4">
+                  <div>
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">$3-5M</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">2026년 필요 자본</div>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-700 dark:text-gray-300">인력 (개발/영업)</span>
+                      <span className="font-semibold text-gray-900 dark:text-white">$1.5M</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-700 dark:text-gray-300">인프라 & 보안</span>
+                      <span className="font-semibold text-gray-900 dark:text-white">$500K</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-700 dark:text-gray-300">영업/마케팅</span>
+                      <span className="font-semibold text-gray-900 dark:text-white">$800K</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-700 dark:text-gray-300">규제/준수</span>
+                      <span className="font-semibold text-gray-900 dark:text-white">$300K</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-700 dark:text-gray-300">운영/여유</span>
+                      <span className="font-semibold text-gray-900 dark:text-white">$900K</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl p-8 shadow-xl text-white">
+                <h3 className="text-2xl font-bold mb-4">Series A 목표</h3>
+                <div className="space-y-6">
+                  <div>
+                    <div className="text-3xl font-bold mb-2">$5-10M</div>
+                    <div className="text-sm text-white/80">투자 유치 금액</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold mb-2">$50M</div>
+                    <div className="text-sm text-white/80">기업 밸류에이션</div>
+                  </div>
+                  <div>
+                    <div className="text-xl font-bold mb-2">25-35% IRR</div>
+                    <div className="text-sm text-white/80">2030 Exit 기준 예상 수익률</div>
+                  </div>
+                  <div className="text-xs text-white/70 pt-4 border-t border-white/20">
+                    2026 Q2 타겟
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Competition */}
+        {activeSection === 'competitive' && (
+          <section className="space-y-8">
+            <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              {language === 'ko' ? '경쟁 분석' : 'Competitive Analysis'}
+            </h2>
+
+            {/* Comparison Table */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                      <th className="text-left py-4 px-6 font-bold">기능/특성</th>
+                      <th className="text-center py-4 px-6 font-bold bg-green-600">Walits</th>
+                      <th className="text-center py-4 px-6 font-bold">Fireblocks</th>
+                      <th className="text-center py-4 px-6 font-bold">Thirdweb</th>
+                      <th className="text-center py-4 px-6 font-bold">Ledger</th>
+                      <th className="text-center py-4 px-6 font-bold">Sepior</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm">
+                    <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">CGGMP21</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Full</td>
+                      <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Partial</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ Yes</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">HSM Integration</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Full</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ Full</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ Full</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">TEE (SGX/TDX)</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Yes</td>
+                      <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Limited</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">API Simplicity</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ High</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ Complex</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ High</td>
+                      <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Medium</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ Very Complex</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">Speed (TPS)</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">10,000</td>
+                      <td className="text-center py-4 px-6 text-gray-600 dark:text-gray-400">1,000</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">100</td>
+                      <td className="text-center py-4 px-6 text-gray-600 dark:text-gray-400">100</td>
+                      <td className="text-center py-4 px-6 text-gray-600 dark:text-gray-400">5,000</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">Cost</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Low</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ Very High</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">✅ Low</td>
+                      <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ High</td>
+                      <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ High</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">AI/Chat Payment</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Exclusive</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">RWA/STO Support</td>
+                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">✅ Full</td>
+                      <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Partial</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
+                      <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Partial</td>
+                      <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Walits Differentiation */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white shadow-lg">
+                <h3 className="text-lg font-bold mb-2">기술 우위</h3>
+                <ul className="text-sm space-y-1 text-white/90">
+                  <li>• CGGMP21 구현</li>
+                  <li>• HSM + TEE 통합</li>
+                  <li>• CGGMP24 준비중</li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-6 text-white shadow-lg">
+                <h3 className="text-lg font-bold mb-2">가격 우위</h3>
+                <ul className="text-sm space-y-1 text-white/90">
+                  <li>• Fireblocks의 1/10</li>
+                  <li>• 협상 가능한 가격</li>
+                  <li>• Chat 수수료 절반</li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
+                <h3 className="text-lg font-bold mb-2">속도 우위</h3>
+                <ul className="text-sm space-y-1 text-white/90">
+                  <li>• API 배포 1주일</li>
+                  <li>• Chat 롤아웃 4주</li>
+                  <li>• 커스텀 기능 2주</li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 text-white shadow-lg">
+                <h3 className="text-lg font-bold mb-2">규제 우위</h3>
+                <ul className="text-sm space-y-1 text-white/90">
+                  <li>• 한국 자본시장법</li>
+                  <li>• Clarity Act 준비</li>
+                  <li>• KYC/AML 자동화</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Go-to-Market */}
+        {activeSection === 'gtm' && (
+          <section className="space-y-8">
+            <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              Go-to-Market Strategy
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Non-Custody GTM */}
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+                  Non-Custody Wallet
+                </h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 1 (Q1-Q2 2026)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• 한국 게임사 20-30개 접촉</li>
+                      <li>• Web3 게임 스튜디오 50개+</li>
+                      <li>• 토큰 프로젝트 100개+</li>
+                      <li>• 초기 KPI: 계약 10개사 (월 $50K)</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 2 (Q3-Q4 2026)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• 미국/EU 게임사 확대</li>
+                      <li>• Polygon/Arbitrum 개발사</li>
+                      <li>• 신규 게임 플랫폼 파트너십</li>
+                      <li>• 목표: 월 $150K (20개사)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Custody GTM */}
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+                  Custody Wallet
+                </h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 1 (Q1-Q2 2026)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• 국내 STO 플랫폼 3-5개</li>
+                      <li>• 기업 재무팀 10개</li>
+                      <li>• 정부 기관 1-2개 파일럿</li>
+                      <li>• 초기 KPI: 기관 5개 (월 $500K)</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 2 (Q3-Q4 2026)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• 글로벌 STO 증권사</li>
+                      <li>• 크립토 네이티브 은행</li>
+                      <li>• 정부 비축금 (Strategic Reserve)</li>
+                      <li>• 목표: 월 $5M</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Auto Chat GTM */}
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+                  Auto Chat Wallet
+                </h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 1 (2026.2-3월)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• 카톡 기업앱 정식 출시</li>
+                      <li>• 초기 1만 사용자 모집</li>
+                      <li>• 일일 거래액: 1억원/일</li>
+                      <li>• 수수료: 500만원/일</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 2 (2026.4-6월)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• 텔레그램 Bot 글로벌 출시</li>
+                      <li>• 월 50만 활성 사용자</li>
+                      <li>• 월 거래액: 250억원</li>
+                      <li>• 수수료: 1.25억원/월</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 3 (2026.7-12월)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• 바이럴 성장 (네트워크 효과)</li>
+                      <li>• 월 활성: 300만 사용자</li>
+                      <li>• 목표: 월 7.5억원</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* AI ST Wallet GTM */}
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+                  AI 토큰증권 지갑
+                </h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 1 (2026.4-6월)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• RWA 토큰 5-10개 포함</li>
+                      <li>• 초기 사용자: 1만명</li>
+                      <li>• 초기 AUM: 100억원</li>
+                      <li>• 수익: 500만원/월</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 2 (2026.7-12월)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• 글로벌 RWA 토큰 추가</li>
+                      <li>• 사용자: 10만명</li>
+                      <li>• AUM: 1,000억원</li>
+                      <li>• 수익: 5억원/월</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 3 (2027년)</div>
+                    <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+                      <li>• 기관 RWA 펀드 파트너십</li>
+                      <li>• 한국 부동산 토큰화 수혜</li>
+                      <li>• AUM: 10조원</li>
+                      <li>• 연 수익: 50-100억원</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Risk Analysis */}
+        {activeSection === 'risks' && (
+          <section className="space-y-8">
+            <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              {language === 'ko' ? '리스크 분석 & 대응 전략' : 'Risk Analysis & Mitigation'}
+            </h2>
+
+            {/* Risk Matrix */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">주요 위험 요소</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b-2 border-gray-200 dark:border-gray-700">
+                      <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">위험</th>
+                      <th className="text-center py-3 px-4 font-semibold text-gray-900 dark:text-white">영향도</th>
+                      <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">대응 전략</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm">
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">규제 불확실성</td>
+                      <td className="text-center py-4 px-4">
+                        <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-xs font-semibold">
+                          High
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-gray-300">
+                        Clarity Act 통과 추적, 선제적 준수, 규제 전문가 자문
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">보안 해킹</td>
+                      <td className="text-center py-4 px-4">
+                        <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-xs font-semibold">
+                          Critical
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-gray-300">
+                        정기 침투 테스트, 버그 바운티 프로그램, 보험 가입
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">기술 노후화</td>
+                      <td className="text-center py-4 px-4">
+                        <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-semibold">
+                          Medium
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-gray-300">
+                        CGGMP24 준비, R&D 투자 (매출의 10-15%)
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">경쟁 심화</td>
+                      <td className="text-center py-4 px-4">
+                        <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-semibold">
+                          Medium
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-gray-300">
+                        Chat+RWA 차별화, 가격 우위, 빠른 출시
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">채택 둔화</td>
+                      <td className="text-center py-4 px-4">
+                        <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-semibold">
+                          Medium
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-gray-300">
+                        초기 고객 인센티브, 파트너십 확대, 사례 연구
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">인력 확보</td>
+                      <td className="text-center py-4 px-4">
+                        <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-semibold">
+                          Medium
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-gray-700 dark:text-gray-300">
+                        높은 급여, 주식옵션 10-20%, 강한 기술 문화
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Technical Risks */}
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 rounded-xl p-6 border-2 border-red-200 dark:border-red-800">
+                <div className="mb-4">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">MPC 보안</h3>
+                </div>
+                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <div>
+                    <div className="font-semibold mb-1">위협</div>
+                    <div>양자 컴퓨팅</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold mb-1">대응</div>
+                    <div>Post-Quantum Crypto 연구, NIST 표준 추적</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold mb-1">Timeline</div>
+                    <div>2028-2030년부터 준비</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 rounded-xl p-6 border-2 border-yellow-200 dark:border-yellow-800">
+                <div className="mb-4">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">스마트 컨트랙트</h3>
+                </div>
+                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <div>
+                    <div className="font-semibold mb-1">위협</div>
+                    <div>스마트 컨트랙트 버그</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold mb-1">대응</div>
+                    <div>Formal Verification, 정기 감사</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold mb-1">예산</div>
+                    <div>연 $100K 외부 감사</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-xl p-6 border-2 border-blue-200 dark:border-blue-800">
+                <div className="mb-4">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">인프라</h3>
+                </div>
+                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <div>
+                    <div className="font-semibold mb-1">위협</div>
+                    <div>클라우드 장애</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold mb-1">대응</div>
+                    <div>멀티 클라우드 + 온프레미스 HSM</div>
+                  </div>
+                  <div>
+                    <div className="font-semibold mb-1">SLA</div>
+                    <div>RPO/RTO: &lt;1시간</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Team */}
+        {activeSection === 'team' && (
+          <section className="space-y-8">
+            <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+              {language === 'ko' ? '팀 & 조직' : 'Team & Organization'}
+            </h2>
+
+            {/* Core Team */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4 mx-auto">
+                  C
+                </div>
+                <h3 className="text-lg font-bold text-center text-gray-900 dark:text-white mb-2">CEO/Founder</h3>
+                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                  <div>• Blockchain/Crypto 10+ 년</div>
+                  <div>• IoT Trust, Decent Wallet</div>
+                  <div>• MPC/DKG 전문가</div>
+                  <div>• 기관 관계 구축</div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4 mx-auto">
+                  T
+                </div>
+                <h3 className="text-lg font-bold text-center text-gray-900 dark:text-white mb-2">CTO/Tech Lead</h3>
+                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                  <div>• CGGMP21 논문 리뷰</div>
+                  <div>• MPC 구현 5+ 년</div>
+                  <div>• 기술 아키텍처 설계</div>
+                  <div>• 팀: 8-10명 엔지니어</div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4 mx-auto">
+                  B
+                </div>
+                <h3 className="text-lg font-bold text-center text-gray-900 dark:text-white mb-2">Chief Business Officer</h3>
+                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                  <div>• 기관 영업 경험</div>
+                  <div>• 펀드레이징 전문</div>
+                  <div>• 비즈니스 개발</div>
+                  <div>• 팀: 3-5명 영업</div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
+                <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4 mx-auto">
+                  C
+                </div>
+                <h3 className="text-lg font-bold text-center text-gray-900 dark:text-white mb-2">Chief Compliance Officer</h3>
+                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                  <div>• 금융감독원 경력</div>
+                  <div>• 한국거래소 경력</div>
+                  <div>• 규제 대응 전문</div>
+                  <div>• 팀: 2-3명 법무</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Organization Growth */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">2026년 조직 확장 계획</h3>
+              <div className="grid md:grid-cols-4 gap-6">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">15명</div>
+                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">2026.Q1 (현재)</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                    <div>개발: 8명</div>
+                    <div>영업/BizDev: 3명</div>
+                    <div>운영: 4명</div>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">25명</div>
+                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">2026.Q2</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                    <div>개발: 12명 (+Chat)</div>
+                    <div>영업: 5명</div>
+                    <div>운영: 8명</div>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">40명</div>
+                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">2026.Q4</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                    <div>개발: 18명</div>
+                    <div>영업/마케팅: 10명</div>
+                    <div>운영: 12명</div>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">80명+</div>
+                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">2027년</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                    <div>글로벌 팀 구성</div>
+                    <div>US, EU, APAC</div>
+                    <div>다국적 확장</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Exit Strategy */}
+            <div className="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl p-8 shadow-xl text-white">
+              <h3 className="text-2xl font-bold mb-6">Exit Strategy</h3>
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                  <div className="text-3xl font-bold mb-2">$15-40B</div>
+                  <div className="text-sm text-white/80 mb-4">2030 목표 밸류에이션</div>
+                  <div className="text-xs">
+                    <div>Conservative: $15B (10x EBITDA)</div>
+                    <div>Base: $22.5B (15x EBITDA)</div>
+                    <div>Bull: $40B (20x EBITDA)</div>
+                  </div>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                  <div className="text-3xl font-bold mb-2">IPO</div>
+                  <div className="text-sm text-white/80 mb-4">2028-2029 미국 상장</div>
+                  <div className="text-xs">
+                    <div>Valuation: $10-20B</div>
+                    <div>확률: 40%</div>
+                    <div>Market: NASDAQ</div>
+                  </div>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                  <div className="text-3xl font-bold mb-2">M&A</div>
+                  <div className="text-sm text-white/80 mb-4">2027-2028 전략적 인수</div>
+                  <div className="text-xs">
+                    <div>Valuation: $5-15B</div>
+                    <div>확률: 35%</div>
+                    <div>Buyers: Stripe, Fireblocks</div>
+                  </div>
+                </div>
+              </div>
+              <div className="text-center text-sm text-white/70">
+                비교: Stripe ($95B) vs Walits 목표 ($20-40B) = 합리적 범위
+              </div>
+            </div>
+          </section>
+        )}
+      </div>
+
+      {/* Contact CTA */}
+      <section id="contact" className="py-20 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-4xl font-bold mb-4 text-white">
-            {copy.contact.title}
+            {language === 'ko' ? 'Walits와 함께하는 토큰화 시대' : 'Tokenization Era with Walits'}
           </h2>
           <p className="text-xl mb-8 text-white/90">
-            {copy.contact.desc}
+            {language === 'ko'
+              ? 'STO 발행, RWA 토크나이제이션, 규제 준수 Custody 상담'
+              : 'Consultation on STO issuance, RWA tokenization, compliant custody'}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Link
               href="/inquiry"
               className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-xl"
             >
-              {copy.contact.cta}
+              {language === 'ko' ? '투자 문의하기' : 'Investment Inquiry'}
             </Link>
             <a
               href="mailto:walits.co@gmail.com"
@@ -503,13 +1421,18 @@ export default function IRPage() {
               walits.co@gmail.com
             </a>
           </div>
+          <div className="text-white/80 text-sm">
+            <div className="mb-2">Website: https://walits.com</div>
+            <div>문서 작성일: 2026년 1월 17일 | 버전: 1.0</div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="py-8 px-4 bg-gray-900 text-gray-400">
         <div className="container mx-auto text-center">
-          <p className="text-sm">© 2026 Walits. All rights reserved.</p>
+          <p className="text-sm">© 2026 Walits Inc. All rights reserved.</p>
+          <p className="text-xs mt-2 text-gray-500">Confidential - For Authorized Recipients Only</p>
         </div>
       </footer>
     </div>
