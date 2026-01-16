@@ -351,41 +351,41 @@ export default function IRPage() {
             </div>
 
             {/* Architecture Diagram */}
-            <div className="bg-gray-900 dark:bg-gray-800 rounded-lg p-8 border border-gray-700">
-              <h3 className="text-2xl font-bold mb-6">기술 아키텍처</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">기술 아키텍처</h3>
               <div className="space-y-4 font-mono text-sm">
-                <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
-                  <div className="font-bold mb-2">Application Layer (API)</div>
-                  <div className="text-blue-300 pl-4">Non-Custody | Custody | Chat | RWA</div>
+                <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-500/50 rounded-lg p-4">
+                  <div className="font-bold mb-2 text-gray-900 dark:text-white">Application Layer (API)</div>
+                  <div className="text-blue-700 dark:text-blue-300 pl-4">Non-Custody | Custody | Chat | RWA</div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="text-blue-400">↓</div>
+                  <div className="text-blue-600 dark:text-blue-400">↓</div>
                 </div>
-                <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
-                  <div className="font-bold mb-2">MPC Orchestration Layer</div>
-                  <div className="text-blue-300 pl-4 space-y-1">
+                <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-500/50 rounded-lg p-4">
+                  <div className="font-bold mb-2 text-gray-900 dark:text-white">MPC Orchestration Layer</div>
+                  <div className="text-blue-700 dark:text-blue-300 pl-4 space-y-1">
                     <div>├─ Key Distribution</div>
                     <div>├─ Transaction Signing</div>
                     <div>└─ Policy Engine (승인 정책)</div>
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="text-blue-400">↓</div>
+                  <div className="text-blue-600 dark:text-blue-400">↓</div>
                 </div>
-                <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
-                  <div className="font-bold mb-2">Security Layer</div>
-                  <div className="text-blue-300 pl-4 space-y-1">
+                <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-500/50 rounded-lg p-4">
+                  <div className="font-bold mb-2 text-gray-900 dark:text-white">Security Layer</div>
+                  <div className="text-blue-700 dark:text-blue-300 pl-4 space-y-1">
                     <div>├─ HSM (Hardware Security Module)</div>
                     <div>├─ TEE (Trusted Execution)</div>
                     <div>└─ Cryptographic Primitives</div>
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="text-blue-400">↓</div>
+                  <div className="text-blue-600 dark:text-blue-400">↓</div>
                 </div>
-                <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
-                  <div className="font-bold mb-2">Blockchain Integration</div>
-                  <div className="text-blue-300 pl-4">Ethereum | Tron | Solana | Base ...</div>
+                <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-500/50 rounded-lg p-4">
+                  <div className="font-bold mb-2 text-gray-900 dark:text-white">Blockchain Integration</div>
+                  <div className="text-blue-700 dark:text-blue-300 pl-4">Ethereum | Tron | Solana | Base ...</div>
                 </div>
               </div>
             </div>
