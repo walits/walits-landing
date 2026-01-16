@@ -31,6 +31,7 @@ export default function HomePage() {
       nav: {
         solutions: '솔루션',
         blog: '블로그',
+        ir: 'IR',
         pricing: '가격',
         contact: '문의',
         login: '로그인',
@@ -217,6 +218,7 @@ export default function HomePage() {
       nav: {
         solutions: 'Solutions',
         blog: 'Blog',
+        ir: 'IR',
         pricing: 'Pricing',
         contact: 'Contact',
         login: 'Login',
@@ -599,6 +601,9 @@ export default function HomePage() {
             </a>
             <Link href="/blog/" className={`text-lg font-semibold hover:underline transition-colors ${scrolled ? 'text-gray-800' : 'text-white'}`}>
               {copy.nav.blog}
+            </Link>
+            <Link href="/ir" className={`text-lg font-semibold hover:underline transition-colors ${scrolled ? 'text-gray-800' : 'text-white'}`}>
+              {copy.nav.ir}
             </Link>
             <div className="relative group">
               <button className={`text-lg font-semibold hover:underline transition-colors flex items-center gap-1 ${scrolled ? 'text-gray-800' : 'text-white'}`}>
