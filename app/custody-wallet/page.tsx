@@ -211,12 +211,9 @@ export default function CustodyWalletPage() {
       {/* Pricing Section */}
       <section className="py-20 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
             가격 안내
           </h2>
-          <p className="text-center text-xl text-gray-600 dark:text-gray-400 mb-12">
-            런칭 프로모션: 첫 한달 무료!
-          </p>
           <div className="max-w-md mx-auto bg-gradient-to-br from-purple-900 to-indigo-900 rounded-2xl shadow-2xl p-8 border-2 border-yellow-500">
             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
               Premium

@@ -192,12 +192,9 @@ export default function NonCustodyWalletPage() {
       {/* Pricing Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
             가격 안내
           </h2>
-          <p className="text-center text-xl text-gray-600 dark:text-gray-400 mb-12">
-            런칭 프로모션: 첫 한달 무료!
-          </p>
           <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-2 border-blue-500">
             <div className="text-center mb-6">
               <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Non-Custody 지갑</h3>

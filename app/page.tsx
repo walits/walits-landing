@@ -993,30 +993,6 @@ export default function HomePage() {
       {/* Pricing Section */}
       <section id="pricing" className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
-          {/* Promotion Banner */}
-          <div className="max-w-3xl mx-auto mb-12">
-            <div className="relative bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-6 text-center text-white overflow-hidden">
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvZz48L3N2Zz4=')] opacity-50"></div>
-              <div className="relative">
-                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium mb-3">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-                  </span>
-                  {language === 'ko' ? '런칭 프로모션' : 'Launch Promotion'}
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-2">
-                  {language === 'ko' ? '첫 한달 무료!' : 'First Month Free!'}
-                </h3>
-                <p className="text-white/90 text-lg">
-                  {language === 'ko'
-                    ? '지금 시작하시면 모든 플랜 첫 한달 무료로 이용하실 수 있습니다'
-                    : 'Sign up now and get your first month free on any plan'}
-                </p>
-              </div>
-            </div>
-          </div>
-
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
               {copy.pricing.title}
