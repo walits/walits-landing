@@ -1006,6 +1006,316 @@ export default function StablecoinRegulation2026() {
               </p>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">
+                {language === 'ko' ? '3.5장. Strategic Bitcoin Reserve: 비트코인의 국가 자산화' : 'Chapter 3.5. Strategic Bitcoin Reserve: Bitcoin as National Asset'}
+              </h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? '트럼프의 비트코인 전략 비축금' : "Trump's Strategic Bitcoin Reserve"}
+              </h3>
+
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    스테이블코인 제도화와 함께 트럼프 행정부가 추진하는 또 하나의 중대한 정책이 있다.
+                    바로 <strong>Strategic Bitcoin Reserve(전략적 비트코인 비축금)</strong>다. 2025년 3월 6일,
+                    트럼프 대통령은 역사적인 행정명령에 서명하며 "미국 정부가 보유한 비트코인을 국가 전략 자산으로
+                    비축한다"고 선언했다. 이는 비트코인을 금(Gold)이나 석유처럼 국가 준비자산으로 공식 인정하는
+                    최초의 사례다.
+                  </>
+                ) : (
+                  <>
+                    Alongside stablecoin institutionalization, the Trump administration is pursuing another critical policy:
+                    the <strong>Strategic Bitcoin Reserve</strong>. On March 6, 2025, President Trump signed a historic
+                    executive order declaring that "Bitcoin held by the US government will be reserved as a national strategic
+                    asset." This represents the first official recognition of Bitcoin as a national reserve asset, similar to
+                    gold or oil.
+                  </>
+                )}
+              </p>
+
+              <div className="not-prose my-8 p-6 bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50 dark:from-orange-900/20 dark:via-yellow-900/20 dark:to-amber-900/20 rounded-lg border-2 border-orange-300 dark:border-orange-700">
+                <h4 className="text-lg font-bold text-orange-900 dark:text-orange-200 mb-4 text-center">
+                  {language === 'ko' ? 'Strategic Bitcoin Reserve 핵심 정보' : 'Strategic Bitcoin Reserve Key Info'}
+                </h4>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="p-4 bg-white dark:bg-gray-800 rounded">
+                    <p className="text-sm font-semibold text-orange-900 dark:text-orange-200 mb-2">
+                      {language === 'ko' ? '📅 발표일' : '📅 Announcement'}
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      {language === 'ko' ? '2025년 3월 6일 (트럼프 행정명령)' : 'March 6, 2025 (Trump Executive Order)'}
+                    </p>
+                  </div>
+                  <div className="p-4 bg-white dark:bg-gray-800 rounded">
+                    <p className="text-sm font-semibold text-orange-900 dark:text-orange-200 mb-2">
+                      {language === 'ko' ? '💰 현재 비축량' : '💰 Current Reserve'}
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      {language === 'ko' ? '~207,000 BTC (~170억 달러)' : '~207,000 BTC (~$17 billion)'}
+                    </p>
+                  </div>
+                  <div className="p-4 bg-white dark:bg-gray-800 rounded">
+                    <p className="text-sm font-semibold text-orange-900 dark:text-orange-200 mb-2">
+                      {language === 'ko' ? '🎯 목표' : '🎯 Target'}
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      {language === 'ko' ? '1,000,000 BTC (5년 계획)' : '1,000,000 BTC (5-year plan)'}
+                    </p>
+                  </div>
+                  <div className="p-4 bg-white dark:bg-gray-800 rounded">
+                    <p className="text-sm font-semibold text-orange-900 dark:text-orange-200 mb-2">
+                      {language === 'ko' ? '⚖️ 원칙' : '⚖️ Principle'}
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      {language === 'ko' ? '절대 매각 안 함 (Never Sell)' : 'Never Sell Policy'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? '트럼프의 3중 전략' : "Trump's Triple Strategy"}
+              </h3>
+
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    왜 미국 정부가 비트코인을 전략 자산으로 비축하려는 것일까? 트럼프 행정부의 전략은
+                    세 가지 목표를 동시에 추구한다.
+                  </>
+                ) : (
+                  <>
+                    Why is the US government reserving Bitcoin as a strategic asset? The Trump administration's strategy
+                    pursues three objectives simultaneously.
+                  </>
+                )}
+              </p>
+
+              <div className="not-prose my-8 space-y-4">
+                <div className="p-5 bg-green-50 dark:bg-green-900/20 rounded-lg border-l-4 border-green-600">
+                  <h5 className="font-bold text-green-900 dark:text-green-200 mb-2">
+                    {language === 'ko' ? '1️⃣ 재정 이득: 부채 헤지' : '1️⃣ Fiscal Gain: Debt Hedge'}
+                  </h5>
+                  <p className="text-sm text-green-800 dark:text-green-300">
+                    {language === 'ko' ? (
+                      <>
+                        미국 부채 38.5조 달러를 비트코인 상승분으로 헤지. 비트코인이 10배 상승하면 207,000 BTC의
+                        가치는 1,700억 달러 → 1.7조 달러가 되어 부채 부담 완화.
+                      </>
+                    ) : (
+                      <>
+                        Hedge $38.5 trillion US debt with Bitcoin appreciation. If Bitcoin increases 10x, 207,000 BTC value
+                        grows from $170 billion → $1.7 trillion, easing debt burden.
+                      </>
+                    )}
+                  </p>
+                </div>
+
+                <div className="p-5 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-600">
+                  <h5 className="font-bold text-blue-900 dark:text-blue-200 mb-2">
+                    {language === 'ko' ? '2️⃣ 달러 패권 유지: 중국 CBDC 견제' : '2️⃣ Dollar Hegemony: Counter China CBDC'}
+                  </h5>
+                  <p className="text-sm text-blue-800 dark:text-blue-300">
+                    {language === 'ko' ? (
+                      <>
+                        중국의 디지털 위안화(e-CNY)가 국제 결제에서 달러를 위협하는 상황에서, "미국이 암호자산의
+                        수도"임을 선언. 비트코인 비축으로 디지털 자산 주도권 확보.
+                      </>
+                    ) : (
+                      <>
+                        As China's digital yuan (e-CNY) threatens dollar dominance in international payments, declare "America
+                        as the crypto capital." Secure digital asset leadership through Bitcoin reserves.
+                      </>
+                    )}
+                  </p>
+                </div>
+
+                <div className="p-5 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-600">
+                  <h5 className="font-bold text-purple-900 dark:text-purple-200 mb-2">
+                    {language === 'ko' ? '3️⃣ 지정학적 무기화: 경제 제재 수단' : '3️⃣ Geopolitical Weaponization: Economic Sanction Tool'}
+                  </h5>
+                  <p className="text-sm text-purple-800 dark:text-purple-300">
+                    {language === 'ko' ? (
+                      <>
+                        금융위기나 경제 제재 시 비트코인이 외교 수단으로 활용. SWIFT 차단 우회 수단이자
+                        동맹국 지원 도구로 기능.
+                      </>
+                    ) : (
+                      <>
+                        Bitcoin serves as diplomatic tool during financial crises or economic sanctions. Functions as
+                        SWIFT bypass mechanism and ally support tool.
+                      </>
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? '주정부로 확산되는 비트코인 비축' : 'Bitcoin Reserves Spreading to State Governments'}
+              </h3>
+
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    더욱 흥미로운 점은 연방 정부뿐만 아니라 주(State) 정부 차원에서도 비트코인 비축이
+                    확산되고 있다는 것이다. 2025년 11월 20일, 텍사스주는 500만 달러 규모의 비트코인을
+                    직접 매입했다. 이는 주정부 최초의 비트코인 전략 비축금이다. 2026년 1월에는 플로리다와
+                    뉴햄프셔주도 비슷한 법안을 추진 중이다.
+                  </>
+                ) : (
+                  <>
+                    More interestingly, Bitcoin reserves are spreading not only at the federal level but also at the
+                    state level. On November 20, 2025, Texas directly purchased $5 million worth of Bitcoin. This
+                    represents the first state-level strategic Bitcoin reserve. As of January 2026, Florida and
+                    New Hampshire are also pursuing similar legislation.
+                  </>
+                )}
+              </p>
+
+              <div className="not-prose my-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+                  {language === 'ko' ? '최근 이슈 타임라인 (2025-2026)' : 'Recent Timeline (2025-2026)'}
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-24 text-sm font-semibold text-gray-600 dark:text-gray-400">2025.3.6</div>
+                    <div className="text-sm text-gray-700 dark:text-gray-300">
+                      {language === 'ko' ? '행정명령 서명 → 20만 BTC 전략 비축금 편입 ✓' : 'Executive order signed → 200K BTC strategic reserve established ✓'}
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-24 text-sm font-semibold text-gray-600 dark:text-gray-400">2025.5</div>
+                    <div className="text-sm text-gray-700 dark:text-gray-300">
+                      {language === 'ko' ? '상원 합의 무산 (트럼프 가족 암호자산 논란)' : 'Senate consensus fails (Trump family crypto controversy)'}
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-24 text-sm font-semibold text-gray-600 dark:text-gray-400">2025.7.19</div>
+                    <div className="text-sm text-gray-700 dark:text-gray-300">
+                      {language === 'ko' ? 'GENIUS Act 법제화 완료 ✓' : 'GENIUS Act enacted ✓'}
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-24 text-sm font-semibold text-gray-600 dark:text-gray-400">2025.11.20</div>
+                    <div className="text-sm text-gray-700 dark:text-gray-300">
+                      {language === 'ko' ? '텍사스주 500만$ 비트코인 비축 (주정부 첫 매입)' : 'Texas $5M Bitcoin reserve (first state purchase)'}
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-24 text-sm font-semibold text-gray-600 dark:text-gray-400">2026.1.7</div>
+                    <div className="text-sm text-gray-700 dark:text-gray-300">
+                      {language === 'ko' ? '플로리다·뉴햄프셔주 비축 법안 추진' : 'Florida & New Hampshire pursue reserve legislation'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? '논란과 비판' : 'Controversies and Criticisms'}
+              </h3>
+
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    물론 Strategic Bitcoin Reserve에 대한 비판도 만만치 않다. 가장 큰 논란은 <strong>이해 상충</strong>
+                    문제다. 트럼프 가족이 XRP, SOL, ADA 등의 암호자산 프로젝트에 투자하고 있다는 사실이 드러나면서,
+                    정책이 개인적 이익을 위한 것이 아니냐는 의혹이 제기되었다. 2025년 3월 3일 XRP, SOL, ADA를
+                    전략 비축에 포함시키겠다는 발표 이후 해당 자산들의 가격이 급등했다가 다시 폭락한 사건도 있었다.
+                  </>
+                ) : (
+                  <>
+                    Of course, criticism of the Strategic Bitcoin Reserve is substantial. The biggest controversy is the
+                    <strong> conflict of interest</strong> issue. Revelations that the Trump family has invested in crypto
+                    projects like XRP, SOL, and ADA raised suspicions that the policy serves personal gain. After the
+                    March 3, 2025 announcement to include XRP, SOL, and ADA in the strategic reserve, these assets surged
+                    then crashed.
+                  </>
+                )}
+              </p>
+
+              <div className="not-prose my-6 p-5 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-600 rounded-r-lg">
+                <p className="text-sm font-semibold text-red-900 dark:text-red-200 mb-2">
+                  {language === 'ko' ? '❌ 주요 비판' : '❌ Key Criticisms'}
+                </p>
+                <ul className="text-sm text-red-800 dark:text-red-300 space-y-2">
+                  <li>{language === 'ko' ? '• 트럼프 가족 암호자산 프로젝트 이해 상충 (가격 조종 의혹)' : '• Trump family crypto project conflicts (price manipulation suspicion)'}</li>
+                  <li>{language === 'ko' ? '• 세금 투입 가능성 (Budget-neutral 공약 지키기 어려움)' : '• Potential tax burden (budget-neutral promise hard to keep)'}</li>
+                  <li>{language === 'ko' ? '• 정치적 투기 성향 (비트코인 가격 변동성 리스크)' : '• Political speculation (Bitcoin price volatility risk)'}</li>
+                </ul>
+              </div>
+
+              <div className="not-prose my-6 p-5 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-600 rounded-r-lg">
+                <p className="text-sm font-semibold text-green-900 dark:text-green-200 mb-2">
+                  {language === 'ko' ? '✅ 긍정적 측면' : '✅ Positive Aspects'}
+                </p>
+                <ul className="text-sm text-green-800 dark:text-green-300 space-y-2">
+                  <li>{language === 'ko' ? '• 정부 수준의 공식 인정 → 시장 신뢰도 상승' : '• Official government recognition → market credibility increase'}</li>
+                  <li>{language === 'ko' ? '• 비트코인 공급 유한 (2,100만 BTC) → 선점 전략 (국가 간 경쟁)' : '• Limited Bitcoin supply (21M BTC) → first-mover strategy (international competition)'}</li>
+                  <li>{language === 'ko' ? '• 주정부 확산 → 제도적 기반 다각화' : '• State-level adoption → institutional foundation diversification'}</li>
+                </ul>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
+                {language === 'ko' ? 'Walits 관점: 비트코인 커스터디 기회' : 'Walits Perspective: Bitcoin Custody Opportunity'}
+              </h3>
+
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    Strategic Bitcoin Reserve가 Walits에게 의미하는 바는 명확하다. <strong>정부 및 주정부가
+                    비트코인을 장기 보관할 안전한 커스터디 솔루션이 필요하다</strong>는 것이다. 207,000 BTC를
+                    넘어 1,000,000 BTC까지 확대하려면, 기관급 보안 시스템이 필수적이다. Walits의 HSM/MPC
+                    기반 커스터디 기술은 이러한 수요에 정확히 부합한다.
+                  </>
+                ) : (
+                  <>
+                    The Strategic Bitcoin Reserve's significance for Walits is clear: <strong>government and state
+                    governments need secure custody solutions for long-term Bitcoin storage</strong>. To expand from
+                    207,000 BTC to 1,000,000 BTC, institutional-grade security systems are essential. Walits' HSM/MPC-based
+                    custody technology precisely meets this demand.
+                  </>
+                )}
+              </p>
+
+              <div className="not-prose my-8 p-6 bg-gradient-to-r from-orange-500 to-yellow-500 dark:from-orange-600 dark:to-yellow-600 rounded-lg text-white">
+                <h4 className="text-xl font-bold mb-3">
+                  {language === 'ko' ? '🔐 Strategic Bitcoin Reserve + Walits Custody' : '🔐 Strategic Bitcoin Reserve + Walits Custody'}
+                </h4>
+                <div className="grid md:grid-cols-3 gap-3 text-sm">
+                  <div className="bg-white/20 backdrop-blur p-3 rounded">
+                    <p className="font-semibold">{language === 'ko' ? '정부 비축' : 'Government Reserve'}</p>
+                    <p className="text-xs mt-1">{language === 'ko' ? 'HSM/MPC 커스터디 수요' : 'HSM/MPC custody demand'}</p>
+                  </div>
+                  <div className="bg-white/20 backdrop-blur p-3 rounded">
+                    <p className="font-semibold">{language === 'ko' ? '주정부 확산' : 'State Expansion'}</p>
+                    <p className="text-xs mt-1">{language === 'ko' ? '엔터프라이즈 커스터디' : 'Enterprise custody opportunity'}</p>
+                  </div>
+                  <div className="bg-white/20 backdrop-blur p-3 rounded">
+                    <p className="font-semibold">{language === 'ko' ? '장기 보유' : 'Long-term Hold'}</p>
+                    <p className="text-xs mt-1">{language === 'ko' ? '보안/운영 안정성 중요' : 'Security/operational stability key'}</p>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                {language === 'ko' ? (
+                  <>
+                    GENIUS Act를 통한 스테이블코인 제도화와 Strategic Bitcoin Reserve를 통한 비트코인 국가 자산화.
+                    이 두 정책은 서로 보완적이다. 스테이블코인은 단기 국채를 담보로 달러를 디지털화하고,
+                    비트코인은 장기 전략 자산으로 부채를 헤지한다. Walits는 이 두 가지 모두에서 핵심 인프라
+                    제공자로 자리매김할 수 있다.
+                  </>
+                ) : (
+                  <>
+                    Stablecoin institutionalization through GENIUS Act and Bitcoin nationalization through Strategic Bitcoin
+                    Reserve—these two policies complement each other. Stablecoins digitize the dollar with T-bill collateral,
+                    while Bitcoin hedges debt as a long-term strategic asset. Walits can position itself as a core infrastructure
+                    provider for both.
+                  </>
+                )}
+              </p>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">
                 {language === 'ko' ? '4장. 스테이블코인 확산과 자산 토크나이제이션의 미래' : 'Chapter 4. Stablecoin Proliferation and the Future of Asset Tokenization'}
               </h2>
 
