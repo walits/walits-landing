@@ -16,7 +16,6 @@ export default function IRPage() {
     { id: 'competitive', label: language === 'ko' ? '경쟁 분석' : 'Competition' },
     { id: 'gtm', label: language === 'ko' ? 'Go-to-Market' : 'Go-to-Market' },
     { id: 'risks', label: language === 'ko' ? '리스크 분석' : 'Risk Analysis' },
-    { id: 'team', label: language === 'ko' ? '팀 구성' : 'Team' },
   ];
 
   return (
@@ -119,21 +118,21 @@ export default function IRPage() {
                     </div>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">$12.8M</div>
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">$12.8M</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '2026 목표 매출' : '2026 Target Revenue'}
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">~165억원</div>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">$1.5B</div>
+                    <div className="text-3xl font-bold text-blue-700 dark:text-blue-300 mb-2">$1.5B</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '2030 전망 매출' : '2030 Projected Revenue'}
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">200%+ CAGR</div>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">67%</div>
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">67%</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '2030 EBITDA 마진' : '2030 EBITDA Margin'}
                     </div>
@@ -163,8 +162,8 @@ export default function IRPage() {
 
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">B2C</span>
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                    <span className="text-2xl font-bold text-blue-700 dark:text-blue-300">B2C</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                     {language === 'ko' ? '개인용 (2026 런칭)' : 'Consumer (Launch 2026)'}
@@ -179,8 +178,8 @@ export default function IRPage() {
 
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-bold text-green-600 dark:text-green-400">+</span>
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                    <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">+</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                     {language === 'ko' ? '규제 순풍' : 'Regulatory Tailwind'}
@@ -226,7 +225,7 @@ export default function IRPage() {
                         {language === 'ko' ? '암호자산 보관 (Custody)' : 'Crypto Custody'}
                       </td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white font-semibold">$2.5B</td>
-                      <td className="text-right py-3 px-4 text-green-600 dark:text-green-400 font-bold">$8-12B</td>
+                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-bold">$8-12B</td>
                       <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-semibold">40%+</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
@@ -234,7 +233,7 @@ export default function IRPage() {
                         {language === 'ko' ? 'DeFi 프로토콜' : 'DeFi Protocols'}
                       </td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white font-semibold">$5B TVL</td>
-                      <td className="text-right py-3 px-4 text-green-600 dark:text-green-400 font-bold">$20-30B TVL</td>
+                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-bold">$20-30B TVL</td>
                       <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-semibold">60%+</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
@@ -242,15 +241,15 @@ export default function IRPage() {
                         {language === 'ko' ? 'RWA (실물자산 토큰화)' : 'RWA Tokenization'}
                       </td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white font-semibold">$0.5B</td>
-                      <td className="text-right py-3 px-4 text-green-600 dark:text-green-400 font-bold">$10-50B</td>
-                      <td className="text-right py-3 px-4 text-purple-600 dark:text-purple-400 font-semibold">200%+</td>
+                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-bold">$10-50B</td>
+                      <td className="text-right py-3 px-4 text-blue-700 dark:text-blue-300 font-semibold">200%+</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
                         {language === 'ko' ? '게임 Web3' : 'Gaming Web3'}
                       </td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white font-semibold">$1B</td>
-                      <td className="text-right py-3 px-4 text-green-600 dark:text-green-400 font-bold">$5-10B</td>
+                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-bold">$5-10B</td>
                       <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 font-semibold">70%+</td>
                     </tr>
                   </tbody>
@@ -319,11 +318,11 @@ export default function IRPage() {
                   <h4 className="font-bold text-gray-900 dark:text-white mb-4">Walits 구현</h4>
                   <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
                     <li className="flex items-start gap-2">
-                      <span className="text-green-600 dark:text-green-400">✅</span>
+                      <span className="text-blue-600 dark:text-blue-400">✅</span>
                       <span>분산 키 생성 (DKG) - 단일 실패점 제거</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-green-600 dark:text-green-400">✅</span>
+                      <span className="text-blue-600 dark:text-blue-400">✅</span>
                       <span>2-of-3 다중 서명 - 금융기관급 보안</span>
                     </li>
                     <li>HSM (Hardware Security Module) 통합</li>
@@ -362,31 +361,31 @@ export default function IRPage() {
                 <div className="flex justify-center">
                   <div className="text-blue-400">↓</div>
                 </div>
-                <div className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-4">
+                <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
                   <div className="font-bold mb-2">MPC Orchestration Layer</div>
-                  <div className="text-purple-300 pl-4 space-y-1">
+                  <div className="text-blue-300 pl-4 space-y-1">
                     <div>├─ Key Distribution</div>
                     <div>├─ Transaction Signing</div>
                     <div>└─ Policy Engine (승인 정책)</div>
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="text-purple-400">↓</div>
+                  <div className="text-blue-400">↓</div>
                 </div>
-                <div className="bg-green-900/30 border border-green-500/50 rounded-lg p-4">
+                <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
                   <div className="font-bold mb-2">Security Layer</div>
-                  <div className="text-green-300 pl-4 space-y-1">
+                  <div className="text-blue-300 pl-4 space-y-1">
                     <div>├─ HSM (Hardware Security Module)</div>
                     <div>├─ TEE (Trusted Execution)</div>
                     <div>└─ Cryptographic Primitives</div>
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="text-green-400">↓</div>
+                  <div className="text-blue-400">↓</div>
                 </div>
-                <div className="bg-orange-900/30 border border-orange-500/50 rounded-lg p-4">
+                <div className="bg-blue-900/30 border border-blue-500/50 rounded-lg p-4">
                   <div className="font-bold mb-2">Blockchain Integration</div>
-                  <div className="text-orange-300 pl-4">Ethereum | Tron | Solana | Base ...</div>
+                  <div className="text-blue-300 pl-4">Ethereum | Tron | Solana | Base ...</div>
                 </div>
               </div>
             </div>
@@ -411,7 +410,7 @@ export default function IRPage() {
                     <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
                       현재 수익
                     </span>
-                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
                       월 $65K+
                     </span>
                   </div>
@@ -443,9 +442,9 @@ export default function IRPage() {
                       <div className="font-semibold mb-1">트랜잭션 수수료</div>
                       <div className="text-gray-600 dark:text-gray-400">0.1-0.5% (거래액 기반)</div>
                     </div>
-                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-500">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-500">
                       <div className="font-semibold mb-1">2027 목표</div>
-                      <div className="text-green-700 dark:text-green-400 font-bold">$1-2M/월 (130-260억원)</div>
+                      <div className="text-blue-700 dark:text-blue-400 font-bold">$1-2M/월 (130-260억원)</div>
                     </div>
                   </div>
                 </div>
@@ -460,10 +459,10 @@ export default function IRPage() {
                     2. Custody Wallet
                   </h3>
                   <div className="flex gap-2">
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
                       고수익
                     </span>
-                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
                       월 $500K-5M
                     </span>
                   </div>
@@ -487,17 +486,17 @@ export default function IRPage() {
                 <div>
                   <h4 className="font-bold text-gray-900 dark:text-white mb-3">2026 예상 계약</h4>
                   <div className="space-y-3 text-sm">
-                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
                       <div className="font-semibold mb-1">국내 STO 플랫폼 (3-5개)</div>
                       <div className="text-gray-600 dark:text-gray-400">월 500만-5천만원</div>
                     </div>
-                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
                       <div className="font-semibold mb-1">글로벌 토큰 증권사 (2-3개)</div>
                       <div className="text-gray-600 dark:text-gray-400">월 1천만-5천만원</div>
                     </div>
-                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-500">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-500">
                       <div className="font-semibold mb-1">2027 목표</div>
-                      <div className="text-green-700 dark:text-green-400 font-bold">월 5-10억원 (100-150억원/년)</div>
+                      <div className="text-blue-700 dark:text-blue-400 font-bold">월 5-10억원 (100-150억원/년)</div>
                     </div>
                   </div>
                 </div>
@@ -512,10 +511,10 @@ export default function IRPage() {
                     3. Auto Chat Wallet
                   </h3>
                   <div className="flex gap-2">
-                    <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
                       2026 런칭
                     </span>
-                    <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
                       대중화 포인트
                     </span>
                   </div>
@@ -526,15 +525,15 @@ export default function IRPage() {
                 <div>
                   <h4 className="font-bold text-gray-900 dark:text-white mb-3">타겟 시장</h4>
                   <div className="space-y-3 text-sm mb-4">
-                    <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-3">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
                       <div className="font-semibold mb-1">한국</div>
                       <div className="text-gray-600 dark:text-gray-400">카톡 3천만 × 1% = 30만명</div>
-                      <div className="text-indigo-600 dark:text-indigo-400 font-bold mt-1">월 7.5억원</div>
+                      <div className="text-blue-700 dark:text-blue-400 font-bold mt-1">월 7.5억원</div>
                     </div>
-                    <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-3">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
                       <div className="font-semibold mb-1">글로벌 (텔레그램)</div>
                       <div className="text-gray-600 dark:text-gray-400">8억 × 0.1% = 800만명</div>
-                      <div className="text-indigo-600 dark:text-indigo-400 font-bold mt-1">월 40억원</div>
+                      <div className="text-blue-700 dark:text-blue-400 font-bold mt-1">월 40억원</div>
                     </div>
                   </div>
                 </div>
@@ -546,9 +545,9 @@ export default function IRPage() {
                     <li>• "가장 싼 경로로 송금" → 최적 라우팅</li>
                     <li>• 앱 없음, 메시지 앱만 사용</li>
                   </ul>
-                  <div className="mt-4 bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-500">
+                  <div className="mt-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-500">
                     <div className="font-semibold mb-1">연간 목표</div>
-                    <div className="text-green-700 dark:text-green-400 font-bold">월 47.5억원 (500억원+/년)</div>
+                    <div className="text-blue-700 dark:text-blue-400 font-bold">월 47.5억원 (500억원+/년)</div>
                   </div>
                 </div>
               </div>
@@ -562,10 +561,10 @@ export default function IRPage() {
                     4. AI 토큰증권 지갑
                   </h3>
                   <div className="flex gap-2">
-                    <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
                       2026 런칭
                     </span>
-                    <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
                       미래 성장
                     </span>
                   </div>
@@ -582,11 +581,11 @@ export default function IRPage() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-700 dark:text-gray-300">2026</span>
-                      <span className="font-semibold text-green-600 dark:text-green-400">$10-50B</span>
+                      <span className="font-semibold text-blue-600 dark:text-blue-400">$10-50B</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-700 dark:text-gray-300">2030</span>
-                      <span className="font-semibold text-purple-600 dark:text-purple-400">$1-5T</span>
+                      <span className="font-semibold text-blue-700 dark:text-blue-300">$1-5T</span>
                     </div>
                     <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
                       <div className="text-blue-600 dark:text-blue-400 font-bold">CAGR: 200%+</div>
@@ -601,10 +600,10 @@ export default function IRPage() {
                     <li>• 배당금 자동 분배</li>
                     <li>• 1만원부터 투자 가능</li>
                   </ul>
-                  <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-500">
+                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-500">
                     <div className="font-semibold mb-1">2027-2030 목표</div>
                     <div className="text-gray-600 dark:text-gray-400 text-sm mb-1">AUM 10조원</div>
-                    <div className="text-green-700 dark:text-green-400 font-bold">연 50-100억원</div>
+                    <div className="text-blue-700 dark:text-blue-400 font-bold">연 50-100억원</div>
                   </div>
                 </div>
               </div>
@@ -631,7 +630,7 @@ export default function IRPage() {
                       <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Q2</th>
                       <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Q3</th>
                       <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">Q4</th>
-                      <th className="text-right py-3 px-4 font-semibold text-green-600 dark:text-green-400">2026 Total</th>
+                      <th className="text-right py-3 px-4 font-semibold text-blue-600 dark:text-blue-400">2026 Total</th>
                     </tr>
                   </thead>
                   <tbody className="text-sm">
@@ -641,7 +640,7 @@ export default function IRPage() {
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$70K</td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$100K</td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$150K</td>
-                      <td className="text-right py-3 px-4 font-bold text-green-600 dark:text-green-400">$370K</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$370K</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Custody</td>
@@ -649,7 +648,7 @@ export default function IRPage() {
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$1.5M</td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$3M</td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$5M</td>
-                      <td className="text-right py-3 px-4 font-bold text-green-600 dark:text-green-400">$10M</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$10M</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Chat Wallet</td>
@@ -657,7 +656,7 @@ export default function IRPage() {
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$300K</td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$500K</td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$800K</td>
-                      <td className="text-right py-3 px-4 font-bold text-green-600 dark:text-green-400">$1.7M</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$1.7M</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">AI 토큰증권</td>
@@ -665,7 +664,7 @@ export default function IRPage() {
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$50K</td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$200K</td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$500K</td>
-                      <td className="text-right py-3 px-4 font-bold text-green-600 dark:text-green-400">$750K</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$750K</td>
                     </tr>
                     <tr className="bg-blue-50 dark:bg-blue-900/20 font-bold">
                       <td className="py-3 px-4 text-gray-900 dark:text-white">총합</td>
@@ -684,7 +683,7 @@ export default function IRPage() {
             </div>
 
             {/* 5-Year Projection */}
-            <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-8 shadow-xl text-white">
+            <div className="bg-blue-900 dark:bg-blue-950 rounded-2xl p-8 shadow-xl text-white">
               <h3 className="text-2xl font-bold mb-6">5년 장기 전망 (2026-2030)</h3>
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -729,7 +728,7 @@ export default function IRPage() {
                       <td className="text-right py-3 px-4 font-bold">56%</td>
                       <td className="text-right py-3 px-4 font-bold">61%</td>
                       <td className="text-right py-3 px-4 font-bold">63%</td>
-                      <td className="text-right py-3 px-4 font-bold text-yellow-300 text-lg">67%</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-300 text-lg">67%</td>
                     </tr>
                   </tbody>
                 </table>
@@ -818,23 +817,23 @@ export default function IRPage() {
                   <tbody className="text-sm">
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">CGGMP21</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Full</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400 font-bold">Full</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Partial</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">Yes</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400">Yes</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">HSM Integration</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Full</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">Full</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400 font-bold">Full</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400">Full</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">Full</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400">Full</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">TEE (SGX/TDX)</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Yes</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400 font-bold">Yes</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Limited</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ No</td>
@@ -842,15 +841,15 @@ export default function IRPage() {
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">API Simplicity</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">High</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400 font-bold">High</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ Complex</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">High</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400">High</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Medium</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ Very Complex</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">Speed (TPS)</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">10,000</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400 font-bold">10,000</td>
                       <td className="text-center py-4 px-6 text-gray-600 dark:text-gray-400">1,000</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">100</td>
                       <td className="text-center py-4 px-6 text-gray-600 dark:text-gray-400">100</td>
@@ -858,15 +857,15 @@ export default function IRPage() {
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">Cost</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Low</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400 font-bold">Low</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ Very High</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400">Low</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400">Low</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ High</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ High</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">AI/Chat Payment</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Exclusive</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400 font-bold">Exclusive</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
@@ -874,7 +873,7 @@ export default function IRPage() {
                     </tr>
                     <tr className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td className="py-4 px-6 font-semibold text-gray-900 dark:text-white">RWA/STO Support</td>
-                      <td className="text-center py-4 px-6 text-green-600 dark:text-green-400 font-bold">Full</td>
+                      <td className="text-center py-4 px-6 text-blue-600 dark:text-blue-400 font-bold">Full</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Partial</td>
                       <td className="text-center py-4 px-6 text-red-600 dark:text-red-400">❌ None</td>
                       <td className="text-center py-4 px-6 text-yellow-600 dark:text-yellow-400">⭕ Partial</td>
@@ -1107,7 +1106,7 @@ export default function IRPage() {
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">기술 노후화</td>
                       <td className="text-center py-4 px-4">
-                        <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-semibold">
+                        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-xs font-semibold">
                           Medium
                         </span>
                       </td>
@@ -1118,7 +1117,7 @@ export default function IRPage() {
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">경쟁 심화</td>
                       <td className="text-center py-4 px-4">
-                        <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-semibold">
+                        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-xs font-semibold">
                           Medium
                         </span>
                       </td>
@@ -1129,7 +1128,7 @@ export default function IRPage() {
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">채택 둔화</td>
                       <td className="text-center py-4 px-4">
-                        <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-semibold">
+                        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-xs font-semibold">
                           Medium
                         </span>
                       </td>
@@ -1140,7 +1139,7 @@ export default function IRPage() {
                     <tr>
                       <td className="py-4 px-4 text-gray-900 dark:text-white font-semibold">인력 확보</td>
                       <td className="text-center py-4 px-4">
-                        <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-xs font-semibold">
+                        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-xs font-semibold">
                           Medium
                         </span>
                       </td>
@@ -1217,156 +1216,10 @@ export default function IRPage() {
             </div>
           </section>
         )}
-
-        {/* Team */}
-        {activeSection === 'team' && (
-          <section className="space-y-8">
-            <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
-              {language === 'ko' ? '팀 & 조직' : 'Team & Organization'}
-            </h2>
-
-            {/* Core Team */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4 mx-auto">
-                  C
-                </div>
-                <h3 className="text-lg font-bold text-center text-gray-900 dark:text-white mb-2">CEO/Founder</h3>
-                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-                  <div>• Blockchain/Crypto 10+ 년</div>
-                  <div>• IoT Trust, Decent Wallet</div>
-                  <div>• MPC/DKG 전문가</div>
-                  <div>• 기관 관계 구축</div>
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4 mx-auto">
-                  T
-                </div>
-                <h3 className="text-lg font-bold text-center text-gray-900 dark:text-white mb-2">CTO/Tech Lead</h3>
-                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-                  <div>• CGGMP21 논문 리뷰</div>
-                  <div>• MPC 구현 5+ 년</div>
-                  <div>• 기술 아키텍처 설계</div>
-                  <div>• 팀: 8-10명 엔지니어</div>
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
-                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4 mx-auto">
-                  B
-                </div>
-                <h3 className="text-lg font-bold text-center text-gray-900 dark:text-white mb-2">Chief Business Officer</h3>
-                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-                  <div>• 기관 영업 경험</div>
-                  <div>• 펀드레이징 전문</div>
-                  <div>• 비즈니스 개발</div>
-                  <div>• 팀: 3-5명 영업</div>
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
-                <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4 mx-auto">
-                  C
-                </div>
-                <h3 className="text-lg font-bold text-center text-gray-900 dark:text-white mb-2">Chief Compliance Officer</h3>
-                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-                  <div>• 금융감독원 경력</div>
-                  <div>• 한국거래소 경력</div>
-                  <div>• 규제 대응 전문</div>
-                  <div>• 팀: 2-3명 법무</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Organization Growth */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">2026년 조직 확장 계획</h3>
-              <div className="grid md:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">15명</div>
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">2026.Q1 (현재)</div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                    <div>개발: 8명</div>
-                    <div>영업/BizDev: 3명</div>
-                    <div>운영: 4명</div>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">25명</div>
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">2026.Q2</div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                    <div>개발: 12명 (+Chat)</div>
-                    <div>영업: 5명</div>
-                    <div>운영: 8명</div>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">40명</div>
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">2026.Q4</div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                    <div>개발: 18명</div>
-                    <div>영업/마케팅: 10명</div>
-                    <div>운영: 12명</div>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">80명+</div>
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">2027년</div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                    <div>글로벌 팀 구성</div>
-                    <div>US, EU, APAC</div>
-                    <div>다국적 확장</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Exit Strategy */}
-            <div className="bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl p-8 shadow-xl text-white">
-              <h3 className="text-2xl font-bold mb-6">Exit Strategy</h3>
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                  <div className="text-3xl font-bold mb-2">$15-40B</div>
-                  <div className="text-sm text-white/80 mb-4">2030 목표 밸류에이션</div>
-                  <div className="text-xs">
-                    <div>Conservative: $15B (10x EBITDA)</div>
-                    <div>Base: $22.5B (15x EBITDA)</div>
-                    <div>Bull: $40B (20x EBITDA)</div>
-                  </div>
-                </div>
-
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                  <div className="text-3xl font-bold mb-2">IPO</div>
-                  <div className="text-sm text-white/80 mb-4">2028-2029 미국 상장</div>
-                  <div className="text-xs">
-                    <div>Valuation: $10-20B</div>
-                    <div>확률: 40%</div>
-                    <div>Market: NASDAQ</div>
-                  </div>
-                </div>
-
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                  <div className="text-3xl font-bold mb-2">M&A</div>
-                  <div className="text-sm text-white/80 mb-4">2027-2028 전략적 인수</div>
-                  <div className="text-xs">
-                    <div>Valuation: $5-15B</div>
-                    <div>확률: 35%</div>
-                    <div>Buyers: Stripe, Fireblocks</div>
-                  </div>
-                </div>
-              </div>
-              <div className="text-center text-sm text-white/70">
-                비교: Stripe ($95B) vs Walits 목표 ($20-40B) = 합리적 범위
-              </div>
-            </div>
-          </section>
-        )}
       </div>
 
       {/* Contact CTA */}
-      <section id="contact" className="py-20 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600">
+      <section id="contact" className="py-20 px-4 bg-blue-900 dark:bg-blue-950">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-4xl font-bold mb-4 text-white">
             {language === 'ko' ? 'Walits와 함께하는 토큰화 시대' : 'Tokenization Era with Walits'}
