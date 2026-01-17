@@ -118,21 +118,21 @@ export default function IRPage() {
                     </div>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">$12.8M</div>
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">$80K</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '2026 목표 매출' : '2026 Target Revenue'}
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">~165억원</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">~1억원</div>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-blue-700 dark:text-blue-300 mb-2">$1.5B</div>
+                    <div className="text-3xl font-bold text-blue-700 dark:text-blue-300 mb-2">$300M</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '2030 전망 매출' : '2030 Projected Revenue'}
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">200%+ CAGR</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">~4000억원</div>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">67%</div>
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">60%</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       {language === 'ko' ? '2030 EBITDA 마진' : '2030 EBITDA Margin'}
                     </div>
@@ -154,9 +154,9 @@ export default function IRPage() {
                   </h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <li>Non-Custody: 게임/앱 토큰 관리</li>
-                  <li>Custody: STO/RWA 기관 보관</li>
-                  <li>월 1-4천만원 + 5천만-1억원</li>
+                  <li>Non-Custody: 게임/앱 토큰 관리 (월 99,000원)</li>
+                  <li>Custody: STO/RWA 기관 보관 (월 550,000원)</li>
+                  <li>2026 목표: 초기 고객사 확보 단계</li>
                 </ul>
               </div>
 
@@ -172,7 +172,7 @@ export default function IRPage() {
                 <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                   <li>Auto Chat: 메시지 앱 결제</li>
                   <li>AI 토큰증권: RWA 투자</li>
-                  <li>월 2.5억원 + 연 50억원 (목표)</li>
+                  <li>2026: 베타 테스트 및 초기 출시</li>
                 </ul>
               </div>
 
@@ -408,10 +408,10 @@ export default function IRPage() {
                   </h3>
                   <div className="flex gap-2">
                     <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
-                      현재 수익
+                      2026 시작
                     </span>
                     <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
-                      월 $65K+
+                      월 99,000원
                     </span>
                   </div>
                 </div>
@@ -436,15 +436,15 @@ export default function IRPage() {
                   <div className="space-y-3 text-sm">
                     <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
                       <div className="font-semibold mb-1">구독료</div>
-                      <div className="text-gray-600 dark:text-gray-400">$500-5,000/월 (유저 수별)</div>
+                      <div className="text-gray-600 dark:text-gray-400">99,000원/월 (약 $75)</div>
                     </div>
                     <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-                      <div className="font-semibold mb-1">트랜잭션 수수료</div>
-                      <div className="text-gray-600 dark:text-gray-400">0.1-0.5% (거래액 기반)</div>
+                      <div className="font-semibold mb-1">2026 목표</div>
+                      <div className="text-gray-600 dark:text-gray-400">초기 고객사 10-15개 확보</div>
                     </div>
                     <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-500">
                       <div className="font-semibold mb-1">2027 목표</div>
-                      <div className="text-blue-700 dark:text-blue-400 font-bold">$1-2M/월 (130-260억원)</div>
+                      <div className="text-blue-700 dark:text-blue-400 font-bold">월 $20-30K (고객사 확대)</div>
                     </div>
                   </div>
                 </div>
@@ -460,10 +460,10 @@ export default function IRPage() {
                   </h3>
                   <div className="flex gap-2">
                     <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
-                      고수익
+                      2026 시작
                     </span>
                     <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
-                      월 $500K-5M
+                      월 550,000원
                     </span>
                   </div>
                 </div>
@@ -484,19 +484,19 @@ export default function IRPage() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">2026 예상 계약</h4>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">수익 모델</h4>
                   <div className="space-y-3 text-sm">
                     <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-                      <div className="font-semibold mb-1">국내 STO 플랫폼 (3-5개)</div>
-                      <div className="text-gray-600 dark:text-gray-400">월 500만-5천만원</div>
+                      <div className="font-semibold mb-1">구독료</div>
+                      <div className="text-gray-600 dark:text-gray-400">550,000원/월 (약 $420)</div>
                     </div>
                     <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-                      <div className="font-semibold mb-1">글로벌 토큰 증권사 (2-3개)</div>
-                      <div className="text-gray-600 dark:text-gray-400">월 1천만-5천만원</div>
+                      <div className="font-semibold mb-1">2026 목표</div>
+                      <div className="text-gray-600 dark:text-gray-400">초기 고객사 5-10개 확보</div>
                     </div>
                     <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-500">
                       <div className="font-semibold mb-1">2027 목표</div>
-                      <div className="text-blue-700 dark:text-blue-400 font-bold">월 5-10억원 (100-150억원/년)</div>
+                      <div className="text-blue-700 dark:text-blue-400 font-bold">월 $50-100K (고객사 확대)</div>
                     </div>
                   </div>
                 </div>
@@ -526,19 +526,17 @@ export default function IRPage() {
                   <h4 className="font-bold text-gray-900 dark:text-white mb-3">타겟 시장</h4>
                   <div className="space-y-3 text-sm mb-4">
                     <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-                      <div className="font-semibold mb-1">한국</div>
-                      <div className="text-gray-600 dark:text-gray-400">카톡 3천만 × 1% = 30만명</div>
-                      <div className="text-blue-700 dark:text-blue-400 font-bold mt-1">월 7.5억원</div>
+                      <div className="font-semibold mb-1">한국 (카카오톡)</div>
+                      <div className="text-gray-600 dark:text-gray-400">3천만 사용자</div>
                     </div>
                     <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
                       <div className="font-semibold mb-1">글로벌 (텔레그램)</div>
-                      <div className="text-gray-600 dark:text-gray-400">8억 × 0.1% = 800만명</div>
-                      <div className="text-blue-700 dark:text-blue-400 font-bold mt-1">월 40억원</div>
+                      <div className="text-gray-600 dark:text-gray-400">8억 사용자</div>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">차별화 기능</h4>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">핵심 기능</h4>
                   <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                     <li>• "카톡으로 @walits 송금" → 자동 처리</li>
                     <li>• "매월 커피값 자동 송금" → AI 스케줄링</li>
@@ -546,8 +544,8 @@ export default function IRPage() {
                     <li>• 앱 없음, 메시지 앱만 사용</li>
                   </ul>
                   <div className="mt-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-500">
-                    <div className="font-semibold mb-1">연간 목표</div>
-                    <div className="text-blue-700 dark:text-blue-400 font-bold">월 47.5억원 (500억원+/년)</div>
+                    <div className="font-semibold mb-1">2026</div>
+                    <div className="text-blue-700 dark:text-blue-400 font-bold">베타 테스트 및 초기 출시</div>
                   </div>
                 </div>
               </div>
@@ -601,9 +599,8 @@ export default function IRPage() {
                     <li>• 1만원부터 투자 가능</li>
                   </ul>
                   <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-500">
-                    <div className="font-semibold mb-1">2027-2030 목표</div>
-                    <div className="text-gray-600 dark:text-gray-400 text-sm mb-1">AUM 10조원</div>
-                    <div className="text-blue-700 dark:text-blue-400 font-bold">연 50-100억원</div>
+                    <div className="font-semibold mb-1">2026</div>
+                    <div className="text-blue-700 dark:text-blue-400 font-bold">베타 서비스 준비 단계</div>
                   </div>
                 </div>
               </div>
@@ -636,49 +633,49 @@ export default function IRPage() {
                   <tbody className="text-sm">
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Non-Custody</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$50K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$70K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$100K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$150K</td>
-                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$370K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$3K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$5K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$8K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$12K</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$28K</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Custody</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$500K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$1.5M</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$3M</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$5M</td>
-                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$10M</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$5K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$10K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$15K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$20K</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$50K</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">Chat Wallet</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$100K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$300K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$500K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$800K</td>
-                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$1.7M</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$0</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$0</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$0.5K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$1K</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$1.5K</td>
                     </tr>
                     <tr className="border-b border-gray-100 dark:border-gray-700">
                       <td className="py-3 px-4 text-gray-700 dark:text-gray-300">AI 토큰증권</td>
                       <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$0</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$50K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$200K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$500K</td>
-                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$750K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$0</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$0</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$0.5K</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-600 dark:text-blue-400">$0.5K</td>
                     </tr>
                     <tr className="bg-blue-50 dark:bg-blue-900/20 font-bold">
                       <td className="py-3 px-4 text-gray-900 dark:text-white">총합</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$650K</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$1.92M</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$3.8M</td>
-                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$6.45M</td>
-                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 text-lg">$12.82M</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$8K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$15K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$23.5K</td>
+                      <td className="text-right py-3 px-4 text-gray-900 dark:text-white">$33.5K</td>
+                      <td className="text-right py-3 px-4 text-blue-600 dark:text-blue-400 text-lg">$80K</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
-                2026 Total: <span className="font-bold text-gray-900 dark:text-white">$12.82M (~165억원)</span>
+                2026 Total: <span className="font-bold text-gray-900 dark:text-white">$80K (~1억원)</span> | 고객/레퍼런스 확보 단계
               </div>
             </div>
 
@@ -700,35 +697,35 @@ export default function IRPage() {
                   <tbody className="text-sm">
                     <tr className="border-b border-white/10">
                       <td className="py-3 px-4">Revenue</td>
-                      <td className="text-right py-3 px-4">$12.8M</td>
-                      <td className="text-right py-3 px-4">$75M</td>
-                      <td className="text-right py-3 px-4">$350M</td>
-                      <td className="text-right py-3 px-4">$750M</td>
-                      <td className="text-right py-3 px-4 font-bold">$1.5B</td>
+                      <td className="text-right py-3 px-4">$80K</td>
+                      <td className="text-right py-3 px-4">$1.5M</td>
+                      <td className="text-right py-3 px-4">$15M</td>
+                      <td className="text-right py-3 px-4">$80M</td>
+                      <td className="text-right py-3 px-4 font-bold">$300M</td>
                     </tr>
                     <tr className="border-b border-white/10">
                       <td className="py-3 px-4">Gross Margin</td>
-                      <td className="text-right py-3 px-4">84%</td>
-                      <td className="text-right py-3 px-4">89%</td>
-                      <td className="text-right py-3 px-4">90%</td>
+                      <td className="text-right py-3 px-4">70%</td>
+                      <td className="text-right py-3 px-4">85%</td>
+                      <td className="text-right py-3 px-4">88%</td>
                       <td className="text-right py-3 px-4">90%</td>
                       <td className="text-right py-3 px-4 font-bold">90%</td>
                     </tr>
                     <tr className="border-b border-white/10">
                       <td className="py-3 px-4">EBITDA</td>
-                      <td className="text-right py-3 px-4">$3.8M</td>
-                      <td className="text-right py-3 px-4">$42M</td>
-                      <td className="text-right py-3 px-4">$215M</td>
-                      <td className="text-right py-3 px-4">$475M</td>
-                      <td className="text-right py-3 px-4 font-bold">$1B</td>
+                      <td className="text-right py-3 px-4">-$50K</td>
+                      <td className="text-right py-3 px-4">$600K</td>
+                      <td className="text-right py-3 px-4">$7.5M</td>
+                      <td className="text-right py-3 px-4">$48M</td>
+                      <td className="text-right py-3 px-4 font-bold">$180M</td>
                     </tr>
                     <tr className="bg-white/10">
                       <td className="py-3 px-4 font-bold">EBITDA Margin</td>
-                      <td className="text-right py-3 px-4 font-bold">30%</td>
-                      <td className="text-right py-3 px-4 font-bold">56%</td>
-                      <td className="text-right py-3 px-4 font-bold">61%</td>
-                      <td className="text-right py-3 px-4 font-bold">63%</td>
-                      <td className="text-right py-3 px-4 font-bold text-blue-300 text-lg">67%</td>
+                      <td className="text-right py-3 px-4 font-bold">-62%</td>
+                      <td className="text-right py-3 px-4 font-bold">40%</td>
+                      <td className="text-right py-3 px-4 font-bold">50%</td>
+                      <td className="text-right py-3 px-4 font-bold">60%</td>
+                      <td className="text-right py-3 px-4 font-bold text-blue-300 text-lg">60%</td>
                     </tr>
                   </tbody>
                 </table>
@@ -942,19 +939,19 @@ export default function IRPage() {
                   <div>
                     <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 1 (Q1-Q2 2026)</div>
                     <ul className="space-y-1 text-gray-700 dark:text-gray-300">
-                      <li>• 한국 게임사 20-30개 접촉</li>
-                      <li>• Web3 게임 스튜디오 50개+</li>
-                      <li>• 토큰 프로젝트 100개+</li>
-                      <li>• 초기 KPI: 계약 10개사 (월 $50K)</li>
+                      <li>• 한국 게임사/앱 초기 접촉</li>
+                      <li>• Web3 프로젝트 파트너십</li>
+                      <li>• 베타 고객 모집</li>
+                      <li>• 초기 KPI: 5-10개사 계약</li>
                     </ul>
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 2 (Q3-Q4 2026)</div>
                     <ul className="space-y-1 text-gray-700 dark:text-gray-300">
-                      <li>• 미국/EU 게임사 확대</li>
-                      <li>• Polygon/Arbitrum 개발사</li>
-                      <li>• 신규 게임 플랫폼 파트너십</li>
-                      <li>• 목표: 월 $150K (20개사)</li>
+                      <li>• 레퍼런스 확보 후 확대</li>
+                      <li>• 추가 고객사 온보딩</li>
+                      <li>• 가격 모델 최적화</li>
+                      <li>• 목표: 15-20개사 확보</li>
                     </ul>
                   </div>
                 </div>
@@ -969,19 +966,19 @@ export default function IRPage() {
                   <div>
                     <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 1 (Q1-Q2 2026)</div>
                     <ul className="space-y-1 text-gray-700 dark:text-gray-300">
-                      <li>• 국내 STO 플랫폼 3-5개</li>
-                      <li>• 기업 재무팀 10개</li>
-                      <li>• 정부 기관 1-2개 파일럿</li>
-                      <li>• 초기 KPI: 기관 5개 (월 $500K)</li>
+                      <li>• 국내 STO 플랫폼 파일럿</li>
+                      <li>• 기업 재무팀 컨설팅</li>
+                      <li>• 레퍼런스 확보 집중</li>
+                      <li>• 초기 KPI: 2-3개 기관 계약</li>
                     </ul>
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 dark:text-white mb-2">Phase 2 (Q3-Q4 2026)</div>
                     <ul className="space-y-1 text-gray-700 dark:text-gray-300">
-                      <li>• 글로벌 STO 증권사</li>
-                      <li>• 크립토 네이티브 은행</li>
-                      <li>• 정부 비축금 (Strategic Reserve)</li>
-                      <li>• 목표: 월 $5M</li>
+                      <li>• 레퍼런스 기반 확대</li>
+                      <li>• 규제 준수 강화</li>
+                      <li>• 가격 모델 고도화</li>
+                      <li>• 목표: 5-10개 기관 확보</li>
                     </ul>
                   </div>
                 </div>
