@@ -10,18 +10,18 @@ export default function BlockchainComparisonPost() {
   const copy = {
     ko: {
       category: '기술 가이드',
-      title: '5대 블록체인 완벽 가이드',
-      subtitle: 'Bitcoin부터 Solana까지, 쉽게 이해하는 블록체인 비교',
+      title: '6대 블록체인 완벽 가이드',
+      subtitle: 'Bitcoin부터 Solana, Layer 2 Base까지, 쉽게 이해하는 블록체인 비교',
       date: '2026년 1월 18일',
-      readTime: '35분 읽기',
+      readTime: '40분 읽기',
       backToBlog: '← 블로그로 돌아가기',
     },
     en: {
       category: 'Technical Guide',
-      title: 'Complete Guide to Top 5 Blockchains',
-      subtitle: 'Bitcoin to Solana: Easy blockchain comparison',
+      title: 'Complete Guide to Top 6 Blockchains',
+      subtitle: 'Bitcoin to Solana and Layer 2 Base: Easy blockchain comparison',
       date: 'January 18, 2026',
-      readTime: '35 min read',
+      readTime: '40 min read',
       backToBlog: '← Back to Blog',
     },
   }[language];
@@ -78,9 +78,9 @@ export default function BlockchainComparisonPost() {
             <>
               <p className="lead text-xl text-gray-600 dark:text-gray-400 mb-8">
                 "블록체인이 뭐가 다르지?" 하고 궁금하셨나요?
-                Bitcoin, Ethereum, XRP, Tron, Solana - 이름은 많이 들어봤지만
+                Bitcoin, Ethereum, Base, XRP, Tron, Solana - 이름은 많이 들어봤지만
                 각각 어떻게 다르고, 언제 어떤 걸 써야 하는지 헷갈리셨을 겁니다.
-                이 가이드에서는 마치 친구에게 설명하듯 쉽게, 하지만 깊이 있게 5대 블록체인을 비교해드립니다.
+                이 가이드에서는 마치 친구에게 설명하듯 쉽게, 하지만 깊이 있게 6대 블록체인(Layer 2 포함)을 비교해드립니다.
               </p>
 
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8">
@@ -162,6 +162,55 @@ export default function BlockchainComparisonPost() {
                   <li>
                     <strong>2022년 9월 - The Merge:</strong> Proof of Work(채굴)에서 Proof of Stake(검증)로 전환하면서
                     에너지 소비가 <strong>99.95% 감소</strong>했습니다! 이건 정말 혁명적인 변화였죠.
+                  </li>
+                </ul>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-10 mb-4">Base (2023) - Ethereum의 고속 차선</h3>
+              <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-6 mb-6">
+                <p className="mb-3"><strong className="text-blue-600">탄생 배경:</strong> 미국 최대 암호화폐 거래소 Coinbase가 "Ethereum은 좋은데 수수료가 너무 비싸다"는 문제를 해결하기 위해 만들었습니다.</p>
+                <p className="mb-3"><strong className="text-blue-600">해결하려는 문제:</strong> "Ethereum의 보안성과 생태계는 유지하면서, 수수료를 100분의 1로 낮출 수 있을까?"</p>
+                <p><strong className="text-blue-600">핵심 철학:</strong> Layer 2로 확장성을 해결하되, Ethereum 메인넷의 보안성을 완전히 물려받자.</p>
+              </div>
+
+              <p className="mb-4">
+                Base는 2023년 8월에 출시된 <strong>Ethereum Layer 2</strong> 솔루션입니다.
+                "Layer 2"가 뭐냐고요? 쉽게 말하면 "고속도로 위에 고가도로를 하나 더 만드는 것"입니다.
+                Ethereum 메인넷(Layer 1)은 그대로 두고, 그 위에 더 빠르고 저렴한 네트워크를 만드는 거죠.
+              </p>
+
+              <p className="mb-6">
+                Base는 <strong>Optimistic Rollup</strong>이라는 기술을 사용합니다.
+                간단히 설명하면, 일단 거래를 빠르게 처리하고 나중에 Ethereum 메인넷에 "요약본"을 올립니다.
+                마치 회의록을 나중에 정리해서 본사에 보고하는 것과 비슷하죠.
+                혹시 잘못된 거래가 있으면 7일 이내에 이의를 제기할 수 있어서 "Optimistic(낙관적)"이라고 부릅니다.
+              </p>
+
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 mb-6">
+                <h4 className="font-bold mb-3">Base의 주요 특징</h4>
+                <ul className="space-y-2">
+                  <li><strong>Ethereum 완전 호환:</strong> Ethereum 스마트 컨트랙트를 그대로 사용 가능</li>
+                  <li><strong>초저렴 수수료:</strong> Ethereum 대비 1/50~1/100 수준 (보통 0.01~0.1달러)</li>
+                  <li><strong>빠른 속도:</strong> 블록 생성 시간 2초, 거의 즉시 확정</li>
+                  <li><strong>Coinbase 지원:</strong> Coinbase 거래소와 직접 통합되어 편리한 입출금</li>
+                  <li><strong>OP Stack 기반:</strong> Optimism과 같은 기술 스택을 공유해서 안정성 입증</li>
+                </ul>
+              </div>
+
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-6 mb-6">
+                <h4 className="font-bold mb-2 text-yellow-700 dark:text-yellow-400">주의: Layer 2의 트레이드오프</h4>
+                <ul className="text-sm space-y-2">
+                  <li>
+                    <strong>출금 지연:</strong> Base에서 Ethereum으로 자산을 빼낼 때는 7일이 걸립니다.
+                    이건 보안을 위한 "Challenge Period"인데, 급하면 제3자 브릿지를 쓸 수 있어요(수수료 추가).
+                  </li>
+                  <li>
+                    <strong>중앙화된 시퀀서:</strong> 현재는 Coinbase가 거래 순서를 정하는 "시퀀서"를 운영합니다.
+                    나중에 탈중앙화할 계획이지만, 지금은 Coinbase를 어느 정도 신뢰해야 합니다.
+                  </li>
+                  <li>
+                    <strong>비교적 신생:</strong> 2023년에 출시되어 아직 1년 반 정도밖에 안 됐습니다.
+                    장기 안정성은 더 지켜봐야 해요.
                   </li>
                 </ul>
               </div>
@@ -341,6 +390,48 @@ export default function BlockchainComparisonPost() {
                 <li><strong>높은 진입 비용:</strong> 32 ETH는 현재 가격으로 약 1억 원이 넘습니다.</li>
               </ul>
 
+              <h3 className="text-2xl font-bold mt-10 mb-4">Base: Optimistic Rollup - 일단 믿고 나중에 검증</h3>
+
+              <p className="mb-4">
+                Base는 자체 합의 메커니즘이 없습니다. 대신 Ethereum의 보안성을 그대로 빌려쓰는
+                <strong> Layer 2</strong> 구조입니다.
+              </p>
+
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 mb-6">
+                <h4 className="font-bold mb-3">쉽게 이해하기: 지점과 본사</h4>
+                <p className="mb-3">
+                  Base는 "지점"이고 Ethereum은 "본사"입니다.
+                  고객이 지점에서 빠르게 업무를 처리하면,
+                  지점은 나중에 본사에 "이런 거래들이 있었습니다"라고 보고합니다.
+                  본사(Ethereum)는 이 보고서를 검증하고 영구 기록으로 남깁니다.
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <strong>핵심:</strong> 실제 보안은 Ethereum 메인넷이 담당하기 때문에,
+                  Base는 Ethereum만큼 안전하면서도 훨씬 빠르고 저렴합니다.
+                </p>
+              </div>
+
+              <p className="mb-4"><strong>작동 방식:</strong></p>
+              <ul className="list-disc pl-6 mb-4 space-y-2">
+                <li><strong>시퀀서가 거래 처리:</strong> Coinbase가 운영하는 시퀀서가 거래를 빠르게 순서대로 처리합니다.</li>
+                <li><strong>배치로 Ethereum에 제출:</strong> 여러 거래를 묶어서 Ethereum 메인넷에 한 번에 제출합니다. 이렇게 하면 수수료가 확 줄어들죠.</li>
+                <li><strong>7일 챌린지 기간:</strong> 누구든 "이 거래 잘못됐어!"라고 이의를 제기할 수 있습니다. 문제가 없으면 Ethereum에 영구 기록됩니다.</li>
+              </ul>
+
+              <p className="mb-4"><strong>장점:</strong></p>
+              <ul className="list-disc pl-6 mb-4 space-y-2">
+                <li><strong>Ethereum 보안 상속:</strong> Ethereum만큼 안전합니다.</li>
+                <li><strong>초저렴 수수료:</strong> Ethereum 대비 1/50~1/100 수준</li>
+                <li><strong>빠른 확정:</strong> 2초면 거래가 확정됩니다(Ethereum은 12초).</li>
+                <li><strong>완벽한 호환성:</strong> Ethereum 스마트 컨트랙트를 그대로 사용 가능</li>
+              </ul>
+
+              <p className="mb-4"><strong>단점:</strong></p>
+              <ul className="list-disc pl-6 mb-6 space-y-2">
+                <li><strong>출금 지연:</strong> Base → Ethereum 출금 시 7일 대기(공식 브릿지 사용 시)</li>
+                <li><strong>중앙화된 시퀀서:</strong> 현재는 Coinbase가 단독으로 시퀀서를 운영합니다.</li>
+              </ul>
+
               <h3 className="text-2xl font-bold mt-10 mb-4">XRP: Consensus Protocol - 신뢰하는 친구들끼리</h3>
 
               <p className="mb-4">
@@ -502,6 +593,27 @@ export default function BlockchainComparisonPost() {
                     <p className="text-sm">스마트 컨트랙트라면 코드와 데이터를 저장하는 공간이 있습니다.</p>
                   </div>
                 </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-10 mb-4">Base: Ethereum과 동일</h3>
+
+              <p className="mb-4">
+                Base는 Ethereum Layer 2이기 때문에 <strong>계정 시스템이 Ethereum과 완전히 동일</strong>합니다.
+                같은 지갑 주소를 사용하고, 같은 방식으로 작동하죠.
+              </p>
+
+              <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-6 mb-6">
+                <h4 className="font-bold mb-3">Base 계정의 편리함</h4>
+                <p className="mb-3">
+                  Ethereum에서 사용하던 MetaMask나 다른 지갑을 그대로 사용할 수 있습니다.
+                  네트워크만 "Base"로 바꾸면 끝!
+                  같은 주소(0x로 시작)를 Ethereum과 Base에서 모두 사용할 수 있어서
+                  별도로 계정을 만들 필요가 없습니다.
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <strong>팁:</strong> Coinbase 거래소를 사용한다면, Base로 직접 입출금이 가능해서
+                  Ethereum 메인넷보다 훨씬 저렴하게 자산을 이동할 수 있습니다.
+                </p>
               </div>
 
               <h3 className="text-2xl font-bold mt-10 mb-4">XRP: Reserve - 최소 예치금 시스템</h3>
@@ -695,6 +807,47 @@ export default function BlockchainComparisonPost() {
                 </p>
               </div>
 
+              <h3 className="text-2xl font-bold mt-10 mb-4">Base 수수료 - Ethereum의 1/50</h3>
+
+              <p className="mb-4">
+                Base는 Ethereum과 동일한 Gas 시스템을 사용하지만,
+                <strong> 수수료가 극적으로 저렴</strong>합니다.
+              </p>
+
+              <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-6 mb-6">
+                <h4 className="font-bold mb-3 text-blue-700 dark:text-blue-400">실전 수수료 예시</h4>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <p className="font-semibold mb-1">일반 ETH 전송</p>
+                    <p className="mb-1">Ethereum: 2,000-10,000원</p>
+                    <p className="text-green-600 font-semibold">Base: <strong>30-200원</strong> (약 1/50 수준)</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-1">ERC20 토큰 전송</p>
+                    <p className="mb-1">Ethereum: 6,000-30,000원</p>
+                    <p className="text-green-600 font-semibold">Base: <strong>100-500원</strong></p>
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-1">NFT 민팅</p>
+                    <p className="mb-1">Ethereum: 20,000-100,000원</p>
+                    <p className="text-green-600 font-semibold">Base: <strong>500-2,000원</strong></p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-900 border rounded-lg p-6 mb-6">
+                <h4 className="font-bold mb-3">왜 이렇게 저렴한가요?</h4>
+                <p className="text-sm mb-3">
+                  Base는 수천 개의 거래를 묶어서 Ethereum에 한 번에 제출합니다.
+                  마치 택배를 하나씩 보내는 대신, 여러 개를 한 박스에 담아 보내는 것과 같죠.
+                  Ethereum 수수료를 여러 사람이 나눠 내기 때문에 개인당 부담이 확 줄어듭니다.
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  참고: Base 수수료는 시간대에 따라 변동됩니다.
+                  네트워크가 한가할 때는 더 저렴하고, 혼잡할 때는 조금 올라갈 수 있어요.
+                </p>
+              </div>
+
               <h3 className="text-2xl font-bold mt-10 mb-4">XRP 수수료 - 거의 공짜 수준</h3>
 
               <p className="mb-4">
@@ -778,41 +931,45 @@ export default function BlockchainComparisonPost() {
               <h2 className="text-3xl font-bold mt-16 mb-6 text-gray-900 dark:text-white">5. 수수료 한눈에 비교하기</h2>
 
               <div className="overflow-x-auto mb-8">
-                <table className="w-full border-collapse bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+                <table className="w-full border-collapse bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden text-sm">
                   <thead className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                     <tr>
-                      <th className="px-6 py-4 text-left">거래 유형</th>
-                      <th className="px-6 py-4 text-right">Bitcoin</th>
-                      <th className="px-6 py-4 text-right">Ethereum</th>
-                      <th className="px-6 py-4 text-right">XRP</th>
-                      <th className="px-6 py-4 text-right">Tron</th>
-                      <th className="px-6 py-4 text-right">Solana</th>
+                      <th className="px-4 py-4 text-left">거래 유형</th>
+                      <th className="px-4 py-4 text-right">Bitcoin</th>
+                      <th className="px-4 py-4 text-right">Ethereum</th>
+                      <th className="px-4 py-4 text-right">Base (L2)</th>
+                      <th className="px-4 py-4 text-right">XRP</th>
+                      <th className="px-4 py-4 text-right">Tron</th>
+                      <th className="px-4 py-4 text-right">Solana</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                     <tr className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                      <td className="px-6 py-4 font-medium">일반 전송</td>
-                      <td className="px-6 py-4 text-right">500-5,000원</td>
-                      <td className="px-6 py-4 text-right">2,000-10,000원</td>
-                      <td className="px-6 py-4 text-right text-green-600 font-semibold">0.0005원</td>
-                      <td className="px-6 py-4 text-right text-green-600 font-semibold">무료*</td>
-                      <td className="px-6 py-4 text-right text-green-600 font-semibold">0.5원</td>
+                      <td className="px-4 py-4 font-medium">일반 전송</td>
+                      <td className="px-4 py-4 text-right">500-5,000원</td>
+                      <td className="px-4 py-4 text-right">2,000-10,000원</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">30-200원</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">0.0005원</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">무료*</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">0.5원</td>
                     </tr>
                     <tr className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                      <td className="px-6 py-4 font-medium">토큰 전송</td>
-                      <td className="px-6 py-4 text-right text-gray-400">-</td>
-                      <td className="px-6 py-4 text-right">6,000-30,000원</td>
-                      <td className="px-6 py-4 text-right text-green-600 font-semibold">0.0005원</td>
-                      <td className="px-6 py-4 text-right">무료-1,500원*</td>
-                      <td className="px-6 py-4 text-right text-green-600 font-semibold">0.5원</td>
+                      <td className="px-4 py-4 font-medium">토큰 전송</td>
+                      <td className="px-4 py-4 text-right text-gray-400">-</td>
+                      <td className="px-4 py-4 text-right">6,000-30,000원</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">100-500원</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">0.0005원</td>
+                      <td className="px-4 py-4 text-right">무료-1,500원*</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">0.5원</td>
                     </tr>
                     <tr className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                      <td className="px-6 py-4 font-medium">처리 시간</td>
-                      <td className="px-6 py-4 text-right">10분-1시간</td>
-                      <td className="px-6 py-4 text-right">12초-10분</td>
-                      <td className="px-6 py-4 text-right text-green-600 font-semibold">3-5초</td>
-                      <td className="px-6 py-4 text-right text-green-600 font-semibold">3초</td>
-                      <td className="px-6 py-4 text-right text-green-600 font-semibold">0.4초</td>
+                      <td className="px-4 py-4 font-medium">처리 시간</td>
+                      <td className="px-4 py-4 text-right">10분-1시간</td>
+                      <td className="px-4 py-4 text-right">12초-10분</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">2초</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">3-5초</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">3초</td>
+                      <td className="px-4 py-4 text-right text-green-600 font-semibold">0.4초</td>
                     </tr>
                   </tbody>
                 </table>
@@ -825,18 +982,19 @@ export default function BlockchainComparisonPost() {
               <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6 mb-8">
                 <h4 className="font-bold mb-3 text-lg">수수료로 블록체인 선택하기</h4>
                 <ul className="space-y-2 text-sm">
-                  <li><strong>돈 아끼기:</strong> XRP, Solana, Tron (스테이킹)</li>
-                  <li><strong>속도 중요:</strong> Solana, XRP, Tron</li>
+                  <li><strong>가장 저렴:</strong> XRP, Solana, Tron (스테이킹)</li>
+                  <li><strong>Ethereum 생태계 + 저렴:</strong> Base (Layer 2)</li>
+                  <li><strong>속도 중요:</strong> Solana, Base, XRP, Tron</li>
                   <li><strong>안정성 우선:</strong> Bitcoin, Ethereum</li>
-                  <li><strong>게임/NFT:</strong> Solana (빠르고 저렴)</li>
-                  <li><strong>스테이블코인:</strong> Tron (USDT 거래량 1위)</li>
+                  <li><strong>게임/NFT:</strong> Base, Solana (빠르고 저렴)</li>
+                  <li><strong>스테이블코인:</strong> Tron (USDT 거래량 1위), Base (USDC 최적화)</li>
                 </ul>
               </div>
 
               <h2 className="text-3xl font-bold mt-16 mb-6 text-gray-900 dark:text-white">마무리하며</h2>
 
               <p className="text-lg mb-6">
-                지금까지 Bitcoin, Ethereum, XRP, Tron, Solana 5대 블록체인을 비교해봤습니다.
+                지금까지 Bitcoin, Ethereum, Base, XRP, Tron, Solana 6대 블록체인을 비교해봤습니다.
                 각각 태어난 이유도 다르고, 추구하는 가치도 달라요.
                 "최고"의 블록체인은 없습니다. <strong>여러분의 목적에 가장 맞는</strong> 블록체인이 있을 뿐이죠.
               </p>
@@ -854,19 +1012,19 @@ export default function BlockchainComparisonPost() {
                   </div>
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
                     <p className="font-semibold mb-2">NFT 거래</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">→ Ethereum 또는 Solana</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">→ Base, Ethereum, Solana</p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
                     <p className="font-semibold mb-2">게임/앱</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">→ Solana 또는 Tron</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">→ Base, Solana, Tron</p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-                    <p className="font-semibold mb-2">USDT 거래</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">→ Tron (거래량 1위)</p>
+                    <p className="font-semibold mb-2">USDT/USDC 거래</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">→ Tron (USDT), Base (USDC)</p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
                     <p className="font-semibold mb-2">DeFi</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">→ Ethereum 또는 Solana</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">→ Ethereum, Base, Solana</p>
                   </div>
                 </div>
               </div>
@@ -875,13 +1033,13 @@ export default function BlockchainComparisonPost() {
                 <h3 className="text-2xl font-bold mb-4">Walits와 함께라면 고민 끝!</h3>
                 <p className="text-lg mb-6">
                   "어떤 블록체인을 써야 하지?" 고민하지 마세요.
-                  Walits는 Bitcoin, Ethereum, XRP, Tron, Solana 등 <strong>주요 블록체인 30+</strong>를
+                  Walits는 Bitcoin, Ethereum, Base, XRP, Tron, Solana 등 <strong>주요 블록체인 30+</strong>를
                   <strong className="text-blue-600"> 하나의 API로 통합</strong>합니다.
                 </p>
                 <p className="mb-6">
                   사용자는 자신에게 맞는 블록체인을 자유롭게 선택하고,
                   여러분은 복잡한 기술 걱정 없이 서비스에만 집중하세요.
-                  국제 송금은 XRP로, NFT는 Solana로, 스테이블코인은 Tron으로 -
+                  국제 송금은 XRP로, NFT는 Base로, 스테이블코인은 Tron으로 -
                   상황에 맞게 최적의 주요 블록체인을 자동으로 활용할 수 있습니다.
                 </p>
                 <Link

@@ -18,10 +18,10 @@ export default function BlogPage() {
           id: 'blockchain-comparison-guide',
           category: '기술 가이드',
           categoryColor: 'bg-gray-100 text-gray-800',
-          title: '5대 블록체인 기술 비교 완벽 가이드',
-          excerpt: 'Bitcoin, Ethereum, XRP, Tron, Solana. 5대 주요 블록체인의 합의 메커니즘, 트랜잭션 구조, 수수료 체계를 완벽 비교. 사용 사례별 추천 가이드 포함.',
+          title: '6대 블록체인 기술 비교 완벽 가이드',
+          excerpt: 'Bitcoin, Ethereum, Base, XRP, Tron, Solana. Layer 2까지 포함한 6대 주요 블록체인의 합의 메커니즘, 트랜잭션 구조, 수수료 체계를 완벽 비교. 사용 사례별 추천 가이드 포함.',
           date: '2026년 1월 18일',
-          readTime: '15분',
+          readTime: '18분',
           image: '/blog/BLOCKCHAIN_COMPARISON_TUTORIAL.jpg',
         },
         {
