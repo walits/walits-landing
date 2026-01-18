@@ -84,12 +84,12 @@ export default function BlockchainComparisonPost() {
               </p>
 
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8">
-                <h3 className="text-lg font-bold mb-3">💡 이 글을 읽으면</h3>
+                <h3 className="text-lg font-bold mb-3">이 글을 읽으면</h3>
                 <ul className="space-y-2 text-sm">
-                  <li>✅ 각 블록체인의 탄생 배경과 목적을 이해할 수 있습니다</li>
-                  <li>✅ 수수료가 왜 다른지, 얼마나 드는지 알 수 있습니다</li>
-                  <li>✅ 여러분의 프로젝트에 어떤 블록체인이 적합한지 판단할 수 있습니다</li>
-                  <li>✅ 기술 용어를 쉽게 이해할 수 있는 비유와 예시를 얻을 수 있습니다</li>
+                  <li>각 블록체인의 탄생 배경과 목적을 이해할 수 있습니다</li>
+                  <li>수수료가 왜 다른지, 얼마나 드는지 알 수 있습니다</li>
+                  <li>여러분의 프로젝트에 어떤 블록체인이 적합한지 판단할 수 있습니다</li>
+                  <li>기술 용어를 쉽게 이해할 수 있는 비유와 예시를 얻을 수 있습니다</li>
                 </ul>
               </div>
 
@@ -112,7 +112,7 @@ export default function BlockchainComparisonPost() {
                 Bitcoin은 블록체인의 할아버지입니다. 2009년 1월 3일, 제네시스 블록(첫 번째 블록)이 생성되면서
                 역사상 처음으로 "디지털 돈"이 탄생했죠. 재미있는 사실은, 2010년에 프로그래머 한 명이
                 피자 두 판을 사기 위해 10,000 BTC를 지불했다는 겁니다.
-                당시엔 별 가치가 없었지만, 지금 가격으로 환산하면... 약 3,500억 원입니다! 😱
+                당시엔 별 가치가 없었지만, 지금 가격으로 환산하면... 약 3,500억 원입니다!
               </p>
 
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 mb-6">
@@ -261,7 +261,7 @@ export default function BlockchainComparisonPost() {
               </p>
 
               <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-6 mb-6">
-                <h4 className="font-bold mb-2 text-yellow-700 dark:text-yellow-400">⚠️ 그런데 완벽하진 않습니다</h4>
+                <h4 className="font-bold mb-2 text-yellow-700 dark:text-yellow-400">주의: 그런데 완벽하진 않습니다</h4>
                 <p className="text-sm">
                   2021년과 2022년에 Solana 네트워크가 몇 차례 멈춘 적이 있습니다.
                   너무 많은 거래가 몰리면서 과부하가 걸린 거죠.
@@ -483,22 +483,22 @@ export default function BlockchainComparisonPost() {
                 <h4 className="font-bold mb-3">Ethereum 계정의 구성 요소</h4>
                 <div className="space-y-4">
                   <div>
-                    <p className="font-semibold text-purple-600 mb-1">🔑 주소 (Address)</p>
+                    <p className="font-semibold text-purple-600 mb-1">주소 (Address)</p>
                     <p className="text-sm mb-1">여러분의 지갑 주소입니다. 0x로 시작하는 42자리 문자열이죠.</p>
                     <p className="text-xs text-gray-600 dark:text-gray-400">예: 0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</p>
                   </div>
                   <div>
-                    <p className="font-semibold text-purple-600 mb-1">💰 잔액 (Balance)</p>
+                    <p className="font-semibold text-purple-600 mb-1">잔액 (Balance)</p>
                     <p className="text-sm mb-1">가지고 있는 ETH의 양입니다. Wei라는 아주 작은 단위로 저장됩니다.</p>
                     <p className="text-xs text-gray-600 dark:text-gray-400">1 ETH = 1,000,000,000,000,000,000 Wei (18개의 0!)</p>
                   </div>
                   <div>
-                    <p className="font-semibold text-purple-600 mb-1">🔢 Nonce</p>
+                    <p className="font-semibold text-purple-600 mb-1">Nonce</p>
                     <p className="text-sm mb-1">이 주소에서 보낸 거래 횟수입니다. 거래 순서를 보장하는 데 사용됩니다.</p>
                     <p className="text-xs text-gray-600 dark:text-gray-400">첫 거래는 0, 두 번째는 1, 이런 식이죠.</p>
                   </div>
                   <div>
-                    <p className="font-semibold text-purple-600 mb-1">📦 Storage (스마트 컨트랙트만)</p>
+                    <p className="font-semibold text-purple-600 mb-1">Storage (스마트 컨트랙트만)</p>
                     <p className="text-sm">스마트 컨트랙트라면 코드와 데이터를 저장하는 공간이 있습니다.</p>
                   </div>
                 </div>
@@ -513,7 +513,7 @@ export default function BlockchainComparisonPost() {
               </p>
 
               <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-6 mb-6">
-                <h4 className="font-bold mb-2 text-yellow-700 dark:text-yellow-400">⚠️ 주의사항</h4>
+                <h4 className="font-bold mb-2 text-yellow-700 dark:text-yellow-400">주의사항</h4>
                 <p className="text-sm mb-3">
                   Reserve로 묶인 10 XRP는 쓸 수 없습니다!
                   만약 계정에 12 XRP가 있다면, 실제로 쓸 수 있는 건 2 XRP뿐입니다.
@@ -534,17 +534,17 @@ export default function BlockchainComparisonPost() {
                 <h4 className="font-bold mb-3">Resource 시스템 이해하기</h4>
                 <div className="space-y-4">
                   <div>
-                    <p className="font-semibold text-red-600 mb-1">⚡ Energy</p>
+                    <p className="font-semibold text-red-600 mb-1">Energy</p>
                     <p className="text-sm mb-2">스마트 컨트랙트를 실행할 때 소모됩니다. TRC20 토큰 전송할 때 주로 필요해요.</p>
                     <p className="text-xs text-gray-600 dark:text-gray-400">USDT 한 번 보내려면 약 31,895 Energy 필요</p>
                   </div>
                   <div>
-                    <p className="font-semibold text-red-600 mb-1">📡 Bandwidth</p>
+                    <p className="font-semibold text-red-600 mb-1">Bandwidth</p>
                     <p className="text-sm mb-2">일반 TRX 전송할 때 소모됩니다. 거래 데이터 크기에 비례해요.</p>
                     <p className="text-xs text-gray-600 dark:text-gray-400">한 번 전송에 약 268 바이트 = 268 Bandwidth</p>
                   </div>
                   <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded">
-                    <p className="font-semibold text-green-700 dark:text-green-400 mb-2">💡 무료로 쓰는 방법</p>
+                    <p className="font-semibold text-green-700 dark:text-green-400 mb-2">무료로 쓰는 방법</p>
                     <p className="text-sm">
                       TRX를 Freeze(동결)하면 매일 Energy와 Bandwidth를 무료로 받을 수 있습니다!
                       예를 들어 300 TRX를 동결하면 하루에 약 30만 Energy를 받아서,
@@ -566,17 +566,17 @@ export default function BlockchainComparisonPost() {
                 <h4 className="font-bold mb-3">Solana 계정 정보</h4>
                 <div className="space-y-4">
                   <div>
-                    <p className="font-semibold text-orange-600 mb-1">🔑 계정 주소 (Pubkey)</p>
+                    <p className="font-semibold text-orange-600 mb-1">계정 주소 (Pubkey)</p>
                     <p className="text-sm">여러분의 지갑 주소입니다. Base58로 인코딩된 문자열이에요.</p>
                   </div>
                   <div>
-                    <p className="font-semibold text-orange-600 mb-1">💰 잔액 (Lamports)</p>
+                    <p className="font-semibold text-orange-600 mb-1">잔액 (Lamports)</p>
                     <p className="text-sm mb-1">가지고 있는 SOL의 양입니다. Lamport라는 작은 단위로 저장돼요.</p>
                     <p className="text-xs text-gray-600 dark:text-gray-400">1 SOL = 1,000,000,000 Lamports (10억!)</p>
                     <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">이름의 유래: Leslie Lamport(분산 시스템의 대가)의 이름을 딴 거래요.</p>
                   </div>
                   <div>
-                    <p className="font-semibold text-orange-600 mb-1">👤 소유자 (Owner)</p>
+                    <p className="font-semibold text-orange-600 mb-1">소유자 (Owner)</p>
                     <p className="text-sm mb-2">이 계정을 관리하는 프로그램의 주소입니다.</p>
                     <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
                       <li>• 일반 지갑: System Program이 관리</li>
@@ -585,11 +585,11 @@ export default function BlockchainComparisonPost() {
                     </ul>
                   </div>
                   <div>
-                    <p className="font-semibold text-orange-600 mb-1">📦 데이터 (Data)</p>
+                    <p className="font-semibold text-orange-600 mb-1">데이터 (Data)</p>
                     <p className="text-sm">계정에 저장된 추가 정보입니다. 일반 지갑은 거의 비어있어요.</p>
                   </div>
                   <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded">
-                    <p className="font-semibold text-orange-700 dark:text-orange-400 mb-2">💡 Rent Exemption</p>
+                    <p className="font-semibold text-orange-700 dark:text-orange-400 mb-2">Rent Exemption</p>
                     <p className="text-sm mb-2">
                       계정을 만들 때 약 <strong>0.00204 SOL</strong>을 예치하면,
                       Rent가 면제되어 영구적으로 사용할 수 있습니다.
@@ -636,7 +636,7 @@ export default function BlockchainComparisonPost() {
               </div>
 
               <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-6 mb-6">
-                <h4 className="font-bold mb-2 text-blue-700 dark:text-blue-400">💡 꿀팁: 수수료 아끼는 법</h4>
+                <h4 className="font-bold mb-2 text-blue-700 dark:text-blue-400">꿀팁: 수수료 아끼는 법</h4>
                 <ul className="text-sm space-y-2">
                   <li>• <strong>주말이나 새벽에 보내기:</strong> 거래량이 적을 때는 수수료가 낮습니다.</li>
                   <li>• <strong>SegWit 주소 사용:</strong> bc1로 시작하는 주소는 데이터 크기가 작아서 수수료가 저렴합니다.</li>
@@ -655,14 +655,14 @@ export default function BlockchainComparisonPost() {
                 <h4 className="font-bold mb-3">Gas 시스템 이해하기</h4>
                 <div className="space-y-3">
                   <div className="bg-white dark:bg-gray-900 p-4 rounded">
-                    <p className="font-semibold mb-2">⛽ Gas Limit (주유 한도)</p>
+                    <p className="font-semibold mb-2">Gas Limit (주유 한도)</p>
                     <p className="text-sm">
                       이 거래를 처리하는 데 필요한 계산량입니다.
                       일반 전송은 21,000 gas, 토큰 전송은 65,000 gas 정도 필요해요.
                     </p>
                   </div>
                   <div className="bg-white dark:bg-gray-900 p-4 rounded">
-                    <p className="font-semibold mb-2">💰 Base Fee (기본 유류세)</p>
+                    <p className="font-semibold mb-2">Base Fee (기본 유류세)</p>
                     <p className="text-sm">
                       네트워크 혼잡도에 따라 자동으로 조정되는 기본 가격입니다.
                       혼잡하면 올라가고, 한가하면 내려갑니다.
@@ -670,7 +670,7 @@ export default function BlockchainComparisonPost() {
                     </p>
                   </div>
                   <div className="bg-white dark:bg-gray-900 p-4 rounded">
-                    <p className="font-semibold mb-2">🎁 Priority Fee (팁)</p>
+                    <p className="font-semibold mb-2">Priority Fee (팁)</p>
                     <p className="text-sm">
                       검증자에게 주는 팁입니다. 많이 줄수록 빨리 처리됩니다.
                       보통 1-2 Gwei 정도면 충분해요.
@@ -722,7 +722,7 @@ export default function BlockchainComparisonPost() {
                 <h4 className="font-bold mb-3">시나리오별 수수료</h4>
 
                 <div className="mb-6">
-                  <p className="font-semibold text-red-600 mb-2">📤 일반 TRX 전송</p>
+                  <p className="font-semibold text-red-600 mb-2">일반 TRX 전송</p>
                   <div className="text-sm space-y-2">
                     <p><strong>스테이킹 없이:</strong> 268 Bandwidth 필요 = 약 30원</p>
                     <p className="text-green-600"><strong>스테이킹 있으면:</strong> 무료! (매일 5,000 Bandwidth 무료 제공)</p>
@@ -730,7 +730,7 @@ export default function BlockchainComparisonPost() {
                 </div>
 
                 <div>
-                  <p className="font-semibold text-red-600 mb-2">💎 TRC20 토큰 전송 (예: USDT)</p>
+                  <p className="font-semibold text-red-600 mb-2">TRC20 토큰 전송 (예: USDT)</p>
                   <div className="text-sm space-y-2">
                     <p><strong>스테이킹 없이:</strong> 31,895 Energy 필요 = 약 1,500원</p>
                     <p className="text-green-600"><strong>스테이킹 있으면:</strong> 거의 무료! (300 TRX 동결 시 하루 30만 Energy)</p>
@@ -739,7 +739,7 @@ export default function BlockchainComparisonPost() {
               </div>
 
               <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-6 mb-6">
-                <h4 className="font-bold mb-2 text-blue-700 dark:text-blue-400">💡 Tron 수수료 절약 꿀팁</h4>
+                <h4 className="font-bold mb-2 text-blue-700 dark:text-blue-400">Tron 수수료 절약 꿀팁</h4>
                 <p className="text-sm mb-3">
                   자주 USDT를 주고받으신다면, 300-500 TRX 정도를 Freeze(동결)해두세요.
                   그러면 매일 충분한 Energy를 받아서 수수료 없이 거래할 수 있습니다.
@@ -757,16 +757,16 @@ export default function BlockchainComparisonPost() {
                 <h4 className="font-bold mb-3 text-orange-700 dark:text-orange-400">실전 수수료 예시</h4>
                 <div className="space-y-4 text-sm">
                   <div>
-                    <p className="font-semibold mb-1">💸 SOL 전송</p>
+                    <p className="font-semibold mb-1">SOL 전송</p>
                     <p>수수료: 0.000005 SOL ≈ <strong className="text-green-600">0.5원</strong> (SOL이 10만 원일 때)</p>
                   </div>
                   <div>
-                    <p className="font-semibold mb-1">💎 SPL 토큰 전송</p>
+                    <p className="font-semibold mb-1">SPL 토큰 전송</p>
                     <p>처음 받는 토큰이라면 ATA(계정) 생성 비용 포함: 0.00204 SOL ≈ 200원</p>
                     <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">* 한 번만 내면 됩니다. 이후부턴 0.5원만!</p>
                   </div>
                   <div className="bg-white dark:bg-gray-900 p-3 rounded">
-                    <p className="font-semibold mb-1">⚡ Priority Fee (우선 처리)</p>
+                    <p className="font-semibold mb-1">Priority Fee (우선 처리)</p>
                     <p className="text-xs">
                       네트워크가 혼잡할 때 우선 처리를 원하면 Priority Fee를 추가할 수 있습니다.
                       보통 1-5원 정도 추가하면 충분해요.
@@ -823,13 +823,13 @@ export default function BlockchainComparisonPost() {
               </p>
 
               <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6 mb-8">
-                <h4 className="font-bold mb-3 text-lg">💡 수수료로 블록체인 선택하기</h4>
+                <h4 className="font-bold mb-3 text-lg">수수료로 블록체인 선택하기</h4>
                 <ul className="space-y-2 text-sm">
-                  <li>💰 <strong>돈 아끼기:</strong> XRP, Solana, Tron (스테이킹)</li>
-                  <li>⚡ <strong>속도 중요:</strong> Solana, XRP, Tron</li>
-                  <li>🔒 <strong>안정성 우선:</strong> Bitcoin, Ethereum</li>
-                  <li>🎮 <strong>게임/NFT:</strong> Solana (빠르고 저렴)</li>
-                  <li>💵 <strong>스테이블코인:</strong> Tron (USDT 거래량 1위)</li>
+                  <li><strong>돈 아끼기:</strong> XRP, Solana, Tron (스테이킹)</li>
+                  <li><strong>속도 중요:</strong> Solana, XRP, Tron</li>
+                  <li><strong>안정성 우선:</strong> Bitcoin, Ethereum</li>
+                  <li><strong>게임/NFT:</strong> Solana (빠르고 저렴)</li>
+                  <li><strong>스테이블코인:</strong> Tron (USDT 거래량 1위)</li>
                 </ul>
               </div>
 
@@ -845,27 +845,27 @@ export default function BlockchainComparisonPost() {
                 <h4 className="text-xl font-bold mb-4">간단 선택 가이드</h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-                    <p className="font-semibold mb-2">🏦 국제 송금</p>
+                    <p className="font-semibold mb-2">국제 송금</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">→ XRP 또는 Solana</p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-                    <p className="font-semibold mb-2">💰 가치 저장</p>
+                    <p className="font-semibold mb-2">가치 저장</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">→ Bitcoin</p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-                    <p className="font-semibold mb-2">🎨 NFT 거래</p>
+                    <p className="font-semibold mb-2">NFT 거래</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">→ Ethereum 또는 Solana</p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-                    <p className="font-semibold mb-2">🎮 게임/앱</p>
+                    <p className="font-semibold mb-2">게임/앱</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">→ Solana 또는 Tron</p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-                    <p className="font-semibold mb-2">💵 USDT 거래</p>
+                    <p className="font-semibold mb-2">USDT 거래</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">→ Tron (거래량 1위)</p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-                    <p className="font-semibold mb-2">🏗️ DeFi</p>
+                    <p className="font-semibold mb-2">DeFi</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">→ Ethereum 또는 Solana</p>
                   </div>
                 </div>
@@ -896,7 +896,7 @@ export default function BlockchainComparisonPost() {
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   이 가이드가 도움이 되셨나요? 블록체인 선택에 관해 더 궁금한 점이 있다면
                   언제든 <Link href="/inquiry" className="text-blue-600 hover:underline">문의하기</Link>로 연락 주세요.
-                  친절하게 상담해드립니다! 😊
+                  친절하게 상담해드립니다!
                 </p>
               </div>
             </>
