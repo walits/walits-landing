@@ -10,14 +10,14 @@ export default function MessengerCryptoTransferPage() {
   const copy = {
     ko: {
       category: '메신저 송금',
-      title: '카카오톡/텔레그램으로 암호화폐 송금하는 법',
+      title: '메신저처럼 쉽게 암호화폐 송금하는 법',
       date: '2026년 1월 11일',
       readTime: '5분 읽기',
       backToBlog: '← 블로그로 돌아가기',
     },
     en: {
       category: 'Messenger Transfer',
-      title: 'How to Send Crypto via KakaoTalk/Telegram',
+      title: 'How to Send Crypto as Easy as Messaging',
       date: 'January 11, 2026',
       readTime: '5 min read',
       backToBlog: '← Back to Blog',
@@ -66,8 +66,8 @@ export default function MessengerCryptoTransferPage() {
           {language === 'ko' ? (
             <>
               <p className="lead text-xl text-gray-700 dark:text-gray-300">
-                친구에게 1만 원 빌려달라고 카톡으로 보내듯, 암호화폐도 메신저로 송금할 수 있다면?
-                AI Chat 지갑으로 카카오톡/텔레그램에서 대화하듯 암호화폐를 주고받으세요.
+                친구에게 1만 원 빌려달라고 메시지 보내듯, 암호화폐도 메신저처럼 쉽게 송금할 수 있다면?
+                Walits 메신저 기능으로 대화하듯 암호화폐를 주고받으세요.
               </p>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">기존 암호화폐 송금의 문제</h2>
@@ -101,12 +101,12 @@ export default function MessengerCryptoTransferPage() {
                 </p>
               </div>
 
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">해결책: 메신저 송금</h2>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">해결책: Walits 메신저 송금</h2>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">카카오톡으로 송금하기</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">국내 송금 예시</h3>
               <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
                 <pre className="text-sm">
-{`[카카오톡 대화창]
+{`[Walits 메신저]
 
 나: 어제 밥값 10,000원 보낼게
 친구: ㅇㅇ 고마워
@@ -114,7 +114,7 @@ export default function MessengerCryptoTransferPage() {
 나: /send 친구이름 10000 KRW
      → 자동으로 USDT로 환전 후 전송
 
-[AI Chat 봇]
+[Walits 알림]
 전송이 완료되었습니다
    10,000원이 7.5 USDT로 환전되어 전송되었습니다
    수신자: 친구이름 (김철수)
@@ -125,10 +125,10 @@ export default function MessengerCryptoTransferPage() {
                 </pre>
               </div>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">텔레그램으로 송금하기</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">해외 송금 예시</h3>
               <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg my-8">
                 <pre className="text-sm">
-{`[Telegram Group Chat]
+{`[Walits Messenger]
 
 Alice: I'll pay for dinner, $50
 Bob: Thanks! I'll send you my share
@@ -136,7 +136,7 @@ Bob: Thanks! I'll send you my share
 Bob: /send @Alice 25 USD
      → Automatically converts to USDT
 
-[Walits Bot]
+[Walits Notification]
 Transfer completed successfully
    $25 USD has been converted to 25 USDT and sent
    To: @Alice
@@ -151,7 +151,7 @@ Alice: Received! Thanks Bob!`}
 
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">1. 대화 기반 UI</h3>
               <p>
-                복잡한 앱 설치 없이 메신저에서 대화하듯 명령어 입력:
+                Walits 앱 내 메신저에서 대화하듯 명령어 입력:
               </p>
               <ul>
                 <li><code>/send [받는사람] [금액] [통화]</code> - 송금</li>
@@ -303,7 +303,7 @@ Alice: Received! Thanks Bob!`}
                     (시간: 5분, 수수료: 무료지만 은행 계좌 필요)
                   </p>
                   <p>
-                    <strong>After AI Chat:</strong> 카톡에서 <code>/split 30000 @친구1 @친구2</code><br/>
+                    <strong>After AI Chat:</strong> Walits 앱에서 <code>/split 30000 @친구1 @친구2</code><br/>
                     (시간: 10초, 은행 계좌 불필요)
                   </p>
                 </div>
@@ -318,7 +318,7 @@ Alice: Received! Thanks Bob!`}
                     100만 원 받으면 8만 원 날림
                   </p>
                   <p>
-                    <strong>After AI Chat:</strong> 텔레그램에서 <code>/invoice 1000000 KRW</code><br/>
+                    <strong>After AI Chat:</strong> Walits 앱에서 <code>/invoice 1000000 KRW</code><br/>
                     수수료: 가스비 100원 (0.01%)
                   </p>
                 </div>
@@ -348,7 +348,7 @@ Alice: Received! Thanks Bob!`}
                 <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">AI Chat 지갑</h3>
                 <div className="text-4xl font-bold text-blue-600 mb-4">무료<span className="text-lg text-gray-600 dark:text-gray-400"> (베타 기간)</span></div>
                 <ul className="mb-6 space-y-2">
-                  <li>카카오톡과 텔레그램에서 바로 사용할 수 있도록 완벽하게 연동됩니다.</li>
+                  <li>Walits 앱 내장 메신저로 쉽고 빠르게 송금하세요.</li>
                   <li>AI가 자동으로 가스비가 가장 저렴한 최적의 경로를 선택하여 송금합니다.</li>
                   <li>그룹 정산 기능으로 여러 명과 함께한 식사비나 여행 경비를 쉽게 나눌 수 있습니다.</li>
                   <li>100원부터 시작하는 소액 결제도 가능하여 크리에이터 후원이나 팁 전송에 최적화되어 있습니다.</li>
@@ -368,15 +368,15 @@ Alice: Received! Thanks Bob!`}
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
                   <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q1. 메신저에 내 자산이 노출되지 않나요?</h4>
                   <p className="mb-0 text-gray-600 dark:text-gray-400">
-                    아니요. 메신저는 UI일 뿐이고, 실제 자산은 TEE 환경의 안전한 지갑에 보관됩니다.
-                    메신저 해킹되어도 자산은 안전합니다.
+                    아니요. Walits 메신저는 UI일 뿐이고, 실제 자산은 TEE 환경의 안전한 지갑에 보관됩니다.
+                    앱이 해킹되어도 자산은 안전합니다.
                   </p>
                 </div>
 
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
                   <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q2. 상대방도 AI Chat 지갑이 있어야 하나요?</h4>
                   <p className="mb-0 text-gray-600 dark:text-gray-400">
-                    네. 하지만 가입은 1분이면 끝납니다. 메신저에서 봇과 대화만 하면 자동으로 지갑 생성됩니다.
+                    네. 하지만 가입은 1분이면 끝납니다. Walits 앱을 설치하고 간단한 가입 절차만 거치면 자동으로 지갑이 생성됩니다.
                   </p>
                 </div>
 

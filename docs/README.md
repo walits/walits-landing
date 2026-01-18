@@ -11,7 +11,7 @@ Detailed IR materials for potential investors, partners, and stakeholders.
 
 **Sections:**
 - Executive Summary
-- Company Overview & Team
+- Company Overview
 - Market Opportunity Analysis
 - Technology Stack & Architecture
 - Products & Services (4 core services)
@@ -62,7 +62,6 @@ Detailed IR materials for potential investors, partners, and stakeholders.
 - Added detailed Use Cases section
 - Expanded Financial Model with code examples
 - Added Partnership Target List
-- Enhanced Team & Hiring sections
 
 **Version 1.0** (January 17, 2026)
 - Initial IR document creation

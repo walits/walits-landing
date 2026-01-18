@@ -3,11 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'AI Chat 지갑 | 메신저 송금 + AI 자동 결제 - Walits',
-  description: '카카오톡, 텔레그램으로 대화하듯 암호화폐 송금. AI가 자동으로 반복 결제 처리하고 최적 경로를 선택해 수수료 절감. 구독료 자동 결제, 소액 결제에 최적화.',
-  keywords: '메신저 지갑, 카카오톡 송금, 텔레그램 지갑, 자동 결제, AI 지갑, 암호화폐 송금, 소액 결제, 구독료 결제',
+  title: 'AI Chat 지갑 | Walits 메신저 송금 + AI 자동 결제',
+  description: 'Walits 메신저로 대화하듯 암호화폐 송금. AI가 자동으로 반복 결제 처리하고 최적 경로를 선택해 수수료 절감. 구독료 자동 결제, 소액 결제에 최적화.',
+  keywords: '메신저 지갑, Walits 메신저, 자동 결제, AI 지갑, 암호화폐 송금, 소액 결제, 구독료 결제',
   openGraph: {
-    title: 'AI Chat 지갑 | 메신저 송금 + AI 자동 결제',
+    title: 'AI Chat 지갑 | Walits 메신저 송금 + AI 자동 결제',
     description: '채팅하듯 송금하고, AI가 자동으로 결제 처리',
     type: 'website',
     url: 'https://walits.com/ai-chat-wallet',
@@ -47,7 +47,7 @@ export default function AIChatWalletPage() {
               채팅 + AI 자동 결제
             </p>
             <p className="text-xl mb-8 text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              카카오톡, 텔레그램으로 대화하듯 송금하세요. AI가 자동으로 최적 결제 경로를 선택하고,
+              Walits 메신저로 대화하듯 송금하세요. AI가 자동으로 최적 결제 경로를 선택하고,
               반복 결제를 자동 처리합니다. 스마트 라우팅으로 수수료를 최소화합니다.
             </p>
             <div className="flex gap-4 justify-center">
@@ -89,7 +89,7 @@ export default function AIChatWalletPage() {
               </div>
               <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">채팅 송금</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                카카오톡, 텔레그램에서 대화하듯 암호화폐 송금. 주소 복사 붙여넣기 필요 없음
+                Walits 메신저에서 대화하듯 암호화폐 송금. 주소 복사 붙여넣기 필요 없음
               </p>
             </div>
 
@@ -216,7 +216,7 @@ export default function AIChatWalletPage() {
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">앱 설치</h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  AI Chat 앱을 다운로드하고 카카오톡/텔레그램 연동
+                  Walits 앱을 다운로드하고 간편하게 가입
                 </p>
               </div>
 

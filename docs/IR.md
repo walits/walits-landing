@@ -55,8 +55,8 @@ Walits는 MPC(Multi-Party Computation) 기반 기업급 암호자산 인프라�
    - 월 550,000원 (~$420)
 
 3. **AI Chat Wallet** (B2C)
-   - 카카오톡/텔레그램에서 자연어로 송금
-   - 앱 설치 불필요
+   - 메신저 기능 내장, 자연어로 송금
+   - 쉬운 전송 및 결제
    - 거래 수수료 0.5% (경쟁사 대비 절반)
 
 4. **AI 토큰증권 지갑** (B2C)
@@ -1196,92 +1196,6 @@ Retained (3K MAU)
 **3. Plaid**
 - **Purpose**: 은행 계좌 연동
 - **Timeline**: 2027 Q1
-
----
-
-## Team
-
-### Current Team (2026)
-
-#### Founders
-
-**CEO: [Name]**
-- **Background**:
-  - 前 [Previous Company] CTO
-  - 블록체인 개발 7년
-  - KAIST 컴퓨터공학 석사
-- **Expertise**: MPC, Cryptography, System Architecture
-
-**CTO: [Name]**
-- **Background**:
-  - 前 [Previous Company] Lead Engineer
-  - 분산 시스템 10년
-  - 서울대 컴퓨터공학 박사
-- **Expertise**: Distributed Systems, Security, Infrastructure
-
-**CPO (Chief Product Officer): [Name]**
-- **Background**:
-  - 前 [Previous Company] Product Manager
-  - Web3 PM 5년
-  - 연세대 경영학 학사
-- **Expertise**: Product Strategy, UX, Go-to-Market
-
-### Hiring Plan (2026-2027)
-
-**2026 Q1-Q2**
-- Backend Engineers: 3명
-- Frontend Engineers: 2명
-- DevOps Engineer: 1명
-- Head of Sales: 1명
-- **Total: 7명 (누적 10명)**
-
-**2026 Q3-Q4**
-- Backend Engineers: 2명
-- Security Engineer: 1명
-- Account Executives: 3명
-- Marketing Manager: 1명
-- Customer Success: 2명
-- **Total: 9명 (누적 19명)**
-
-**2027**
-- Engineering: 10명
-- Sales: 5명
-- Marketing: 3명
-- Operations: 2명
-- **Total: 20명 (누적 39명)**
-
-### Advisory Board
-
-**Security Advisor: [Name]**
-- 前 [Company] CISO
-- 금융 보안 20년 경력
-
-**Regulatory Advisor: [Name]**
-- 前 금융위원회 팀장
-- 자본시장법 전문가
-
-**Technical Advisor: [Name]**
-- 前 [Company] Principal Engineer
-- MPC 연구 논문 10+ 편
-
-### Compensation Philosophy
-
-**Salary**
-- 시장 대비 90th percentile
-- Backend Engineer: 8,000만원+
-- Senior Engineer: 1억원+
-
-**Equity**
-- 초기 직원: 0.5-2% stock options
-- 임원급: 2-5%
-- 4년 vesting (1년 cliff)
-
-**Benefits**
-- 원격 근무 가능
-- 무제한 휴가
-- 최신 장비 지원 (MacBook Pro, 4K 모니터)
-- 점심/저녁 제공
-- 건강 검진, 운동 지원
 
 ---
 
