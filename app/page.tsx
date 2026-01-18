@@ -961,7 +961,7 @@ export default function HomePage() {
 
             {/* Right: Image */}
             <div className="flex justify-center">
-              <img src="/tech.png" alt="MPC Architecture" className="w-full max-w-md rounded-xl shadow-lg" />
+              <img src="/mpc.png" alt="MPC Architecture" className="w-full max-w-md rounded-xl shadow-lg" />
             </div>
           </div>
         </div>
