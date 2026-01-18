@@ -615,6 +615,124 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                 </div>
               </div>
 
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">선택적 Passphrase 암호화 (추가 보안)</h3>
+
+              <div className="bg-indigo-50 dark:bg-indigo-900/20 p-6 rounded-lg my-6">
+                <p className="mb-4">
+                  백업키는 이미 MPC로 3조각 중 하나이므로 단독으로는 자산에 접근할 수 없어 안전하지만,
+                  추가적인 보안이 필요한 경우 <strong>선택적으로 passphrase를 설정</strong>할 수 있습니다.
+                </p>
+
+                <div className="mt-4 p-4 bg-blue-100 dark:bg-blue-900/30 rounded">
+                  <p className="font-semibold text-blue-800 dark:text-blue-300">💡 Passphrase 암호화란?</p>
+                  <p className="text-sm mt-2">
+                    백업키 PDF를 다운로드할 때 사용자가 설정한 비밀번호로 한 번 더 암호화하는 기능입니다.
+                    이렇게 하면 누군가 PDF 파일을 얻더라도 비밀번호 없이는 열어볼 수 없습니다.
+                  </p>
+                </div>
+
+                <h4 className="font-bold mt-6 mb-3 text-gray-900 dark:text-white">언제 사용하면 좋을까요?</h4>
+                <ul className="space-y-2">
+                  <li>
+                    <strong>✅ 최고 수준의 보안이 필요한 경우</strong>
+                    <ul className="ml-6 mt-1 text-sm space-y-1">
+                      <li>• 대량의 암호화폐를 보관하는 경우</li>
+                      <li>• 규제 요구사항으로 이중 암호화가 필요한 기업</li>
+                      <li>• 백업키를 클라우드에 보관해야 하는 경우</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>⚠️ 일반 사용자는 선택사항</strong>
+                    <ul className="ml-6 mt-1 text-sm space-y-1">
+                      <li>• 은행 금고에 보관한다면 passphrase 없이도 충분히 안전</li>
+                      <li>• MPC 자체가 이미 강력한 보안을 제공</li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <h4 className="font-bold mt-6 mb-3 text-gray-900 dark:text-white">장단점 비교</h4>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded">
+                    <p className="font-semibold text-green-800 dark:text-green-300 mb-2">✅ 장점</p>
+                    <ul className="text-sm space-y-1">
+                      <li>• 이중 보안 (MPC + Passphrase)</li>
+                      <li>• PDF 파일 탈취 시에도 안전</li>
+                      <li>• 클라우드 저장 가능</li>
+                      <li>• 규제 준수 용이</li>
+                    </ul>
+                  </div>
+                  <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded">
+                    <p className="font-semibold text-orange-800 dark:text-orange-300 mb-2">⚠️ 단점</p>
+                    <ul className="text-sm space-y-1">
+                      <li>• 비밀번호를 잊으면 복구 불가능</li>
+                      <li>• 사용성 저하 (복원 시 추가 단계)</li>
+                      <li>• 비밀번호를 별도로 안전하게 보관해야 함</li>
+                      <li>• 관리할 비밀번호가 하나 더 늘어남</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <h4 className="font-bold mt-6 mb-3 text-gray-900 dark:text-white">Passphrase 설정 방법</h4>
+                <ol className="space-y-2">
+                  <li>1. 지갑 생성 시 "고급 옵션" 클릭</li>
+                  <li>2. "백업키 Passphrase 암호화" 옵션 활성화</li>
+                  <li>3. 강력한 비밀번호 입력 (12자 이상 권장)
+                    <div className="mt-2 ml-4 text-sm">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <span className="text-red-600">❌</span>
+                        <code className="bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded">password123</code>
+                        <span className="text-gray-600">너무 약함</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-green-600">✅</span>
+                        <code className="bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded">K9$mPz2@vLqR8#xW</code>
+                        <span className="text-gray-600">강력함</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li>4. 비밀번호 확인 입력</li>
+                  <li>5. 백업키 PDF 다운로드 (암호화됨)</li>
+                </ol>
+
+                <h4 className="font-bold mt-6 mb-3 text-gray-900 dark:text-white">Passphrase 관리 방법</h4>
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded">
+                  <p className="font-semibold text-yellow-800 dark:text-yellow-300 mb-3">🔑 비밀번호 보관 전략</p>
+                  <ul className="space-y-2 text-sm">
+                    <li>
+                      <strong>방법 1: 물리적 보관 (가장 안전)</strong>
+                      <ul className="ml-6 mt-1 space-y-1">
+                        <li>• 종이에 적어서 백업키 PDF와 다른 장소에 보관</li>
+                        <li>• 예: PDF는 은행 금고, 비밀번호는 가정용 금고</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>방법 2: 비밀번호 관리자 사용</strong>
+                      <ul className="ml-6 mt-1 space-y-1">
+                        <li>• 1Password, Bitwarden 등 사용</li>
+                        <li>• 마스터 비밀번호는 종이에 적어 금고 보관</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>방법 3: 가족과 분할 보관</strong>
+                      <ul className="ml-6 mt-1 space-y-1">
+                        <li>• PDF: 본인이 보관</li>
+                        <li>• Passphrase: 가족(부모님 등)에게 봉인 봉투로 전달</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mt-4 p-4 bg-red-100 dark:bg-red-900/30 rounded">
+                  <p className="font-semibold text-red-800 dark:text-red-300">⛔ 치명적 주의사항</p>
+                  <ul className="mt-2 space-y-1 text-sm">
+                    <li>• <strong>Passphrase를 잊어버리면 복구 절대 불가능</strong></li>
+                    <li>• PDF와 비밀번호를 같은 장소에 보관하지 마세요</li>
+                    <li>• 비밀번호를 디지털 기기에만 저장하지 마세요 (파손 위험)</li>
+                    <li>• 생일, 전화번호 등 추측 가능한 비밀번호 금지</li>
+                  </ul>
+                </div>
+              </div>
+
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">백업키 복원하기 (Import)</h3>
 
               <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg my-6">
@@ -630,9 +748,10 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                   <li>1. Walits 앱 설치 (새 디바이스)</li>
                   <li>2. "백업 가져오기" 메뉴 선택</li>
                   <li>3. 백업키 PDF 파일 선택</li>
-                  <li>4. 지갑 이름 확인 (선택사항: 변경 가능)</li>
-                  <li>5. "가져오기" 클릭</li>
-                  <li>6. 완료: 백업키가 성공적으로 복원되었습니다!</li>
+                  <li>4. Passphrase 입력 (암호화된 백업의 경우에만)</li>
+                  <li>5. 지갑 이름 확인 (선택사항: 변경 가능)</li>
+                  <li>6. "가져오기" 클릭</li>
+                  <li>7. 완료: 백업키가 성공적으로 복원되었습니다!</li>
                 </ol>
 
                 <div className="mt-4 p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded">
@@ -810,6 +929,24 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                   <p className="text-gray-700 dark:text-gray-300">
                     <strong>A:</strong> 네, 완전히 호환됩니다. 모바일 앱에서 내보낸 백업을 PC 앱에서 가져올 수 있고,
                     그 반대도 가능합니다. 모든 플랫폼이 동일한 백업 형식을 사용합니다.
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q9. Passphrase 암호화를 반드시 사용해야 하나요?</h4>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <strong>A:</strong> 아니요, 선택사항입니다. 백업키는 이미 MPC로 분리된 조각이므로 단독으로는 자산에 접근할 수 없어 안전합니다.
+                    은행 금고나 안전금고에 보관한다면 passphrase 없이도 충분합니다.
+                    다만, 백업키를 클라우드에 저장하거나 최고 수준의 보안이 필요한 경우에는 passphrase 사용을 권장합니다.
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q10. Passphrase를 잊어버리면 어떻게 되나요?</h4>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <strong>A:</strong> <span className="text-red-600 font-semibold">복구가 절대 불가능</span>합니다.
+                    암호화된 백업키 PDF를 열 수 없게 되며, 고객키까지 분실한 상황이라면 자산을 영구적으로 잃게 됩니다.
+                    Passphrase를 설정했다면 반드시 종이에 적어 안전한 장소에 보관하거나 비밀번호 관리자를 사용하세요.
                   </p>
                 </div>
               </div>
