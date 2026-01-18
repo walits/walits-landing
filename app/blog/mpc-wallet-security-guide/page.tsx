@@ -774,7 +774,7 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">실제 도입 사례</h2>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">도입 사례 예시</h2>
 
               <div className="space-y-6">
                 <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg">
