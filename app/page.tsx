@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HomePage() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
@@ -573,7 +574,16 @@ export default function HomePage() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-8">
-            <span className={`text-3xl font-bold ${scrolled ? 'text-gray-900' : 'text-white'}`}>Walits</span>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt="Walits Logo"
+                width={40}
+                height={40}
+                className="rounded"
+              />
+              <span className={`text-3xl font-bold ${scrolled ? 'text-gray-900' : 'text-white'}`}>Walits</span>
+            </div>
 
             {/* Enterprise Wallets */}
             <div className="flex items-center gap-2">
