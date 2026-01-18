@@ -522,74 +522,95 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                 반드시 지갑 생성 즉시 백업하고, 안전한 장소에 보관하세요.
               </p>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">백업키 내보내기 (Export)</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">백업키 PDF 다운로드 (지갑 생성 시)</h3>
 
               <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-6">
-                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">Walits 앱에서 백업하기</h4>
-                <ol className="space-y-2">
-                  <li>1. Walits 앱 열기</li>
-                  <li>2. 지갑 목록에서 백업할 지갑 선택</li>
-                  <li>3. "백업 내보내기" 버튼 클릭</li>
-                  <li>4. 암호화 옵션 선택 (강력 권장):</li>
-                  <li className="ml-4">
-                    <label className="flex items-center space-x-2">
-                      <input type="checkbox" checked disabled className="form-checkbox" />
-                      <span>암호화 (AES-256-GCM)</span>
-                    </label>
+                <p className="mb-4">
+                  Walits는 지갑 생성 시 백업키를 <strong>PDF 문서</strong>로 자동 생성합니다.
+                  별도의 내보내기 기능이 없으며, 지갑 생성 단계에서 한 번만 다운로드 가능합니다.
+                </p>
+
+                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">지갑 생성 및 백업키 다운로드</h4>
+                <ol className="space-y-3">
+                  <li>
+                    <strong>1단계: 지갑 생성</strong><br/>
+                    <span className="text-sm">Walits 앱에서 "새 지갑 만들기" 선택</span>
                   </li>
-                  <li>5. 강력한 비밀번호 설정 (최소 12자, 대소문자+숫자+특수문자)</li>
-                  <li>6. 저장 위치 선택</li>
-                  <li>7. 완료: <code className="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">MY-WALLET-backup-20260118_143022.enc</code></li>
+                  <li>
+                    <strong>2단계: MPC 키 생성</strong><br/>
+                    <span className="text-sm">서버키 + 고객키 + 백업키가 자동으로 생성됩니다</span>
+                  </li>
+                  <li>
+                    <strong>3단계: 백업키 PDF 다운로드</strong><br/>
+                    <span className="text-sm">"백업키 PDF 다운로드" 버튼 클릭</span><br/>
+                    <code className="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded mt-1 inline-block">
+                      MY-WALLET-backup-20260118.pdf
+                    </code>
+                  </li>
+                  <li>
+                    <strong>4단계: 안전한 장소에 보관</strong><br/>
+                    <span className="text-sm text-red-600 dark:text-red-400 font-semibold">⚠️ 이 단계를 건너뛰지 마세요!</span>
+                  </li>
                 </ol>
 
-                <div className="mt-4 p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded">
-                  <p className="font-semibold text-yellow-800 dark:text-yellow-300">💡 백업 파일명 형식</p>
-                  <p className="text-sm mt-1">
-                    <code>{`{지갑이름}-backup-{날짜}_{시간}.enc`}</code><br/>
-                    예: <code>ethereum-wallet-backup-20260118_143022.enc</code>
+                <div className="mt-4 p-4 bg-red-100 dark:bg-red-900/30 rounded">
+                  <p className="font-semibold text-red-800 dark:text-red-300">🚨 중요: 재다운로드 불가능</p>
+                  <p className="text-sm mt-2">
+                    백업키 PDF는 지갑 생성 시 단 한 번만 다운로드할 수 있습니다.<br/>
+                    이후에는 재다운로드가 불가능하므로 <strong>반드시 안전한 장소에 보관</strong>하세요!
                   </p>
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">백업키 저장 위치 (3-2-1 규칙)</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">백업키 PDF 보관 방법</h3>
 
               <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-6 border-l-4 border-green-500">
-                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">3-2-1 백업 규칙</h4>
+                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">추천 보관 장소</h4>
                 <ul className="space-y-3">
                   <li>
-                    <strong>3개 복사본:</strong> 백업 파일을 최소 3곳에 보관
-                    <ul className="ml-6 mt-2 space-y-1">
-                      <li>• 원본: 클라이언트 디바이스 (앱 내장)</li>
-                      <li>• 백업 1: USB 메모리</li>
-                      <li>• 백업 2: 클라우드 또는 종이</li>
+                    <strong>1순위: 은행 금고</strong>
+                    <ul className="ml-6 mt-2 space-y-1 text-sm">
+                      <li>• 가장 안전한 물리적 보관</li>
+                      <li>• 화재, 도난으로부터 완벽 보호</li>
+                      <li>• PDF를 USB에 저장하거나 인쇄해서 보관</li>
                     </ul>
                   </li>
                   <li>
-                    <strong>2개 이상의 저장 매체:</strong> 서로 다른 형태로 보관
-                    <ul className="ml-6 mt-2 space-y-1">
-                      <li>• SSD (클라이언트 디바이스)</li>
-                      <li>• USB 플래시 드라이브</li>
-                      <li>• 종이 (QR 코드 인쇄)</li>
-                      <li>• 클라우드 (Dropbox, Google Drive 등)</li>
+                    <strong>2순위: 가정용 금고</strong>
+                    <ul className="ml-6 mt-2 space-y-1 text-sm">
+                      <li>• 내화금고 사용 권장</li>
+                      <li>• 방수 밀봉 봉투에 넣어 보관</li>
+                      <li>• 가족 외 다른 사람이 접근할 수 없는 곳</li>
                     </ul>
                   </li>
                   <li>
-                    <strong>1개 오프사이트 백업:</strong> 집/사무실과 다른 장소에 보관
-                    <ul className="ml-6 mt-2 space-y-1">
-                      <li>• 은행 금고</li>
-                      <li>• 가족 집</li>
-                      <li>• 다른 도시 사무실</li>
+                    <strong>3순위: 신뢰할 수 있는 가족에게 위탁</strong>
+                    <ul className="ml-6 mt-2 space-y-1 text-sm">
+                      <li>• 부모님이나 형제자매의 금고</li>
+                      <li>• 지리적으로 떨어진 장소 (재난 대비)</li>
+                      <li>• 봉인된 봉투에 넣어 전달</li>
                     </ul>
                   </li>
                 </ul>
 
+                <div className="mt-4 p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded">
+                  <p className="font-semibold text-yellow-800 dark:text-yellow-300">💡 보관 시 주의사항</p>
+                  <ul className="mt-2 space-y-1 text-sm">
+                    <li>• PDF를 여러 곳에 복사해서 보관 가능 (권장)</li>
+                    <li>• 클라우드 저장 시 반드시 암호화 (ZIP 비밀번호 등)</li>
+                    <li>• 인쇄 시 고품질 용지 사용 (변색 방지)</li>
+                    <li>• 물리적 손상 방지를 위해 라미네이팅 고려</li>
+                    <li>• 정기적으로 보관 상태 확인 (연 1회)</li>
+                  </ul>
+                </div>
+
                 <div className="mt-4 p-4 bg-white dark:bg-gray-700 rounded">
-                  <p className="font-semibold mb-2">예시 백업 전략:</p>
+                  <p className="font-semibold mb-2">예시 보관 전략:</p>
                   <pre className="text-sm">
-{`복사본 1: MacBook (앱 기본 저장소)
-복사본 2: USB 메모리 (책상 서랍)
-복사본 3: Dropbox (암호화 필수)
-오프사이트: 부모님 집 금고 (USB 복사본)`}
+{`원본 PDF: USB 메모리 → 은행 금고
+복사본 1: PDF 인쇄 → 가정용 금고 (라미네이팅)
+복사본 2: 암호화 ZIP → 부모님 집 금고
+백업: 암호화하여 개인 클라우드 (선택사항)`}
                   </pre>
                 </div>
               </div>
@@ -608,11 +629,10 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                 <ol className="space-y-2">
                   <li>1. Walits 앱 설치 (새 디바이스)</li>
                   <li>2. "백업 가져오기" 메뉴 선택</li>
-                  <li>3. 백업 파일 선택 (USB 또는 클라우드에서)</li>
-                  <li>4. 암호화된 백업인 경우 비밀번호 입력</li>
-                  <li>5. 지갑 이름 확인 (선택사항: 변경 가능)</li>
-                  <li>6. "가져오기" 클릭</li>
-                  <li>7. 완료: 백업키가 성공적으로 복원되었습니다!</li>
+                  <li>3. 백업키 PDF 파일 선택</li>
+                  <li>4. 지갑 이름 확인 (선택사항: 변경 가능)</li>
+                  <li>5. "가져오기" 클릭</li>
+                  <li>6. 완료: 백업키가 성공적으로 복원되었습니다!</li>
                 </ol>
 
                 <div className="mt-4 p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded">
@@ -621,77 +641,6 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                     복원된 백업키로 즉시 송금하지 마세요!<br/>
                     먼저 서버와 연결되는지 확인하고, 테스트 송금(소액)을 해보세요.
                   </p>
-                </div>
-              </div>
-
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">백업 검증 (정기 테스트)</h3>
-
-              <div className="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-lg my-6">
-                <p className="mb-4">
-                  백업 파일이 정상적으로 작동하는지 정기적으로 테스트하세요.
-                  막상 필요할 때 백업이 손상되었다면 복구할 수 없습니다!
-                </p>
-
-                <h4 className="font-bold mb-2">테스트 절차 (3개월마다):</h4>
-                <ol className="space-y-2">
-                  <li>1. 백업 파일 가져오기 시도</li>
-                  <li>2. 비밀번호로 복호화 성공 확인</li>
-                  <li>3. 지갑 정보 확인 (주소, 공개키)</li>
-                  <li>4. 테스트 완료 후 삭제 (원본은 유지)</li>
-                </ol>
-
-                <div className="mt-4 p-4 bg-green-100 dark:bg-green-900/30 rounded">
-                  <p className="font-semibold text-green-800 dark:text-green-300">✅ 체크리스트</p>
-                  <ul className="mt-2 space-y-1 text-sm">
-                    <li>□ 지갑 생성 후 즉시 백업 완료</li>
-                    <li>□ 최소 3곳에 백업 저장</li>
-                    <li>□ 암호화 비밀번호를 안전한 곳에 기록</li>
-                    <li>□ 오프라인 저장소 1개 이상 보유</li>
-                    <li>□ 3개월마다 복원 테스트 실행</li>
-                    <li>□ 백업키 사용 후 즉시 재백업</li>
-                  </ul>
-                </div>
-              </div>
-
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">암호화 비밀번호 관리</h3>
-
-              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-6">
-                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">강력한 비밀번호 생성 규칙</h4>
-                <ul className="space-y-2">
-                  <li>• <strong>최소 길이:</strong> 12자 이상 (20자 이상 권장)</li>
-                  <li>• <strong>복잡도:</strong> 대문자, 소문자, 숫자, 특수문자 모두 포함</li>
-                  <li>• <strong>예측 불가:</strong> 생일, 이름, 전화번호 등 개인정보 사용 금지</li>
-                  <li>• <strong>고유성:</strong> 다른 서비스와 절대 같은 비밀번호 사용 금지</li>
-                </ul>
-
-                <div className="mt-4">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">비밀번호 예시:</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-red-600">❌</span>
-                      <code className="bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded">password123</code>
-                      <span className="text-gray-600">너무 약함</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-yellow-600">⚠️</span>
-                      <code className="bg-yellow-100 dark:bg-yellow-900/30 px-2 py-1 rounded">MyBirthday1990!</code>
-                      <span className="text-gray-600">예측 가능</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-green-600">✅</span>
-                      <code className="bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded">K9$mPz2@vLqR8#xW</code>
-                      <span className="text-gray-600">강력함</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 p-4 bg-blue-100 dark:bg-blue-900/30 rounded">
-                  <p className="font-semibold text-blue-800 dark:text-blue-300">💡 비밀번호 관리 도구 사용</p>
-                  <ul className="mt-2 space-y-1 text-sm">
-                    <li>• 1Password, Bitwarden 등 비밀번호 관리자 사용</li>
-                    <li>• 마스터 비밀번호는 종이에 적어 금고 보관</li>
-                    <li>• 비밀번호를 잊어버리면 복구 불가능!</li>
-                  </ul>
                 </div>
               </div>
 
@@ -795,11 +744,11 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
 
               <div className="space-y-6">
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q1. 백업키를 여러 번 저장해도 되나요?</h4>
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q1. 백업키 PDF는 어디에 보관해야 하나요?</h4>
                   <p className="text-gray-700 dark:text-gray-300">
-                    <strong>A:</strong> 네, 권장됩니다! 최소 3곳 이상에 백업하세요.
-                    하나가 손상되어도 다른 백업으로 복구할 수 있습니다.
-                    USB, 클라우드, 종이 등 서로 다른 형태로 보관하는 것이 가장 안전합니다.
+                    <strong>A:</strong> 은행 금고나 안전금고에 보관하는 것을 강력히 권장합니다.
+                    여러 곳에 복사본을 만들면 오히려 분실이나 도난의 위험이 증가할 수 있습니다.
+                    백업키 PDF는 지갑 생성 시 단 한 번만 다운로드할 수 있으므로, 절대 분실하지 않도록 안전한 단일 장소에 보관하세요.
                   </p>
                 </div>
 
@@ -830,35 +779,17 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                 </div>
 
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q5. 암호화된 백업의 비밀번호를 잊어버렸어요!</h4>
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q5. 백업키를 클라우드에 저장해도 되나요?</h4>
                   <p className="text-gray-700 dark:text-gray-300">
-                    <strong>A:</strong> 비밀번호 복구는 불가능합니다.
-                    예방책으로 비밀번호를 종이에 적어 금고에 보관하거나,
-                    1Password/Bitwarden 같은 비밀번호 관리자를 사용하세요.
-                    또는 암호화된 백업과 암호화하지 않은 백업을 각각 다른 장소에 보관하는 방법도 있습니다.
+                    <strong>A:</strong> 권장하지 않습니다.
+                    백업키는 MPC의 3개 조각 중 하나이므로, 백업키 단독으로는 자산에 접근할 수 없어 비교적 안전하지만,
+                    은행 금고와 같은 오프라인 저장소에 보관하는 것이 가장 안전합니다.
+                    클라우드는 해킹 위험이 있으므로 가능한 한 피하세요.
                   </p>
                 </div>
 
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q6. 백업키를 클라우드에 저장해도 되나요?</h4>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    <strong>A:</strong> 반드시 암호화한 후 저장하세요.
-                    Dropbox, Google Drive 등에 암호화된 백업(.enc 파일)을 저장하는 것은 안전합니다.
-                    <span className="text-red-600 font-semibold">절대 평문(.json) 파일을 클라우드에 올리지 마세요!</span>
-                  </p>
-                </div>
-
-                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q7. 복구 테스트는 어떻게 하나요?</h4>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    <strong>A:</strong> 3개월마다 백업 파일을 가져와서 복원이 되는지 테스트하세요.
-                    복원 성공 후 테스트용 지갑은 삭제하고, 원본 백업은 그대로 보관합니다.
-                    이렇게 하면 막상 필요할 때 백업이 손상되어 있는 불상사를 예방할 수 있습니다.
-                  </p>
-                </div>
-
-                <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q8. 해커가 서버키를 탈취하면 어떻게 되나요?</h4>
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q6. 해커가 서버키를 탈취하면 어떻게 되나요?</h4>
                   <p className="text-gray-700 dark:text-gray-300">
                     <strong>A:</strong> 걱정하지 마세요! 서버키만으로는 아무것도 할 수 없습니다.
                     송금하려면 고객키 또는 백업키가 추가로 필요한데, 이는 사용자만 보유하고 있습니다.
@@ -867,7 +798,7 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                 </div>
 
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q9. EdDSA 지갑(Solana)도 같은 방식으로 복구되나요?</h4>
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q7. EdDSA 지갑(Solana)도 같은 방식으로 복구되나요?</h4>
                   <p className="text-gray-700 dark:text-gray-300">
                     <strong>A:</strong> 네, ECDSA(Ethereum)와 EdDSA(Solana) 모두 동일한 방법으로 백업하고 복구합니다.
                     백업키 파일 형식도 동일하며, 복구 절차도 같습니다.
@@ -875,7 +806,7 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                 </div>
 
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q10. 여러 플랫폼(모바일/PC/웹) 간 백업이 호환되나요?</h4>
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q8. 여러 플랫폼(모바일/PC/웹) 간 백업이 호환되나요?</h4>
                   <p className="text-gray-700 dark:text-gray-300">
                     <strong>A:</strong> 네, 완전히 호환됩니다. 모바일 앱에서 내보낸 백업을 PC 앱에서 가져올 수 있고,
                     그 반대도 가능합니다. 모든 플랫폼이 동일한 백업 형식을 사용합니다.
