@@ -122,7 +122,7 @@ export default function AIAutoPaymentSubscriptionPage() {
               <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
                 <h4 className="font-bold mb-4 text-gray-900 dark:text-white">Step 1: 구독 등록</h4>
                 <pre className="text-sm">
-{`[Auto Chat 지갑]
+{`[AI Chat 지갑]
 
 나: /subscribe Netflix 15.49 USD monthly
 AI: Netflix 구독이 성공적으로 등록되었습니다
@@ -355,7 +355,7 @@ AI: Netflix 자동 결제가 일시 정지되었습니다
                 <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
                   곧 출시 예정
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Auto Chat 지갑 - AI 자동 결제</h3>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">AI Chat 지갑 - AI 자동 결제</h3>
                 <div className="text-4xl font-bold text-blue-600 mb-4">₩5,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
                 <p className="text-lg mb-4">구독 서비스 10개 이상 사용 시 가치 있는 투자</p>
                 <ul className="mb-6">
@@ -366,7 +366,7 @@ AI: Netflix 자동 결제가 일시 정지되었습니다
                   <li>팀 단위로 예산을 설정하고 관리할 수 있어 회사나 팀 프로젝트에 최적화되어 있습니다.</li>
                 </ul>
                 <Link
-                  href="/auto-chat-wallet"
+                  href="/ai-chat-wallet"
                   className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                 >
                   출시 알림 신청
@@ -461,7 +461,7 @@ AI: Netflix 자동 결제가 일시 정지되었습니다
               <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
                 <h4 className="font-bold mb-4 text-gray-900 dark:text-white">Step 1: Subscribe</h4>
                 <pre className="text-sm">
-{`[Auto Chat Wallet]
+{`[AI Chat Wallet]
 
 Me: /subscribe Netflix 15.49 USD monthly
 AI: Netflix subscription successfully registered
@@ -694,7 +694,7 @@ AI: Netflix auto payment paused
                 <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
                   Coming Soon
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Auto Chat Wallet - AI Auto Payment</h3>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">AI Chat Wallet - AI Auto Payment</h3>
                 <div className="text-4xl font-bold text-blue-600 mb-4">₩5,000<span className="text-lg text-gray-600 dark:text-gray-400">/month</span></div>
                 <p className="text-lg mb-4">Valuable investment when using 10+ subscription services</p>
                 <ul className="mb-6">
@@ -705,7 +705,7 @@ AI: Netflix auto payment paused
                   <li>Set and manage budgets by team, optimized for companies and team projects.</li>
                 </ul>
                 <Link
-                  href="/auto-chat-wallet"
+                  href="/ai-chat-wallet"
                   className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                 >
                   Request Launch Notification

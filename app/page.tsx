@@ -63,9 +63,9 @@ export default function HomePage() {
         proUseCases: '✓ 고객 자산 집금\n✓ 운영 자금 관리\n✓ 기업 재무 관리\n✓ 토큰 발행사 운영',
       },
       aiVsSto: {
-        title: 'Auto Chat Wallet vs AI ST Token Wallet',
+        title: 'AI Chat Wallet vs AI ST Token Wallet',
         subtitle: '개인 투자자를 위한 두 가지 혁신적인 지갑 서비스',
-        aiTitle: 'Auto Chat 지갑',
+        aiTitle: 'AI Chat 지갑',
         aiSubtitle: '채팅 + 자동 결제',
         aiDesc: '카카오톡, 텔레그램으로 대화하듯 송금하세요. AI가 자동으로 최적 결제 경로를 선택하고, 반복 결제를 자동 처리합니다. 스마트 라우팅으로 수수료를 최소화합니다.',
         aiFeatures: [
@@ -151,7 +151,7 @@ export default function HomePage() {
         getStarted: '시작하기',
         plans: {
           ai: {
-            name: 'Auto Chat 지갑',
+            name: 'AI Chat 지갑',
             price: '무료',
             features: [
               'AI 자동 결제',
@@ -250,9 +250,9 @@ export default function HomePage() {
         proUseCases: '✓ Customer Asset Custody\n✓ Operating Fund Management\n✓ Corporate Treasury\n✓ Token Issuer Operations',
       },
       aiVsSto: {
-        title: 'Auto Chat Wallet vs AI ST Token Wallet',
+        title: 'AI Chat Wallet vs AI ST Token Wallet',
         subtitle: 'Two innovative wallet services for individual investors',
-        aiTitle: 'Auto Chat Wallet',
+        aiTitle: 'AI Chat Wallet',
         aiSubtitle: 'Chat + Auto Payment',
         aiDesc: 'Send crypto as easily as chatting on KakaoTalk or Telegram. AI automatically selects optimal payment routes and processes recurring payments. Smart routing minimizes transaction fees.',
         aiFeatures: [
@@ -338,7 +338,7 @@ export default function HomePage() {
         getStarted: 'Get Started',
         plans: {
           ai: {
-            name: 'Auto Chat Wallet',
+            name: 'AI Chat Wallet',
             price: 'Free',
             features: [
               'AI auto payment',
@@ -405,8 +405,8 @@ export default function HomePage() {
     "@type": "Organization",
     name: "Walits",
     description: language === 'ko'
-      ? "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Non-Custody API 대량 지급, MPC Custody 안전 보관, Auto Chat 지갑, AI 토큰증권(ST) 지갑"
-      : "Enterprise crypto wallet platform featuring Non-Custody API for mass distribution, MPC Custody for secure storage, Auto Chat Wallet, and AI Security Token (ST) wallet",
+      ? "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Non-Custody API 대량 지급, MPC Custody 안전 보관, AI Chat 지갑, AI 토큰증권(ST) 지갑"
+      : "Enterprise crypto wallet platform featuring Non-Custody API for mass distribution, MPC Custody for secure storage, AI Chat Wallet, and AI Security Token (ST) wallet",
     url: "https://walits.com",
     logo: "https://walits.com/logo.png",
     sameAs: [
@@ -443,7 +443,7 @@ export default function HomePage() {
       },
       {
         "@type": "Offer",
-        name: language === 'ko' ? "Auto Chat 지갑" : "Auto Chat Wallet",
+        name: language === 'ko' ? "AI Chat 지갑" : "AI Chat Wallet",
         description: language === 'ko' ? "채팅 송금 + AI 자동 결제" : "Chat transfer + AI auto payment",
         price: "0",
         priceCurrency: "KRW",
@@ -601,7 +601,7 @@ export default function HomePage() {
                 {language === 'ko' ? '개인용' : 'Personal'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-                Auto Chat, AI ST Wallet
+                AI Chat, AI ST Wallet
               </span>
             </div>
           </div>
@@ -684,7 +684,7 @@ export default function HomePage() {
                   <div className="w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
                     <div className="block px-4 py-3 opacity-60 cursor-not-allowed">
                       <div className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                        {language === 'ko' ? 'Auto Chat 지갑' : 'Auto Chat Wallet'}
+                        {language === 'ko' ? 'AI Chat 지갑' : 'AI Chat Wallet'}
                         <span className="bg-yellow-500 text-white px-2 py-0.5 rounded-full text-xs font-semibold">
                           {language === 'ko' ? '준비중' : 'Soon'}
                         </span>

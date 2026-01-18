@@ -67,7 +67,7 @@ export default function MessengerCryptoTransferPage() {
             <>
               <p className="lead text-xl text-gray-700 dark:text-gray-300">
                 친구에게 1만 원 빌려달라고 카톡으로 보내듯, 암호화폐도 메신저로 송금할 수 있다면?
-                Auto Chat 지갑으로 카카오톡/텔레그램에서 대화하듯 암호화폐를 주고받으세요.
+                AI Chat 지갑으로 카카오톡/텔레그램에서 대화하듯 암호화폐를 주고받으세요.
               </p>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">기존 암호화폐 송금의 문제</h2>
@@ -114,7 +114,7 @@ export default function MessengerCryptoTransferPage() {
 나: /send 친구이름 10000 KRW
      → 자동으로 USDT로 환전 후 전송
 
-[Auto Chat 봇]
+[AI Chat 봇]
 전송이 완료되었습니다
    10,000원이 7.5 USDT로 환전되어 전송되었습니다
    수신자: 친구이름 (김철수)
@@ -147,7 +147,7 @@ Alice: Received! Thanks Bob!`}
                 </pre>
               </div>
 
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Auto Chat 지갑의 핵심 기능</h2>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">AI Chat 지갑의 핵심 기능</h2>
 
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">1. 대화 기반 UI</h3>
               <p>
@@ -234,7 +234,7 @@ Alice: Received! Thanks Bob!`}
                 <li>오픈소스 개발자에게 1,000원 기부</li>
               </ul>
               <p>
-                기존 결제 시스템(카드, 계좌이체)은 수수료가 최소 300원이라 불가능. Auto Chat은 가능!
+                기존 결제 시스템(카드, 계좌이체)은 수수료가 최소 300원이라 불가능. AI Chat은 가능!
               </p>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">보안은 어떻게?</h2>
@@ -303,7 +303,7 @@ Alice: Received! Thanks Bob!`}
                     (시간: 5분, 수수료: 무료지만 은행 계좌 필요)
                   </p>
                   <p>
-                    <strong>After Auto Chat:</strong> 카톡에서 <code>/split 30000 @친구1 @친구2</code><br/>
+                    <strong>After AI Chat:</strong> 카톡에서 <code>/split 30000 @친구1 @친구2</code><br/>
                     (시간: 10초, 은행 계좌 불필요)
                   </p>
                 </div>
@@ -318,7 +318,7 @@ Alice: Received! Thanks Bob!`}
                     100만 원 받으면 8만 원 날림
                   </p>
                   <p>
-                    <strong>After Auto Chat:</strong> 텔레그램에서 <code>/invoice 1000000 KRW</code><br/>
+                    <strong>After AI Chat:</strong> 텔레그램에서 <code>/invoice 1000000 KRW</code><br/>
                     수수료: 가스비 100원 (0.01%)
                   </p>
                 </div>
@@ -333,7 +333,7 @@ Alice: Received! Thanks Bob!`}
                     작은 후원은 불가능
                   </p>
                   <p>
-                    <strong>After Auto Chat:</strong> 100원부터 후원 가능<br/>
+                    <strong>After AI Chat:</strong> 100원부터 후원 가능<br/>
                     "재미있었어요 100원 드려요!" → <code>/tip @작가님 100</code>
                   </p>
                 </div>
@@ -345,7 +345,7 @@ Alice: Received! Thanks Bob!`}
                 <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
                   곧 출시 예정
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Auto Chat 지갑</h3>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">AI Chat 지갑</h3>
                 <div className="text-4xl font-bold text-blue-600 mb-4">무료<span className="text-lg text-gray-600 dark:text-gray-400"> (베타 기간)</span></div>
                 <ul className="mb-6 space-y-2">
                   <li>카카오톡과 텔레그램에서 바로 사용할 수 있도록 완벽하게 연동됩니다.</li>
@@ -355,7 +355,7 @@ Alice: Received! Thanks Bob!`}
                   <li>송금 횟수나 금액에 제한이 없어 얼마든지 자유롭게 거래할 수 있습니다.</li>
                 </ul>
                 <Link
-                  href="/auto-chat-wallet"
+                  href="/ai-chat-wallet"
                   className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                 >
                   출시 알림 신청
@@ -374,7 +374,7 @@ Alice: Received! Thanks Bob!`}
                 </div>
 
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q2. 상대방도 Auto Chat 지갑이 있어야 하나요?</h4>
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q2. 상대방도 AI Chat 지갑이 있어야 하나요?</h4>
                   <p className="mb-0 text-gray-600 dark:text-gray-400">
                     네. 하지만 가입은 1분이면 끝납니다. 메신저에서 봇과 대화만 하면 자동으로 지갑 생성됩니다.
                   </p>
@@ -398,7 +398,7 @@ Alice: Received! Thanks Bob!`}
               </div>
 
               <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl my-12 text-center">
-                <h3 className="text-2xl font-bold mb-4">Auto Chat 지갑 출시 알림</h3>
+                <h3 className="text-2xl font-bold mb-4">AI Chat 지갑 출시 알림</h3>
                 <p className="mb-6">
                   베타 테스트 참여자 모집 중! 출시 전 무료로 먼저 사용하세요.
                 </p>
@@ -428,7 +428,7 @@ Alice: Received! Thanks Bob!`}
             <>
               <p className="lead text-xl text-gray-700 dark:text-gray-300">
                 Just like sending a text asking to borrow $10 on KakaoTalk, what if you could send cryptocurrency via messenger?
-                Send and receive crypto as easily as chatting with Auto Chat wallet on KakaoTalk/Telegram.
+                Send and receive crypto as easily as chatting with AI Chat wallet on KakaoTalk/Telegram.
               </p>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Problems with Traditional Crypto Transfers</h2>
@@ -508,7 +508,7 @@ Alice: Received! Thanks Bob!`}
                 </pre>
               </div>
 
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Auto Chat Wallet Core Features</h2>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">AI Chat Wallet Core Features</h2>
 
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">1. Conversation-Based UI</h3>
               <p>
@@ -595,7 +595,7 @@ Total 75,000 won received`}
                 <li>1,000 won donation to open source developer</li>
               </ul>
               <p>
-                Traditional payment systems (card, bank transfer) have minimum 300 won fees, making this impossible. Auto Chat makes it possible!
+                Traditional payment systems (card, bank transfer) have minimum 300 won fees, making this impossible. AI Chat makes it possible!
               </p>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">What About Security?</h2>
@@ -664,7 +664,7 @@ Result: Only first transaction executes, second is automatically blocked`}
                     (Time: 5 min, Fee: Free but bank account required)
                   </p>
                   <p>
-                    <strong>After Auto Chat:</strong> In KakaoTalk <code>/split 30000 @Friend1 @Friend2</code><br/>
+                    <strong>After AI Chat:</strong> In KakaoTalk <code>/split 30000 @Friend1 @Friend2</code><br/>
                     (Time: 10 sec, No bank account needed)
                   </p>
                 </div>
@@ -679,7 +679,7 @@ Result: Only first transaction executes, second is automatically blocked`}
                     Lose 80,000 won from 1 million won payment
                   </p>
                   <p>
-                    <strong>After Auto Chat:</strong> In Telegram <code>/invoice 1000000 KRW</code><br/>
+                    <strong>After AI Chat:</strong> In Telegram <code>/invoice 1000000 KRW</code><br/>
                     Fee: 100 won gas fee (0.01%)
                   </p>
                 </div>
@@ -694,7 +694,7 @@ Result: Only first transaction executes, second is automatically blocked`}
                     Small tips impossible
                   </p>
                   <p>
-                    <strong>After Auto Chat:</strong> Tips from 100 won possible<br/>
+                    <strong>After AI Chat:</strong> Tips from 100 won possible<br/>
                     "That was fun, here's 100 won!" → <code>/tip @Creator 100</code>
                   </p>
                 </div>
@@ -706,7 +706,7 @@ Result: Only first transaction executes, second is automatically blocked`}
                 <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
                   Coming Soon
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Auto Chat Wallet</h3>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">AI Chat Wallet</h3>
                 <div className="text-4xl font-bold text-blue-600 mb-4">Free<span className="text-lg text-gray-600 dark:text-gray-400"> (Beta Period)</span></div>
                 <ul className="mb-6 space-y-2">
                   <li>Seamlessly integrated to work directly in KakaoTalk and Telegram.</li>
@@ -716,7 +716,7 @@ Result: Only first transaction executes, second is automatically blocked`}
                   <li>No limits on transfer frequency or amounts, giving you complete freedom in transactions.</li>
                 </ul>
                 <Link
-                  href="/auto-chat-wallet"
+                  href="/ai-chat-wallet"
                   className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                 >
                   Sign Up for Launch Alert
@@ -735,7 +735,7 @@ Result: Only first transaction executes, second is automatically blocked`}
                 </div>
 
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q2. Does the recipient also need Auto Chat wallet?</h4>
+                  <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q2. Does the recipient also need AI Chat wallet?</h4>
                   <p className="mb-0 text-gray-600 dark:text-gray-400">
                     Yes. But signing up takes just 1 minute. Simply chat with the bot in messenger and a wallet is automatically created.
                   </p>
@@ -759,7 +759,7 @@ Result: Only first transaction executes, second is automatically blocked`}
               </div>
 
               <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl my-12 text-center">
-                <h3 className="text-2xl font-bold mb-4">Auto Chat Wallet Launch Alert</h3>
+                <h3 className="text-2xl font-bold mb-4">AI Chat Wallet Launch Alert</h3>
                 <p className="mb-6">
                   Beta testers wanted! Use it free before official launch.
                 </p>

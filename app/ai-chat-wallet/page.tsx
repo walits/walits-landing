@@ -3,18 +3,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Auto Chat 지갑 | 메신저 송금 + AI 자동 결제 - Walits',
+  title: 'AI Chat 지갑 | 메신저 송금 + AI 자동 결제 - Walits',
   description: '카카오톡, 텔레그램으로 대화하듯 암호화폐 송금. AI가 자동으로 반복 결제 처리하고 최적 경로를 선택해 수수료 절감. 구독료 자동 결제, 소액 결제에 최적화.',
   keywords: '메신저 지갑, 카카오톡 송금, 텔레그램 지갑, 자동 결제, AI 지갑, 암호화폐 송금, 소액 결제, 구독료 결제',
   openGraph: {
-    title: 'Auto Chat 지갑 | 메신저 송금 + AI 자동 결제',
+    title: 'AI Chat 지갑 | 메신저 송금 + AI 자동 결제',
     description: '채팅하듯 송금하고, AI가 자동으로 결제 처리',
     type: 'website',
-    url: 'https://walits.com/auto-chat-wallet',
+    url: 'https://walits.com/ai-chat-wallet',
   },
 };
 
-export default function AutoChatWalletPage() {
+export default function AIChatWalletPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
@@ -41,7 +41,7 @@ export default function AutoChatWalletPage() {
               <span className="text-green-700 dark:text-green-400 font-semibold">Coming Soon</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
-              Auto Chat 지갑
+              AI Chat 지갑
             </h1>
             <p className="text-2xl mb-4 text-gray-700 dark:text-gray-300">
               채팅 + AI 자동 결제
@@ -216,7 +216,7 @@ export default function AutoChatWalletPage() {
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">앱 설치</h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Auto Chat 앱을 다운로드하고 카카오톡/텔레그램 연동
+                  AI Chat 앱을 다운로드하고 카카오톡/텔레그램 연동
                 </p>
               </div>
 
@@ -255,7 +255,7 @@ export default function AutoChatWalletPage() {
           </p>
           <div className="max-w-md mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border-2 border-green-500">
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Auto Chat 지갑</h3>
+              <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">AI Chat 지갑</h3>
               <div className="flex items-baseline justify-center gap-2">
                 <span className="text-5xl font-bold text-green-600">무료</span>
               </div>
@@ -303,7 +303,7 @@ export default function AutoChatWalletPage() {
             대화하듯 송금하세요
           </h2>
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-            Auto Chat 지갑으로 암호화폐 송금이 메신저처럼 쉬워집니다.
+            AI Chat 지갑으로 암호화폐 송금이 메신저처럼 쉬워집니다.
             사전 신청하고 런칭 소식을 가장 먼저 받아보세요.
           </p>
           <Link

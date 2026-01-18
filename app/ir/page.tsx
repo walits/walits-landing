@@ -122,7 +122,7 @@ export default function IRPage() {
                       {language === 'ko' ? '핵심 서비스' : 'Core Services'}
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">
-                      Non-Custody, Custody, Auto Chat, AI ST
+                      Non-Custody, Custody, AI Chat, AI ST
                     </div>
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
@@ -178,7 +178,7 @@ export default function IRPage() {
                   </h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                  <li>Auto Chat: 메시지 앱 결제</li>
+                  <li>AI Chat: 메시지 앱 결제</li>
                   <li>AI 토큰증권: RWA 투자</li>
                   <li>2026: 베타 테스트 및 초기 출시</li>
                 </ul>
@@ -511,12 +511,12 @@ export default function IRPage() {
               </div>
             </div>
 
-            {/* Auto Chat */}
+            {/* AI Chat */}
             <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
               <div className="flex items-start justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    3. Auto Chat Wallet
+                    3. AI Chat Wallet
                   </h3>
                   <div className="flex gap-2">
                     <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold rounded-full">
@@ -992,10 +992,10 @@ export default function IRPage() {
                 </div>
               </div>
 
-              {/* Auto Chat GTM */}
+              {/* AI Chat GTM */}
               <div className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
                 <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                  Auto Chat Wallet
+                  AI Chat Wallet
                 </h3>
                 <div className="space-y-4 text-sm">
                   <div>
