@@ -76,7 +76,7 @@ export default function MPCWalletSecurityGuidePage() {
             <>
               <p className="lead text-xl text-gray-700 dark:text-gray-300">
                 100억 원의 암호화폐를 어떻게 안전하게 보관하시겠습니까? 단일 개인키로는 너무 위험합니다.
-                MPC 2-of-3 지갑이 유일한 답입니다.
+                MPC 지갑이 유일한 답입니다.
               </p>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">문제: 단일 실패점</h2>
@@ -100,36 +100,98 @@ export default function MPCWalletSecurityGuidePage() {
                 </p>
               </div>
 
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">해결책: MPC 2-of-3</h2>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">해결책: MPC 지갑</h2>
 
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">MPC란?</h3>
               <p>
-                <strong>Multi-Party Computation (다자간 연산)</strong>: 개인키를 3개 조각으로 나누고,
-                그 중 2개만 있으면 트랜잭션 서명이 가능한 기술입니다.
+                <strong>Multi-Party Computation (다자간 연산)</strong>: 개인키를 여러 조각으로 나누고,
+                일정 개수 이상의 조각이 모여야만 트랜잭션 서명이 가능한 기술입니다.
+                개인키 원본은 절대 생성되지 않으므로 단일 실패점이 존재하지 않습니다.
               </p>
 
+              <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg my-8 border-l-4 border-purple-500">
+                <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Walits는 2가지 MPC 방식 지원</h4>
+                <p className="mb-0">
+                  <strong>방식 1 (현재 지원)</strong>: 서버키 + 고객키 + 백업키로 구성, 서버 인증으로 승인 관리<br/>
+                  <strong>방식 2 (추후 지원)</strong>: 여러 명이 분산 키를 보유하는 전통적인 2-of-3 방식
+                </p>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">방식 1: 서버키 + 고객키 (현재 지원)</h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">키 구성</h3>
               <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
-                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">작동 원리</h4>
                 <pre className="text-sm overflow-x-auto">
 {`개인키 원본: [절대 생성되지 않음!]
-     ↓ MPC 알고리즘으로 분할
+     ↓ MPC 알고리즘으로 분할 (2-of-3)
      ↓
-Key Share 1 (CEO 보관)
-Key Share 2 (CFO 보관)
-Key Share 3 (오프라인 백업)
+Key Share 1: 서버키 (Walits 서버에 안전하게 보관)
+Key Share 2: 고객키 (고객 디바이스에 보관)
+Key Share 3: 백업키 (고객 백업용, 오프라인 보관)
 
 트랜잭션 서명:
-✓ Key Share 1 + Key Share 2 → 서명 가능
-✓ Key Share 1 + Key Share 3 → 서명 가능
-✓ Key Share 2 + Key Share 3 → 서명 가능
-✗ Key Share 1만 → 서명 불가
-✗ Key Share 2만 → 서명 불가
+✓ 서버키 + 고객키 → 서명 가능 (정상 송금)
+✓ 서버키 + 백업키 → 서명 가능 (디바이스 분실 시 복구)
+✓ 고객키 + 백업키 → 서명 가능 (서버 장애 시)
+✗ 서버키만 → 서명 불가 (키 탈취 방지)
+✗ 고객키만 → 서명 불가 (키 탈취 방지)
 
-핵심: 개인키 원본은 절대 생성되지 않음!`}
+핵심: 2개 이상의 키가 있어야만 송금 가능!`}
                 </pre>
               </div>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">왜 2-of-3인가?</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">승인(Approve) 프로세스</h3>
+              <p>
+                방식 1에서는 MPC로 키 탈취를 방지하고, 추가로 서버 인증을 통해 승인 프로세스를 관리합니다.
+                송금 시 얼마나 많은 사람들이 참여해야 하는지는 서버 측 정책으로 설정됩니다:
+              </p>
+              <ul>
+                <li><strong>단일 승인</strong>: 소액 송금의 경우 1명의 승인으로 즉시 처리</li>
+                <li><strong>다중 승인</strong>: 고액 송금의 경우 2명 이상의 승인 필요</li>
+                <li><strong>서버 인증</strong>: 모든 승인은 서버에서 검증되어 정책 준수 보장</li>
+                <li><strong>유연한 설정</strong>: 기업별로 금액대별 승인 규칙 커스터마이징 가능</li>
+              </ul>
+
+              <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-8 border-l-4 border-green-500">
+                <h4 className="font-bold mb-2 text-gray-900 dark:text-white">방식 1의 이중 보안 체계</h4>
+                <p className="mb-0">
+                  <strong>1단계 (MPC)</strong>: 2개 이상의 키가 있어야 서명 가능 → 키 탈취 방지<br/>
+                  <strong>2단계 (Approve)</strong>: 서버 인증으로 다중 승인 관리 → 내부 통제 강화
+                </p>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">방식 1의 장점</h3>
+              <ul>
+                <li><strong>탈취 방지</strong>: 해커가 서버키만 탈취해도 자산은 안전 (고객키 또는 백업키 필요)</li>
+                <li><strong>디바이스 분실 방지</strong>: 고객 디바이스를 잃어도 서버키 + 백업키로 복구 가능</li>
+                <li><strong>편의성</strong>: 고객은 앱에서 간편하게 승인만 하면 됨</li>
+                <li><strong>보안성</strong>: 2개 이상의 키가 동시에 침해되어야 자산 탈취 가능</li>
+              </ul>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">방식 2: 다중 키 보유자 (추후 지원)</h2>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">키 구성</h3>
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
+                <pre className="text-sm overflow-x-auto">
+{`개인키 원본: [절대 생성되지 않음!]
+     ↓ MPC 알고리즘으로 분할 (2-of-3)
+     ↓
+Key Share 1: CEO 보관
+Key Share 2: CFO 보관
+Key Share 3: 오프라인 백업 (콜드 스토리지)
+
+트랜잭션 서명:
+✓ CEO키 + CFO키 → 서명 가능
+✓ CEO키 + 백업키 → 서명 가능 (CFO 부재 시)
+✓ CFO키 + 백업키 → 서명 가능 (CEO 부재 시)
+✗ CEO키만 → 서명 불가 (내부자 횡령 방지)
+✗ CFO키만 → 서명 불가 (내부자 횡령 방지)
+
+핵심: 2명 이상이 동의해야만 송금 가능!`}
+                </pre>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">방식 2의 장점</h3>
               <ul>
                 <li><strong>분실 방지</strong>: 1개 키를 잃어도 나머지 2개로 복구 가능</li>
                 <li><strong>탈취 방지</strong>: 해커가 1개 키를 탈취해도 자산은 안전</li>
@@ -203,17 +265,6 @@ Key Share 3 (오프라인 백업)
                   </tbody>
                 </table>
               </div>
-
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">승인 프로세스</h3>
-              <ol>
-                <li><strong>출금 요청</strong>: 담당자가 대시보드에서 출금 신청</li>
-                <li><strong>정책 확인</strong>: 시스템이 자동으로 금액별 규칙 확인</li>
-                <li><strong>승인 알림</strong>: 승인자에게 이메일/SMS 발송</li>
-                <li><strong>다중 승인</strong>: 규칙에 따라 2명 이상 승인</li>
-                <li><strong>MPC 서명</strong>: 2-of-3 키로 자동 서명</li>
-                <li><strong>온체인 전송</strong>: 블록체인에 트랜잭션 제출</li>
-                <li><strong>완료 알림</strong>: 모든 관련자에게 완료 통지</li>
-              </ol>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">감사 추적 시스템</h2>
 
@@ -357,11 +408,11 @@ Key Share 3 (오프라인 백업)
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">가격</h2>
 
               <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8">
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Custody Wallet (MPC 2-of-3)</h3>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Custody Wallet (MPC)</h3>
                 <div className="text-4xl font-bold text-purple-600 mb-4">₩550,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
                 <p className="text-lg mb-4">첫 달 무료 • 전담 매니저 지원</p>
                 <ul className="mb-6 space-y-2">
-                  <li>MPC 2-of-3 보안 방식으로 단일 실패점을 완전히 제거했습니다.</li>
+                  <li>MPC 보안 방식으로 단일 실패점을 완전히 제거했습니다.</li>
                   <li>ECDSA와 EdDSA 알고리즘을 모두 지원하여 모든 주요 블록체인과 호환됩니다.</li>
                   <li>다중 승인 워크플로우를 통해 금액별로 차등화된 승인 규칙을 적용할 수 있습니다.</li>
                   <li>정책 기반 거버넌스 시스템으로 내부 통제를 체계적으로 관리합니다.</li>
@@ -520,17 +571,6 @@ Key Point: Original private key is NEVER created!`}
                   </tbody>
                 </table>
               </div>
-
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Approval Process</h3>
-              <ol>
-                <li><strong>Withdrawal Request</strong>: Staff requests withdrawal from dashboard</li>
-                <li><strong>Policy Check</strong>: System automatically checks amount-based rules</li>
-                <li><strong>Approval Notification</strong>: Email/SMS sent to approvers</li>
-                <li><strong>Multi-Approval</strong>: 2+ people approve according to rules</li>
-                <li><strong>MPC Signing</strong>: Automatic signing with 2-of-3 keys</li>
-                <li><strong>On-chain Transfer</strong>: Transaction submitted to blockchain</li>
-                <li><strong>Completion Notification</strong>: All stakeholders notified of completion</li>
-              </ol>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Audit Trail System</h2>
 
