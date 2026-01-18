@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'blockchain-comparison-guide',
+          category: '기술 가이드',
+          categoryColor: 'bg-gray-100 text-gray-800',
+          title: '5대 블록체인 기술 비교 완벽 가이드',
+          excerpt: 'Bitcoin, Ethereum, XRP, Tron, Solana. 5대 주요 블록체인의 합의 메커니즘, 트랜잭션 구조, 수수료 체계를 완벽 비교. 사용 사례별 추천 가이드 포함.',
+          date: '2026년 1월 18일',
+          readTime: '15분',
+          image: '/blog/BLOCKCHAIN_COMPARISON_TUTORIAL.jpg',
+        },
+        {
           id: 'enterprise-crypto-wallet-guide',
           category: '기업용 지갑',
           categoryColor: 'bg-purple-100 text-purple-800',
@@ -142,6 +152,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'blockchain-comparison-guide',
+          category: 'Technical Guide',
+          categoryColor: 'bg-gray-100 text-gray-800',
+          title: 'Complete Guide to Top 5 Blockchain Technologies',
+          excerpt: 'Bitcoin, Ethereum, XRP, Tron, Solana. Complete comparison of consensus mechanisms, transaction structures, and fee systems. Includes use case recommendations.',
+          date: 'January 18, 2026',
+          readTime: '15 min read',
+          image: '/blog/BLOCKCHAIN_COMPARISON_TUTORIAL.jpg',
+        },
         {
           id: 'enterprise-crypto-wallet-guide',
           category: 'Enterprise',

@@ -47,6 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // New Blog Posts (2026)
     {
+      url: `${baseUrl}/blog/blockchain-comparison-guide`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.75,
+    },
+    {
       url: `${baseUrl}/blog/enterprise-crypto-wallet-guide`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
