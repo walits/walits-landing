@@ -264,7 +264,7 @@ export default function NonCustodyWalletPage() {
             지금 바로 시작하세요
           </h2>
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-            API 키만 있으면 5분 안에 통합 완료. 첫 한달 무료로 체험해보세요.
+            API 키만 있으면 5분 안에 통합 완료.
           </p>
           <div className="flex gap-4 justify-center">
             <Link

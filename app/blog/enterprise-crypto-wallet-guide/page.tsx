@@ -305,7 +305,7 @@ export default function EnterpriseCryptoWalletGuidePage() {
               <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
                 <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Non-Custody Wallet</h3>
                 <ul className="mb-4 space-y-2">
-                  <li>Monthly fee is 99,000 won, with the first month free to experience all features.</li>
+                  <li>Monthly fee is 99,000 won.</li>
                   <li>No limit on transaction processing, so you can use it without worrying about additional costs even when bulk processing is needed.</li>
                   <li>Perfect support for ICO or custom token issuance if you're planning one.</li>
                   <li>All private keys are securely managed in a TEE (Trusted Execution Environment), completely isolated from external access.</li>
@@ -318,7 +318,7 @@ export default function EnterpriseCryptoWalletGuidePage() {
               <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
                 <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Custody Wallet</h3>
                 <ul className="mb-4 space-y-2">
-                  <li>Monthly fee is 550,000 won, with the first month free to test the entire system.</li>
+                  <li>Monthly fee is 550,000 won.</li>
                   <li>Adopts MPC 2-of-3 security method to completely eliminate single point of failure, designed so that signing is possible with just 2 out of 3 key shares.</li>
                   <li>Through multi-approval workflow, you can set different approval rules by amount, flexibly responding even when both CEO and CFO approval is required.</li>
                   <li>A dedicated account manager is assigned to support everything from technical support to operational consulting.</li>

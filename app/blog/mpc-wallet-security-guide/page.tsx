@@ -942,7 +942,7 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                   <div className="text-4xl font-bold text-blue-600 mb-4">
                     ₩99,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">약 $75 • 첫 달 50% 할인</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">약 $75</p>
 
                   <div className="mb-6">
                     <p className="font-semibold mb-3 text-gray-900 dark:text-white">보안 방식 선택:</p>
@@ -1022,7 +1022,7 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                   <div className="text-4xl font-bold text-purple-600 mb-4">
                     ₩550,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">약 $420 • 첫 달 무료</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">약 $420</p>
 
                   <ul className="mb-6 space-y-2 text-sm">
                     <li className="flex items-start">
@@ -1396,7 +1396,7 @@ Key Point: Original private key is NEVER created!`}
               <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8">
                 <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Custody Wallet (MPC 2-of-3)</h3>
                 <div className="text-4xl font-bold text-purple-600 mb-4">₩550,000<span className="text-lg text-gray-600 dark:text-gray-400">/month</span></div>
-                <p className="text-lg mb-4">First month free • Dedicated manager support</p>
+                <p className="text-lg mb-4">Dedicated manager support</p>
                 <ul className="mb-6 space-y-2">
                   <li>MPC 2-of-3 security completely eliminates single points of failure.</li>
                   <li>Supports both ECDSA and EdDSA algorithms for compatibility with all major blockchains.</li>

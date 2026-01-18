@@ -286,7 +286,7 @@ export default function CustodyWalletPage() {
             금융기관급 보안으로 자산을 보호하세요
           </h2>
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-            MPC 2-of-3, 다중 승인, 완벽한 감사. 첫 한달 무료로 체험해보세요.
+            MPC 2-of-3, 다중 승인, 완벽한 감사.
           </p>
           <div className="flex gap-4 justify-center">
             <Link
