@@ -995,26 +995,185 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">가격</h2>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Walits 지갑 상품</h2>
 
-              <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8">
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Custody Wallet (MPC)</h3>
-                <div className="text-4xl font-bold text-purple-600 mb-4">₩550,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span></div>
-                <p className="text-lg mb-4">첫 달 무료 • 전담 매니저 지원</p>
-                <ul className="mb-6 space-y-2">
-                  <li>MPC 보안 방식으로 단일 실패점을 완전히 제거했습니다.</li>
-                  <li>ECDSA와 EdDSA 알고리즘을 모두 지원하여 모든 주요 블록체인과 호환됩니다.</li>
-                  <li>다중 승인 워크플로우를 통해 금액별로 차등화된 승인 규칙을 적용할 수 있습니다.</li>
-                  <li>정책 기반 거버넌스 시스템으로 내부 통제를 체계적으로 관리합니다.</li>
-                  <li>모든 거래와 승인 과정이 완벽하게 감사 추적되어 투명성이 보장됩니다.</li>
-                  <li>24시간 연중무휴 기술 지원팀이 대기하고 있어 언제든지 도움을 받을 수 있습니다.</li>
-                </ul>
-                <Link
-                  href="/custody-wallet"
-                  className="inline-block px-8 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors"
-                >
-                  무료로 시작하기
-                </Link>
+              <p className="text-lg mb-8 text-gray-700 dark:text-gray-300">
+                비즈니스 규모와 보안 요구사항에 맞는 지갑을 선택하세요.
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                {/* Non-Custody Wallet */}
+                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-8 rounded-xl border-2 border-blue-200 dark:border-blue-800">
+                  <div className="inline-block px-4 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full mb-4">
+                    개인 • 소규모 비즈니스
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Non-Custody Wallet</h3>
+                  <div className="text-4xl font-bold text-blue-600 mb-4">
+                    ₩99,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">약 $75 • 첫 달 50% 할인</p>
+
+                  <div className="mb-6">
+                    <p className="font-semibold mb-3 text-gray-900 dark:text-white">보안 방식 선택:</p>
+                    <div className="space-y-3">
+                      <div className="flex items-start space-x-3 p-3 bg-white dark:bg-gray-800 rounded-lg">
+                        <div className="flex-shrink-0 w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs mt-0.5">1</div>
+                        <div>
+                          <p className="font-semibold text-sm">MPC 방식</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">서버키 + 고객키로 이중 보안</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-3 p-3 bg-white dark:bg-gray-800 rounded-lg">
+                        <div className="flex-shrink-0 w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs mt-0.5">2</div>
+                        <div>
+                          <p className="font-semibold text-sm">TEE 방식</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">하드웨어 격리 환경에서 키 보관</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <ul className="mb-6 space-y-2 text-sm">
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>개인키를 고객이 직접 보유</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>MPC 또는 TEE 보안 방식 선택</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>ECDSA & EdDSA 알고리즘 지원</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>간편한 백업 및 복원</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>모바일/데스크톱 앱 지원</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>이메일 고객 지원</span>
+                    </li>
+                  </ul>
+                  <Link
+                    href="/non-custody-wallet"
+                    className="inline-block w-full text-center px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                  >
+                    시작하기
+                  </Link>
+                </div>
+
+                {/* Custody Wallet */}
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-8 rounded-xl border-2 border-purple-300 dark:border-purple-700 relative">
+                  <div className="absolute -top-3 right-8 px-4 py-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-semibold rounded-full">
+                    기업 추천
+                  </div>
+                  <div className="inline-block px-4 py-1 bg-purple-600 text-white text-sm font-semibold rounded-full mb-4">
+                    기업 • 금융기관
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Custody Wallet (MPC)</h3>
+                  <div className="text-4xl font-bold text-purple-600 mb-4">
+                    ₩550,000<span className="text-lg text-gray-600 dark:text-gray-400">/월</span>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">약 $420 • 첫 달 무료</p>
+
+                  <ul className="mb-6 space-y-2 text-sm">
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-purple-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span><strong>MPC 2-of-3 보안</strong>으로 단일 실패점 제거</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-purple-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span><strong>다중 승인 워크플로우</strong> (금액별 차등 승인)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-purple-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>정책 기반 거버넌스 시스템</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-purple-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>완벽한 감사 추적 (Audit Trail)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-purple-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>ECDSA & EdDSA 알고리즘 지원</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-purple-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span><strong>전담 매니저</strong> 및 우선 지원</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-purple-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span><strong>24/7 기술 지원</strong> 및 긴급 대응</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-purple-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>규제 준수 리포트 제공</span>
+                    </li>
+                  </ul>
+                  <Link
+                    href="/custody-wallet"
+                    className="inline-block w-full text-center px-8 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+                  >
+                    무료로 시작하기
+                  </Link>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-8">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">어떤 지갑을 선택해야 할까요?</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <p className="font-semibold mb-2 text-blue-600">Non-Custody Wallet 추천 대상:</p>
+                    <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                      <li>• 개인 투자자</li>
+                      <li>• 소규모 비즈니스 (자산 10억 원 미만)</li>
+                      <li>• 완전한 자산 통제권 원하는 경우</li>
+                      <li>• 간편한 백업/복원 선호</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-2 text-purple-600">Custody Wallet 추천 대상:</p>
+                    <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                      <li>• 기업 및 금융기관</li>
+                      <li>• 대규모 자산 보관 (10억 원 이상)</li>
+                      <li>• 내부 통제 및 승인 프로세스 필요</li>
+                      <li>• 규제 준수 및 감사 추적 필수</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl my-12 text-center">
