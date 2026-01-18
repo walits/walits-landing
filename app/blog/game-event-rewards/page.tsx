@@ -300,7 +300,7 @@ export default function GameEventRewardsPost() {
                   크리스마스 이벤트를 성공적으로 마무리하고 싶다면 지금 시작하세요.
                 </p>
                 <Link href="/inquiry" className="inline-block px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                  무료로 시작하기 →
+                  시작하기 →
                 </Link>
               </div>
             </>
@@ -542,7 +542,7 @@ export default function GameEventRewardsPost() {
                   If you want to successfully complete your Christmas event, start now.
                 </p>
                 <Link href="/inquiry" className="inline-block px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                  Start Free →
+                  Get Started →
                 </Link>
               </div>
             </>

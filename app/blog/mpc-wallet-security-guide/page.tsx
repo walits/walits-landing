@@ -1078,7 +1078,7 @@ Key Share 3: 오프라인 백업 (콜드 스토리지)
                     href="/custody-wallet"
                     className="inline-block w-full text-center px-8 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors"
                   >
-                    무료로 시작하기
+                    시작하기
                   </Link>
                 </div>
               </div>
@@ -1409,7 +1409,7 @@ Key Point: Original private key is NEVER created!`}
                   href="/custody-wallet"
                   className="inline-block px-8 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors"
                 >
-                  Start Free
+                  Get Started
                 </Link>
               </div>
 

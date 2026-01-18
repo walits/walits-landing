@@ -284,7 +284,7 @@ export default function DailyAttendancePost() {
                   크리스마스 이벤트를 성공적으로 마무리하고 싶다면 지금 시작하세요.
                 </p>
                 <Link href="/inquiry" className="inline-block px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                  무료로 시작하기 →
+                  시작하기 →
                 </Link>
               </div>
             </>
@@ -506,10 +506,10 @@ export default function DailyAttendancePost() {
               <div className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 p-8 rounded-lg text-center">
                 <h2 className="text-2xl font-bold mb-4">Start Now</h2>
                 <p className="mb-6 text-gray-300 dark:text-gray-600">
-                  Walits Non-Custody API is free for the first month. If you want to successfully complete your Christmas event, start now.
+                  If you want to successfully complete your Christmas event, start now.
                 </p>
                 <Link href="/inquiry" className="inline-block px-8 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                  Start Free →
+                  Get Started →
                 </Link>
               </div>
             </>
