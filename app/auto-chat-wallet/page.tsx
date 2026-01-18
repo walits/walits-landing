@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Auto Chat 지갑 | 메신저 송금 + AI 자동 결제 - Walits',
@@ -16,6 +17,22 @@ export const metadata: Metadata = {
 export default function AutoChatWalletPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
+      {/* Header */}
+      <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div className="container mx-auto px-4 py-4">
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="Walits Logo"
+              width={32}
+              height={32}
+              className="rounded"
+            />
+            <span className="text-2xl font-bold text-gray-900 dark:text-white">Walits</span>
+          </Link>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-4">

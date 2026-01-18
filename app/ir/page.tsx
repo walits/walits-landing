@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function IRPage() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
@@ -23,8 +24,15 @@ export default function IRPage() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm dark:bg-gray-900/95">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
-            Walits
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo.png"
+              alt="Walits Logo"
+              width={32}
+              height={32}
+              className="rounded"
+            />
+            <span className="text-2xl font-bold text-gray-900 dark:text-white">Walits</span>
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/" className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">

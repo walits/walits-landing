@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type ServiceType = 'NON_CUSTODY' | 'CUSTODY' | 'BOTH' | 'OTHER';
 
@@ -83,8 +84,15 @@ export default function InquiryPage() {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-gray-900">
-            Walits
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="Walits Logo"
+              width={32}
+              height={32}
+              className="rounded"
+            />
+            <span className="text-2xl font-bold text-gray-900">Walits</span>
           </Link>
           <Link href="/" className="text-gray-600 hover:text-gray-900">
             홈으로

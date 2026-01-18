@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function AIAutoPaymentSubscriptionPage() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
@@ -28,9 +29,16 @@ export default function AIAutoPaymentSubscriptionPage() {
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
           <div className="flex items-center justify-between mb-4">
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              <Link href="/blog/" className="hover:underline">{language === 'ko' ? '블로그' : 'Blog'}</Link> / {copy.category}
-            </div>
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/logo.png"
+                alt="Walits Logo"
+                width={32}
+                height={32}
+                className="rounded"
+              />
+              <span className="text-xl font-bold text-gray-900 dark:text-white">Walits</span>
+            </Link>
             <div className="flex items-center gap-2">
               <button onClick={() => setLanguage('ko')} className={`px-3 py-1 rounded ${language === 'ko' ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-600'}`}>한</button>
               <button onClick={() => setLanguage('en')} className={`px-3 py-1 rounded ${language === 'en' ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-600'}`}>EN</button>

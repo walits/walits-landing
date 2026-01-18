@@ -12,13 +12,16 @@ export default function StablecoinRegulation2026() {
       <div className="container mx-auto px-4 max-w-4xl">
         <header className="mb-12">
           <div className="flex justify-between items-center mb-4">
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              <Link href="/blog/" className="hover:underline">
-                {language === 'ko' ? '블로그' : 'Blog'}
-              </Link>
-              {' / '}
-              {language === 'ko' ? '금융 분석' : 'Financial Analysis'}
-            </div>
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/logo.png"
+                alt="Walits Logo"
+                width={32}
+                height={32}
+                className="rounded"
+              />
+              <span className="text-xl font-bold text-gray-900 dark:text-white">Walits</span>
+            </Link>
             <div className="flex gap-2">
               <button
                 onClick={() => setLanguage('ko')}

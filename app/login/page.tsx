@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function LoginSelectionPage() {
   return (
@@ -6,9 +7,13 @@ export default function LoginSelectionPage() {
       <div className="max-w-4xl w-full px-4">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center">
-              <span className="text-white font-bold text-2xl">B</span>
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Walits Logo"
+              width={64}
+              height={64}
+              className="rounded"
+            />
           </div>
           <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
             어떤 서비스를 이용하시나요?
