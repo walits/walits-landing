@@ -106,20 +106,18 @@ export default function MessengerCryptoTransferPage() {
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">국내 송금 예시</h3>
               <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
                 <pre className="text-sm">
-{`[Walits 메신저]
+{`[Walits 메신저 - 철수와의 채팅]
 
 나: 어제 밥값 10 USDT 보낼게
 친구: ㅇㅇ 고마워
 
-나: /send 친구이름 10 USDT
-     → AI가 자동으로 최적 네트워크 선택 (Polygon)
+[송금 버튼 클릭]
+→ 금액 입력: 10 USDT
+→ 지문 인식 (또는 PIN 입력)
+→ AI가 자동으로 Polygon 네트워크 선택
 
-[Walits 알림]
-전송이 완료되었습니다
-   금액: 10 USDT
-   수신자: 친구이름 (김철수)
-   네트워크: Polygon (가스비 $0.001)
-   처리 시간: 5초
+💸 10 USDT를 전송했습니다 (약 3초 소요)
+    가스비: $0.001
 
 친구: 받았어! 고마워~`}
                 </pre>
@@ -149,20 +147,20 @@ Alice: Received! Thanks Bob!`}
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">AI Chat 지갑의 핵심 기능</h2>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">1. 대화 기반 UI</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">1. 메신저처럼 간편한 UI</h3>
               <p>
-                Walits 앱 내 메신저에서 대화하듯 명령어 입력:
+                카카오톡처럼 친구 선택하고 버튼 클릭만 하면 끝:
               </p>
               <ul>
-                <li><code>/send [받는사람] [금액] [통화]</code> - 송금</li>
-                <li><code>/balance</code> - 잔액 확인</li>
-                <li><code>/history</code> - 거래 내역</li>
-                <li><code>/request [금액]</code> - 송금 요청</li>
+                <li><strong>송금하기</strong> - 친구 선택 → 금액/토큰 입력 → 지문 인식</li>
+                <li><strong>정산하기</strong> - 그룹채팅에서 정산 버튼 → 자동 분할 계산</li>
+                <li><strong>후원하기</strong> - 크리에이터 프로필에서 후원 버튼</li>
+                <li><strong>잔액 확인</strong> - 지갑 탭에서 모든 토큰 잔액 한눈에</li>
               </ul>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2. 자동 환전 및 최적 경로</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2. AI 최적 네트워크 선택</h3>
               <p>
-                AI가 자동으로 최적의 송금 경로를 선택합니다:
+                AI가 자동으로 가스비가 가장 저렴하고 빠른 네트워크를 선택해줍니다:
               </p>
               <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-6">
                 <h4 className="font-bold mb-4 text-gray-900 dark:text-white">송금 시나리오: 10 USDT 전송</h4>
@@ -205,22 +203,26 @@ Alice: Received! Thanks Bob!`}
               <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-8">
                 <h4 className="font-bold mb-4 text-gray-900 dark:text-white">예시: 4명이서 저녁 식사</h4>
                 <pre className="text-sm">
-{`총 비용: 75 USDT (내가 결제)
+{`[그룹채팅방 - 저녁 모임]
 
-나: /split 75 USDT @철수 @영희 @민수
-    → 자동으로 1/4 = 18.75 USDT씩 계산
+나: 다들 밥값 정산해야지! 총 75 USDT 나왔어
 
-[Auto Chat 봇]
-정산 요청이 발송되었습니다
-   철수님께: 18.75 USDT
-   영희님께: 18.75 USDT
-   민수님께: 18.75 USDT
+[정산하기 버튼 클릭]
+→ 총액: 75 USDT 입력
+→ 참여자 선택: 철수, 영희, 민수 (3명 선택)
+→ 자동 계산: 18.75 USDT씩
 
-[철수님 승인] 18.75 USDT 전송이 완료되었습니다
-[영희님 승인] 18.75 USDT 전송이 완료되었습니다
-[민수님 승인] 18.75 USDT 전송이 완료되었습니다
+[알림]
+정산 요청을 보냈습니다
+   철수: 18.75 USDT
+   영희: 18.75 USDT
+   민수: 18.75 USDT
 
-총 56.25 USDT를 모두 수령하셨습니다`}
+✅ 철수님이 18.75 USDT를 보냈습니다
+✅ 영희님이 18.75 USDT를 보냈습니다
+✅ 민수님이 18.75 USDT를 보냈습니다
+
+💰 56.25 USDT를 모두 받았습니다!`}
                 </pre>
               </div>
 
@@ -338,9 +340,9 @@ Alice: Received! Thanks Bob!`}
 
 현재 잔액: 10 USDT
 
-동시에 두 건의 송금을 시도하는 경우:
- 첫 번째: /send 친구A 10 USDT → 처리 중 대기
- 두 번째: /send 친구B 10 USDT → 차단됨 (잔액 부족)
+동시에 두 건의 송금 버튼을 빠르게 누르는 경우:
+ 첫 번째: 친구A에게 10 USDT → 처리 중...
+ 두 번째: 친구B에게 10 USDT → ❌ 잔액 부족
 
 결과: 첫 번째 거래만 실행되고, 두 번째는 자동으로 차단됩니다`}
                 </pre>
@@ -359,8 +361,8 @@ Alice: Received! Thanks Bob!`}
                     (시간: 5분, 수수료: 무료지만 은행 계좌 필요)
                   </p>
                   <p>
-                    <strong>After AI Chat:</strong> Walits 앱에서 <code>/split 22.5 USDT @친구1 @친구2</code><br/>
-                    (시간: 10초, 은행 계좌 불필요)
+                    <strong>After AI Chat:</strong> Walits 그룹채팅에서 정산하기 버튼 클릭<br/>
+                    → 22.5 USDT, 친구 2명 선택 → 완료 (시간: 10초, 은행 계좌 불필요)
                   </p>
                 </div>
 
@@ -374,7 +376,7 @@ Alice: Received! Thanks Bob!`}
                     $1,000 받으면 $80 날림
                   </p>
                   <p>
-                    <strong>After AI Chat:</strong> Walits 앱에서 <code>/invoice 1000 USDT</code><br/>
+                    <strong>After AI Chat:</strong> Walits 메신저로 요청서 전송 → 1000 USDT 받기<br/>
                     수수료: 가스비 $0.001 (0.0001%)
                   </p>
                 </div>
@@ -390,7 +392,7 @@ Alice: Received! Thanks Bob!`}
                   </p>
                   <p>
                     <strong>After AI Chat:</strong> 소액부터 후원 가능<br/>
-                    "재미있었어요!" → <code>/tip @작가님 0.1 USDT</code>
+                    "재미있었어요!" → [후원하기] 버튼 → 0.1 USDT 전송
                   </p>
                 </div>
               </div>
