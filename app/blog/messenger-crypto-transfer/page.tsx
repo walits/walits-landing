@@ -103,7 +103,7 @@ export default function MessengerCryptoTransferPage() {
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">해결책: Walits 메신저 송금</h2>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">국내 송금 예시</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">송금 예시</h3>
               <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
                 <pre className="text-sm">
 {`[Walits 메신저 - 철수와의 채팅]
@@ -120,28 +120,6 @@ export default function MessengerCryptoTransferPage() {
     가스비: $0.001
 
 친구: 받았어! 고마워~`}
-                </pre>
-              </div>
-
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">해외 송금 예시</h3>
-              <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg my-8">
-                <pre className="text-sm">
-{`[Walits Messenger]
-
-Alice: I'll pay for dinner, $50
-Bob: Thanks! I'll send you my share
-
-Bob: /send @Alice 25 USD
-     → Automatically converts to USDT
-
-[Walits Notification]
-Transfer completed successfully
-   $25 USD has been converted to 25 USDT and sent
-   To: @Alice
-   Network: Arbitrum (gas fee $0.10)
-   Processing time: 3 seconds
-
-Alice: Received! Thanks Bob!`}
                 </pre>
               </div>
 
@@ -297,11 +275,13 @@ Alice: Received! Thanks Bob!`}
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">다단계 인증</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">간편 인증</h3>
+              <p className="mb-4">
+                카카오뱅크처럼 간단하게! PIN 6자리 또는 생체인증(지문/얼굴) 중 선택하세요.
+              </p>
               <ul className="space-y-2">
-                <li><strong>생체인증</strong>: 1만 원 이상 송금 시 지문이나 얼굴 인식</li>
-                <li><strong>PIN 코드</strong>: 10만 원 이상은 6자리 PIN 추가 입력</li>
-                <li><strong>2단계 인증(2FA)</strong>: 100만 원 이상은 이메일/SMS 인증 코드까지</li>
+                <li><strong>일반 송금</strong>: PIN 또는 생체인증 중 선택</li>
+                <li><strong>고액 송금 (750 USDT 이상)</strong>: PIN + 이메일/SMS 인증 코드</li>
               </ul>
 
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">일일 한도</h3>
@@ -316,36 +296,18 @@ Alice: Received! Thanks Bob!`}
                   <tbody>
                     <tr className="border-b border-gray-300 dark:border-gray-700">
                       <td className="p-2">기본 (이메일)</td>
-                      <td className="p-2">100,000원</td>
+                      <td className="p-2">75 USDT</td>
                     </tr>
                     <tr className="border-b border-gray-300 dark:border-gray-700">
                       <td className="p-2">KYC 1단계 (신분증)</td>
-                      <td className="p-2">1,000,000원</td>
+                      <td className="p-2">750 USDT</td>
                     </tr>
                     <tr>
                       <td className="p-2">KYC 2단계 (영상통화)</td>
-                      <td className="p-2">10,000,000원</td>
+                      <td className="p-2">7,500 USDT</td>
                     </tr>
                   </tbody>
                 </table>
-              </div>
-
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">이중지불 방지</h3>
-              <p>
-                Redis 분산 락으로 동시 전송 차단:
-              </p>
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-6">
-                <pre className="text-sm">
-{`[이중지불 시도 시나리오 - 자동 방지]
-
-현재 잔액: 10 USDT
-
-동시에 두 건의 송금 버튼을 빠르게 누르는 경우:
- 첫 번째: 친구A에게 10 USDT → 처리 중...
- 두 번째: 친구B에게 10 USDT → ❌ 잔액 부족
-
-결과: 첫 번째 거래만 실행되고, 두 번째는 자동으로 차단됩니다`}
-                </pre>
               </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">실제 사용 사례</h2>
@@ -714,11 +676,13 @@ Total 75,000 won received`}
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Multi-Factor Authentication</h3>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Simple Authentication</h3>
+              <p className="mb-4">
+                Just like KakaoBank! Choose either 6-digit PIN or biometric (fingerprint/face).
+              </p>
               <ul className="space-y-2">
-                <li><strong>Biometric</strong>: Transfers over 10,000 won require fingerprint or face recognition</li>
-                <li><strong>PIN code</strong>: Amounts over 100,000 won require additional 6-digit PIN</li>
-                <li><strong>2FA</strong>: High-value transactions over 1,000,000 won require email/SMS verification</li>
+                <li><strong>Regular transfers</strong>: PIN or biometric (your choice)</li>
+                <li><strong>Large transfers (750 USDT+)</strong>: PIN + email/SMS verification code</li>
               </ul>
 
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Daily Limits</h3>
@@ -733,36 +697,18 @@ Total 75,000 won received`}
                   <tbody>
                     <tr className="border-b border-gray-300 dark:border-gray-700">
                       <td className="p-2">Basic (Email)</td>
-                      <td className="p-2">100,000 won</td>
+                      <td className="p-2">75 USDT</td>
                     </tr>
                     <tr className="border-b border-gray-300 dark:border-gray-700">
                       <td className="p-2">KYC Level 1 (ID)</td>
-                      <td className="p-2">1,000,000 won</td>
+                      <td className="p-2">750 USDT</td>
                     </tr>
                     <tr>
                       <td className="p-2">KYC Level 2 (Video Call)</td>
-                      <td className="p-2">10,000,000 won</td>
+                      <td className="p-2">7,500 USDT</td>
                     </tr>
                   </tbody>
                 </table>
-              </div>
-
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Double-Spend Prevention</h3>
-              <p>
-                Redis distributed lock blocks concurrent transfers:
-              </p>
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-6">
-                <pre className="text-sm">
-{`[Double-spend attempt scenario - Auto prevention]
-
-Current balance: 10,000 won
-
-Attempting two simultaneous transfers:
- First: /send FriendA 10000 → Processing wait
- Second: /send FriendB 10000 → Blocked (insufficient balance)
-
-Result: Only first transaction executes, second is automatically blocked`}
-                </pre>
               </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">Real Use Cases</h2>
@@ -778,8 +724,8 @@ Result: Only first transaction executes, second is automatically blocked`}
                     (Time: 5 min, Fee: Free but bank account required)
                   </p>
                   <p>
-                    <strong>After AI Chat:</strong> In KakaoTalk <code>/split 30000 @Friend1 @Friend2</code><br/>
-                    (Time: 10 sec, No bank account needed)
+                    <strong>After AI Chat:</strong> In Walits group chat, click split button<br/>
+                    → 22.5 USDT, select 2 friends → Done (Time: 10 sec, No bank account needed)
                   </p>
                 </div>
 
