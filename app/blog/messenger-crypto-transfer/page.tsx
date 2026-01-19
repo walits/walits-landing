@@ -239,11 +239,67 @@ Alice: Received! Thanks Bob!`}
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">보안은 어떻게?</h2>
 
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">개인키 관리 (MPC 2-of-3)</h3>
+
+              <p className="mb-4">
+                "개인키를 어떻게 관리하지?" 이게 사람들이 가장 걱정하는 부분이죠.
+                일반 지갑은 12개 단어(니모닉)를 외워야 하는데, 솔직히 누가 그걸 외워요? 종이에 적어두면 찢어질까봐 불안하고...
+              </p>
+
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-lg my-6 border-l-4 border-blue-500">
+                <p className="font-semibold mb-3 text-blue-900 dark:text-blue-300">💡 Walits는 MPC 방식으로 해결했어요</p>
+                <p className="mb-4">
+                  개인키를 3조각으로 쪼갠 뒤, 나눠서 보관합니다. 2개만 있으면 송금 가능하고, 1개만으로는 아무것도 못해요.
+                </p>
+
+                <div className="space-y-3 text-sm">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold text-gray-900 dark:text-white">1️⃣ 고객키 (내 폰에 저장)</p>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      → 앱 설치하면 자동 생성돼요<br/>
+                      → PIN이나 지문으로 보호됨 (카카오뱅크처럼!)<br/>
+                      → <span className="text-blue-600 dark:text-blue-400 font-semibold">니모닉 외울 필요 없어요!</span>
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold text-gray-900 dark:text-white">2️⃣ 서버키 (Walits가 관리)</p>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      → 우리 서버에 안전하게 보관<br/>
+                      → 서버키만 해킹당해도 송금 불가 (고객키 필요)
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold text-gray-900 dark:text-white">3️⃣ 백업키 (내가 보관)</p>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      → 지갑 만들 때 PDF로 다운로드<br/>
+                      → 집 서랍이나 USB에 보관하면 돼요<br/>
+                      → 혹시 폰 바꾸거나 분실했을 때 복구용
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 p-3 bg-green-100 dark:bg-green-900/30 rounded">
+                  <p className="text-sm font-semibold text-green-800 dark:text-green-300">✅ 실제 송금할 때는?</p>
+                  <p className="text-sm text-green-700 dark:text-green-400">
+                    고객키(내 폰) + 서버키(Walits) 2개로 자동 서명! 백업키는 건드릴 일 없어요.
+                  </p>
+                </div>
+
+                <div className="mt-4 p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded">
+                  <p className="text-sm font-semibold text-yellow-800 dark:text-yellow-300">📱 폰 분실하면?</p>
+                  <p className="text-sm text-yellow-700 dark:text-yellow-400">
+                    서버키(Walits) + 백업키(내가 보관한 PDF)로 복구 → 새 폰에서 다시 시작!
+                  </p>
+                </div>
+              </div>
+
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">다단계 인증</h3>
               <ul className="space-y-2">
-                <li><strong>생체인증</strong>: 1만 원 이상 송금 시 지문이나 얼굴 인식을 통한 본인 확인이 필요합니다.</li>
-                <li><strong>PIN 코드</strong>: 10만 원 이상의 금액에서는 6자리 PIN 코드를 추가로 입력해야 합니다.</li>
-                <li><strong>2단계 인증(2FA)</strong>: 100만 원 이상의 고액 거래에서는 이메일이나 SMS로 전송되는 인증 코드를 입력해야 최종 승인됩니다.</li>
+                <li><strong>생체인증</strong>: 1만 원 이상 송금 시 지문이나 얼굴 인식</li>
+                <li><strong>PIN 코드</strong>: 10만 원 이상은 6자리 PIN 추가 입력</li>
+                <li><strong>2단계 인증(2FA)</strong>: 100만 원 이상은 이메일/SMS 인증 코드까지</li>
               </ul>
 
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">일일 한도</h3>
@@ -368,8 +424,8 @@ Alice: Received! Thanks Bob!`}
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
                   <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q1. 메신저에 내 자산이 노출되지 않나요?</h4>
                   <p className="mb-0 text-gray-600 dark:text-gray-400">
-                    아니요. Walits 메신저는 UI일 뿐이고, 실제 자산은 TEE 환경의 안전한 지갑에 보관됩니다.
-                    앱이 해킹되어도 자산은 안전합니다.
+                    아니요. 개인키가 3조각으로 나뉘어 분산 저장되는 MPC 방식이라 안전해요.
+                    메신저 UI가 해킹당해도, 개인키 1조각만으로는 송금이 불가능합니다. 2개가 있어야 하거든요.
                   </p>
                 </div>
 
@@ -391,8 +447,8 @@ Alice: Received! Thanks Bob!`}
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
                   <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q4. 어떤 코인을 지원하나요?</h4>
                   <p className="mb-0 text-gray-600 dark:text-gray-400">
-                    USDT, USDC (스테이블코인)을 주로 지원합니다. 법정화폐(원화, 달러)로 표시하지만
-                    실제로는 스테이블코인으로 전송됩니다.
+                    USDT, USDC 같은 스테이블코인부터 ETH, BTC, SOL 등 주요 암호화폐를 모두 지원해요.
+                    메신저에서 보낼 때 토큰을 선택하면 됩니다. (예: "철수야, USDT 10,000원어치 보낼게")
                   </p>
                 </div>
               </div>
@@ -600,11 +656,67 @@ Total 75,000 won received`}
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">What About Security?</h2>
 
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Private Key Management (MPC 2-of-3)</h3>
+
+              <p className="mb-4">
+                "How do you manage private keys?" That's everyone's biggest concern.
+                Traditional wallets require memorizing 12 words (mnemonic). Honestly, who can remember those? If you write them down, you worry about losing the paper...
+              </p>
+
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-lg my-6 border-l-4 border-blue-500">
+                <p className="font-semibold mb-3 text-blue-900 dark:text-blue-300">💡 Walits solved this with MPC</p>
+                <p className="mb-4">
+                  We split your private key into 3 pieces and store them separately. You only need 2 pieces to send crypto, and 1 piece alone is useless.
+                </p>
+
+                <div className="space-y-3 text-sm">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold text-gray-900 dark:text-white">1️⃣ Customer Key (Your Phone)</p>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      → Auto-generated when you install the app<br/>
+                      → Protected by PIN or fingerprint (like KakaoBank!)<br/>
+                      → <span className="text-blue-600 dark:text-blue-400 font-semibold">No need to memorize mnemonics!</span>
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold text-gray-900 dark:text-white">2️⃣ Server Key (Walits Manages)</p>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      → Stored securely on our servers<br/>
+                      → Even if hacked, can't send without customer key
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold text-gray-900 dark:text-white">3️⃣ Backup Key (You Keep)</p>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      → Downloaded as PDF when creating wallet<br/>
+                      → Store in a drawer or USB at home<br/>
+                      → For recovery if you change or lose your phone
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 p-3 bg-green-100 dark:bg-green-900/30 rounded">
+                  <p className="text-sm font-semibold text-green-800 dark:text-green-300">✅ When sending crypto?</p>
+                  <p className="text-sm text-green-700 dark:text-green-400">
+                    Auto-signed with Customer Key (your phone) + Server Key (Walits)! You never touch the backup key.
+                  </p>
+                </div>
+
+                <div className="mt-4 p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded">
+                  <p className="text-sm font-semibold text-yellow-800 dark:text-yellow-300">📱 Lost your phone?</p>
+                  <p className="text-sm text-yellow-700 dark:text-yellow-400">
+                    Recover with Server Key (Walits) + Backup Key (your PDF) → Start fresh on a new phone!
+                  </p>
+                </div>
+              </div>
+
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Multi-Factor Authentication</h3>
               <ul className="space-y-2">
-                <li><strong>Biometric</strong>: Transfers over 10,000 won require fingerprint or face recognition for identity verification.</li>
-                <li><strong>PIN code</strong>: Amounts over 100,000 won require additional 6-digit PIN code entry.</li>
-                <li><strong>2FA</strong>: High-value transactions over 1,000,000 won require email or SMS verification code for final approval.</li>
+                <li><strong>Biometric</strong>: Transfers over 10,000 won require fingerprint or face recognition</li>
+                <li><strong>PIN code</strong>: Amounts over 100,000 won require additional 6-digit PIN</li>
+                <li><strong>2FA</strong>: High-value transactions over 1,000,000 won require email/SMS verification</li>
               </ul>
 
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Daily Limits</h3>
@@ -729,8 +841,8 @@ Result: Only first transaction executes, second is automatically blocked`}
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
                   <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q1. Aren't my assets exposed in the messenger?</h4>
                   <p className="mb-0 text-gray-600 dark:text-gray-400">
-                    No. The messenger is just the UI; actual assets are stored in a secure wallet in TEE environment.
-                    Even if the messenger is hacked, your assets remain safe.
+                    No. Your private key is split into 3 pieces using MPC (Multi-Party Computation).
+                    Even if the messenger UI is hacked, they can only get 1 piece, which is useless. You need 2 pieces to send crypto.
                   </p>
                 </div>
 
@@ -752,8 +864,8 @@ Result: Only first transaction executes, second is automatically blocked`}
                 <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
                   <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q4. Which coins are supported?</h4>
                   <p className="mb-0 text-gray-600 dark:text-gray-400">
-                    Mainly USDT and USDC (stablecoins). Displayed in fiat currency (won, dollars) but
-                    actually transferred as stablecoins.
+                    We support all major cryptocurrencies: stablecoins like USDT and USDC, plus ETH, BTC, SOL, etc.
+                    Just select the token when sending in messenger. (e.g., "Send Chulsu 10,000 won worth of USDT")
                   </p>
                 </div>
               </div>
