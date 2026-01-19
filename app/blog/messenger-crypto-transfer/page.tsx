@@ -108,17 +108,17 @@ export default function MessengerCryptoTransferPage() {
                 <pre className="text-sm">
 {`[Walits 메신저]
 
-나: 어제 밥값 10,000원 보낼게
+나: 어제 밥값 10 USDT 보낼게
 친구: ㅇㅇ 고마워
 
-나: /send 친구이름 10000 KRW
-     → 자동으로 USDT로 환전 후 전송
+나: /send 친구이름 10 USDT
+     → AI가 자동으로 최적 네트워크 선택 (Polygon)
 
 [Walits 알림]
 전송이 완료되었습니다
-   10,000원이 7.5 USDT로 환전되어 전송되었습니다
+   금액: 10 USDT
    수신자: 친구이름 (김철수)
-   네트워크: Polygon (가스비 약 50원)
+   네트워크: Polygon (가스비 $0.001)
    처리 시간: 5초
 
 친구: 받았어! 고마워~`}
@@ -165,7 +165,7 @@ Alice: Received! Thanks Bob!`}
                 AI가 자동으로 최적의 송금 경로를 선택합니다:
               </p>
               <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-6">
-                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">송금 시나리오: 10,000원 전송</h4>
+                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">송금 시나리오: 10 USDT 전송</h4>
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-300 dark:border-gray-700">
@@ -178,26 +178,26 @@ Alice: Received! Thanks Bob!`}
                   <tbody>
                     <tr className="border-b border-gray-300 dark:border-gray-700">
                       <td className="p-2">Ethereum</td>
-                      <td className="p-2">₩3,000</td>
+                      <td className="p-2">$2.5</td>
                       <td className="p-2">1분</td>
                       <td className="p-2">선택 안 함</td>
                     </tr>
                     <tr className="border-b border-gray-300 dark:border-gray-700">
                       <td className="p-2">Polygon</td>
-                      <td className="p-2">₩50</td>
+                      <td className="p-2">$0.001</td>
                       <td className="p-2">5초</td>
                       <td className="p-2">AI 선택됨</td>
                     </tr>
                     <tr className="border-b border-gray-300 dark:border-gray-700">
                       <td className="p-2">Arbitrum</td>
-                      <td className="p-2">₩100</td>
+                      <td className="p-2">$0.05</td>
                       <td className="p-2">3초</td>
                       <td className="p-2">선택 안 함</td>
                     </tr>
                   </tbody>
                 </table>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
-                  → AI가 가스비 최저인 Polygon 선택 (₩50 vs ₩3,000 = 98% 절감)
+                  → AI가 가스비 최저인 Polygon 선택 ($0.001 vs $2.5 = 99.9% 절감)
                 </p>
               </div>
 
@@ -205,22 +205,22 @@ Alice: Received! Thanks Bob!`}
               <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-8">
                 <h4 className="font-bold mb-4 text-gray-900 dark:text-white">예시: 4명이서 저녁 식사</h4>
                 <pre className="text-sm">
-{`총 비용: 100,000원 (나 결제)
+{`총 비용: 75 USDT (내가 결제)
 
-나: /split 100000 @철수 @영희 @민수
-    → 자동으로 1/4 = 25,000원씩 계산
+나: /split 75 USDT @철수 @영희 @민수
+    → 자동으로 1/4 = 18.75 USDT씩 계산
 
 [Auto Chat 봇]
 정산 요청이 발송되었습니다
-   철수님께: 25,000원
-   영희님께: 25,000원
-   민수님께: 25,000원
+   철수님께: 18.75 USDT
+   영희님께: 18.75 USDT
+   민수님께: 18.75 USDT
 
-[철수님 승인] 25,000원 전송이 완료되었습니다
-[영희님 승인] 25,000원 전송이 완료되었습니다
-[민수님 승인] 25,000원 전송이 완료되었습니다
+[철수님 승인] 18.75 USDT 전송이 완료되었습니다
+[영희님 승인] 18.75 USDT 전송이 완료되었습니다
+[민수님 승인] 18.75 USDT 전송이 완료되었습니다
 
-총 75,000원을 모두 수령하셨습니다`}
+총 56.25 USDT를 모두 수령하셨습니다`}
                 </pre>
               </div>
 
@@ -336,11 +336,11 @@ Alice: Received! Thanks Bob!`}
                 <pre className="text-sm">
 {`[이중지불 시도 시나리오 - 자동 방지]
 
-현재 잔액: 10,000원
+현재 잔액: 10 USDT
 
 동시에 두 건의 송금을 시도하는 경우:
- 첫 번째: /send 친구A 10000 → 처리 중 대기
- 두 번째: /send 친구B 10000 → 차단됨 (잔액 부족)
+ 첫 번째: /send 친구A 10 USDT → 처리 중 대기
+ 두 번째: /send 친구B 10 USDT → 차단됨 (잔액 부족)
 
 결과: 첫 번째 거래만 실행되고, 두 번째는 자동으로 차단됩니다`}
                 </pre>
@@ -359,7 +359,7 @@ Alice: Received! Thanks Bob!`}
                     (시간: 5분, 수수료: 무료지만 은행 계좌 필요)
                   </p>
                   <p>
-                    <strong>After AI Chat:</strong> Walits 앱에서 <code>/split 30000 @친구1 @친구2</code><br/>
+                    <strong>After AI Chat:</strong> Walits 앱에서 <code>/split 22.5 USDT @친구1 @친구2</code><br/>
                     (시간: 10초, 은행 계좌 불필요)
                   </p>
                 </div>
@@ -371,11 +371,11 @@ Alice: Received! Thanks Bob!`}
                   </p>
                   <p>
                     <strong>Before:</strong> PayPal → 수수료 5% + 환전 수수료 3% = 총 8% 손실<br/>
-                    100만 원 받으면 8만 원 날림
+                    $1,000 받으면 $80 날림
                   </p>
                   <p>
-                    <strong>After AI Chat:</strong> Walits 앱에서 <code>/invoice 1000000 KRW</code><br/>
-                    수수료: 가스비 100원 (0.01%)
+                    <strong>After AI Chat:</strong> Walits 앱에서 <code>/invoice 1000 USDT</code><br/>
+                    수수료: 가스비 $0.001 (0.0001%)
                   </p>
                 </div>
 
@@ -389,8 +389,8 @@ Alice: Received! Thanks Bob!`}
                     작은 후원은 불가능
                   </p>
                   <p>
-                    <strong>After AI Chat:</strong> 100원부터 후원 가능<br/>
-                    "재미있었어요 100원 드려요!" → <code>/tip @작가님 100</code>
+                    <strong>After AI Chat:</strong> 소액부터 후원 가능<br/>
+                    "재미있었어요!" → <code>/tip @작가님 0.1 USDT</code>
                   </p>
                 </div>
               </div>
@@ -448,7 +448,7 @@ Alice: Received! Thanks Bob!`}
                   <h4 className="font-bold mb-2 text-gray-900 dark:text-white">Q4. 어떤 코인을 지원하나요?</h4>
                   <p className="mb-0 text-gray-600 dark:text-gray-400">
                     USDT, USDC 같은 스테이블코인부터 ETH, BTC, SOL 등 주요 암호화폐를 모두 지원해요.
-                    메신저에서 보낼 때 토큰을 선택하면 됩니다. (예: "철수야, USDT 10,000원어치 보낼게")
+                    메신저에서 보낼 때 토큰을 직접 선택하면 됩니다. (예: "철수야, 10 USDT 보낼게")
                   </p>
                 </div>
               </div>
