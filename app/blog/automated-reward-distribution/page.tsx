@@ -62,6 +62,14 @@ export default function AutomatedRewardPost() {
           </div>
         </div>
 
+        <div className="mb-12">
+          <img
+            src="/blog/game-rewards.jpg"
+            alt="Automated Reward Distribution"
+            className="w-full rounded-xl shadow-lg"
+          />
+        </div>
+
         <div className="prose prose-lg dark:prose-invert max-w-none">
           {language === 'ko' ? (
             <>
