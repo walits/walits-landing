@@ -202,6 +202,65 @@ export default function AutomatedRewardPost() {
                 </div>
               </div>
 
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">다양한 토큰으로 보상 지급</h2>
+
+              <div className="mb-12 p-8 bg-gradient-to-r from-green-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">원하는 토큰으로 자유롭게</h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-6">
+                  Walits는 다양한 블록체인과 토큰을 지원합니다.
+                  USDT, Ethereum, Solana 등 주요 암호화폐는 물론, 자체 게임 토큰이나 커뮤니티 토큰도 자유롭게 사용할 수 있습니다.
+                </p>
+
+                <div className="grid gap-4 md:grid-cols-3 mb-6">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">💰 주요 암호화폐</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      USDT, USDC, Ethereum (ETH), Solana (SOL), Bitcoin 등
+                    </p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">🎮 자체 토큰</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      GameCoin, CommunityToken 등 자체 발행 ERC-20/SPL 토큰
+                    </p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">✨ WLT (Walits Token)</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Walits 네이티브 토큰으로 보상 지급 가능
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-2 border-blue-200 dark:border-blue-800">
+                  <h4 className="font-bold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
+                    <span className="text-2xl">🚀</span>
+                    WLT (Walits Token)의 미래
+                  </h4>
+                  <p className="text-gray-700 dark:text-gray-300 mb-3">
+                    WLT는 단순한 보상 토큰을 넘어, 실제 세계에서 사용 가능한 유틸리티 토큰으로 진화할 예정입니다.
+                  </p>
+                  <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 dark:text-blue-400">•</span>
+                      <span>온·오프라인 가맹점에서 결제 수단으로 사용</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 dark:text-blue-400">•</span>
+                      <span>Walits 생태계 내 프리미엄 기능 이용</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 dark:text-blue-400">•</span>
+                      <span>스테이킹을 통한 추가 수익 창출</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 dark:text-blue-400">•</span>
+                      <span>파트너사 서비스 할인 및 혜택</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
               <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">실제 사용 예시</h2>
 
               <div className="mb-12 space-y-8">
@@ -572,6 +631,65 @@ export default function AutomatedRewardPost() {
                       Actual withdrawal rate is usually less than 5%.
                     </p>
                   </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Reward Distribution with Various Tokens</h2>
+
+              <div className="mb-12 p-8 bg-gradient-to-r from-green-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Freedom to Choose Your Token</h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-6">
+                  Walits supports various blockchains and tokens.
+                  Use major cryptocurrencies like USDT, Ethereum, and Solana, or your own game/community tokens with complete freedom.
+                </p>
+
+                <div className="grid gap-4 md:grid-cols-3 mb-6">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">💰 Major Cryptocurrencies</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      USDT, USDC, Ethereum (ETH), Solana (SOL), Bitcoin, etc.
+                    </p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">🎮 Custom Tokens</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Your own ERC-20/SPL tokens like GameCoin, CommunityToken
+                    </p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded border border-gray-200 dark:border-gray-600">
+                    <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">✨ WLT (Walits Token)</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Distribute rewards with Walits native token
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-2 border-blue-200 dark:border-blue-800">
+                  <h4 className="font-bold mb-3 text-gray-900 dark:text-white flex items-center gap-2">
+                    <span className="text-2xl">🚀</span>
+                    The Future of WLT (Walits Token)
+                  </h4>
+                  <p className="text-gray-700 dark:text-gray-300 mb-3">
+                    WLT is evolving beyond a simple reward token to become a utility token usable in the real world.
+                  </p>
+                  <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 dark:text-blue-400">•</span>
+                      <span>Payment method at online and offline merchants</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 dark:text-blue-400">•</span>
+                      <span>Access premium features within Walits ecosystem</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 dark:text-blue-400">•</span>
+                      <span>Generate additional revenue through staking</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 dark:text-blue-400">•</span>
+                      <span>Discounts and benefits at partner services</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
 
