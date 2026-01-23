@@ -62,33 +62,23 @@ export default function HomePage() {
         ],
         proUseCases: '✓ 고객 자산 집금\n✓ 운영 자금 관리\n✓ 기업 재무 관리\n✓ 토큰 발행사 운영',
       },
-      aiVsSto: {
-        title: 'AI Chat Wallet vs AI ST Token Wallet',
-        subtitle: '개인 투자자를 위한 두 가지 혁신적인 지갑 서비스',
-        aiTitle: 'AI Chat 지갑',
-        aiSubtitle: '채팅 + 자동 결제',
-        aiDesc: 'Walits 메신저로 대화하듯 송금하세요. AI가 자동으로 최적 결제 경로를 선택하고, 반복 결제를 자동 처리합니다. 스마트 라우팅으로 수수료를 최소화합니다.',
-        aiFeatures: [
-          '자동 결제: AI가 반복 결제 자동 처리',
-          '채팅 송금: Walits 메신저로 간편 송금',
-          '최적 경로: 가장 저렴한 수수료로 자동 라우팅',
-          '실시간 알림: 송금/입금 즉시 알림',
-          '간편 인증: 생체 인증으로 빠른 송금',
-          '다중 토큰: 주요 암호화폐 모두 지원',
+      personalWallet: {
+        title: 'Walits 개인지갑',
+        subtitle: 'AI, 투자, Chat, RWA - 하나의 지갑으로 모든 것을',
+        desc: '채팅하듯 송금하고, AI가 자동으로 투자하고, 실물 자산 토큰에 투자하세요. 일상 결제부터 전문 투자까지 하나의 앱에서 모두 해결합니다.',
+        features: [
+          '💬 채팅 송금: 카카오톡처럼 메시지 보내듯 암호화폐 송금',
+          '🤖 AI 자동 결제: 구독료, 청구서 자동 결제 및 최적 경로 선택',
+          '📊 AI 포트폴리오 관리: 자동 리밸런싱으로 최적 투자 비율 유지',
+          '🏠 RWA 투자: 부동산, 주식 등 실물 자산 토큰화 자산 투자',
+          '💰 배당 수령: 토큰증권 배당금 자동 분배',
+          '🔐 기관급 보안: MPC 기술로 안전한 자산 보관',
+          '📈 스마트 분석: AI 기반 투자 추천 및 리스크 관리',
+          '⚡ 실시간 알림: 송금, 입금, 투자 수익 즉시 알림',
+          '🌍 다중 토큰: USDT, ETH, SOL 등 주요 암호화폐 모두 지원',
+          '✅ 규제 준수: 금융 규제 완벽 대응 및 디지털 증권 보관',
         ],
-        aiUseCases: '✓ 채팅으로 송금\n✓ 구독료 자동 결제\n✓ 소액 결제\n✓ 그룹 정산',
-        stoTitle: 'AI 토큰증권 지갑',
-        stoSubtitle: 'AI 투자 + 증권형 토큰',
-        stoDesc: 'AI가 토큰증권 포트폴리오를 자동으로 관리하고 최적화합니다. 부동산, 주식 등 실물 자산 기반 증권형 토큰에 투자하세요.',
-        stoFeatures: [
-          'AI 자동 리밸런싱: 최적 투자 비율 유지',
-          '규제 준수: 금융 규제 완벽 대응',
-          '실물 자산: 부동산, 주식 등 토큰화 자산',
-          '배당 수령: 자동 배당금 분배',
-          '안전 보관: 기관급 보안 시스템',
-          '스마트 분석: AI 기반 투자 추천',
-        ],
-        stoUseCases: '✓ 부동산 토큰 투자\n✓ AI 포트폴리오 관리\n✓ 배당 수익 관리\n✓ 디지털 증권 보관',
+        useCases: '✓ 채팅으로 송금\n✓ 구독료 자동 결제\n✓ 소액 결제\n✓ 그룹 정산\n✓ 부동산 토큰 투자\n✓ AI 포트폴리오 관리\n✓ 배당 수익 관리\n✓ 디지털 증권 보관',
       },
       mpc: {
         title: 'MPC 2-of-3: 최고의 보안 아키텍처',
@@ -249,33 +239,23 @@ export default function HomePage() {
         ],
         proUseCases: '✓ Customer Asset Custody\n✓ Operating Fund Management\n✓ Corporate Treasury\n✓ Token Issuer Operations',
       },
-      aiVsSto: {
-        title: 'AI Chat Wallet vs AI ST Token Wallet',
-        subtitle: 'Two innovative wallet services for individual investors',
-        aiTitle: 'AI Chat Wallet',
-        aiSubtitle: 'Chat + Auto Payment',
-        aiDesc: 'Send crypto as easily as chatting on KakaoTalk or Telegram. AI automatically selects optimal payment routes and processes recurring payments. Smart routing minimizes transaction fees.',
-        aiFeatures: [
-          'Auto Payment: AI handles recurring payments automatically',
-          'Chat Transfer: Easy transfers via KakaoTalk/Telegram',
-          'Optimal Routing: Automatic routing via lowest-cost paths',
-          'Real-time Alerts: Instant notifications for transfers',
-          'Biometric Auth: Fast transfers with fingerprint/face ID',
-          'Multi-Token: All major cryptocurrencies supported',
+      personalWallet: {
+        title: 'Walits Personal Wallet',
+        subtitle: 'AI, Investment, Chat, RWA - Everything in One Wallet',
+        desc: 'Send crypto like chatting, let AI invest automatically, and invest in real-world asset tokens. From daily payments to professional investing, all in one app.',
+        features: [
+          '💬 Chat Transfer: Send crypto like messaging on KakaoTalk',
+          '🤖 AI Auto Payment: Auto-pay subscriptions & bills with optimal routing',
+          '📊 AI Portfolio Management: Auto-rebalancing for optimal investment ratios',
+          '🏠 RWA Investment: Invest in tokenized real-world assets like real estate & stocks',
+          '💰 Dividend Receipt: Automatic distribution of security token dividends',
+          '🔐 Institution-Grade Security: Safe asset storage with MPC technology',
+          '📈 Smart Analysis: AI-powered investment recommendations & risk management',
+          '⚡ Real-time Alerts: Instant notifications for transfers, deposits, investment returns',
+          '🌍 Multi-Token: All major cryptocurrencies including USDT, ETH, SOL',
+          '✅ Regulatory Compliance: Full compliance & digital securities storage',
         ],
-        aiUseCases: '✓ Chat Transfers\n✓ Auto Subscriptions\n✓ Micropayments\n✓ Group Settlements',
-        stoTitle: 'AI ST Token Wallet',
-        stoSubtitle: 'AI Investment + Security Tokens',
-        stoDesc: 'AI automatically manages and optimizes your security token portfolio. Invest in real-world asset-backed tokens like real estate and stocks.',
-        stoFeatures: [
-          'AI Auto Rebalancing: Maintains optimal investment ratios',
-          'Regulatory Compliance: Full financial regulation compliance',
-          'Real Assets: Tokenized real estate, stocks, etc.',
-          'Dividend Receipt: Automatic dividend distribution',
-          'Safe Storage: Institution-grade security system',
-          'Smart Analysis: AI-powered investment recommendations',
-        ],
-        stoUseCases: '✓ Real Estate Token Investment\n✓ AI Portfolio Management\n✓ Dividend Income Management\n✓ Digital Securities Storage',
+        useCases: '✓ Chat Transfers\n✓ Auto Subscriptions\n✓ Micropayments\n✓ Group Settlements\n✓ Real Estate Token Investment\n✓ AI Portfolio Management\n✓ Dividend Income Management\n✓ Digital Securities Storage',
       },
       mpc: {
         title: 'MPC 2-of-3: Ultimate Security Architecture',
@@ -844,20 +824,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Personal Wallets Section */}
+      {/* Personal Wallet Section */}
       <section id="personal" className="py-24 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-              {language === 'ko' ? '개인용 지갑' : 'Personal Wallets'}
+              {copy.personalWallet.title}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              {copy.aiVsSto.subtitle}
+              {copy.personalWallet.subtitle}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Messenger Card */}
+          <div className="max-w-4xl mx-auto">
+            {/* Unified Personal Wallet Card */}
             <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-xl border border-gray-900 dark:border-gray-600 relative">
               <div className="absolute -top-3 right-6">
                 <span className="px-3 py-1 bg-yellow-500 text-white text-sm font-semibold rounded-full">
@@ -865,65 +845,44 @@ export default function HomePage() {
                 </span>
               </div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gray-900 dark:bg-gray-600">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
                   <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {copy.aiVsSto.aiTitle}
+                    {copy.personalWallet.title}
                   </h3>
                   <p className="text-base text-gray-700 dark:text-gray-300">
-                    {language === 'ko' ? '카톡/텔레그램 · MPC 2-of-2' : 'KakaoTalk/Telegram · MPC 2-of-2'}
+                    {language === 'ko' ? 'AI · 투자 · Chat · RWA · MPC 2-of-2' : 'AI · Investment · Chat · RWA · MPC 2-of-2'}
                   </p>
                 </div>
               </div>
               <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
-                {copy.aiVsSto.aiDesc}
+                {copy.personalWallet.desc}
               </p>
-              <ul className="space-y-3 text-base text-gray-800 dark:text-gray-300">
-                {copy.aiVsSto.aiFeatures.map((feature, i) => (
-                  <li key={i}>• {feature}</li>
+              <div className="grid md:grid-cols-2 gap-3 text-base text-gray-800 dark:text-gray-300">
+                {copy.personalWallet.features.map((feature, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <span className="text-blue-500 mt-1">•</span>
+                    <span>{feature}</span>
+                  </div>
                 ))}
-              </ul>
-              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
-                {language === 'ko' ? 'AI 자동 결제 · 채팅 송금' : 'AI Auto Payment · Chat Transfer'}
               </div>
-            </div>
-
-            {/* AI STO Card */}
-            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-xl border border-gray-900 dark:border-gray-600 relative">
-              <div className="absolute -top-3 right-6">
-                <span className="px-3 py-1 bg-yellow-500 text-white text-sm font-semibold rounded-full">
-                  {language === 'ko' ? '런칭 준비중' : 'Coming Soon'}
+              <div className="mt-8 flex flex-wrap gap-2">
+                <span className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
+                  💬 {language === 'ko' ? '채팅 송금' : 'Chat Transfer'}
                 </span>
-              </div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gray-900 dark:bg-gray-600">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {copy.aiVsSto.stoTitle}
-                  </h3>
-                  <p className="text-base text-gray-700 dark:text-gray-300">
-                    {language === 'ko' ? 'AI 투자 · KYC/AML 준수' : 'AI Investing · KYC/AML Compliant'}
-                  </p>
-                </div>
-              </div>
-              <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
-                {copy.aiVsSto.stoDesc}
-              </p>
-              <ul className="space-y-3 text-base text-gray-800 dark:text-gray-300">
-                {copy.aiVsSto.stoFeatures.map((feature, i) => (
-                  <li key={i}>• {feature}</li>
-                ))}
-              </ul>
-              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
-                {language === 'ko' ? 'AI 토큰증권 투자 · 스마트 포트폴리오' : 'AI Security Token · Smart Portfolio'}
+                <span className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
+                  🤖 {language === 'ko' ? 'AI 자동 결제' : 'AI Auto Payment'}
+                </span>
+                <span className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
+                  📊 {language === 'ko' ? 'AI 포트폴리오' : 'AI Portfolio'}
+                </span>
+                <span className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
+                  🏠 {language === 'ko' ? 'RWA 투자' : 'RWA Investment'}
+                </span>
               </div>
             </div>
           </div>
