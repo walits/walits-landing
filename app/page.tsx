@@ -27,7 +27,7 @@ export default function HomePage() {
     ko: {
       hero: {
         title: <>세상에서 가장 쉽고<br />안전한 기업용 지갑</>,
-        subtitle: '글로벌 토큰화의 초석, 신뢰비용 제로의 세상을 위하여. Non-Custody API로 대량 지급을 자동화하고, MPC Custody로 자산을 안전하게 보관하세요. 토큰증권 지갑으로 증권형 토큰에 투자하세요.',
+        subtitle: '글로벌 토큰화의 초석, 신뢰비용 제로의 세상을 위하여. Virtual Balance로 포인트를 즉시 지급하고, 실제 블록체인 자산도 안전하게 관리하세요. MPC 기술 기반 개인 투자 지갑으로 RWA 자산에 투자하세요.',
       },
       nav: {
         solutions: '솔루션',
@@ -37,30 +37,31 @@ export default function HomePage() {
         contact: '문의',
         login: '로그인',
       },
-      nonCustodyVsCustody: {
-        title: 'Non-Custody Wallet vs Custody Wallet',
-        subtitle: '앱/게임을 위한 Non-Custody Wallet, 고객 자산 집금을 위한 Custody Wallet을 선택하세요.',
-        basicTitle: 'Non-Custody Wallet',
-        basicSubtitle: 'API로 간편하게 대량 지급',
-        basicDesc: '집금 없이 계정별로 독립 입출금. 대규모 에어드랍/보상/토큰 지급에 최적화. 커스텀 토큰 발행 시 자동으로 각 사용자 지갑 생성.',
+      enterpriseWallet: {
+        title: '기업용 지갑',
+        subtitle: 'Virtual Balance 기반 포인트 지급부터 실제 블록체인 자산 관리까지',
+        basicTitle: 'Basic',
+        basicSubtitle: 'Virtual Balance 기반 대량 지급',
+        basicDesc: 'Virtual Balance로 가스비 없이 즉시 포인트/리워드 지급. 대규모 에어드랍과 ICO/커스텀 토큰 발행에 최적화.',
         basicFeatures: [
-          '즉시 시작: API 키만으로 바로 사용',
-          '빠른 처리: TEE 환경에서 대량 트랜잭션 동시 처리',
-          '간편 관리: 계정별 독립 지갑으로 복잡한 승인 불필요',
-          '안전한 격리: 각 계정은 독립된 지갑으로 완전 격리',
-          'ICO 지원: 커스텀 토큰별 자동 지갑 생성 및 배포',
+          'Virtual Balance: 가스비 없이 즉시 지급',
+          'API 기반: API 키만으로 바로 시작',
+          '대량 처리: TEE 환경에서 동시 트랜잭션 처리',
+          '계정별 독립: 각 계정은 독립된 지갑으로 완전 격리',
+          'ICO 지원: 커스텀 토큰 발행 및 자동 배포',
         ],
-        basicUseCases: '✓ 게임 보상 지급\n✓ NFT 에어드랍\n✓ ICO/토큰 발행\n✓ 대량 리워드 발행',
-        proTitle: 'Custody Wallet',
-        proSubtitle: 'MPC로 안전하게 자산 보관',
-        proDesc: '기업 자산을 MPC 2-of-3 다중 서명으로 안전하게 보관. 승인 정책 기반 거버넌스.',
+        basicUseCases: '게임 보상 | NFT 에어드랍 | ICO/토큰 발행 | 리워드 포인트',
+        proTitle: 'Pro',
+        proSubtitle: '실제 블록체인 입금 감지 + 기업 재무 관리',
+        proDesc: 'Basic의 모든 기능 + 실제 암호화폐 입금 감지 및 추적. 기업 재무 관리 기능 포함. (집금은 수동 운영)',
         proFeatures: [
-          '최고 보안: MPC 2-of-3로 단일 실패점 제거',
-          '다중 승인: 정책 기반 승인 워크플로우',
-          '완벽한 감사: 모든 거래 이력 추적 및 리포팅',
-          '규제 대응: 금융기관급 보안 및 컴플라이언스',
+          'Basic 모든 기능 포함',
+          '실시간 입금 감지: 블록체인 입금 즉시 추적',
+          '기업 재무 관리: 자산 현황 대시보드',
+          '수동 집금: 필요 시 수동으로 자산 이동',
+          '고급 리포팅: 상세한 거래 내역 및 분석',
         ],
-        proUseCases: '✓ 고객 자산 집금\n✓ 운영 자금 관리\n✓ 기업 재무 관리\n✓ 토큰 발행사 운영',
+        proUseCases: '게임 아이템 거래소 | 크립토 결제 | 기업 재무 관리 | 토큰 발행사',
       },
       personalWallet: {
         title: 'AI Chat(전송,투자,RWA) Wallet',
@@ -127,10 +128,6 @@ export default function HomePage() {
             title: '이중지불 방지',
             desc: 'Redis 분산 락과 트랜잭션 락으로 이중지불 원천 차단. 멱등성 보장으로 동시성 이슈 완벽 방지',
           },
-          {
-            title: '자동 집금 (Auto-Sweep)',
-            desc: '입금 확정 시 Master Address로 자동 집금. 가스비 최적화 및 자산 통합 관리',
-          },
         ],
       },
       pricing: {
@@ -152,28 +149,29 @@ export default function HomePage() {
               '다중 토큰 지원',
             ],
           },
-          nonCustody: {
-            name: 'Non-Custody 지갑',
+          basic: {
+            name: '기업용 지갑 Basic',
             originalPrice: '₩200,000',
             price: '₩99,000',
             features: [
-              'TEE 환경 보안',
-              'API 기반 대량 지급',
+              'Virtual Balance 즉시 지급',
+              'API 기반 대량 처리',
               '계정별 독립 지갑',
               '무제한 트랜잭션',
               'ICO/커스텀 토큰 지원',
               '개발자 기술 지원',
             ],
           },
-          custody: {
-            name: 'Custody 지갑',
-            originalPrice: '₩1,000,000',
-            price: '₩550,000',
+          pro: {
+            name: '기업용 지갑 Pro',
+            originalPrice: '₩500,000',
+            price: '₩300,000',
             features: [
-              'MPC 2-of-3 보안',
-              '다중 승인 워크플로우',
-              '정책 기반 거버넌스',
-              '완벽한 감사 추적',
+              'Basic 모든 기능 포함',
+              '실시간 블록체인 입금 감지',
+              '기업 재무 관리 대시보드',
+              '수동 집금 기능',
+              '고급 리포팅 및 분석',
               '전담 계정 매니저',
               '우선 기술 지원',
             ],
@@ -192,7 +190,7 @@ export default function HomePage() {
     en: {
       hero: {
         title: <>The Easiest and<br />Most Secure Enterprise Wallet</>,
-        subtitle: 'Foundation of global tokenization, for a world of zero trust costs. Automate mass distributions with Non-Custody API, secure corporate assets with MPC Custody, and trade compliant security tokens with ST Wallet.',
+        subtitle: 'Foundation of global tokenization, for a world of zero trust costs. Instantly distribute points with Virtual Balance, securely manage real blockchain assets, and invest in RWA tokens with our MPC-based personal wallet.',
       },
       nav: {
         solutions: 'Solutions',
@@ -202,30 +200,31 @@ export default function HomePage() {
         contact: 'Contact',
         login: 'Login',
       },
-      nonCustodyVsCustody: {
-        title: 'Non-Custody Wallet vs Custody Wallet',
-        subtitle: 'Choose Non-Custody Wallet for apps/games, Custody Wallet for customer asset management.',
-        basicTitle: 'Non-Custody Wallet',
-        basicSubtitle: 'Easy Mass Distribution via API',
-        basicDesc: 'Independent deposit/withdrawal per account without custody. Optimized for large-scale airdrops/rewards/token distribution. Auto-creates user wallets for custom tokens.',
+      enterpriseWallet: {
+        title: 'Enterprise Wallet',
+        subtitle: 'From Virtual Balance points to real blockchain asset management',
+        basicTitle: 'Basic',
+        basicSubtitle: 'Virtual Balance Mass Distribution',
+        basicDesc: 'Instant points/rewards distribution with Virtual Balance and zero gas fees. Optimized for large-scale airdrops and ICO/custom token issuance.',
         basicFeatures: [
-          'Instant Start: Use immediately with just API key',
-          'Fast Processing: Simultaneous mass transactions in TEE environment',
-          'Easy Management: No complex approvals with independent wallets per account',
-          'Safe Isolation: Each account completely isolated with independent wallet',
-          'ICO Support: Auto wallet creation & distribution per custom token',
+          'Virtual Balance: Instant distribution with zero gas fees',
+          'API-based: Start immediately with just API key',
+          'Mass Processing: Simultaneous transactions in TEE environment',
+          'Account Isolation: Each account with independent wallet',
+          'ICO Support: Custom token issuance and auto-distribution',
         ],
-        basicUseCases: '✓ Game Rewards\n✓ NFT Airdrops\n✓ ICO/Token Issuance\n✓ Mass Reward Distribution',
-        proTitle: 'Custody Wallet',
-        proSubtitle: 'Secure Asset Storage with MPC',
-        proDesc: 'Safely store corporate assets with MPC 2-of-3 multi-signature. Approval policy-based governance.',
+        basicUseCases: 'Game Rewards | NFT Airdrops | ICO/Token Issuance | Reward Points',
+        proTitle: 'Pro',
+        proSubtitle: 'Real Blockchain Deposit Detection + Treasury',
+        proDesc: 'All Basic features + real crypto deposit detection and tracking. Includes corporate treasury management. (Manual sweep operations)',
         proFeatures: [
-          'Maximum Security: Eliminate single point of failure with MPC 2-of-3',
-          'Multi-Approval: Policy-based approval workflow',
-          'Complete Audit: Track and report all transaction history',
-          'Regulatory Compliance: Financial institution-grade security and compliance',
+          'All Basic features included',
+          'Real-time Deposit Detection: Instant blockchain deposit tracking',
+          'Corporate Treasury: Asset status dashboard',
+          'Manual Sweep: Manual asset movement when needed',
+          'Advanced Reporting: Detailed transaction history and analytics',
         ],
-        proUseCases: '✓ Customer Asset Custody\n✓ Operating Fund Management\n✓ Corporate Treasury\n✓ Token Issuer Operations',
+        proUseCases: 'Game Item Marketplace | Crypto Payments | Corporate Treasury | Token Issuers',
       },
       personalWallet: {
         title: 'AI Chat(Transfer,Investment,RWA) Wallet',
@@ -292,10 +291,6 @@ export default function HomePage() {
             title: 'Double-Spend Prevention',
             desc: 'Prevents double-spending with Redis distributed locks and transaction locks. Idempotency guarantee completely eliminates concurrency issues',
           },
-          {
-            title: 'Auto-Sweep',
-            desc: 'Automatic sweep to Master Address upon deposit confirmation. Optimizes gas fees and centralizes asset management',
-          },
         ],
       },
       pricing: {
@@ -317,28 +312,29 @@ export default function HomePage() {
               'Multi-token support',
             ],
           },
-          nonCustody: {
-            name: 'Non-Custody Wallet',
+          basic: {
+            name: 'Enterprise Wallet Basic',
             originalPrice: '$150',
             price: '$58',
             features: [
-              'TEE environment security',
-              'API-based mass distribution',
+              'Virtual Balance instant distribution',
+              'API-based mass processing',
               'Independent wallet per account',
               'Unlimited transactions',
               'ICO/Custom token support',
               'Developer support',
             ],
           },
-          custody: {
-            name: 'Custody Wallet',
-            originalPrice: '$750',
-            price: '$410',
+          pro: {
+            name: 'Enterprise Wallet Pro',
+            originalPrice: '$380',
+            price: '$220',
             features: [
-              'MPC 2-of-3 security',
-              'Multi-approval workflow',
-              'Policy-based governance',
-              'Complete audit trail',
+              'All Basic features included',
+              'Real-time blockchain deposit detection',
+              'Corporate treasury dashboard',
+              'Manual sweep operations',
+              'Advanced reporting & analytics',
               'Dedicated account manager',
               'Priority technical support',
             ],
@@ -361,8 +357,8 @@ export default function HomePage() {
     "@type": "Organization",
     name: "Walits",
     description: language === 'ko'
-      ? "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Non-Custody API 대량 지급, MPC Custody 안전 보관, AI Chat(전송,투자,RWA) Wallet"
-      : "Enterprise crypto wallet platform featuring Non-Custody API for mass distribution, MPC Custody for secure storage, and AI Chat(Transfer,Investment,RWA) Wallet",
+      ? "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Virtual Balance 기반 대량 지급부터 실제 블록체인 자산 관리까지. AI Chat(전송,투자,RWA) Wallet으로 개인 투자 지원"
+      : "Enterprise crypto wallet platform featuring Virtual Balance mass distribution and real blockchain asset management. AI Chat(Transfer,Investment,RWA) Wallet for personal investment",
     url: "https://walits.com",
     logo: "https://walits.com/logo.png",
     sameAs: [
@@ -383,19 +379,19 @@ export default function HomePage() {
     offers: [
       {
         "@type": "Offer",
-        name: language === 'ko' ? "Non-Custody 지갑" : "Non-Custody Wallet",
-        description: language === 'ko' ? "API 기반 대량 지급 솔루션" : "API-based mass distribution solution",
+        name: language === 'ko' ? "기업용 지갑 Basic" : "Enterprise Wallet Basic",
+        description: language === 'ko' ? "Virtual Balance 기반 대량 지급" : "Virtual Balance mass distribution",
         price: "99000",
         priceCurrency: "KRW",
         category: language === 'ko' ? "기업용 코인 지갑" : "Enterprise Crypto Wallet"
       },
       {
         "@type": "Offer",
-        name: language === 'ko' ? "Custody 지갑" : "Custody Wallet",
-        description: language === 'ko' ? "MPC 2-of-3 안전 보관" : "MPC 2-of-3 secure storage",
-        price: "550000",
+        name: language === 'ko' ? "기업용 지갑 Pro" : "Enterprise Wallet Pro",
+        description: language === 'ko' ? "Virtual Balance + 실제 블록체인 입금 감지 및 재무 관리" : "Virtual Balance + Real blockchain deposit detection and treasury management",
+        price: "300000",
         priceCurrency: "KRW",
-        category: language === 'ko' ? "가상자산 보관" : "Crypto Asset Custody"
+        category: language === 'ko' ? "기업용 코인 지갑" : "Enterprise Crypto Wallet"
       },
       {
         "@type": "Offer",
@@ -417,15 +413,15 @@ export default function HomePage() {
         name: "가상자산 지갑이란 무엇인가요?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "가상자산 지갑은 비트코인, 이더리움 등 암호화폐를 보관하고 관리하는 디지털 지갑입니다. Walits는 기업용 Non-Custody 지갑과 Custody 지갑을 제공하여 안전한 자산 관리를 지원합니다."
+          text: "가상자산 지갑은 비트코인, 이더리움 등 암호화폐를 보관하고 관리하는 디지털 지갑입니다. Walits는 기업용 지갑(Basic/Pro)과 개인용 AI Chat 지갑을 제공하여 안전한 자산 관리를 지원합니다."
         }
       },
       {
         "@type": "Question",
-        name: "Non-Custody 지갑과 Custody 지갑의 차이는 무엇인가요?",
+        name: "기업용 지갑 Basic과 Pro의 차이는 무엇인가요?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Non-Custody 지갑은 계정별로 독립된 지갑을 제공하여 API로 대량 지급이 가능하며, 집금 없이 운영됩니다. Custody 지갑은 고객 자산을 MPC 2-of-3 방식으로 안전하게 집금하여 보관하며, 승인 정책 기반으로 출금을 관리합니다."
+          text: "Basic 플랜은 Virtual Balance를 활용한 가스비 없는 즉시 포인트/리워드 지급에 최적화되어 있습니다. Pro 플랜은 Basic의 모든 기능에 더해 실제 블록체인 입금 감지, 기업 재무 관리 대시보드, 수동 집금 기능 등 고급 기능을 제공합니다."
         }
       },
       {
@@ -471,10 +467,10 @@ export default function HomePage() {
       },
       {
         "@type": "Question",
-        name: "What's the difference between Non-Custody and Custody wallets?",
+        name: "What's the difference between Enterprise Wallet Basic and Pro?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Non-Custody wallets provide independent wallets per account for API-based mass distribution without pooling. Custody wallets securely pool customer assets using MPC 2-of-3 and manage withdrawals through approval policies."
+          text: "Basic plan is optimized for instant points/rewards distribution with Virtual Balance and zero gas fees. Pro plan includes all Basic features plus real blockchain deposit detection, corporate treasury dashboard, and manual sweep operations for advanced asset management."
         }
       },
       {
@@ -533,13 +529,13 @@ export default function HomePage() {
               <span className={`text-3xl font-bold ${scrolled ? 'text-gray-900' : 'text-white'}`}>Walits</span>
             </div>
 
-            {/* Enterprise Wallets */}
+            {/* Enterprise Wallet */}
             <div className="flex items-center gap-2">
               <span className={`text-sm font-normal ${scrolled ? 'text-gray-500' : 'text-white/50'}`}>
                 {language === 'ko' ? '기업용' : 'Enterprise'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-                Non-Custody, Custody Wallet
+                {language === 'ko' ? '기업용 지갑 (Basic, Pro)' : 'Enterprise Wallet (Basic, Pro)'}
               </span>
             </div>
 
@@ -644,18 +640,10 @@ export default function HomePage() {
                     <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
                     <a href={`${NON_CUSTODY_URL}/login`} className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                       <div className="font-semibold text-gray-900 dark:text-white">
-                        {language === 'ko' ? 'Non-Custody 지갑' : 'Non-Custody Wallet'}
+                        {language === 'ko' ? '기업용 지갑' : 'Enterprise Wallet'}
                       </div>
                       <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                        {language === 'ko' ? 'API 기반 대량 지급' : 'API-based mass distribution'}
-                      </div>
-                    </a>
-                    <a href={`${CUSTODY_URL}/login`} className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                      <div className="font-semibold text-gray-900 dark:text-white">
-                        {language === 'ko' ? 'Custody 지갑' : 'Custody Wallet'}
-                      </div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                        {language === 'ko' ? 'MPC 2-of-3 안전 보관' : 'MPC 2-of-3 secure storage'}
+                        {language === 'ko' ? 'Virtual Balance + 블록체인 자산 관리' : 'Virtual Balance + Blockchain asset management'}
                       </div>
                     </a>
                   </div>
@@ -709,72 +697,77 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Enterprise Wallets Section */}
+      {/* Enterprise Wallet Section */}
       <section id="solutions" className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-              {language === 'ko' ? '기업용 지갑' : 'Enterprise Wallets'}
+              {copy.enterpriseWallet.title}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              {copy.nonCustodyVsCustody.subtitle}
+              {copy.enterpriseWallet.subtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Non-Custody Card */}
+            {/* Basic Plan Card */}
             <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-md border border-gray-900 dark:border-gray-600">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gray-900 dark:bg-gray-600">
-                  <span className="text-white font-bold text-xl">N</span>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-blue-600">
+                  <span className="text-white font-bold text-xl">B</span>
                 </div>
                 <div>
                   <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {copy.nonCustodyVsCustody.basicTitle}
+                    {copy.enterpriseWallet.basicTitle}
                   </h3>
                   <p className="text-base text-gray-700 dark:text-gray-300">
-                    {language === 'ko' ? '독립 계정 기반 · 집금 없음' : 'Independent accounts · No pooling'}
+                    {copy.enterpriseWallet.basicSubtitle}
                   </p>
                 </div>
               </div>
               <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
-                {copy.nonCustodyVsCustody.basicDesc}
+                {copy.enterpriseWallet.basicDesc}
               </p>
               <ul className="space-y-3 text-base text-gray-800 dark:text-gray-300">
-                {copy.nonCustodyVsCustody.basicFeatures.map((feature, i) => (
+                {copy.enterpriseWallet.basicFeatures.map((feature, i) => (
                   <li key={i}>• {feature}</li>
                 ))}
               </ul>
-              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
-                {language === 'ko' ? '고객 포인트 지급 및 관리' : 'Customer Points Distribution & Management'}
+              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-900/30 shadow-sm border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
+                {copy.enterpriseWallet.basicUseCases}
               </div>
             </div>
 
-            {/* Custody Card */}
-            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-md border border-gray-900 dark:border-gray-600">
+            {/* Pro Plan Card */}
+            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-md border border-gray-900 dark:border-gray-600 relative">
+              <div className="absolute -top-3 right-6">
+                <span className="px-3 py-1 bg-gradient-to-r from-purple-600 to-purple-500 text-white text-sm font-semibold rounded-full shadow-lg">
+                  {language === 'ko' ? '추천' : 'Recommended'}
+                </span>
+              </div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gray-900 dark:bg-gray-600">
-                  <span className="text-white font-bold text-xl">C</span>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-purple-600 to-purple-700">
+                  <span className="text-white font-bold text-xl">P</span>
                 </div>
                 <div>
                   <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {copy.nonCustodyVsCustody.proTitle}
+                    {copy.enterpriseWallet.proTitle}
                   </h3>
                   <p className="text-base text-gray-700 dark:text-gray-300">
-                    {language === 'ko' ? '집금(Omnibus) · 정책 기반 출금' : 'Omnibus pooling · Policy-based withdrawals'}
+                    {copy.enterpriseWallet.proSubtitle}
                   </p>
                 </div>
               </div>
               <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
-                {copy.nonCustodyVsCustody.proDesc}
+                {copy.enterpriseWallet.proDesc}
               </p>
               <ul className="space-y-3 text-base text-gray-800 dark:text-gray-300">
-                {copy.nonCustodyVsCustody.proFeatures.map((feature, i) => (
+                {copy.enterpriseWallet.proFeatures.map((feature, i) => (
                   <li key={i}>• {feature}</li>
                 ))}
               </ul>
-              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-white dark:bg-gray-700 shadow-sm border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
-                {language === 'ko' ? '기업 재무 관리 · 고객 자산 보관' : 'Corporate Treasury · Customer Asset Custody'}
+              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-purple-50 dark:bg-purple-900/30 shadow-sm border border-purple-200 dark:border-purple-700 text-gray-900 dark:text-white">
+                {copy.enterpriseWallet.proUseCases}
               </div>
             </div>
           </div>
@@ -968,7 +961,7 @@ export default function HomePage() {
               </button>
             </div>
 
-            {/* Non-Custody Plan */}
+            {/* Basic Plan */}
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-300 dark:border-gray-600 hover:shadow-lg transition-shadow relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
@@ -977,22 +970,22 @@ export default function HomePage() {
               </div>
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                  {copy.pricing.plans.nonCustody.name}
+                  {copy.pricing.plans.basic.name}
                 </h3>
                 <div className="flex flex-col items-center">
                   <span className="text-lg text-gray-400 line-through">
-                    {copy.pricing.plans.nonCustody.originalPrice}/{copy.pricing.monthly}
+                    {copy.pricing.plans.basic.originalPrice}/{copy.pricing.monthly}
                   </span>
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-4xl font-bold text-red-600">
-                      {copy.pricing.plans.nonCustody.price}
+                      {copy.pricing.plans.basic.price}
                     </span>
                     <span className="text-gray-600 dark:text-gray-400">/{copy.pricing.monthly}</span>
                   </div>
                 </div>
               </div>
               <ul className="space-y-3 mb-8">
-                {copy.pricing.plans.nonCustody.features.map((feature, i) => (
+                {copy.pricing.plans.basic.features.map((feature, i) => (
                   <li key={i} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
                     <span className="text-gray-900 dark:text-white mr-2 mt-1">✓</span>
                     <span>{feature}</span>
@@ -1007,34 +1000,34 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Custody Plan */}
+            {/* Pro Plan */}
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-100 dark:to-gray-200 rounded-xl p-8 border-2 border-gray-700 dark:border-gray-400 hover:shadow-2xl transition-shadow relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 flex gap-2 whitespace-nowrap">
                 <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
-                  {language === 'ko' ? '2026년 4월 출시' : 'Launch Apr 2026'}
+                  {language === 'ko' ? '2026년 3월 출시' : 'Launch Mar 2026'}
                 </span>
                 <span className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
-                  {language === 'ko' ? '프리미엄' : 'Premium'}
+                  {language === 'ko' ? '추천' : 'Recommended'}
                 </span>
               </div>
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-white dark:text-gray-900 mb-2">
-                  {copy.pricing.plans.custody.name}
+                  {copy.pricing.plans.pro.name}
                 </h3>
                 <div className="flex flex-col items-center">
                   <span className="text-lg text-gray-500 line-through">
-                    {copy.pricing.plans.custody.originalPrice}/{copy.pricing.monthly}
+                    {copy.pricing.plans.pro.originalPrice}/{copy.pricing.monthly}
                   </span>
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-4xl font-bold text-yellow-500 dark:text-yellow-600">
-                      {copy.pricing.plans.custody.price}
+                      {copy.pricing.plans.pro.price}
                     </span>
                     <span className="text-gray-400 dark:text-gray-600">/{copy.pricing.monthly}</span>
                   </div>
                 </div>
               </div>
               <ul className="space-y-3 mb-8">
-                {copy.pricing.plans.custody.features.map((feature, i) => (
+                {copy.pricing.plans.pro.features.map((feature, i) => (
                   <li key={i} className="flex items-start text-sm text-gray-300 dark:text-gray-600">
                     <span className="text-yellow-500 dark:text-yellow-600 mr-2 mt-1">✓</span>
                     <span>{feature}</span>
