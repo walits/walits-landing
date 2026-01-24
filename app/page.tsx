@@ -53,7 +53,7 @@ export default function HomePage() {
         basicUseCases: '게임 보상 | NFT 에어드랍 | ICO/토큰 발행 | 리워드 포인트',
         proTitle: 'Pro',
         proSubtitle: '실제 블록체인 입금 감지 + 기업 재무 관리',
-        proDesc: 'Basic의 모든 기능 + 실제 암호화폐 입금 감지 및 추적. 기업 재무 관리 기능 포함. (집금은 수동 운영)',
+        proDesc: 'Basic의 모든 기능 + 실제 암호화폐 입금 감지 및 추적. 기업 재무 관리 기능 포함.',
         proFeatures: [
           'Basic 모든 기능 포함',
           '실시간 입금 감지: 블록체인 입금 즉시 추적',
@@ -216,7 +216,7 @@ export default function HomePage() {
         basicUseCases: 'Game Rewards | NFT Airdrops | ICO/Token Issuance | Reward Points',
         proTitle: 'Pro',
         proSubtitle: 'Real Blockchain Deposit Detection + Treasury',
-        proDesc: 'All Basic features + real crypto deposit detection and tracking. Includes corporate treasury management. (Manual sweep operations)',
+        proDesc: 'All Basic features + real crypto deposit detection and tracking. Includes corporate treasury management.',
         proFeatures: [
           'All Basic features included',
           'Real-time Deposit Detection: Instant blockchain deposit tracking',
