@@ -27,7 +27,7 @@ export default function HomePage() {
     ko: {
       hero: {
         title: <>세상에서 가장 쉽고<br />안전한 기업용 지갑</>,
-        subtitle: '글로벌 토큰화의 초석, 신뢰비용 제로의 세상을 위하여. Virtual Balance로 포인트를 즉시 지급하고, 실제 블록체인 자산도 안전하게 관리하세요. MPC 기술 기반 개인 투자 지갑으로 RWA 자산에 투자하세요.',
+        subtitle: '글로벌 토큰화의 초석, 신뢰비용 제로의 세상을 위하여. 코인 자산을 안전하게 관리하며 MPC 기술 기반 개인 투자 지갑으로 RWA 자산에 투자하세요. 스테이블코인 전문 지갑을 통해 혁신적인 송금,지불의 매력을 느껴보세요',
       },
       nav: {
         solutions: '솔루션',
@@ -190,7 +190,7 @@ export default function HomePage() {
     en: {
       hero: {
         title: <>The Easiest and<br />Most Secure Enterprise Wallet</>,
-        subtitle: 'Foundation of global tokenization, for a world of zero trust costs. Instantly distribute points with Virtual Balance, securely manage real blockchain assets, and invest in RWA tokens with our MPC-based personal wallet.',
+        subtitle: 'Foundation of global tokenization, for a world of zero trust costs. Securely manage your crypto assets and invest in RWA tokens with our MPC-based personal investment wallet. Experience the innovative appeal of transfers and payments through our stablecoin-specialized wallet.',
       },
       nav: {
         solutions: 'Solutions',
