@@ -11,7 +11,7 @@ export default function TronUSDTHackScenarioPage() {
     ko: {
       breadcrumb: '블로그',
       category: '보안 & 리스크',
-      title: '트론(Tron) 네트워크 해킹 시 USDT 붕괴 시나리오',
+      title: '스테이블 코인 (트론 USDT) 해킹시 발생할 시나리오',
       date: '2026년 2월 11일',
       readTime: '15분 읽기',
       backToBlog: '← 블로그로 돌아가기',
