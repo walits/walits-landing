@@ -836,6 +836,118 @@ export default function StablecoinPaymentComparisonPage() {
                 </div>
               </div>
 
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">용어 설명</h2>
+
+              <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                  본문에 등장하는 결제 및 블록체인 전문 용어를 쉽게 풀이합니다.
+                </p>
+                <div className="space-y-6">
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Authorization (승인) vs Settlement (정산)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                      <strong>Authorization (승인):</strong> 결제가 가능한지 확인하는 단계입니다.
+                      카드 한도, 잔액, 부정사용 여부를 체크하며, 승인이 완료되면 "결제 성공" 메시지가 뜨지만 돈은 아직 이동하지 않았습니다.
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      <strong>Settlement (정산):</strong> 실제로 돈이 이동하는 단계입니다.
+                      승인된 거래들을 모아서 일괄 처리하며, 보통 2~3 영업일 후 가맹점 계좌에 입금됩니다.
+                      전통 카드 결제의 가장 큰 특징은 이 두 단계가 분리되어 있다는 점입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-green-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">PG사 (Payment Gateway, 결제대행사)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      가맹점과 카드사 사이에서 결제를 중개하는 회사입니다.
+                      토스페이먼츠, KG이니시스, NHN KCP 등이 대표적이며, 가맹점은 PG사와 계약하여 다양한 결제 수단을 통합 지원받습니다.
+                      온라인 쇼핑몰에서 "결제 창"을 띄워주는 역할을 합니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-purple-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">매입사 (Acquirer) vs 발급사 (Issuer)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                      <strong>매입사 (Acquirer):</strong> 가맹점과 계약한 카드사입니다.
+                      가맹점의 거래를 "매입"하여 결제를 처리하고, 정산 시 가맹점에 돈을 지급합니다.
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      <strong>발급사 (Issuer):</strong> 고객에게 카드를 발급한 카드사/은행입니다.
+                      고객의 한도와 잔액을 관리하며, 승인 요청이 오면 최종 결정을 내립니다.
+                      예: 고객이 신한카드로 결제 → 신한카드가 발급사
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-yellow-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Clearing (청산)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      카드 네트워크(VISA, Mastercard 등)가 발급사와 매입사 간 자금을 중개하여 정산하는 과정입니다.
+                      하루치 거래를 모아서 일괄 처리하며, 각 은행 간 입출금을 상계(Netting)하여 실제 이동할 금액만 전송합니다.
+                      이 과정이 2~3일 소요되는 주요 원인입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-red-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">T+2, T+3 (정산 주기)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      거래일(T, Trade date)로부터 정산이 완료되기까지 걸리는 영업일 수입니다.
+                      T+2는 거래 후 2영업일 뒤 정산, T+3은 3영업일 뒤 정산을 의미합니다.
+                      월요일 거래 시 T+2라면 수요일에 입금됩니다 (주말은 제외).
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-orange-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Push Payment vs Pull Payment</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                      <strong>Pull Payment (당김 결제):</strong> 전통적인 카드 결제 방식입니다.
+                      고객이 카드 정보를 제공하면, 가맹점이 고객 계좌에서 돈을 "당겨옵니다(Pull)".
+                      이 과정에서 가맹점이 카드 정보를 저장하게 되어 보안 리스크가 있습니다.
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      <strong>Push Payment (밀어넣기 결제):</strong> 스테이블코인 결제 방식입니다.
+                      고객이 직접 가맹점 지갑으로 돈을 "밀어넣습니다(Push)".
+                      가맹점은 고객의 민감 정보를 보관할 필요가 없어 더 안전합니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-indigo-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">차지백 (Chargeback)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      고객이 결제를 취소하거나 이의를 제기하여 이미 승인된 거래를 번복하는 것입니다.
+                      예: "카드를 도난당했어요", "물건을 못 받았어요" 등의 사유로 발급사에 요청하면,
+                      가맹점 계좌에서 이미 입금된 금액을 다시 회수합니다. 가맹점 입장에서는 큰 리스크입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-pink-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">MPC (Multi-Party Computation)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      다자간 연산을 의미하며, 암호화폐 지갑에서는 개인키를 여러 조각으로 나누어 분산 보관하는 기술입니다.
+                      예를 들어 2-of-3 MPC는 3개 조각 중 2개만 있으면 서명 가능하므로, 하나가 해킹되어도 안전합니다.
+                      Walits는 기업용 지갑에 MPC 기술을 적용하여 보안성을 극대화합니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-teal-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">리컨실리에이션 (Reconciliation, 대사)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      회사의 장부와 실제 입금 내역을 대조하여 일치 여부를 확인하는 회계 작업입니다.
+                      전통 결제는 승인과 정산이 분리되어 있고 수수료도 다양해서 리컨실리에이션이 복잡합니다.
+                      스테이블코인은 모든 거래가 온체인에 기록되어 자동화가 가능하지만, 법정화폐 환산 시점 등의 회계 이슈가 남아있습니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-cyan-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Travel Rule (자금이동추적규칙)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      FATF(국제자금세탁방지기구)가 제정한 규칙으로, $1,000(또는 €1,000) 이상의 암호화폐 전송 시
+                      송금인과 수취인의 신원 정보를 교환해야 합니다. 이는 자금세탁과 테러자금조달을 방지하기 위한 규제입니다.
+                      스테이블코인 결제가 대규모로 채택되려면 Travel Rule 준수가 필수입니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg my-8 border-l-4 border-yellow-500">
                 <h4 className="font-bold mb-2 text-gray-900 dark:text-white">💡 Walits의 접근</h4>
                 <p className="text-sm mb-4">

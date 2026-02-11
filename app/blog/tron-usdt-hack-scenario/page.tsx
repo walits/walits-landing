@@ -825,6 +825,88 @@ Binance: 정상 USDT로 인식 → BTC 10B 지급
                 </div>
               </div>
 
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">용어 설명</h2>
+
+              <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                  본문에 등장하는 금융 및 블록체인 전문 용어를 쉽게 풀이합니다.
+                </p>
+                <div className="space-y-6">
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">역레포 (Reverse Repo)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      연방준비제도(Fed)가 금융기관에 단기로 자금을 빌려주고 국채를 담보로 받는 제도입니다.
+                      보통 하루 단위로 운영되며, 금융기관이 여유 자금을 안전하게 운용할 수 있는 방법입니다.
+                      테더 같은 기관들이 준비금을 단기 운용할 때 자주 사용합니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-green-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">MMF (Money Market Fund)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      단기 금융상품(T-Bills, CP, CD 등)에 투자하는 초단기 펀드입니다.
+                      유동성이 높고 안전하지만 수익률은 낮습니다. 일반적으로 연 3~5% 수준의 수익을 제공하며,
+                      현금처럼 빠르게 인출할 수 있어 기업들이 운영 자금을 보관하는 용도로 많이 사용합니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-purple-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">T-Bills (Treasury Bills)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      미국 정부가 발행하는 만기 1년 이하의 단기 국채입니다.
+                      이자를 직접 지급하지 않고 액면가보다 낮은 가격에 발행되어(할인 발행), 만기 시 액면가로 상환되는 방식입니다.
+                      전 세계에서 가장 안전한 자산으로 평가받으며, 테더 준비금의 70% 이상이 T-Bills로 구성되어 있습니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-yellow-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">DPoS (Delegated Proof of Stake)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      위임 지분 증명 합의 메커니즘입니다. 토큰 보유자들이 투표로 검증자(Validator)를 선출하고,
+                      선출된 소수의 검증자들이 블록을 생성합니다. 트론은 27개의 Super Representative(SR)를 선출하여 운영합니다.
+                      속도는 빠르지만, 검증자 수가 적어 비트코인/이더리움보다 탈중앙화 수준이 낮습니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-red-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">SR (Super Representative)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      트론 네트워크의 검증자입니다. TRX 토큰 보유자들의 투표로 선출된 27개 노드가 블록을 생성하고 네트워크를 운영합니다.
+                      각 SR은 매 3초마다 순서대로 블록을 생성하며, 블록 보상을 받습니다.
+                      27개 중 14개(과반수)만 장악하면 네트워크를 제어할 수 있어 보안상 취약점으로 지적됩니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-orange-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">TVL (Total Value Locked)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      DeFi 프로토콜에 예치된 총 자산 가치입니다. 예를 들어 Aave에 $10억이 예치되어 있다면 TVL은 $10억입니다.
+                      TVL은 DeFi 프로토콜의 규모와 신뢰도를 나타내는 핵심 지표로 사용됩니다.
+                      TVL이 높을수록 더 많은 유동성과 사용자가 있다는 의미입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-indigo-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Layer 2 (L2)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      이더리움 메인넷(Layer 1) 위에서 작동하는 2차 네트워크입니다.
+                      트랜잭션을 L2에서 먼저 처리한 후, 결과만 이더리움에 기록하여 속도는 빠르고 수수료는 낮추면서도
+                      이더리움의 보안성을 그대로 활용합니다. Arbitrum, Optimism, Base, zkSync 등이 대표적인 L2 솔루션입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-pink-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">디페깅 (De-pegging)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      스테이블코인의 가격이 목표 가격($1)에서 벗어나는 현상입니다.
+                      예를 들어 USDT가 $0.95로 하락하면 "5% 디페깅"이라고 표현합니다.
+                      일시적인 유동성 부족, 신뢰 위기, 시스템 오류 등이 원인이 될 수 있으며,
+                      심각한 경우 은행 뱅크런과 유사한 대규모 상환 요청으로 이어질 수 있습니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">마무리: 기술이 먼저다</h2>
 
               <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl my-8">

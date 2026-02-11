@@ -808,6 +808,97 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
                 </div>
               </div>
 
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">용어 설명</h2>
+
+              <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                  본문에 등장하는 금융 및 블록체인 전문 용어를 쉽게 풀이합니다.
+                </p>
+                <div className="space-y-6">
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">AUM (Assets Under Management)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      자산운용사가 고객을 대신해 운용하고 있는 총 자산 규모입니다.
+                      BlackRock의 AUM $10.5조는 고객들이 BlackRock에 맡긴 돈의 총합으로, 회사 규모와 신뢰도를 나타내는 핵심 지표입니다.
+                      참고로 한국 GDP가 약 $1.5조이므로, BlackRock의 AUM은 한국 GDP의 약 7배에 달합니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-green-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">MMF (Money Market Fund)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      단기 금융상품(T-Bills, CP, CD 등)에 투자하는 초단기 펀드입니다.
+                      유동성이 높고 안전하지만 수익률은 낮습니다. 일반적으로 연 3~5% 수준의 수익을 제공하며,
+                      현금처럼 빠르게 인출할 수 있어 기업들이 운영 자금을 보관하는 용도로 많이 사용합니다.
+                      BUIDL은 블록체인 기반 MMF의 대표 사례입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-purple-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">T-Bills (Treasury Bills)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      미국 정부가 발행하는 만기 1년 이하의 단기 국채입니다.
+                      이자를 직접 지급하지 않고 액면가보다 낮은 가격에 발행되어(할인 발행), 만기 시 액면가로 상환되는 방식입니다.
+                      전 세계에서 가장 안전한 자산으로 평가받으며, BUIDL의 기초 자산으로 사용됩니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-yellow-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">RP (Repo / Reverse Repo)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      Repo(환매조건부채권)는 채권을 담보로 단기 자금을 빌리는 거래입니다.
+                      Reverse Repo는 그 반대로, 자금을 빌려주고 채권을 담보로 받는 거래입니다.
+                      주로 은행과 금융기관이 초단기(하룻밤~수일) 자금을 운용할 때 사용하며, BUIDL 같은 MMF의 주요 투자 대상입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-red-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">T+0, T+2, T+3</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      거래일(T, Trade date)로부터 결제가 완료되기까지 걸리는 날짜를 나타냅니다.
+                      T+0은 거래 당일 즉시 결제, T+2는 거래 후 2영업일 뒤 결제를 의미합니다.
+                      전통 펀드는 보통 T+2~T+3이지만, BUIDL은 블록체인 기술로 T+0 즉시 환매가 가능합니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-orange-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">적격 투자자 (Accredited Investor)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      미국 증권법(Regulation D)에서 정의하는 고액 자산가 또는 전문 투자자를 말합니다.
+                      개인의 경우 연소득 $200K 이상 또는 순자산 $1M 이상, 기관의 경우 운용자산 $5M 이상이어야 합니다.
+                      BUIDL은 최소 투자금 $5M으로 적격 투자자만 참여할 수 있는 사모펀드입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-indigo-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">LTV (Loan to Value)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      담보 가치 대비 대출 가능 비율입니다. 예를 들어 LTV 80%는 $100 가치의 자산을 담보로 $80까지 빌릴 수 있다는 의미입니다.
+                      DeFi 프로토콜에서 BUIDL을 담보로 대출받을 때, LTV 80%라면 $10M BUIDL로 $8M USDC를 빌릴 수 있습니다.
+                      LTV가 높을수록 더 많이 빌릴 수 있지만, 담보 가치 하락 시 청산 위험이 커집니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-pink-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">DeFi (Decentralized Finance)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      탈중앙 금융을 의미하며, 은행이나 증권사 같은 중개인 없이 블록체인 스마트 컨트랙트로 금융 서비스를 제공하는 시스템입니다.
+                      대출, 예금, 거래소, 파생상품 등 전통 금융의 모든 기능을 탈중앙화된 방식으로 구현합니다.
+                      BUIDL은 DeFi 프로토콜(Aave, Compound 등)과 연계하여 담보 대출, 유동성 공급 등에 활용할 수 있습니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-teal-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">RWA (Real World Assets)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      현실 세계의 자산을 블록체인 토큰으로 표현한 것입니다.
+                      부동산, 국채, 주식, 예술품, 상품 등 물리적/전통적 자산을 디지털 토큰화하여 블록체인에서 거래할 수 있게 만듭니다.
+                      BUIDL은 미국 국채를 기초 자산으로 하는 RWA의 대표적인 예시입니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg my-8 border-l-4 border-yellow-500">
                 <h4 className="font-bold mb-2 text-gray-900 dark:text-white">💡 Walits와 RWA의 미래</h4>
                 <p className="text-sm mb-4">

@@ -643,6 +643,127 @@ BUIDL:
                 </div>
               </div>
 
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">용어 설명</h2>
+
+              <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl my-8">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                  본문에 등장하는 STO 및 증권 관련 전문 용어를 쉽게 풀이합니다.
+                </p>
+                <div className="space-y-6">
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">STO (Security Token Offering)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      증권형 토큰을 발행하는 것을 의미합니다. 실물 자산(부동산, 채권, 주식, 예술품 등)의 소유권을
+                      블록체인 토큰으로 표현하여 거래할 수 있게 만듭니다.
+                      기존 증권법의 규제를 받기 때문에 투자자 보호가 강하며, 배당과 의결권 같은 법적 권리를 보장받습니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-green-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">ICO (Initial Coin Offering)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      암호화폐 프로젝트가 자금을 조달하기 위해 유틸리티 토큰을 발행하는 것입니다.
+                      유틸리티 토큰은 서비스 이용권일 뿐 소유권이나 배당권이 없으며, 증권 규제를 받지 않아
+                      투자자 보호가 약합니다. 2017~2018년 ICO 붐 당시 많은 사기 프로젝트가 발생했습니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-purple-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">RWA (Real World Assets)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      현실 세계의 자산을 블록체인 토큰으로 표현한 것입니다.
+                      부동산, 국채, 회사채, 주식, 상품(금, 원유 등), 예술품, 지적재산권 등 거의 모든 자산을 토큰화할 수 있습니다.
+                      RWA는 전통 자산의 안정성과 블록체인의 효율성을 결합하여 금융의 미래로 주목받고 있습니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-yellow-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">유틸리티 토큰 vs 증권형 토큰</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                      <strong>유틸리티 토큰:</strong> 특정 플랫폼에서 서비스를 이용할 수 있는 권리를 나타냅니다.
+                      예: 게임 내 화폐, 클라우드 스토리지 이용권. 배당이나 소유권이 없습니다.
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      <strong>증권형 토큰:</strong> 실물 자산의 소유권, 배당권, 의결권 등 법적 권리를 나타냅니다.
+                      증권법의 규제를 받으며, 투자자는 법적으로 보호받습니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-red-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Fractional Ownership (조각 투자)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      고가의 자산을 여러 조각으로 나누어 소액 투자를 가능하게 하는 방식입니다.
+                      예를 들어 100억 원짜리 빌딩을 100개 토큰으로 나누면, 1억 원으로 빌딩의 1% 지분을 소유할 수 있습니다.
+                      기존에는 부유층만 접근 가능했던 프리미엄 자산을 일반 투자자도 투자할 수 있게 됩니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-orange-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Smart Contract (스마트 컨트랙트)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      블록체인에서 자동으로 실행되는 계약입니다. 특정 조건이 충족되면 중개인 없이 자동으로 거래가 체결됩니다.
+                      STO에서는 배당금 분배, 토큰 전송 제한(적격 투자자만 거래 가능), 의결권 행사 등을
+                      스마트 컨트랙트로 자동화하여 투명성과 효율성을 높입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-indigo-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Regulation D / A+ / S</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                      미국 SEC의 증권 발행 규제입니다.
+                    </p>
+                    <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1 ml-4">
+                      <li><strong>Regulation D:</strong> 적격 투자자에게만 사모로 증권을 판매할 수 있습니다. SEC 등록 면제.</li>
+                      <li><strong>Regulation A+:</strong> 일반 투자자에게도 공모 가능하지만, 연간 최대 $75M까지만 발행 가능.</li>
+                      <li><strong>Regulation S:</strong> 미국 외 국가에서 증권을 발행할 때 적용되는 규제.</li>
+                    </ul>
+                  </div>
+
+                  <div className="border-l-4 border-pink-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Howey Test (하위 테스트)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      미국 대법원이 1946년 확립한 "증권" 판단 기준입니다. 다음 4가지 조건을 모두 충족하면 증권으로 간주됩니다:
+                    </p>
+                    <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1 ml-4 mt-2">
+                      <li>1. 돈의 투자 (Investment of money)</li>
+                      <li>2. 공동 사업 (Common enterprise)</li>
+                      <li>3. 수익 기대 (Expectation of profits)</li>
+                      <li>4. 타인의 노력에 의한 수익 (Profits derived from the efforts of others)</li>
+                    </ul>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">
+                      대부분의 STO는 Howey Test를 통과하여 증권으로 분류됩니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-teal-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">적격 투자자 (Accredited Investor)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      미국 증권법에서 정의하는 고액 자산가 또는 전문 투자자를 말합니다.
+                      개인의 경우 연소득 $200K 이상 또는 순자산 $1M 이상, 기관의 경우 운용자산 $5M 이상이어야 합니다.
+                      Regulation D 사모펀드는 적격 투자자만 참여할 수 있습니다. 한국에서는 "전문투자자"로 불립니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-cyan-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">ATS (Alternative Trading System)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      대체 거래 시스템으로, 기존 증권거래소가 아닌 비공개 플랫폼에서 증권을 거래하는 시스템입니다.
+                      STO 토큰은 일반 암호화폐 거래소가 아닌 ATS에서 거래됩니다.
+                      tZERO, OpenFinance Network 등이 대표적인 STO ATS 플랫폼입니다.
+                    </p>
+                  </div>
+
+                  <div className="border-l-4 border-lime-500 pl-4">
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">BlackRock BUIDL</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      세계 최대 자산운용사 BlackRock이 2024년 출시한 블록체인 기반 MMF(Money Market Fund)입니다.
+                      미국 단기 국채(T-Bills)를 기초 자산으로 하며, 시가총액 $1.5B+, 연 수익률 약 5%, 매일 배당 지급,
+                      T+0 즉시 환매가 가능합니다. 전통 금융과 블록체인의 융합을 보여주는 RWA의 대표 사례입니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">가격 (Coming Soon)</h2>
 
               <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8">
