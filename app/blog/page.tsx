@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'stablecoin-payment-vs-traditional',
+          category: '결제 & 핀테크',
+          categoryColor: 'bg-cyan-100 text-cyan-800',
+          title: '스테이블코인 결제가 기존 결제망보다 단계를 줄이는 방법',
+          excerpt: '카드 결제는 승인과 정산이 분리되어 며칠이 걸립니다. 스테이블코인은 온체인 전송으로 결제+정산을 동시에 처리합니다. 8단계 vs 4단계, 실무 관점에서 비교 분석합니다.',
+          date: '2026년 2월 11일',
+          readTime: '14분',
+          image: '/blog/payment.jpg',
+        },
+        {
           id: 'blackrock-buidl-tokenized-fund',
           category: 'RWA & 기관 투자',
           categoryColor: 'bg-emerald-100 text-emerald-800',
@@ -162,6 +172,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'stablecoin-payment-vs-traditional',
+          category: 'Payments & FinTech',
+          categoryColor: 'bg-cyan-100 text-cyan-800',
+          title: 'How Stablecoin Payments Reduce Steps vs Traditional Payment Systems',
+          excerpt: 'Card payments separate authorization and settlement, taking days. Stablecoins process payment+settlement simultaneously via on-chain transfer. 8 steps vs 4 steps analyzed from a practical perspective.',
+          date: 'February 11, 2026',
+          readTime: '14 min read',
+          image: '/blog/payment.jpg',
+        },
         {
           id: 'blackrock-buidl-tokenized-fund',
           category: 'RWA & Institutional',
