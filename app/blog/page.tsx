@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'blackrock-buidl-tokenized-fund',
+          category: 'RWA & 기관 투자',
+          categoryColor: 'bg-emerald-100 text-emerald-800',
+          title: 'BlackRock BUIDL: 전통 금융이 블록체인을 만났을 때',
+          excerpt: '세계 최대 자산운용사 BlackRock의 $1.5B 토큰화 펀드 BUIDL. 매일 배당, T+0 환매, DeFi 연계까지. 전통 금융과 블록체인 융합의 완성형을 분석합니다.',
+          date: '2026년 2월 11일',
+          readTime: '12분',
+          image: '/blog/blackrock.jpg',
+        },
+        {
           id: 'tron-usdt-hack-scenario',
           category: '보안 & 리스크',
           categoryColor: 'bg-red-100 text-red-800',
@@ -152,6 +162,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'blackrock-buidl-tokenized-fund',
+          category: 'RWA & Institutional',
+          categoryColor: 'bg-emerald-100 text-emerald-800',
+          title: 'BlackRock BUIDL: When Traditional Finance Meets Blockchain',
+          excerpt: 'World\'s largest asset manager BlackRock\'s $1.5B tokenized fund BUIDL. Daily dividends, T+0 redemption, DeFi integration. Analyzing the perfect fusion of TradFi and blockchain.',
+          date: 'February 11, 2026',
+          readTime: '12 min read',
+          image: '/blog/blackrock.jpg',
+        },
         {
           id: 'tron-usdt-hack-scenario',
           category: 'Security & Risk',
