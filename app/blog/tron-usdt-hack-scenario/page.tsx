@@ -765,7 +765,7 @@ Binance: 정상 USDT로 인식 → BTC 10B 지급
                     <ul className="space-y-1 text-sm">
                       <li>• 높은 가스비 ($5~$20)</li>
                       <li>• 제3세계 사용자 진입 장벽</li>
-                      <li>• 소액 송금 불가 (수수료 > 송금액)</li>
+                      <li>• 소액 송금 불가 (수수료 &gt; 송금액)</li>
                       <li>• 트랜잭션 확정 시간 (12초 ~ 수분)</li>
                     </ul>
                   </div>
