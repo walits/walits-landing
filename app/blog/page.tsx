@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'tron-usdt-hack-scenario',
+          category: '보안 & 리스크',
+          categoryColor: 'bg-red-100 text-red-800',
+          title: '트론(Tron) 네트워크 해킹 시 USDT 붕괴 시나리오',
+          excerpt: '600억 달러 이상의 TRC-20 USDT가 위험에 처한다면? 트론 네트워크 해킹 시나리오와 글로벌 금융 시스템 충격파, 그리고 탈중앙화의 기술적 한계를 분석합니다.',
+          date: '2026년 2월 11일',
+          readTime: '15분',
+          image: '/blog/usdt.jpg',
+        },
+        {
           id: 'blockchain-comparison-guide',
           category: '기술 가이드',
           categoryColor: 'bg-gray-100 text-gray-800',
@@ -142,6 +152,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'tron-usdt-hack-scenario',
+          category: 'Security & Risk',
+          categoryColor: 'bg-red-100 text-red-800',
+          title: 'USDT Collapse Scenario: If Tron Network Gets Hacked',
+          excerpt: 'What if $60B+ of TRC-20 USDT is at risk? Analyzing Tron network hack scenarios, global financial system shockwaves, and technical limits of decentralization.',
+          date: 'February 11, 2026',
+          readTime: '15 min read',
+          image: '/blog/usdt.jpg',
+        },
         {
           id: 'blockchain-comparison-guide',
           category: 'Technical Guide',
