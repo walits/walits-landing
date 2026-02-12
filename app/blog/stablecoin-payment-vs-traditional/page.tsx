@@ -95,9 +95,9 @@ export default function StablecoinPaymentComparisonPage() {
                     승인이 완료되면 "결제 성공" 메시지가 뜨지만, <strong className="text-red-600">돈은 아직 이동하지 않았습니다.</strong></p>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Settlement (정산)</h4>
-                    <p>실제로 돈이 이동하는 단계. 승인된 거래들을 모아서 배치로 일괄 처리하며,
-                    <strong className="text-red-600"> 보통 D+3 영업일 전후</strong> 가맹점 계좌에 입금됩니다.
+                    <h4 className="font-semibold mb-1">Settlement (정산) & Funding (입금)</h4>
+                    <p>Clearing(거래 확정/대사), Settlement(기관 간 결제), Funding(가맹점 입금)으로 세분화되며,
+                    <strong className="text-red-600"> 가맹점 입금까지 보통 D+3 영업일 전후</strong> 소요됩니다 (계약/PG에 따라 상이).
                     (PG 경유 시 D+3~5일 또는 주 단위로 늘어날 수 있음)</p>
                   </div>
                 </div>
@@ -190,7 +190,7 @@ export default function StablecoinPaymentComparisonPage() {
                     <div className="flex-1">
                       <h5 className="font-semibold">Clearing (청산) & 정산 확정</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        카드 네트워크가 발급사-매입사 간 자금을 청산하고 정산 확정 (D+1~2일)
+                        카드 네트워크가 발급사-매입사 간 거래를 확정·청산 (배치 프로세스, 타임라인은 스킴/계약에 따라 상이)
                       </p>
                     </div>
                   </div>
@@ -210,7 +210,7 @@ export default function StablecoinPaymentComparisonPage() {
                 <div className="mt-8 p-4 bg-red-50 dark:bg-red-900/30 rounded-lg border-l-4 border-red-500">
                   <p className="text-sm">
                     <strong>⏱️ 정산 시간:</strong> D+3 영업일 전후 (PG 경유 시 D+3~5일 또는 더 길어질 수 있음)<br/>
-                    <strong>💰 수수료:</strong> 2~4% (업종별 상이)<br/>
+                    <strong>💰 수수료:</strong> 업종·규모·카드종류에 따라 상이 (해외카드/부가서비스 시 더 높을 수 있음)<br/>
                     <strong>📌 특징:</strong> 실시간 승인과 달리 배치 성격이 강하며, 승인과 정산이 분리되어 현금 흐름 관리가 어렵고 차지백 리스크 존재
                   </p>
                 </div>
@@ -499,7 +499,7 @@ export default function StablecoinPaymentComparisonPage() {
                     <div className="flex-1">
                       <h5 className="font-semibold">블록체인 확정 (Confirmation)</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        트랜잭션이 블록에 포함되고 확정됨 (이더리움: ~15초, 솔라나: ~1초)
+                        트랜잭션이 블록에 포함 (이더리움: 수십 초, 강한 확정성은 몇 분 소요 가능)
                       </p>
                     </div>
                   </div>
@@ -541,8 +541,8 @@ export default function StablecoinPaymentComparisonPage() {
 [전체 흐름]
 고객 지갑 → 블록체인 → 가맹점 지갑 (15초~5분)
 
-✅ 중간 기관 없음 (PG, 매입사, 카드 네트워크, 발급사 제거)
-✅ 승인 = 정산 (블록 확정 = 돈 이동 완료)`}
+✅ 기존 카드 레일의 중간 기관 축소 (운영·컴플라이언스는 게이트웨이/지갑 인프라로 이동)
+✅ 동일 자산(USDC) 수취 시 온체인 전송이 결제+정산 역할 수행`}
                 </pre>
               </div>
 
@@ -550,7 +550,7 @@ export default function StablecoinPaymentComparisonPage() {
 
               <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg my-8 border-l-4 border-red-500">
                 <h3 className="text-xl font-bold mb-4 text-red-700 dark:text-red-300">
-                  "커피 한 잔에 가스비 $15?" — 이더리움의 치명적 약점
+                  "커피 한 잔에 가스비가?" — 이더리움 L1의 비용 문제
                 </h3>
                 <p className="text-sm mb-4">
                   위에서 설명한 스테이블코인 결제의 장점은 <strong>이론적으로는 완벽</strong>합니다.
@@ -558,7 +558,7 @@ export default function StablecoinPaymentComparisonPage() {
                 </p>
 
                 <div className="bg-white dark:bg-gray-800 p-5 rounded-lg">
-                  <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">💸 실제 비용 시뮬레이션 (2026년 기준)</h4>
+                  <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">💸 비용 시뮬레이션 (혼잡 시 예시, 실제 변동)</h4>
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between items-center p-3 bg-red-50 dark:bg-red-900/30 rounded border-l-4 border-red-500">
                       <div>
@@ -720,7 +720,7 @@ export default function StablecoinPaymentComparisonPage() {
                     옵션 2: 트론 (Tron) — 가장 저렴하지만...
                   </h3>
                   <p className="text-sm mb-4">
-                    현재 전 세계 스테이블코인 결제의 50% 이상이 트론에서 발생하는 이유는 <strong>압도적인 저렴함</strong> 때문입니다.
+                    트론이 스테이블코인 결제에 널리 사용되는 이유는 <strong>압도적인 저렴함</strong> 때문입니다.
                   </p>
 
                   <div className="bg-white dark:bg-gray-800 p-4 rounded mb-4">
@@ -741,7 +741,7 @@ export default function StablecoinPaymentComparisonPage() {
                         </tr>
                         <tr>
                           <td className="py-2 font-semibold">TRC-20 USDT 발행량</td>
-                          <td className="py-2 text-right font-bold">$60B+ (전체 USDT의 50%)</td>
+                          <td className="py-2 text-right font-bold">대규모 (체인별 분포는 지속 변동)</td>
                         </tr>
                       </tbody>
                     </table>
@@ -760,7 +760,7 @@ export default function StablecoinPaymentComparisonPage() {
                     <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded">
                       <h5 className="font-semibold text-sm mb-2 text-red-600">❌ 단점 (치명적)</h5>
                       <ul className="text-xs space-y-1 ml-4">
-                        <li>• <strong className="text-red-600">낮은 탈중앙화</strong> (27개 노드)</li>
+                        <li>• <strong className="text-red-600">낮은 탈중앙화</strong> (슈퍼 대표(SR) 수가 제한적)</li>
                         <li>• <strong className="text-red-600">네트워크 리스크</strong> (51% 공격 가능성)</li>
                         <li>• Justin Sun의 실질적 통제</li>
                         <li>• 기관 투자자 기피</li>
@@ -918,7 +918,7 @@ export default function StablecoinPaymentComparisonPage() {
                     <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded">
                       <h4 className="font-semibold text-sm mb-2 text-green-600">✅ 이더리움 L1</h4>
                       <ul className="text-xs space-y-1 ml-4">
-                        <li>• <strong>100만+ 검증자</strong>가 분산 운영</li>
+                        <li>• <strong>대규모 검증자</strong>가 분산 운영</li>
                         <li>• 트랜잭션 순서 조작 불가능</li>
                         <li>• MEV 방지 메커니즘</li>
                         <li>• 검열 저항성 최고</li>
@@ -1082,10 +1082,10 @@ export default function StablecoinPaymentComparisonPage() {
                       </tr>
                       <tr>
                         <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">Sequencer</td>
-                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">100만+ 검증자</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">대규모 분산</td>
                         <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-yellow-50 dark:bg-yellow-900/30">단일 (계획: 탈중앙화)</td>
                         <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-red-50 dark:bg-red-900/30">Coinbase 단독</td>
-                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-red-50 dark:bg-red-900/30">27개 노드</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-red-50 dark:bg-red-900/30">SR 제한적</td>
                       </tr>
                       <tr>
                         <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">인출 시간</td>
@@ -1110,7 +1110,7 @@ export default function StablecoinPaymentComparisonPage() {
                 <h4 className="font-bold mb-3 text-gray-900 dark:text-white">🎯 2026년 현실적인 결론</h4>
                 <div className="space-y-3 text-sm">
                   <p>
-                    <strong>1. Layer 2는 완벽하지 않습니다:</strong> 중앙화, Sequencer 리스크, 7일 인출 대기 등 명확한 약점이 있습니다.
+                    <strong>1. Layer 2는 완벽하지 않습니다:</strong> 중앙화, Sequencer 리스크, 표준 브리지 기준 며칠 인출 대기(프로토콜별 상이, 즉시 출금은 유동성 브리지 사용 시 추가 비용/리스크) 등 명확한 약점이 있습니다.
                     하지만 <strong>현실적으로 소액 결제를 위한 유일한 해결책</strong>입니다.
                   </p>
                   <p>
@@ -1120,7 +1120,7 @@ export default function StablecoinPaymentComparisonPage() {
                     <br/>• $100 미만: Base/Polygon (실용성)
                   </p>
                   <p>
-                    <strong>3. 트론은 과도기적 해결책:</strong> 현재 많이 사용되지만, 27개 노드의 극단적 중앙화는 장기적으로 지속 불가능합니다.
+                    <strong>3. 트론은 과도기적 해결책:</strong> 현재 많이 사용되지만, 합의 참여자가 제한적인 구조는 장기적 우려가 있습니다.
                     Layer 2의 "Sequencer 1개"도 문제지만, 최소한 이더리움 L1 보안을 상속받습니다.
                   </p>
                   <p>
@@ -1210,15 +1210,15 @@ export default function StablecoinPaymentComparisonPage() {
                   </p>
                   <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-xs">
                     <pre>
-{`[이더리움 예시]
-• 1 confirmation: 블록에 포함됨 (~15초)
-• 12 confirmations: 안전하게 확정 (~3분)
-• 64 confirmations: 최종 확정 (finality, ~13분)
+{`[이더리움 예시 - 정책에 따라 컨펌 수 조절]
+• 1 confirmation: 블록에 포함 (수십 초)
+• 더 많은 confirmations: 강한 확정성 (몇 분)
+• 최종성(finality): 프로토콜 정책에 따라 상이
 
-가맹점 정책:
-• 커피 $5 결제: 1 confirmation (15초 대기)
-• 노트북 $1,000 결제: 12 confirmations (3분 대기)
-• 자동차 $30,000 결제: 64 confirmations (13분 대기)`}
+가맹점 정책 (예시):
+• 소액 결제: 낮은 컨펌 수 (빠른 처리)
+• 중액 결제: 중간 수준 컨펌 (균형)
+• 고액 결제: 높은 컨펌 수 (안전성 우선)`}
                     </pre>
                   </div>
                   <p className="text-xs mt-3 text-gray-600 dark:text-gray-400">
@@ -1311,7 +1311,7 @@ export default function StablecoinPaymentComparisonPage() {
                     </tr>
                     <tr>
                       <td className="border border-gray-300 dark:border-gray-700 p-4 font-semibold">차지백</td>
-                      <td className="border border-gray-300 dark:border-gray-700 p-4">가능 (고객이 180일 내 요청)</td>
+                      <td className="border border-gray-300 dark:border-gray-700 p-4">가능 (기간/조건은 스킴·사유별 상이)</td>
                       <td className="border border-gray-300 dark:border-gray-700 p-4 text-green-600 font-bold">불가능 (비가역적)</td>
                     </tr>
                     <tr>
@@ -1386,7 +1386,7 @@ export default function StablecoinPaymentComparisonPage() {
                 <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg">
                   <h4 className="font-bold mb-3 text-purple-700 dark:text-purple-300">2. Travel Rule (트래블 룰)</h4>
                   <p className="text-sm mb-3">
-                    FATF(국제자금세탁방지기구) 권고안에 따라, $1,000 이상 거래 시 송금인/수취인 정보를 교환해야 합니다.
+                    FATF(국제자금세탁방지기구) 권고 기준 $1,000/€1,000 이상 거래 시 송금인/수취인 정보 교환 요구가 강화됩니다.
                   </p>
                   <div className="bg-gray-900 text-green-400 p-3 rounded text-xs">
                     <pre>
@@ -1409,10 +1409,10 @@ export default function StablecoinPaymentComparisonPage() {
                     스테이블코인 결제 게이트웨이는 각국의 송금업, 가상자산사업자 라이선스가 필요할 수 있습니다.
                   </p>
                   <div className="text-xs space-y-2">
-                    <p><strong>미국:</strong> MSB (Money Services Business) 라이선스</p>
-                    <p><strong>한국:</strong> 가상자산사업자 신고 (특정금융정보법)</p>
-                    <p><strong>유럽:</strong> MiCA (Markets in Crypto-Assets) 규제 준수</p>
-                    <p className="text-red-600 font-semibold mt-2">→ 라이선스 획득까지 6개월~2년 소요</p>
+                    <p><strong>미국:</strong> 사업 모델에 따라 MSB/MTL 등 필요할 수 있음</p>
+                    <p><strong>한국:</strong> 사업 모델에 따라 VASP 신고 등 필요할 수 있음</p>
+                    <p><strong>유럽:</strong> MiCA 규제 준수 필요 (사업 유형별 요건 상이)</p>
+                    <p className="text-red-600 font-semibold mt-2">→ 라이선스 획득 시 6개월~2년 소요 가능</p>
                   </div>
                 </div>
               </div>
@@ -1434,7 +1434,7 @@ export default function StablecoinPaymentComparisonPage() {
                     </ul>
                     <p className="mt-2"><strong>과제:</strong></p>
                     <ul className="ml-4">
-                      <li>• 사용자 채택률 낮음 (~1%)</li>
+                      <li>• 사용자 채택률 아직 낮음</li>
                       <li>• 법정화폐 변환 필요 시 추가 단계</li>
                     </ul>
                   </div>
@@ -1452,22 +1452,22 @@ export default function StablecoinPaymentComparisonPage() {
                     <ul className="ml-4">
                       <li>• 송금 시간: 3~5일 → 10분</li>
                       <li>• 수수료: 5~10% → 1~2%</li>
-                      <li>• 2025년 거래량 $5B+</li>
+                      <li>• 대규모 거래량 처리 (공식 발표 기준)</li>
                     </ul>
                   </div>
                 </div>
 
                 <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg">
-                  <h3 className="font-bold text-lg mb-2 text-purple-700 dark:text-purple-300">사례 3: 한국 게임사 N사</h3>
+                  <h3 className="font-bold text-lg mb-2 text-purple-700 dark:text-purple-300">사례 3: 글로벌 게임사 시나리오 (가정)</h3>
                   <p className="text-sm mb-3">
-                    글로벌 게임 매출을 USDC로 수취하여 환전 비용과 정산 시간을 획기적으로 단축했습니다.
+                    글로벌 게임 매출을 USDC로 수취할 경우 환전 비용과 정산 시간을 단축할 수 있습니다.
                   </p>
                   <div className="text-xs space-y-2">
-                    <p><strong>기존 방식:</strong></p>
-                    <p className="ml-4">미국 플레이어 결제 → Stripe → 환전 → 한국 계좌 (T+7일, 3% 수수료)</p>
-                    <p className="mt-2"><strong>USDC 방식:</strong></p>
-                    <p className="ml-4">미국 플레이어 → USDC 전송 → 한국 게임사 지갑 (T+0, 0.5% 수수료)</p>
-                    <p className="mt-2 text-green-600 font-semibold">연간 수수료 절감: 약 $2M (연 매출 $80M 기준)</p>
+                    <p><strong>기존 방식 (예시):</strong></p>
+                    <p className="ml-4">플레이어 결제 → Stripe → 환전 → 계좌 입금 (며칠 소요, 수수료 발생)</p>
+                    <p className="mt-2"><strong>USDC 방식 (예시):</strong></p>
+                    <p className="ml-4">플레이어 → USDC 전송 → 게임사 지갑 (빠른 처리, 낮은 수수료)</p>
+                    <p className="mt-2 text-green-600 font-semibold">잠재적 수수료 절감 효과 (규모에 따라 상이)</p>
                   </div>
                 </div>
               </div>
@@ -1489,7 +1489,7 @@ export default function StablecoinPaymentComparisonPage() {
                         <ul className="ml-4 space-y-1 text-xs">
                           <li>• 각국의 규제가 상이하고 계속 변화함</li>
                           <li>• 라이선스 획득 비용과 시간 (수억 원, 1~2년)</li>
-                          <li>• Travel Rule 준수 복잡성 ($1,000 이상 거래)</li>
+                          <li>• Travel Rule 준수 복잡성 (FATF 권고 기준 $1,000/€1,000 이상)</li>
                           <li>• 세금 처리 불명확 (암호화폐 자산 vs 외화)</li>
                         </ul>
                       </div>
@@ -1603,7 +1603,7 @@ export default function StablecoinPaymentComparisonPage() {
                     <ul className="text-sm space-y-1">
                       <li>• 8단계 → 4단계로 단계 압축</li>
                       <li>• 승인과 정산이 하나로 합쳐져 D+3 영업일 → 즉시 완료 (T+0) 실현</li>
-                      <li>• 참여자 감소로 수수료 절감 (2~4% → 1% 미만)</li>
+                      <li>• 참여자 감소로 수수료 절감 (카드 대비 크게 낮출 가능성)</li>
                       <li>• 국제 결제에서 환전 수수료 제거</li>
                       <li>• 차지백 리스크 제거 (비가역적 거래)</li>
                     </ul>
@@ -1642,10 +1642,10 @@ export default function StablecoinPaymentComparisonPage() {
                       카드 한도, 잔액, 부정사용 여부를 체크하며, 승인이 완료되면 "결제 성공" 메시지가 뜨지만 돈은 아직 이동하지 않았습니다.
                     </p>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
-                      <strong>Settlement (정산):</strong> 실제로 돈이 이동하는 단계입니다.
-                      승인된 거래들을 모아서 배치로 일괄 처리하며, 보통 결제일 기준 D+3 영업일 전후에 가맹점 계좌에 입금됩니다.
+                      <strong>Settlement (정산) & Funding (입금):</strong> Clearing(거래 확정/대사), Settlement(기관 간 결제), Funding(가맹점 입금)으로 세분화되며,
+                      가맹점 입금까지 보통 결제일 기준 D+3 영업일 전후 소요됩니다.
                       (PG 경유 시 D+3~5일 또는 주 단위 정산으로 늘어날 수 있음)
-                      전통 카드 결제의 가장 큰 특징은 이 두 단계가 분리되어 있다는 점입니다.
+                      전통 카드 결제의 가장 큰 특징은 승인과 정산·입금 단계가 분리되어 있다는 점입니다.
                     </p>
                   </div>
 
@@ -1734,9 +1734,9 @@ export default function StablecoinPaymentComparisonPage() {
                   <div className="border-l-4 border-cyan-500 pl-4">
                     <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Travel Rule (자금이동추적규칙)</h4>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
-                      FATF(국제자금세탁방지기구)가 제정한 규칙으로, $1,000(또는 €1,000) 이상의 암호화폐 전송 시
-                      송금인과 수취인의 신원 정보를 교환해야 합니다. 이는 자금세탁과 테러자금조달을 방지하기 위한 규제입니다.
-                      스테이블코인 결제가 대규모로 채택되려면 Travel Rule 준수가 필수입니다.
+                      FATF(국제자금세탁방지기구) 권고 기준으로, $1,000/€1,000 이상의 암호화폐 전송 시
+                      송금인과 수취인의 신원 정보 교환이 강화됩니다. 이는 자금세탁과 테러자금조달을 방지하기 위한 규제입니다.
+                      스테이블코인 결제가 대규모로 채택되려면 Travel Rule 준수가 중요합니다.
                     </p>
                   </div>
                 </div>
