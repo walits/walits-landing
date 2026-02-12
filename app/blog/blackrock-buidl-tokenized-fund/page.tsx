@@ -81,7 +81,7 @@ export default function BlackRockBUIDLPage() {
               <p className="lead text-xl text-gray-700 dark:text-gray-300">
                 2024년 3월, 세계 최대 자산운용사 BlackRock이 조용히 역사를 만들었습니다.
                 $10조를 운용하는 거대 금융기관이 블록체인 기반 토큰화 펀드 "BUIDL"을 출시한 것입니다.
-                불과 2년 만에 $1.5B 규모로 성장한 BUIDL은 전통 금융과 암호화폐의 완벽한 융합을 보여줍니다.
+                불과 2년 만에 약 $2.4B 규모로 급성장한 BUIDL은 전통 금융과 암호화폐의 융합을 보여줍니다.
               </p>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">BlackRock: 세계를 움직이는 자산운용사</h2>
@@ -153,15 +153,15 @@ export default function BlackRockBUIDLPage() {
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
                           <td className="py-2 font-semibold">블록체인</td>
-                          <td className="py-2 text-right text-xs">Ethereum, Solana, Polygon, Avalanche, Arbitrum, Optimism, Aptos, BNB</td>
+                          <td className="py-2 text-right text-xs">Ethereum 외 다수 (지속 확장 중)</td>
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
                           <td className="py-2 font-semibold">토큰 심볼</td>
                           <td className="py-2 text-right">BUIDL</td>
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
-                          <td className="py-2 font-semibold">시가총액</td>
-                          <td className="py-2 text-right text-green-600 font-bold">$2.4B+</td>
+                          <td className="py-2 font-semibold">펀드 규모(AUM)</td>
+                          <td className="py-2 text-right text-green-600 font-bold">$2.4B+ (2025년 초 기준)</td>
                         </tr>
                         <tr>
                           <td className="py-2 font-semibold">최소 투자</td>
@@ -181,15 +181,15 @@ export default function BlackRockBUIDLPage() {
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
                           <td className="py-2 font-semibold">수익률</td>
-                          <td className="py-2 text-right text-green-600 font-bold">연 4.5~5.2%</td>
+                          <td className="py-2 text-right text-xs">연 4.5~5.2% (변동, 참고치)</td>
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
                           <td className="py-2 font-semibold">배당 주기</td>
-                          <td className="py-2 text-right">매일 자동 분배</td>
+                          <td className="py-2 text-right text-xs">일별 산정/누적, 월 1회 지급</td>
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
                           <td className="py-2 font-semibold">환매</td>
-                          <td className="py-2 text-right">T+0 (즉시)</td>
+                          <td className="py-2 text-right text-xs">T+0 (최소 $250K, 조건부)</td>
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
                           <td className="py-2 font-semibold">수수료</td>
@@ -210,11 +210,11 @@ export default function BlackRockBUIDLPage() {
               <div className="space-y-6 my-8">
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border-l-4 border-blue-500">
                   <h3 className="text-xl font-bold mb-4 text-blue-700 dark:text-blue-300">
-                    1. 실시간 On-Chain 배당 (매일 자동 분배)
+                    1. 실시간 On-Chain 배당 (일별 산정, 월별 지급)
                   </h3>
                   <p className="mb-4 text-sm">
                     전통적인 Money Market Fund(MMF)는 배당을 월 1회 지급하고, 중개인을 통해 2-3일이 소요됩니다.
-                    BUIDL은 <strong>매일 자정(UTC) 스마트 컨트랙트가 자동 실행</strong>되어 배당을 지급합니다.
+                    BUIDL은 <strong>매일 수익이 산정·누적</strong>되며, <strong>월 1회 온체인으로 자동 지급</strong>됩니다.
                   </p>
                   <div className="bg-gray-900 dark:bg-black p-4 rounded-lg my-4 overflow-x-auto">
                     <pre className="text-sm text-green-400">
@@ -225,27 +225,27 @@ export default function BlackRockBUIDLPage() {
 ⏱️  배당 받기까지 평균 3일 소요
 
 [BUIDL]
-매일 00:00 UTC: 배당 자동 계산
-     ↓ (스마트 컨트랙트 즉시 실행)
+매일: 수익 산정 및 NAV 반영 (온체인)
+     ↓ (30일간 누적)
+매월 1일: 스마트 컨트랙트 자동 실행
      ↓ (블록 확정 ~15초)
-00:01 UTC: 지갑에 BUIDL 토큰 추가 입금
-⚡ 배당 받기까지 1분 이내
+매월 1일: 지갑에 BUIDL 토큰 추가 입금
+⚡ 중개인 없이 온체인 자동 지급
 
 ✅ 장점:
-• 복리 효과 극대화 (매일 재투자)
+• 일별 NAV 반영으로 투명성 극대화
 • 중개 수수료 제거
 • 투명한 온체인 기록`}
                     </pre>
                   </div>
                   <div className="bg-white dark:bg-gray-800 p-4 rounded mt-4">
-                    <h4 className="font-semibold text-sm mb-2">💡 실제 사례</h4>
+                    <h4 className="font-semibold text-sm mb-2">💡 사례 (예시)</h4>
                     <p className="text-xs text-gray-600 dark:text-gray-400">
                       <strong>투자금:</strong> $100M<br/>
-                      <strong>연 수익률:</strong> 5%<br/>
-                      <strong>매일 배당:</strong> $100M × 5% ÷ 365 = <span className="text-green-600 font-bold">$13,699</span><br/>
-                      <strong>1년 복리:</strong> $100M × (1 + 0.05/365)^365 = <span className="text-green-600 font-bold">$105.127M</span><br/>
-                      <strong>vs 연 1회 배당:</strong> $100M × 1.05 = $105M<br/>
-                      <strong>차익:</strong> <span className="text-green-600 font-bold">+$127,000</span> (복리 효과)
+                      <strong>연 수익률:</strong> 5% (가정)<br/>
+                      <strong>일별 산정:</strong> $100M × 5% ÷ 365 = <span className="text-green-600 font-bold">$13,699/일</span><br/>
+                      <strong>월 1회 지급:</strong> 약 $416K (30일 누적)<br/>
+                      <strong>연간 총액:</strong> 약 <span className="text-green-600 font-bold">$5M</span> (5% 수익)
                     </p>
                   </div>
                 </div>
@@ -256,7 +256,7 @@ export default function BlackRockBUIDLPage() {
                   </h3>
                   <p className="mb-4 text-sm">
                     전통 펀드는 환매 신청 후 <strong>T+2~T+3</strong> (2~3 영업일) 후에 현금을 받습니다.
-                    BUIDL은 <strong>T+0 즉시 환매</strong>가 가능합니다.
+                    BUIDL은 <strong>T+0 즉시 환매</strong>가 가능합니다 (최소 환매 금액 $250K 등 조건 적용).
                   </p>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="bg-white dark:bg-gray-800 p-4 rounded">
@@ -302,7 +302,7 @@ export default function BlackRockBUIDLPage() {
                         <li className="flex items-start gap-2">
                           <span className="text-green-600 font-bold">✓</span>
                           <div>
-                            <strong>BlackRock 운용:</strong> 세계 최대 자산운용사, 신용등급 AAA
+                            <strong>BlackRock 운용:</strong> 세계 최대 자산운용사 (AUM $10.5조)
                           </div>
                         </li>
                         <li className="flex items-start gap-2">
@@ -314,13 +314,13 @@ export default function BlackRockBUIDLPage() {
                         <li className="flex items-start gap-2">
                           <span className="text-green-600 font-bold">✓</span>
                           <div>
-                            <strong>SEC 규제 준수:</strong> Regulation D에 따른 적격 투자자 전용 사모펀드
+                            <strong>Regulation D 등록 면제:</strong> 적격 투자자 전용 사모펀드 (SEC Rule 506(c))
                           </div>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-green-600 font-bold">✓</span>
                           <div>
-                            <strong>Big 4 감사:</strong> 정기적인 외부 감사 (Deloitte, PwC 등)
+                            <strong>PwC 감사:</strong> Big 4 회계법인의 정기적인 외부 감사
                           </div>
                         </li>
                       </ul>
@@ -371,14 +371,14 @@ export default function BlackRockBUIDLPage() {
                       <h4 className="font-semibold mb-2 text-sm">📌 시나리오 1: 담보 대출 (Collateralized Lending)</h4>
                       <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-xs">
                         <pre>
-{`보유 자산: BUIDL $10M (연 5% 수익)
+{`보유 자산: BUIDL $10M (연 5% 가정)
      ↓
 Aave/Compound에 담보로 예치
      ↓
 USDC $8M 대출 (80% LTV)
      ↓
 결과:
-✅ BUIDL 연 5% 수익 계속 발생 ($500K/년)
+✅ BUIDL 연 5% 수익 계속 발생 (예시: $500K/년)
 ✅ USDC $8M 유동성 확보
 ✅ 대출 이자 연 3% 지불 ($240K/년)
 ━━━━━━━━━━━━━━━━━━━━━━
@@ -395,7 +395,7 @@ USDC $8M 대출 (80% LTV)
                       <h4 className="font-semibold mb-2 text-sm">📌 시나리오 2: 자동 재투자 (Auto-Compounding)</h4>
                       <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-xs">
                         <pre>
-{`매일 00:00 UTC: BUIDL 배당 수령 ($13,699)
+{`매월 1일: BUIDL 배당 수령 (예: $416K/월)
      ↓
 스마트 컨트랙트 자동 실행
      ↓
@@ -403,12 +403,12 @@ Uniswap에서 ETH 또는 다른 자산 매수
      ↓
 Yield Farming 프로토콜에 예치
      ↓
-추가 수익 발생 (연 8-12%)
+추가 수익 발생 (예: 연 8-12%)
 
 ━━━━━━━━━━━━━━━━━━━━━━
-최종 수익률:
+최종 수익률 (예시):
 BUIDL 5% + DeFi 추가 수익 4-8%
-= 연 9-13% 복합 수익`}
+= 연 9-13% 복합 수익 가능`}
                         </pre>
                       </div>
                       <p className="text-xs mt-2 text-gray-600 dark:text-gray-400">
@@ -587,7 +587,7 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
                   </li>
                   <li>
                     <strong>2. 시장 규모 급성장:</strong> 2024년 $1B → 2026년 $12B (12배 성장)
-                    → 2030년 예상 $15조 (Boston Consulting Group 추정)
+                    → 2030년 $15조 규모 전망 (BCG 등 추정, 실현 여부 불확실)
                   </li>
                   <li>
                     <strong>3. 이더리움 선호:</strong> 대부분의 주요 펀드가 이더리움을 선택했습니다.
@@ -914,7 +914,7 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
                     <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded">
                       <h4 className="font-semibold mb-2 text-yellow-700 dark:text-yellow-400">BUIDL 세무 처리</h4>
                       <ul className="ml-4 space-y-1">
-                        <li className="text-red-600 font-semibold">• 이자 소득 (매일 배당)</li>
+                        <li className="text-red-600 font-semibold">• 이자 소득 (월별 배당)</li>
                         <li className="text-orange-600 font-semibold">+ 암호화폐 거래 손익 (전송/환매)</li>
                         <li className="text-purple-600 font-semibold">+ DeFi 거래 손익 (담보 대출 등)</li>
                         <li className="text-blue-600 font-semibold">+ 외화 환산 손익 (해외 투자자)</li>
@@ -1107,7 +1107,7 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
                   <h3 className="font-bold mb-3 text-yellow-700 dark:text-yellow-300">✅ 기업 재무팀 관점</h3>
                   <ul className="space-y-2 text-sm">
                     <li>
-                      <strong>현금 관리:</strong> 유휴 현금을 BUIDL에 투자하여 연 5% 수익
+                      <strong>현금 관리:</strong> 유휴 현금을 BUIDL에 투자 (예: 연 5% 수익)
                     </li>
                     <li>
                       <strong>즉시 환매:</strong> 급하게 현금이 필요할 때 즉시 환매 가능
@@ -1122,10 +1122,10 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">RWA 시장의 미래: 2030년 전망</h2>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">RWA 시장의 미래: 2030년 전망 (추정)</h2>
 
               <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 p-8 rounded-xl my-8">
-                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">🔮 5년 후 RWA 시장 예측</h3>
+                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">🔮 5년 후 RWA 시장 예측 (불확실성 높음)</h3>
                 <div className="space-y-6">
                   <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
                     <div className="flex justify-between items-center mb-4">
@@ -1184,11 +1184,11 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
                         </ul>
                       </div>
                       <div>
-                        <h5 className="font-semibold text-red-700 dark:text-red-400">2030년: "모든 것이 토큰"</h5>
+                        <h5 className="font-semibold text-red-700 dark:text-red-400">2030년: "모든 것이 토큰" (시나리오)</h5>
                         <ul className="ml-4 mt-1 space-y-1 text-xs">
-                          <li>• 전 세계 금융자산의 10%가 토큰화 ($15조 / $150조)</li>
-                          <li>• 중앙은행 디지털 화폐(CBDC)와 RWA 통합</li>
-                          <li>• DeFi와 TradFi 경계 소멸</li>
+                          <li>• 전 세계 금융자산의 10% 토큰화 추정 (약 $15조, 실현 불확실)</li>
+                          <li>• 중앙은행 디지털 화폐(CBDC)와 RWA 통합 가능성</li>
+                          <li>• DeFi와 TradFi 경계 소멸 전망</li>
                         </ul>
                       </div>
                     </div>
@@ -1344,7 +1344,7 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
               <p className="lead text-xl text-gray-700 dark:text-gray-300">
                 In March 2024, BlackRock, the world's largest asset manager, quietly made history.
                 The $10 trillion giant launched "BUIDL," a blockchain-based tokenized fund.
-                Growing to $1.5B in just 2 years, BUIDL demonstrates the perfect fusion of traditional finance and crypto.
+                Growing to approximately $2.4B in just 2 years, BUIDL demonstrates the fusion of traditional finance and crypto.
               </p>
 
               {/* English content follows same structure as Korean */}
