@@ -153,7 +153,7 @@ export default function BlackRockBUIDLPage() {
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
                           <td className="py-2 font-semibold">블록체인</td>
-                          <td className="py-2 text-right">Ethereum</td>
+                          <td className="py-2 text-right text-xs">Ethereum, Solana, Polygon, Avalanche, Arbitrum, Optimism, Aptos, BNB</td>
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
                           <td className="py-2 font-semibold">토큰 심볼</td>
@@ -161,7 +161,7 @@ export default function BlackRockBUIDLPage() {
                         </tr>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
                           <td className="py-2 font-semibold">시가총액</td>
-                          <td className="py-2 text-right text-green-600 font-bold">$1.5B+</td>
+                          <td className="py-2 text-right text-green-600 font-bold">$2.4B+</td>
                         </tr>
                         <tr>
                           <td className="py-2 font-semibold">최소 투자</td>
@@ -480,16 +480,38 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
                     <div className="w-32 text-right font-bold text-purple-600">$750M 돌파</div>
                   </div>
                   <div className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg border-2 border-green-500">
-                    <div className="w-24 text-sm font-bold text-gray-900 dark:text-white">2026년 1월</div>
+                    <div className="w-24 text-sm font-bold text-gray-900 dark:text-white">2026년 2월</div>
                     <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
                       <div className="h-full bg-gradient-to-r from-green-500 to-emerald-500" style={{width: '100%'}}></div>
                     </div>
-                    <div className="w-32 text-right font-bold text-green-600">$1.5B+ 🚀</div>
+                    <div className="w-32 text-right font-bold text-green-600">$2.4B+ 🚀</div>
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">
-                  <strong>22개월 만에 150배 성장</strong> — 역대 가장 빠르게 성장한 토큰화 펀드
+                  <strong>23개월 만에 240배 성장</strong> — 역대 가장 빠르게 성장한 토큰화 펀드
                 </p>
+              </div>
+
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-6 border-l-4 border-blue-500">
+                <h4 className="font-bold mb-3 text-blue-700 dark:text-blue-300">🆕 최신 개발: Uniswap 통합 (2026년 2월 11일)</h4>
+                <p className="text-sm mb-3">
+                  BlackRock이 DeFi 영역에 본격 진출하며, BUIDL을 <strong>Uniswap UniswapX</strong>에 상장했습니다.
+                  이는 기관급 토큰화 펀드가 탈중앙 거래소(DEX)에 상장된 첫 사례입니다.
+                </p>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <strong>거래 방식:</strong> Securitize를 통해 화이트리스트된 적격 투자자만 UniswapX에서 거래 가능
+                  </li>
+                  <li>
+                    <strong>24/7 거래:</strong> 스테이블코인(USDC 등)과 24시간 교환 가능
+                  </li>
+                  <li>
+                    <strong>마켓메이커:</strong> 승인된 마켓메이커가 유동성 제공
+                  </li>
+                  <li>
+                    <strong>시장 반응:</strong> Uniswap 토큰(UNI) 25% 급등
+                  </li>
+                </ul>
               </div>
 
               <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">경쟁사 등장: RWA 시장 급성장</h3>
@@ -511,8 +533,8 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
                       <td className="border border-gray-300 dark:border-gray-700 p-4 font-bold">BUIDL</td>
                       <td className="border border-gray-300 dark:border-gray-700 p-4">BlackRock</td>
                       <td className="border border-gray-300 dark:border-gray-700 p-4">2024.03</td>
-                      <td className="border border-gray-300 dark:border-gray-700 p-4 text-green-600 font-bold">$1.5B</td>
-                      <td className="border border-gray-300 dark:border-gray-700 p-4">Ethereum</td>
+                      <td className="border border-gray-300 dark:border-gray-700 p-4 text-green-600 font-bold">$2.4B</td>
+                      <td className="border border-gray-300 dark:border-gray-700 p-4 text-xs">Ethereum + 7개 체인</td>
                       <td className="border border-gray-300 dark:border-gray-700 p-4">4.5-5.2%</td>
                     </tr>
                     <tr>
@@ -625,6 +647,402 @@ BUIDL 5% + 거래 수수료 3% + CRV 보상 2%
                 </p>
                 <p className="text-xs mt-4 text-gray-500">
                   — 2023년 12월, CNBC 인터뷰에서
+                </p>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">BUIDL이 직면한 법적·규제적 제약</h2>
+
+              <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg my-8 border-l-4 border-red-500">
+                <p className="text-sm mb-4">
+                  BUIDL은 혁신적인 상품이지만, <strong>완벽하지 않습니다</strong>.
+                  전통 금융 규제 체계 안에서 운영되기 때문에 여러 제약이 존재하며, 이는 대중화에 큰 장애물이 되고 있습니다.
+                </p>
+              </div>
+
+              <div className="space-y-6 my-8">
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-red-500">
+                  <h3 className="text-xl font-bold mb-4 text-red-700 dark:text-red-300">
+                    1. 적격 투자자 제한 (Accredited Investor Only)
+                  </h3>
+                  <p className="text-sm mb-3">
+                    BUIDL은 <strong>Regulation D Rule 506(c)</strong> 사모펀드로, 일반 개인 투자자는 투자할 수 없습니다.
+                  </p>
+
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded my-4">
+                    <h4 className="font-semibold text-sm mb-2">적격 투자자(Accredited Investor) 기준</h4>
+                    <div className="grid md:grid-cols-2 gap-4 text-xs">
+                      <div>
+                        <p className="font-semibold mb-2 text-blue-600">개인 투자자</p>
+                        <ul className="ml-4 space-y-1">
+                          <li>• 연소득 $200K 이상 (부부 $300K)</li>
+                          <li>• 또는 순자산 $1M 이상 (거주지 제외)</li>
+                          <li>• 또는 Series 7, 65, 82 자격증 보유</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="font-semibold mb-2 text-purple-600">기관 투자자</p>
+                        <ul className="ml-4 space-y-1">
+                          <li>• 운용자산 $5M 이상</li>
+                          <li>• 은행, 보험사, 연기금</li>
+                          <li>• 공인 투자자문사(RIA)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded border-l-4 border-yellow-500">
+                    <p className="text-xs">
+                      <strong>⚠️ 현실:</strong> 미국 가구의 약 10% 미만만이 적격 투자자 기준을 충족합니다.
+                      즉, <strong>90% 이상의 일반 투자자는 BUIDL에 투자할 수 없습니다.</strong>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-orange-500">
+                  <h3 className="text-xl font-bold mb-4 text-orange-700 dark:text-orange-300">
+                    2. 높은 최소 투자금 & 환매 제한
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4 text-sm">
+                    <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded">
+                      <h4 className="font-semibold mb-2">최소 투자금</h4>
+                      <p className="text-3xl font-bold text-red-600 mb-2">$5,000,000</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
+                        중소기업이나 개인 투자자에게는 진입 장벽이 너무 높습니다.
+                        일반 MMF는 $1,000~$10,000부터 시작 가능한 것과 대조적입니다.
+                      </p>
+                    </div>
+                    <div className="bg-orange-50 dark:bg-orange-900/30 p-4 rounded">
+                      <h4 className="font-semibold mb-2">최소 환매금</h4>
+                      <p className="text-3xl font-bold text-orange-600 mb-2">$250,000</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
+                        T+0 즉시 환매가 가능하지만, 최소 $250K씩만 환매 가능합니다.
+                        소액 환매가 필요한 경우 유연성이 떨어집니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-purple-500">
+                  <h3 className="text-xl font-bold mb-4 text-purple-700 dark:text-purple-300">
+                    3. Transfer Restrictions (양도 제한)
+                  </h3>
+                  <p className="text-sm mb-3">
+                    BUIDL 토큰은 일반적인 암호화폐와 달리 <strong>자유롭게 양도할 수 없습니다</strong>.
+                  </p>
+
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded my-4">
+                    <h4 className="font-semibold text-sm mb-2">양도 프로세스</h4>
+                    <ol className="space-y-2 text-xs ml-4">
+                      <li>
+                        <strong>1. Securitize 화이트리스트 필수:</strong> 양수인(구매자)이 Securitize를 통해 사전 승인을 받아야 합니다.
+                      </li>
+                      <li>
+                        <strong>2. KYC/AML 검증:</strong> 양수인은 신원 확인, 자금 출처 확인, 제재 리스트 대조 등을 거쳐야 합니다.
+                      </li>
+                      <li>
+                        <strong>3. 적격 투자자 증명:</strong> 양수인이 적격 투자자 기준을 충족함을 증명해야 합니다.
+                      </li>
+                      <li>
+                        <strong>4. 승인 대기:</strong> Securitize의 승인까지 수 시간~수일 소요됩니다.
+                      </li>
+                      <li>
+                        <strong>5. 온체인 전송:</strong> 승인 후에야 비로소 온체인 전송이 가능합니다.
+                      </li>
+                    </ol>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4 mt-4">
+                    <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded">
+                      <h5 className="font-semibold text-sm mb-2 text-red-600">❌ 불가능한 것들</h5>
+                      <ul className="text-xs space-y-1 ml-4">
+                        <li>• DEX(Uniswap 등)에서 자유 거래 ❌</li>
+                        <li>• 익명 사용자에게 전송 ❌</li>
+                        <li>• 국가 제재 대상 지역 전송 ❌</li>
+                        <li>• 비적격 투자자에게 판매 ❌</li>
+                      </ul>
+                    </div>
+                    <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded">
+                      <h5 className="font-semibold text-sm mb-2 text-green-600">✅ 가능한 것들</h5>
+                      <ul className="text-xs space-y-1 ml-4">
+                        <li>• 화이트리스트된 투자자 간 전송 ✓</li>
+                        <li>• BlackRock으로 환매 (USDC 수령) ✓</li>
+                        <li>• UniswapX 승인된 마켓메이커 거래 ✓</li>
+                        <li>• DeFi 담보 예치 (일부 제한적) ✓</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded border-l-4 border-yellow-500 mt-4">
+                    <p className="text-xs">
+                      <strong>💭 본질적 모순:</strong> "블록체인의 핵심 가치는 누구나 자유롭게 거래할 수 있는 것"인데,
+                      BUIDL은 규제 준수를 위해 이를 포기했습니다. 이는 토큰화의 이상과 규제 현실 사이의 타협입니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-blue-500">
+                  <h3 className="text-xl font-bold mb-4 text-blue-700 dark:text-blue-300">
+                    4. 국제 투자자 제한 (지역별 규제 차이)
+                  </h3>
+                  <p className="text-sm mb-3">
+                    BUIDL은 미국 증권법(SEC Regulation D) 하에 운영되므로, <strong>국제 투자자 접근이 제한적</strong>입니다.
+                  </p>
+
+                  <div className="overflow-x-auto my-4">
+                    <table className="w-full border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-gray-100 dark:bg-gray-800">
+                          <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">국가/지역</th>
+                          <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">투자 가능 여부</th>
+                          <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">제한 사항</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">미국</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 text-green-600 font-bold">✓ 가능</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3">적격 투자자 기준 충족 필요</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">유럽 (EU/UK)</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 text-yellow-600 font-bold">△ 제한적</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3">MiFID II 전문 투자자만 가능, 추가 서류 필요</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">한국</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 text-red-600 font-bold">✗ 사실상 불가</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3">외국 사모펀드 투자 규제, 외환거래법 제약</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">일본</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 text-red-600 font-bold">✗ 사실상 불가</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3">금융상품거래법, 외국 증권 규제</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">중국</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 text-red-600 font-bold">✗ 완전 차단</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3">암호화폐 거래 금지, 자본 통제</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">제재 대상국</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3 text-red-600 font-bold">✗ 완전 차단</td>
+                          <td className="border border-gray-300 dark:border-gray-700 p-3">OFAC 제재: 북한, 이란, 러시아(일부), 시리아 등</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded">
+                    <p className="text-xs">
+                      <strong>📌 한국 투자자의 어려움:</strong>
+                      한국 거주자가 BUIDL에 투자하려면 (1) 미국 적격 투자자 기준 충족, (2) 외환거래법에 따른 해외 금융상품 투자 신고,
+                      (3) 세무 신고 복잡성, (4) Securitize 화이트리스트 승인 등 여러 단계를 거쳐야 하며, 사실상 일반 투자자는 불가능합니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-indigo-500">
+                  <h3 className="text-xl font-bold mb-4 text-indigo-700 dark:text-indigo-300">
+                    5. DeFi 연계 시 규제 불확실성
+                  </h3>
+                  <p className="text-sm mb-3">
+                    BUIDL을 DeFi 프로토콜(Aave, Compound 등)에서 사용할 때 <strong>법적 회색지대</strong>가 발생합니다.
+                  </p>
+
+                  <div className="space-y-4">
+                    <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded">
+                      <h4 className="font-semibold text-sm mb-2">🤔 불확실한 질문들</h4>
+                      <ul className="space-y-2 text-xs ml-4">
+                        <li>
+                          <strong>Q1:</strong> BUIDL을 Aave에 담보로 예치하는 것은 "증권 대출"인가?
+                          → SEC 규제 대상인가? 추가 등록 필요한가?
+                        </li>
+                        <li>
+                          <strong>Q2:</strong> 비적격 투자자가 DeFi에서 간접적으로 BUIDL에 노출되면?
+                          → 예: Aave에서 BUIDL 담보 대출을 받는 것은 적격 투자자 규제 우회인가?
+                        </li>
+                        <li>
+                          <strong>Q3:</strong> 스마트 컨트랙트가 자동으로 BUIDL을 거래하면?
+                          → 누가 증권법 준수 책임을 지는가? (컨트랙트 개발자? 사용자? 프로토콜?)
+                        </li>
+                        <li>
+                          <strong>Q4:</strong> BUIDL 수익을 다른 DeFi 프로토콜에 자동 재투자하면?
+                          → 투자 자문업(Investment Adviser) 등록 필요한가?
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded border-l-4 border-red-500">
+                      <h4 className="font-semibold text-sm mb-2 text-red-700 dark:text-red-400">⚠️ 현재 상황</h4>
+                      <p className="text-xs mb-2">
+                        SEC는 아직 "토큰화 증권의 DeFi 활용"에 대한 명확한 가이드라인을 제시하지 않았습니다.
+                      </p>
+                      <ul className="text-xs space-y-1 ml-4">
+                        <li>• BlackRock은 매우 보수적으로 접근 중 (Securitize 화이트리스트 엄격 운영)</li>
+                        <li>• DeFi 프로토콜들은 BUIDL 상장을 조심스럽게 진행 (규제 리스크 고려)</li>
+                        <li>• 2026년 현재 Uniswap UniswapX 통합이 첫 사례이지만, 여전히 화이트리스트 제한</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded">
+                      <h4 className="font-semibold text-sm mb-2">🔮 미래 전망</h4>
+                      <p className="text-xs">
+                        SEC가 "DeFi에서 증권형 토큰 활용" 규칙을 명확히 하기 전까지는 법적 불확실성이 지속될 것입니다.
+                        2027~2028년경 규제 프레임워크가 정립될 것으로 예상되지만, 그 전까지는 조심스러운 접근이 필요합니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-pink-500">
+                  <h3 className="text-xl font-bold mb-4 text-pink-700 dark:text-pink-300">
+                    6. 세무 처리의 복잡성
+                  </h3>
+                  <p className="text-sm mb-3">
+                    BUIDL은 "증권"이지만 "암호화폐 형태"로 존재하므로, 세무 처리가 복잡합니다.
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-4 text-xs">
+                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+                      <h4 className="font-semibold mb-2">전통 MMF 세무 처리</h4>
+                      <ul className="ml-4 space-y-1">
+                        <li>• 이자 소득으로 처리</li>
+                        <li>• 1099-INT 또는 1099-DIV 수령</li>
+                        <li>• 단순 명확함</li>
+                      </ul>
+                    </div>
+                    <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded">
+                      <h4 className="font-semibold mb-2 text-yellow-700 dark:text-yellow-400">BUIDL 세무 처리</h4>
+                      <ul className="ml-4 space-y-1">
+                        <li className="text-red-600 font-semibold">• 이자 소득 (매일 배당)</li>
+                        <li className="text-orange-600 font-semibold">+ 암호화폐 거래 손익 (전송/환매)</li>
+                        <li className="text-purple-600 font-semibold">+ DeFi 거래 손익 (담보 대출 등)</li>
+                        <li className="text-blue-600 font-semibold">+ 외화 환산 손익 (해외 투자자)</li>
+                        <li className="text-pink-600 font-semibold">= 복잡한 세무 신고</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded border-l-4 border-red-500 mt-4">
+                    <p className="text-xs">
+                      <strong>💸 실전 사례:</strong> 투자자가 BUIDL을 Aave에 담보로 맡기고 USDC를 빌린 후, 그 USDC로 다른 DeFi 프로토콜에서 수익을 냈다면?
+                      → (1) BUIDL 배당 소득, (2) Aave 담보 예치/인출 거래 손익, (3) 대출 이자 비용, (4) USDC 활용 수익,
+                      (5) 최종 환매 시 손익을 모두 추적하고 신고해야 합니다. 전문 세무사 없이는 거의 불가능합니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-teal-500">
+                  <h3 className="text-xl font-bold mb-4 text-teal-700 dark:text-teal-300">
+                    7. 유동성 & Secondary Market 문제
+                  </h3>
+                  <p className="text-sm mb-3">
+                    BUIDL은 T+0 환매가 가능하지만, <strong>2차 시장(Secondary Market) 유동성은 매우 낮습니다</strong>.
+                  </p>
+
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded my-4">
+                    <h4 className="font-semibold text-sm mb-2">환매 vs 2차 시장 매도</h4>
+                    <div className="grid md:grid-cols-2 gap-4 text-xs">
+                      <div className="bg-green-50 dark:bg-green-900/30 p-3 rounded">
+                        <p className="font-semibold text-green-600 mb-2">✅ BlackRock 환매 (Primary)</p>
+                        <ul className="ml-4 space-y-1">
+                          <li>• T+0 즉시 환매</li>
+                          <li>• $1.00 정확한 NAV 수령</li>
+                          <li>• 최소 $250K 제약</li>
+                          <li>• USDC로 지급</li>
+                        </ul>
+                      </div>
+                      <div className="bg-red-50 dark:bg-red-900/30 p-3 rounded">
+                        <p className="font-semibold text-red-600 mb-2">❌ 2차 시장 매도 (Secondary)</p>
+                        <ul className="ml-4 space-y-1">
+                          <li>• 화이트리스트된 구매자 찾기 어려움</li>
+                          <li>• 할인 매도 가능성 ($0.98~$0.99)</li>
+                          <li>• 거래 완결까지 시간 소요</li>
+                          <li>• UniswapX도 제한적 (마켓메이커만)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded">
+                    <p className="text-xs">
+                      <strong>📊 비교:</strong> 전통 MMF는 수조 달러 규모의 2차 시장이 존재하지만,
+                      BUIDL은 $2.4B 규모임에도 2차 시장 거래량이 매우 적습니다. 대부분 투자자는 BlackRock 직접 환매를 이용합니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-gray-500">
+                  <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
+                    8. 규제 변화 리스크
+                  </h3>
+                  <p className="text-sm mb-3">
+                    BUIDL은 현재 SEC 규제를 준수하지만, <strong>규제가 변경되면 운영 방식이 크게 바뀔 수 있습니다</strong>.
+                  </p>
+
+                  <div className="space-y-3 text-xs">
+                    <div className="bg-blue-50 dark:bg-blue-900/30 p-3 rounded">
+                      <p className="font-semibold mb-1">시나리오 1: 규제 완화</p>
+                      <p>
+                        SEC가 소액 투자자에게 토큰화 증권을 개방하면 ($10K~$100K 최소 투자)?
+                        → BUIDL 시가총액 폭발적 성장 가능
+                      </p>
+                    </div>
+                    <div className="bg-yellow-50 dark:bg-yellow-900/30 p-3 rounded">
+                      <p className="font-semibold mb-1">시나리오 2: 규제 강화</p>
+                      <p>
+                        SEC가 "토큰화 증권의 DeFi 활용"을 엄격히 제한하면?
+                        → BUIDL의 DeFi 연계 활용 불가능, 매력도 감소
+                      </p>
+                    </div>
+                    <div className="bg-red-50 dark:bg-red-900/30 p-3 rounded">
+                      <p className="font-semibold mb-1">시나리오 3: 국제 규제 충돌</p>
+                      <p>
+                        EU, 한국, 일본 등이 미국 사모펀드 투자를 더 제한하면?
+                        → 글로벌 확장 어려움, 미국 시장에만 갇힘
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-100 dark:bg-gray-900 p-4 rounded border-l-4 border-gray-500 mt-4">
+                    <p className="text-xs">
+                      <strong>🔮 2026년 현재:</strong> 미국 의회에서 "스테이블코인 법안"과 "디지털 자산 규제 법안" 논의 중입니다.
+                      이 법안들이 통과되면 BUIDL 같은 토큰화 증권의 규제 환경이 크게 바뀔 수 있습니다.
+                      투자자는 규제 변화를 지속적으로 모니터링해야 합니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 p-8 rounded-xl my-8 border-2 border-red-500">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">💭 핵심 메시지: 혁신과 규제의 줄다리기</h3>
+                <p className="text-sm mb-4">
+                  BUIDL은 <strong className="text-red-600">기술적으로는 완벽하지만, 규제적으로는 제약이 많은</strong> 상품입니다.
+                  BlackRock은 의도적으로 보수적인 접근을 택했으며, 이는 장기적 신뢰 구축을 위한 전략입니다.
+                </p>
+                <div className="grid md:grid-cols-2 gap-4 text-xs">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <h4 className="font-semibold mb-2 text-green-600">✅ 현실적 성과</h4>
+                    <ul className="ml-4 space-y-1">
+                      <li>• SEC 승인을 받아 합법적 운영</li>
+                      <li>• 23개월 만에 $2.4B 성장</li>
+                      <li>• 기관 투자자 신뢰 확보</li>
+                      <li>• 다른 금융사들의 벤치마크</li>
+                    </ul>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <h4 className="font-semibold mb-2 text-red-600">❌ 남은 과제</h4>
+                    <ul className="ml-4 space-y-1">
+                      <li>• 일반 투자자 접근 불가 (90%+ 제외)</li>
+                      <li>• 국제 투자자 제한</li>
+                      <li>• DeFi 연계 규제 불확실성</li>
+                      <li>• 2차 시장 유동성 부족</li>
+                    </ul>
+                  </div>
+                </div>
+                <p className="text-sm mt-4">
+                  <strong>결론:</strong> BUIDL은 "RWA 혁명의 시작"이지만 "완성"은 아닙니다.
+                  진정한 대중화를 위해서는 <strong className="text-orange-600">규제 명확화와 투자자 접근성 개선</strong>이 필수적입니다.
                 </p>
               </div>
 

@@ -546,6 +546,594 @@ export default function StablecoinPaymentComparisonPage() {
                 </pre>
               </div>
 
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">🚨 현실 체크: 이더리움 가스비 문제</h2>
+
+              <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg my-8 border-l-4 border-red-500">
+                <h3 className="text-xl font-bold mb-4 text-red-700 dark:text-red-300">
+                  "커피 한 잔에 가스비 $15?" — 이더리움의 치명적 약점
+                </h3>
+                <p className="text-sm mb-4">
+                  위에서 설명한 스테이블코인 결제의 장점은 <strong>이론적으로는 완벽</strong>합니다.
+                  하지만 <strong className="text-red-600">이더리움 메인넷(L1)에서는 소액 결제가 사실상 불가능</strong>합니다.
+                </p>
+
+                <div className="bg-white dark:bg-gray-800 p-5 rounded-lg">
+                  <h4 className="font-semibold mb-3 text-gray-900 dark:text-white">💸 실제 비용 시뮬레이션 (2026년 기준)</h4>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between items-center p-3 bg-red-50 dark:bg-red-900/30 rounded border-l-4 border-red-500">
+                      <div>
+                        <p className="font-semibold">스타벅스 라떼 $5 결제</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">이더리움 L1 USDC 전송</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-red-600">$5 + $12</p>
+                        <p className="text-xs">가스비 포함 총 $17</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-red-50 dark:bg-red-900/30 rounded border-l-4 border-red-500">
+                      <div>
+                        <p className="font-semibold">편의점 물 $2 결제</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">이더리움 L1 USDT 전송</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-red-600">$2 + $15</p>
+                        <p className="text-xs">가스비 포함 총 $17</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-orange-50 dark:bg-orange-900/30 rounded border-l-4 border-orange-500">
+                      <div>
+                        <p className="font-semibold">식당 저녁 식사 $50 결제</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">이더리움 L1 USDC 전송</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-orange-600">$50 + $10</p>
+                        <p className="text-xs">가스비 20% 추가</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-yellow-50 dark:bg-yellow-900/30 rounded border-l-4 border-yellow-500">
+                      <div>
+                        <p className="font-semibold">노트북 $1,000 결제</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">이더리움 L1 USDC 전송</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-yellow-600">$1,000 + $8</p>
+                        <p className="text-xs">가스비 0.8% 수준</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-green-50 dark:bg-green-900/30 rounded border-l-4 border-green-500">
+                      <div>
+                        <p className="font-semibold">기업 간 결제 $100,000</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">이더리움 L1 USDC 전송</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-green-600">$100K + $12</p>
+                        <p className="text-xs">가스비 0.012% (무시 가능)</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 p-4 bg-gray-900 dark:bg-black rounded-lg text-white">
+                  <p className="font-bold mb-2 text-yellow-300">📊 결론</p>
+                  <ul className="text-xs space-y-1">
+                    <li>• <strong className="text-red-400">$100 미만 결제:</strong> 이더리움 L1 사용 불가 (가스비 10%+ 초과)</li>
+                    <li>• <strong className="text-orange-400">$100~$1,000 결제:</strong> 부담스럽지만 가능 (가스비 1~10%)</li>
+                    <li>• <strong className="text-green-400">$1,000 이상 결제:</strong> 합리적 (가스비 1% 미만)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">해결책: Layer 2 & 저비용 블록체인</h2>
+
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                이더리움의 가스비 문제는 치명적이지만, <strong>이미 해결책이 존재</strong>합니다.
+                2026년 현재 실용적인 스테이블코인 결제는 다음 3가지 방식으로 이루어집니다.
+              </p>
+
+              <div className="space-y-6 my-8">
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-lg border-l-4 border-blue-500">
+                  <h3 className="text-xl font-bold mb-4 text-blue-700 dark:text-blue-300">
+                    옵션 1: 이더리움 Layer 2 (권장 ⭐)
+                  </h3>
+                  <p className="text-sm mb-4">
+                    이더리움의 보안성을 유지하면서 가스비를 100분의 1로 줄인 Layer 2 솔루션입니다.
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-4 mb-4">
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <h4 className="font-semibold mb-2 text-sm">🔷 Arbitrum / Optimism</h4>
+                      <table className="w-full text-xs">
+                        <tbody>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">가스비</td>
+                            <td className="py-1 text-right text-green-600 font-bold">$0.10~$0.50</td>
+                          </tr>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">확정 시간</td>
+                            <td className="py-1 text-right">1~2초</td>
+                          </tr>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">보안</td>
+                            <td className="py-1 text-right">이더리움 상속</td>
+                          </tr>
+                          <tr>
+                            <td className="py-1 font-semibold">적합 용도</td>
+                            <td className="py-1 text-right text-xs">$10~$1,000 결제</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <h4 className="font-semibold mb-2 text-sm">🔶 Base (Coinbase L2)</h4>
+                      <table className="w-full text-xs">
+                        <tbody>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">가스비</td>
+                            <td className="py-1 text-right text-green-600 font-bold">$0.05~$0.20</td>
+                          </tr>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">확정 시간</td>
+                            <td className="py-1 text-right">1초</td>
+                          </tr>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">보안</td>
+                            <td className="py-1 text-right">이더리움 상속</td>
+                          </tr>
+                          <tr>
+                            <td className="py-1 font-semibold">특징</td>
+                            <td className="py-1 text-right text-xs">CEX 직접 연동</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <h4 className="font-semibold mb-3 text-sm">💸 Base에서 커피 결제 시뮬레이션</h4>
+                    <div className="space-y-2 text-xs">
+                      <div className="flex justify-between p-2 bg-green-50 dark:bg-green-900/30 rounded">
+                        <span>스타벅스 라떼 $5</span>
+                        <span className="text-green-600 font-bold">$5 + $0.08 = $5.08 ✓</span>
+                      </div>
+                      <div className="flex justify-between p-2 bg-green-50 dark:bg-green-900/30 rounded">
+                        <span>편의점 물 $2</span>
+                        <span className="text-green-600 font-bold">$2 + $0.06 = $2.06 ✓</span>
+                      </div>
+                      <div className="flex justify-between p-2 bg-green-50 dark:bg-green-900/30 rounded">
+                        <span>식당 저녁 식사 $50</span>
+                        <span className="text-green-600 font-bold">$50 + $0.10 = $50.10 ✓</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/30 rounded">
+                    <p className="text-xs">
+                      <strong>✅ 장점:</strong> 이더리움의 보안 + 저렴한 수수료 + USDC 네이티브 발행
+                      <br/><strong>❌ 단점:</strong> 트론보다는 약간 비쌈 (하지만 충분히 실용적)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 p-6 rounded-lg border-l-4 border-green-500">
+                  <h3 className="text-xl font-bold mb-4 text-green-700 dark:text-green-300">
+                    옵션 2: 트론 (Tron) — 가장 저렴하지만...
+                  </h3>
+                  <p className="text-sm mb-4">
+                    현재 전 세계 스테이블코인 결제의 50% 이상이 트론에서 발생하는 이유는 <strong>압도적인 저렴함</strong> 때문입니다.
+                  </p>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded mb-4">
+                    <h4 className="font-semibold mb-2 text-sm">📊 트론 USDT 전송 비용</h4>
+                    <table className="w-full text-xs">
+                      <tbody>
+                        <tr className="border-b border-gray-200 dark:border-gray-700">
+                          <td className="py-2 font-semibold">가스비 (Energy)</td>
+                          <td className="py-2 text-right text-green-600 font-bold">$0.50~$2</td>
+                        </tr>
+                        <tr className="border-b border-gray-200 dark:border-gray-700">
+                          <td className="py-2 font-semibold">확정 시간</td>
+                          <td className="py-2 text-right">3초 (매우 빠름)</td>
+                        </tr>
+                        <tr className="border-b border-gray-200 dark:border-gray-700">
+                          <td className="py-2 font-semibold">일일 거래량</td>
+                          <td className="py-2 text-right">200만+ 트랜잭션</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2 font-semibold">TRC-20 USDT 발행량</td>
+                          <td className="py-2 text-right font-bold">$60B+ (전체 USDT의 50%)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded">
+                      <h5 className="font-semibold text-sm mb-2 text-green-600">✅ 장점</h5>
+                      <ul className="text-xs space-y-1 ml-4">
+                        <li>• 가장 저렴한 수수료 ($0.50~$2)</li>
+                        <li>• 빠른 확정 시간 (3초)</li>
+                        <li>• 제3세계에서 널리 사용</li>
+                        <li>• 거래소 간 이동에 최적</li>
+                      </ul>
+                    </div>
+                    <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded">
+                      <h5 className="font-semibold text-sm mb-2 text-red-600">❌ 단점 (치명적)</h5>
+                      <ul className="text-xs space-y-1 ml-4">
+                        <li>• <strong className="text-red-600">낮은 탈중앙화</strong> (27개 노드)</li>
+                        <li>• <strong className="text-red-600">네트워크 리스크</strong> (51% 공격 가능성)</li>
+                        <li>• Justin Sun의 실질적 통제</li>
+                        <li>• 기관 투자자 기피</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded border-l-4 border-yellow-500">
+                    <p className="text-xs">
+                      <strong>⚠️ 트론의 딜레마:</strong> 소액 송금에는 최적이지만, 보안성 우려로 장기 보관이나 대규모 거래에는 부적합합니다.
+                      <Link href="/blog/tron-usdt-hack-scenario" className="text-blue-600 hover:underline ml-1">
+                        → 트론 USDT 해킹 시나리오 분석 읽기
+                      </Link>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-lg border-l-4 border-purple-500">
+                  <h3 className="text-xl font-bold mb-4 text-purple-700 dark:text-purple-300">
+                    옵션 3: Polygon / Solana — 중간 지점
+                  </h3>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <h4 className="font-semibold mb-2 text-sm">🟣 Polygon PoS</h4>
+                      <table className="w-full text-xs">
+                        <tbody>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">가스비</td>
+                            <td className="py-1 text-right text-green-600 font-bold">$0.01~$0.10</td>
+                          </tr>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">확정 시간</td>
+                            <td className="py-1 text-right">2초</td>
+                          </tr>
+                          <tr>
+                            <td className="py-1 font-semibold">평가</td>
+                            <td className="py-1 text-right text-xs">매우 저렴하지만 보안 논란</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <h4 className="font-semibold mb-2 text-sm">🟢 Solana</h4>
+                      <table className="w-full text-xs">
+                        <tbody>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">가스비</td>
+                            <td className="py-1 text-right text-green-600 font-bold">$0.001~$0.01</td>
+                          </tr>
+                          <tr className="border-b border-gray-200 dark:border-gray-700">
+                            <td className="py-1 font-semibold">확정 시간</td>
+                            <td className="py-1 text-right">0.4초 (최고속)</td>
+                          </tr>
+                          <tr>
+                            <td className="py-1 font-semibold">평가</td>
+                            <td className="py-1 text-right text-xs">초저렴, 다운타임 이슈</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">실전 가이드: 어떤 체인을 선택할까?</h2>
+
+              <div className="bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900/20 p-8 rounded-xl my-8">
+                <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">사용 사례별 최적 선택</h3>
+
+                <div className="space-y-4">
+                  <div className="bg-white dark:bg-gray-800 p-5 rounded-lg border-l-4 border-blue-500">
+                    <h4 className="font-semibold mb-2">☕ 소액 일상 결제 ($1~$50)</h4>
+                    <p className="text-sm mb-2">
+                      <strong className="text-blue-600">1순위:</strong> Base (Coinbase L2) — 가스비 $0.05~$0.10, 거래소 직접 연동<br/>
+                      <strong className="text-green-600">2순위:</strong> Polygon PoS — 가스비 $0.01~$0.05, 매우 저렴<br/>
+                      <strong className="text-orange-600">3순위:</strong> Tron — 가스비 $0.50~$2, 저렴하지만 보안 우려
+                    </p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      ❌ <strong>피해야 할 것:</strong> 이더리움 L1 (가스비 $10+ 소액 결제 불가)
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-5 rounded-lg border-l-4 border-green-500">
+                    <h4 className="font-semibold mb-2">🛒 중간 금액 결제 ($50~$1,000)</h4>
+                    <p className="text-sm mb-2">
+                      <strong className="text-blue-600">1순위:</strong> Arbitrum / Optimism — 가스비 $0.10~$0.50, 이더리움 보안<br/>
+                      <strong className="text-green-600">2순위:</strong> Base — 가스비 $0.10~$0.20, CEX 연동<br/>
+                      <strong className="text-purple-600">3순위:</strong> 이더리움 L1 — 가스비 $8~$15 (1~3% 수준)
+                    </p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      💡 <strong>추천:</strong> Layer 2가 보안과 비용의 균형이 가장 좋음
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-5 rounded-lg border-l-4 border-purple-500">
+                    <h4 className="font-semibold mb-2">💼 기업 간 거래 ($10K+)</h4>
+                    <p className="text-sm mb-2">
+                      <strong className="text-blue-600">1순위:</strong> 이더리움 L1 — 가스비 $10~$20 (0.1% 미만), 최고 보안<br/>
+                      <strong className="text-purple-600">2순위:</strong> Arbitrum / Optimism — 가스비 $0.50, 충분한 보안<br/>
+                      <strong className="text-orange-600">3순위:</strong> Tron — 가스비 $1, 저렴하지만 기관 기피
+                    </p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      ✅ <strong>권장:</strong> 대규모 거래는 보안이 최우선, 가스비는 무시 가능
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-5 rounded-lg border-l-4 border-yellow-500">
+                    <h4 className="font-semibold mb-2">🌍 국제 송금</h4>
+                    <p className="text-sm mb-2">
+                      <strong className="text-green-600">1순위:</strong> Tron — 수수료 $1~$2, 제3세계 인프라 발달<br/>
+                      <strong className="text-blue-600">2순위:</strong> Polygon — 수수료 $0.05, 빠른 확정<br/>
+                      <strong className="text-purple-600">3순위:</strong> Arbitrum — 수수료 $0.30, 안전성 우선 시
+                    </p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      💡 <strong>참고:</strong> 송금 금액과 수취인 지역에 따라 선택
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-5 rounded-lg border-l-4 border-red-500">
+                    <h4 className="font-semibold mb-2">🏦 장기 보관 & 안전 중시</h4>
+                    <p className="text-sm mb-2">
+                      <strong className="text-blue-600">1순위:</strong> 이더리움 L1 — 최고 보안, 탈중앙화<br/>
+                      <strong className="text-purple-600">2순위:</strong> Arbitrum / Optimism — 이더리움 보안 상속<br/>
+                      <strong className="text-green-600">3순위:</strong> Base — Coinbase 신뢰도
+                    </p>
+                    <p className="text-xs text-red-600 dark:text-red-400">
+                      ❌ <strong>피해야 할 것:</strong> Tron (보안 우려), Polygon (중앙화 논란)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">⚠️ Layer 2의 어두운 면: 중앙화 리스크</h2>
+
+              <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg my-8 border-l-4 border-red-500">
+                <p className="text-sm mb-4">
+                  Layer 2는 가스비 문제를 해결했지만, <strong className="text-red-600">완벽하지 않습니다</strong>.
+                  특히 <strong>"중앙화"</strong> 문제는 Layer 2의 가장 큰 약점이자, 이더리움 L1을 선호하는 이유입니다.
+                </p>
+              </div>
+
+              <div className="space-y-6 my-8">
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-orange-500">
+                  <h3 className="text-xl font-bold mb-4 text-orange-700 dark:text-orange-300">
+                    문제 1: Sequencer 중앙화 (트랜잭션 순서 결정권)
+                  </h3>
+                  <p className="text-sm mb-3">
+                    대부분의 Layer 2는 <strong>"Sequencer"</strong>라는 단일 노드가 모든 트랜잭션 순서를 결정합니다.
+                    이는 이더리움 L1의 탈중앙화된 검증자 네트워크와 완전히 다릅니다.
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-4 my-4">
+                    <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded">
+                      <h4 className="font-semibold text-sm mb-2 text-green-600">✅ 이더리움 L1</h4>
+                      <ul className="text-xs space-y-1 ml-4">
+                        <li>• <strong>100만+ 검증자</strong>가 분산 운영</li>
+                        <li>• 트랜잭션 순서 조작 불가능</li>
+                        <li>• MEV 방지 메커니즘</li>
+                        <li>• 검열 저항성 최고</li>
+                      </ul>
+                    </div>
+                    <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded">
+                      <h4 className="font-semibold text-sm mb-2 text-red-600">❌ Layer 2 (Arbitrum, Optimism, Base)</h4>
+                      <ul className="text-xs space-y-1 ml-4">
+                        <li>• <strong>단일 Sequencer</strong> 운영</li>
+                        <li>• Arbitrum: Offchain Labs 운영</li>
+                        <li>• Optimism: OP Labs 운영</li>
+                        <li>• Base: <strong className="text-red-600">Coinbase 직접 운영</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded border-l-4 border-yellow-500">
+                    <h4 className="font-semibold text-sm mb-2">🚨 실제 리스크</h4>
+                    <ul className="text-xs space-y-2">
+                      <li>
+                        <strong>시나리오 1: Sequencer 다운타임</strong><br/>
+                        Sequencer가 멈추면 모든 거래가 중단됩니다. 2023년 Arbitrum은 2시간 다운타임 경험.
+                      </li>
+                      <li>
+                        <strong>시나리오 2: 트랜잭션 검열</strong><br/>
+                        Sequencer는 특정 트랜잭션을 거부하거나 지연시킬 수 있습니다. (이론적으로는 가능)
+                      </li>
+                      <li>
+                        <strong>시나리오 3: MEV 추출</strong><br/>
+                        Sequencer는 트랜잭션 순서를 조작하여 차익거래(MEV) 가능.
+                      </li>
+                      <li>
+                        <strong>시나리오 4: 정부 압박</strong><br/>
+                        정부가 Sequencer 운영사(예: Coinbase)에 특정 주소 차단 요구 가능.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-purple-500">
+                  <h3 className="text-xl font-bold mb-4 text-purple-700 dark:text-purple-300">
+                    문제 2: 탈출 시간 지연 (Optimistic Rollup)
+                  </h3>
+                  <p className="text-sm mb-3">
+                    Arbitrum과 Optimism은 <strong>Optimistic Rollup</strong> 방식으로,
+                    L2에서 L1으로 자금을 인출하려면 <strong className="text-red-600">7일 대기</strong>해야 합니다.
+                  </p>
+
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded my-4">
+                    <h4 className="font-semibold text-sm mb-2">⏰ 인출 프로세스</h4>
+                    <div className="space-y-2 text-xs">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">1</div>
+                        <div>
+                          <p className="font-semibold">L2에서 인출 요청 (Withdraw 트랜잭션)</p>
+                          <p className="text-gray-600 dark:text-gray-400">즉시 실행</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">2</div>
+                        <div>
+                          <p className="font-semibold">Fraud Proof 챌린지 기간</p>
+                          <p className="text-red-600 font-bold">⏱️ 7일 대기 (168시간)</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">3</div>
+                        <div>
+                          <p className="font-semibold">L1에서 최종 인출 실행 (Finalize)</p>
+                          <p className="text-gray-600 dark:text-gray-400">가스비 추가 발생 ($10~$20)</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded border-l-4 border-red-500">
+                    <p className="text-xs">
+                      <strong>💸 실전 문제:</strong> 급하게 현금이 필요한데 7일을 기다려야 한다면?
+                      → <strong>제3자 브리지</strong>(Hop Protocol, Across 등)를 사용하면 즉시 인출 가능하지만,
+                      0.1~0.3% 수수료를 추가로 지불해야 하고, 브리지 해킹 리스크도 있습니다.
+                    </p>
+                  </div>
+
+                  <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded mt-4">
+                    <p className="text-xs">
+                      <strong>✅ zkRollup은 다릅니다:</strong> zkSync, StarkNet 같은 zkRollup은 암호학적 증명으로
+                      L1 인출이 <strong>즉시~수 시간 내</strong> 가능합니다. 하지만 zkRollup도 Sequencer 중앙화 문제는 동일합니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-blue-500">
+                  <h3 className="text-xl font-bold mb-4 text-blue-700 dark:text-blue-300">
+                    문제 3: 스마트 컨트랙트 리스크 & 버그
+                  </h3>
+                  <p className="text-sm mb-3">
+                    Layer 2는 복잡한 스마트 컨트랙트로 구현되므로, <strong>버그나 해킹 리스크</strong>가 존재합니다.
+                    이더리움 L1은 10년+ 검증됐지만, L2는 상대적으로 신생입니다.
+                  </p>
+
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+                    <h4 className="font-semibold text-sm mb-2">📅 Layer 2 출시일</h4>
+                    <ul className="text-xs space-y-1 ml-4">
+                      <li>• Arbitrum: 2021년 8월 (약 5년)</li>
+                      <li>• Optimism: 2021년 12월 (약 4년)</li>
+                      <li>• Base: 2023년 8월 (약 2.5년) ← 가장 신생</li>
+                      <li>• zkSync: 2023년 3월 (약 3년)</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded border-l-4 border-yellow-500 mt-4">
+                    <p className="text-xs">
+                      <strong>⚠️ 비교:</strong> 이더리움 L1은 2015년 출시 (11년+ 검증), 비트코인은 2009년 (17년+ 검증).
+                      시간이 지날수록 신뢰도가 높아지며, Layer 2는 아직 "실험 단계"로 볼 수 있습니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-gray-50 to-purple-50 dark:from-gray-800 dark:to-purple-900/20 p-8 rounded-xl my-8 border-2 border-purple-500">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                  ⚖️ 탈중앙화 vs 실용성: 타협점 찾기
+                </h3>
+                <p className="text-sm mb-6">
+                  Layer 2의 중앙화는 <strong>"의도적인 트레이드오프"</strong>입니다.
+                  완벽한 탈중앙화를 포기하는 대신, 저렴한 수수료와 빠른 속도를 얻었습니다.
+                </p>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse text-xs">
+                    <thead>
+                      <tr className="bg-gray-100 dark:bg-gray-800">
+                        <th className="border border-gray-300 dark:border-gray-700 p-3 text-left">항목</th>
+                        <th className="border border-gray-300 dark:border-gray-700 p-3 text-center">이더리움 L1</th>
+                        <th className="border border-gray-300 dark:border-gray-700 p-3 text-center">Arbitrum/Optimism</th>
+                        <th className="border border-gray-300 dark:border-gray-700 p-3 text-center">Base (Coinbase)</th>
+                        <th className="border border-gray-300 dark:border-gray-700 p-3 text-center">Tron</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">탈중앙화</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">⭐⭐⭐⭐⭐</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center">⭐⭐⭐</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-yellow-50 dark:bg-yellow-900/30">⭐⭐</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-red-50 dark:bg-red-900/30">⭐</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">가스비</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-red-50 dark:bg-red-900/30">$8~$20</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">$0.10~$0.50</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">$0.05~$0.20</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">$0.50~$2</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">보안 성숙도</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">11년 검증</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center">4~5년</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-yellow-50 dark:bg-yellow-900/30">2.5년</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center">8년</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">Sequencer</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">100만+ 검증자</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-yellow-50 dark:bg-yellow-900/30">단일 (계획: 탈중앙화)</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-red-50 dark:bg-red-900/30">Coinbase 단독</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-red-50 dark:bg-red-900/30">27개 노드</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 font-semibold">인출 시간</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">즉시</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-red-50 dark:bg-red-900/30">7일 (L1로)</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-red-50 dark:bg-red-900/30">7일 (L1로)</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center bg-green-50 dark:bg-green-900/30">즉시</td>
+                      </tr>
+                      <tr className="font-bold bg-gray-50 dark:bg-gray-700">
+                        <td className="border border-gray-300 dark:border-gray-700 p-3">추천 용도</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center text-xs">대규모 거래, 장기 보관</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center text-xs">일반 결제, DeFi</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center text-xs">CEX 연동, 소액 결제</td>
+                        <td className="border border-gray-300 dark:border-gray-700 p-3 text-center text-xs">제3세계 송금 (단기)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg my-8 border-l-4 border-yellow-500">
+                <h4 className="font-bold mb-3 text-gray-900 dark:text-white">🎯 2026년 현실적인 결론</h4>
+                <div className="space-y-3 text-sm">
+                  <p>
+                    <strong>1. Layer 2는 완벽하지 않습니다:</strong> 중앙화, Sequencer 리스크, 7일 인출 대기 등 명확한 약점이 있습니다.
+                    하지만 <strong>현실적으로 소액 결제를 위한 유일한 해결책</strong>입니다.
+                  </p>
+                  <p>
+                    <strong>2. 금액에 따라 선택하세요:</strong>
+                    <br/>• $10K 이상: 이더리움 L1 (보안 최우선)
+                    <br/>• $100~$10K: Arbitrum/Optimism (균형)
+                    <br/>• $100 미만: Base/Polygon (실용성)
+                  </p>
+                  <p>
+                    <strong>3. 트론은 과도기적 해결책:</strong> 현재 많이 사용되지만, 27개 노드의 극단적 중앙화는 장기적으로 지속 불가능합니다.
+                    Layer 2의 "Sequencer 1개"도 문제지만, 최소한 이더리움 L1 보안을 상속받습니다.
+                  </p>
+                  <p>
+                    <strong>4. 미래는 탈중앙화된 Sequencer:</strong> Arbitrum과 Optimism은 2026~2027년 Sequencer 탈중앙화 계획 중입니다.
+                    이것이 완성되면 Layer 2는 진정한 대안이 될 것입니다.
+                  </p>
+                  <p>
+                    <strong>5. "완벽한 솔루션"은 없습니다:</strong> 탈중앙화, 저비용, 보안성을 모두 달성하는 것은 불가능합니다 (블록체인 트릴레마).
+                    용도에 맞게 타협점을 선택하세요.
+                  </p>
+                </div>
+              </div>
+
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">3가지 핵심 차이점: 단계가 줄어드는 이유</h2>
 
               <div className="grid md:grid-cols-3 gap-6 my-8">
