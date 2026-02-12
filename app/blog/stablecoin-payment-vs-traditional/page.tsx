@@ -96,8 +96,9 @@ export default function StablecoinPaymentComparisonPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Settlement (정산)</h4>
-                    <p>실제로 돈이 이동하는 단계. 승인된 거래들을 모아서 일괄 처리하며,
-                    <strong className="text-red-600"> 보통 2~3 영업일 후</strong> 가맹점 계좌에 입금됩니다.</p>
+                    <p>실제로 돈이 이동하는 단계. 승인된 거래들을 모아서 배치로 일괄 처리하며,
+                    <strong className="text-red-600"> 보통 D+3 영업일 전후</strong> 가맹점 계좌에 입금됩니다.
+                    (PG 경유 시 D+3~5일 또는 주 단위로 늘어날 수 있음)</p>
                   </div>
                 </div>
               </div>
@@ -112,25 +113,26 @@ export default function StablecoinPaymentComparisonPage() {
                     <div className="flex-1">
                       <h5 className="font-semibold">고객이 카드 결제 요청</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        POS 단말기나 온라인 체크아웃에서 카드 정보 입력
+                        POS 단말기(오프라인)나 온라인 체크아웃에서 카드 정보 입력
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 text-sm">2</div>
                     <div className="flex-1">
-                      <h5 className="font-semibold">가맹점 → PG사 (결제처리사)</h5>
+                      <h5 className="font-semibold">가맹점 → VAN/PG사</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        결제 요청을 PG사(KG이니시스, 토스페이먼츠 등)로 전달
+                        오프라인: VAN사(NICE정보통신, KSNET 등) 경유<br/>
+                        온라인: PG사(KG이니시스, 토스페이먼츠 등)로 전달
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 text-sm">3</div>
                     <div className="flex-1">
-                      <h5 className="font-semibold">PG사 → 매입사 (Acquirer)</h5>
+                      <h5 className="font-semibold">VAN/PG사 → 매입사 (Acquirer)</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        PG사가 매입사(신한카드, KB국민카드 등)로 승인 요청
+                        매입사(가맹점과 계약된 신한카드, KB국민카드 등)로 승인 요청
                       </p>
                     </div>
                   </div>
@@ -157,7 +159,7 @@ export default function StablecoinPaymentComparisonPage() {
                     <div className="flex-1">
                       <h5 className="font-semibold text-green-600 dark:text-green-400">승인 응답 (역방향)</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        발급사 → 카드 네트워크 → 매입사 → PG사 → 가맹점 (1~3초 소요)
+                        발급사 → 카드 네트워크 → 매입사 → VAN/PG사 → 가맹점 (1~3초 소요)
                       </p>
                     </div>
                   </div>
@@ -172,32 +174,34 @@ export default function StablecoinPaymentComparisonPage() {
               </div>
 
               <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-8 rounded-xl my-8">
-                <h4 className="font-bold mb-6 text-gray-900 dark:text-white">💸 Phase 2: 정산 & 입금 (Settlement & Funding) — 2~3 영업일</h4>
+                <h4 className="font-bold mb-6 text-gray-900 dark:text-white">💸 Phase 2: 정산 & 입금 (Settlement & Funding) — D+3 영업일 전후</h4>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 text-sm">6</div>
                     <div className="flex-1">
-                      <h5 className="font-semibold">가맹점이 정산 요청 (Batch Close)</h5>
+                      <h5 className="font-semibold">매입 (전표 전송)</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        하루 거래 종료 후, 승인된 거래들을 묶어서 PG사에 정산 요청
+                        승인된 거래를 거래 다음날 가맹점/대행사가 모아서 매입사로 전표 전송 (배치 처리)
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 text-sm">7</div>
                     <div className="flex-1">
-                      <h5 className="font-semibold">카드 네트워크 Clearing</h5>
+                      <h5 className="font-semibold">Clearing (청산) & 정산 확정</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        카드 네트워크가 발급사로부터 자금을 끌어와(Pull) 매입사로 전달
+                        카드 네트워크가 발급사-매입사 간 자금을 청산하고 정산 확정 (D+1~2일)
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 text-sm">8</div>
                     <div className="flex-1">
-                      <h5 className="font-semibold">매입사 → 가맹점 계좌 입금</h5>
+                      <h5 className="font-semibold">가맹점 계좌 입금</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        수수료를 제외한 금액이 가맹점 계좌에 입금 (T+2~3일)
+                        수수료를 제외한 금액이 가맹점 계좌에 입금<br/>
+                        <span className="text-xs">• 일반적으로 결제일 기준 D+3 영업일 전후<br/>
+                        • PG사 경유 시 D+3~5일 또는 주 단위 정산으로 늘어날 수 있음</span>
                       </p>
                     </div>
                   </div>
@@ -205,9 +209,9 @@ export default function StablecoinPaymentComparisonPage() {
 
                 <div className="mt-8 p-4 bg-red-50 dark:bg-red-900/30 rounded-lg border-l-4 border-red-500">
                   <p className="text-sm">
-                    <strong>⏱️ 정산 시간:</strong> 2~3 영업일 (주말 제외)<br/>
+                    <strong>⏱️ 정산 시간:</strong> D+3 영업일 전후 (PG 경유 시 D+3~5일 또는 더 길어질 수 있음)<br/>
                     <strong>💰 수수료:</strong> 2~4% (업종별 상이)<br/>
-                    <strong>📌 문제점:</strong> 승인과 정산이 분리되어 있어 현금 흐름 관리가 어렵고, 차지백(거래 취소) 리스크 존재
+                    <strong>📌 특징:</strong> 실시간 승인과 달리 배치 성격이 강하며, 승인과 정산이 분리되어 현금 흐름 관리가 어렵고 차지백 리스크 존재
                   </p>
                 </div>
               </div>
@@ -217,8 +221,8 @@ export default function StablecoinPaymentComparisonPage() {
               <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-8 overflow-x-auto">
                 <pre className="text-xs">
 {`┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐
-│   고객   │────▶│  가맹점  │────▶│   PG사   │────▶│  매입사  │────▶│카드네트워크│
-│ (소비자) │     │ (판매자) │     │ (토스 등)│     │(신한카드)│     │(VISA 등) │
+│   고객   │────▶│  가맹점  │────▶│ VAN/PG사 │────▶│  매입사  │────▶│카드네트워크│
+│ (소비자) │     │ (판매자) │     │(NICE/토스)│     │(신한카드)│     │(VISA 등) │
 └──────────┘     └──────────┘     └──────────┘     └──────────┘     └──────────┘
                                                                             │
                                                                             ▼
@@ -227,12 +231,212 @@ export default function StablecoinPaymentComparisonPage() {
                                                                       │(카드회사)│
                                                                       └──────────┘
 
-[승인 흐름]
-고객 → 가맹점 → PG → 매입사 → 카드네트워크 → 발급사 (실시간)
+[승인 흐름 - 실시간]
+고객(카드) → 가맹점(POS) → VAN/PG → 매입사 → 카드네트워크 → 발급사
+→ 승인 응답 역방향 (1~3초)
 
-[정산 흐름]
-발급사 → 카드네트워크 → 매입사 → PG → 가맹점 (2~3일 후)`}
+[정산 흐름 - 배치 처리]
+1. 매입: 승인된 거래를 모아 전표 전송 (거래 다음날)
+2. Clearing: 발급사-매입사 간 자금 청산 (카드 네트워크)
+3. 입금: 가맹점 계좌로 정산금 입금 (D+3 영업일 전후)
+   ※ PG 경유 시 D+3~5일 또는 주 단위 정산으로 늘어날 수 있음`}
                 </pre>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">💡 자주 묻는 질문: 발급사가 누구든 매입사가 처리 가능한가?</h3>
+
+              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-8 rounded-xl my-8 border-2 border-indigo-500">
+                <div className="mb-6">
+                  <h4 className="text-xl font-bold mb-3 text-indigo-700 dark:text-indigo-300">결론부터: 원칙적으로 대부분 "가능"합니다</h4>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                    가맹점이 A매입사(예: 신한카드)와 계약했더라도, 고객 카드가 어느 발급사(B카드사, C은행 등)에서 발급됐든
+                    해당 결제망(국내전용/국제브랜드)에서 유효하게 라우팅될 수 있으면 A매입사가 처리할 수 있습니다.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold text-lg mb-3 text-blue-700 dark:text-blue-300">발급사 (Issuer)의 역할</h5>
+                    <div className="space-y-2 text-sm">
+                      <p><strong>담당 업무:</strong></p>
+                      <ul className="ml-4 space-y-1 text-xs">
+                        <li>• 고객(카드회원)에게 카드 발급</li>
+                        <li>• 고객의 한도, 잔액 관리</li>
+                        <li>• 승인 요청 시 최종 결정</li>
+                        <li>• 고객에게 청구(결제일에 출금)</li>
+                      </ul>
+                      <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded">
+                        <p className="text-xs font-semibold">예시:</p>
+                        <p className="text-xs">내가 신한카드를 가지고 있다면<br/>→ <strong>신한카드 = 발급사</strong></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold text-lg mb-3 text-purple-700 dark:text-purple-300">매입사 (Acquirer)의 역할</h5>
+                    <div className="space-y-2 text-sm">
+                      <p><strong>담당 업무:</strong></p>
+                      <ul className="ml-4 space-y-1 text-xs">
+                        <li>• 가맹점과 계약 체결</li>
+                        <li>• 가맹점의 매출전표를 "매입"</li>
+                        <li>• 승인 요청을 발급사로 전달</li>
+                        <li>• 가맹점에 정산금 입금</li>
+                      </ul>
+                      <div className="mt-3 p-3 bg-purple-50 dark:bg-purple-900/30 rounded">
+                        <p className="text-xs font-semibold">예시:</p>
+                        <p className="text-xs">카페가 KB국민카드와 계약했다면<br/>→ <strong>KB국민카드 = 매입사</strong></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-5 bg-green-50 dark:bg-green-900/30 rounded-lg border-l-4 border-green-500">
+                  <h5 className="font-bold mb-2 text-green-700 dark:text-green-300">핵심 포인트</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                    발급사와 매입사는 <strong>역할이 완전히 다릅니다.</strong>
+                  </p>
+                  <ul className="mt-2 ml-4 space-y-1 text-sm">
+                    <li>• 발급사는 "고객 쪽" 관리 (돈을 내는 사람)</li>
+                    <li>• 매입사는 "가맹점 쪽" 관리 (돈을 받는 사람)</li>
+                    <li>• 따라서 발급사가 누구든, 매입사는 가맹점 창구로서 거래를 처리할 수 있습니다</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="space-y-6 my-8">
+                <h4 className="text-xl font-bold text-gray-900 dark:text-white">실제 거래 흐름 예시로 이해하기</h4>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-blue-500">
+                  <h5 className="font-bold mb-3 text-blue-700 dark:text-blue-300">시나리오: 스타벅스에서 신한카드로 결제</h5>
+                  <div className="space-y-3 text-sm">
+                    <div className="p-3 bg-gray-50 dark:bg-gray-900 rounded">
+                      <p className="font-semibold mb-2">등장인물</p>
+                      <ul className="ml-4 space-y-1 text-xs">
+                        <li>• <strong>고객:</strong> 신한카드 소지 (발급사 = 신한카드)</li>
+                        <li>• <strong>가맹점:</strong> 스타벅스 (매입사 = KB국민카드와 계약)</li>
+                        <li>• <strong>카드 네트워크:</strong> VISA/Mastercard 등</li>
+                      </ul>
+                    </div>
+
+                    <div className="p-3 bg-blue-50 dark:bg-blue-900/30 rounded">
+                      <p className="font-semibold mb-2 text-blue-700 dark:text-blue-300">승인 흐름</p>
+                      <div className="text-xs space-y-1">
+                        <p>1. 고객이 신한카드로 결제 요청</p>
+                        <p>2. 스타벅스 POS → VAN → <strong>KB국민카드(매입사)</strong></p>
+                        <p>3. KB국민카드 → 카드 네트워크 → <strong>신한카드(발급사)</strong></p>
+                        <p>4. 신한카드가 승인/거절 결정 (고객 한도 확인)</p>
+                        <p>5. 승인 응답이 역방향으로 돌아옴</p>
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-purple-50 dark:bg-purple-900/30 rounded">
+                      <p className="font-semibold mb-2 text-purple-700 dark:text-purple-300">정산 흐름</p>
+                      <div className="text-xs space-y-1">
+                        <p>1. <strong>신한카드(발급사)</strong>: D+결제일에 고객 계좌에서 출금</p>
+                        <p>2. 카드 네트워크가 신한카드↔KB국민카드 간 청산(Clearing)</p>
+                        <p>3. <strong>KB국민카드(매입사)</strong>: D+3일에 스타벅스 계좌로 입금</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 p-3 bg-green-50 dark:bg-green-900/30 rounded border-l-4 border-green-500">
+                      <p className="text-xs">
+                        <strong>✅ 결론:</strong> 스타벅스가 KB국민카드(매입사)와 계약했지만,
+                        고객이 신한카드(발급사)를 쓰든, 우리카드를 쓰든, 하나카드를 쓰든 상관없이 모두 처리 가능합니다.
+                        <strong>발급사와 매입사는 서로 다른 역할</strong>이기 때문입니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-orange-500">
+                  <h5 className="font-bold mb-3 text-orange-700 dark:text-orange-300">예외 상황: 언제 처리가 안 될까?</h5>
+                  <div className="space-y-3 text-sm">
+                    <div>
+                      <p className="font-semibold mb-1">1. 결제망(브랜드) 호환 문제</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
+                        가맹점이 특정 결제망만 지원하도록 계약한 경우
+                      </p>
+                      <div className="ml-4 text-xs">
+                        <p>• 가맹점이 "국내전용 카드만" 계약 → VISA/Mastercard는 결제 불가</p>
+                        <p>• 가맹점이 "VISA만" 계약 → Amex, 은련카드는 결제 불가</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="font-semibold mb-1">2. 가맹점 업종/리스크 정책</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
+                        매입사가 특정 업종이나 고위험 거래를 제한할 수 있음
+                      </p>
+                      <div className="ml-4 text-xs">
+                        <p>• 유흥업소, 성인용품 등 일부 업종은 매입사가 취급 거부 가능</p>
+                        <p>• 고액 거래는 추가 인증이나 승인 제한이 걸릴 수 있음</p>
+                        <p>• 차지백 위험이 높은 업종은 정산 주기가 길어질 수 있음</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="font-semibold mb-1">3. 기술적 라우팅 문제</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
+                        네트워크 연결이나 시스템 설정 이슈
+                      </p>
+                      <div className="ml-4 text-xs">
+                        <p>• VAN/PG사의 네트워크 라우팅 설정 오류</p>
+                        <p>• 카드사 간 제휴 관계 문제 (드물지만 발생 가능)</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg border-l-4 border-yellow-500">
+                  <h5 className="font-bold mb-3 text-yellow-700 dark:text-yellow-300">🇰🇷 한국에서 더 헷갈리는 이유</h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                    한국은 한 카드사가 <strong>발급사와 매입사를 동시에</strong> 운영하는 경우가 많습니다.
+                  </p>
+                  <div className="space-y-3 text-xs">
+                    <div className="p-3 bg-white dark:bg-gray-800 rounded">
+                      <p className="font-semibold mb-1">예: 신한카드</p>
+                      <p>• <strong>발급사로서:</strong> 고객에게 신한카드 발급, 고객 계좌 관리</p>
+                      <p>• <strong>매입사로서:</strong> 가맹점과 계약, 가맹점 매출전표 매입 & 정산</p>
+                      <p className="mt-2 text-gray-600 dark:text-gray-400">
+                        → 같은 회사가 양쪽 역할을 다 하지만, <strong>거래마다 역할은 구분</strong>됩니다
+                      </p>
+                    </div>
+
+                    <div className="p-3 bg-white dark:bg-gray-800 rounded">
+                      <p className="font-semibold mb-1">실제 거래 예시</p>
+                      <p>• 신한카드 소지자가 신한카드 가맹점에서 결제</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        → 발급사도 신한카드, 매입사도 신한카드 (같은 회사지만 역할은 다름)
+                      </p>
+                      <p className="mt-2">• 신한카드 소지자가 KB 가맹점에서 결제</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        → 발급사는 신한카드, 매입사는 KB국민카드 (역할 분리가 명확)
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl my-8">
+                <h4 className="font-bold mb-3 text-gray-900 dark:text-white">📌 핵심 요약</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <p><strong>발급사가 누구든 매입사는 처리 가능:</strong> 발급사는 고객 관리, 매입사는 가맹점 관리로 역할이 다르므로 서로 독립적</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <p><strong>예외는 있음:</strong> 결제망 호환, 업종 제한, 리스크 정책 등으로 일부 제약 가능</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <p><strong>한국의 특수성:</strong> 한 카드사가 발급사+매입사 역할을 겸하지만, 거래마다 역할은 명확히 구분됨</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">✓</span>
+                    <p><strong>실무 적용:</strong> 가맹점은 매입사 1곳과 계약하면 대부분의 발급사 카드를 받을 수 있음</p>
+                  </div>
+                </div>
               </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">스테이블코인 결제: 온체인 전송 = 결제 + 정산</h2>
@@ -387,7 +591,7 @@ export default function StablecoinPaymentComparisonPage() {
                   <div className="space-y-2 text-sm">
                     <div>
                       <p className="font-semibold">카드:</p>
-                      <p className="text-xs">승인(1~3초) + 정산(2~3일) 분리</p>
+                      <p className="text-xs">승인(1~3초) + 정산(D+3일) 분리</p>
                     </div>
                     <div>
                       <p className="font-semibold text-green-600">스테이블코인:</p>
@@ -509,7 +713,7 @@ export default function StablecoinPaymentComparisonPage() {
                     </tr>
                     <tr>
                       <td className="border border-gray-300 dark:border-gray-700 p-4 font-semibold">정산 시간</td>
-                      <td className="border border-gray-300 dark:border-gray-700 p-4 text-red-600 font-bold">2~3 영업일</td>
+                      <td className="border border-gray-300 dark:border-gray-700 p-4 text-red-600 font-bold">D+3 영업일 전후<br/><span className="text-xs">(PG 경유 시 D+3~5일 또는 더 길어질 수 있음)</span></td>
                       <td className="border border-gray-300 dark:border-gray-700 p-4 text-green-600 font-bold">즉시 (승인=정산)</td>
                     </tr>
                     <tr>
@@ -810,7 +1014,7 @@ export default function StablecoinPaymentComparisonPage() {
                     <h4 className="font-bold mb-2 text-xl">✅ 스테이블코인 결제의 강점</h4>
                     <ul className="text-sm space-y-1">
                       <li>• 8단계 → 4단계로 단계 압축</li>
-                      <li>• 승인과 정산이 하나로 합쳐져 T+2~3일 → T+0 실현</li>
+                      <li>• 승인과 정산이 하나로 합쳐져 D+3 영업일 → 즉시 완료 (T+0) 실현</li>
                       <li>• 참여자 감소로 수수료 절감 (2~4% → 1% 미만)</li>
                       <li>• 국제 결제에서 환전 수수료 제거</li>
                       <li>• 차지백 리스크 제거 (비가역적 거래)</li>
@@ -851,17 +1055,19 @@ export default function StablecoinPaymentComparisonPage() {
                     </p>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
                       <strong>Settlement (정산):</strong> 실제로 돈이 이동하는 단계입니다.
-                      승인된 거래들을 모아서 일괄 처리하며, 보통 2~3 영업일 후 가맹점 계좌에 입금됩니다.
+                      승인된 거래들을 모아서 배치로 일괄 처리하며, 보통 결제일 기준 D+3 영업일 전후에 가맹점 계좌에 입금됩니다.
+                      (PG 경유 시 D+3~5일 또는 주 단위 정산으로 늘어날 수 있음)
                       전통 카드 결제의 가장 큰 특징은 이 두 단계가 분리되어 있다는 점입니다.
                     </p>
                   </div>
 
                   <div className="border-l-4 border-green-500 pl-4">
-                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">PG사 (Payment Gateway, 결제대행사)</h4>
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">VAN/PG사 (Value Added Network / Payment Gateway)</h4>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
                       가맹점과 카드사 사이에서 결제를 중개하는 회사입니다.
-                      토스페이먼츠, KG이니시스, NHN KCP 등이 대표적이며, 가맹점은 PG사와 계약하여 다양한 결제 수단을 통합 지원받습니다.
-                      온라인 쇼핑몰에서 "결제 창"을 띄워주는 역할을 합니다.
+                      <strong>VAN사</strong>(NICE정보통신, KSNET 등)는 주로 오프라인 POS 단말기를 통한 결제를 처리하고,
+                      <strong>PG사</strong>(토스페이먼츠, KG이니시스, NHN KCP 등)는 온라인 결제 창을 제공합니다.
+                      가맹점은 VAN/PG사와 계약하여 다양한 결제 수단을 통합 지원받으며, 정산 주기도 이들의 정책에 따라 달라질 수 있습니다.
                     </p>
                   </div>
 
@@ -882,17 +1088,17 @@ export default function StablecoinPaymentComparisonPage() {
                     <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Clearing (청산)</h4>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
                       카드 네트워크(VISA, Mastercard 등)가 발급사와 매입사 간 자금을 중개하여 정산하는 과정입니다.
-                      하루치 거래를 모아서 일괄 처리하며, 각 은행 간 입출금을 상계(Netting)하여 실제 이동할 금액만 전송합니다.
-                      이 과정이 2~3일 소요되는 주요 원인입니다.
+                      승인된 거래를 거래 다음날 모아서(매입/전표 전송) 배치로 일괄 처리하며, 각 은행 간 입출금을 상계(Netting)하여 실제 이동할 금액만 전송합니다.
+                      이 배치 처리 과정이 D+3 영업일 전후 소요되는 주요 원인입니다.
                     </p>
                   </div>
 
                   <div className="border-l-4 border-red-500 pl-4">
-                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">T+2, T+3 (정산 주기)</h4>
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">D+N (정산 주기)</h4>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
-                      거래일(T, Trade date)로부터 정산이 완료되기까지 걸리는 영업일 수입니다.
-                      T+2는 거래 후 2영업일 뒤 정산, T+3은 3영업일 뒤 정산을 의미합니다.
-                      월요일 거래 시 T+2라면 수요일에 입금됩니다 (주말은 제외).
+                      결제일(D, Date)로부터 정산이 완료되기까지 걸리는 영업일 수입니다.
+                      D+3은 결제 후 3영업일 뒤 입금을 의미하며, 월요일 결제 시 D+3이라면 목요일에 입금됩니다 (주말은 제외).
+                      PG사를 경유하면 PG의 정산 정책에 따라 D+3~5일 또는 주 단위 정산으로 더 늘어날 수 있습니다.
                     </p>
                   </div>
 

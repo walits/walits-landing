@@ -833,11 +833,23 @@ Binance: 정상 USDT로 인식 → BTC 10B 지급
                 </p>
                 <div className="space-y-6">
                   <div className="border-l-4 border-blue-500 pl-4">
-                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">역레포 (Reverse Repo)</h4>
+                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">역레포 (Reverse Repo, RRP)</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                      미국의 역레포(RRP)는 연방준비제도(Fed)가 시장 참가자(금융기관, MMF 등)로부터 현금을 하룻밤(overnight) 빌리고,
+                      대신 미국 국채 등을 담보로 제공하는 거래입니다.
+                    </p>
+                    <div className="bg-blue-50 dark:bg-blue-900/30 p-3 rounded text-sm mb-3">
+                      <p className="font-semibold mb-2 text-blue-700 dark:text-blue-300">거래 흐름:</p>
+                      <ul className="space-y-1 text-xs ml-4">
+                        <li>1. 금융기관/MMF가 여유 현금을 연준에 맡김 (=연준에 대출)</li>
+                        <li>2. 연준은 그 대가로 국채를 담보로 제공</li>
+                        <li>3. 다음날 연준이 현금을 이자(역레포 금리)와 함께 돌려주고, 담보를 회수</li>
+                      </ul>
+                    </div>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
-                      연방준비제도(Fed)가 금융기관에 단기로 자금을 빌려주고 국채를 담보로 받는 제도입니다.
-                      보통 하루 단위로 운영되며, 금융기관이 여유 자금을 안전하게 운용할 수 있는 방법입니다.
-                      테더 같은 기관들이 준비금을 단기 운용할 때 자주 사용합니다.
+                      <strong>금융기관 입장:</strong> 남는 현금을 연준에 맡겨 안전하게 운용하고, 다음날 이자를 받습니다.
+                      테더 같은 스테이블코인 발행사는 준비금을 MMF나 금융기관을 통해 간접적으로 역레포에 운용할 수 있습니다.
+                      <br/><strong>연준 입장:</strong> 시장 유동성을 흡수하고 단기금리 하한선을 형성하는 통화정책 수단으로 활용합니다.
                     </p>
                   </div>
 
