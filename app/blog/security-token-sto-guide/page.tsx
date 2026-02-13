@@ -1312,16 +1312,216 @@ contract DividendDistributor {
                   </div>
                 </div>
 
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-8 rounded-xl my-8 border-2 border-blue-600">
+                  <h5 className="font-bold mb-4 text-2xl text-gray-900 dark:text-white">🎉 2026년 법제화 최신 동향 (Breaking News)</h5>
+
+                  <div className="space-y-6">
+                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-green-500">
+                      <h6 className="font-bold text-lg mb-3 text-green-700 dark:text-green-300">✅ 토큰증권(STO) 법제화 확정 (2026년 1월)</h6>
+                      <div className="space-y-3 text-sm">
+                        <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded">
+                          <p className="font-semibold mb-2">🏛️ 국회 본회의 통과</p>
+                          <ul className="ml-4 space-y-1 text-xs">
+                            <li>• <strong>날짜:</strong> 2026년 1월 15일</li>
+                            <li>• <strong>법안:</strong> 전자증권법 개정안, 자본시장법 개정안</li>
+                            <li>• <strong>시행일:</strong> 공포 후 1년 (2027년 1월 시행 예정)</li>
+                          </ul>
+                        </div>
+
+                        <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded">
+                          <p className="font-semibold mb-2">📋 주요 내용</p>
+                          <ul className="ml-4 space-y-1 text-xs">
+                            <li>• <strong>분산원장 개념 법률 정의:</strong> 블록체인을 법적으로 인정</li>
+                            <li>• <strong>전자등록계좌부 활용:</strong> 분산원장을 증권 계좌부(전자등록계좌부)로 사용 가능</li>
+                            <li>• <strong>발행 절차 명시:</strong> 발행인은 전자등록기관에 사전 통지 후 전자등록 신청</li>
+                            <li>• <strong>투자자 보호:</strong> 자본시장법상 증권 규제 전면 적용</li>
+                            <li>• <strong>거래소 요건:</strong> 토큰증권 거래 플랫폼 인가 기준 마련</li>
+                          </ul>
+                        </div>
+
+                        <div className="bg-purple-50 dark:bg-purple-900/30 p-4 rounded">
+                          <p className="font-semibold mb-2">📈 시장 전망</p>
+                          <ul className="ml-4 space-y-1 text-xs">
+                            <li>• <strong>2030년 시장 규모:</strong> 367조원 (GDP의 14.5%)</li>
+                            <li>• <strong>조각투자 확대:</strong> 부동산·미술품·저작권 등 실물자산 토큰화 본격화</li>
+                            <li>• <strong>기관 투자자 참여:</strong> 증권사·은행 등 대형 금융사 진입 가속화</li>
+                          </ul>
+                        </div>
+
+                        <div className="mt-3 p-3 bg-green-100 dark:bg-green-800 rounded text-xs">
+                          <strong>💡 의미:</strong> 한국이 세계 최초로 <strong>토큰증권을 제도권 자본시장에 완전히 통합</strong>하는 법적 프레임워크를 완성했습니다.
+                          미국·유럽도 아직 단편적 규제에 머물러 있는 반면, 한국은 발행·유통·결제·투자자 보호까지 통합 규율하는 포괄적 법체계를 구축했습니다.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-orange-500">
+                      <h6 className="font-bold text-lg mb-3 text-orange-700 dark:text-orange-300">⏳ 원화 스테이블코인 법제화 진행 중</h6>
+                      <div className="space-y-3 text-sm">
+                        <div className="bg-orange-50 dark:bg-orange-900/30 p-4 rounded">
+                          <p className="font-semibold mb-2">📜 디지털자산 기본법 (2단계 입법)</p>
+                          <ul className="ml-4 space-y-1 text-xs">
+                            <li>• <strong>현황:</strong> 금융위원회 정부안 마련, 국회 발의 예정</li>
+                            <li>• <strong>목표:</strong> 원화 스테이블코인 제도권 편입, ICO 허용</li>
+                            <li>• <strong>상태:</strong> 아직 국회 통과 안 됨 (2026년 2월 현재 논의 중)</li>
+                          </ul>
+                        </div>
+
+                        <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded border-l-4 border-red-500">
+                          <p className="font-semibold mb-2 text-red-800 dark:text-red-300">🔥 핵심 쟁점: 발행 주체를 둘러싼 갈등</p>
+                          <div className="grid md:grid-cols-2 gap-3 mt-2">
+                            <div className="bg-white dark:bg-gray-800 p-3 rounded">
+                              <p className="font-semibold text-xs mb-2 text-blue-700 dark:text-blue-300">한국은행·국민의힘 입장</p>
+                              <ul className="text-xs space-y-1">
+                                <li>• <strong>"은행 51% 룰"</strong> 주장</li>
+                                <li>• 발행사 지분 51% 이상을 은행이 보유해야 함</li>
+                                <li>• 이유: 통화정책 파급력 관리, 금융안정, KYC·AML 체계</li>
+                              </ul>
+                            </div>
+                            <div className="bg-white dark:bg-gray-800 p-3 rounded">
+                              <p className="font-semibold text-xs mb-2 text-purple-700 dark:text-purple-300">금융위원회·민주당 입장</p>
+                              <ul className="text-xs space-y-1">
+                                <li>• <strong>비은행 참여 허용</strong> 주장</li>
+                                <li>• 은행 중심 규제는 과도한 진입 장벽</li>
+                                <li>• 이유: 핀테크 혁신, 기술기업 참여, 글로벌 경쟁력</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded">
+                          <p className="font-semibold mb-2">🤝 절충안 (금융위 제시)</p>
+                          <ul className="ml-4 space-y-1 text-xs">
+                            <li>• <strong>1단계:</strong> 은행이 지분 50%+1주를 보유한 컨소시엄에 우선 허용</li>
+                            <li>• <strong>2단계:</strong> 향후 기술기업 참여 확대 (시행령에서 조정)</li>
+                            <li>• <strong>최대 주주:</strong> 기술기업도 가능 (은행이 과반만 보유하면 됨)</li>
+                            <li>• <strong>최소 자기자본:</strong> 50억원 이상</li>
+                            <li>• <strong>준비금:</strong> 은행 예금 또는 국채로 100% 보유 의무</li>
+                          </ul>
+                        </div>
+
+                        <div className="mt-3 p-3 bg-orange-100 dark:bg-orange-800 rounded text-xs">
+                          <strong>⚠️ 현황:</strong> 원화 스테이블코인은 <strong>법제화 진행 중</strong>이나 아직 확정되지 않았습니다.
+                          발행 주체, 준비자산 구성, 감독 권한 등 핵심 쟁점에 대한 이해관계자 간 조율이 진행 중이며,
+                          법안이 국회를 통과하더라도 시행령·세부 규칙 마련까지 추가 시간이 소요될 전망입니다.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20 p-6 rounded-lg border-2 border-cyan-600">
+                      <h6 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">🔍 토큰증권 발행사 vs 원화 스테이블코인 발행사: 핵심 차이</h6>
+
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-xs border-collapse">
+                          <thead>
+                            <tr className="bg-gray-100 dark:bg-gray-700">
+                              <th className="border border-gray-300 dark:border-gray-600 p-2">구분</th>
+                              <th className="border border-gray-300 dark:border-gray-600 p-2">토큰증권 발행사</th>
+                              <th className="border border-gray-300 dark:border-gray-600 p-2">원화 스테이블코인 발행사</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold bg-gray-50 dark:bg-gray-800">발행 대상</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2"><strong>증권</strong> (부동산·채권·지분 등 실물자산)</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2"><strong>통화성 지급수단</strong> (원화 가치 연동 디지털 자산)</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold bg-gray-50 dark:bg-gray-800">적용 법률</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                • 전자증권법 (2026년 개정)<br/>
+                                • 자본시장법
+                              </td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                • 디지털자산 기본법 (예정)<br/>
+                                • 전자금융거래법 (부분 적용 가능성)
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold bg-gray-50 dark:bg-gray-800">법적 성격</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">자본시장법상 "증권"</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">지급·결제 수단 (증권 아님)</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold bg-gray-50 dark:bg-gray-800">규제 목적</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">투자자 보호, 자본시장 공정성</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">통화 안정, 금융 시스템 안정, 자금세탁 방지</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold bg-gray-50 dark:bg-gray-800">발행 요건</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                • 전자등록기관에 사전 통지·신청<br/>
+                                • 증권신고서 제출 (공모 시)<br/>
+                                • 금융투자업 인가 (증권사)
+                              </td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                • 최소 자기자본 50억원<br/>
+                                • 은행 컨소시엄 (50%+1주) 또는 단독<br/>
+                                • 준비금 100% 보유 (은행 예금·국채)
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold bg-gray-50 dark:bg-gray-800">감독 기관</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">금융위원회 (자본시장 감독)</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">금융위원회 + 한국은행 (통화정책 연계)</td>
+                            </tr>
+                            <tr>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold bg-gray-50 dark:bg-gray-800">주요 기능</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                • 자산 소유권 표시<br/>
+                                • 배당·이자 수령<br/>
+                                • 투표권 행사
+                              </td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                • 가치 저장<br/>
+                                • 지급·결제<br/>
+                                • 송금·환전
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold bg-gray-50 dark:bg-gray-800">양도 제한</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                <strong>있음</strong> (적격 투자자·KYC·화이트리스트)
+                              </td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                <strong>없음</strong> (자유로운 유통이 원칙, KYC는 발행·환전 시에만)
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold bg-gray-50 dark:bg-gray-800">법제화 현황<br/>(2026년 2월)</td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                <span className="inline-block px-2 py-1 bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100 rounded text-xs font-semibold">✅ 확정 (2027년 시행)</span>
+                              </td>
+                              <td className="border border-gray-300 dark:border-gray-600 p-2">
+                                <span className="inline-block px-2 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100 rounded text-xs font-semibold">⏳ 논의 중</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div className="mt-4 p-4 bg-cyan-50 dark:bg-cyan-900/30 rounded text-xs">
+                        <p className="font-semibold mb-2">📌 핵심 요약</p>
+                        <ul className="ml-4 space-y-1">
+                          <li>• <strong>토큰증권:</strong> "증권"이므로 자본시장법·전자증권법 적용 → 투자자 보호 중심 규제</li>
+                          <li>• <strong>원화 스테이블코인:</strong> "통화성 지급수단"이므로 별도 법체계 필요 → 금융안정·통화정책 중심 규제</li>
+                          <li>• <strong>발행 주체:</strong> 토큰증권은 일반 기업 가능 / 스테이블코인은 은행 또는 은행 컨소시엄 중심으로 제한될 가능성</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg border-l-4 border-yellow-500">
-                  <h5 className="font-bold mb-3 text-yellow-800 dark:text-yellow-300">⚠️ 법적 공백 및 과제</h5>
+                  <h5 className="font-bold mb-3 text-yellow-800 dark:text-yellow-300">⚠️ 남은 과제 (2026년 2월 기준)</h5>
                   <ul className="space-y-2 text-sm">
                     <li>
-                      <strong>1. 명시적 법률 부재:</strong> "블록체인 기반 증권" 또는 "디지털 자산 증권"에 대한 직접적인 법률 규정이 없어,
-                      기존 자본시장법을 유추 적용하는 방식으로 운영 중입니다.
+                      <strong>1. 토큰증권 시행 준비:</strong> 법은 통과했으나 2027년 1월 시행까지 1년의 준비 기간이 필요합니다.
+                      전자등록기관 지정, 거래소 인가 기준, 시행령·세부 규칙 마련 등 인프라 구축이 진행 중입니다.
                     </li>
                     <li>
-                      <strong>2. 디지털자산기본법 논의:</strong> 2024~2025년 국회에서 가상자산·디지털자산 통합 규제 법안이 논의되었으나
-                      아직 제정되지 않았습니다. (2026년 현재 계류 또는 추가 논의 중)
+                      <strong>2. 원화 스테이블코인 법제화 완료:</strong> 디지털자산 기본법 제정이 완료되지 않아 원화 스테이블코인 발행은 여전히 불가능합니다.
+                      국회 통과 시기는 불확실하며, 발행 주체·감독 체계 등 핵심 쟁점에 대한 합의가 필요합니다.
                     </li>
                     <li>
                       <strong>3. 거래소 인가 미비:</strong> 증권형 토큰을 거래할 수 있는 정식 인가 거래소가 부재하여,
@@ -1341,7 +1541,7 @@ contract DividendDistributor {
                 <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg mt-4">
                   <h5 className="font-bold mb-3 text-green-800 dark:text-green-300">✅ 사업 가능 근거 요약</h5>
                   <p className="text-sm mb-3">
-                    "법이 없는데 어떻게 사업을 하는가?"라는 질문에 대한 답:
+                    2026년 법제화 완료로 한국의 RWA·STO 시장은 명확한 법적 기반을 갖추게 되었습니다:
                   </p>
                   <ul className="space-y-2 text-sm">
                     <li>
@@ -1349,9 +1549,9 @@ contract DividendDistributor {
                       2021년 온투법 제정으로 소액 투자 중개 플랫폼이 금융위 등록 후 합법적으로 운영 가능
                     </li>
                     <li>
-                      <strong>✓ 증권형 토큰은 자본시장법 유추 적용:</strong>
-                      금융위원회가 "실질이 증권이면 자본시장법 적용" 원칙을 유지하여,
-                      토큰 형태여도 증권의 성격을 가지면 기존 증권 규제를 따르도록 해석
+                      <strong>✓ 토큰증권은 전자증권법으로 법제화 완료 (2026년 1월):</strong>
+                      전자증권법·자본시장법 개정으로 블록체인 기반 증권 발행·유통이 법적으로 명시되었으며,
+                      2027년 1월 시행 예정입니다. 더 이상 "유추 적용"이 아닌 <strong>명시적 법률 근거</strong>를 확보했습니다.
                     </li>
                     <li>
                       <strong>✓ 규제 샌드박스로 혁신 모델 시범 허용:</strong>
@@ -1360,7 +1560,7 @@ contract DividendDistributor {
                     <li>
                       <strong>✓ 정부 정책적 육성 의지:</strong>
                       금융위·과기정통부 등이 디지털 자산 및 RWA 시장 육성을 국정 과제로 추진 중이며,
-                      법제화 논의가 지속적으로 진행되고 있음
+                      2030년까지 367조원 규모 시장 육성을 목표로 인프라 구축 중입니다.
                     </li>
                   </ul>
                 </div>
