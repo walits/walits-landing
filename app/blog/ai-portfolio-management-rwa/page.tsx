@@ -11,15 +11,15 @@ export default function AIPortfolioManagementRWAPage() {
     ko: {
       category: 'AI 자산관리',
       title: 'AI로 실물자산(RWA) 포트폴리오 관리하는 법',
-      date: '2026년 1월 11일',
-      readTime: '8분 읽기',
+      date: '2026년 2월 13일',
+      readTime: '15분 읽기',
       backToBlog: '← 블로그로 돌아가기',
     },
     en: {
       category: 'AI Asset Management',
       title: 'Managing Real World Asset (RWA) Portfolio with AI',
-      date: 'January 11, 2026',
-      readTime: '8 min read',
+      date: 'February 13, 2026',
+      readTime: '15 min read',
       backToBlog: '← Back to Blog',
     },
   }[language];
@@ -91,6 +91,362 @@ export default function AIPortfolioManagementRWAPage() {
                   비트코인/이더리움 같은 암호화폐는 변동성이 너무 큽니다 (하루 10% 등락도 흔함).
                   반면 RWA는 실물 자산에 기반하므로 안정적이고, 배당 수익도 있습니다.
                 </p>
+              </div>
+
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">2024-2026 RWA 시장 폭발적 성장</h2>
+
+              <div className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8 border-2 border-emerald-500">
+                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">📊 시장 규모 12배 성장</h3>
+
+                <div className="grid md:grid-cols-3 gap-4 mb-6">
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg text-center">
+                    <div className="text-4xl font-bold text-gray-500 mb-2">2024년</div>
+                    <div className="text-3xl font-bold text-blue-600">$1B</div>
+                    <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">초기 시장</p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg text-center">
+                    <div className="text-4xl font-bold text-orange-500 mb-2">2026년</div>
+                    <div className="text-3xl font-bold text-orange-600">$12B</div>
+                    <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">현재 (12배 성장)</p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg text-center">
+                    <div className="text-4xl font-bold text-green-500 mb-2">2030년</div>
+                    <div className="text-3xl font-bold text-green-600">$15T (추정)</div>
+                    <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">BCG 전망</p>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                  <h4 className="font-bold mb-4 text-gray-900 dark:text-white">왜 급성장하는가?</h4>
+                  <ul className="space-y-3 text-sm">
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-1">✓</span>
+                      <div>
+                        <strong>전통 금융기관의 대거 진입:</strong> BlackRock, JPMorgan, Franklin Templeton 등 대형 자산운용사들이
+                        블록체인 기반 펀드를 속속 출시하며 시장을 주도하고 있습니다.
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-1">✓</span>
+                      <div>
+                        <strong>높은 금리 환경의 매력:</strong> 2024-2026년 미국 기준금리 4-5%대 유지로
+                        단기 국채·MMF 기반 RWA 수익률이 연 4-5%에 달해 투자자들의 수요가 급증했습니다.
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-1">✓</span>
+                      <div>
+                        <strong>24/7 글로벌 거래:</strong> 블록체인 특성상 주말·공휴일 관계없이 언제든 거래 가능하여
+                        전통 증권 대비 유동성과 접근성이 크게 향상되었습니다.
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-green-600 font-bold mt-1">✓</span>
+                      <div>
+                        <strong>소액 투자 가능:</strong> $100 단위로 조각 투자 가능하여 기존에는 수억~수천억 자산에
+                        접근하지 못했던 일반 투자자들도 참여할 수 있게 되었습니다.
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-gray-900 dark:text-white">주요 RWA 프로토콜 & 사례</h3>
+
+              <div className="space-y-6 my-8">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-lg border-l-4 border-blue-600">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-black p-4 rounded-lg">
+                      <span className="text-white font-bold text-2xl">BR</span>
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-xl mb-2 text-gray-900 dark:text-white">BlackRock BUIDL - 세계 최대 토큰화 펀드</h4>
+                      <div className="grid md:grid-cols-2 gap-4 mb-3">
+                        <div>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">
+                            <strong>규모:</strong> $2.4B+ (2025년 기준)<br/>
+                            <strong>수익률:</strong> 연 4.5-5.2% (변동)<br/>
+                            <strong>자산:</strong> 미국 단기 국채, RP, 현금<br/>
+                            <strong>배당:</strong> 일별 산정, 월 1회 온체인 지급
+                          </p>
+                        </div>
+                        <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                          <p className="text-xs text-gray-600 dark:text-gray-400">
+                            <strong>의미:</strong> 세계 최대 자산운용사가 블록체인 펀드를 정식 출시하면서
+                            "RWA는 실험이 아닌 현실"임을 증명했습니다. 기관 투자자들의 대량 유입 계기가 되었습니다.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded text-xs">
+                        <strong>🔗 블록체인:</strong> Ethereum, Solana, Polygon, Arbitrum 등 8개 체인 지원<br/>
+                        <strong>💰 최소 투자:</strong> $5M (적격 투자자 전용)
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-lg border-l-4 border-purple-600">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-purple-600 p-4 rounded-lg">
+                      <span className="text-white font-bold text-2xl">FT</span>
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-xl mb-2 text-gray-900 dark:text-white">Franklin Templeton OnChain US Government Money Fund</h4>
+                      <div className="grid md:grid-cols-2 gap-4 mb-3">
+                        <div>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">
+                            <strong>규모:</strong> $400M+ (2025년)<br/>
+                            <strong>특징:</strong> 최초로 Stellar·Polygon에서 출시<br/>
+                            <strong>자산:</strong> 미국 정부 증권, RP<br/>
+                            <strong>수익:</strong> 안정적 단기 수익
+                          </p>
+                        </div>
+                        <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                          <p className="text-xs text-gray-600 dark:text-gray-400">
+                            <strong>혁신:</strong> 2021년부터 블록체인 펀드를 운영하며 RWA 시장을 개척한
+                            선구자입니다. 개인 투자자도 접근 가능한 낮은 진입 장벽이 특징입니다.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 p-6 rounded-lg border-l-4 border-green-600">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-green-600 p-4 rounded-lg">
+                      <span className="text-white font-bold text-2xl">ON</span>
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-xl mb-2 text-gray-900 dark:text-white">Ondo Finance - DeFi와 TradFi의 가교</h4>
+                      <div className="grid md:grid-cols-2 gap-4 mb-3">
+                        <div>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">
+                            <strong>주요 상품:</strong><br/>
+                            • USDY: 미국 국채 담보 토큰 (연 5%)<br/>
+                            • OUSG: 단기 미국 국채 토큰<br/>
+                            <strong>TVL:</strong> $500M+ (2025년)
+                          </p>
+                        </div>
+                        <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                          <p className="text-xs text-gray-600 dark:text-gray-400">
+                            <strong>특징:</strong> DeFi 프로토콜과 통합하여 USDY를 Aave, Compound 등에서
+                            담보로 사용 가능합니다. "실물 자산 수익 + DeFi 유동성"을 동시에 누릴 수 있습니다.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="bg-green-100 dark:bg-green-900/30 p-3 rounded text-xs">
+                        <strong>🎯 활용:</strong> USDY를 Aave에 담보로 맡기고 USDC 대출 → 원금 수익 유지하며 유동성 확보
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 p-6 rounded-lg border-l-4 border-orange-600">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-orange-600 p-4 rounded-lg">
+                      <span className="text-white font-bold text-2xl">MK</span>
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-xl mb-2 text-gray-900 dark:text-white">MakerDAO RWA 투자 - DeFi의 RWA 편입</h4>
+                      <div className="grid md:grid-cols-2 gap-4 mb-3">
+                        <div>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">
+                            <strong>DAI 담보 구성:</strong><br/>
+                            • 미국 단기 국채: $1.2B+<br/>
+                            • 회사채: $500M+<br/>
+                            • 전통 암호화폐 담보: 감소 중
+                          </p>
+                        </div>
+                        <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                          <p className="text-xs text-gray-600 dark:text-gray-400">
+                            <strong>전략:</strong> DeFi 프로토콜이 암호화폐 변동성에서 벗어나
+                            안정적인 실물 자산으로 수익을 창출하는 모델입니다. DAI 발행 담보의 50% 이상이 RWA로 전환되었습니다.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 p-6 rounded-lg border-l-4 border-cyan-600">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-cyan-600 p-4 rounded-lg">
+                      <span className="text-white font-bold text-2xl">CF</span>
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-xl mb-2 text-gray-900 dark:text-white">Centrifuge - 실물 자산 토큰화 인프라</h4>
+                      <div className="grid md:grid-cols-2 gap-4 mb-3">
+                        <div>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">
+                            <strong>토큰화 자산:</strong><br/>
+                            • 부동산 모기지<br/>
+                            • 무역 금융 (Trade Finance)<br/>
+                            • 송장 팩토링 (Invoice Factoring)
+                          </p>
+                        </div>
+                        <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                          <p className="text-xs text-gray-600 dark:text-gray-400">
+                            <strong>혁신:</strong> 중소기업 대출, 부동산 모기지 등 비유동적 자산을 토큰화하여
+                            DeFi 프로토콜에서 자금을 조달할 수 있게 합니다. "실물 경제와 DeFi의 연결"을 구현합니다.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-gray-900 dark:text-white">금리와 RWA 수익률의 관계</h3>
+
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 p-8 rounded-xl my-8 border-l-4 border-yellow-500">
+                <h4 className="font-bold mb-4 text-xl text-gray-900 dark:text-white">⚠️ 2024-2026년 "고금리 환경"이 RWA 붐을 만들었다</h4>
+
+                <div className="space-y-4 text-sm">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                    <p className="font-semibold mb-2 text-gray-900 dark:text-white">현재 상황 (2026년)</p>
+                    <ul className="space-y-1 ml-4">
+                      <li>• 미국 기준금리: 4.5-5.0%</li>
+                      <li>• 미국 단기 국채 (T-Bill) 수익률: 4.5-5.0%</li>
+                      <li>• BlackRock BUIDL 수익률: 4.5-5.2%</li>
+                      <li>• 스테이블코인(USDT/USDC) 이자: 거의 0% (DeFi 제외)</li>
+                    </ul>
+                    <p className="mt-3 text-xs text-gray-600 dark:text-gray-400">
+                      → 암호화폐 시장 참여자들이 "아무 것도 안 하고 연 5% 받는" RWA로 대거 이동
+                    </p>
+                  </div>
+
+                  <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded-lg border-l-4 border-red-500">
+                    <p className="font-semibold mb-2 text-red-800 dark:text-red-300">미래 리스크: 금리 하락 시나리오</p>
+                    <p className="text-xs mb-2">
+                      만약 연준이 2027-2028년 금리를 2%대로 내리면?
+                    </p>
+                    <ul className="space-y-1 ml-4 text-xs">
+                      <li>• BlackRock BUIDL 수익률: 5% → 2%로 하락</li>
+                      <li>• RWA 투자 매력 감소 → 자금 이탈 가능</li>
+                      <li>• 부동산·회사채 등 대안 RWA 수요 증가 예상</li>
+                    </ul>
+                    <div className="mt-3 p-2 bg-white dark:bg-gray-800 rounded">
+                      <p className="text-xs font-semibold">💡 AI 포트폴리오 관리의 중요성</p>
+                      <p className="text-xs">
+                        금리 변화에 따라 <strong>국채 RWA ↔ 부동산 RWA ↔ 회사채 RWA</strong> 간
+                        자동 리밸런싱이 필수입니다. 사람이 수동으로 대응하기는 어렵고, AI가 시장 데이터를 분석하여
+                        최적 배분을 실시간 조정해야 합니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-gray-900 dark:text-white">DeFi + RWA 융합 트렌드</h3>
+
+              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-8 rounded-xl my-8">
+                <h4 className="font-bold mb-4 text-xl text-gray-900 dark:text-white">🔗 "실물 자산으로 DeFi 수익 극대화"</h4>
+
+                <div className="space-y-6">
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold mb-3 text-gray-900 dark:text-white">시나리오 1: RWA 담보 대출</h5>
+                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm">
+                      <pre>
+{`보유 자산: BlackRock BUIDL $100K (연 5% 수익)
+     ↓
+Aave에 담보로 예치
+     ↓
+USDC $70K 대출 (70% LTV)
+     ↓
+대출 USDC로 추가 투자 (DeFi Yield Farming, 연 8%)
+
+최종 수익:
+✅ BUIDL 연 5% 계속 발생 ($5K/년)
+✅ USDC $70K 운용 수익 ($5.6K/년, 8% 가정)
+✅ 대출 이자 연 3% 지불 (-$2.1K/년)
+━━━━━━━━━━━━━━━━━━━━━━
+순수익: $8.5K/년 (원금 대비 8.5%)
+vs BUIDL만 보유: $5K/년 (5%)
+→ 70% 추가 수익 창출`}
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold mb-3 text-gray-900 dark:text-white">시나리오 2: RWA + LP 토큰 듀얼 수익</h5>
+                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded text-sm">
+                      <pre>
+{`Ondo USDY $50K 보유 (연 5% 미국 국채 수익)
+     ↓
+Curve Finance에 USDY/USDC LP 제공
+     ↓
+LP 토큰 수령
+     ↓
+결과:
+✅ USDY 기본 수익 5% 유지
+✅ Curve LP 수수료 추가 (1-2%)
+✅ CRV 토큰 보상 추가 (변동)
+━━━━━━━━━━━━━━━━━━━━━━
+총 수익률: 7-9% (복합)`}
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div className="bg-purple-50 dark:bg-purple-900/30 p-4 rounded">
+                    <p className="font-semibold mb-2 text-purple-800 dark:text-purple-300">🤖 AI의 역할</p>
+                    <ul className="text-sm space-y-1 ml-4">
+                      <li>• <strong>리스크 모니터링:</strong> LTV 비율이 위험 수준 도달 시 자동 담보 추가</li>
+                      <li>• <strong>수익률 최적화:</strong> DeFi 프로토콜 간 APY 비교하여 자동 이동</li>
+                      <li>• <strong>청산 방지:</strong> 가격 변동 시 자동 리밸런싱으로 청산 위험 사전 차단</li>
+                      <li>• <strong>가스비 최적화:</strong> 네트워크 혼잡도 분석하여 최저 가스비 타이밍에 거래 실행</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-gray-900 dark:text-white">규제 이슈와 투자자 보호</h3>
+
+              <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg my-8 border-l-4 border-red-500">
+                <h4 className="font-bold mb-4 text-red-800 dark:text-red-300">⚠️ RWA 투자 시 반드시 확인해야 할 것들</h4>
+                <div className="space-y-3 text-sm">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold mb-2 text-gray-900 dark:text-white">1. 증권형 토큰 = 증권 규제 적용</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      대부분의 RWA는 증권으로 분류되어 각국 금융당국의 규제를 받습니다.
+                      미국은 SEC Regulation D/A+, 한국은 자본시장법이 적용됩니다.
+                      <strong>무등록·무인가 RWA는 투자하지 마세요.</strong>
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold mb-2 text-gray-900 dark:text-white">2. 적격 투자자 요건 확인</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      BlackRock BUIDL은 최소 $5M, 일부 RWA는 순자산/소득 요건이 있습니다.
+                      요건 미달 시 투자 불가하거나 법적 보호를 받지 못할 수 있습니다.
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold mb-2 text-gray-900 dark:text-white">3. 유동성 리스크</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      RWA 토큰은 일반 암호화폐 거래소에서 거래되지 않습니다.
+                      ATS (Alternative Trading System) 또는 발행사 자체 플랫폼에서만 거래 가능하므로,
+                      <strong>급하게 현금화가 어려울 수 있습니다.</strong>
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold mb-2 text-gray-900 dark:text-white">4. 스마트 컨트랙트 리스크</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      블록체인 기반이므로 스마트 컨트랙트 버그, 해킹 리스크가 존재합니다.
+                      대형 플랫폼(BlackRock, Franklin Templeton 등)은 감사를 받지만, 100% 안전을 보장하지는 않습니다.
+                    </p>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold mb-2 text-gray-900 dark:text-white">5. 세금 처리 불명확</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      RWA 배당·매매 차익에 대한 세금 처리가 국가마다 다르고 아직 명확하지 않은 경우가 많습니다.
+                      세무사 자문을 받거나, AI ST 지갑의 세금 추적 기능을 활용하세요.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">전통적 자산 관리의 문제점</h2>
