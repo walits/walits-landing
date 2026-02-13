@@ -645,55 +645,444 @@ ROI: 80% (30억 투자 → 54억 회수)`}
                 </p>
               </div>
 
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">AI ST 지갑 활용법</h2>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">STO 발행 상세 프로세스 (6개월-1년 소요)</h2>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">1. AI 포트폴리오 관리</h3>
-              <p>
-                AI가 자동으로 최적의 STO 포트폴리오를 구성합니다:
-              </p>
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
-                <h4 className="font-bold mb-4 text-gray-900 dark:text-white">AI 추천 포트폴리오 (투자금 1억 원)</h4>
-                <pre className="text-sm">
-{`[보수적 투자자 프로필]
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-8 rounded-xl my-8 border-2 border-blue-600">
+                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">📋 STO 발행 7단계</h3>
 
-AI 추천 자산 배분:
- 40% (4,000만 원): 국채 STO (연 3% 안정적)
- 30% (3,000만 원): 강남 빌딩 STO (연 5% 임대 수익)
- 20% (2,000만 원): 회사채 STO (연 6% 중간 위험)
- 10% (1,000만 원): 스타트업 지분 STO (고위험/고수익)
+                <div className="space-y-6">
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-blue-500">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">1단계: 법률 자문 및 구조 설계 (1-2개월)</h4>
+                    <div className="text-sm space-y-2">
+                      <p><strong>목적:</strong> 증권 규제 준수 여부 판단 및 발행 구조 설계</p>
+                      <ul className="ml-4 space-y-1">
+                        <li>• <strong>Howey Test 분석:</strong> 토큰이 증권인지 판단 (4가지 조건 검토)</li>
+                        <li>• <strong>규제 프레임워크 선택:</strong> Reg D, Reg A+, Reg S 중 선택</li>
+                        <li>• <strong>법률 문서 작성:</strong> Private Placement Memorandum (PPM), Subscription Agreement</li>
+                        <li>• <strong>IP 검토:</strong> 자산의 법적 소유권 및 지적재산권 확인</li>
+                      </ul>
+                      <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded text-xs">
+                        <strong>💰 비용:</strong> $50K-$200K (법률 자문료)<br/>
+                        <strong>⚠️ 주의:</strong> 전문 증권 변호사 필수 (일반 변호사는 부적합)
+                      </div>
+                    </div>
+                  </div>
 
-예상 수익률: 연 4.5%
-위험도: 중하 (Low-Medium)
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-purple-500">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">2단계: 자산 평가 및 실사 (Due Diligence) (1개월)</h4>
+                    <div className="text-sm space-y-2">
+                      <p><strong>목적:</strong> 토큰화할 자산의 정확한 가치 산정</p>
+                      <ul className="ml-4 space-y-1">
+                        <li>• <strong>부동산:</strong> 감정평가사 (Appraiser)가 시장 가치 평가</li>
+                        <li>• <strong>미술품:</strong> 전문 감정사 (Authenticator) + 경매 기록 분석</li>
+                        <li>• <strong>기업 지분:</strong> 회계법인 (Big 4)이 재무제표 감사 및 기업 가치 평가</li>
+                        <li>• <strong>채권:</strong> 신용평가기관 (Moody's, S&P)이 신용등급 부여</li>
+                      </ul>
+                      <div className="mt-3 p-3 bg-purple-50 dark:bg-purple-900/30 rounded text-xs">
+                        <strong>💰 비용:</strong> $20K-$100K (자산 종류에 따라 상이)<br/>
+                        <strong>📊 산출물:</strong> Valuation Report, Asset Audit Report
+                      </div>
+                    </div>
+                  </div>
 
-✓ AI가 시장 상황에 따라 자동 리밸런싱
-✓ 고위험 자산 비중 증가 시 자동 알림`}
-                </pre>
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-green-500">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">3단계: 토큰 설계 및 경제 모델 (2-4주)</h4>
+                    <div className="text-sm space-y-2">
+                      <p><strong>목적:</strong> 토큰의 권리·의무·경제 구조 설계</p>
+                      <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded mt-2">
+                        <p className="font-semibold mb-2">토큰 설계 예시:</p>
+                        <pre className="text-xs">
+{`토큰 이름: GANGNAM-BLDG
+총 발행량: 10,000 토큰
+1토큰 = 빌딩 가치의 0.01%
+
+권리:
+  ✓ 임대료 수익 배당 (분기별)
+  ✓ 빌딩 매각 시 차익 분배
+  ✓ 주요 의사결정 투표권 (1토큰 = 1표)
+
+의무:
+  ✓ 관리비·세금 비례 부담
+  ✓ Lock-up 기간 준수 (6개월)
+
+양도 제한:
+  ✓ KYC 완료 투자자에게만 양도 가능
+  ✓ 화이트리스트 등록 필수`}
+                        </pre>
+                      </div>
+                      <div className="mt-3 p-3 bg-green-50 dark:bg-green-900/30 rounded text-xs">
+                        <strong>💡 핵심:</strong> Token Economics (토크노믹스) 설계가 투자 매력도 결정
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-orange-500">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">4단계: 스마트 컨트랙트 개발 및 감사 (2-3개월)</h4>
+                    <div className="text-sm space-y-2">
+                      <p><strong>목적:</strong> 증권형 토큰 표준 준수 + 컴플라이언스 자동화</p>
+                      <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded mt-2">
+                        <p className="font-semibold mb-2">주요 토큰 표준:</p>
+                        <ul className="text-xs space-y-1 ml-4">
+                          <li>• <strong>ERC-1400:</strong> 증권형 토큰 표준 (Partitioned Tokens)</li>
+                          <li>• <strong>ERC-1404:</strong> Transfer Restrictions (양도 제한 구현)</li>
+                          <li>• <strong>ERC-3643 (T-REX):</strong> KYC/AML 온체인 검증 + Identity Registry</li>
+                        </ul>
+                        <p className="font-semibold mt-3 mb-2">필수 기능 구현:</p>
+                        <pre className="text-xs">
+{`function transfer(address to, uint256 amount)
+  → canTransfer() 검증
+    ✓ from 주소 KYC 완료?
+    ✓ to 주소 화이트리스트 등록?
+    ✓ Lock-up 기간 경과?
+    ✓ 양도 제한 규칙 준수?
+  → 모두 통과 시 transfer 실행
+  → 실패 시 revert
+
+function distributeDividends()
+  → 토큰 보유 비율에 따라 자동 배당
+  → 세금 원천징수 자동 계산
+  → 배당 내역 온체인 기록`}
+                        </pre>
+                      </div>
+                      <div className="mt-3 p-3 bg-orange-50 dark:bg-orange-900/30 rounded text-xs">
+                        <strong>💰 비용:</strong> $50K-$200K (개발) + $20K-$50K (감사)<br/>
+                        <strong>🔒 감사:</strong> OpenZeppelin, CertiK, Trail of Bits 등 전문 업체 필수
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-red-500">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">5단계: 규제 기관 신고/승인 (1-2개월)</h4>
+                    <div className="text-sm space-y-2">
+                      <p><strong>미국 SEC:</strong></p>
+                      <ul className="ml-4 space-y-1 text-xs">
+                        <li>• <strong>Reg D (Rule 506c):</strong> Form D 제출 (15일 이내) → 사전 승인 불필요</li>
+                        <li>• <strong>Reg A+ (Tier 2):</strong> Offering Circular 제출 → SEC 승인 대기 (30-60일)</li>
+                        <li>• <strong>Blue Sky Laws:</strong> 각 주(State)별 별도 신고</li>
+                      </ul>
+                      <p className="mt-2"><strong>한국 금융위:</strong></p>
+                      <ul className="ml-4 space-y-1 text-xs">
+                        <li>• <strong>증권신고서</strong> 제출 (자본시장법 제119조)</li>
+                        <li>• <strong>투자설명서</strong> 작성 및 교부 의무</li>
+                        <li>• 금융위원회 심사 (1-2개월)</li>
+                      </ul>
+                      <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/30 rounded text-xs">
+                        <strong>⚠️ 주의:</strong> 무신고 발행 시 형사처벌 (징역 5년 이하 또는 벌금)
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-cyan-500">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">6단계: 투자자 모집 및 KYC/AML (1-3개월)</h4>
+                    <div className="text-sm space-y-2">
+                      <p><strong>목적:</strong> 적격 투자자 확보 + 자금세탁 방지</p>
+                      <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded mt-2">
+                        <p className="font-semibold mb-2">KYC 프로세스:</p>
+                        <pre className="text-xs">
+{`1. 신원 확인 (Identity Verification)
+   → 여권/운전면허증 사진 업로드
+   → 셀카 촬영 (Liveness Check)
+   → AI 얼굴 인식으로 본인 확인
+
+2. 주소 확인 (Address Verification)
+   → 공과금 고지서, 은행 명세서 제출
+   → 3개월 이내 발행분만 인정
+
+3. 자금 출처 확인 (Source of Funds)
+   → 급여 명세서, 사업 소득 증빙
+   → 고액 투자 시 (>$100K) 추가 서류 요구
+
+4. 적격 투자자 검증 (Accredited Investor)
+   → 미국: 순자산 $1M 이상 증빙
+   → 한국: 금융자산 5억 이상 증빙
+   → CPA 확인서 또는 자산 증빙서 제출
+
+5. AML 스크리닝
+   → OFAC 제재 명단 대조
+   → PEP (Politically Exposed Person) 검증
+   → 범죄 경력 조회`}
+                        </pre>
+                      </div>
+                      <div className="mt-3 p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded text-xs">
+                        <strong>📊 통과율:</strong> 일반적으로 신청자의 60-80%만 KYC 통과<br/>
+                        <strong>🕐 소요 시간:</strong> 1-3 영업일 (자동화 시) / 1-2주 (수동 검토 시)
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border-l-4 border-pink-500">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">7단계: 토큰 발행 및 상장 (1개월)</h4>
+                    <div className="text-sm space-y-2">
+                      <p><strong>목적:</strong> 스마트 컨트랙트 배포 + 투자자에게 토큰 분배</p>
+                      <ul className="ml-4 space-y-1 text-xs">
+                        <li>• <strong>토큰 발행 (Minting):</strong> 스마트 컨트랙트 배포 → 총 발행량 생성</li>
+                        <li>• <strong>Whitelist 등록:</strong> KYC 통과 투자자 주소를 화이트리스트에 추가</li>
+                        <li>• <strong>토큰 분배 (Distribution):</strong> 투자금 납입 확인 → 토큰 전송</li>
+                        <li>• <strong>ATS 상장:</strong> tZERO, Securitize Markets 등에 상장 신청</li>
+                        <li>• <strong>유동성 공급:</strong> 초기 유동성 풀 구축 (선택 사항)</li>
+                      </ul>
+                      <div className="mt-3 p-3 bg-pink-50 dark:bg-pink-900/30 rounded text-xs">
+                        <strong>🎉 완료:</strong> 투자자는 토큰 보유 즉시 자산 소유권 획득<br/>
+                        <strong>📈 이후:</strong> 배당 분배, 거버넌스 투표 등 자동 실행
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 p-6 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/30 dark:to-orange-900/30 rounded-lg border-2 border-yellow-500">
+                  <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">💰 총 발행 비용 및 소요 시간</h4>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <p className="font-semibold mb-2">비용 구성:</p>
+                      <ul className="text-xs space-y-1">
+                        <li>• 법률 자문: $50K-$200K</li>
+                        <li>• 자산 평가/감사: $20K-$100K</li>
+                        <li>• 스마트 컨트랙트 개발: $50K-$200K</li>
+                        <li>• 보안 감사: $20K-$50K</li>
+                        <li>• 규제 신고: $10K-$50K</li>
+                        <li>• KYC/AML 플랫폼: $10K-$30K</li>
+                        <li>• 마케팅: $50K-$200K</li>
+                        <li className="font-bold text-red-600 border-t pt-2 mt-2">총 비용: $210K-$830K</li>
+                      </ul>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <p className="font-semibold mb-2">소요 시간:</p>
+                      <ul className="text-xs space-y-1">
+                        <li>• 법률 자문: 1-2개월</li>
+                        <li>• 자산 평가: 1개월</li>
+                        <li>• 토큰 설계: 2-4주</li>
+                        <li>• 개발+감사: 2-3개월</li>
+                        <li>• 규제 승인: 1-2개월</li>
+                        <li>• 투자자 모집: 1-3개월</li>
+                        <li>• 발행+상장: 1개월</li>
+                        <li className="font-bold text-blue-600 border-t pt-2 mt-2">총 기간: 6-12개월</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2. 자동 수익 재투자</h3>
-              <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-lg my-6">
-                <pre className="text-sm">
-{`[매월 배당 수익 자동 재투자]
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">증권형 토큰 기술 구조 심층 분석</h2>
 
-1월: 빌딩 임대료 배당 50만 원 받음
-     ↓ AI 자동 실행
-     ↓
-AI: "50만 원으로 추가 투자 가능한 STO:"
- 1. 같은 빌딩 추가 매수 (복리 효과)
- 2. 다른 부동산 STO 분산 투자
- 3. 현금 보유 (대기)
+              <div className="space-y-6 my-8">
+                <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-8 rounded-xl border-l-4 border-indigo-600">
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">🔧 ERC-1400: 증권형 토큰 표준</h3>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="text-sm mb-3">
+                      ERC-1400은 증권의 복잡한 요구사항을 블록체인에서 구현하기 위한 표준입니다.
+                      일반 ERC-20 토큰과 달리 <strong>양도 제한, 강제 이체, 파티션 분할</strong> 등 증권 특화 기능을 제공합니다.
+                    </p>
+                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+                      <p className="font-semibold text-sm mb-2">핵심 기능:</p>
+                      <pre className="text-xs">
+{`// 1. Transfer Restrictions (양도 제한)
+function canTransfer(address to, uint256 value, bytes data)
+  returns (bool, byte, bytes32)
+{
+  // 규제 준수 여부 검증
+  if (!isWhitelisted(to)) return (false, 0x50, "Recipient not whitelisted");
+  if (isLocked(msg.sender)) return (false, 0x51, "Tokens locked");
+  if (!isAccredited(to)) return (false, 0x52, "Not accredited investor");
+  return (true, 0xA0, "Valid transfer");
+}
 
-→ AI 선택: 같은 빌딩 0.5 토큰 추가 매수
-→ 복리 효과로 수익 가속화`}
-                </pre>
+// 2. Partitioned Tokens (파티션별 관리)
+// 토큰을 여러 파티션으로 분할 (Lock-up, 투표권 등)
+mapping(bytes32 => mapping(address => uint256)) balancesByPartition;
+
+// 3. Forced Transfer (강제 이체)
+// 법원 명령, 규제 요구 시 관리자가 강제 이체 가능
+function controllerTransfer(address from, address to, uint256 value)
+  onlyController
+{
+  _transfer(from, to, value);
+  emit ControllerTransfer(from, to, value);
+}`}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 p-8 rounded-xl border-l-4 border-green-600">
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">🔐 ERC-3643 (T-REX): Identity & Compliance</h3>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="text-sm mb-3">
+                      T-REX (Token for Regulated EXchanges)는 온체인 신원 확인 및 컴플라이언스 자동화를 구현합니다.
+                      <strong>Identity Registry</strong>와 <strong>Compliance Module</strong>이 핵심입니다.
+                    </p>
+                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+                      <p className="font-semibold text-sm mb-2">구조:</p>
+                      <pre className="text-xs">
+{`[Identity Registry]
+  ┌─ Investor Address (0x123...)
+  │  ├─ Identity Contract (온체인 KYC 데이터)
+  │  │  ├─ Country: US
+  │  │  ├─ Accredited: true
+  │  │  ├─ KYC Expiry: 2027-01-01
+  │  │  └─ Claims: [KYC_PASSED, ACCREDITED_INVESTOR]
+  │  └─ Compliance Checks
+  │     ├─ Country Restriction: ✓ (US allowed)
+  │     ├─ Investor Limit: ✓ (Under 2,000 investors)
+  │     └─ Token Cap: ✓ (Individual limit not exceeded)
+
+[Compliance Module]
+  → 모든 transfer() 실행 전 검증
+  → Identity Registry 조회
+  → 규제 룰 자동 적용
+  → 통과 시에만 토큰 이동 허용`}
+                      </pre>
+                    </div>
+                    <div className="mt-3 p-3 bg-green-50 dark:bg-green-900/30 rounded text-xs">
+                      <strong>💡 장점:</strong> KYC 데이터를 온체인에 안전하게 저장하여 중개자 없이 자동 검증<br/>
+                      <strong>🔒 프라이버시:</strong> 실제 개인정보는 오프체인 보관, 온체인에는 해시값만 저장
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 p-8 rounded-xl border-l-4 border-orange-600">
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">💰 자동 배당 분배 메커니즘</h3>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="text-sm mb-3">
+                      증권형 토큰의 핵심 기능 중 하나는 <strong>스마트 컨트랙트 기반 자동 배당</strong>입니다.
+                      임대료, 이자, 배당금 등을 토큰 보유 비율에 따라 자동으로 분배합니다.
+                    </p>
+                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+                      <p className="font-semibold text-sm mb-2">구현 예시:</p>
+                      <pre className="text-xs">
+{`// Dividend Distribution Contract
+contract DividendDistributor {
+
+  // 배당금 입금
+  function depositDividend() external payable {
+    require(msg.value > 0, "No dividend");
+    totalDividendsDeposited += msg.value;
+    dividendPerToken = msg.value / token.totalSupply();
+    emit DividendDeposited(msg.value, block.timestamp);
+  }
+
+  // 투자자별 배당 청구
+  function claimDividend() external {
+    uint256 balance = token.balanceOf(msg.sender);
+    uint256 owed = balance * dividendPerToken - claimed[msg.sender];
+    require(owed > 0, "No dividend to claim");
+
+    // 세금 원천징수 (예: 15%)
+    uint256 tax = owed * 15 / 100;
+    uint256 netAmount = owed - tax;
+
+    claimed[msg.sender] += owed;
+    payable(msg.sender).transfer(netAmount);
+    taxAuthority.transfer(tax); // 세금 자동 납부
+
+    emit DividendClaimed(msg.sender, netAmount, tax);
+  }
+
+  // 관리자가 모든 투자자에게 일괄 분배 (Push 방식)
+  function distributeToAll() external onlyAdmin {
+    address[] memory holders = token.getAllHolders();
+    for (uint i = 0; i < holders.length; i++) {
+      uint256 balance = token.balanceOf(holders[i]);
+      uint256 amount = balance * dividendPerToken;
+      payable(holders[i]).transfer(amount);
+    }
+  }
+}`}
+                      </pre>
+                    </div>
+                    <div className="mt-3 p-3 bg-orange-50 dark:bg-orange-900/30 rounded text-xs">
+                      <strong>📊 실제 사례:</strong> BlackRock BUIDL은 매월 1일 자동 배당 (일별 산정, 월별 지급)<br/>
+                      <strong>⚡ 효율:</strong> 수천 명 투자자에게 동시 배당 가능 (전통 방식은 은행 송금 수수료 + 수일 소요)
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">3. 리스크 모니터링</h3>
-              <ul className="space-y-2">
-                <li><strong>가격 하락 알림</strong>: 보유하고 있는 토큰 가격이 10% 이상 하락하면 즉시 알림을 받아 적절한 조치를 취할 수 있습니다.</li>
-                <li><strong>신용등급 변동</strong>: 채권 발행사의 신용등급이 하락하면 자동으로 경고가 발송되어 리스크를 미리 파악할 수 있습니다.</li>
-                <li><strong>시장 위험 감지</strong>: 부동산 시장이 과열 조짐을 보이면 AI가 매도를 추천하여 손실을 최소화할 수 있습니다.</li>
-              </ul>
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">유통 시장 (Secondary Market) 구조</h2>
+
+              <div className="bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8 border-2 border-cyan-600">
+                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">🏦 STO 거래는 어디서? ATS vs DEX</h3>
+
+                <div className="space-y-6">
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">1. ATS (Alternative Trading System) - 미국 SEC 인가</h4>
+                    <p className="text-sm mb-3">
+                      SEC에 등록된 대체 거래 시스템으로, 증권형 토큰을 합법적으로 거래할 수 있는 플랫폼입니다.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+                        <p className="font-semibold text-sm mb-2">tZERO</p>
+                        <ul className="text-xs space-y-1">
+                          <li>• Overstock.com 자회사</li>
+                          <li>• SEC 승인 ATS + 브로커-딜러</li>
+                          <li>• 부동산, 기업 지분 STO 거래</li>
+                          <li>• T+0 결제 (즉시 정산)</li>
+                        </ul>
+                      </div>
+                      <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+                        <p className="font-semibold text-sm mb-2">Securitize Markets</p>
+                        <ul className="text-xs space-y-1">
+                          <li>• SEC 등록 Transfer Agent</li>
+                          <li>• KYC/AML 통합</li>
+                          <li>• 기관 투자자 중심</li>
+                          <li>• Compliance 자동화</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="mt-3 p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded text-xs">
+                      <strong>⚠️ 문제:</strong> 유동성 부족 (거래량 적음), 높은 수수료, 제한된 거래 시간
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">2. DEX (탈중앙 거래소) - 규제 회색지대</h4>
+                    <p className="text-sm mb-3">
+                      Uniswap, Curve 같은 DEX에서 증권형 토큰을 거래하는 것은 <strong>대부분 불법</strong>입니다.
+                    </p>
+                    <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded border-l-4 border-red-500">
+                      <p className="font-semibold text-sm mb-2 text-red-800 dark:text-red-300">⚠️ SEC 입장</p>
+                      <ul className="text-xs space-y-1">
+                        <li>• 증권은 반드시 등록된 거래소에서만 거래 가능</li>
+                        <li>• DEX에서 증권형 토큰 거래 → 무등록 증권 거래 (불법)</li>
+                        <li>• DEX 운영자도 브로커-딜러 등록 없이 증권 중개 시 처벌 대상</li>
+                      </ul>
+                    </div>
+                    <div className="mt-3 bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded border-l-4 border-yellow-500">
+                      <p className="font-semibold text-sm mb-2 text-yellow-800 dark:text-yellow-300">💡 예외: Permissioned DEX</p>
+                      <p className="text-xs">
+                        일부 프로젝트는 "화이트리스트 전용 DEX"를 구축하여 KYC 완료 투자자끼리만 거래하도록 제한합니다.
+                        스마트 컨트랙트가 Compliance Layer와 통합되어 규제를 준수하는 방식입니다.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">3. 유동성 문제 & 해결 시도</h4>
+                    <p className="text-sm mb-3">
+                      STO의 가장 큰 문제는 <strong>"유동성 부족"</strong>입니다. 발행은 쉽지만 사고팔 사람이 없습니다.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+                        <p className="font-semibold text-sm mb-2 text-red-600">문제점</p>
+                        <ul className="text-xs space-y-1">
+                          <li>• 적격 투자자만 거래 가능 → 매수자 제한</li>
+                          <li>• Lock-up 기간 (6개월-1년) → 즉시 매도 불가</li>
+                          <li>• ATS 거래량 적음 → 호가 스프레드 큼</li>
+                          <li>• 일반 거래소 상장 불가 → 접근성 낮음</li>
+                        </ul>
+                      </div>
+                      <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded">
+                        <p className="font-semibold text-sm mb-2 text-green-600">해결 시도</p>
+                        <ul className="text-xs space-y-1">
+                          <li>• Market Maker 고용 → 유동성 공급</li>
+                          <li>• 발행사 자체 Buyback 프로그램</li>
+                          <li>• Reg A+ 활용 → 일반 투자자 참여 허용</li>
+                          <li>• 국가 간 상호 인정 (EU Passporting)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">규제 및 컴플라이언스</h2>
 
@@ -1402,43 +1791,6 @@ BUIDL:
                     </p>
                   </div>
                 </div>
-              </div>
-
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">가격 (Coming Soon)</h2>
-
-              <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8">
-                <div className="inline-block px-4 py-1 bg-yellow-400 text-gray-900 rounded-full text-sm font-semibold mb-4">
-                  곧 출시 예정
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">AI ST 지갑</h3>
-                <div className="text-4xl font-bold text-purple-600 mb-4">무료<span className="text-lg text-gray-600 dark:text-gray-400"> (베타 기간)</span></div>
-                <ul className="mb-6">
-                  <li>증권형 토큰(STO)을 안전하게 보관하고 관리할 수 있습니다.</li>
-                  <li>AI가 자동으로 포트폴리오를 분석하고 최적화된 투자 전략을 제안합니다.</li>
-                  <li>배당금이나 임대료 등의 수익을 자동으로 지갑에 수령할 수 있습니다.</li>
-                  <li>실시간으로 리스크를 모니터링하여 위험 요소를 조기에 파악합니다.</li>
-                  <li>받은 수익을 자동으로 재투자하여 복리 효과를 극대화합니다.</li>
-                </ul>
-                <Link
-                  href="/ai-st-wallet"
-                  className="inline-block px-8 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors"
-                >
-                  출시 알림 신청
-                </Link>
-              </div>
-
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl my-12 text-center">
-                <h3 className="text-2xl font-bold mb-4">실물 자산 토큰화의 미래</h3>
-                <p className="mb-6">
-                  STO는 부동산, 채권, 주식을 누구나 소액으로 투자 가능하게 만듭니다.
-                  AI ST 지갑으로 스마트한 투자를 시작하세요.
-                </p>
-                <Link
-                  href="/inquiry"
-                  className="inline-block px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-                >
-                  베타 신청하기
-                </Link>
               </div>
             </>
           ) : (

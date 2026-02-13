@@ -116,12 +116,12 @@ export default function BlogPage() {
         },
         {
           id: 'security-token-sto-guide',
-          category: 'STO & 증권',
+          category: 'STO & RWA',
           categoryColor: 'bg-teal-100 text-teal-800',
-          title: 'STO(증권형 토큰) 완벽 가이드',
-          excerpt: '부동산, 채권, 주식을 블록체인으로 토큰화. RWA(실물 자산) 투자의 모든 것.',
-          date: '2026년 1월 11일',
-          readTime: '10분',
+          title: 'STO(증권형 토큰)과 RWA 완벽 가이드',
+          excerpt: '발행 프로세스부터 기술 구조까지. K-POP 저작권, 예측 시장 등 창의적 RWA 사례 포함.',
+          date: '2026년 2월 13일',
+          readTime: '18분',
           image: '/blog/sto-guide.jpg',
         },
         {
