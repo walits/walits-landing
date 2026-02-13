@@ -243,13 +243,406 @@ export default function SecurityTokenSTOGuidePage() {
                 </p>
               </div>
 
-              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">4. 예술품 & 수집품</h3>
-              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg my-6">
-                <ul>
-                  <li><strong>미술품</strong>: 피카소 그림 10억 원 → 100개 토큰</li>
-                  <li><strong>와인</strong>: 희귀 와인 컬렉션 → 조각 투자</li>
-                  <li><strong>시계</strong>: 롤렉스 한정판 → 공동 소유</li>
-                </ul>
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">4. 예술품 & 수집품 (Art & Collectibles)</h3>
+
+              <div className="space-y-6 my-8">
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-lg border-l-4 border-purple-500">
+                  <h4 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">🎨 미술품 (Fine Art)</h4>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <p className="font-semibold mb-2 text-sm">사례: 피카소 "여인의 얼굴" 조각투자</p>
+                      <pre className="text-xs bg-gray-50 dark:bg-gray-900 p-3 rounded">
+{`작품 가치: 50억 원
+     ↓
+5,000개 토큰 발행 (1토큰 = 100만 원)
+     ↓
+투자자 1,000명 참여 (평균 5토큰씩)
+     ↓
+3년 후 작품 가치 70억 원 상승
+     ↓
+투자자 수익률: 40% (연 11.8%)`}
+                      </pre>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <p className="font-semibold mb-2 text-sm">한국 사례: 박수근 작품</p>
+                      <pre className="text-xs bg-gray-50 dark:bg-gray-900 p-3 rounded">
+{`박수근 "빨래터" (감정가 10억 원)
+     ↓
+아트투게더 플랫폼에서 토큰화
+     ↓
+1,000개 토큰 발행 (1토큰 = 100만 원)
+     ↓
+소액 투자자도 명화 소유 가능
+     ↓
+미술관 전시 대여료 배당 수익
+     ↓
+작품 가치 상승 시 매각 후 차익 분배`}
+                      </pre>
+                    </div>
+                  </div>
+                  <div className="mt-4 p-3 bg-purple-100 dark:bg-purple-900/30 rounded text-xs">
+                    <strong>💡 장점:</strong> 고가 미술품은 부자들만 투자 가능했으나, 토큰화로 일반인도 100만원부터 명화 소유 가능
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 p-6 rounded-lg border-l-4 border-amber-500">
+                  <h4 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">🍷 와인 & 위스키 (Luxury Beverages)</h4>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-semibold mb-2">사례: 1945년 로마네 콩티 와인</p>
+                    <pre className="text-xs bg-gray-50 dark:bg-gray-900 p-3 rounded">
+{`희귀 와인 12병 컬렉션 (6억 원)
+     ↓
+600개 토큰 발행 (1토큰 = 100만 원)
+     ↓
+전문 보관업체에서 온도·습도 관리
+     ↓
+와인 가치 연 10% 상승 (희소성)
+     ↓
+5년 후 매각: 9.6억 원
+     ↓
+투자자 수익률: 60% (연 9.9%)`}
+                    </pre>
+                    <p className="text-xs mt-3 text-gray-600 dark:text-gray-400">
+                      <strong>실제 플랫폼:</strong> Cult Wine Investment, Vinovest (해외) / 한국은 아직 초기 단계
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-6 rounded-lg border-l-4 border-blue-500">
+                  <h4 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">⌚ 명품 시계 & 스니커즈 (Luxury Goods)</h4>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <p className="font-semibold mb-2 text-sm">롤렉스 데이토나 한정판</p>
+                      <pre className="text-xs bg-gray-50 dark:bg-gray-900 p-3 rounded">
+{`시계 가치: 2억 원
+     ↓
+200개 토큰 발행
+     ↓
+투자자 50명 공동 소유
+     ↓
+시계 가치 상승 시 매각 차익 분배`}
+                      </pre>
+                    </div>
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                      <p className="font-semibold mb-2 text-sm">나이키 에어조던 1985 오리지널</p>
+                      <pre className="text-xs bg-gray-50 dark:bg-gray-900 p-3 rounded">
+{`스니커즈 가치: 5,000만 원
+     ↓
+500개 토큰 발행
+     ↓
+스니커즈 컬렉터+투자자 참여
+     ↓
+희소성으로 연 15-20% 가치 상승`}
+                      </pre>
+                    </div>
+                  </div>
+                  <p className="text-xs mt-3 text-gray-600 dark:text-gray-400">
+                    <strong>플랫폼:</strong> Rally (명품 시계, 스포츠 카드 조각투자), StockX (스니커즈 거래)
+                  </p>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-gray-900 dark:text-white">5. K-POP 아이돌 & 엔터테인먼트 IP</h3>
+
+              <div className="bg-gradient-to-r from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 p-8 rounded-xl my-8 border-2 border-pink-500">
+                <h4 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">🎤 팬덤 경제와 토큰화의 만남</h4>
+
+                <div className="space-y-6">
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold mb-3 text-gray-900 dark:text-white">사례 1: 아이돌 그룹 음원 저작권 토큰화</h5>
+                    <pre className="text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded">
+{`[가상 시나리오: "NOVA" 그룹 음원 저작권]
+
+그룹 "NOVA" 히트곡 "Starlight" 저작권 가치: 50억 원
+     ↓
+저작권 50% 토큰화 (25억 원 상당)
+     ↓
+25,000개 토큰 발행 (1토큰 = 10만 원)
+     ↓
+팬들이 토큰 구매 → 사실상 "공동 프로듀서"
+     ↓
+음원 수익 배당 (매월)
+  • Spotify, Apple Music 스트리밍 수익
+  • YouTube 광고 수익
+  • 방송국 사용료
+  • 해외 라이선스 수익
+     ↓
+투자자 혜택:
+✅ 월 배당금 수령 (음원 재생 횟수에 비례)
+✅ 팬 미팅 우선 초대
+✅ 굿즈 할인
+✅ 투표권 (다음 앨범 컨셉 투표)
+     ↓
+예상 수익률: 연 8-12% (히트곡 기준)`}
+                    </pre>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold mb-3 text-gray-900 dark:text-white">사례 2: 콘서트 수익 배당 토큰</h5>
+                    <pre className="text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded">
+{`[월드투어 콘서트 수익 배당 구조]
+
+"NOVA" 월드투어 예상 수익: 200억 원
+     ↓
+투어 수익 30% 토큰화 (60억 원)
+     ↓
+60,000개 토큰 발행 (1토큰 = 10만 원)
+     ↓
+콘서트 진행하며 실시간 수익 정산
+  • 티켓 판매 수익: 150억
+  • 굿즈 판매: 30억
+  • 스폰서십: 20억
+  총 200억 → 투자자 배당분 60억
+     ↓
+토큰 보유자 혜택:
+✅ 콘서트 수익 배당 (투어 종료 후)
+✅ 티켓 선예매 권한
+✅ VIP 라운지 이용권
+✅ 아티스트 사인회 참가권
+     ↓
+ROI: 투어 성공 시 20-30% 수익`}
+                    </pre>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold mb-3 text-gray-900 dark:text-white">사례 3: 유튜버 채널 수익 배당</h5>
+                    <pre className="text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded">
+{`[구독자 500만 유튜버 "TechKing" 채널 토큰화]
+
+채널 가치 평가: 30억 원 (월 수익 1억 × 30배)
+     ↓
+채널 수익 20% 토큰화 (6억 원)
+     ↓
+6,000개 토큰 발행
+     ↓
+매월 수익 배당:
+  • 광고 수익: 8,000만 원
+  • 브랜드 협찬: 2,000만 원
+  • 멤버십: 1,000만 원
+  월 총 1.1억 → 투자자 배당분 2,200만 원
+     ↓
+토큰 보유자 혜택:
+✅ 월 배당금 수령
+✅ 비공개 영상 조기 시청
+✅ 구독자 전용 커뮤니티
+✅ 영상 주제 투표권
+     ↓
+연 수익률: 약 44% (초기 투자금 대비)`}
+                    </pre>
+                  </div>
+
+                  <div className="bg-pink-100 dark:bg-pink-900/30 p-4 rounded mt-4">
+                    <p className="font-semibold mb-2 text-pink-800 dark:text-pink-300">🌟 팬덤 경제의 혁신</p>
+                    <ul className="text-sm space-y-1 ml-4">
+                      <li>• <strong>팬 → 투자자:</strong> 단순 소비자에서 수익 공유 파트너로 전환</li>
+                      <li>• <strong>아티스트 자금 조달:</strong> 은행 대출 없이 팬들에게서 투자 유치</li>
+                      <li>• <strong>충성도 강화:</strong> 금전적 이해관계로 팬덤 결속력 극대화</li>
+                      <li>• <strong>신인 발굴:</strong> 무명 아티스트도 팬 기반 크라우드펀딩 가능</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded border-l-4 border-yellow-500">
+                    <p className="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">⚠️ 규제 리스크</p>
+                    <p className="text-xs">
+                      엔터테인먼트 IP 토큰화는 "증권"으로 분류될 가능성이 높아 금융당국 인가가 필요합니다.
+                      한국에서는 온투법 등록 또는 자본시장법 준수가 필요하며, 무등록 발행 시 불법입니다.
+                      실제 사례로 <strong>뮤직카우</strong>가 음악 저작권 조각투자를 온투법 등록 후 운영 중입니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-gray-900 dark:text-white">6. 예측 시장 (Prediction Markets)</h3>
+
+              <div className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8 border-2 border-indigo-500">
+                <h4 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">🔮 미래 결과에 베팅하는 탈중앙 시장</h4>
+
+                <div className="space-y-6">
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold mb-3 text-gray-900 dark:text-white">사례 1: 대통령 선거 예측 시장</h5>
+                    <pre className="text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded">
+{`[2028년 미국 대통령 선거 예측]
+
+Polymarket에서 거래되는 토큰:
+  • "민주당 후보 당선" 토큰: 1토큰 = $0.55
+  • "공화당 후보 당선" 토큰: 1토큰 = $0.45
+     ↓
+투자자 A의 전략:
+  민주당 토큰 1,000개 매수 ($550)
+     ↓
+실제 결과: 민주당 후보 당선
+     ↓
+토큰 가치: $1.00으로 확정
+     ↓
+투자자 A 수익: $1,000 - $550 = $450 (82% 수익)
+
+※ 틀린 예측의 토큰은 $0으로 소멸`}
+                    </pre>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold mb-3 text-gray-900 dark:text-white">사례 2: 스포츠 경기 결과 예측</h5>
+                    <pre className="text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded">
+{`[2026 월드컵 우승국 예측]
+
+Augur 플랫폼 토큰 가격 (선수권 시작 전):
+  • 브라질 우승: $0.30
+  • 프랑스 우승: $0.25
+  • 아르헨티나 우승: $0.20
+  • 독일 우승: $0.15
+  • 기타: $0.10
+     ↓
+투자자는 여러 나라 토큰을 포트폴리오처럼 구성
+     ↓
+월드컵 종료 후 실제 우승국 토큰만 $1.00
+나머지는 모두 $0`}
+                    </pre>
+                  </div>
+
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg">
+                    <h5 className="font-bold mb-3 text-gray-900 dark:text-white">사례 3: 경제 지표 & 날씨 예측</h5>
+                    <pre className="text-sm bg-gray-50 dark:bg-gray-900 p-4 rounded">
+{`[연준 금리 인하 시기 예측]
+
+"2026년 3월 금리 인하" 토큰: $0.40
+"2026년 6월 금리 인하" 토큰: $0.35
+"2026년 9월 금리 인하" 토큰: $0.15
+"2026년 금리 인하 없음" 토큰: $0.10
+     ↓
+실제 결과에 따라 정확한 예측 토큰만 $1.00으로 정산
+     ↓
+→ 시장 참여자들의 집단 지성으로 미래 예측
+→ 전문가보다 정확하다는 연구 결과 다수`}
+                    </pre>
+                  </div>
+
+                  <div className="bg-indigo-100 dark:bg-indigo-900/30 p-4 rounded">
+                    <p className="font-semibold mb-2 text-indigo-800 dark:text-indigo-300">💡 예측 시장의 가치</p>
+                    <ul className="text-sm space-y-1 ml-4">
+                      <li>• <strong>집단 지성 활용:</strong> 수만 명의 예측을 시장 가격으로 집약</li>
+                      <li>• <strong>정보 비대칭 해소:</strong> 내부 정보를 가진 사람이 시장에 반영</li>
+                      <li>• <strong>리스크 헤징:</strong> 기업이 선거 결과에 따른 리스크를 헷지 가능</li>
+                      <li>• <strong>여론 조사보다 정확:</strong> "돈을 건" 예측이라 더 신뢰도 높음</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded border-l-4 border-red-500">
+                    <p className="font-semibold text-red-800 dark:text-red-300 mb-2">⚠️ 한국에서의 합법성</p>
+                    <p className="text-xs">
+                      예측 시장은 "도박"과 유사한 구조라 한국에서는 <strong>불법일 가능성이 높습니다.</strong>
+                      게임산업법, 사행행위규제법 등에 저촉될 수 있으며, 금융당국 인가 없이 운영 시 처벌 대상입니다.
+                      미국·유럽에서는 CFTC 규제를 받으며 합법적으로 운영되는 플랫폼(Polymarket, Kalshi 등)이 있으나,
+                      한국 거주자는 참여 전 법률 자문이 필수입니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-gray-900 dark:text-white">7. 기타 대체 자산 (Alternative Assets)</h3>
+
+              <div className="space-y-6 my-8">
+                <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg border-l-4 border-green-500">
+                  <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">🏇 경주마 & 스포츠팀 지분</h4>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <pre className="text-sm bg-gray-50 dark:bg-gray-900 p-3 rounded">
+{`경주마 "썬더볼트" 가치: 20억 원
+     ↓
+2,000개 토큰 발행
+     ↓
+경주 상금 배당:
+  • 1등 상금: 5억 원 → 투자자에게 배분
+  • 2등 상금: 2억 원 → 투자자에게 배분
+     ↓
+말 은퇴 후 씨수말로 대여 수익도 배당
+
+[축구팀 지분 토큰]
+FC Barcelona 팬 토큰 ($BAR):
+  • 투표권: 유니폼 디자인, 선수 영입 의견
+  • 혜택: 티켓 우선 구매, 굿즈 할인
+  • 거래: Binance 등에서 거래 가능`}
+                    </pre>
+                  </div>
+                </div>
+
+                <div className="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-lg border-l-4 border-orange-500">
+                  <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">🎬 영화 제작비 크라우드펀딩</h4>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <pre className="text-sm bg-gray-50 dark:bg-gray-900 p-3 rounded">
+{`영화 "AI 전쟁" 제작비: 100억 원
+     ↓
+30% 토큰화 (30억 원)
+     ↓
+30,000개 토큰 발행
+     ↓
+영화 수익 배분:
+  • 박스오피스: 200억
+  • OTT 판권: 50억
+  • 해외 배급: 30억
+  총 280억 → 제작비 회수 후 순이익 180억
+     ↓
+투자자 배당: 54억 (30% 지분)
+     ↓
+ROI: 80% (30억 투자 → 54억 회수)`}
+                    </pre>
+                  </div>
+                </div>
+
+                <div className="bg-cyan-50 dark:bg-cyan-900/20 p-6 rounded-lg border-l-4 border-cyan-500">
+                  <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">⚡ 재생에너지 프로젝트</h4>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <pre className="text-sm bg-gray-50 dark:bg-gray-900 p-3 rounded">
+{`태양광 발전소 건설: 50억 원
+     ↓
+5,000개 토큰 발행
+     ↓
+발전소 가동:
+  • 월 전력 판매 수익: 5,000만 원
+  • 연 수익: 6억 원
+     ↓
+투자자 배당: 연 6억 원 (12% 수익률)
+     ↓
+20년간 안정적 배당 + 탄소배출권 수익 추가`}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 p-8 rounded-xl my-8">
+                <h4 className="font-bold text-2xl mb-4 text-gray-900 dark:text-white">🌐 토큰화 가능한 거의 모든 것</h4>
+                <p className="mb-4 text-gray-700 dark:text-gray-300">
+                  STO 기술의 핵심은 <strong>"가치를 가진 모든 자산을 디지털 토큰으로 변환"</strong>하는 것입니다.
+                  전통적으로 소수만 접근 가능했던 자산을 조각내어 누구나 투자할 수 있게 만듭니다.
+                </p>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-bold mb-2 text-sm">💼 전통 자산</p>
+                    <p className="text-xs">부동산, 채권, 주식, 원자재</p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-bold mb-2 text-sm">🎨 수집품</p>
+                    <p className="text-xs">미술품, 와인, 시계, 스니커즈, 스포츠 카드</p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-bold mb-2 text-sm">🎵 IP 자산</p>
+                    <p className="text-xs">음원, 유튜브 채널, 영화 저작권, 게임 IP</p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-bold mb-2 text-sm">🏆 스포츠</p>
+                    <p className="text-xs">경주마, 팀 지분, 선수 계약금</p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-bold mb-2 text-sm">🔮 미래 가치</p>
+                    <p className="text-xs">예측 시장, 탄소배출권, 데이터</p>
+                  </div>
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded">
+                    <p className="font-bold mb-2 text-sm">⚡ 인프라</p>
+                    <p className="text-xs">태양광, 풍력, 통신망, 충전소</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 italic">
+                  → <strong>상상할 수 있는 모든 자산이 토큰화 대상</strong>이 될 수 있습니다.
+                  다만, 각국 증권 규제와 투자자 보호 법률을 반드시 준수해야 합니다.
+                </p>
               </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">AI ST 지갑 활용법</h2>
