@@ -10,19 +10,19 @@ export default function SecurityTokenSTOGuidePage() {
   const copy = {
     ko: {
       breadcrumb: '블로그',
-      category: 'STO & 증권형 토큰',
-      title: 'STO(증권형 토큰) 완벽 가이드',
-      date: '2026년 1월 11일',
-      readTime: '10분 읽기',
+      category: 'STO & RWA',
+      title: 'STO(증권형 토큰)과 RWA 완벽 가이드',
+      date: '2026년 2월 13일',
+      readTime: '15분 읽기',
       backToBlog: '← 블로그로 돌아가기',
       relatedPosts: '관련 글',
     },
     en: {
       breadcrumb: 'Blog',
-      category: 'STO & Security Tokens',
-      title: 'Complete Guide to STO (Security Token Offering)',
-      date: 'January 11, 2026',
-      readTime: '10 min read',
+      category: 'STO & RWA',
+      title: 'Complete Guide to STO and RWA (Real World Assets)',
+      date: 'February 13, 2026',
+      readTime: '15 min read',
       backToBlog: '← Back to Blog',
       relatedPosts: 'Related Posts',
     },
@@ -455,6 +455,253 @@ AI: "50만 원으로 추가 투자 가능한 STO:"
                     </ul>
                   </div>
                 </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-gray-900 dark:text-white">한국 RWA·STO 시장 현황 (2026년)</h3>
+
+              <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 p-8 rounded-xl my-8 border-l-4 border-green-500">
+                <h4 className="font-bold mb-4 text-xl text-gray-900 dark:text-white">📊 시장 개요</h4>
+                <p className="mb-4 text-sm">
+                  한국의 RWA 토큰화 시장은 명확한 법적 프레임워크가 부재한 상황에서도
+                  <strong>온라인투자연계금융업법(온투법)</strong>, <strong>자본시장법</strong>, <strong>금융혁신지원특별법(규제 샌드박스)</strong> 등
+                  기존 법률을 해석·활용하여 빠르게 성장하고 있습니다.
+                </p>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg mb-4">
+                  <h5 className="font-bold mb-3 text-gray-900 dark:text-white">법적 근거 및 사업 모델</h5>
+                  <div className="space-y-3 text-sm">
+                    <div className="border-l-4 border-blue-500 pl-4">
+                      <p className="font-semibold text-blue-700 dark:text-blue-300">1. 온라인투자연계금융업법 (온투법) 기반</p>
+                      <p className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                        <strong>제정:</strong> 2021년 4월 시행<br/>
+                        <strong>목적:</strong> 소액 투자자 보호 및 조각투자 활성화<br/>
+                        <strong>규제:</strong> 금융위원회 등록 및 감독
+                      </p>
+                      <ul className="ml-4 mt-2 space-y-1 text-xs">
+                        <li>• <strong>부동산 조각투자:</strong> 카사코리아, 피스, 소유</li>
+                        <li>• <strong>미술품 조각투자:</strong> 아트투게더, 테사</li>
+                        <li>• <strong>음악 저작권:</strong> 뮤직카우</li>
+                      </ul>
+                      <div className="mt-2 p-2 bg-blue-50 dark:bg-blue-900/30 rounded text-xs">
+                        <strong>핵심 요건:</strong> 금융위 등록, 투자한도 제한 (개인: 건당 500만원, 연 1천만원), 정보공시 의무
+                      </div>
+                    </div>
+
+                    <div className="border-l-4 border-purple-500 pl-4">
+                      <p className="font-semibold text-purple-700 dark:text-purple-300">2. 자본시장법 기반 (증권형 토큰)</p>
+                      <p className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                        <strong>법적 해석:</strong> 증권형 토큰은 자본시장법상 "증권"으로 해석 (금융위 유권해석)<br/>
+                        <strong>규제:</strong> 증권신고서 제출, 금융투자업 인가 필요
+                      </p>
+                      <ul className="ml-4 mt-2 space-y-1 text-xs">
+                        <li>• <strong>STO 플랫폼:</strong> 루센트블록 (Lucentblock)</li>
+                        <li>• <strong>증권형 토큰 인프라:</strong> 두나무, 한국거래소 (KRX) 협력 프로젝트</li>
+                        <li>• <strong>디지털 증권 발행:</strong> KB증권, 신한금융투자 등 대형 증권사 참여 검토 중</li>
+                      </ul>
+                      <div className="mt-2 p-2 bg-purple-50 dark:bg-purple-900/30 rounded text-xs">
+                        <strong>현황:</strong> 블록체인 기반 증권 발행·유통에 대한 명시적 규정은 없으나, 자본시장법을 유추 적용하여 시범 사업 진행 중
+                      </div>
+                    </div>
+
+                    <div className="border-l-4 border-orange-500 pl-4">
+                      <p className="font-semibold text-orange-700 dark:text-orange-300">3. 금융혁신지원특별법 (규제 샌드박스)</p>
+                      <p className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                        <strong>목적:</strong> 혁신 금융 서비스 시범 운영 허용<br/>
+                        <strong>기간:</strong> 최대 4년 (2년 + 연장 2년)
+                      </p>
+                      <ul className="ml-4 mt-2 space-y-1 text-xs">
+                        <li>• 규제 적용 유예로 신규 비즈니스 모델 검증 가능</li>
+                        <li>• 토큰 증권 거래 플랫폼 시범 사업 승인 사례 존재</li>
+                        <li>• 샌드박스 종료 후 정식 법제화 또는 사업 종료</li>
+                      </ul>
+                    </div>
+
+                    <div className="border-l-4 border-red-500 pl-4">
+                      <p className="font-semibold text-red-700 dark:text-red-300">4. 부동산 크라우드펀딩 (별도 법령)</p>
+                      <p className="text-xs mt-1 text-gray-600 dark:text-gray-400">
+                        <strong>법적 근거:</strong> 부동산개발업법, 온투법<br/>
+                        <strong>사업자:</strong> 테라펀딩, 펀다, 어니스트펀드 등
+                      </p>
+                      <ul className="ml-4 mt-2 space-y-1 text-xs">
+                        <li>• 부동산 개발 프로젝트에 대한 대출형·지분형 투자</li>
+                        <li>• 블록체인 토큰화와는 별개이나, RWA 개념과 유사</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-lg border-l-4 border-yellow-500">
+                  <h5 className="font-bold mb-3 text-yellow-800 dark:text-yellow-300">⚠️ 법적 공백 및 과제</h5>
+                  <ul className="space-y-2 text-sm">
+                    <li>
+                      <strong>1. 명시적 법률 부재:</strong> "블록체인 기반 증권" 또는 "디지털 자산 증권"에 대한 직접적인 법률 규정이 없어,
+                      기존 자본시장법을 유추 적용하는 방식으로 운영 중입니다.
+                    </li>
+                    <li>
+                      <strong>2. 디지털자산기본법 논의:</strong> 2024~2025년 국회에서 가상자산·디지털자산 통합 규제 법안이 논의되었으나
+                      아직 제정되지 않았습니다. (2026년 현재 계류 또는 추가 논의 중)
+                    </li>
+                    <li>
+                      <strong>3. 거래소 인가 미비:</strong> 증권형 토큰을 거래할 수 있는 정식 인가 거래소가 부재하여,
+                      발행은 가능하나 유통 시장이 제한적입니다.
+                    </li>
+                    <li>
+                      <strong>4. 세제 불명확:</strong> 토큰화된 자산의 양도소득세, 배당소득세 처리 방식이 명확하지 않아
+                      투자자 혼란이 있습니다. (금융투자소득세 도입 논의 중)
+                    </li>
+                    <li>
+                      <strong>5. 국경 간 거래:</strong> 해외 STO 상품에 대한 국내 투자자 접근 규제가 불명확하며,
+                      외국환거래법, 자본시장법 등 여러 법률이 복합적으로 적용됩니다.
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg mt-4">
+                  <h5 className="font-bold mb-3 text-green-800 dark:text-green-300">✅ 사업 가능 근거 요약</h5>
+                  <p className="text-sm mb-3">
+                    "법이 없는데 어떻게 사업을 하는가?"라는 질문에 대한 답:
+                  </p>
+                  <ul className="space-y-2 text-sm">
+                    <li>
+                      <strong>✓ 조각투자는 온투법으로 명시적 허용:</strong>
+                      2021년 온투법 제정으로 소액 투자 중개 플랫폼이 금융위 등록 후 합법적으로 운영 가능
+                    </li>
+                    <li>
+                      <strong>✓ 증권형 토큰은 자본시장법 유추 적용:</strong>
+                      금융위원회가 "실질이 증권이면 자본시장법 적용" 원칙을 유지하여,
+                      토큰 형태여도 증권의 성격을 가지면 기존 증권 규제를 따르도록 해석
+                    </li>
+                    <li>
+                      <strong>✓ 규제 샌드박스로 혁신 모델 시범 허용:</strong>
+                      금융혁신지원특별법에 따라 금융위 승인 시 최대 4년간 규제 유예를 받아 신규 모델 테스트 가능
+                    </li>
+                    <li>
+                      <strong>✓ 정부 정책적 육성 의지:</strong>
+                      금융위·과기정통부 등이 디지털 자산 및 RWA 시장 육성을 국정 과제로 추진 중이며,
+                      법제화 논의가 지속적으로 진행되고 있음
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">주요 한국 RWA·STO 사업자</h3>
+
+              <div className="space-y-4 my-8">
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg">
+                      <span className="text-2xl">🏢</span>
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">카사코리아 (KASA Korea)</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        <strong>분야:</strong> 부동산 조각투자<br/>
+                        <strong>법적 근거:</strong> 온라인투자연계금융업 등록 (온투법)<br/>
+                        <strong>사업 모델:</strong> 수익형 부동산(오피스텔, 상가 등)을 소액으로 조각내어 투자 기회 제공
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-500">
+                        대표 상품: 강남 오피스텔, 부산 상가 등 월 임대료 수익 배당
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-purple-100 dark:bg-purple-900 p-3 rounded-lg">
+                      <span className="text-2xl">🎨</span>
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">아트투게더 (Art Together)</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        <strong>분야:</strong> 미술품 조각투자<br/>
+                        <strong>법적 근거:</strong> 온라인투자연계금융업 등록 (온투법)<br/>
+                        <strong>사업 모델:</strong> 고가 미술품(회화, 조각 등)을 조각내어 다수가 공동 소유
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-500">
+                        대표 상품: 박수근, 이중섭 등 유명 작가 작품 / 가치 상승 시 차익 실현
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-green-100 dark:bg-green-900 p-3 rounded-lg">
+                      <span className="text-2xl">🔐</span>
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">루센트블록 (Lucentblock)</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        <strong>분야:</strong> STO 플랫폼 (블록체인 증권 발행·관리 인프라)<br/>
+                        <strong>법적 근거:</strong> 금융혁신지원특별법 (규제 샌드박스 승인)<br/>
+                        <strong>사업 모델:</strong> 기업·부동산 등의 자산을 증권형 토큰으로 발행하는 기술 플랫폼 제공
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-500">
+                        특징: 블록체인 기반 증권 발행·분배·배당 자동화 / 금융위 샌드박스 승인
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-orange-100 dark:bg-orange-900 p-3 rounded-lg">
+                      <span className="text-2xl">🏗️</span>
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">테라펀딩 (Tera Funding)</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        <strong>분야:</strong> 부동산 크라우드펀딩<br/>
+                        <strong>법적 근거:</strong> 온투법, 부동산개발업법<br/>
+                        <strong>사업 모델:</strong> 부동산 개발 프로젝트에 대한 대출형·지분형 투자 중개
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-500">
+                        특징: 토큰화와 별개이나 소액 투자자에게 부동산 투자 기회 제공
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-indigo-100 dark:bg-indigo-900 p-3 rounded-lg">
+                      <span className="text-2xl">🏦</span>
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">두나무·한국거래소(KRX) 협력</h5>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        <strong>분야:</strong> 디지털 증권 발행·거래 인프라 구축<br/>
+                        <strong>법적 근거:</strong> 자본시장법 (증권으로 해석), 규제 샌드박스 검토 중<br/>
+                        <strong>사업 모델:</strong> 블록체인 기반 증권 발행·예탁·결제 시스템 개발
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-500">
+                        현황: 시범 사업 단계 / 정식 증권형 토큰 거래소 인가 추진 중
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 p-6 rounded-lg my-8 border-l-4 border-red-500">
+                <h4 className="font-bold mb-3 text-red-800 dark:text-red-300">🚨 투자자 주의사항</h4>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <strong>법적 불확실성:</strong> 디지털 자산에 대한 명시적 법률이 없어, 향후 규제 변경 시 사업 모델이나 투자 보호에 영향을 받을 수 있습니다.
+                  </li>
+                  <li>
+                    <strong>유동성 제한:</strong> 증권형 토큰 거래소가 정식 인가되지 않아, 발행된 토큰을 매도하기 어려울 수 있습니다.
+                  </li>
+                  <li>
+                    <strong>세제 불명확:</strong> 토큰 매매 차익 및 배당 소득에 대한 과세 기준이 불명확하여, 세무 처리에 주의가 필요합니다.
+                  </li>
+                  <li>
+                    <strong>원금 손실 위험:</strong> 조각투자·크라우드펀딩은 예금자보호법 적용 대상이 아니므로, 투자 원금 손실 위험이 있습니다.
+                  </li>
+                  <li>
+                    <strong>사업자 선택 주의:</strong> 금융위 등록·인가를 받은 사업자인지 반드시 확인하고, 비등록 사업자는 피해야 합니다.
+                  </li>
+                </ul>
               </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">BlackRock BUIDL: 세계 최대 STO 사례</h2>
