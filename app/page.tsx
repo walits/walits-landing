@@ -8,6 +8,7 @@ export default function HomePage() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
   const [scrolled, setScrolled] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [noticeOpen, setNoticeOpen] = useState(true);
 
   // Service URLs from environment variables
   const NON_CUSTODY_URL = process.env.NEXT_PUBLIC_NON_CUSTODY_URL || 'http://localhost:3101';
@@ -504,6 +505,60 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* Notice Modal */}
+      {noticeOpen && (
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full mx-4 p-8 relative animate-fadeIn">
+            <button
+              onClick={() => setNoticeOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+              aria-label="Close"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div className="text-center">
+              <div className="mb-6">
+                <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                  {language === 'ko' ? '🚧 서비스 개발 중' : '🚧 Under Development'}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  {language === 'ko'
+                    ? '현재 Walits 서비스를 개발 중입니다. 빠른 시일 내에 더 나은 서비스로 찾아뵙겠습니다.'
+                    : 'Walits is currently under development. We will meet you soon with better services.'}
+                </p>
+                <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4 mb-6">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                    {language === 'ko' ? '📧 문의사항' : '📧 Contact'}
+                  </p>
+                  <a
+                    href="mailto:walits.co@gmail.com"
+                    className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+                  >
+                    walits.co@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setNoticeOpen(false)}
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-6 rounded-lg transition-all transform hover:scale-105 active:scale-95"
+              >
+                {language === 'ko' ? '확인' : 'OK'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
