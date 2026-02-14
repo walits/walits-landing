@@ -965,7 +965,7 @@ export default function HomePage() {
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-300 dark:border-gray-600 hover:shadow-lg transition-shadow relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                  {language === 'ko' ? '2026년 2월 출시' : 'Launch Feb 2026'}
+                  {language === 'ko' ? '2026년 4월 출시' : 'Launch April 2026'}
                 </span>
               </div>
               <div className="text-center mb-6">
