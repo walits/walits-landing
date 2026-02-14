@@ -532,8 +532,8 @@ export default function HomePage() {
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8 text-base">
                   {language === 'ko'
-                    ? '현재 Walits 서비스를 개발 중입니다. 빠른 시일 내에 더 나은 서비스로 찾아뵙겠습니다.'
-                    : 'Walits is currently under development. We will meet you soon with better services.'}
+                    ? '현재 Walits 서비스를 개발 중입니다. 빠른 시일 내에 혁신적인 서비스를 제공해 드리기 위해 최선의 노력을 다하겠습니다.'
+                    : 'Walits is currently under development. We are committed to providing you with innovative services as soon as possible.'}
                 </p>
                 <div className="bg-gradient-to-br from-slate-50 to-gray-100 dark:from-gray-700/50 dark:to-gray-800/50 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 backdrop-blur-sm">
                   <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
