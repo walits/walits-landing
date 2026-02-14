@@ -522,10 +522,14 @@ export default function HomePage() {
 
             <div className="text-center">
               <div className="mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg transform hover:scale-105 transition-transform">
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                <div className="w-24 h-24 bg-white dark:bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg p-4 border border-gray-100 dark:border-gray-600">
+                  <Image
+                    src="/logo.png"
+                    alt="Walits Logo"
+                    width={80}
+                    height={80}
+                    className="object-contain"
+                  />
                 </div>
                 <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-4">
                   {language === 'ko' ? '서비스 개발 중' : 'Under Development'}
