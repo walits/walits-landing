@@ -1066,7 +1066,7 @@ export default function HomePage() {
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-100 dark:to-gray-200 rounded-xl p-8 border-2 border-gray-700 dark:border-gray-400 hover:shadow-2xl transition-shadow relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 flex gap-2 whitespace-nowrap">
                 <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
-                  {language === 'ko' ? '2026년 3월 출시' : 'Launch Mar 2026'}
+                  {language === 'ko' ? '2026년 5월 출시' : 'Launch May 2026'}
                 </span>
                 <span className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
                   {language === 'ko' ? '추천' : 'Recommended'}
