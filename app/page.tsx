@@ -522,7 +522,7 @@ export default function HomePage() {
 
             <div className="text-center">
               <div className="mb-8">
-                <div className="w-24 h-24 bg-white dark:bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg p-4 border border-gray-100 dark:border-gray-600">
+                <div className="w-24 h-24 bg-white dark:bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg p-4 border-2 border-amber-400 dark:border-amber-500">
                   <Image
                     src="/logo.png"
                     alt="Walits Logo"
