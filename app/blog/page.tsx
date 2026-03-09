@@ -95,7 +95,7 @@ export default function BlogPage() {
           image: '/blog/mpc-security.jpg',
         },
         {
-          id: 'messenger-crypto-transfer',
+          id: 'stablecoin-wallet-erc4337',
           category: 'ERC-4337 · 계정 추상화',
           categoryColor: 'bg-blue-100 text-blue-800',
           title: '스테이블 코인을 위한 합리적 지갑 서비스',
@@ -253,7 +253,7 @@ export default function BlogPage() {
           image: '/blog/mpc-security.jpg',
         },
         {
-          id: 'messenger-crypto-transfer',
+          id: 'stablecoin-wallet-erc4337',
           category: 'ERC-4337 · Account Abstraction',
           categoryColor: 'bg-blue-100 text-blue-800',
           title: 'A Rational Wallet Service for Stablecoins',

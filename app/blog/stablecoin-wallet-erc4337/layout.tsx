@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Walits Team" }],
   alternates: {
-    canonical: "/blog/messenger-crypto-transfer",
+    canonical: "/blog/stablecoin-wallet-erc4337",
   },
   openGraph: {
     title: "스테이블 코인을 위한 합리적 지갑 서비스",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2026-03-09T00:00:00Z",
     authors: ["Walits Team"],
-    url: "https://walits.com/blog/messenger-crypto-transfer",
+    url: "https://walits.com/blog/stablecoin-wallet-erc4337",
     images: [
       {
         url: "https://walits.com/blog/messenger-transfer.jpg",
