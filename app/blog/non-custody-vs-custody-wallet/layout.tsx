@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "국가가 압수한 코인, 왜 계속 털리는가 — 커스터디 전문가가 본 구조적 결함과 10가지 처방 | Walits",
+  title: "범죄 압수 코인을 보관하기 위한 국가기관용 커스터디지갑 | Walits",
   description: "강남서 22BTC 유출, 국세청 69억 탈취까지. Walits 리서치팀이 분석한 한국 압수 가상자산 보안의 3가지 구조적 결함과 MPC·HSM·SSS 기반 10가지 실질적 처방.",
   keywords: [
     "압수 가상자산 보안",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     canonical: "/blog/non-custody-vs-custody-wallet",
   },
   openGraph: {
-    title: "국가가 압수한 코인, 왜 계속 털리는가 — 10가지 처방",
+    title: "범죄 압수 코인을 보관하기 위한 국가기관용 커스터디지갑",
     description: "강남서 22BTC 유출, 국세청 69억 탈취. 한국 압수 코인 보안 결함의 구조적 원인과 커스터디 전문가의 10가지 처방.",
     type: "article",
     publishedTime: "2026-03-10T00:00:00Z",

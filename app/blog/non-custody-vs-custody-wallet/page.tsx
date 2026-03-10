@@ -11,7 +11,7 @@ export default function SeizedCryptoManagementPage() {
     ko: {
       breadcrumb: '블로그',
       breadcrumbCategory: '디지털 자산',
-      title: '국가가 압수한 코인, 왜 계속 털리는가 — 커스터디 전문가가 본 구조적 결함과 10가지 처방',
+      title: '범죄 압수 코인을 보관하기 위한 국가기관용 커스터디지갑',
       date: '2026년 3월 10일',
       readTime: '12분 읽기',
       author: 'Walits 리서치팀',
@@ -19,7 +19,7 @@ export default function SeizedCryptoManagementPage() {
     en: {
       breadcrumb: 'Blog',
       breadcrumbCategory: 'Digital Assets',
-      title: "Why Korea Keeps Losing Seized Crypto — Structural Flaws and 10 Real Fixes",
+      title: "Custody Wallets for Government Agencies to Secure Seized Criminal Assets",
       date: 'March 10, 2026',
       readTime: '12 min read',
       author: 'Walits Research Team',
