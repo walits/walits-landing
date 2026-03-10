@@ -132,7 +132,7 @@ export default function SeizedCryptoManagementPage() {
               </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">
-                지금 당장 할 수 있는 7가지 처방
+                지금 당장 할 수 있는 8가지 처방
               </h2>
               <p>
                 거창한 인프라를 새로 짓자는 이야기가 아닙니다. 이미 검증된 기술과 절차만으로도
@@ -236,10 +236,37 @@ export default function SeizedCryptoManagementPage() {
                 </p>
               </div>
 
-              {/* 처방 6 */}
+              {/* 처방 6 - 스테이블코인 전환 */}
               <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-6 border border-green-200 dark:border-green-800">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="bg-green-600 text-white text-sm font-bold px-3 py-1 rounded-full">처방 6</span>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">스테이블코인 전환 — 압수 즉시 USDT·USDC로 환산 보관</h3>
+                </div>
+                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg mb-4 font-mono text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
+                  <pre>{`압수 시점 시세로 USDT 또는 USDC로 즉시 스왑
+→ 가격 변동 리스크 제거 (자산 가치 고정)
+→ 수십 종 코인을 2개 스테이블코인으로 단일화
+→ 보관·감사·회계 처리 대폭 단순화
+법원 제출 자료: "압수 시점 $XXX,XXX USDT" 명확 기재`}</pre>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
+                  현재 문제 중 하나는 압수 코인의 종류가 너무 다양하다는 것입니다. 비트코인, 이더리움, 알트코인, 밈코인까지
+                  각각 다른 네트워크·지갑·보안 체계가 필요합니다. 압수 즉시 시세를 기준으로 USDT·USDC로 전환하면
+                  관리 복잡도가 극적으로 낮아집니다.
+                </p>
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border border-yellow-300 dark:border-yellow-700 text-sm">
+                  <p className="font-semibold text-yellow-800 dark:text-yellow-200 mb-1">검토 필요 사항</p>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    전환 시점의 시세 조작 가능성과 법적 적정성(원물 보전 의무 여부)은 별도 법제화로 해소해야 합니다.
+                    압수 즉시 전환하는 것이 현행법상 허용되는지도 검토가 필요합니다.
+                  </p>
+                </div>
+              </div>
+
+              {/* 처방 7 */}
+              <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-6 border border-green-200 dark:border-green-800">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="bg-green-600 text-white text-sm font-bold px-3 py-1 rounded-full">처방 7</span>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">법제화 — 압수 90일 후 자동 몰수·경매 제도화</h3>
                 </div>
                 <div className="bg-white dark:bg-gray-800 p-4 rounded-lg mb-4 font-mono text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
@@ -255,10 +282,10 @@ export default function SeizedCryptoManagementPage() {
                 </p>
               </div>
 
-              {/* 처방 7 */}
+              {/* 처방 8 */}
               <div className="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-lg my-6 border border-orange-200 dark:border-orange-800">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="bg-orange-600 text-white text-sm font-bold px-3 py-1 rounded-full">처방 7</span>
+                  <span className="bg-orange-600 text-white text-sm font-bold px-3 py-1 rounded-full">처방 8</span>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">AI 이상 탐지 — 내부자 행동 패턴까지 감시</h3>
                 </div>
                 <div className="bg-white dark:bg-gray-800 p-4 rounded-lg mb-4 font-mono text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
@@ -395,7 +422,7 @@ export default function SeizedCryptoManagementPage() {
               </div>
 
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">
-                7 Fixes You Can Start Right Now
+                8 Fixes You Can Start Right Now
               </h2>
               <p>
                 This isn't about building grand new infrastructure. The existing, proven technology and procedures are already sufficient to solve most of the current problems.
@@ -496,6 +523,30 @@ Staking positions fully traceable in real time
               <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-6 border border-green-200 dark:border-green-800">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="bg-green-600 text-white text-sm font-bold px-3 py-1 rounded-full">Fix 6</span>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Stablecoin Conversion — Swap Seized Assets to USDT/USDC at Time of Seizure</h3>
+                </div>
+                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg mb-4 font-mono text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
+                  <pre>{`Convert to USDT or USDC at market rate at time of seizure
+→ Eliminate price volatility risk (value fixed in USD terms)
+→ Consolidate dozens of coin types into 2 stablecoins
+→ Dramatically simplify custody, auditing, and accounting
+Court filing: "Seized assets: $XXX,XXX USDT (as of [date])" — clear`}</pre>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
+                  One underappreciated problem is the sheer variety of seized coins — Bitcoin, Ethereum, altcoins, meme coins — each requiring different networks, wallets, and security setups. Converting everything to USDT or USDC at seizure dramatically reduces operational complexity.
+                </p>
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border border-yellow-300 dark:border-yellow-700 text-sm">
+                  <p className="font-semibold text-yellow-800 dark:text-yellow-200 mb-1">Issues to Resolve</p>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Potential manipulation of conversion timing and legal questions around in-kind preservation requirements need to be addressed through legislation. Whether immediate conversion is permitted under current law also requires review.
+                  </p>
+                </div>
+              </div>
+
+              {/* Fix 7 */}
+              <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg my-6 border border-green-200 dark:border-green-800">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="bg-green-600 text-white text-sm font-bold px-3 py-1 rounded-full">Fix 7</span>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">Legislation — Auto-Forfeiture and Auction Within 90 Days</h3>
                 </div>
                 <div className="bg-white dark:bg-gray-800 p-4 rounded-lg mb-4 font-mono text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
@@ -510,10 +561,10 @@ Proposed:
                 </p>
               </div>
 
-              {/* Fix 7 */}
+              {/* Fix 8 */}
               <div className="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-lg my-6 border border-orange-200 dark:border-orange-800">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="bg-orange-600 text-white text-sm font-bold px-3 py-1 rounded-full">Fix 7</span>
+                  <span className="bg-orange-600 text-white text-sm font-bold px-3 py-1 rounded-full">Fix 8</span>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">AI Anomaly Detection — Monitoring Insider Behavior Patterns</h3>
                 </div>
                 <div className="bg-white dark:bg-gray-800 p-4 rounded-lg mb-4 font-mono text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
