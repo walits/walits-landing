@@ -718,6 +718,196 @@ export default function CryptoTaxAnalysisPost() {
                 <strong className="text-gray-900 dark:text-white">한 줄 요약:</strong> 거래소 안에서만 논 사람은 거래소가 다 해준다. 개인 지갑을 쓴 순간부터 본인이 직접 소명해야 한다. 국세청의 통합분석 시스템은 후자를 잡기 위해 존재한다.
               </div>
 
+              {/* 9. 실전 시나리오 */}
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">9. 실전 시나리오: 내 상황은 어떻게 되나</h2>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+                교과서적인 설명 말고, 실제로 많이 부딪히는 케이스별로 정리했다.
+              </p>
+
+              <div className="mb-12 space-y-8">
+
+                {/* 시나리오 1: 친구에게 받은 코인 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-900 dark:bg-white px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">시나리오 ① 친구에게 코인을 선물받았다</h3>
+                    <p className="text-gray-300 dark:text-gray-600 text-sm mt-1">작년에 친구가 비트코인 0.1개(당시 시세 500만 원)를 그냥 줬다. 개인지갑에 보관 중이다.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① 지금 당장 문제: 증여세</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        코인도 재산이다. 가족이 아닌 타인에게 받은 재산은 <strong className="text-gray-800 dark:text-gray-200">10년 합산 500만 원 초과 시 증여세 신고 의무</strong>가 생긴다.
+                        500만 원이면 딱 기준선이라 실제 세액은 0원이 될 수 있지만, <strong className="text-red-600 dark:text-red-400">신고 자체는 해야 한다.</strong>
+                      </p>
+                      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded p-3 text-xs text-amber-800 dark:text-amber-300">
+                        신고 기한: 증여받은 날이 속하는 달의 말일부터 <strong>3개월 이내</strong>. 이미 지났다면 <strong>기한후 신고</strong>를 해야 한다. 무신고 가산세 20%가 붙지만, 자진 신고 시 감면 혜택이 있다. 지금이라도 하는 게 낫다.
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② 나중에 팔 때 문제: 양도소득세</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        증여받은 시점의 시가가 <strong className="text-gray-800 dark:text-gray-200">취득가액</strong>이 된다. 500만 원에 받아서 나중에 1,000만 원에 팔면, 과세 대상 차익은 500만 원.
+                        여기서 연 250만 원 기본공제를 빼면 250만 원에 22% → <strong className="text-gray-800 dark:text-gray-200">세금 약 55만 원.</strong>
+                      </p>
+                      <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 font-mono text-xs">
+                        <p>양도가액: 1,000만 원</p>
+                        <p>− 취득가액(증여 시 시가): 500만 원</p>
+                        <p>= 차익: 500만 원</p>
+                        <p>− 기본공제: 250만 원</p>
+                        <p>= 과세표준: 250만 원 × 22% = <strong>55만 원</strong></p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">③ 정부가 알 수 있나?</p>
+                      <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <p><span className="font-semibold text-gray-800 dark:text-gray-200">지금 당장:</span> 개인지갑 간 이체는 추적하기 어렵다. 친구가 거래소에서 출금했다면 그 기록은 남지만, 받은 사람의 지갑과의 연결은 당장 알기 힘들다.</p>
+                        <p><span className="font-semibold text-gray-800 dark:text-gray-200">나중에 현금화할 때:</span> KYC가 된 국내 거래소에 입금하면 그 시점에 역추적 가능하다. "이 코인이 어디서 왔냐"는 질문에 답할 수 없으면 전액 과세 위험.</p>
+                        <p><span className="font-semibold text-red-600 dark:text-red-400">블록체인은 영구 기록이다:</span> TXID는 절대 지워지지 않는다. 2026년 시스템이 구축된 후 소급 분석이 이루어지면, 과거 거래도 들여다볼 수 있다. 부과제척기간은 <strong>일반 10년, 사기·은닉 15년</strong>이다.</p>
+                      </div>
+                    </div>
+
+                    <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg text-sm">
+                      <p className="font-semibold text-green-800 dark:text-green-300 mb-1">합법적 해결책</p>
+                      <p className="text-green-700 dark:text-green-400">지금이라도 증여세 기한후 신고를 하고, 친구와의 이체 TXID와 당시 시세를 증빙자료로 보존해 두어라. 취득 시점 시가를 인정받아야 나중에 양도세 계산에서 불이익을 받지 않는다.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 시나리오 2: 상속받은 코인 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-800 dark:bg-gray-100 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">시나리오 ② 부모님이 돌아가시면서 코인을 남기셨다</h3>
+                    <p className="text-gray-300 dark:text-gray-600 text-sm mt-1">지갑 시드 문구를 메모로 남기셨고, 안에 이더리움 5개가 있다.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① 상속세 신고 의무</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        가상자산도 상속재산에 포함된다. <strong className="text-gray-800 dark:text-gray-200">사망일로부터 6개월 이내</strong> 상속세 신고를 해야 한다.
+                        상속세 과세가액은 사망 당시 시가 기준이며, 기본공제(일괄 5억 원 등)를 적용한 후 산출된다.
+                        신고를 하지 않으면 20% 무신고 가산세 + 납부 지연 이자가 붙는다.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② 상속받은 코인의 취득가액</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        상속 시점의 시가가 취득가액이 된다. 부모님이 처음 산 가격은 관계없다.
+                        나중에 팔 때 양도세는 <em>(매도가 − 상속 시 시가)</em>에 22%를 적용한다.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">③ 개인지갑인 경우 추가 난관</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        거래소에 있던 코인은 상속 신고가 상대적으로 쉽다(거래소가 사망자 계좌를 동결하고 상속 절차를 안내).
+                        그러나 개인지갑은 시드 문구를 사용해 이전해야 하는데, 이 과정을 소명하지 못하면
+                        국세청이 코인 출처를 의심할 수 있다. <strong className="text-gray-800 dark:text-gray-200">시드 인수 경위와 사망일 기준 시세 자료를 반드시 확보해야 한다.</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 시나리오 3: 해외 거래소 신고 안 한 경우 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-700 dark:bg-gray-200 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">시나리오 ③ 바이낸스에서 몇 년째 거래했는데 신고 한 번도 안 했다</h3>
+                    <p className="text-gray-300 dark:text-gray-700 text-sm mt-1">KYC에 한국 여권을 등록했다. 국내에는 신고하지 않았다.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① CARF로 이미 들통날 수 있다</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        2026년부터 OECD CARF(가상자산 보고 프레임워크)가 발효된다. 바이낸스가 등록된 국가의 세무당국 →
+                        한국 국세청으로 <strong className="text-gray-800 dark:text-gray-200">자동 정보 교환</strong>이 이루어진다.
+                        한국 주민등록번호 또는 여권번호가 KYC에 있으면 거래 내역 전체가 전달된다.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② 과태료와 가산세 누적 구조</p>
+                      <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                        <p>• 해외금융계좌 미신고(연간 잔액 5억 원 초과): 과태료 최대 20% + 명단공개 가능</p>
+                        <p>• 양도소득세 무신고: 세액의 20% 가산세 (사기·부정행위는 40%)</p>
+                        <p>• 납부 지연 이자: 연 9.125% (하루 0.025%)</p>
+                        <p>• 과거 5년 치가 한꺼번에 추징되면 원금보다 가산세가 더 커질 수 있다</p>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg text-sm">
+                      <p className="font-semibold text-blue-800 dark:text-blue-300 mb-1">현실적 대응</p>
+                      <p className="text-blue-700 dark:text-blue-400">자진신고(기한후 신고)를 통해 가산세를 최소화하는 것이 최선이다. CARF 데이터가 국세청에 들어오기 전에 먼저 신고하는 것이 협상력이 높다. 세무사를 통해 소명 자료를 정리하고 자진신고를 준비하라.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 시나리오 4: P2P 직거래 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-600 dark:bg-gray-300 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">시나리오 ④ 친구한테서 직접 현금으로 사서 개인지갑에 넣어뒀다</h3>
+                    <p className="text-gray-200 dark:text-gray-700 text-sm mt-1">거래소를 거치지 않고 P2P로 현금 500만 원을 주고 비트코인을 받았다.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① 취득가액 증빙이 핵심 문제다</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        나중에 거래소에 입금해서 팔 때, 국세청이 "이 코인 어디서 났냐"고 묻는다.
+                        취득가액을 입증하지 못하면 <strong className="text-red-600 dark:text-red-400">취득가액 0원으로 간주 → 전액 양도차익으로 과세.</strong>
+                        현금 거래 당시 이체 내역이 없다면 입증이 매우 어렵다.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② 금융실명제 위반 가능성</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        현금을 주고 코인을 받는 P2P 거래는 그 자체가 위법은 아니지만,
+                        거액의 현금 거래는 금융거래 신고 의무(FIU 보고)와 연결될 수 있다.
+                        특히 금액이 커지면 자금세탁 혐의로 수사 대상이 될 수 있다.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">③ 지금 해야 할 일</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        거래 당시 상대방과 주고받은 메시지, TXID, 당시 시세 캡처 등 취득 증빙을 최대한 모아두어라.
+                        나중에 거래소에 입금할 때 소명 자료로 활용할 수 있다.
+                        금액이 크다면 세무사와 상담해 취득 경위를 정리해두는 것이 좋다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 시나리오 5: 2017년 이전에 산 코인 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-500 dark:bg-gray-400 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">시나리오 ⑤ 2017년에 비트코인을 샀는데 거래소가 없어졌다</h3>
+                    <p className="text-gray-200 dark:text-gray-700 text-sm mt-1">당시 소액으로 샀는데 거래소가 폐업하거나 내역이 없다. 지갑에 그냥 쌓여 있다.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① 취득가액 0원 처리될 수 있다</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        폐업한 거래소의 데이터는 복구가 불가능한 경우가 많다.
+                        취득 당시 입증이 안 되면 국세청이 취득가액을 0원으로 산정할 수 있다.
+                        예를 들어 100만 원에 샀는데 지금 1억 원이 됐다면, 취득가액 0원으로 처리 시 전액 9,900만 원에 22% 과세.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② 당장 할 수 있는 것들</p>
+                      <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                        <p>• 당시 은행 이체 내역 (계좌 이체로 코인 대금을 냈다면 5년치 조회 가능)</p>
+                        <p>• 당시 이메일 수신 확인서, 가입 환영 이메일</p>
+                        <p>• 카카오톡·문자 내역 (구매 관련 대화)</p>
+                        <p>• 거래소 지원에 연락해 이전 거래 내역 요청 (폐업해도 일부 보관 중인 경우 있음)</p>
+                        <p>• 국세청 세무조사 불복 시 가능한 증빙 목록을 세무사와 미리 정리해두기</p>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg text-sm">
+                      <p className="font-semibold text-yellow-800 dark:text-yellow-300 mb-1">포인트</p>
+                      <p className="text-yellow-700 dark:text-yellow-400">국세청도 대량 처리를 해야 하기 때문에, 납세자가 합리적인 증빙을 제출하면 추정 과세보다 실제 취득가액을 인정해주는 경우가 많다. 일단 자료를 최대한 모아두는 것이 중요하다.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
               {/* 결론 */}
               <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
                 <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">결론: 준비된 자만이 살아남는다</h2>
@@ -1296,6 +1486,196 @@ export default function CryptoTaxAnalysisPost() {
 
               <div className="mb-12 p-5 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                 <strong className="text-gray-900 dark:text-white">One-line summary:</strong> Stay on domestic exchanges and the exchange does it for you. The moment you touch a personal wallet, you&apos;re on your own. The NTS integrated analysis system exists to catch the people in group C.
+              </div>
+
+              {/* Scenario Section */}
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">9. Real-World Scenarios: What Happens in My Situation?</h2>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+                Forget the textbook explanations. Here are the situations people actually run into.
+              </p>
+
+              <div className="mb-12 space-y-8">
+
+                {/* Scenario 1 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-900 dark:bg-white px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">Scenario ① A friend gave me crypto as a gift</h3>
+                    <p className="text-gray-300 dark:text-gray-600 text-sm mt-1">Last year a friend sent 0.1 BTC (worth ₩5M at the time). It&apos;s sitting in my personal wallet.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① The immediate issue: Gift tax</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        Crypto is property. Receiving property from a non-family member above <strong className="text-gray-800 dark:text-gray-200">₩5M in any 10-year period triggers a gift tax filing obligation.</strong>
+                        At exactly ₩5M the actual tax owed may be zero — but <strong className="text-red-600 dark:text-red-400">you still have to file.</strong>
+                      </p>
+                      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded p-3 text-xs text-amber-800 dark:text-amber-300">
+                        Deadline: within 3 months of the end of the month the gift was received. Already missed it? File a <strong>late return</strong>. A 20% non-filing penalty applies, but voluntary late filing gets a discount. Filing late is always better than not filing.
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② When you eventually sell: Capital gains tax</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        The market value at the time of the gift becomes your <strong className="text-gray-800 dark:text-gray-200">acquisition cost</strong>. Received at ₩5M, sold later at ₩10M: the taxable gain is ₩5M.
+                        Subtract the ₩2.5M annual deduction → ₩2.5M taxable at 22% = <strong className="text-gray-800 dark:text-gray-200">approximately ₩550,000 in tax.</strong>
+                      </p>
+                      <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 font-mono text-xs">
+                        <p>Disposal price: ₩10,000,000</p>
+                        <p>− Acquisition cost (gift-time market value): ₩5,000,000</p>
+                        <p>= Gain: ₩5,000,000</p>
+                        <p>− Basic deduction: ₩2,500,000</p>
+                        <p>= Taxable income: ₩2,500,000 × 22% = <strong>₩550,000</strong></p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">③ Would the government know?</p>
+                      <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <p><span className="font-semibold text-gray-800 dark:text-gray-200">Right now:</span> Transfers between personal wallets are hard to trace. Your friend&apos;s exchange withdrawal is on record, but linking it to your wallet isn&apos;t trivial yet.</p>
+                        <p><span className="font-semibold text-gray-800 dark:text-gray-200">When you cash out:</span> Deposit into a KYC-linked domestic exchange, and the trail is traceable backwards. &quot;Where did this coin come from?&quot; — if you can&apos;t answer that, the NTS can tax the full amount.</p>
+                        <p><span className="font-semibold text-red-600 dark:text-red-400">The blockchain is permanent:</span> TXIDs never disappear. Once the 2026 system is live, retroactive analysis is possible. The statute of limitations is <strong>10 years (general) and 15 years (fraud/concealment).</strong></p>
+                      </div>
+                    </div>
+
+                    <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg text-sm">
+                      <p className="font-semibold text-green-800 dark:text-green-300 mb-1">Legal resolution</p>
+                      <p className="text-green-700 dark:text-green-400">File a late gift tax return now. Preserve the TXID and a screenshot of the market price at the time of transfer. Establishing the acquisition cost now means you won&apos;t be over-taxed when you eventually sell.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Scenario 2 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-800 dark:bg-gray-100 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">Scenario ② A deceased parent left crypto behind</h3>
+                    <p className="text-gray-300 dark:text-gray-600 text-sm mt-1">They left a handwritten note with a seed phrase. The wallet holds 5 ETH.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① Inheritance tax filing required</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Virtual assets are included in the estate. <strong className="text-gray-800 dark:text-gray-200">Inheritance tax must be filed within 6 months of death.</strong>
+                        The taxable value is the market price at the date of death, after applying standard deductions (e.g., ₩500M unified deduction).
+                        Missing the deadline triggers a 20% non-filing penalty plus daily interest.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② Acquisition cost for inherited crypto</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        The estate&apos;s valuation price (market value at date of death) becomes your acquisition cost — not what the deceased originally paid.
+                        When you later sell, capital gains are calculated on <em>(disposal price − inherited value)</em>.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">③ Personal wallet adds complications</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Exchange-held assets are simpler — the exchange freezes the account and guides the inheritance process.
+                        For a personal wallet, you access it via the seed phrase, but the NTS may question the provenance of those coins.
+                        <strong className="text-gray-800 dark:text-gray-200"> Document how you obtained the seed phrase and secure the date-of-death price data as evidence.</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Scenario 3 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-700 dark:bg-gray-200 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">Scenario ③ I&apos;ve been trading on Binance for years — never reported anything</h3>
+                    <p className="text-gray-300 dark:text-gray-700 text-sm mt-1">KYC done with a Korean passport. Nothing has been reported to the NTS.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① CARF may already have you</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        The OECD&apos;s CARF (Crypto-Asset Reporting Framework) takes effect in 2026.
+                        Binance&apos;s home jurisdiction shares your trading history with the NTS — <strong className="text-gray-800 dark:text-gray-200">automatically.</strong>
+                        If your Korean resident ID or passport number is on the KYC, your full transaction history follows.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② The penalty stack</p>
+                      <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                        <p>• Overseas financial account non-reporting (annual balance &gt;₩500M): up to 20% penalty + possible name publication</p>
+                        <p>• Capital gains non-filing: 20% surcharge on tax owed (40% if deemed fraudulent)</p>
+                        <p>• Late payment interest: 9.125% per year (0.025%/day)</p>
+                        <p>• Five years of back-taxes assessed at once can make the penalties exceed the original amount</p>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg text-sm">
+                      <p className="font-semibold text-blue-800 dark:text-blue-300 mb-1">Practical approach</p>
+                      <p className="text-blue-700 dark:text-blue-400">Voluntary late filing minimizes penalties. Filing before CARF data hits the NTS gives you more negotiating leverage than waiting to be caught. Work with a tax advisor to compile documentation and file proactively.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Scenario 4 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-600 dark:bg-gray-300 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">Scenario ④ Bought crypto from a friend for cash, no exchange involved</h3>
+                    <p className="text-gray-200 dark:text-gray-700 text-sm mt-1">Paid ₩5M cash, received BTC directly to a personal wallet. No exchange record.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① Proving acquisition cost is the core problem</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        When you eventually deposit to an exchange to sell, the NTS asks: &quot;Where did this coin come from?&quot;
+                        If you can&apos;t prove acquisition cost, <strong className="text-red-600 dark:text-red-400">the NTS assumes ₩0 acquisition cost → full disposal amount is taxable.</strong>
+                        A cash transaction leaves no bank transfer record, making this extremely hard to prove.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② Financial real-name rule exposure</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Cash-for-crypto P2P trades aren&apos;t illegal per se, but large cash transactions
+                        are linked to Financial Intelligence Unit (FIU) reporting requirements.
+                        At higher amounts, money laundering suspicion becomes a real risk.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">③ What to do now</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Gather everything: messages exchanged at the time, the TXID, screenshots of the price at transfer date.
+                        These can serve as acquisition cost evidence when you eventually cash out.
+                        For large amounts, consult a tax advisor to document the acquisition properly before the 2027 tax regime kicks in.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Scenario 5 */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                  <div className="bg-gray-500 dark:bg-gray-400 px-6 py-4">
+                    <h3 className="text-lg font-bold text-white dark:text-gray-900">Scenario ⑤ Bought Bitcoin in 2017 — the exchange no longer exists</h3>
+                    <p className="text-gray-200 dark:text-gray-700 text-sm mt-1">Small purchase back then, exchange has since shut down or the records are gone.</p>
+                  </div>
+                  <div className="p-6 space-y-5">
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">① Risk of ₩0 acquisition cost</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Data from defunct exchanges is often unrecoverable.
+                        Without acquisition proof, the NTS may set acquisition cost to ₩0.
+                        If you paid ₩1M and it&apos;s now worth ₩100M, a ₩0 acquisition cost means 22% on the full ₩99M.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-2">② What you can still find</p>
+                      <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                        <p>• Bank transfer records from when you funded the exchange (5 years accessible via your bank)</p>
+                        <p>• Welcome/confirmation emails from the exchange at signup</p>
+                        <p>• KakaoTalk or SMS records related to the purchase</p>
+                        <p>• Contact the defunct exchange&apos;s successor or data custodian — some archived records may still exist</p>
+                        <p>• Build a complete documentation file with a tax advisor before any audit</p>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg text-sm">
+                      <p className="font-semibold text-yellow-800 dark:text-yellow-300 mb-1">Key point</p>
+                      <p className="text-yellow-700 dark:text-yellow-400">The NTS processes cases at scale. In practice, presenting reasonable supporting documents usually gets your actual acquisition cost recognized rather than the default ₩0 estimate. Gathering evidence now costs nothing; being caught without it later costs everything.</p>
+                    </div>
+                  </div>
+                </div>
+
               </div>
 
               <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
