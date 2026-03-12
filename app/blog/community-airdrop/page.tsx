@@ -292,36 +292,84 @@ export default function CryptoTaxAnalysisPost() {
               </div>
 
               {/* 5. 시스템 구성요소 */}
-              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">5. 시스템 구성요소: 무엇을 어떻게 만드나</h2>
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">5. RFP로 읽는 시스템 구성: 실제로 무엇을 만드나</h2>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+                아래 내용은 국세청이 공개한 제안요청서(RFP) 사업범위를 바탕으로 정리한 것입니다.
+              </p>
 
               <div className="mb-12 space-y-6">
                 <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">데이터 통합 레이어</h3>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold rounded">RFP 1항</span>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">가상자산 정보 통합관리</h3>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                    핵심은 <strong>거래소 데이터 + 온체인 데이터 + 국세자료</strong> 세 축의 결합이다.
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                    <li>VASP(업비트·빗썸 등)의 <strong>거래명세서·거래집계표</strong> 연계 관리</li>
+                    <li>블록체인 거래정보, 동향정보, 지갑주소 등 외부 자료 수집·구축</li>
+                    <li className="text-gray-900 dark:text-gray-100 font-medium">
+                      법인세·소득세·<strong className="text-red-600 dark:text-red-400">상속/증여세</strong> 신고, 세적, 조사 등 국세자료 연계
+                      <span className="ml-2 text-xs text-red-500">(★ 상속·증여 탈루 집중 타깃)</span>
+                    </li>
+                    <li>납세자별 거래개요, 가상자산 증감 현황, 보유잔고 등 인별 거래현황 제공</li>
+                    <li><strong>해외금융계좌</strong>로 식별된 지갑주소 + 블록체인 거래정보 결합 → 사용자가 자유롭게 거래 추적 시각화</li>
+                  </ul>
+                  <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 rounded text-xs text-red-700 dark:text-red-300">
+                    상속·증여세 신고 자료와 코인 거래 내역을 교차 검증한다는 의미다. 부모에게 코인을 이전하거나 자녀 명의 지갑으로 보낸 기록이 상속/증여 신고 누락으로 추적될 수 있다.
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold rounded">RFP 2항</span>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">거래정보 통합분석 + AI 이상거래 탐지</h3>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                    단순 조회가 아닌 <strong>탈루혐의 자동 추출</strong>이 목표다.
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                    <li>자금세탁, <strong>상속·증여 후 신고 누락</strong> 등 불법 거래 흐름 분석·검증 프로세스 구축</li>
+                    <li><strong>NTIS(국세통합시스템)</strong> 자료와 가상자산 수집 정보 결합 → 조사대상자별 탈루혐의 분석 및 소명자료 검증</li>
+                    <li className="text-gray-900 dark:text-gray-100 font-medium">
+                      AI 머신러닝 이상거래 패턴 탐지:
+                      <ul className="list-disc list-inside ml-4 mt-1 space-y-1 font-normal text-gray-600 dark:text-gray-400">
+                        <li><strong>고액이전 거래</strong> — 대규모 코인 이동 즉시 감지</li>
+                        <li><strong>소액반복 입금 후 환전거래</strong> — 스머핑(자금 쪼개기) 패턴 탐지</li>
+                      </ul>
+                    </li>
+                    <li>거래유형별·코인 종류별·VASP별·조사유형별 통계 제공</li>
+                  </ul>
+                  <div className="mt-4 p-3 bg-orange-50 dark:bg-orange-900/20 rounded text-xs text-orange-700 dark:text-orange-300">
+                    "소액반복 입금 후 환전"은 자금세탁 방지(AML)의 고전적 탐지 패턴이다. 여러 지갑에 나눠 보내고 환전소에서 모으는 방식을 시스템이 선제적으로 잡겠다는 뜻이다.
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold rounded">RFP 3항</span>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">조사관 업무 지원 UI</h3>
+                  </div>
                   <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
-                    <li>VASP 거래명세서 수집 및 정규화 파이프라인</li>
-                    <li>블록체인 노드 API 실시간 연동 (이더리움·비트코인·트론 등)</li>
-                    <li>해외 과세당국 정보 수취 채널 (CRS/FATCA 유사 체계)</li>
-                    <li>지갑 주소 ↔ 실명 매핑 데이터베이스</li>
+                    <li>사용자별·권한별 맞춤형 초기화면 및 메뉴 제공</li>
+                    <li>나의 할 일, 진행관리, 결재관리, 인계·인수 관리 등 업무 편의 기능</li>
+                    <li>대량 분석자료를 일목요연하게 보여주는 사용자 친화적 화면</li>
+                    <li>접속로그 관리 등 시스템 보안 관리 기능</li>
                   </ul>
                 </div>
 
                 <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">AI 분석 엔진</h3>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold rounded">RFP 4항</span>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">안정적 개통 및 운영 체계</h3>
+                  </div>
                   <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
-                    <li>머신러닝 기반 이상 패턴 탐지 (탈세 의심 거래)</li>
-                    <li>주소 클러스터링: 동일인 소유 지갑 그루핑</li>
-                    <li>믹싱·토네이도캐시 경유 자금 추적 시도</li>
-                    <li>80억 건 이상 트랜잭션 처리 인프라 (HA 클러스터)</li>
-                  </ul>
-                </div>
-
-                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">조사 지원 대시보드</h3>
-                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
-                    <li>납세자별 전체 거래 흐름 시각화</li>
-                    <li>의심 주소 리스트 및 우선순위 조사 대상 추출</li>
-                    <li>5년치 거래 내역 클릭 한 번에 엑셀 출력</li>
-                    <li>PII 암호화 및 접근 권한 관리</li>
+                    <li>국가정보자원관리원(NIRS)과 긴밀 협업하여 인프라 구축</li>
+                    <li>단위·통합·성능·인수 테스트 및 시범운영 실시</li>
+                    <li><strong>대량 과세자료 처리</strong> 등 과부하 프로세스 대상 성능테스트로 안정적 처리성능 확보</li>
+                    <li>시범운영 환경 구성, 교재 제작, 조사관 교육 실시</li>
                   </ul>
                 </div>
               </div>
@@ -632,7 +680,89 @@ export default function CryptoTaxAnalysisPost() {
                 </table>
               </div>
 
-              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">5. Technical Limits: Where Are the Gaps?</h2>
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">5. What the RFP Actually Says They&apos;re Building</h2>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+                The following is based on the scope of work published in the NTS&apos;s official Request for Proposal.
+              </p>
+
+              <div className="mb-12 space-y-6">
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold rounded">RFP §1</span>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">Integrated Virtual Asset Data Management</h3>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                    The core is a three-way fusion: <strong>exchange data + on-chain data + existing tax records</strong>.
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Link and manage VASP <strong>transaction statements and transaction summaries</strong></li>
+                    <li>Collect blockchain transaction data, trend data, and wallet addresses from external sources</li>
+                    <li className="text-gray-900 dark:text-gray-100 font-medium">
+                      Connect corporate tax, income tax, <strong className="text-red-600 dark:text-red-400">inheritance/gift tax</strong> filings, tax registry, and audit records
+                      <span className="ml-2 text-xs text-red-500">(★ Inheritance/gift evasion is a primary target)</span>
+                    </li>
+                    <li>Provide per-taxpayer transaction overview, asset change history, and current holdings</li>
+                    <li>Combine <strong>overseas financial account</strong>-linked wallet addresses with blockchain data for free-form transaction tracing and visualization</li>
+                  </ul>
+                  <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 rounded text-xs text-red-700 dark:text-red-300">
+                    This means cross-referencing inheritance/gift tax filings against on-chain transfers. Sending coins to a parent or child&apos;s wallet without filing a gift tax return is now directly traceable.
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold rounded">RFP §2</span>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">Transaction Analytics + AI Anomaly Detection</h3>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                    The goal is not just lookup — it&apos;s <strong>automated extraction of tax evasion suspects</strong>.
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Design and build workflows to analyze money laundering and <strong>post-inheritance/gift under-reporting</strong></li>
+                    <li>Combine <strong>NTIS (National Tax Information System)</strong> records with virtual asset data for per-taxpayer evasion analysis and evidence verification</li>
+                    <li className="text-gray-900 dark:text-gray-100 font-medium">
+                      AI/ML anomaly pattern detection targets:
+                      <ul className="list-disc list-inside ml-4 mt-1 space-y-1 font-normal text-gray-600 dark:text-gray-400">
+                        <li><strong>Large transfer transactions</strong> — immediate detection of major coin movements</li>
+                        <li><strong>Small repeated deposits followed by fiat conversion</strong> — smurfing pattern detection</li>
+                      </ul>
+                    </li>
+                    <li>Statistics by transaction type, coin type, VASP, and audit type</li>
+                  </ul>
+                  <div className="mt-4 p-3 bg-orange-50 dark:bg-orange-900/20 rounded text-xs text-orange-700 dark:text-orange-300">
+                    &quot;Small repeated deposits followed by conversion&quot; is the classic AML smurfing pattern — splitting funds across wallets and consolidating at exchanges. The system is designed to flag this proactively.
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold rounded">RFP §3</span>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">Investigator-Facing UI</h3>
+                  </div>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Role-based personalized dashboards and menus</li>
+                    <li>Task management, progress tracking, approval workflows, and handover management</li>
+                    <li>User-friendly interface for displaying large-scale analytical data at a glance</li>
+                    <li>Access log management and system security controls</li>
+                  </ul>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold rounded">RFP §4</span>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">Deployment & Stability</h3>
+                  </div>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Close collaboration with NIRS (National Information Resources Service) for infrastructure</li>
+                    <li>Unit, integration, performance, and acceptance testing + pilot operation</li>
+                    <li>Performance testing for <strong>high-volume tax data processing</strong> workloads</li>
+                    <li>Pilot environment setup, training materials, and investigator onboarding</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">6. Technical Limits: Where Are the Gaps?</h2>
 
               <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300">
                 <strong>Note:</strong> This section describes technical realities for informational purposes. Tax evasion is a crime. Legal tax optimization strategies are recommended.
