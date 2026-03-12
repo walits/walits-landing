@@ -62,6 +62,17 @@ export default function CryptoTaxAnalysisPost() {
           </div>
         </div>
 
+        <div className="mb-8 flex items-start gap-3 px-5 py-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700/50 rounded-lg text-sm text-amber-800 dark:text-amber-300">
+          <span className="mt-0.5 text-amber-500 dark:text-amber-400 flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </span>
+          <p className="leading-relaxed">
+            {language === 'ko'
+              ? '이 글은 공개된 자료와 취재를 바탕으로 작성된 분석·의견 콘텐츠입니다. 세법 해석 및 시행 세부 사항은 추후 변경될 수 있으며, 개인의 세무 판단에는 반드시 공인 세무사 또는 전문가의 확인을 거치시기 바랍니다.'
+              : 'This article is an analysis and opinion piece based on publicly available information. Tax law interpretations and implementation details are subject to change. Please consult a licensed tax professional before making any personal tax decisions.'}
+          </p>
+        </div>
+
         <div className="mb-10 rounded-lg overflow-hidden">
           <Image
             src="/blog/airdrop.jpg"
