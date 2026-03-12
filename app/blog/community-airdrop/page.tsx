@@ -68,7 +68,7 @@ export default function CryptoTaxAnalysisPost() {
           </span>
           <p className="leading-relaxed">
             {language === 'ko'
-              ? '이 글은 공개된 자료와 취재를 바탕으로 작성된 분석·의견 콘텐츠입니다. 세법 해석 및 시행 세부 사항은 추후 변경될 수 있으며, 개인의 세무 판단에는 반드시 공인 세무사 또는 전문가의 확인을 거치시기 바랍니다.'
+              ? '이 글은 공개된 자료와 취재를 바탕으로 작성된 분석·의견·예상 콘텐츠입니다. 세법 해석 및 시행 세부 사항은 추후 변경될 수 있으며, 개인의 세무 판단에는 반드시 공인 세무사 또는 전문가의 확인을 거치시기 바랍니다.'
               : 'This article is an analysis and opinion piece based on publicly available information. Tax law interpretations and implementation details are subject to change. Please consult a licensed tax professional before making any personal tax decisions.'}
           </p>
         </div>
