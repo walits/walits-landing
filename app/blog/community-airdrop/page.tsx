@@ -178,7 +178,7 @@ export default function CryptoTaxAnalysisPost() {
                 </p>
               </div>
 
-              <div className="mb-12 p-6 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+              <div className="mb-8 p-6 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
                 <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">에어드랍·스테이킹도 과세 대상</h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
                   단순히 코인을 사고팔아 남긴 차익만 털어가는 게 아니다.
@@ -190,6 +190,47 @@ export default function CryptoTaxAnalysisPost() {
                   <li>에어드랍 수령 → 기타소득 22%</li>
                   <li>DEX 유동성 공급 수수료 → 과세 여부 검토 중</li>
                 </ul>
+              </div>
+
+              {/* 스테이블코인 과세 */}
+              <div className="mb-12 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">스테이블코인도 과세 대상인가? — 아직은 소액이라 괜찮지만...</h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  USDT·USDC 같은 스테이블코인은 현재 <strong>가상자산이용자보호법상 '가상자산'으로 분류</strong>된다.
+                  원칙적으로는 양도차익 과세 대상이다.
+                  하지만 현실적으로 여기서부터 이야기가 복잡해진다.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  스테이블코인의 '차익'은 달러 페그가 아니라 <strong>원/달러 환율 변동분</strong>에서 나온다.
+                  예를 들어 1,300원에 USDT 100개를 샀다가 환율이 1,350원이 됐을 때 팔면, 5,000원 차익이 발생한다.
+                  이론상 이 5,000원도 과세 대상이다. 실제로는? 연 250만 원 기본공제 이하라 세금은 0원이다.
+                  문제는 <strong>행정 부담</strong>이다.
+                </p>
+                <div className="bg-white dark:bg-gray-900 p-4 rounded border border-blue-200 dark:border-blue-700 mb-4">
+                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">DeFi에서 스테이블코인 과세가 악몽인 이유</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                    DEX에서 ETH → USDT → BTC 스왑을 한 번 하면 과세 이벤트가 <strong>두 번</strong> 발생한다.
+                    ETH 매도 차익 + USDT 매도 차익(환율 변동분)을 각각 계산해야 한다.
+                    하루에 수십 번 스왑을 돌리는 DeFi 유저라면, 연간 과세 이벤트가 수천 건에 달할 수 있다.
+                    대부분 건당 차익이 수백 원~수천 원 수준이지만, 그 내역을 <em>전부 신고</em>해야 한다.
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>스왑 1회 = 최대 2건의 가상자산 양도 이벤트</li>
+                    <li>각 이벤트마다 취득가액·양도가액·환율 기준 계산 필요</li>
+                    <li>총 차익이 250만 원 미만이어도 <strong>신고 의무</strong>는 별개 문제</li>
+                    <li>세금 0원짜리 신고서를 수천 줄 작성해야 하는 상황 가능</li>
+                  </ul>
+                </div>
+                <div className="bg-white dark:bg-gray-900 p-4 rounded border border-blue-200 dark:border-blue-700">
+                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">현실적 전망: 지금 당장은 소액이라 괜찮지만</h4>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>국내 스테이블코인 사용량이 아직 낮아 국세청도 이 부분 적극 집행은 후순위</li>
+                    <li>CBDC는 명시적으로 가상자산 과세 대상에서 제외 예정</li>
+                    <li>원화 스테이블코인(KRW 페그) 등장 시 과세 방식 재검토 불가피</li>
+                    <li>EU MiCA처럼 스테이블코인 소액 거래에 <strong>de minimis(최소 면세) 기준</strong>을 도입할 가능성 있으나, 현행법에 규정 없음</li>
+                    <li>DeFi 사용량이 폭발하면 국세청이 '현실적으로 잡을 수 없는' 상황에 직면 → 2029년 이후 별도 지침 가능성</li>
+                  </ul>
+                </div>
               </div>
 
               {/* 4. 기울어진 운동장 */}
@@ -490,7 +531,7 @@ export default function CryptoTaxAnalysisPost() {
                 </p>
               </div>
 
-              <div className="mb-12 p-6 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+              <div className="mb-8 p-6 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
                 <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">Airdrops & Staking Are Also Taxable</h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
                   It's not just buy-sell profits. DeFi staking rewards and free airdrops are
@@ -501,6 +542,47 @@ export default function CryptoTaxAnalysisPost() {
                   <li>Airdrop receipts → miscellaneous income, 22%</li>
                   <li>DEX liquidity provision fees → under review</li>
                 </ul>
+              </div>
+
+              {/* Stablecoin taxation */}
+              <div className="mb-12 p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">Are Stablecoins Taxable Too? — Low Usage Now, But a Ticking Time Bomb</h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  USDT and USDC are officially classified as <strong>virtual assets under Korea's Virtual Asset User Protection Act</strong>,
+                  which means they are technically subject to capital gains tax.
+                  But here's where it gets complicated.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  Stablecoin "gains" don't come from price appreciation — they come from <strong>KRW/USD exchange rate movements</strong>.
+                  Buy 100 USDT at ₩1,300/USD, sell when it hits ₩1,350/USD: you technically have a ₩5,000 gain.
+                  In theory, that's taxable. In practice, it falls under the ₩2.5 million annual deduction, so tax owed is ₩0.
+                  The real problem is <strong>administrative burden</strong>.
+                </p>
+                <div className="bg-white dark:bg-gray-900 p-4 rounded border border-blue-200 dark:border-blue-700 mb-4">
+                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Why Stablecoin Taxation Is a Nightmare for DeFi Users</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                    A single ETH → USDT → BTC swap on a DEX creates <strong>two separate taxable disposal events</strong>:
+                    the ETH sale gain and the USDT sale gain (FX movement).
+                    A heavy DeFi user swapping dozens of times per day could generate thousands of taxable events per year —
+                    most with gains of just a few hundred won per transaction, but all technically reportable.
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>1 swap = up to 2 virtual asset disposal events</li>
+                    <li>Each requires calculating acquisition price, transfer price, and FX rate at time of transaction</li>
+                    <li>Total gains below ₩2.5M may owe zero tax — but <strong>filing obligation may still apply</strong></li>
+                    <li>Potentially thousands of ₩0-tax line items to report annually</li>
+                  </ul>
+                </div>
+                <div className="bg-white dark:bg-gray-900 p-4 rounded border border-blue-200 dark:border-blue-700">
+                  <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Realistic Outlook: Low Priority for Now, But Watch This Space</h4>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                    <li>Domestic stablecoin usage is still low — active enforcement is low priority for the NTS</li>
+                    <li>CBDC is explicitly excluded from virtual asset taxation (it's government-issued fiat)</li>
+                    <li>A KRW-pegged stablecoin would force a complete rethink of the tax framework</li>
+                    <li>The EU MiCA approach of <strong>de minimis thresholds</strong> for small stablecoin transactions may influence future Korean policy, but no such rule exists today</li>
+                    <li>If DeFi adoption explodes, the NTS faces a "too complex to enforce" scenario → separate guidelines likely post-2029</li>
+                  </ul>
+                </div>
               </div>
 
               <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">4. Stocks Get Relief, Crypto Gets Squeezed</h2>
