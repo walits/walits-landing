@@ -314,11 +314,13 @@ export default function CryptoTaxAnalysisPost() {
                       법인세·소득세·<strong className="text-red-600 dark:text-red-400">상속/증여세</strong> 신고, 세적, 조사 등 국세자료 연계
                       <span className="ml-2 text-xs text-red-500">(★ 상속·증여 탈루 집중 타깃)</span>
                     </li>
-                    <li>납세자별 거래개요, 가상자산 증감 현황, 보유잔고 등 인별 거래현황 제공</li>
-                    <li><strong>해외금융계좌</strong>로 식별된 지갑주소 + 블록체인 거래정보 결합 → 사용자가 자유롭게 거래 추적 시각화</li>
+                    <li><strong>연도/반기/분기/월/일별</strong> 보유 가상자산 증감 현황 및 잔고 수량·금액 등 가상자산별 상세내역 파악</li>
+                    <li>거래명세서, 거래집계표, <strong>해외금융계좌신고</strong>, 블록체인 자료 등을 인별 통합 조회</li>
+                    <li>가상자산별 주요 정보(<strong>백서·상장내역·시세·특징</strong>) 및 가상자산사업자 관련 정보 등록·조회</li>
+                    <li>특정 지갑주소와 <strong>TXID(트랜잭션 ID)를 중심</strong>으로 블록체인 거래흐름 시각화 및 지갑 상세내역 조회</li>
                   </ul>
                   <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 rounded text-xs text-red-700 dark:text-red-300">
-                    상속·증여세 신고 자료와 코인 거래 내역을 교차 검증한다는 의미다. 부모에게 코인을 이전하거나 자녀 명의 지갑으로 보낸 기록이 상속/증여 신고 누락으로 추적될 수 있다.
+                    상속·증여세 신고 자료와 코인 거래 내역을 교차 검증한다. 부모·자녀 명의 지갑으로 코인을 보낸 기록이 신고 누락 여부로 추적될 수 있다. 특히 "일별" 잔고 추적이 가능하다는 건 특정 날짜에 코인이 어디로 사라졌는지 국세청이 직접 확인할 수 있다는 뜻이다.
                   </div>
                 </div>
 
@@ -328,22 +330,33 @@ export default function CryptoTaxAnalysisPost() {
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">거래정보 통합분석 + AI 이상거래 탐지</h3>
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    단순 조회가 아닌 <strong>탈루혐의 자동 추출</strong>이 목표다.
+                    단순 조회가 아닌 <strong>탈루혐의 자동 추출 및 조사대상자 선정</strong>이 목표다.
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
                     <li>자금세탁, <strong>상속·증여 후 신고 누락</strong> 등 불법 거래 흐름 분석·검증 프로세스 구축</li>
-                    <li><strong>NTIS(국세통합시스템)</strong> 자료와 가상자산 수집 정보 결합 → 조사대상자별 탈루혐의 분석 및 소명자료 검증</li>
+                    <li><strong>NTIS(국세통합시스템)</strong> 자료 + 가상자산 수집 정보 결합 → 조사대상자별 탈루혐의 분석 및 소명자료 검증</li>
                     <li className="text-gray-900 dark:text-gray-100 font-medium">
-                      AI 머신러닝 이상거래 패턴 탐지:
+                      <strong>조사 대상자 자동 선정 로직:</strong> 거래기간·종류·수량·금액·횟수 + 납세자 연령·사업자 여부 교차 분석
+                    </li>
+                    <li className="text-gray-900 dark:text-gray-100 font-medium">
+                      AI 머신러닝 이상거래 패턴 탐지 (토큰 단위 전체 거래내역 대상):
                       <ul className="list-disc list-inside ml-4 mt-1 space-y-1 font-normal text-gray-600 dark:text-gray-400">
                         <li><strong>고액이전 거래</strong> — 대규모 코인 이동 즉시 감지</li>
                         <li><strong>소액반복 입금 후 환전거래</strong> — 스머핑(자금 쪼개기) 패턴 탐지</li>
                       </ul>
                     </li>
-                    <li>거래유형별·코인 종류별·VASP별·조사유형별 통계 제공</li>
+                    <li>
+                      다차원 통계 제공:
+                      <ul className="list-disc list-inside ml-4 mt-1 space-y-1 text-gray-600 dark:text-gray-400">
+                        <li>거래유형별 <strong>인구통계학적 통계</strong>(연령별·성별·지역별)</li>
+                        <li>가상자산 종류별 기간별 통계 (가격변동 추세, 기간별 거래유형별 거래량)</li>
+                        <li>VASP별·거래상대방별·기간별 통계 (유입·유출, 거래량)</li>
+                        <li>조사유형별 통계 및 시스템 사용 통계</li>
+                      </ul>
+                    </li>
                   </ul>
                   <div className="mt-4 p-3 bg-orange-50 dark:bg-orange-900/20 rounded text-xs text-orange-700 dark:text-orange-300">
-                    "소액반복 입금 후 환전"은 자금세탁 방지(AML)의 고전적 탐지 패턴이다. 여러 지갑에 나눠 보내고 환전소에서 모으는 방식을 시스템이 선제적으로 잡겠다는 뜻이다.
+                    "인구통계학적 통계"는 특히 주목할 부분이다. 40대 자산가 남성이 특정 시기에 대량 매도 후 신고를 누락했다면, 동일 패턴을 보이는 그룹 전체를 한 번에 추출해 조사 대상 목록을 만들 수 있다는 뜻이다. 개인 단위가 아닌 집단 패턴 기반 탈루 의심자 선별이 가능해진다.
                   </div>
                 </div>
 
@@ -441,6 +454,58 @@ export default function CryptoTaxAnalysisPost() {
                     <li>AI 오탐지율(false positive) 이슈: 선의의 납세자가 조사 대상 선정 위험</li>
                     <li>초기 시스템은 완성도 한계 존재 → 2028~2029년 시스템 고도화 후 소급 조사 가능성</li>
                   </ul>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">⑥ 구현하기 가장 어려운 기술적 과제들</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-3">
+                    RFP 요구사항 자체는 명확하지만, 실제 구현 과정에서 SI 업체가 마주칠 기술적 난관들이 있다.
+                  </p>
+                  <div className="space-y-4">
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">일별 잔고 스냅샷 — 데이터 볼륨 문제</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        연도/월/일별 보유 현황을 모든 납세자에 대해 저장한다는 것은 엄청난 스토리지 압박이다.
+                        납세자 수백만 명 × 수백 종 코인 × 365일 단위 스냅샷을 효율적으로 관리하는 파티셔닝·압축 전략 없이는
+                        DB가 감당하기 어렵다. 컬럼형 DB(Parquet 등)나 시계열 DB 도입 여부가 설계의 핵심이 된다.
+                      </p>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">TXID 중심 그래프 시각화 — 실시간 성능</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        특정 TXID·지갑 주소에서 출발해 연결된 모든 거래를 그래프로 탐색하는 기능은
+                        그래프 DB(Neo4j 등) 없이는 관계형 DB 조인만으로 수백 뎁스(depth) 탐색 시 성능이 급격히 저하된다.
+                        조사관이 "클릭 한 번"으로 즉시 결과를 보려면 사전 인덱싱(pre-computation)과 캐싱 레이어가 필수다.
+                      </p>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">AI 이상거래 탐지 — 레이블 데이터 부족</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        머신러닝 모델 학습에 필요한 '확실한 탈세 거래' 레이블 데이터가 충분하지 않다.
+                        기존 국세청 조사 실적을 레이블로 쓸 수 있지만 그 수가 한정적이고,
+                        가상자산 거래 패턴은 주식·은행 거래와 달라 기존 AML 모델을 그대로 이식하기도 어렵다.
+                        결국 초기에는 규칙 기반(rule-based) 탐지에 의존하다가 점진적으로 ML 비중을 높이는 하이브리드 구조가 현실적이다.
+                      </p>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">가상자산별 백서·시세 정보 등록·관리</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        국내외 거래소에 상장된 코인 종류만 수천 개다. 폐지된 코인, 리브랜딩된 토큰, 하드포크 파생 코인을
+                        어떻게 동일성을 유지하며 관리할지는 데이터 거버넌스 문제다.
+                        특히 상장폐지 시점의 시세를 어떤 기준으로 확정할지는 납세자 불복 소지가 있어
+                        법령 해석과 기술 구현이 맞닿는 민감한 영역이다.
+                      </p>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">인구통계 기반 대상자 선정의 역차별 리스크</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        연령·성별·지역 기반 통계로 조사 대상을 선정하면, 특정 집단이 과도하게 타깃될 수 있다.
+                        이는 행정 소송 및 개인정보보호 이슈와 직결되며,
+                        개인정보보호위원회와의 협의 없이 이 기능을 조사에 직접 활용하기는 법적으로 불안정하다.
+                        시스템에는 구현되더라도 실제 조사 근거로 쓰이려면 별도 법적 근거 마련이 선행되어야 한다.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -702,11 +767,13 @@ export default function CryptoTaxAnalysisPost() {
                       Connect corporate tax, income tax, <strong className="text-red-600 dark:text-red-400">inheritance/gift tax</strong> filings, tax registry, and audit records
                       <span className="ml-2 text-xs text-red-500">(★ Inheritance/gift evasion is a primary target)</span>
                     </li>
-                    <li>Provide per-taxpayer transaction overview, asset change history, and current holdings</li>
-                    <li>Combine <strong>overseas financial account</strong>-linked wallet addresses with blockchain data for free-form transaction tracing and visualization</li>
+                    <li>Track virtual asset holdings with <strong>yearly / semi-annual / quarterly / monthly / daily</strong> granularity — balance, volume, and amount per coin</li>
+                    <li>Unified per-taxpayer lookup: transaction statements, summaries, <strong>overseas financial account filings</strong>, and blockchain data</li>
+                    <li>Register and query per-coin reference data: <strong>whitepaper, listing history, price, characteristics</strong>, and associated VASP info</li>
+                    <li>Blockchain transaction flow visualization centered on a <strong>specific wallet address or TXID</strong> with detailed address lookup</li>
                   </ul>
                   <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 rounded text-xs text-red-700 dark:text-red-300">
-                    This means cross-referencing inheritance/gift tax filings against on-chain transfers. Sending coins to a parent or child&apos;s wallet without filing a gift tax return is now directly traceable.
+                    Day-level balance tracking means the NTS can pinpoint exactly when and where coins disappeared. Cross-referencing with inheritance/gift tax filings means sending coins to family wallets without a gift tax return is now directly traceable.
                   </div>
                 </div>
 
@@ -728,10 +795,21 @@ export default function CryptoTaxAnalysisPost() {
                         <li><strong>Small repeated deposits followed by fiat conversion</strong> — smurfing pattern detection</li>
                       </ul>
                     </li>
-                    <li>Statistics by transaction type, coin type, VASP, and audit type</li>
+                    <li className="text-gray-900 dark:text-gray-100 font-medium">
+                      <strong>Automated investigation target selection:</strong> cross-analysis of transaction period, type, volume, amount, frequency vs. taxpayer age, business registration status
+                    </li>
+                    <li>
+                      Multi-dimensional statistics:
+                      <ul className="list-disc list-inside ml-4 mt-1 space-y-1 text-gray-600 dark:text-gray-400">
+                        <li>Transaction-type <strong>demographic statistics</strong> (by age, gender, region)</li>
+                        <li>By coin type and period (price trend, transaction volume by type)</li>
+                        <li>By VASP and counterparty (inflow/outflow, volume by period)</li>
+                        <li>By audit type and system usage statistics</li>
+                      </ul>
+                    </li>
                   </ul>
                   <div className="mt-4 p-3 bg-orange-50 dark:bg-orange-900/20 rounded text-xs text-orange-700 dark:text-orange-300">
-                    &quot;Small repeated deposits followed by conversion&quot; is the classic AML smurfing pattern — splitting funds across wallets and consolidating at exchanges. The system is designed to flag this proactively.
+                    The demographic statistics feature is significant. If a 40s-male-high-asset pattern shows mass selling with no tax filing, the system can extract everyone matching that pattern as a group for investigation — moving beyond individual audits to pattern-based batch targeting.
                   </div>
                 </div>
 
@@ -812,6 +890,56 @@ export default function CryptoTaxAnalysisPost() {
                     <li>AI false positive rate risk: innocent taxpayers may be flagged for audit</li>
                     <li>Initial system will have coverage gaps — retroactive investigations likely as system matures in 2028-2029</li>
                   </ul>
+                </div>
+
+                <div className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">⑥ The Hardest Technical Challenges to Actually Build</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-3">
+                    The RFP requirements are clear enough on paper — here&apos;s where the SI vendor will hit real engineering walls.
+                  </p>
+                  <div className="space-y-4">
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">Daily Balance Snapshots — Data Volume Problem</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Storing year/month/day-level holdings for every taxpayer creates massive storage pressure.
+                        Millions of taxpayers × hundreds of coins × 365-day granularity requires columnar storage (Parquet) or time-series DB architecture.
+                        Without careful partitioning and compression strategy, the database simply won&apos;t scale.
+                      </p>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">TXID-Centered Graph Visualization — Real-Time Performance</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Traversing all connected transactions from a single TXID or wallet address requires graph DB (Neo4j, etc.).
+                        Relational DB joins collapse at multi-depth traversals.
+                        For &quot;one click, instant result&quot; UX, pre-computed indexes and caching layers are mandatory — not optional.
+                      </p>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">AI Anomaly Detection — Labeled Data Shortage</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        ML models need labeled &quot;confirmed tax evasion&quot; training data. Existing NTS audit records are limited,
+                        and crypto transaction patterns don&apos;t map cleanly to traditional AML models built for banking.
+                        Realistically, the initial version will be mostly rule-based, with ML being phased in gradually — a hybrid approach.
+                      </p>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">Per-Coin Reference Data (Whitepaper, Price History) Management</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        There are thousands of listed tokens. Managing delisted coins, rebranded tokens, and hard fork derivatives
+                        while maintaining identity continuity is a data governance nightmare.
+                        Especially, establishing the &quot;official&quot; price at delisting time is legally sensitive — it directly affects tax assessments and opens doors to taxpayer appeals.
+                      </p>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded text-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">Demographic-Based Target Selection — Legal Risk</p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Using age/gender/region statistics to select audit targets risks over-targeting specific groups —
+                        raising administrative litigation and personal data protection concerns.
+                        Without separate legal authority and coordination with the Personal Information Protection Commission,
+                        this feature may be built into the system but legally unusable for actual audit selection.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
