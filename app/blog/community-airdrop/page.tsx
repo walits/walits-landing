@@ -549,6 +549,56 @@ export default function CryptoTaxAnalysisPost() {
                 </div>
               </div>
 
+              {/* 실제 과세 방식 */}
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">8. 그래서 세금을 어떻게 매긴다는 건가</h2>
+
+              <div className="mb-6 p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">구조는 생각보다 단순하다. 사람을 셋으로 나눠 생각하면 된다.</p>
+
+                <div className="space-y-4">
+                  <div className="flex gap-4 items-start">
+                    <span className="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 rounded-full flex items-center justify-center text-sm font-bold">A</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">국내 거래소 안에서만 거래한 사람</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        업비트·빗썸이 연간 거래 내역에서 취득가액·양도가액을 자동 계산해 국세청에 넘긴다.
+                        납세자는 5월에 거래소가 만들어준 내역서를 확인하고 신고하면 끝.
+                        <strong className="text-gray-700 dark:text-gray-300"> 사실상 자동 처리.</strong>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 items-start">
+                    <span className="flex-shrink-0 w-8 h-8 bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-400 rounded-full flex items-center justify-center text-sm font-bold">B</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">해외 거래소(바이낸스 등)도 쓴 사람</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        2026년부터 국가 간 과세 정보가 자동 교환된다.
+                        바이낸스 KYC에 한국 주민번호가 등록돼 있다면 거래 내역이 국세청에 들어온다.
+                        <strong className="text-gray-700 dark:text-gray-300"> 스스로 신고하지 않으면 가산세 대상.</strong>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 items-start">
+                    <span className="flex-shrink-0 w-8 h-8 bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400 rounded-full flex items-center justify-center text-sm font-bold">C</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">개인 지갑(메타마스크 등)으로 옮긴 사람</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        거래소 출금 기록은 남는다. 거기서부터 코인이 어디로 갔는지 소명하지 못하면
+                        국세청은 전액 양도로 간주할 수 있다.
+                        DeFi·스테이킹·에어드랍까지 더하면 스스로 정리해서 신고해야 한다.
+                        <strong className="text-gray-700 dark:text-gray-300"> 이 시스템을 만드는 진짜 이유가 여기에 있다.</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-12 p-5 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                <strong className="text-gray-900 dark:text-white">한 줄 요약:</strong> 거래소 안에서만 논 사람은 거래소가 다 해준다. 개인 지갑을 쓴 순간부터 본인이 직접 소명해야 한다. 국세청의 통합분석 시스템은 후자를 잡기 위해 존재한다.
+              </div>
+
               {/* 결론 */}
               <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
                 <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">결론: 준비된 자만이 살아남는다</h2>
@@ -979,6 +1029,56 @@ export default function CryptoTaxAnalysisPost() {
                     annual tax reports from your on-chain history.
                   </p>
                 </div>
+              </div>
+
+              {/* How tax is actually levied */}
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">8. So How Does the Tax Actually Get Calculated?</h2>
+
+              <div className="mb-6 p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">The structure is simpler than it sounds. Think of three types of people.</p>
+
+                <div className="space-y-4">
+                  <div className="flex gap-4 items-start">
+                    <span className="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 rounded-full flex items-center justify-center text-sm font-bold">A</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">People who only traded on domestic exchanges</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Upbit and Bithumb automatically calculate acquisition price, transfer price, and gains — then submit everything to the NTS.
+                        Taxpayers just confirm the exchange-generated statement and file in May.
+                        <strong className="text-gray-700 dark:text-gray-300"> Essentially automatic.</strong>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 items-start">
+                    <span className="flex-shrink-0 w-8 h-8 bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-400 rounded-full flex items-center justify-center text-sm font-bold">B</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">People who also used foreign exchanges (Binance, etc.)</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Starting 2026, international tax information is automatically exchanged between countries.
+                        If a Korean resident&apos;s ID is on a Binance KYC, that trading history flows to the NTS.
+                        <strong className="text-gray-700 dark:text-gray-300"> Failing to self-report means penalties.</strong>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 items-start">
+                    <span className="flex-shrink-0 w-8 h-8 bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400 rounded-full flex items-center justify-center text-sm font-bold">C</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">People who moved coins to personal wallets (MetaMask, etc.)</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        The exchange withdrawal is on record. If you can&apos;t explain where the coins went from there,
+                        the NTS can treat the entire amount as a taxable disposal.
+                        Add DeFi, staking, and airdrops on top, and you&apos;re fully responsible for tracking and self-reporting.
+                        <strong className="text-gray-700 dark:text-gray-300"> This is the exact reason this system is being built.</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-12 p-5 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                <strong className="text-gray-900 dark:text-white">One-line summary:</strong> Stay on domestic exchanges and the exchange does it for you. The moment you touch a personal wallet, you&apos;re on your own. The NTS integrated analysis system exists to catch the people in group C.
               </div>
 
               <div className="mb-12 p-8 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
