@@ -671,10 +671,18 @@ export default function CryptoTaxAnalysisPost() {
                     <span className="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 rounded-full flex items-center justify-center text-sm font-bold">A</span>
                     <div>
                       <p className="font-semibold text-gray-900 dark:text-white mb-1">국내 거래소 안에서만 거래한 사람</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        과세 기준은 <strong className="text-gray-700 dark:text-gray-300">'매도(양도) 시점'</strong>이다. 가격이 올랐더라도 팔지 않으면 과세 없다.
+                        빗썸에서 1억에 BTC 1개를 사서 그냥 들고 있다면 — 세금 0원, 신고 의무 없음.
+                        그 BTC를 1.5억에 팔았을 때 비로소 차익 5천만 원에 22%가 붙는다.
+                      </p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        업비트·빗썸이 연간 거래 내역에서 취득가액·양도가액을 자동 계산해 국세청에 넘긴다.
+                        이 경우 업비트·빗썸이 연간 '매수·매도' 내역에서 취득가액·양도가액을 자동 계산해 국세청에 제출한다.
                         납세자는 5월에 거래소가 만들어준 내역서를 확인하고 신고하면 끝.
                         <strong className="text-gray-700 dark:text-gray-300"> 사실상 자동 처리.</strong>
+                      </p>
+                      <p className="text-xs text-orange-600 dark:text-orange-400 mt-2">
+                        ※ 단, 스테이킹·에어드랍으로 코인 수량이 늘어난 경우는 다르다. 그 자체가 기타소득으로 수령 시점에 과세된다 (팔기 전이라도).
                       </p>
                     </div>
                   </div>
@@ -1246,10 +1254,15 @@ export default function CryptoTaxAnalysisPost() {
                     <span className="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 rounded-full flex items-center justify-center text-sm font-bold">A</span>
                     <div>
                       <p className="font-semibold text-gray-900 dark:text-white mb-1">People who only traded on domestic exchanges</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        Tax is triggered at the point of <strong className="text-gray-700 dark:text-gray-300">disposal (sale)</strong> — not when the price goes up. Bought 1 BTC for ₩100M and just holding it? Zero tax, no obligation. Sold it for ₩150M? Now the ₩50M gain is taxed at 22%.
+                      </p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        Upbit and Bithumb automatically calculate acquisition price, transfer price, and gains — then submit everything to the NTS.
-                        Taxpayers just confirm the exchange-generated statement and file in May.
+                        For buy/sell transactions within the exchange, Upbit and Bithumb automatically calculate acquisition price, transfer price, and gains — then submit to the NTS. Taxpayers confirm the exchange-generated statement and file in May.
                         <strong className="text-gray-700 dark:text-gray-300"> Essentially automatic.</strong>
+                      </p>
+                      <p className="text-xs text-orange-600 dark:text-orange-400 mt-2">
+                        ※ Exception: staking rewards and airdrops that increase your coin balance are treated as miscellaneous income — taxable at receipt, even before you sell.
                       </p>
                     </div>
                   </div>
