@@ -244,6 +244,214 @@ export default function CryptoTaxAnalysisPost() {
                 </div>
               </div>
 
+              {/* 3.5 과세 복잡화 요소 */}
+              <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">CEX 원화↔코인 자료만으로 안 되는 이유: 복잡화 요소 7가지</h2>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
+                업비트·빗썸 KRW↔코인 거래 데이터만 있으면 과세는 단순하다. 문제는 그 이후부터다.
+              </p>
+
+              <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-400">
+                <p className="font-semibold text-gray-900 dark:text-white mb-2">탈세 경로 예시</p>
+                <div className="font-mono text-xs bg-white dark:bg-gray-900 p-3 rounded border border-gray-200 dark:border-gray-700 leading-relaxed">
+                  <p>원화 → 업비트 BTC → 바이낸스 ETH → Uniswap USDC → MetaMask → DeFi 스테이킹</p>
+                  <p className="text-red-500 mt-2">→ 시스템이 CEX 자료만 보면 &quot;BTC만 팔았네?&quot; 오인식</p>
+                </div>
+              </div>
+
+              <div className="mb-12 overflow-x-auto">
+                <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
+                  <thead className="bg-gray-900 dark:bg-white text-white dark:text-gray-900">
+                    <tr>
+                      <th className="p-3 text-left border border-gray-700 dark:border-gray-200 w-8">#</th>
+                      <th className="p-3 text-left border border-gray-700 dark:border-gray-200">복잡화 요소</th>
+                      <th className="p-3 text-left border border-gray-700 dark:border-gray-200">대표 사례</th>
+                      <th className="p-3 text-left border border-gray-700 dark:border-gray-200">왜 복잡한가</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-700 dark:text-gray-300">
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">1</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">해외 거래소</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">바이낸스·코인베이스</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">자료 미제출 → 2026년부터 OECD CARF 자동 교환으로 커버 시작, 그 이전 누락분은 소급 가능성</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">2</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">DEX (탈중앙 거래소)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Uniswap·PancakeSwap</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">지갑 주소 익명성, 스마트컨트랙트 직접 호출 → KYC 없음, 온체인 분석으로만 추적</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">3</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">개인 지갑 (셀프 커스터디)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">MetaMask·Ledger</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">CEX 출금 이후 추적 단절, HD 월렛 파생 경로 수천 개 분석 필요</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">4</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">크로스체인 브릿지</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">이더리움→솔라나 이동</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">체인이 바뀌면 동일 자금임을 연결하기 어려움, 멀티체인 인덱싱 인프라 미비</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">5</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">래핑/언래핑</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">wETH↔ETH 변환</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">동일 자산이 다른 토큰 형태로 변신 → 별도 양도로 볼지, 동일 자산 유지로 볼지 법령 미확정</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">6</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">DeFi (스테이킹·유동성 풀)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Aave·Uniswap LP</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">보상 토큰·이자가 지속 발생, LP 토큰 취득가액 산정 복잡, 시점별 시가 확정 어려움</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">7</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">NFT·RWA 토큰화</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">NFT 매매·부동산 토큰</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">가상자산 범주이지만 단일 자산 → 시세 기준 불명확, 분할 가능 여부·평가 방법 논란</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* 요소별 심층 설명 */}
+              <div className="mb-8 space-y-4">
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">해외 거래소 — 현재는 사각지대, 2026년부터 노출</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        바이낸스·OKX·Bybit 등은 국내 VASP 등록이 없어 거래 내역을 국세청에 제출하지 않는다.
+                        그러나 2026년부터 OECD CARF(Crypto-Asset Reporting Framework)가 시행되면 한국인 계좌 정보가
+                        자동으로 넘어온다. <strong className="text-gray-800 dark:text-gray-200">문제는 2026년 이전 거래분이다.</strong>
+                        CARF 시행 후 국세청이 "왜 이전에 신고 안 했냐"며 소급 조사를 할 수 있고,
+                        부과제척기간(최대 15년)이 남아 있는 한 추징이 가능하다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">DEX — 온체인 추적만 가능, KYC 없음</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        유니스왑·팬케이크스왑 등 DEX는 스마트컨트랙트에 직접 접근해 거래한다.
+                        중앙 서버도, 신원 확인도 없다. 국세청이 할 수 있는 것은 온체인 주소 클러스터링뿐이다.
+                        <strong className="text-gray-800 dark:text-gray-200"> 그 지갑이 누구 것인지를 연결하려면</strong> 결국 그 주소가 국내 거래소 출금 주소와 연결되는 시점을 잡아야 한다.
+                        연결고리 없이 DEX만 쓴다면 현재 시스템으로는 추적이 거의 불가능하다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">개인 지갑 — 출금 이후가 블랙박스</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        업비트에서 메타마스크로 출금하는 순간 거래소 기록에서 코인이 사라진다.
+                        HD(계층 결정적) 지갑은 하나의 시드에서 사실상 무한대의 주소를 파생한다.
+                        국세청이 RFP에 "HD 월렛 파생 경로 일부 반영"이라고 명시한 것은 <strong className="text-gray-800 dark:text-gray-200">완전 추적을 포기했다는 의미이기도 하다.</strong>
+                        단, 그 코인을 다시 국내 거래소로 입금해 현금화하는 순간 역추적이 시작된다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">4</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">크로스체인 브릿지 — 자금이 체인을 넘으면 추적 단절</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        이더리움 위에서 ETH를 솔라나의 SOL로 브릿지하면, 이더리움 분석 시스템과 솔라나 분석 시스템이 별개로 작동한다.
+                        두 체인을 연결하는 것은 기술적으로 어렵고, 초기 국세청 시스템에서 비EVM 체인(솔라나·아발란체·코스모스 등) 커버리지는 제한적일 가능성이 높다.
+                        <strong className="text-gray-800 dark:text-gray-200"> 현재로선 이더리움 메인넷 기반 추적이 가장 성숙하다.</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">5</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">래핑/언래핑 — 법령 해석이 아직 없다</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        ETH를 wETH로 래핑하거나 반대로 언래핑하는 것은 동일한 자산의 형태 변환이지만,
+                        온체인에서는 ETH가 소각되고 wETH가 새로 발행되는 형태로 기록된다.
+                        현행 소득세법은 이것이 <strong className="text-gray-800 dark:text-gray-200">'양도'에 해당하는지 명시하지 않는다.</strong>
+                        해석에 따라 매번 과세 이벤트가 발생할 수도 있고, 단순 형태 변환으로 볼 수도 있다.
+                        DeFi를 많이 사용하는 사람은 이 해석이 확정되기 전까지 거래 내역 기록을 철저히 해두어야 한다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">6</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">DeFi 보상 — 언제, 얼마로 잡나</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Aave에 ETH를 예치하면 aETH 토큰이 지속적으로 증가한다.
+                        Uniswap LP 포지션은 수수료가 실시간으로 쌓인다.
+                        이 보상들은 에어드랍·스테이킹과 마찬가지로 <strong className="text-gray-800 dark:text-gray-200">수령 시점 시가로 기타소득 과세</strong>가 원칙이다.
+                        문제는 초 단위로 발생하는 이자를 언제 '수령'으로 볼지, 시가는 어느 시점 기준인지, LP 토큰을 돌려받을 때 원금과 이자를 어떻게 분리할지가 모두 법령 미확정 상태다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">7</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">NFT·RWA — 가격 기준이 없다</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        NFT는 가상자산으로 분류되지만, 동일한 종류의 시장 가격이 존재하지 않는다.
+                        고가 NFT 매매 차익은 과세 대상이지만, 취득가액과 양도가액을 둘 다 주관적으로 주장할 수 있는 여지가 크다.
+                        부동산을 토큰화한 RWA는 더 복잡하다. 토큰 가격과 실물 부동산 가격 간 괴리가 생길 경우,
+                        <strong className="text-gray-800 dark:text-gray-200"> 어떤 가격을 과세 기준으로 삼을지 법령이 정비되지 않았다.</strong>
+                        초기에는 고가 NFT(수억 원 이상) 위주로 선별적 조사가 이루어질 가능성이 높다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-4 p-5 bg-gray-900 dark:bg-gray-100 rounded-lg text-white dark:text-gray-900 text-sm leading-relaxed">
+                <p className="font-semibold mb-3">국세청 통합분석시스템의 현실적 목표와 한계</p>
+                <div className="grid grid-cols-1 gap-2 text-sm">
+                  <div className="flex items-start gap-2 text-gray-300 dark:text-gray-700">
+                    <span className="text-green-400 dark:text-green-600 font-bold flex-shrink-0">✓</span>
+                    <span>블록체인 API + AI 패턴 분석으로 지갑 주소 클러스터링 → CEX 출금 주소와 연결 확인</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-gray-300 dark:text-gray-700">
+                    <span className="text-green-400 dark:text-green-600 font-bold flex-shrink-0">✓</span>
+                    <span>VASP 자료 + CARF 해외 교환 → 거래소 이용자 약 80% 커버 목표</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-gray-300 dark:text-gray-700">
+                    <span className="text-green-400 dark:text-green-600 font-bold flex-shrink-0">✓</span>
+                    <span>대규모 이상 거래 패턴 AI 탐지 → 우선 조사 대상 자동 추출</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-yellow-300 dark:text-yellow-600 mt-2">
+                    <span className="font-bold flex-shrink-0">⚠</span>
+                    <span><strong>현실:</strong> DEX·크로스체인·개인지갑 사용자 완벽 커버 불가 → 거래소 중심 과세 + 블록체인 샘플링 검증 병행. 초기엔 고액 거래자 우선 타깃.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-12 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg text-sm text-amber-800 dark:text-amber-300">
+                <strong>납세자 관점 핵심:</strong> CEX만 쓴 사람은 거래소가 자동 처리한다. DEX·개인지갑·DeFi를 사용하는 순간, 복잡성은 납세자 본인이 소명해야 한다. "시스템이 다 못 잡는다"는 것은 사실이지만, <strong>잡힌 사람은 가산세 포함 전액 추징</strong>이고 법령 미확정 부분까지 불리하게 해석될 수 있다.
+              </div>
+
               {/* 4. 기울어진 운동장 */}
               <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">4. 코인 vs 주식: 형평성 핵심 쟁점</h2>
 
@@ -1066,6 +1274,216 @@ export default function CryptoTaxAnalysisPost() {
                     <li>If DeFi adoption explodes, the NTS faces a "too complex to enforce" scenario → separate guidelines likely post-2029</li>
                   </ul>
                 </div>
+              </div>
+
+              {/* Complexity factors */}
+              <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Why CEX KRW↔Coin Data Isn&apos;t Enough: 7 Complexity Factors</h2>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
+                If everyone traded only on Upbit and Bithumb, crypto taxation would be trivial. The problem starts the moment coins leave the exchange.
+              </p>
+
+              <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-400">
+                <p className="font-semibold text-gray-900 dark:text-white mb-2">A typical evasion path</p>
+                <div className="font-mono text-xs bg-white dark:bg-gray-900 p-3 rounded border border-gray-200 dark:border-gray-700 leading-relaxed">
+                  <p>KRW → Upbit BTC → Binance ETH → Uniswap USDC → MetaMask → DeFi staking</p>
+                  <p className="text-red-500 mt-2">→ A system reading only CEX data concludes: &quot;They just sold some BTC.&quot; Wrong.</p>
+                </div>
+              </div>
+
+              <div className="mb-12 overflow-x-auto">
+                <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
+                  <thead className="bg-gray-900 dark:bg-white text-white dark:text-gray-900">
+                    <tr>
+                      <th className="p-3 text-left border border-gray-700 dark:border-gray-200 w-8">#</th>
+                      <th className="p-3 text-left border border-gray-700 dark:border-gray-200">Factor</th>
+                      <th className="p-3 text-left border border-gray-700 dark:border-gray-200">Examples</th>
+                      <th className="p-3 text-left border border-gray-700 dark:border-gray-200">Why it&apos;s hard</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-700 dark:text-gray-300">
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">1</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Foreign exchanges</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Binance, Coinbase</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">No mandatory data submission to NTS — OECD CARF auto-exchange starts 2026; pre-2026 gaps may be investigated retroactively</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">2</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">DEX (decentralized exchanges)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Uniswap, PancakeSwap</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">No KYC, wallet pseudonymity, smart contract calls leave no identity trail — on-chain clustering is the only method</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">3</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Personal wallets (self-custody)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">MetaMask, Ledger</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Trail breaks after CEX withdrawal; HD wallet derivation can generate thousands of addresses from one seed</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">4</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Cross-chain bridges</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">ETH → Solana transfer</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Funds change chains and become hard to link; multi-chain indexing infrastructure is immature</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">5</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Wrapping / unwrapping</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">wETH ↔ ETH conversion</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Same underlying asset, different token — undecided whether this counts as a taxable disposal under current Korean law</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">6</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">DeFi (staking, liquidity pools)</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Aave, Uniswap LP</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Rewards accrue continuously; LP token acquisition cost is complex to calculate; time-of-receipt market pricing is disputed</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-bold text-center">7</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">NFTs & RWA tokens</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">NFT trading, real estate tokens</td>
+                      <td className="p-3 border border-gray-200 dark:border-gray-700">Classified as virtual assets but each is unique — no market price benchmark, valuation methodology is actively debated</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Factor deep dives */}
+              <div className="mb-8 space-y-4">
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">Foreign exchanges — blind spot now, exposed from 2026</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Binance, OKX, and Bybit have no VASP registration in Korea and submit no data to the NTS.
+                        But from 2026, OECD CARF (Crypto-Asset Reporting Framework) kicks in, and Korean account holders&apos; data flows automatically.
+                        <strong className="text-gray-800 dark:text-gray-200"> The real risk is pre-2026 activity.</strong>
+                        Once CARF data arrives, the NTS can investigate why earlier years went unreported.
+                        With a statute of limitations of up to 15 years, retroactive assessment is very much on the table.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">DEX — on-chain analysis only, zero KYC</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Uniswap and PancakeSwap interact directly with smart contracts — no central server, no identity verification.
+                        The only tool available to the NTS is on-chain wallet clustering.
+                        <strong className="text-gray-800 dark:text-gray-200"> To connect an address to a real person</strong>, the system must catch the moment that wallet links to a KYC-registered exchange address.
+                        Without that link, a pure DEX user is currently close to invisible.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">Personal wallets — black box after withdrawal</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        The moment coins leave Upbit to MetaMask, they vanish from exchange records.
+                        HD wallets generate essentially infinite addresses from one seed.
+                        The NTS RFP explicitly states &quot;partial HD derivation path support&quot; — which is an admission that <strong className="text-gray-800 dark:text-gray-200">complete tracking isn&apos;t achievable.</strong>
+                        The chain snaps back together when coins are deposited back to a KYC exchange for cash-out — that&apos;s when retroactive tracing begins.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">4</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">Cross-chain bridges — the trail breaks when chains change</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Bridge ETH from Ethereum to Solana as SOL, and the Ethereum and Solana analysis systems operate independently.
+                        Linking the same funds across two chains requires specific bridge-aware tooling.
+                        Non-EVM chains (Solana, Avalanche, Cosmos) are likely to have limited coverage in the initial system.
+                        <strong className="text-gray-800 dark:text-gray-200"> Ethereum mainnet-based tracking is currently the most mature</strong> — other chains are gradually being added.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">5</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">Wrapping/unwrapping — the law hasn&apos;t decided</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Wrapping ETH into wETH or vice versa is conceptually a form change on the same asset.
+                        On-chain, however, ETH is burned and wETH is minted — it looks like a disposal and an acquisition.
+                        <strong className="text-gray-800 dark:text-gray-200">Current Korean tax law does not specify</strong> whether this constitutes a taxable &quot;transfer.&quot;
+                        Depending on interpretation, every wrap/unwrap could be a taxable event — or none of them.
+                        Heavy DeFi users should track every such transaction now and wait for regulatory guidance.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">6</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">DeFi rewards — when is &quot;receipt&quot;, and at what price?</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Deposit ETH on Aave and your aETH balance grows continuously. Uniswap LP fees accrue in real time.
+                        In principle, these rewards are miscellaneous income taxed at <strong className="text-gray-800 dark:text-gray-200">22% at time of receipt</strong>, just like airdrops and staking.
+                        What&apos;s unresolved: when exactly does per-second interest count as &quot;received&quot;? Which timestamp determines market price?
+                        How do you separate principal from yield when unwinding an LP position?
+                        All of these remain legally undefined as of 2026.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-7 h-7 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full flex items-center justify-center text-xs font-bold">7</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">NFTs & RWA — no benchmark price exists</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        NFTs are classified as virtual assets, but each one is unique — there&apos;s no exchange rate or market price to reference.
+                        Both acquisition and disposal values are highly subjective, creating room for disputes.
+                        Real estate-backed RWA tokens add another layer: when the token price diverges from the underlying property value,
+                        <strong className="text-gray-800 dark:text-gray-200"> there&apos;s no statute yet specifying which price governs for tax purposes.</strong>
+                        Expect the NTS to focus first on high-value NFT trades (₩100M+) where the numbers are worth the investigation effort.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-4 p-5 bg-gray-900 dark:bg-gray-100 rounded-lg text-white dark:text-gray-900 text-sm leading-relaxed">
+                <p className="font-semibold mb-3">What the NTS Integrated System Is Realistically Targeting</p>
+                <div className="grid grid-cols-1 gap-2 text-sm">
+                  <div className="flex items-start gap-2 text-gray-300 dark:text-gray-700">
+                    <span className="text-green-400 dark:text-green-600 font-bold flex-shrink-0">✓</span>
+                    <span>Blockchain API + AI pattern analysis → wallet address clustering linked to CEX withdrawal records</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-gray-300 dark:text-gray-700">
+                    <span className="text-green-400 dark:text-green-600 font-bold flex-shrink-0">✓</span>
+                    <span>VASP data + CARF international exchange → targeting ~80% of exchange users covered</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-gray-300 dark:text-gray-700">
+                    <span className="text-green-400 dark:text-green-600 font-bold flex-shrink-0">✓</span>
+                    <span>AI anomaly detection for large transfers and unusual patterns → automated audit target extraction</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-yellow-300 dark:text-yellow-600 mt-2">
+                    <span className="font-bold flex-shrink-0">⚠</span>
+                    <span><strong>Reality:</strong> DEX, cross-chain, and personal wallet users can&apos;t be fully covered → CEX-centered taxation + blockchain sampling verification in parallel. Initial focus will be high-volume traders.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-12 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg text-sm text-amber-800 dark:text-amber-300">
+                <strong>Key takeaway:</strong> CEX-only users get automated processing. The moment you use DEX, personal wallets, or DeFi, proving your tax position is your responsibility. &quot;The system can&apos;t catch everyone&quot; is true — but <strong>those it does catch face full back-taxes plus penalties</strong>, and legally ambiguous areas tend to be interpreted against the taxpayer.
               </div>
 
               <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">4. Crypto vs. Stocks: The Fairness Fault Lines</h2>
