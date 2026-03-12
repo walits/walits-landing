@@ -247,63 +247,121 @@ export default function CryptoTaxAnalysisPost() {
               {/* 4. 기울어진 운동장 */}
               <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">4. 코인 vs 주식: 형평성 핵심 쟁점</h2>
 
-              <div className="mb-8 overflow-x-auto">
-                <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
-                  <thead className="bg-gray-50 dark:bg-gray-800">
-                    <tr>
-                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">쟁점</th>
-                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">주식 (금융투자소득)</th>
-                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">가상자산 (기타소득)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-gray-700 dark:text-gray-300">
-                    <tr>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">기본공제</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">5,000만 원 (금투세 도입 시)</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">250만 원 <span className="text-xs">(20배 차이)</span></td>
-                    </tr>
-                    <tr className="bg-gray-50 dark:bg-gray-800">
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">손실 이월 공제</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">5년간 이월 가능</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">불가 (당해연도만)</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">세율</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700">20~25% (대주주만 적용)</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">22% (소액 투자자 포함 전체)</td>
-                    </tr>
-                    <tr className="bg-gray-50 dark:bg-gray-800">
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">자산 분류</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">금융투자자산</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">무형자산 → 기타소득</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">손익 통산</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">국내외 주식 합산</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">코인 간 합산만</td>
-                    </tr>
-                  </tbody>
-                </table>
+              {/* 금투세 폐지 배경 */}
+              <div className="mb-6 p-5 bg-gray-900 dark:bg-gray-100 rounded-lg text-white dark:text-gray-900 text-sm leading-relaxed">
+                <p className="mb-2"><strong>금투세(금융투자소득세)란?</strong> 주식·펀드 등 금융투자로 연 5,000만 원 이상 수익을 올린 투자자에게 20~25%를 과세하는 제도. 2020년 입법됐으나 두 차례 시행이 유예됐고, <strong>2024년 12월 10일 소득세법 개정으로 결국 폐지됐다.</strong></p>
+                <p>폐지 배경: "상위 1%(약 15만 명)가 전체 상장주식의 53%를 보유 — 이들이 세금 때문에 주식을 팔면 주가가 떨어지고 일반 투자자가 피해를 본다"는 논리가 우세했다. 이와 함께 증권거래세도 코스닥 기준 2022년 0.23% → 2025년 0.15%로 단계 인하, 대주주 양도세 요건도 보유 10억 → 50억으로 완화됐다.</p>
+              </div>
+
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                금투세가 폐지된 지금, 코인 과세와의 형평성 논쟁은 두 가지 시나리오로 나눠 봐야 한다.
+              </p>
+
+              {/* 시나리오 A: 현재 */}
+              <div className="mb-4">
+                <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">시나리오 A — 현재 (금투세 폐지 상태)</h3>
+                <div className="mb-4 overflow-x-auto">
+                  <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-800">
+                      <tr>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">항목</th>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">주식 (2025년 현행)</th>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">가상자산 (2027년 예정)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-gray-700 dark:text-gray-300">
+                      <tr>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">일반 투자자 양도세</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600 font-bold">없음 (금투세 폐지)</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600 font-bold">22% (250만 원 초과분)</td>
+                      </tr>
+                      <tr className="bg-gray-50 dark:bg-gray-800">
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">대주주 양도세</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700">20~25% (50억 이상 보유)</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">22% (전체 해당)</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">거래세</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700">증권거래세 0.15% (코스닥)</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700">없음</td>
+                      </tr>
+                      <tr className="bg-gray-50 dark:bg-gray-800">
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">건보료 영향</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">없음</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">기타소득 합산 → 보험료 증가</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-sm text-gray-700 dark:text-gray-300">
+                  주식으로 1억을 벌면 양도세 0원. 코인으로 1억을 벌면 약 2,145만 원.
+                  <strong className="text-red-700 dark:text-red-400"> 같은 투자 이익에 완전히 다른 잣대다.</strong>
+                  '소득 있는 곳에 세금 있다'는 원칙은 코인에만 적용된다.
+                </div>
+              </div>
+
+              {/* 시나리오 B: 금투세 재시행 가정 */}
+              <div className="mb-8">
+                <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">시나리오 B — 금투세가 다시 시행된다면</h3>
+                <div className="mb-4 overflow-x-auto">
+                  <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-800">
+                      <tr>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">항목</th>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">주식 (금투세 시행 가정)</th>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">가상자산 (2027년 예정)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-gray-700 dark:text-gray-300">
+                      <tr>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">기본공제</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">5,000만 원</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">250만 원 <span className="text-xs">(20배 차이)</span></td>
+                      </tr>
+                      <tr className="bg-gray-50 dark:bg-gray-800">
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">손실 이월 공제</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">5년 이월 가능</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">불가 (당해연도만)</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">세율</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700">20~25%</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">22%</td>
+                      </tr>
+                      <tr className="bg-gray-50 dark:bg-gray-800">
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">자산 분류</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">금융투자소득</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">기타소득 (건보료 연동)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg text-sm text-gray-700 dark:text-gray-300">
+                  금투세가 재시행되더라도 코인 투자자는 여전히 불리하다. 기본공제 20배 격차, 손실 이월 불가, 건보료 연동이라는 3중 부담이 남는다.
+                  <strong className="text-orange-700 dark:text-orange-400"> 금투세 재시행이 형평성 문제를 해결하는 게 아니라, 코인 과세 조건을 주식 수준으로 맞춰야 한다는 게 핵심 쟁점이다.</strong>
+                </div>
               </div>
 
               <div className="mb-8 space-y-4">
                 <div className="p-5 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">① 손실 이월 불가 — 가장 불합리한 조항</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">① 손실 이월 불가 — 금투세 폐지와 무관하게 불합리</h3>
                   <p className="text-sm text-gray-700 dark:text-gray-300">
                     작년에 코인으로 1억 원을 잃고, 올해 1천만 원을 벌었다고 치자.
-                    상식적으론 9천만 원 적자지만, 국세청은 올해 번 1천만 원에 칼같이 22%를 청구한다.
-                    주식 투자자라면 작년 손실 1억 원을 이월해 올해 세금이 0원이다.
-                    <strong className="text-red-700 dark:text-red-400"> 동일한 투자 결과, 완전히 다른 세금.</strong>
+                    국세청은 올해 번 1천만 원에 칼같이 22%를 청구한다.
+                    금투세가 살아 있었다면 주식 투자자는 작년 손실 1억을 이월해 세금 0원이다.
+                    금투세가 폐지된 지금은 주식 자체가 비과세이니 더 말할 것도 없다.
+                    <strong className="text-red-700 dark:text-red-400"> 어느 시나리오에서도 코인 투자자만 불리하다.</strong>
                   </p>
                 </div>
 
                 <div className="p-5 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">② 기본공제 20배 격차 — 소액 투자자 역차별</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">② 1,000만 코인 투자자 — 청년층 반발 가능성</h3>
                   <p className="text-sm text-gray-700 dark:text-gray-300">
-                    주식은 금투세 도입 시 5,000만 원까지 비과세다. 코인은 250만 원.
-                    연봉 3천만 원 직장인이 코인으로 300만 원 벌면 초과분 50만 원에 22%가 붙는다.
-                    같은 금액으로 주식에 투자했다면 세금이 없다.
-                    <strong className="text-orange-700 dark:text-orange-400"> 소액 투자자일수록 더 불리한 구조다.</strong>
+                    국내 코인 투자자 수는 약 1,000만 명. 주식 투자자와 큰 차이가 없다.
+                    특히 20~30대 청년 투자자 비중이 높다. 오문성 교수는
+                    <em>"청년 투자자 비중이 높은데 가상화폐에 대해서만 과세가 시행될 경우 반발이 더 커질 수 있다"</em>고 지적한다.
+                    주식은 부유층의 반대 논리로 폐지됐고, 코인은 청년층이 몰려 있다는 점에서 정치적 압력 구도가 다르다.
+                    <strong className="text-orange-700 dark:text-orange-400"> 과세 형평성은 결국 정치적 결정의 문제이기도 하다.</strong>
                   </p>
                 </div>
 
@@ -814,64 +872,111 @@ export default function CryptoTaxAnalysisPost() {
 
               <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">4. Crypto vs. Stocks: The Fairness Fault Lines</h2>
 
-              <div className="mb-8 overflow-x-auto">
-                <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
-                  <thead className="bg-gray-50 dark:bg-gray-800">
-                    <tr>
-                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Issue</th>
-                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Stocks (financial investment income)</th>
-                      <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Crypto (miscellaneous income)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-gray-700 dark:text-gray-300">
-                    <tr>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Basic deduction</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">₩50 million (under financial investment tax)</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">₩2.5 million <span className="text-xs">(20x gap)</span></td>
-                    </tr>
-                    <tr className="bg-gray-50 dark:bg-gray-800">
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Loss carryforward</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">5 years</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">Not allowed (current year only)</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Tax rate</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700">20–25% (major shareholders only)</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">22% (all investors)</td>
-                    </tr>
-                    <tr className="bg-gray-50 dark:bg-gray-800">
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Asset classification</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">Financial investment asset</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">Intangible asset → miscellaneous income</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Loss netting</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">Domestic + foreign stocks combined</td>
-                      <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">Crypto-to-crypto only</td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="mb-6 p-5 bg-gray-900 dark:bg-gray-100 rounded-lg text-white dark:text-gray-900 text-sm leading-relaxed">
+                <p className="mb-2"><strong>What is the Financial Investment Tax (금투세)?</strong> A proposed tax of 20–25% on investment gains above ₩50M per year from stocks, funds, and similar assets. Introduced in 2020, deferred twice — and <strong>officially abolished on December 10, 2024</strong> via an amendment to the Income Tax Act.</p>
+                <p>Why it was killed: The top 1% of stock investors (roughly 150,000 people) hold 53% of all listed domestic shares. The argument was that taxing them would cause selling pressure, crashing prices and hurting ordinary investors. Securities transaction tax was simultaneously cut (Kosdaq: 0.23% in 2022 → 0.15% in 2025), and the major shareholder threshold for capital gains was relaxed from ₩1B to ₩5B holdings.</p>
+              </div>
+
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                With the financial investment tax gone, the fairness debate splits into two distinct scenarios.
+              </p>
+
+              <div className="mb-4">
+                <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">Scenario A — Right Now (Financial Investment Tax Abolished)</h3>
+                <div className="mb-4 overflow-x-auto">
+                  <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-800">
+                      <tr>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Item</th>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Stocks (current, 2025)</th>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Crypto (planned, 2027)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-gray-700 dark:text-gray-300">
+                      <tr>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Capital gains (general)</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600 font-bold">None (tax abolished)</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600 font-bold">22% above ₩2.5M</td>
+                      </tr>
+                      <tr className="bg-gray-50 dark:bg-gray-800">
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Capital gains (major shareholder)</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700">20–25% (holdings ≥ ₩5B)</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">22% (all investors)</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Transaction tax</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700">0.15% (Kosdaq)</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700">None</td>
+                      </tr>
+                      <tr className="bg-gray-50 dark:bg-gray-800">
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Health insurance impact</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">None</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">Misc. income → premium increase</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-sm text-gray-700 dark:text-gray-300">
+                  Earn ₩100M in stocks today: zero capital gains tax. Earn ₩100M in crypto in 2027: approximately ₩21.45M in tax.
+                  <strong className="text-red-700 dark:text-red-400"> The &quot;tax where income exists&quot; principle only applies to crypto investors.</strong>
+                </div>
+              </div>
+
+              <div className="mb-8">
+                <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">Scenario B — If the Financial Investment Tax Were Reinstated</h3>
+                <div className="mb-4 overflow-x-auto">
+                  <table className="w-full text-sm border border-gray-200 dark:border-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-800">
+                      <tr>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Item</th>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Stocks (if reinstated)</th>
+                        <th className="p-3 text-left border border-gray-200 dark:border-gray-700">Crypto (planned, 2027)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-gray-700 dark:text-gray-300">
+                      <tr>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Basic deduction</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">₩50 million</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">₩2.5 million (20x gap)</td>
+                      </tr>
+                      <tr className="bg-gray-50 dark:bg-gray-800">
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Loss carryforward</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">5 years</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">Not allowed</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 font-semibold">Asset classification</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-green-600">Financial investment income</td>
+                        <td className="p-3 border border-gray-200 dark:border-gray-700 text-red-600">Misc. income (health insurance linked)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg text-sm text-gray-700 dark:text-gray-300">
+                  Even if the financial investment tax comes back, crypto investors are still worse off: 20x smaller deduction, no loss carryforward, health insurance premium exposure.
+                  <strong className="text-orange-700 dark:text-orange-400"> The fix isn&apos;t reinstating stock taxes — it&apos;s bringing crypto tax conditions up to stock-equivalent standards.</strong>
+                </div>
               </div>
 
               <div className="mb-8 space-y-4">
                 <div className="p-5 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">① No Loss Carryforward — The Most Indefensible Rule</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">① No Loss Carryforward — Unfair in Every Scenario</h3>
                   <p className="text-sm text-gray-700 dark:text-gray-300">
                     Lose ₩100M on crypto last year, make ₩10M this year — you still owe 22% on ₩10M.
-                    A stock investor in the same position would carry forward the ₩100M loss and owe nothing.
-                    Same investment behavior. Completely different tax treatment.
-                    <strong className="text-red-700 dark:text-red-400"> Tax without acknowledging the loss is not taxation — it&apos;s confiscation.</strong>
+                    If the financial investment tax were active, stock investors could carry forward the ₩100M loss and owe zero.
+                    With the financial investment tax abolished, stocks are simply untaxed.
+                    <strong className="text-red-700 dark:text-red-400"> In every scenario, only crypto investors get hit.</strong>
                   </p>
                 </div>
 
                 <div className="p-5 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">② 20x Deduction Gap — Penalizes Small Investors Most</h3>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">② ~10 Million Crypto Investors — Political Pressure Building</h3>
                   <p className="text-sm text-gray-700 dark:text-gray-300">
-                    Under the financial investment tax framework, stock gains up to ₩50M are tax-free. Crypto: ₩2.5M.
-                    A salaried worker earning ₩3M on crypto pays 22% on ₩500K of excess.
-                    The same ₩3M gain in stocks: zero tax.
-                    Crypto investors are disproportionately young — Prof. Oh Moon-seong (Hanyang Women&apos;s University, Korean Tax Policy Association) notes that &quot;the youth investor share is high, and applying crypto tax alone will generate stronger backlash.&quot;
-                    <strong className="text-orange-700 dark:text-orange-400"> The smaller the investor, the worse the deal.</strong>
+                    Korea has approximately 10 million crypto investors — comparable to the stock investor base.
+                    The crypto investor demographic skews younger than stocks.
+                    Prof. Oh Moon-seong notes: &quot;The youth investor share is high, and applying crypto tax alone will generate stronger backlash.&quot;
+                    Stocks were exempted largely due to the political influence of wealthy shareholders. Crypto&apos;s resistance will come from sheer voter numbers.
+                    <strong className="text-orange-700 dark:text-orange-400"> Tax fairness is ultimately a political question too.</strong>
                   </p>
                 </div>
 
