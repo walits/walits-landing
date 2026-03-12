@@ -1,28 +1,29 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "커뮤니티 에어드랍 대량 지급 가이드 | 1,000명 동시 배포 | Walits",
-  description: "1,000명 유저에게 토큰 에어드랍을 한 번에 지급하는 방법. Virtual Balance 시스템으로 가스비 없이 즉시 배포하는 실전 가이드. NFT 에어드랍, 코인 에어드랍 활용법.",
+  title: "코인 과세 유예는 끝났다: 국세청 가상자산 통합분석 시스템 완전 해부 | Walits",
+  description: "2027년 1월 가상자산 양도소득세 시행을 앞두고 국세청이 구축 중인 통합분석 시스템의 작동 방식, 기술적 한계, 합법적 절세 전략을 완전 해부합니다.",
   keywords: [
-    "에어드랍",
-    "토큰 에어드랍",
-    "NFT 에어드랍",
-    "대량 에어드랍",
-    "코인 배포",
-    "Virtual Balance",
-    "가스비 없는 에어드랍",
-    "커뮤니티 보상",
-    "토큰 분배",
+    "가상자산 세금",
+    "코인 양도소득세",
+    "국세청 가상자산",
+    "가상자산 통합분석 시스템",
+    "코인 과세",
+    "블록체인 세금",
+    "가상자산 절세",
+    "코인 탈세",
+    "VASP 보고",
+    "가상자산 취득가액",
   ],
   authors: [{ name: "Walits Team" }],
   alternates: {
     canonical: "/blog/community-airdrop",
   },
   openGraph: {
-    title: "커뮤니티 에어드랍 대량 지급 가이드 | 1,000명 동시 배포",
-    description: "Virtual Balance로 1,000명에게 가스비 없이 즉시 토큰 에어드랍하는 실전 가이드",
+    title: "코인 과세 유예는 끝났다: 국세청 가상자산 통합분석 시스템 완전 해부",
+    description: "2027년 1월 가상자산 양도소득세 시행을 앞두고 국세청 감시 시스템의 작동 방식과 합법적 대응 전략을 해부합니다.",
     type: "article",
-    publishedTime: "2024-12-14T00:00:00Z",
+    publishedTime: "2026-03-12T00:00:00Z",
     authors: ["Walits Team"],
     url: "https://walits.com/blog/community-airdrop",
     images: [
@@ -30,13 +31,13 @@ export const metadata: Metadata = {
         url: "https://walits.com/blog/airdrop.jpg",
         width: 1200,
         height: 630,
-        alt: "Community Airdrop Guide",
+        alt: "국세청 가상자산 통합분석 시스템",
       },
     ],
   },
 };
 
-export default function AirdropLayout({
+export default function CryptoTaxLayout({
   children,
 }: {
   children: React.ReactNode;
