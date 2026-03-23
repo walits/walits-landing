@@ -246,18 +246,56 @@ export default function MevEthereumDeepDivePage() {
               </div>
 
               {/* 공개/비공개 mempool 오해 해소 박스 */}
-              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-6 my-6">
-                <p className="text-sm font-semibold text-amber-800 dark:text-amber-300 mb-3">❓ 비공개 mempool의 Tx는 블록에 포함되지 못하는 거 아닌가?</p>
-                <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mb-3">
-                  흔한 오해다. <strong>"공개 / 비공개"는 누가 볼 수 있느냐의 문제</strong>이지, 블록 포함 여부와 무관하다.
-                </p>
-                <div className="space-y-2 text-sm text-amber-900 dark:text-amber-200">
-                  <p>• <strong>공개 mempool Tx</strong> — 모든 노드에 브로드캐스팅된 뒤, Searcher들이 보고 앞뒤로 끼어든다. Builder가 수거해 블록에 넣는다.</p>
-                  <p>• <strong>Private RPC / Builder private orderflow Tx</strong> — Relay나 Builder에게 직접 전달된다. 브로드캐스팅 없이 Builder의 블록 후보에 바로 올라간다.</p>
+              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-6 my-6 space-y-5">
+                <p className="font-bold text-amber-800 dark:text-amber-300 text-base">❓ 비공개 mempool의 Tx는 블록이 되기 어려운 거 아닌가?</p>
+
+                {/* PoW 복습 */}
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-2">PoW 시절 (이더리움 2022년 9월 이전)</p>
+                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+                    PoW에서는 <strong>채굴자(Miner)가 블록 생성 권한을 독점</strong>했다. 채굴자는 공개 mempool에서 Tx를 골라 순서를 직접 정하고 블록을 만들었다. 당연히 공개 mempool에 없는 Tx는 해당 채굴자가 처리해 주기 전까지 블록에 들어갈 수 없었다. 이 구조에서는 "공개 mempool = 블록 대기열"이라는 공식이 거의 성립했다.
+                  </p>
                 </div>
-                <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mt-3">
-                  결국 두 경로 모두 <strong>Builder → Proposer(검증자) → 블록 확정</strong>이라는 동일한 PBS 파이프라인을 거친다. 오히려 private orderflow Tx는 Builder에게 <strong>독점 수익 기회</strong>를 제공하기 때문에, Builder들이 이 채널 확보를 위해 dApp·지갑 서비스와 경쟁적으로 계약을 맺는다. 비공개라서 불리한 게 아니라, 오히려 블록 포함 우선순위가 더 높을 수 있다.
-                </p>
+
+                {/* PoS + PBS 전환 */}
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-2">PoS 전환 후 — 역할이 분리됐다 (PBS)</p>
+                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mb-3">
+                    2022년 9월 이더리움이 PoS(The Merge)로 전환하면서, PoW처럼 한 사람이 채굴하고 블록을 만드는 구조가 사라졌다. 대신 역할이 두 개로 쪼개졌다. 이것이 <strong>PBS(Proposer-Builder Separation)</strong>다.
+                  </p>
+                  <div className="bg-white dark:bg-gray-900 border border-amber-200 dark:border-amber-800 rounded-lg overflow-hidden text-sm">
+                    <div className="grid grid-cols-2 divide-x divide-amber-200 dark:divide-amber-800">
+                      <div className="p-4">
+                        <p className="font-bold text-amber-800 dark:text-amber-300 mb-1">Builder (블록 제조자)</p>
+                        <p className="text-amber-900 dark:text-amber-200 text-xs leading-relaxed">mempool에서 Tx를 수집하고, Searcher 번들도 받아서 <strong>가장 수익이 높은 순서로</strong> 블록 후보를 조립한다. 전문 소프트웨어 회사다.</p>
+                      </div>
+                      <div className="p-4">
+                        <p className="font-bold text-amber-800 dark:text-amber-300 mb-1">Proposer (검증자 / Validator)</p>
+                        <p className="text-amber-900 dark:text-amber-200 text-xs leading-relaxed">Builder들이 제출한 블록 후보 중 <strong>입찰가가 가장 높은 것을 선택</strong>해 서명한다. Tx 순서에는 개입하지 않는다. ETH를 32개 이상 스테이킹한 노드다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 핵심 답변 */}
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-2">그래서 — 공개/비공개는 '가시성' 문제, 블록 포함은 'Builder' 문제</p>
+                  <div className="space-y-2 text-sm text-amber-900 dark:text-amber-200">
+                    <p>• <strong>공개 mempool Tx</strong> — 전 세계 노드에 브로드캐스팅. Builder가 수거해 블록 후보에 넣는다. Searcher도 같은 Tx를 보고 앞뒤로 끼어든다.</p>
+                    <p>• <strong>Private Tx (Private RPC / Builder direct)</strong> — 공개 브로드캐스팅 없이 Builder에게 직접 전달된다. Builder의 블록 후보에 곧바로 올라간다. 차이는 Searcher가 못 본다는 것뿐이다.</p>
+                  </div>
+                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mt-3">
+                    두 경로 모두 최종적으로 <strong>Builder가 블록에 포함시키고, Proposer(검증자)가 그 블록을 선택해 확정</strong>한다. "공개 mempool에 없으면 블록이 못 된다"는 PoW 시절의 상식이지, PoS에서는 통하지 않는다.
+                  </p>
+                </div>
+
+                {/* 역설: 오히려 private이 유리 */}
+                <div className="bg-amber-100 dark:bg-amber-900/40 rounded-lg p-4">
+                  <p className="text-sm font-semibold text-amber-800 dark:text-amber-300 mb-1">오히려 Private Tx가 더 유리할 수 있다</p>
+                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+                    Builder 입장에서 private orderflow Tx는 <strong>자신만 볼 수 있는 독점 수익 기회</strong>다. 경쟁 Builder가 같은 Tx로 더 높은 블록을 만들 수 없으므로, 해당 Builder는 이 Tx를 포함한 블록에 더 높은 입찰가를 써낼 유인이 생긴다. 결과적으로 Flashbots, BloXroute 같은 주요 Builder들이 대형 dApp·지갑 서비스와 private orderflow 계약을 맺기 위해 경쟁한다. 비공개라서 불리한 게 아니라, <strong>블록 포함 우선순위가 오히려 높아진다</strong>.
+                  </p>
+                </div>
               </div>
 
               <hr className="border-gray-200 dark:border-gray-700 my-10" />
@@ -1061,18 +1099,56 @@ export default function MevEthereumDeepDivePage() {
               </div>
 
               {/* Private mempool misconception callout EN */}
-              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-6 my-6">
-                <p className="text-sm font-semibold text-amber-800 dark:text-amber-300 mb-3">❓ Don't private mempool transactions miss out on block inclusion?</p>
-                <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mb-3">
-                  A common misconception. <strong>"Public vs. private" is purely about visibility</strong> — it has nothing to do with whether a transaction gets included in a block.
-                </p>
-                <div className="space-y-2 text-sm text-amber-900 dark:text-amber-200">
-                  <p>• <strong>Public mempool Tx</strong> — Broadcast to all nodes. Searchers watch and insert front/back-running trades. Eventually a Builder picks it up and includes it in a block candidate.</p>
-                  <p>• <strong>Private RPC / Builder private orderflow Tx</strong> — Sent directly to a Relay or Builder, bypassing broadcast entirely. It lands straight in the Builder's block candidate.</p>
+              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-6 my-6 space-y-5">
+                <p className="font-bold text-amber-800 dark:text-amber-300 text-base">❓ Are private mempool transactions at a disadvantage for block inclusion?</p>
+
+                {/* PoW recap */}
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-2">PoW Era (Ethereum before September 2022)</p>
+                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+                    Under PoW, <strong>miners held a monopoly on block production</strong>. A miner pulled transactions from the public mempool, ordered them however they liked, and mined the block. Anything not in the public mempool simply didn't exist for that miner until someone handed it to them. In this model, "public mempool = block queue" was essentially true.
+                  </p>
                 </div>
-                <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mt-3">
-                  Both paths travel the same PBS pipeline: <strong>Builder → Proposer (validator) → finalized block</strong>. In fact, private orderflow gives Builders an <strong>exclusive profit opportunity</strong> — which is exactly why major Builders aggressively compete to sign direct deals with dApps and wallet services. Far from being at a disadvantage, private transactions can actually enjoy higher block-inclusion priority.
-                </p>
+
+                {/* PoS + PBS */}
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-2">After The Merge (PoS) — Roles Split Into Two (PBS)</p>
+                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mb-3">
+                    When Ethereum switched to PoS in September 2022, the PoW model of "one party mines and builds the block" disappeared. The job split into two specialized roles — this is <strong>PBS (Proposer-Builder Separation)</strong>.
+                  </p>
+                  <div className="bg-white dark:bg-gray-900 border border-amber-200 dark:border-amber-800 rounded-lg overflow-hidden text-sm">
+                    <div className="grid grid-cols-2 divide-x divide-amber-200 dark:divide-amber-800">
+                      <div className="p-4">
+                        <p className="font-bold text-amber-800 dark:text-amber-300 mb-1">Builder (Block Producer)</p>
+                        <p className="text-amber-900 dark:text-amber-200 text-xs leading-relaxed">Collects transactions from the mempool and Searcher bundles, then assembles a block candidate in <strong>the most profitable ordering</strong>. These are specialized software companies.</p>
+                      </div>
+                      <div className="p-4">
+                        <p className="font-bold text-amber-800 dark:text-amber-300 mb-1">Proposer (Validator)</p>
+                        <p className="text-amber-900 dark:text-amber-200 text-xs leading-relaxed">Receives block candidates from Builders and <strong>picks the highest-bid one</strong>, then signs and finalizes it. Never touches transaction ordering. Must stake ≥ 32 ETH.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Core answer */}
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 mb-2">The Answer — "Public/Private" is a Visibility Problem, Not a Block-Inclusion Problem</p>
+                  <div className="space-y-2 text-sm text-amber-900 dark:text-amber-200">
+                    <p>• <strong>Public mempool Tx</strong> — Broadcast globally. Any Builder (and any Searcher) can see it. Builders collect it into their block candidates.</p>
+                    <p>• <strong>Private Tx (Private RPC / Builder direct)</strong> — Delivered directly to a Builder without public broadcast. It goes straight into that Builder's block candidate. The only difference: Searchers can't see it.</p>
+                  </div>
+                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mt-3">
+                    Both paths end the same way: <strong>a Builder includes the Tx in a block → a Proposer (validator) picks that block → it's finalized</strong>. "Not in the public mempool = can't become a block" was a PoW-era intuition. Under PoS PBS, it no longer holds.
+                  </p>
+                </div>
+
+                {/* Paradox: private is actually better */}
+                <div className="bg-amber-100 dark:bg-amber-900/40 rounded-lg p-4">
+                  <p className="text-sm font-semibold text-amber-800 dark:text-amber-300 mb-1">In fact, private transactions can have an advantage</p>
+                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+                    From a Builder's perspective, private orderflow is an <strong>exclusive profit opportunity that no competing Builder can access</strong>. Since rival Builders can't build a higher-value block using the same transaction, the Builder with access has a strong incentive to bid more aggressively — making the block more likely to be chosen by the Proposer. This is why Flashbots, BloXroute, and other major Builders compete fiercely to ink private-orderflow deals with large dApps and wallet services. Private doesn't mean disadvantaged — <strong>it often means higher inclusion priority</strong>.
+                  </p>
+                </div>
               </div>
 
               <hr className="border-gray-200 dark:border-gray-700 my-10" />
