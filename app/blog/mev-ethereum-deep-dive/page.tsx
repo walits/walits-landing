@@ -153,6 +153,98 @@ export default function MevEthereumDeepDivePage() {
                 </div>
               </div>
 
+              {/* Mempool 종류 */}
+              <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">Mempool의 종류 — 공개만 있는 게 아니다</h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-5">
+                "mempool"이라고 하면 모두가 같은 대기열을 보는 것 같지만, 실제로는 Tx가 어떤 경로로 전달되느냐에 따라 누가 볼 수 있는지가 달라진다.
+              </p>
+
+              <div className="space-y-3 my-6">
+                {/* 공개 mempool */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-3 px-5 py-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <span className="text-xs font-mono font-bold px-2 py-1 rounded-full bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300">완전 공개</span>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">공개 mempool (Public mempool)</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">아무 설정 없이 MetaMask로 Tx를 보내면 여기 들어간다. 전 세계 누구나 실시간으로 볼 수 있고, Searcher 봇들이 24시간 스캔한다. Sandwich Attack의 피해자가 되는 이유가 이것이다.</p>
+                    <div className="flex flex-wrap gap-2 text-xs font-mono">
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">접근: eth_subscribe("newPendingTransactions")</span>
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">유료 고속: bloXroute, Blocknative</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Private RPC */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-3 px-5 py-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <span className="text-xs font-mono font-bold px-2 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300">완전 비공개</span>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">Private mempool (Private RPC)</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">Flashbots Protect RPC, MEV Blocker 같은 서비스를 통해 Tx를 보내면 공개 mempool을 완전히 우회한다. Tx가 특정 relay·builder에게만 전달되어 다른 Searcher에게 전혀 노출되지 않는다. Sandwich Attack 방어에 가장 효과적이다.</p>
+                    <div className="flex flex-wrap gap-2 text-xs font-mono">
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">Flashbots Protect: rpc.flashbots.net</span>
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">MEV Blocker: rpc.mevblocker.io</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* MEV-Share */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-3 px-5 py-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <span className="text-xs font-mono font-bold px-2 py-1 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">부분 공개</span>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">MEV-Share orderflow</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">완전 공개도, 완전 비공개도 아닌 중간 형태. Tx 자체는 공개 mempool에 들어가지 않지만, Flashbots Matchmaker가 등록된 Searcher에게 <strong>"힌트"만</strong> 공유한다. 예: "USDC↔ETH 스왑이 있다" 정도만 알려주고 금액·주소는 비공개. Searcher가 MEV를 추출하면 수익 일부를 원래 사용자에게 돌려줘야 한다.</p>
+                    <div className="flex flex-wrap gap-2 text-xs font-mono">
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">제공: Flashbots Matchmaker API</span>
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">사용자 수익 환원 구조</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Builder private orderflow */}
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-3 px-5 py-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <span className="text-xs font-mono font-bold px-2 py-1 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">계약 기반</span>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">Builder private orderflow</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-gray-700 dark:text-gray-300">대형 builder(Flashbots, BloXroute 등)가 특정 dApp·지갑 서비스와 직접 계약을 맺어 Tx를 공개 mempool 없이 바로 받는 경우. 해당 builder만 볼 수 있으며 다른 builder나 Searcher에게는 보이지 않는다. Tx 볼륨이 큰 서비스일수록 이 채널로 수익을 높이는 구조다.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="overflow-x-auto my-6">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-900 dark:text-white">유형</th>
+                      <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-900 dark:text-white">누가 보나</th>
+                      <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-900 dark:text-white">Sandwich 위험</th>
+                      <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-900 dark:text-white">예시</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { type: '공개 mempool', who: '누구나', risk: '높음', riskColor: 'text-red-600 dark:text-red-400', ex: '일반 MetaMask Tx' },
+                      { type: 'Private RPC', who: '특정 relay만', risk: '없음', riskColor: 'text-green-600 dark:text-green-400', ex: 'Flashbots Protect, MEV Blocker' },
+                      { type: 'MEV-Share', who: '등록된 Searcher (힌트만)', risk: '낮음', riskColor: 'text-amber-600 dark:text-amber-400', ex: 'Flashbots MEV-Share' },
+                      { type: 'Builder private', who: '특정 builder만', risk: '없음', riskColor: 'text-green-600 dark:text-green-400', ex: 'dApp·지갑과 직접 계약' },
+                    ].map((row, i) => (
+                      <tr key={i} className={i % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>
+                        <td className="border border-gray-200 dark:border-gray-700 p-3 font-medium text-gray-900 dark:text-white">{row.type}</td>
+                        <td className="border border-gray-200 dark:border-gray-700 p-3 text-gray-600 dark:text-gray-400">{row.who}</td>
+                        <td className={`border border-gray-200 dark:border-gray-700 p-3 font-semibold ${row.riskColor}`}>{row.risk}</td>
+                        <td className="border border-gray-200 dark:border-gray-700 p-3 text-gray-500 dark:text-gray-400 text-xs font-mono">{row.ex}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
               <hr className="border-gray-200 dark:border-gray-700 my-10" />
 
               {/* ── S2 플래시론 ── */}
@@ -863,6 +955,94 @@ export default function MevEthereumDeepDivePage() {
                     )
                   )}
                 </div>
+              </div>
+
+              {/* Mempool types EN */}
+              <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">Types of Mempools — The Public One Isn't the Only One</h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-5">
+                "The mempool" implies one shared queue — but who can actually see a transaction depends entirely on which path it takes.
+              </p>
+
+              <div className="space-y-3 my-6">
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-3 px-5 py-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <span className="text-xs font-mono font-bold px-2 py-1 rounded-full bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300">fully public</span>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">Public Mempool</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">Send a transaction from MetaMask with no special settings and it lands here. Anyone in the world can see it in real time. Searcher bots scan it 24/7. This is why sandwich attacks are possible.</p>
+                    <div className="flex flex-wrap gap-2 text-xs font-mono">
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">access: eth_subscribe("newPendingTransactions")</span>
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">paid fast-lane: bloXroute, Blocknative</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-3 px-5 py-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <span className="text-xs font-mono font-bold px-2 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300">fully private</span>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">Private Mempool (Private RPC)</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">Use a service like Flashbots Protect RPC or MEV Blocker and your transaction bypasses the public mempool entirely. It's delivered only to specific relays/builders — invisible to all other searchers. The most effective sandwich attack defense available today.</p>
+                    <div className="flex flex-wrap gap-2 text-xs font-mono">
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">Flashbots Protect: rpc.flashbots.net</span>
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">MEV Blocker: rpc.mevblocker.io</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-3 px-5 py-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <span className="text-xs font-mono font-bold px-2 py-1 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">partial visibility</span>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">MEV-Share Orderflow</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">A middle ground — neither fully public nor fully private. The transaction doesn't enter the public mempool, but Flashbots' Matchmaker shares a <strong>"hint"</strong> with registered searchers: e.g., "a USDC↔ETH swap is happening" — amount and address stay hidden. If a searcher extracts MEV from it, they must return a portion of the profit to the original user.</p>
+                    <div className="flex flex-wrap gap-2 text-xs font-mono">
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">provided by: Flashbots Matchmaker API</span>
+                      <span className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-400">user profit-sharing structure</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-3 px-5 py-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <span className="text-xs font-mono font-bold px-2 py-1 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">contract-based</span>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">Builder Private Orderflow</p>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-gray-700 dark:text-gray-300">Large builders (Flashbots, BloXroute, etc.) strike direct deals with dApps and wallet services to receive transactions without going through the public mempool. Only that builder can see them — invisible to all other builders and searchers. High-volume services use this channel to increase their builder's revenue.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="overflow-x-auto my-6">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50 dark:bg-gray-800">
+                      <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-900 dark:text-white">Type</th>
+                      <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-900 dark:text-white">Who Can See It</th>
+                      <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-900 dark:text-white">Sandwich Risk</th>
+                      <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-900 dark:text-white">Example</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { type: 'Public mempool', who: 'Everyone', risk: 'High', riskColor: 'text-red-600 dark:text-red-400', ex: 'Default MetaMask Tx' },
+                      { type: 'Private RPC', who: 'Specific relay only', risk: 'None', riskColor: 'text-green-600 dark:text-green-400', ex: 'Flashbots Protect, MEV Blocker' },
+                      { type: 'MEV-Share', who: 'Registered searchers (hints only)', risk: 'Low', riskColor: 'text-amber-600 dark:text-amber-400', ex: 'Flashbots MEV-Share' },
+                      { type: 'Builder private', who: 'One specific builder', risk: 'None', riskColor: 'text-green-600 dark:text-green-400', ex: 'Direct dApp / wallet deals' },
+                    ].map((row, i) => (
+                      <tr key={i} className={i % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>
+                        <td className="border border-gray-200 dark:border-gray-700 p-3 font-medium text-gray-900 dark:text-white">{row.type}</td>
+                        <td className="border border-gray-200 dark:border-gray-700 p-3 text-gray-600 dark:text-gray-400">{row.who}</td>
+                        <td className={`border border-gray-200 dark:border-gray-700 p-3 font-semibold ${row.riskColor}`}>{row.risk}</td>
+                        <td className="border border-gray-200 dark:border-gray-700 p-3 text-gray-500 dark:text-gray-400 text-xs font-mono">{row.ex}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
 
               <hr className="border-gray-200 dark:border-gray-700 my-10" />
