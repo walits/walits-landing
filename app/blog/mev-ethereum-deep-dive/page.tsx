@@ -665,7 +665,7 @@ export default function MevEthereumDeepDivePage() {
               <h2 className="text-3xl font-bold mt-12 mb-2 text-gray-900 dark:text-white">11 · 실전 사례: $50M Aave 스왑 사건</h2>
               <p className="text-sm font-mono text-gray-400 mb-6">2026년 3월 12일 · Ethereum Mainnet</p>
               <p className="text-gray-700 dark:text-gray-300">
-                이론에서 다룬 모든 개념 — AMM 가격 충격, 샌드위치 어택, 플래시론, Flashbots — 이 하나의 트랜잭션에서 동시에 작동하는 것을 보여준 사건이다. 누군가가 Aave 인터페이스에서 <strong>50,432,688 USDT를 AAVE 토큰으로 스왑</strong>했고, 결과는 <strong>327 AAVE(약 $36,000)</strong>였다. 사실상 $49.96M을 날렸다.
+                이론에서 다룬 모든 개념 — AMM 가격 충격, 샌드위치 어택, 플래시론, Flashbots — 이 하나의 트랜잭션에서 동시에 작동하는 것을 보여준 사건이다. 누군가가 Aave에 예치해 둔 <strong>$50,432,688 상당의 <code className="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">aEthUSDT</code>(USDT 예금 영수증 토큰)를 Collateral Swap 기능으로 AAVE 토큰과 교환</strong>했고, 결과는 <strong>327 AAVE(약 $36,000)</strong>였다. 사실상 $49.96M을 날렸다.
               </p>
 
               {/* 요약 수치 */}
@@ -690,10 +690,13 @@ export default function MevEthereumDeepDivePage() {
                   <span className="text-lg">🏦</span> Aave는 렌딩 프로토콜인데, 왜 스왑에 사용됐나?
                 </p>
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
-                  맞다. Aave는 본질적으로 <strong>대출·차입(렌딩) 프로토콜</strong>이다. 그런데 Aave에 자산을 예치하면 단순히 토큰을 보관하는 게 아니라 <strong>aToken</strong>이라는 이자 수익형 토큰을 받는다. USDT를 예치하면 <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code>를 받고, 이 토큰은 시간이 지날수록 이자가 붙어 잔액이 자동으로 늘어난다.
+                  맞다. Aave는 본질적으로 <strong>대출·차입(렌딩) 프로토콜</strong>이다. 핵심은 이거다: <strong>Aave에 USDT를 예치하면, USDT는 Aave 스마트컨트랙트 안에 잠기고 사용자 지갑에는 USDT가 사라진다.</strong> 대신 <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code>라는 "예금 영수증 토큰"이 발행된다. 이 토큰은 시간이 지날수록 이자가 붙어 잔액이 자동으로 늘어나는 이자 수익형 토큰이다.
                 </p>
+                <div className="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-3 text-sm font-mono text-gray-600 dark:text-gray-300 my-3">
+                  USDT 예치 → 지갑의 USDT 사라짐 → <code className="text-amber-700 dark:text-amber-300">aEthUSDT</code> 발행됨 (영수증)
+                </div>
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-                  이 사건의 피해자는 처음부터 스왑을 하려던 게 아니었다. Aave에 USDT를 예치해 <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code>를 보유하던 상태에서, 담보를 AAVE 토큰으로 교체하기 위해 Aave의 <strong>Collateral Swap</strong> 기능을 사용했다.
+                  이 사건의 피해자는 처음부터 외부 스왑을 하려던 게 아니었다. 이미 Aave에 USDT를 예치한 상태라 지갑에는 <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code>만 있었고, 이 담보를 AAVE 토큰으로 바꾸기 위해 Aave의 <strong>Collateral Swap</strong> 기능을 사용한 것이다.
                 </p>
                 <div className="bg-white dark:bg-gray-900 rounded-lg p-4 mb-4">
                   <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Collateral Swap 내부 동작 (버튼 하나의 실체)</p>
@@ -1485,7 +1488,7 @@ export default function MevEthereumDeepDivePage() {
               <h2 className="text-3xl font-bold mt-12 mb-2 text-gray-900 dark:text-white">11 · Real-World Case: The $50M Aave Swap Incident</h2>
               <p className="text-sm font-mono text-gray-400 mb-6">March 12, 2026 · Ethereum Mainnet</p>
               <p className="text-gray-700 dark:text-gray-300">
-                Every concept covered in this article — AMM price impact, sandwich attacks, flash loans, Flashbots — converged in a single transaction. Someone swapped <strong>50,432,688 USDT for AAVE tokens</strong> via the Aave interface and received <strong>327 AAVE worth roughly $36,000</strong>. They had effectively destroyed $49.96 million.
+                Every concept covered in this article — AMM price impact, sandwich attacks, flash loans, Flashbots — converged in a single transaction. Someone used Aave's Collateral Swap feature to exchange <strong>$50,432,688 worth of <code className="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">aEthUSDT</code> — Aave's yield-bearing USDT deposit token — for AAVE tokens</strong>, and received just <strong>327 AAVE worth roughly $36,000</strong>. They had effectively destroyed $49.96 million.
               </p>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 my-8">
@@ -1509,10 +1512,13 @@ export default function MevEthereumDeepDivePage() {
                   <span className="text-lg">🏦</span> Aave is a lending protocol — so why was it used for a swap?
                 </p>
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
-                  Correct. Aave is fundamentally a <strong>lending and borrowing protocol</strong>. But when you deposit assets into Aave, you don't just hold the token — you receive an <strong>aToken</strong>, a yield-bearing receipt. Deposit USDT and you get <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code>, whose balance automatically grows as interest accrues.
+                  Correct. Aave is fundamentally a <strong>lending and borrowing protocol</strong>. Here's the key: <strong>when you deposit USDT into Aave, your USDT is locked inside the smart contract — it leaves your wallet.</strong> In return, Aave mints <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code>, a yield-bearing "deposit receipt" token whose balance automatically grows as interest accrues.
                 </p>
+                <div className="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-3 text-sm font-mono text-gray-600 dark:text-gray-300 my-3">
+                  Deposit USDT → USDT leaves wallet → <code className="text-amber-700 dark:text-amber-300">aEthUSDT</code> minted (receipt token)
+                </div>
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-                  The victim wasn't trying to "swap" in the traditional sense. They were holding <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code> from a prior USDT deposit and wanted to switch their collateral to AAVE tokens. They used Aave's <strong>Collateral Swap</strong> feature to do it in one click.
+                  The victim wasn't initiating a traditional swap. Their wallet held <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code> — not USDT — because they had already deposited into Aave earlier. To switch that collateral to AAVE tokens, they used Aave's <strong>Collateral Swap</strong> feature in a single click.
                 </p>
                 <div className="bg-white dark:bg-gray-900 rounded-lg p-4 mb-4">
                   <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">What "Collateral Swap" actually does under the hood</p>
