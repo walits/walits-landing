@@ -170,8 +170,8 @@ export default function MevEthereumDeepDivePage() {
               <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 space-y-3 my-4">
                 {[
                   { n: '1', text: 'Aave에서 10,000 ETH 플래시론 실행 (담보 없음)' },
-                  { n: '2', text: 'DEX A에서 10,000 ETH → 20,000,000 USDC 매도 (1 ETH = 2,000 USDC)' },
-                  { n: '3', text: 'DEX B에서 20,100,000 USDC → 10,000 ETH 매수 (1 ETH = 2,010 USDC)' },
+                  { n: '2', text: 'DEX A에서 10,000 ETH → 20,100,000 USDC 매도 (1 ETH = 2,010 USDC, 비싼 곳)' },
+                  { n: '3', text: 'DEX B에서 20,000,000 USDC → 10,000 ETH 매수 (1 ETH = 2,000 USDC, 싼 곳)' },
                   { n: '4', text: 'Aave에 10,000 ETH + 수수료(0.09%) 상환' },
                   { n: '★', text: '순이익: 약 90,000 USDC — 자본 투입 0, 하나의 트랜잭션', profit: true },
                 ].map((step, i) => (
@@ -882,8 +882,8 @@ export default function MevEthereumDeepDivePage() {
               <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 space-y-3 my-4">
                 {[
                   { n: '1', text: 'Flash loan 10,000 ETH from Aave (no collateral)' },
-                  { n: '2', text: 'Sell 10,000 ETH on DEX A → 20,000,000 USDC (1 ETH = 2,000 USDC)' },
-                  { n: '3', text: 'Buy 10,000 ETH on DEX B → pay 20,100,000 USDC (1 ETH = 2,010 USDC)' },
+                  { n: '2', text: 'Sell 10,000 ETH on DEX A → 20,100,000 USDC (1 ETH = 2,010 USDC, expensive side)' },
+                  { n: '3', text: 'Buy 10,000 ETH on DEX B → pay 20,000,000 USDC (1 ETH = 2,000 USDC, cheap side)' },
                   { n: '4', text: 'Repay Aave: 10,000 ETH + 0.09% fee' },
                   { n: '★', text: 'Net profit: ~90,000 USDC — zero capital, one transaction', profit: true },
                 ].map((step, i) => (
