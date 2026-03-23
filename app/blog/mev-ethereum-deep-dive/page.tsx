@@ -815,6 +815,123 @@ export default function MevEthereumDeepDivePage() {
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Arkham과 BlockSec의 집계가 $32M~$34M으로 약간 차이가 있으나, 총 $43M+ 이상이 단일 트랜잭션에서 추출된 것은 역대 단일 Tx 기준 최대급 MEV 수확 중 하나다.</p>
 
+              {/* Titan Builder 정체 */}
+              <div className="border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-8 space-y-4">
+                <p className="font-bold text-gray-900 dark:text-white text-base flex items-center gap-2">
+                  <span className="text-lg">🏗️</span> Titan Builder — 이 주체는 누구인가?
+                </p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  Titan Builder는 이더리움 PBS 생태계에서 <strong>블록을 가장 많이 생산하는 상위 Builder 중 하나</strong>다. 2023년부터 운영을 시작해 현재 전체 이더리움 블록의 <strong>25~40%</strong>를 지속적으로 점유한다. Flashbots Builder, BloXroute, Beaver Builder 등과 함께 소수의 Builder가 이더리움 블록 생산을 과점하는 구조다.
+                </p>
+
+                {/* Builder 시장 점유율 개념 */}
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">이더리움 블록 Builder 시장 (2025~2026년 기준)</p>
+                  <div className="space-y-2">
+                    {[
+                      { name: 'Titan Builder', pct: '30~40%', bar: 'w-10/12', color: 'bg-red-400' },
+                      { name: 'Flashbots Builder', pct: '20~30%', bar: 'w-8/12', color: 'bg-orange-400' },
+                      { name: 'BloXroute', pct: '10~15%', bar: 'w-4/12', color: 'bg-blue-400' },
+                      { name: '기타 Builder', pct: '나머지', bar: 'w-3/12', color: 'bg-gray-400' },
+                    ].map((b, i) => (
+                      <div key={i} className="flex items-center gap-3 text-sm">
+                        <span className="w-36 flex-shrink-0 text-gray-700 dark:text-gray-300 text-xs">{b.name}</span>
+                        <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+                          <div className={`${b.bar} ${b.color} h-2 rounded-full`} />
+                        </div>
+                        <span className="w-16 text-xs text-gray-500 text-right">{b.pct}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-400 mt-3">* mevboost.pics 데이터 기반 대략적 수치, 시기에 따라 변동 있음</p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-red-800 dark:text-red-300 mb-1">핵심 — Titan Builder는 Builder이자 Searcher다</p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                      대부분의 Builder는 "우리는 중립적으로 Searcher 번들을 받아 블록을 만들 뿐"이라고 주장한다. 하지만 Titan Builder는 <strong>자체 MEV 추출 봇도 운영</strong>한다. 즉, 외부 Searcher의 번들을 받는 동시에 자신이 직접 MEV 기회를 탐지하고 실행한다.
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mt-2">
+                      이것이 이 사건에서 치명적이었다. Titan Builder는 <strong>자신이 만드는 블록 안에서 자신의 샌드위치 번들을 원하는 순서대로 배치</strong>할 수 있다. 일반 Searcher는 Builder에게 번들을 제출하고 포함 여부를 기다려야 하지만, Titan은 자신이 Builder이므로 <strong>순서 보장이 완벽하다</strong>. 프론트런 Tx → 피해자 Tx → 백런 Tx 순서를 스스로 확정한다.
+                    </p>
+                  </div>
+                  <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-1">수직 통합의 위험</p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                      Builder + Searcher 겸업 구조는 이해충돌 문제를 낳는다. 외부 Searcher가 번들을 제출하면 Builder인 Titan이 그 기회를 먼저 보고, 자신의 봇이 더 나은 번들을 만들어 덮어씌울 수 있다는 의혹이 꾸준히 제기된다. 이 사건 이후 이더리움 커뮤니티에서 Builder의 겸업 금지 또는 투명성 강화 논의가 재점화됐다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Titan Builder $34M 수익 상세 */}
+              <div className="border border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/10 rounded-xl p-6 my-6 space-y-4">
+                <p className="font-bold text-red-800 dark:text-red-300 text-base">💰 Titan Builder는 어떻게 $34M을 벌었나?</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  샌드위치 어택의 수익은 <strong>"내가 싸게 산 AAVE를 피해자가 비싼 가격에 사고 나면, 그 비싼 가격에 내가 판다"</strong>는 구조다. 피해자의 주문이 클수록, 그리고 풀 유동성이 작을수록 수익이 커진다. 이 사건은 그 두 조건이 극단적으로 맞아떨어진 케이스다.
+                </p>
+                <div className="bg-white dark:bg-gray-900 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">수익 계산 구조</p>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex gap-3">
+                      <span className="text-orange-500 font-bold flex-shrink-0">FRONT</span>
+                      <div className="text-gray-700 dark:text-gray-300">
+                        Morpho에서 $29M WETH 플래시론 → Bancor에서 AAVE 매수 → SushiSwap AAVE/WETH 풀 가격 조작 (AAVE 가격 $114 → 수십 배로 인위 급등)
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-red-500 font-bold flex-shrink-0">VICTIM</span>
+                      <div className="text-gray-700 dark:text-gray-300">
+                        피해자의 17,958 WETH($37M)가 이미 왜곡된 풀에 투입 → AMM 공식상 AAVE 1개당 실질 단가 ~$154,229에 327개 체결 → 피해자는 $37M 상당의 WETH를 $36K 어치 AAVE와 교환
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-600 font-bold flex-shrink-0">BACK</span>
+                      <div className="text-gray-700 dark:text-gray-300">
+                        피해자의 WETH가 풀에 대량 유입된 상태 → SushiSwap에서 AAVE 매도 → 풀에 WETH가 넘쳐나므로 Titan이 가진 AAVE를 비싸게 팔 수 있음 → Morpho 플래시론 상환 후 약 <strong>$34M 순이익</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4 bg-red-50 dark:bg-red-900/20 rounded p-3 text-xs font-mono text-gray-600 dark:text-gray-300">
+                    핵심: 피해자의 $37M WETH가 풀에 들어오면서 AAVE 유동성이 흡수됨<br />
+                    → Titan이 미리 산 AAVE의 가치가 폭발적으로 상승<br />
+                    → Titan은 그 AAVE를 비싸게 팔고 플래시론 상환 → 차액이 순이익
+                  </div>
+                </div>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  일반 샌드위치는 수천~수만 달러 수준의 MEV를 노린다. 이 사건이 $34M이라는 전례 없는 금액이 된 이유는 <strong>풀 유동성($73K) 대비 피해자 주문($37M)의 비율이 약 500:1</strong>이었기 때문이다. AMM 공식은 이 경우 AAVE 가격을 1,350배 이상 올려야만 균형이 맞도록 설계돼 있다.
+                </p>
+              </div>
+
+              {/* 두 번째 MEV 봇 $10M */}
+              <div className="border border-orange-300 dark:border-orange-700 bg-orange-50 dark:bg-orange-900/10 rounded-xl p-6 my-6 space-y-4">
+                <p className="font-bold text-orange-800 dark:text-orange-300 text-base">💰 두 번째 MEV 봇은 어떻게 $10M을 벌었나?</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  Titan Builder의 샌드위치 트랜잭션이 실행되는 동안, SushiSwap에서 AAVE 가격이 $114 → $154,000 수준으로 치솟는 순간이 발생했다. 이 <strong>가격 왜곡은 같은 블록 안에서 짧게 존재</strong>했고, 두 번째 봇은 이것을 독립적으로 포착해 수익을 냈다.
+                </p>
+                <div className="space-y-3">
+                  <div className="bg-white dark:bg-gray-900 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
+                    <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">추정 수익 경로 (두 가지 병렬 가능)</p>
+                    <div className="space-y-4 text-sm text-gray-700 dark:text-gray-300">
+                      <div>
+                        <p className="font-semibold text-orange-700 dark:text-orange-400 mb-1">경로 A — 크로스-DEX 차익거래</p>
+                        <p className="leading-relaxed">SushiSwap에서 AAVE 가격이 $154K로 치솟는 동안, 다른 DEX(Uniswap, Curve 등)에서는 AAVE가 여전히 $114 수준이었다. 두 번째 봇은 이 가격 괴리를 포착해 <strong>싼 DEX에서 AAVE 매수 → 비싼 SushiSwap에 매도</strong>하는 차익거래를 실행했다. Titan의 샌드위치가 만들어 낸 가격 왜곡을 또 다른 봇이 무임승차한 것이다.</p>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-orange-700 dark:text-orange-400 mb-1">경로 B — 렌딩 프로토콜 청산</p>
+                        <p className="leading-relaxed">일부 렌딩 프로토콜은 SushiSwap 풀을 AAVE 가격 오라클로 참조한다. AAVE 가격이 일시적으로 $154K로 보이면, AAVE를 담보로 빌린 포지션이 <strong>갑자기 과담보 상태</strong>가 되어 청산 가능 상태가 된다. 봇이 이 청산 기회를 잡아 청산 보너스(보통 5~10%)를 수취했을 가능성이 있다.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-orange-100 dark:bg-orange-900/30 rounded-lg p-4">
+                    <p className="text-sm text-orange-900 dark:text-orange-200 leading-relaxed">
+                      <strong>핵심 교훈:</strong> 하나의 대형 MEV 이벤트는 연쇄적으로 다른 MEV 기회를 만든다. Titan의 샌드위치가 가격 왜곡을 만들고, 그 왜곡이 차익거래와 청산 기회를 파생시켜 두 번째 봇이 $10M을 추가로 가져갔다. MEV는 단발성이 아니라 <strong>연쇄 폭발</strong>이다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* BOX: MEV 봇 실전 실행 */}
               <div className="border border-purple-300 dark:border-purple-700 bg-purple-50 dark:bg-purple-900/20 rounded-xl p-5 my-6">
                 <p className="font-bold text-purple-800 dark:text-purple-300 mb-4 flex items-center gap-2">
@@ -1633,6 +1750,116 @@ export default function MevEthereumDeepDivePage() {
                 ))}
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400">Arkham and BlockSec figures differ slightly ($32M–$34M for Titan Builder), but the combined $43M+ extracted in a single transaction ranks among the largest MEV harvests ever recorded.</p>
+
+              {/* Titan Builder identity EN */}
+              <div className="border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-8 space-y-4">
+                <p className="font-bold text-gray-900 dark:text-white text-base flex items-center gap-2">
+                  <span className="text-lg">🏗️</span> Titan Builder — Who (or What) Is It?
+                </p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  Titan Builder is one of the <strong>top block builders in Ethereum's PBS ecosystem</strong>, consistently winning <strong>25–40% of all Ethereum blocks</strong> since launching in 2023. It competes alongside Flashbots Builder, BloXroute, Beaver Builder, and a handful of others that together produce the vast majority of Ethereum blocks.
+                </p>
+
+                <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Ethereum Block Builder Market Share (2025–2026, approximate)</p>
+                  <div className="space-y-2">
+                    {[
+                      { name: 'Titan Builder', pct: '30–40%', bar: 'w-10/12', color: 'bg-red-400' },
+                      { name: 'Flashbots Builder', pct: '20–30%', bar: 'w-8/12', color: 'bg-orange-400' },
+                      { name: 'BloXroute', pct: '10–15%', bar: 'w-4/12', color: 'bg-blue-400' },
+                      { name: 'Others', pct: 'Remainder', bar: 'w-3/12', color: 'bg-gray-400' },
+                    ].map((b, i) => (
+                      <div key={i} className="flex items-center gap-3 text-sm">
+                        <span className="w-36 flex-shrink-0 text-gray-700 dark:text-gray-300 text-xs">{b.name}</span>
+                        <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+                          <div className={`${b.bar} ${b.color} h-2 rounded-full`} />
+                        </div>
+                        <span className="w-16 text-xs text-gray-500 text-right">{b.pct}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-400 mt-3">* Approximate figures based on mevboost.pics data; varies over time.</p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-red-800 dark:text-red-300 mb-1">The Key — Titan Builder Is Both a Builder AND a Searcher</p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                      Most builders claim neutrality: "We just accept Searcher bundles and build blocks." Titan Builder is different — it <strong>also operates its own MEV extraction bots</strong>. It simultaneously accepts external Searcher bundles while directly hunting MEV opportunities itself.
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mt-2">
+                      This was decisive in this incident. Because Titan Builder <strong>assembles the block itself</strong>, it can place its own sandwich bundle in exactly the right position: front-run Tx → victim Tx → back-run Tx. An ordinary Searcher submits a bundle and hopes the Builder includes it; Titan Builder <strong>guarantees its own ordering</strong> by being the Builder.
+                    </p>
+                  </div>
+                  <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-1">The Conflict of Interest Problem</p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                      A Builder that also runs searcher bots creates a fundamental conflict of interest. When external Searchers submit bundles, Titan can see those opportunities first and potentially front-run them with its own bot. This incident reignited Ethereum community debate around mandatory Builder neutrality and transparency requirements.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* How Titan made $34M EN */}
+              <div className="border border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/10 rounded-xl p-6 my-6 space-y-4">
+                <p className="font-bold text-red-800 dark:text-red-300 text-base">💰 How Did Titan Builder Make $34M?</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  A sandwich attack's profit is simple in principle: <strong>buy cheap before the victim, let the victim inflate the price, sell high after</strong>. The bigger the victim's order and the thinner the pool liquidity, the more profit. This incident hit both extremes simultaneously.
+                </p>
+                <div className="bg-white dark:bg-gray-900 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Profit Mechanics</p>
+                  <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                    <div className="flex gap-3">
+                      <span className="text-orange-500 font-bold flex-shrink-0">FRONT</span>
+                      <div>Flash loan $29M WETH from Morpho → buy AAVE on Bancor → manipulate the SushiSwap AAVE/WETH pool price (AAVE artificially spiked from $114 to many multiples above market)</div>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-red-500 font-bold flex-shrink-0">VICTIM</span>
+                      <div>Victim's 17,958 WETH ($37M) hits the already-distorted pool → AMM formula resolves to ~$154,229/AAVE → victim receives only 327 AAVE for $37M of WETH</div>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-600 font-bold flex-shrink-0">BACK</span>
+                      <div>Victim's WETH floods the pool → Titan sells its AAVE back into the WETH-heavy pool at an elevated rate → repays Morpho flash loan → <strong>~$34M net profit</strong></div>
+                    </div>
+                  </div>
+                  <div className="mt-4 bg-red-50 dark:bg-red-900/20 rounded p-3 text-xs font-mono text-gray-600 dark:text-gray-300">
+                    Key: victim's $37M WETH absorbed all AAVE from the pool<br />
+                    → AAVE Titan pre-bought surged in value<br />
+                    → Titan sold at peak, repaid flash loan → kept the spread
+                  </div>
+                </div>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  Typical sandwich attacks net thousands to low millions. The reason this reached $34M is that the <strong>victim's order ($37M) was ~500× the pool's total liquidity ($73K)</strong>. The AMM formula requires AAVE's price to rise over 1,350× to restore equilibrium — which is exactly what happened.
+                </p>
+              </div>
+
+              {/* Second bot $10M EN */}
+              <div className="border border-orange-300 dark:border-orange-700 bg-orange-50 dark:bg-orange-900/10 rounded-xl p-6 my-6 space-y-4">
+                <p className="font-bold text-orange-800 dark:text-orange-300 text-base">💰 How Did the Second MEV Bot Make $10M?</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  While Titan Builder's sandwich executed, AAVE's price on SushiSwap briefly spiked to ~$154,000 — roughly 1,350× the market price. This <strong>price distortion existed momentarily within the same block</strong>, and a second independent bot captured it separately.
+                </p>
+                <div className="space-y-3">
+                  <div className="bg-white dark:bg-gray-900 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
+                    <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Two Likely Profit Routes (possibly concurrent)</p>
+                    <div className="space-y-4 text-sm text-gray-700 dark:text-gray-300">
+                      <div>
+                        <p className="font-semibold text-orange-700 dark:text-orange-400 mb-1">Route A — Cross-DEX Arbitrage</p>
+                        <p className="leading-relaxed">While SushiSwap showed AAVE at $154K, every other DEX (Uniswap, Curve, etc.) still priced it at ~$114. The second bot spotted this gap and executed: <strong>buy AAVE cheaply on another DEX → sell it at the inflated SushiSwap price</strong>. It effectively free-rode on the price distortion Titan's sandwich had created.</p>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-orange-700 dark:text-orange-400 mb-1">Route B — Lending Protocol Liquidations</p>
+                        <p className="leading-relaxed">Some lending protocols reference SushiSwap pools as price oracles for AAVE. When the oracle briefly reported AAVE at $154K, loans backed by AAVE could suddenly appear <strong>over-collateralized or mis-priced</strong>, opening liquidation opportunities. A bot collecting a 5–10% liquidation bonus on AAVE positions at this temporary valuation could extract millions.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-orange-100 dark:bg-orange-900/30 rounded-lg p-4">
+                    <p className="text-sm text-orange-900 dark:text-orange-200 leading-relaxed">
+                      <strong>Key takeaway:</strong> One large MEV event cascades into secondary opportunities. Titan's sandwich created a price distortion; that distortion spawned arbitrage and liquidation opportunities that a second bot monetized for another $10M. MEV isn't a single explosion — it's a <strong>chain reaction</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
               {/* BOX: MEV Bot Execution EN */}
               <div className="border border-purple-300 dark:border-purple-700 bg-purple-50 dark:bg-purple-900/20 rounded-xl p-5 my-6">
