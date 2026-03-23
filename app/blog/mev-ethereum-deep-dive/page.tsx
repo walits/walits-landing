@@ -10,14 +10,14 @@ export default function MevEthereumDeepDivePage() {
   const copy = {
     ko: {
       category: 'DEEP DIVE · 이더리움',
-      title: 'MEV 완전 해부: 플래시론 · Flashbots · 청산 · 차익거래',
+      title: 'MEV 완전 해부 그리고 2026년 3월12일 $50M 해킹 사례',
       date: '2026년 3월 23일',
       readTime: '25분 읽기',
       backToBlog: '← 블로그로 돌아가기',
     },
     en: {
       category: 'DEEP DIVE · ETHEREUM',
-      title: 'MEV Dissected: Flash Loans · Flashbots · Liquidations · Arbitrage',
+      title: 'MEV Dissected: The Complete Guide + $50M Aave Hack Case Study (March 2026)',
       date: 'March 23, 2026',
       readTime: '25 min read',
       backToBlog: '← Back to Blog',
