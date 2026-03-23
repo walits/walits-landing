@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'mev-ethereum-deep-dive',
+          category: 'DEEP DIVE · 이더리움',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: 'MEV 완전 해부: 플래시론 · Flashbots · 청산 · 차익거래',
+          excerpt: '자본 없이 수천만 달러 MEV를 추출하는 구조. 플래시론이 자본 문제를 해결하고, 청산·차익거래가 기회를 만들고, Flashbots가 private하게 실행한다. 이더리움 MEV 핵심 엔진을 완전 해부한다.',
+          date: '2026년 3월 23일',
+          readTime: '25분',
+          image: '/blog/mev.png',
+        },
+        {
           id: 'stablecoin-payment-vs-traditional',
           category: '결제 & 핀테크',
           categoryColor: 'bg-cyan-100 text-cyan-800',
@@ -172,6 +182,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'mev-ethereum-deep-dive',
+          category: 'DEEP DIVE · Ethereum',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: 'MEV Dissected: Flash Loans · Flashbots · Liquidations · Arbitrage',
+          excerpt: 'How to extract millions in MEV with zero capital. Flash loans solve the funding problem, liquidations and arbitrage create the opportunity, and Flashbots executes it all privately. The full MEV engine, dissected.',
+          date: 'March 23, 2026',
+          readTime: '25 min read',
+          image: '/blog/mev.png',
+        },
         {
           id: 'stablecoin-payment-vs-traditional',
           category: 'Payments & FinTech',
