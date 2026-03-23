@@ -22,7 +22,7 @@ export default function BlogPage() {
           excerpt: '자본 없이 수천만 달러 MEV를 추출하는 구조. 플래시론이 자본 문제를 해결하고, 청산·차익거래가 기회를 만들고, Flashbots가 private하게 실행한다. 이더리움 MEV 핵심 엔진을 완전 해부한다.',
           date: '2026년 3월 23일',
           readTime: '25분',
-          image: '/blog/mev.png',
+          image: '/blog/mev.webp',
         },
         {
           id: 'stablecoin-payment-vs-traditional',
@@ -190,7 +190,7 @@ export default function BlogPage() {
           excerpt: 'How to extract millions in MEV with zero capital. Flash loans solve the funding problem, liquidations and arbitrage create the opportunity, and Flashbots executes it all privately. The full MEV engine, dissected.',
           date: 'March 23, 2026',
           readTime: '25 min read',
-          image: '/blog/mev.png',
+          image: '/blog/mev.webp',
         },
         {
           id: 'stablecoin-payment-vs-traditional',

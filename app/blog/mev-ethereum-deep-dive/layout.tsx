@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'MEV 완전 해부: 플래시론 · Flashbots · 청산 · 차익거래',
     description: '자본 없이 수천만 달러 MEV를 추출하는 구조. 플래시론, Flashbots, 청산, 차익거래 — 이더리움 MEV 생태계의 핵심 엔진을 완전 해부한다.',
-    images: ['/blog/mev.png'],
+    images: ['/blog/mev.webp'],
   },
 };
 

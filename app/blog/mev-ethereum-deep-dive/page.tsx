@@ -59,7 +59,7 @@ export default function MevEthereumDeepDivePage() {
 
         <div className="mb-12 -mx-4 md:mx-0 overflow-hidden rounded-xl">
           <img
-            src="/blog/mev.png"
+            src="/blog/mev.webp"
             alt={language === 'ko' ? 'MEV 이더리움 플래시론 플래시봇 청산 차익거래' : 'MEV Ethereum Flash Loan Flashbots Liquidation Arbitrage'}
             className="w-full h-auto object-cover"
           />
