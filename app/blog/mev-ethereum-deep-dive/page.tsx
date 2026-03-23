@@ -539,6 +539,37 @@ export default function MevEthereumDeepDivePage() {
                 ))}
               </div>
 
+              {/* BOX: Aave는 렌딩인데 왜 스왑? */}
+              <div className="border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 rounded-xl p-5 my-6">
+                <p className="font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+                  <span className="text-lg">🏦</span> Aave는 렌딩 프로토콜인데, 왜 스왑에 사용됐나?
+                </p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                  맞다. Aave는 본질적으로 <strong>대출·차입(렌딩) 프로토콜</strong>이다. 그런데 Aave에 자산을 예치하면 단순히 토큰을 보관하는 게 아니라 <strong>aToken</strong>이라는 이자 수익형 토큰을 받는다. USDT를 예치하면 <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code>를 받고, 이 토큰은 시간이 지날수록 이자가 붙어 잔액이 자동으로 늘어난다.
+                </p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                  이 사건의 피해자는 처음부터 스왑을 하려던 게 아니었다. Aave에 USDT를 예치해 <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code>를 보유하던 상태에서, 담보를 AAVE 토큰으로 교체하기 위해 Aave의 <strong>Collateral Swap</strong> 기능을 사용했다.
+                </p>
+                <div className="bg-white dark:bg-gray-900 rounded-lg p-4 mb-4">
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Collateral Swap 내부 동작 (버튼 하나의 실체)</p>
+                  <div className="space-y-2">
+                    {[
+                      { n: '1', text: 'aEthUSDT → USDT 언랩 (Aave 예치금 출금)', color: 'text-gray-600 dark:text-gray-400' },
+                      { n: '2', text: 'USDT → WETH → AAVE 스왑 (CoW Protocol → Uniswap V3 → SushiSwap 경유)', color: 'text-red-600 dark:text-red-400' },
+                      { n: '3', text: 'AAVE를 다시 Aave에 예치 → aEthAAVE로 변환', color: 'text-gray-600 dark:text-gray-400' },
+                    ].map((s, i) => (
+                      <div key={i} className={`flex items-start gap-3 text-sm ${s.color}`}>
+                        <span className="font-mono text-gray-400 w-4 flex-shrink-0">{s.n}</span>
+                        <span>{s.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  이 세 단계가 하나의 트랜잭션으로 추상화된 것이 Collateral Swap 버튼이다. Aave가 DEX로 변신한 게 아니라, 복잡한 과정을 버튼 하나로 추상화했기 때문에 사용자 입장에서 "Aave에서 스왑"처럼 보인 것이다. <strong>그 추상화가 사용자로 하여금 내부 경로의 유동성 리스크를 체감하기 어렵게 만든 것</strong>이 이 사건 비판의 또 다른 핵심이다.
+                </p>
+              </div>
+
               {/* 트랜잭션 플로우 */}
               <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">트랜잭션 플로우</h3>
               <div className="overflow-x-auto my-4">
@@ -1184,6 +1215,37 @@ export default function MevEthereumDeepDivePage() {
                     <p className="text-xs text-gray-400 mt-1">{s.sub}</p>
                   </div>
                 ))}
+              </div>
+
+              {/* BOX: Aave is a lending protocol — why was it used for a swap? EN */}
+              <div className="border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 rounded-xl p-5 my-6">
+                <p className="font-bold text-gray-800 dark:text-gray-200 mb-3 flex items-center gap-2">
+                  <span className="text-lg">🏦</span> Aave is a lending protocol — so why was it used for a swap?
+                </p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                  Correct. Aave is fundamentally a <strong>lending and borrowing protocol</strong>. But when you deposit assets into Aave, you don't just hold the token — you receive an <strong>aToken</strong>, a yield-bearing receipt. Deposit USDT and you get <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code>, whose balance automatically grows as interest accrues.
+                </p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                  The victim wasn't trying to "swap" in the traditional sense. They were holding <code className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-xs">aEthUSDT</code> from a prior USDT deposit and wanted to switch their collateral to AAVE tokens. They used Aave's <strong>Collateral Swap</strong> feature to do it in one click.
+                </p>
+                <div className="bg-white dark:bg-gray-900 rounded-lg p-4 mb-4">
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">What "Collateral Swap" actually does under the hood</p>
+                  <div className="space-y-2">
+                    {[
+                      { n: '1', text: 'Unwrap aEthUSDT → USDT (redeem from Aave deposit)', color: 'text-gray-600 dark:text-gray-400' },
+                      { n: '2', text: 'Swap USDT → WETH → AAVE (routed through CoW Protocol → Uniswap V3 → SushiSwap)', color: 'text-red-600 dark:text-red-400' },
+                      { n: '3', text: 'Re-deposit AAVE into Aave → receive aEthAAVE', color: 'text-gray-600 dark:text-gray-400' },
+                    ].map((s, i) => (
+                      <div key={i} className={`flex items-start gap-3 text-sm ${s.color}`}>
+                        <span className="font-mono text-gray-400 w-4 flex-shrink-0">{s.n}</span>
+                        <span>{s.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  These three steps were bundled into a single "Collateral Swap" button. Aave didn't become a DEX — it abstracted a complex multi-protocol flow into a one-click action. <strong>That abstraction made it nearly impossible for the user to perceive the liquidity risk buried inside the routing path.</strong> This is the second major criticism of the incident beyond the warning dialog.
+                </p>
               </div>
 
               <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Transaction Flow</h3>
