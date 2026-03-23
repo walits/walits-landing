@@ -270,7 +270,7 @@ export default function MevEthereumDeepDivePage() {
               {/* ── S4 청산 ── */}
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">04 · 청산 — DeFi 건전성의 이면</h2>
               <p className="text-gray-700 dark:text-gray-300">
-                Aave, Compound, MakerDAO 같은 DeFi 대출 프로토콜은 <strong>과담보(over-collateralized)</strong> 구조다. 100 USDC를 빌리려면 150 ETH어치 담보를 맡겨야 한다. ETH 가격이 떨어져 담보가치가 임계치(예: 120%) 아래로 내려가면 해당 포지션이 <em>청산 가능</em> 상태가 된다. 이 순간 누구든 청산하고 <strong>청산 보너스(5~15%)</strong>를 받을 수 있다.
+                Aave, Compound, MakerDAO 같은 DeFi 대출 프로토콜은 <strong>과담보(over-collateralized)</strong> 구조다. 100 USDC를 빌리려면 150 ETH어치 담보를 맡겨야 한다 (1 USDC = 1 ETH라고 가정). ETH 가격이 떨어져 담보가치가 임계치(예: 120%) 아래로 내려가면 해당 포지션이 <em>청산 가능</em> 상태가 된다. 이 순간 누구든 청산하고 <strong>청산 보너스(5~15%)</strong>를 받을 수 있다.
               </p>
 
               <h3 className="text-xl font-bold mt-8 mb-3 text-gray-900 dark:text-white">청산 MEV 플로우</h3>
@@ -969,7 +969,7 @@ export default function MevEthereumDeepDivePage() {
               {/* S4 EN Liquidation */}
               <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">04 · Liquidations — The Flip Side of DeFi Health</h2>
               <p className="text-gray-700 dark:text-gray-300">
-                DeFi lending protocols like Aave, Compound, and MakerDAO are <strong>over-collateralized</strong>. To borrow 100 USDC you must deposit $150 worth of ETH. If ETH drops and the collateral ratio falls below a threshold (e.g. 120%), the position becomes <em>liquidatable</em>. Anyone can liquidate it and claim a <strong>liquidation bonus (5–15%)</strong>.
+                DeFi lending protocols like Aave, Compound, and MakerDAO are <strong>over-collateralized</strong>. To borrow 100 USDC you must deposit $150 worth of ETH (assuming 1 USDC = 1 ETH for simplicity). If ETH drops and the collateral ratio falls below a threshold (e.g. 120%), the position becomes <em>liquidatable</em>. Anyone can liquidate it and claim a <strong>liquidation bonus (5–15%)</strong>.
               </p>
               <h3 className="text-xl font-bold mt-8 mb-3 text-gray-900 dark:text-white">Liquidation MEV Flow</h3>
               <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 space-y-3 my-4">
