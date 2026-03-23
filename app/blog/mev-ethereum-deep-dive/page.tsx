@@ -245,6 +245,21 @@ export default function MevEthereumDeepDivePage() {
                 </table>
               </div>
 
+              {/* 공개/비공개 mempool 오해 해소 박스 */}
+              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-6 my-6">
+                <p className="text-sm font-semibold text-amber-800 dark:text-amber-300 mb-3">❓ 비공개 mempool의 Tx는 블록에 포함되지 못하는 거 아닌가?</p>
+                <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mb-3">
+                  흔한 오해다. <strong>"공개 / 비공개"는 누가 볼 수 있느냐의 문제</strong>이지, 블록 포함 여부와 무관하다.
+                </p>
+                <div className="space-y-2 text-sm text-amber-900 dark:text-amber-200">
+                  <p>• <strong>공개 mempool Tx</strong> — 모든 노드에 브로드캐스팅된 뒤, Searcher들이 보고 앞뒤로 끼어든다. Builder가 수거해 블록에 넣는다.</p>
+                  <p>• <strong>Private RPC / Builder private orderflow Tx</strong> — Relay나 Builder에게 직접 전달된다. 브로드캐스팅 없이 Builder의 블록 후보에 바로 올라간다.</p>
+                </div>
+                <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mt-3">
+                  결국 두 경로 모두 <strong>Builder → Proposer(검증자) → 블록 확정</strong>이라는 동일한 PBS 파이프라인을 거친다. 오히려 private orderflow Tx는 Builder에게 <strong>독점 수익 기회</strong>를 제공하기 때문에, Builder들이 이 채널 확보를 위해 dApp·지갑 서비스와 경쟁적으로 계약을 맺는다. 비공개라서 불리한 게 아니라, 오히려 블록 포함 우선순위가 더 높을 수 있다.
+                </p>
+              </div>
+
               <hr className="border-gray-200 dark:border-gray-700 my-10" />
 
               {/* ── S2 플래시론 ── */}
@@ -1043,6 +1058,21 @@ export default function MevEthereumDeepDivePage() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Private mempool misconception callout EN */}
+              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-6 my-6">
+                <p className="text-sm font-semibold text-amber-800 dark:text-amber-300 mb-3">❓ Don't private mempool transactions miss out on block inclusion?</p>
+                <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mb-3">
+                  A common misconception. <strong>"Public vs. private" is purely about visibility</strong> — it has nothing to do with whether a transaction gets included in a block.
+                </p>
+                <div className="space-y-2 text-sm text-amber-900 dark:text-amber-200">
+                  <p>• <strong>Public mempool Tx</strong> — Broadcast to all nodes. Searchers watch and insert front/back-running trades. Eventually a Builder picks it up and includes it in a block candidate.</p>
+                  <p>• <strong>Private RPC / Builder private orderflow Tx</strong> — Sent directly to a Relay or Builder, bypassing broadcast entirely. It lands straight in the Builder's block candidate.</p>
+                </div>
+                <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed mt-3">
+                  Both paths travel the same PBS pipeline: <strong>Builder → Proposer (validator) → finalized block</strong>. In fact, private orderflow gives Builders an <strong>exclusive profit opportunity</strong> — which is exactly why major Builders aggressively compete to sign direct deals with dApps and wallet services. Far from being at a disadvantage, private transactions can actually enjoy higher block-inclusion priority.
+                </p>
               </div>
 
               <hr className="border-gray-200 dark:border-gray-700 my-10" />
