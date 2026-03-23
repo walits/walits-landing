@@ -899,6 +899,34 @@ export default function MevEthereumDeepDivePage() {
                     → Titan은 그 AAVE를 비싸게 팔고 플래시론 상환 → 차액이 순이익
                   </div>
                 </div>
+                {/* Price impact only vs bot */}
+                <div className="bg-white dark:bg-gray-900 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">봇이 없었다면? — Price Impact만 있을 때 돈은 어디 가나</p>
+                  <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-300">
+                    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+                      <p className="font-semibold mb-2 text-gray-800 dark:text-gray-200">❌ 봇 없이 피해자만 스왑</p>
+                      <div className="space-y-1 text-xs font-mono">
+                        <p>피해자: WETH 17,958개 투입</p>
+                        <p>풀: AAVE 거의 전량 소진</p>
+                        <p>풀 안에 WETH 17,975개 축적</p>
+                      </div>
+                      <p className="text-xs mt-2 text-gray-600 dark:text-gray-400">→ 손해는 풀 <strong>LP(유동성 공급자)</strong>에게 돌아감. 피해자가 WETH를 헐값에 팔고 AAVE를 비싸게 산 셈이니, 그 차액은 LP가 챙긴다. <strong>봇은 돈을 못 번다.</strong></p>
+                    </div>
+                    <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-3">
+                      <p className="font-semibold mb-2 text-red-800 dark:text-red-300">✅ 봇이 개입하면</p>
+                      <div className="space-y-1 text-xs font-mono">
+                        <p><span className="text-orange-500">FRONT:</span> 봇이 $114에 AAVE 매수</p>
+                        <p><span className="text-red-500">VICTIM:</span> 피해자가 가격을 펌프</p>
+                        <p><span className="text-green-600">BACK:</span>  봇이 수천달러에 매도</p>
+                      </div>
+                      <p className="text-xs mt-2 text-gray-600 dark:text-gray-400">→ LP에게 가야 할 가치를 봇이 가로챈다. 피해자의 대형 주문이 <strong>봇의 수익을 만들어주는 펌프 역할</strong>을 한 것이다.</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 border-t border-gray-100 dark:border-gray-700 pt-3">
+                    한 문장 요약: 피해자의 대형 주문이 가격을 올려주는 펌프 역할을 했고, 봇은 그 펌프 <em>전에</em> 사서 펌프 <em>후에</em> 팔았다. 피해자는 자기 돈으로 봇의 수익을 만들어준 셈이다.
+                  </p>
+                </div>
+
                 <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                   일반 샌드위치는 수천~수만 달러 수준의 MEV를 노린다. 이 사건이 $34M이라는 전례 없는 금액이 된 이유는 <strong>풀 유동성($73K) 대비 피해자 주문($37M)의 비율이 약 500:1</strong>이었기 때문이다. AMM 공식은 이 경우 AAVE 가격을 1,350배 이상 올려야만 균형이 맞도록 설계돼 있다.
                 </p>
@@ -1828,6 +1856,34 @@ export default function MevEthereumDeepDivePage() {
                     → Titan sold at peak, repaid flash loan → kept the spread
                   </div>
                 </div>
+                {/* Price impact only vs bot EN */}
+                <div className="bg-white dark:bg-gray-900 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">What if there was no bot? — Where does the money go from price impact alone?</p>
+                  <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-300">
+                    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+                      <p className="font-semibold mb-2 text-gray-800 dark:text-gray-200">❌ No bot — victim swaps alone</p>
+                      <div className="space-y-1 text-xs font-mono">
+                        <p>Victim: dumps 17,958 WETH into pool</p>
+                        <p>Pool: nearly all AAVE drained</p>
+                        <p>Pool now holds ~17,975 WETH</p>
+                      </div>
+                      <p className="text-xs mt-2 text-gray-600 dark:text-gray-400">→ The loss flows to the pool's <strong>LPs (liquidity providers)</strong>. The victim effectively sold WETH cheaply and bought AAVE expensively — LPs pocket that spread. <strong>No bot profits.</strong></p>
+                    </div>
+                    <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-3">
+                      <p className="font-semibold mb-2 text-red-800 dark:text-red-300">✅ Bot steps in</p>
+                      <div className="space-y-1 text-xs font-mono">
+                        <p><span className="text-orange-500">FRONT:</span> bot buys AAVE at $114</p>
+                        <p><span className="text-red-500">VICTIM:</span> victim pumps the price</p>
+                        <p><span className="text-green-600">BACK:</span>  bot sells at $1,000s</p>
+                      </div>
+                      <p className="text-xs mt-2 text-gray-600 dark:text-gray-400">→ The bot intercepts the value that would have gone to LPs. The victim's giant order <strong>acts as the pump that creates the bot's profit</strong>.</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 border-t border-gray-100 dark:border-gray-700 pt-3">
+                    One sentence: the victim's large order pumped the price, the bot bought <em>before</em> the pump and sold <em>after</em>. The victim's own money financed the bot's profit.
+                  </p>
+                </div>
+
                 <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                   Typical sandwich attacks net thousands to low millions. The reason this reached $34M is that the <strong>victim's order ($37M) was ~500× the pool's total liquidity ($73K)</strong>. The AMM formula requires AAVE's price to rise over 1,350× to restore equilibrium — which is exactly what happened.
                 </p>
