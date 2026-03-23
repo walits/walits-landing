@@ -68,9 +68,7 @@ export default function MevEthereumDeepDivePage() {
         <div className="prose prose-lg dark:prose-invert max-w-none">
           {language === 'ko' ? (
             <>
-              <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
-                매 블록마다 수십만 달러가 조용히 추출된다. 자본이 없어도 된다. 실패해도 gas만 날리면 그만이다. 플래시론이 자본 문제를 해결하고, Flashbots가 노출 위험을 없애고, 청산과 차익거래가 수익 기회를 만든다. 이 네 가지가 맞물리는 순간 이더리움 MEV의 핵심 엔진이 작동한다.
-              </p>
+
 
               {/* TOC */}
               <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 mb-12">
