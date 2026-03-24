@@ -984,6 +984,81 @@ export default function MevEthereumDeepDivePage() {
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 pt-3 border-t border-purple-200 dark:border-purple-800">이 실행 구조는 앞서 설명한 플래시론(S2) + 샌드위치(S5) + Flashbots private bundle(S6)의 교과서적 결합이다.</p>
               </div>
 
+              {/* 왜 돌려주지 않아도 되나 */}
+              <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Titan Builder는 돈을 돌려줘야 하는 거 아닌가?</h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-6">결론부터: <strong>법적 의무도 없고, 실제로 돌려주지도 않았다.</strong> 이유는 세 가지다.</p>
+
+              <div className="space-y-4 my-6">
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+                  <p className="font-semibold text-gray-900 dark:text-white mb-2">① 프로토콜이 허용한 행위다</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">이더리움 PBS 규칙상 Builder는 블록 내 트랜잭션 순서를 자유롭게 정할 수 있다. Titan Builder가 한 행위는 이 규칙 안에 있다. 피해자의 자금을 탈취한 게 아니라, 피해자가 slippage 설정 없이 제출한 트랜잭션이 AMM 공식대로 체결된 것이다. 현재 어떤 국가도 MEV 샌드위치를 명시적으로 불법으로 규정하지 않는다.</p>
+                </div>
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+                  <p className="font-semibold text-gray-900 dark:text-white mb-2">② 청구 대상이 없다</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">Aave 프로토콜은 스마트컨트랙트이고 운영사가 아니다. Titan Builder는 회사 소재지·법인 정보가 공개되지 않으며 법적 관할권이 불명확하다. 이더리움 재단은 프로토콜 개발자이지 운영자가 아니다. 탈중앙화 구조 자체가 책임 귀속 주체를 흐린다.</p>
+                </div>
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+                  <p className="font-semibold text-gray-900 dark:text-white mb-2">③ 자발적 반환 동기가 없다</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">Titan Builder는 합법적으로 활동하는 블록 빌더 회사다. 자금 세탁 문제도 없고, 법적 압박도 없으며, 반환 시 얻을 이점도 없다. 이더리움 커뮤니티의 비판은 받았지만 사업에 영향이 없었다.</p>
+                </div>
+              </div>
+
+              {/* 비교 사례 */}
+              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 my-6">
+                <p className="font-semibold text-gray-900 dark:text-white mb-4">DeFi 자금 반환 사례 비교</p>
+                <div className="space-y-4 text-sm">
+                  {[
+                    {
+                      name: 'Poly Network 해킹 (2021)',
+                      amount: '$611M',
+                      returned: '전액 반환',
+                      returnColor: 'text-green-600 dark:text-green-400',
+                      reason: '해커가 "기술적 증명"이라 주장. 실질적으로는 자금 규모가 너무 커서 세탁 불가능했고, 개발팀이 온체인 메시지로 협상. 법적 추적 가능성이 높았음.',
+                      mev: false,
+                    },
+                    {
+                      name: 'Euler Finance 해킹 (2023)',
+                      amount: '$197M',
+                      returned: '전액 반환',
+                      returnColor: 'text-green-600 dark:text-green-400',
+                      reason: '해커가 FBI 추적을 인식하고 협상 후 반환. 피해자 중 일부가 생계 자금을 잃었다는 온체인 메시지에 반응했다는 설도 있음.',
+                      mev: false,
+                    },
+                    {
+                      name: 'Curve Finance 해킹 (2023)',
+                      amount: '$73M',
+                      returned: '일부 반환 (~$52M)',
+                      returnColor: 'text-amber-600 dark:text-amber-400',
+                      reason: '일부 화이트햇 봇이 선점 추출 후 반환. 나머지는 미반환. MEV 봇이 해커보다 먼저 자금을 추출해 보호한 케이스.',
+                      mev: true,
+                    },
+                    {
+                      name: 'Aave $50M Sandwich (2026)',
+                      amount: '$43M+',
+                      returned: '미반환',
+                      returnColor: 'text-red-600 dark:text-red-400',
+                      reason: '프로토콜 규칙 내 합법적 MEV 추출. 법적 의무 없음. Aave 거버넌스에서 $600K 프로토콜 수수료 환불만 논의됨.',
+                      mev: true,
+                    },
+                  ].map((c, i) => (
+                    <div key={i} className="flex gap-4 pb-4 border-b border-gray-200 dark:border-gray-700 last:border-0 last:pb-0">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-medium text-gray-900 dark:text-white">{c.name}</span>
+                          {c.mev && <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">MEV 관련</span>}
+                        </div>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{c.reason}</p>
+                      </div>
+                      <div className="text-right flex-shrink-0 w-28">
+                        <p className="font-mono text-xs text-gray-500">{c.amount}</p>
+                        <p className={`text-xs font-semibold ${c.returnColor}`}>{c.returned}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">자발적 반환이 이뤄진 케이스는 공통적으로 ①자금 규모가 너무 커서 세탁이 불가능하거나 ②FBI·인터폴 추적이 가시화됐거나 ③협상 인센티브가 있었다. 이 사건은 세 조건 모두 해당하지 않는다.</p>
+              </div>
+
               {/* 돈세탁설 */}
               <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">돈세탁설 — 의혹과 반론</h3>
               <p className="text-gray-700 dark:text-gray-300 mb-4">사건 직후 커뮤니티에서 "실수가 아니라 의도적인 돈세탁"이라는 주장이 퍼졌다.</p>
@@ -1939,6 +2014,81 @@ export default function MevEthereumDeepDivePage() {
                   ))}
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 pt-3 border-t border-purple-200 dark:border-purple-800">This execution is a textbook combination of flash loans (S2) + sandwich attack (S5) + Flashbots private bundle (S6) — all concepts covered earlier in this post.</p>
+              </div>
+
+              {/* Shouldn't Titan Builder return the money EN */}
+              <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Shouldn't Titan Builder Return the Money?</h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-6">Short answer: <strong>no legal obligation exists, and no funds were returned.</strong> Three reasons.</p>
+
+              <div className="space-y-4 my-6">
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+                  <p className="font-semibold text-gray-900 dark:text-white mb-2">① The protocol permitted it</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">Under Ethereum PBS rules, Builders are free to order transactions within a block however they like. What Titan Builder did falls within those rules. No funds were stolen — the victim submitted a transaction with no slippage protection and the AMM formula executed as designed. No jurisdiction currently classifies MEV sandwich attacks as illegal.</p>
+                </div>
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+                  <p className="font-semibold text-gray-900 dark:text-white mb-2">② There is no legal defendant</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">Aave is a smart contract, not a company. Titan Builder does not publish its legal entity or jurisdiction. The Ethereum Foundation develops the protocol but does not operate it. Decentralization by design diffuses liability to the point where no single party can be held responsible.</p>
+                </div>
+                <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+                  <p className="font-semibold text-gray-900 dark:text-white mb-2">③ No incentive to return voluntarily</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">Titan Builder is a functioning commercial block builder. There is no money-laundering risk, no law-enforcement pressure, and no business reason to return funds. Community criticism followed, but had no material effect on operations.</p>
+                </div>
+              </div>
+
+              {/* Comparison cases EN */}
+              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 my-6">
+                <p className="font-semibold text-gray-900 dark:text-white mb-4">DeFi Fund Return Precedents</p>
+                <div className="space-y-4 text-sm">
+                  {[
+                    {
+                      name: 'Poly Network Hack (2021)',
+                      amount: '$611M',
+                      returned: 'Fully returned',
+                      returnColor: 'text-green-600 dark:text-green-400',
+                      reason: "Hacker claimed it was a 'technical demonstration.' In practice, funds were too large to launder, and on-chain negotiations with the dev team were public. High law-enforcement traceability.",
+                      mev: false,
+                    },
+                    {
+                      name: 'Euler Finance Hack (2023)',
+                      amount: '$197M',
+                      returned: 'Fully returned',
+                      returnColor: 'text-green-600 dark:text-green-400',
+                      reason: 'Hacker returned funds after recognizing FBI tracking. Some attribute the decision to on-chain messages from victims who lost life savings.',
+                      mev: false,
+                    },
+                    {
+                      name: 'Curve Finance Hack (2023)',
+                      amount: '$73M',
+                      returned: 'Partial (~$52M)',
+                      returnColor: 'text-amber-600 dark:text-amber-400',
+                      reason: 'Some white-hat bots front-ran the hacker and extracted funds first, then returned them. Remainder unrecovered. A rare case where MEV bots acted as a protective mechanism.',
+                      mev: true,
+                    },
+                    {
+                      name: 'Aave $50M Sandwich (2026)',
+                      amount: '$43M+',
+                      returned: 'Not returned',
+                      returnColor: 'text-red-600 dark:text-red-400',
+                      reason: 'Legal MEV extraction within protocol rules. No legal obligation. Aave governance only discussed refunding ~$600K in protocol fees.',
+                      mev: true,
+                    },
+                  ].map((c, i) => (
+                    <div key={i} className="flex gap-4 pb-4 border-b border-gray-200 dark:border-gray-700 last:border-0 last:pb-0">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-medium text-gray-900 dark:text-white">{c.name}</span>
+                          {c.mev && <span className="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">MEV-related</span>}
+                        </div>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{c.reason}</p>
+                      </div>
+                      <div className="text-right flex-shrink-0 w-28">
+                        <p className="font-mono text-xs text-gray-500">{c.amount}</p>
+                        <p className={`text-xs font-semibold ${c.returnColor}`}>{c.returned}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">Voluntary returns share three common factors: ① funds were too large to launder, ② law-enforcement tracking was visible, or ③ there was a negotiated incentive. This incident meets none of those conditions.</p>
               </div>
 
               <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">The Money Laundering Theory</h3>
