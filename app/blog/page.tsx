@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'uniswap-deep-dive',
+          category: 'DeFi 시리즈 2',
+          categoryColor: 'bg-pink-100 text-pink-800',
+          title: 'DeFi 시리즈 2 — Uniswap: AMM과 유동성 혁명 완전 해부',
+          excerpt: 'x×y=k 공식 하나로 $2.4조 거래소를 만든 방법. v1 탄생부터 v2 완성, v3 집중 유동성 혁명, v4 훅 아키텍처까지. 비영구 손실·수수료 구조·MEV 방어까지 완전 해부한다.',
+          date: '2026년 3월 24일',
+          readTime: '22분',
+          image: '/blog/uniswap.jpg',
+        },
+        {
           id: 'aave-deep-dive',
           category: 'DeFi 시리즈 1',
           categoryColor: 'bg-purple-100 text-purple-800',
@@ -192,6 +202,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'uniswap-deep-dive',
+          category: 'DeFi Series 2',
+          categoryColor: 'bg-pink-100 text-pink-800',
+          title: 'DeFi Series 2 — Uniswap: The AMM & Liquidity Revolution',
+          excerpt: 'How a single formula — x×y=k — became a $2.4T exchange. From v1\'s birth to v2\'s foundation, v3\'s concentrated liquidity revolution, and v4\'s hook architecture. Impermanent loss, fee tiers, MEV defense — all dissected.',
+          date: 'March 24, 2026',
+          readTime: '22 min read',
+          image: '/blog/uniswap.jpg',
+        },
         {
           id: 'aave-deep-dive',
           category: 'DeFi Series 1',
