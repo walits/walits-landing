@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'oneinch-deep-dive',
+          category: 'DeFi 시리즈 3',
+          categoryColor: 'bg-orange-100 text-orange-800',
+          title: 'DeFi 시리즈 3 — 1inch: DEX 애그리게이터 완전 튜토리얼',
+          excerpt: '100개 이상의 DEX를 실시간 스캔해 최적 경로를 찾는 1inch. Pathfinder 라우팅 알고리즘, 스플릿 라우팅, Fusion Mode 가스리스 스왑, Limit Order까지. 1inch의 모든 것을 튜토리얼 형식으로 완전 해부한다.',
+          date: '2026년 3월 24일',
+          readTime: '20분',
+          image: '/blog/1inch.jpg',
+        },
+        {
           id: 'uniswap-deep-dive',
           category: 'DeFi 시리즈 2',
           categoryColor: 'bg-pink-100 text-pink-800',
@@ -211,6 +221,16 @@ export default function BlogPage() {
           date: 'March 24, 2026',
           readTime: '22 min read',
           image: '/blog/uniswap.jpg',
+        },
+        {
+          id: 'oneinch-deep-dive',
+          category: 'DeFi Series 3',
+          categoryColor: 'bg-orange-100 text-orange-800',
+          title: 'DeFi Series 3 — 1inch: Complete DEX Aggregator Tutorial',
+          excerpt: '1inch scans 100+ DEXes in real-time to find the optimal route. Pathfinder routing algorithm, split routing, Fusion Mode gasless swaps, Limit Orders — everything about 1inch dissected in tutorial format.',
+          date: 'March 24, 2026',
+          readTime: '20 min read',
+          image: '/blog/1inch.jpg',
         },
         {
           id: 'aave-deep-dive',
