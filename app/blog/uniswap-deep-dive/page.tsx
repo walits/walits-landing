@@ -258,7 +258,7 @@ export default function UniswapDeepDivePage() {
               <p className="pl-4"><span className="text-green-400">bytes calldata data</span> <span className="text-gray-500">// 플래시 스왑용 콜백 데이터</span></p>
               <p>{')'} <span className="text-blue-400">external</span>;</p>
               <p className="mt-3 text-gray-500">// 내부 로직: x*y=k 검증 후 토큰 전송</p>
-              <p className="text-gray-500">// data.length > 0 이면 IUniswapV2Callee 콜백 (플래시 스왑)</p>
+              <p className="text-gray-500">{'// data.length > 0 이면 IUniswapV2Callee 콜백 (플래시 스왑)'}</p>
             </div>
 
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
