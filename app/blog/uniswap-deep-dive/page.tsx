@@ -433,26 +433,244 @@ export default function UniswapDeepDivePage() {
             {/* ── S7 스왑 라우팅 ── */}
             <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">07 · 스왑 라우팅 — 최적 경로 자동 탐색</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Uniswap 인터페이스에서 USDC → AAVE를 스왑하면 단순히 USDC/AAVE 풀을 찾는 게 아니다. <strong>UniswapX 라우터</strong>가 여러 경로를 탐색해 최적 가격을 찾는다.
+              Uniswap 인터페이스에서 USDC → AAVE를 스왑하면 단순히 USDC/AAVE 풀 하나를 찾는 게 아니다. <strong>Uniswap 스마트 오더 라우터(Smart Order Router, SOR)</strong>가 수백 개의 경로를 시뮬레이션해 최적 가격을 찾아준다. 이 과정이 어떻게 작동하는지 단계별로 뜯어보자.
             </p>
 
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-6">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">라우팅 탐색 예시: USDC → AAVE</p>
-              <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                <div className="flex items-center gap-2 bg-white dark:bg-gray-900 rounded-lg p-3">
-                  <span className="text-xs bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 px-2 py-0.5 rounded font-bold flex-shrink-0">경로 A</span>
-                  <span className="font-mono text-xs">USDC → WETH (0.05%) → AAVE (0.3%)</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white dark:bg-gray-900 rounded-lg p-3">
-                  <span className="text-xs bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300 px-2 py-0.5 rounded font-bold flex-shrink-0">경로 B ✓</span>
-                  <span className="font-mono text-xs">USDC → USDT (0.01%) → WETH (0.05%) → AAVE (0.3%)</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white dark:bg-gray-900 rounded-lg p-3">
-                  <span className="text-xs bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 px-2 py-0.5 rounded font-bold flex-shrink-0">경로 C</span>
-                  <span className="font-mono text-xs">USDC 60% → 경로A + 40% → 경로B (분할 라우팅)</span>
+            {/* 왜 직접 풀만 쓰면 안 되나 */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">왜 직접 풀만 쓰면 안 되나 — 유동성과 가격 충격</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              USDC/AAVE 직접 풀이 존재한다고 해도, 그 풀의 유동성이 얕으면 대량 스왑 시 <strong>가격 충격(Price Impact)</strong>이 크다. x×y=k 공식에서 한 방향으로 많이 사면 살수록 가격이 급격히 불리해진다.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 my-6">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-xl p-5">
+                <p className="text-sm font-bold text-red-700 dark:text-red-300 mb-3">❌ USDC/AAVE 직접 풀만 사용</p>
+                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <p>• USDC 10,000 → AAVE 직접 풀에 넣기</p>
+                  <p>• 풀 유동성이 얕으면 가격 충격 <strong>3~5%</strong></p>
+                  <p>• 결과: 예상보다 훨씬 적은 AAVE 수령</p>
                 </div>
               </div>
-              <p className="text-xs text-gray-500 mt-3">라우터가 세 경로의 예상 output을 시뮬레이션하고 가장 많은 AAVE를 받는 경로를 선택한다. 분할 라우팅으로 가격 충격을 최소화하기도 한다.</p>
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-xl p-5">
+                <p className="text-sm font-bold text-green-700 dark:text-green-300 mb-3">✅ 라우터가 최적 경로 탐색</p>
+                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <p>• USDC → WETH → AAVE (유동성 깊은 풀 경유)</p>
+                  <p>• 가격 충격 <strong>0.3~0.8%</strong>로 대폭 감소</p>
+                  <p>• 결과: AAVE 수령량 2~4% 증가</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 라우팅 탐색 4단계 */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">SOR이 경로를 찾는 4단계</h3>
+            <div className="space-y-3 my-6">
+              {[
+                {
+                  n: '1',
+                  title: '후보 풀 수집',
+                  desc: 'v2 풀, v3 풀(0.01%·0.05%·0.3%·1% 수수료 티어), v4 풀을 포함해 입력 토큰과 출력 토큰에 관련된 모든 풀을 수집한다. 중간 토큰(WETH, USDT, DAI, WBTC 등)을 경유하는 다중 홉 경로도 포함된다.',
+                  color: 'bg-blue-50 dark:bg-blue-900/20',
+                  icon: '🔍',
+                },
+                {
+                  n: '2',
+                  title: '경로 그래프 생성',
+                  desc: '각 풀을 노드로, 토큰을 엣지로 연결한 그래프를 만든다. USDC → WETH → AAVE처럼 2홉, USDC → USDT → WETH → AAVE처럼 3홉 경로도 탐색 대상이 된다. 일반적으로 최대 3홉까지 탐색한다.',
+                  color: 'bg-purple-50 dark:bg-purple-900/20',
+                  icon: '🗺️',
+                },
+                {
+                  n: '3',
+                  title: '각 경로 시뮬레이션',
+                  desc: '입력 금액을 넣었을 때 각 경로에서 받을 수 있는 output을 온체인 상태 기준으로 시뮬레이션한다. 가격 충격, 수수료, 슬리피지를 모두 계산한 순수 수령량(net output)을 비교한다.',
+                  color: 'bg-orange-50 dark:bg-orange-900/20',
+                  icon: '🧮',
+                },
+                {
+                  n: '4',
+                  title: '분할 라우팅 최적화',
+                  desc: '단일 경로보다 여러 경로에 분산하는 게 유리한지 계산한다. 예: USDC 70%는 경로 A, 30%는 경로 B. 각 풀의 유동성 곡선이 다르므로 분산 투입이 전체 가격 충격을 줄일 수 있다.',
+                  color: 'bg-green-50 dark:bg-green-900/20',
+                  icon: '⚖️',
+                },
+              ].map((s, i) => (
+                <div key={i} className={`rounded-xl p-5 ${s.color}`}>
+                  <div className="flex items-start gap-3">
+                    <span className="text-xl flex-shrink-0">{s.icon}</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">단계 {s.n} — {s.title}</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{s.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* 실제 라우팅 예시 */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">실제 예시 — USDC $10,000 → AAVE 스왑 시 라우터가 선택하는 경로</h3>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-5">SOR이 탐색하는 경로 후보들</p>
+              <div className="space-y-4">
+                {[
+                  {
+                    label: '경로 A',
+                    badge: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
+                    path: 'USDC → WETH (v3 0.05%) → AAVE (v3 0.3%)',
+                    hops: '2홉',
+                    fee: '수수료: 0.35%',
+                    impact: '가격 충격: ~1.2%',
+                    output: '예상 AAVE: 82.4개',
+                    best: false,
+                  },
+                  {
+                    label: '경로 B ✓ 최적',
+                    badge: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300',
+                    path: 'USDC 70% → WETH (v3 0.05%) → AAVE (v3 0.3%) + USDC 30% → USDT (v3 0.01%) → WETH (v3 0.05%) → AAVE (v3 0.3%)',
+                    hops: '분할 라우팅',
+                    fee: '수수료: 0.36%',
+                    impact: '가격 충격: ~0.4%',
+                    output: '예상 AAVE: 84.1개 (+2.0%)',
+                    best: true,
+                  },
+                  {
+                    label: '경로 C',
+                    badge: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
+                    path: 'USDC → DAI (v3 0.01%) → WETH (v3 0.05%) → AAVE (v3 0.3%)',
+                    hops: '3홉',
+                    fee: '수수료: 0.36%',
+                    impact: '가격 충격: ~0.9%',
+                    output: '예상 AAVE: 83.1개',
+                    best: false,
+                  },
+                ].map((r, i) => (
+                  <div key={i} className={`border rounded-xl p-4 ${r.best ? 'border-green-400 dark:border-green-600 bg-green-50/50 dark:bg-green-900/10' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900'}`}>
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span className={`text-xs font-bold px-2 py-1 rounded ${r.badge}`}>{r.label}</span>
+                      <span className="text-xs text-gray-400">{r.hops}</span>
+                    </div>
+                    <p className="text-xs font-mono text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">{r.path}</p>
+                    <div className="flex flex-wrap gap-4 text-xs">
+                      <span className="text-gray-500">{r.fee}</span>
+                      <span className="text-orange-600 dark:text-orange-400">{r.impact}</span>
+                      <span className={`font-bold ${r.best ? 'text-green-600 dark:text-green-400' : 'text-gray-700 dark:text-gray-300'}`}>{r.output}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-gray-500 mt-4">* 수치는 예시. 실제 output은 풀 상태·블록 시점에 따라 달라진다. 라우터는 항상 net output이 가장 큰 경로를 선택한다.</p>
+            </div>
+
+            {/* 분할 라우팅이 왜 유리한가 */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">분할 라우팅(Split Routing)이 왜 유리한가</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              x×y=k 곡선에서 한 풀에 USDC $10,000을 전부 넣으면, 풀의 비율이 크게 틀어져 후반부로 갈수록 받는 AAVE 개수가 급격히 줄어든다. 이것이 가격 충격이다.
+            </p>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">같은 $10,000로 AAVE 더 받는 법</p>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-32 text-gray-500 text-xs flex-shrink-0">풀 A 한 곳에 전액</div>
+                  <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
+                    <div className="bg-red-400 h-4 rounded-full" style={{width: '78%'}} />
+                  </div>
+                  <span className="text-xs text-red-600 dark:text-red-400 w-20 flex-shrink-0">82.4 AAVE</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-32 text-gray-500 text-xs flex-shrink-0">A·B 풀에 분산 투입</div>
+                  <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
+                    <div className="bg-green-400 h-4 rounded-full" style={{width: '85%'}} />
+                  </div>
+                  <span className="text-xs text-green-600 dark:text-green-400 w-20 flex-shrink-0">84.1 AAVE ✓</span>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 mt-4">각 풀이 독립적인 x×y=k 곡선을 가지므로, 두 풀에 분산하면 각 풀에서 곡선의 유리한 구간을 더 많이 활용할 수 있다. 금액이 클수록 분할 라우팅의 효과가 커진다.</p>
+            </div>
+
+            {/* 멀티홉이 왜 필요한가 */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">멀티홉(Multi-hop)이 필요한 이유</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              모든 토큰 쌍이 직접 풀을 가지지 않는다. USDC/AAVE 직접 풀이 있더라도 유동성이 낮으면 WETH를 경유하는 것이 더 유리하다. WETH는 거의 모든 토큰의 허브 역할을 한다.
+            </p>
+            <div className="overflow-x-auto my-4">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-800">
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">홉 수</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">경로 예시</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">언제 유리한가</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { hops: '1홉 (직접)', path: 'USDC → AAVE', when: '유동성이 충분한 주요 쌍 (USDC/ETH, ETH/WBTC)' },
+                    { hops: '2홉', path: 'USDC → WETH → AAVE', when: '직접 풀 유동성이 낮거나 없을 때. WETH 경유가 대부분 유리' },
+                    { hops: '3홉', path: 'USDC → DAI → WETH → AAVE', when: '특수한 경우. 스테이블 쌍에 깊은 유동성이 있을 때' },
+                    { hops: '분할 2홉', path: '70% USDC→WETH→AAVE + 30% USDC→USDT→WETH→AAVE', when: '대량 스왑 시 가격 충격 분산 목적' },
+                  ].map((r, i) => (
+                    <tr key={i} className={i % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-medium text-purple-600 dark:text-purple-400 text-xs">{r.hops}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-600 dark:text-gray-400">{r.path}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 text-xs text-gray-600 dark:text-gray-400">{r.when}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* 슬리피지 */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">슬리피지(Slippage)와 최소 수령량</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              라우터가 최적 경로를 계산한 뒤 트랜잭션을 제출해도, 내 트랜잭션이 블록에 포함되기 전에 다른 거래가 풀 상태를 바꿀 수 있다. 이것이 슬리피지다. Uniswap 인터페이스는 슬리피지 허용치를 설정하고, 이보다 불리하면 트랜잭션을 자동 revert시킨다.
+            </p>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 my-4">
+              <div className="grid md:grid-cols-3 gap-4 text-sm">
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-green-600 dark:text-green-400">0.1%</p>
+                  <p className="text-xs text-gray-500 mt-1">스테이블코인 쌍 권장</p>
+                  <p className="text-xs text-gray-400">(USDC/USDT 등)</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">0.5%</p>
+                  <p className="text-xs text-gray-500 mt-1">일반 스왑 기본값</p>
+                  <p className="text-xs text-gray-400">(대부분의 케이스)</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">1~3%</p>
+                  <p className="text-xs text-gray-500 mt-1">유동성 낮은 토큰</p>
+                  <p className="text-xs text-gray-400">(소형 알트코인)</p>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 mt-4">슬리피지를 너무 낮게 설정하면 트랜잭션이 자주 실패하고, 너무 높게 설정하면 MEV 봇의 샌드위치 어택 표적이 된다. 0.5%가 대부분의 상황에서 적절하다.</p>
+            </div>
+
+            {/* MEV와 라우팅 */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">라우팅과 MEV — 내 스왑이 공격받을 수 있다</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              퍼블릭 mempool에 스왑 트랜잭션이 올라오면, MEV 봇이 이를 감지하고 앞뒤에 자신의 트랜잭션을 끼워 넣는 <strong>샌드위치 어택</strong>을 시도할 수 있다. 특히 슬리피지가 높거나 금액이 클 때 타깃이 된다.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 my-4">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-xl p-4">
+                <p className="text-sm font-bold text-red-700 dark:text-red-300 mb-2">⚠️ 샌드위치 어택 발생 조건</p>
+                <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                  <li>• 슬리피지 허용치가 1% 이상으로 높음</li>
+                  <li>• 스왑 금액이 커서 가격 충격이 큼</li>
+                  <li>• 유동성 낮은 풀 경유</li>
+                </ul>
+              </div>
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-xl p-4">
+                <p className="text-sm font-bold text-green-700 dark:text-green-300 mb-2">🛡️ 보호 방법</p>
+                <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                  <li>• UniswapX 사용 (오프체인 오더, MEV 차단)</li>
+                  <li>• 슬리피지를 0.5% 이하로 유지</li>
+                  <li>• Flashbots Protect RPC 사용</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-5 rounded-r-lg my-6">
+              <p className="text-sm font-bold text-blue-800 dark:text-blue-300 mb-2">💡 Uniswap 인터페이스가 라우팅을 자동으로 처리한다</p>
+              <p className="text-sm text-blue-700 dark:text-blue-200 leading-relaxed">
+                일반 사용자는 이 모든 과정을 신경 쓰지 않아도 된다. Uniswap 앱이 SOR을 실행하고 최적 경로를 자동으로 선택한다. 다만 <strong>금액이 클수록, 유동성이 낮은 토큰일수록</strong> 라우팅 품질이 중요해지며, 이럴 때는 1inch 같은 전문 애그리게이터와 결과를 비교해보는 것이 좋다.
+              </p>
             </div>
 
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
@@ -916,24 +1134,233 @@ export default function UniswapDeepDivePage() {
 
             <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">07 · Swap Routing — Automatic Best Path</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Swapping USDC → AAVE on Uniswap doesn't just look for a USDC/AAVE pool. The <strong>UniswapX router</strong> simulates multiple paths and picks the best output.
+              Swapping USDC → AAVE on Uniswap doesn't just look for a USDC/AAVE pool. The <strong>Smart Order Router (SOR)</strong> simulates hundreds of paths across v2, v3, and v4 pools to find the best net output. Here's how it works, step by step.
             </p>
 
+            {/* Why not just use the direct pool */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Why Not Just Use the Direct Pool? — Liquidity and Price Impact</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Even if a USDC/AAVE pool exists, shallow liquidity means a large swap causes severe <strong>price impact</strong>. With x×y=k, each additional unit you buy costs more than the last.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 my-6">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-xl p-5">
+                <p className="text-sm font-bold text-red-700 dark:text-red-300 mb-3">❌ Direct USDC/AAVE Pool Only</p>
+                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <p>• Dump $10,000 USDC into a shallow pool</p>
+                  <p>• Price impact: <strong>3–5%</strong></p>
+                  <p>• You receive far less AAVE than expected</p>
+                </div>
+              </div>
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-xl p-5">
+                <p className="text-sm font-bold text-green-700 dark:text-green-300 mb-3">✅ Router Finds Optimal Path</p>
+                <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  <p>• USDC → WETH → AAVE (deep liquidity pools)</p>
+                  <p>• Price impact: <strong>0.3–0.8%</strong></p>
+                  <p>• 2–4% more AAVE received</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 4-step routing process */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">How SOR Finds the Best Path — 4 Steps</h3>
+            <div className="space-y-3 my-6">
+              {[
+                {
+                  n: '1', icon: '🔍', title: 'Collect Candidate Pools',
+                  desc: 'SOR gathers all v2 pools, v3 pools (all four fee tiers: 0.01%, 0.05%, 0.3%, 1%), and v4 pools relevant to the input and output tokens — including multi-hop paths via intermediate tokens like WETH, USDT, DAI, and WBTC.',
+                  color: 'bg-blue-50 dark:bg-blue-900/20',
+                },
+                {
+                  n: '2', icon: '🗺️', title: 'Build a Pool Graph',
+                  desc: 'Each pool becomes a node; tokens become edges. The router traces paths: 2-hop (USDC→WETH→AAVE), 3-hop (USDC→USDT→WETH→AAVE), and so on. Up to 3 hops are typically explored.',
+                  color: 'bg-purple-50 dark:bg-purple-900/20',
+                },
+                {
+                  n: '3', icon: '🧮', title: 'Simulate Each Path',
+                  desc: 'For each candidate path, SOR calculates the expected output given current on-chain pool state — accounting for price impact, fees, and slippage. It compares net output across all paths.',
+                  color: 'bg-orange-50 dark:bg-orange-900/20',
+                },
+                {
+                  n: '4', icon: '⚖️', title: 'Optimize with Split Routing',
+                  desc: 'SOR checks if splitting the order across multiple paths beats a single path. E.g., 70% via Route A + 30% via Route B. Because each pool has an independent x×y=k curve, spreading the trade reduces price impact on each pool.',
+                  color: 'bg-green-50 dark:bg-green-900/20',
+                },
+              ].map((s, i) => (
+                <div key={i} className={`rounded-xl p-5 ${s.color}`}>
+                  <div className="flex items-start gap-3">
+                    <span className="text-xl flex-shrink-0">{s.icon}</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-1">Step {s.n} — {s.title}</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{s.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Real routing example */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Real Example — SOR Picking a Route for USDC $10,000 → AAVE</h3>
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-6">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Routing Example: USDC → AAVE</p>
-              <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-5">Candidate Routes SOR Evaluates</p>
+              <div className="space-y-4">
                 {[
-                  { tag: 'Route A', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300', path: 'USDC → WETH (0.05%) → AAVE (0.3%)' },
-                  { tag: 'Route B ✓', color: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300', path: 'USDC → USDT (0.01%) → WETH (0.05%) → AAVE (0.3%)' },
-                  { tag: 'Route C', color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300', path: '60% Route A + 40% Route B (split routing)' },
+                  {
+                    label: 'Route A',
+                    badge: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
+                    path: 'USDC → WETH (v3 0.05%) → AAVE (v3 0.3%)',
+                    hops: '2-hop',
+                    fee: 'Fee: 0.35%',
+                    impact: 'Price impact: ~1.2%',
+                    output: 'Est. AAVE: 82.4',
+                    best: false,
+                  },
+                  {
+                    label: 'Route B ✓ Best',
+                    badge: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300',
+                    path: '70% USDC→WETH(v3 0.05%)→AAVE(v3 0.3%) + 30% USDC→USDT(v3 0.01%)→WETH(v3 0.05%)→AAVE(v3 0.3%)',
+                    hops: 'Split routing',
+                    fee: 'Fee: 0.36%',
+                    impact: 'Price impact: ~0.4%',
+                    output: 'Est. AAVE: 84.1 (+2.0%)',
+                    best: true,
+                  },
+                  {
+                    label: 'Route C',
+                    badge: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
+                    path: 'USDC → DAI (v3 0.01%) → WETH (v3 0.05%) → AAVE (v3 0.3%)',
+                    hops: '3-hop',
+                    fee: 'Fee: 0.36%',
+                    impact: 'Price impact: ~0.9%',
+                    output: 'Est. AAVE: 83.1',
+                    best: false,
+                  },
                 ].map((r, i) => (
-                  <div key={i} className="flex items-center gap-2 bg-white dark:bg-gray-900 rounded-lg p-3">
-                    <span className={`text-xs px-2 py-0.5 rounded font-bold flex-shrink-0 ${r.color}`}>{r.tag}</span>
-                    <span className="font-mono text-xs">{r.path}</span>
+                  <div key={i} className={`border rounded-xl p-4 ${r.best ? 'border-green-400 dark:border-green-600 bg-green-50/50 dark:bg-green-900/10' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900'}`}>
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span className={`text-xs font-bold px-2 py-1 rounded ${r.badge}`}>{r.label}</span>
+                      <span className="text-xs text-gray-400">{r.hops}</span>
+                    </div>
+                    <p className="text-xs font-mono text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">{r.path}</p>
+                    <div className="flex flex-wrap gap-4 text-xs">
+                      <span className="text-gray-500">{r.fee}</span>
+                      <span className="text-orange-600 dark:text-orange-400">{r.impact}</span>
+                      <span className={`font-bold ${r.best ? 'text-green-600 dark:text-green-400' : 'text-gray-700 dark:text-gray-300'}`}>{r.output}</span>
+                    </div>
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-gray-500 mt-3">The router simulates all three paths and selects whichever yields the most AAVE. Split routing minimizes price impact.</p>
+              <p className="text-xs text-gray-500 mt-4">* Numbers are illustrative. Actual output depends on pool state at execution time. SOR always selects the route with the highest net output.</p>
+            </div>
+
+            {/* Why split routing helps */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Why Split Routing Wins on Large Orders</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              With x×y=k, dumping $10,000 into one pool skews the ratio heavily, and each subsequent unit costs more. Splitting across two pools means each pool absorbs a smaller shock — keeping you in the flatter, more favorable part of each curve.
+            </p>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Same $10,000 — More AAVE with Split Routing</p>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-40 text-gray-500 text-xs flex-shrink-0">Single pool (Route A)</div>
+                  <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
+                    <div className="bg-red-400 h-4 rounded-full" style={{width: '78%'}} />
+                  </div>
+                  <span className="text-xs text-red-600 dark:text-red-400 w-20 flex-shrink-0">82.4 AAVE</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-40 text-gray-500 text-xs flex-shrink-0">Split routing (Route B)</div>
+                  <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
+                    <div className="bg-green-400 h-4 rounded-full" style={{width: '85%'}} />
+                  </div>
+                  <span className="text-xs text-green-600 dark:text-green-400 w-20 flex-shrink-0">84.1 AAVE ✓</span>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 mt-4">The larger the trade, the more split routing helps. Each pool has an independent curve — spreading trades exploits the favorable low-impact zone on each one.</p>
+            </div>
+
+            {/* Multi-hop table */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">When Multi-Hop Paths Are Used</h3>
+            <div className="overflow-x-auto my-4">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-800">
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">Hops</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">Example Path</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">When Used</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { hops: '1-hop (direct)', path: 'USDC → AAVE', when: 'Deep liquidity pairs: USDC/ETH, ETH/WBTC' },
+                    { hops: '2-hop', path: 'USDC → WETH → AAVE', when: 'No direct pool, or WETH route has deeper liquidity' },
+                    { hops: '3-hop', path: 'USDC → DAI → WETH → AAVE', when: 'Specific stablecoin pools with deep liquidity' },
+                    { hops: 'Split 2-hop', path: '70% USDC→WETH→AAVE + 30% USDC→USDT→WETH→AAVE', when: 'Large trades needing price impact distribution' },
+                  ].map((r, i) => (
+                    <tr key={i} className={i % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-medium text-purple-600 dark:text-purple-400 text-xs">{r.hops}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-600 dark:text-gray-400">{r.path}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 text-xs text-gray-600 dark:text-gray-400">{r.when}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Slippage */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Slippage Tolerance — Your Safety Net</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Even after SOR picks the best path, other transactions can change pool state before yours is included in a block. Slippage tolerance sets the minimum acceptable output — if the actual output falls below it, the transaction reverts automatically.
+            </p>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 my-4">
+              <div className="grid md:grid-cols-3 gap-4 text-sm text-center">
+                <div>
+                  <p className="text-2xl font-bold text-green-600 dark:text-green-400">0.1%</p>
+                  <p className="text-xs text-gray-500 mt-1">Stablecoin pairs</p>
+                  <p className="text-xs text-gray-400">(USDC/USDT etc.)</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">0.5%</p>
+                  <p className="text-xs text-gray-500 mt-1">Default for most swaps</p>
+                  <p className="text-xs text-gray-400">(recommended)</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">1–3%</p>
+                  <p className="text-xs text-gray-500 mt-1">Low-liquidity tokens</p>
+                  <p className="text-xs text-gray-400">(small altcoins)</p>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 mt-4">Too low = frequent transaction failures. Too high = MEV sandwich attack target. 0.5% works for the vast majority of swaps.</p>
+            </div>
+
+            {/* MEV and routing */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Routing and MEV — Your Swap Can Be Attacked</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              When a swap transaction hits the public mempool, MEV bots can spot it and execute a <strong>sandwich attack</strong> — front-running to push the price up, then back-running to sell. High slippage tolerance and large amounts are the prime targets.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 my-4">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-xl p-4">
+                <p className="text-sm font-bold text-red-700 dark:text-red-300 mb-2">⚠️ Sandwich Attack Conditions</p>
+                <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                  <li>• Slippage tolerance set high (1%+)</li>
+                  <li>• Large swap with visible price impact</li>
+                  <li>• Shallow pool being used</li>
+                </ul>
+              </div>
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-xl p-4">
+                <p className="text-sm font-bold text-green-700 dark:text-green-300 mb-2">🛡️ Protection Methods</p>
+                <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                  <li>• Use UniswapX (off-chain orders, MEV-blocked)</li>
+                  <li>• Keep slippage at 0.5% or below</li>
+                  <li>• Use Flashbots Protect RPC</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-5 rounded-r-lg my-6">
+              <p className="text-sm font-bold text-blue-800 dark:text-blue-300 mb-2">💡 The Uniswap Interface Handles All of This Automatically</p>
+              <p className="text-sm text-blue-700 dark:text-blue-200 leading-relaxed">
+                Regular users don't need to think about any of this — the Uniswap app runs SOR and picks the best route automatically. But <strong>the larger the trade and the less liquid the token</strong>, the more routing quality matters. For large swaps, it's worth comparing with a dedicated aggregator like 1inch to see if they find a better route.
+              </p>
             </div>
 
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
