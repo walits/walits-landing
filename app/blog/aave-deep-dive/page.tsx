@@ -237,8 +237,84 @@ export default function AaveDeepDivePage() {
 
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
 
-            {/* ── S5 대출 구조 ── */}
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">05 · 대출(Borrow) 구조</h2>
+            {/* ── WHY 섹션 ── */}
+            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">05 · 왜 ETH를 팔지 않고 굳이 빌리는가?</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              처음 Aave를 접하면 이런 의문이 든다. <strong>"ETH를 담보로 맡기고 USDT를 빌리는 게 왜 유리하지? 그냥 ETH → USDT 스왑하면 되지 않나?"</strong>
+            </p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              결론부터 말하면, 스왑은 ETH를 <em>처분</em>하는 것이고 대출은 ETH를 <em>유지하면서</em> 현금을 조달하는 것이다. 이 차이가 DeFi 대출의 핵심이다.
+            </p>
+
+            {/* 비교 카드 */}
+            <div className="grid md:grid-cols-2 gap-4 my-6">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-5">
+                <p className="text-sm font-bold text-red-700 dark:text-red-300 mb-3">❌ ETH → USDT 스왑</p>
+                <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-2">
+                  <li>• ETH가 사라진다</li>
+                  <li>• 이후 ETH 가격이 올라도 수익 없음</li>
+                  <li>• 대부분의 국가에서 <strong>양도소득세 과세</strong> 이벤트 발생</li>
+                  <li>• 되돌리려면 다시 USDT → ETH 스왑 (슬리피지 + 수수료)</li>
+                </ul>
+              </div>
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-5">
+                <p className="text-sm font-bold text-green-700 dark:text-green-300 mb-3">✅ ETH 담보 → USDT 대출</p>
+                <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-2">
+                  <li>• ETH가 그대로 담보에 남아있다</li>
+                  <li>• ETH 가격 상승 시 담보 가치도 같이 오름</li>
+                  <li>• 대출은 과세 이벤트 아님 (세금 이연)</li>
+                  <li>• USDT 상환하면 ETH 그대로 돌려받음</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 구체적 시나리오 */}
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-5">실제 사용 시나리오 4가지</p>
+              <div className="space-y-5">
+                <div className="flex gap-4">
+                  <span className="text-2xl flex-shrink-0">💰</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-1">시나리오 1 — ETH 홀더의 현금 조달</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">ETH를 팔기 싫은데 당장 생활비나 사업 자금이 필요한 경우. ETH 담보 → USDT 대출 → 현금화. 나중에 USDT 갚으면 ETH 돌려받는다. <strong>ETH를 "팔지 않고" 유동성을 확보</strong>하는 것이 핵심.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-2xl flex-shrink-0">📈</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-1">시나리오 2 — 레버리지 롱</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">ETH 가격 상승을 강하게 베팅하고 싶을 때. ETH 담보 → USDT 대출 → USDT로 ETH 추가 구매 → 다시 담보 → 반복. ETH 보유량이 늘어나는 만큼 레버리지가 걸린다. 단, ETH 가격이 빠지면 청산 위험이 증폭된다.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-2xl flex-shrink-0">🏛️</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-1">시나리오 3 — 세금 이연 (Tax Deferral)</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">ETH를 스왑하면 매도로 간주돼 양도소득세가 발생한다. 반면 대출은 보유 자산을 담보로 빌리는 것이라 <strong>과세 이벤트가 아니다</strong>. ETH가 많이 오른 상황에서 현금이 필요할 때, 세금 없이 유동성을 확보하는 전략으로 활용된다.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-2xl flex-shrink-0">📉</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-1">시나리오 4 — 다른 코인 숏 포지션</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">ETH 담보 → 알트코인 대출 → 대출한 알트코인을 즉시 스왑해서 팔기. 알트코인 가격이 내려가면 나중에 싸게 사서 상환하고 차익을 챙긴다. 전통 금융의 공매도(Short Selling)를 DeFi에서 구현하는 방식이다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 핵심 트레이드오프 */}
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 p-5 rounded-r-lg my-6">
+              <p className="text-sm font-bold text-yellow-800 dark:text-yellow-300 mb-2">⚠️ 그렇다면 왜 모든 사람이 이렇게 하지 않는가?</p>
+              <p className="text-sm text-yellow-700 dark:text-yellow-200 leading-relaxed">
+                <strong>청산 위험</strong> 때문이다. ETH 가격이 하락하면 담보 가치가 떨어지고, Health Factor가 1.0 아래로 내려가면 담보가 강제 청산된다. 스왑은 ETH를 잃지만 추가 손실이 없는 반면, 대출은 가격이 빠질 때 담보 ETH까지 잃을 수 있다. <strong>레버리지는 양방향으로 작동한다.</strong>
+              </p>
+            </div>
+
+            <hr className="border-gray-200 dark:border-gray-700 my-10" />
+
+            {/* ── S6 대출 구조 (번호 변경) ── */}
+            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">06 · 대출(Borrow) 구조</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               예치한 자산이 담보가 되면, 다른 자산을 빌릴 수 있다. 빌린 자산에는 이자가 붙고, 이 이자가 풀에 쌓여 예치자의 수익이 된다.
             </p>
@@ -828,7 +904,80 @@ await flashbotsProvider.sendBundle(bundle, targetBlock);`,
 
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
 
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">05 · Borrow Structure</h2>
+            {/* ── WHY section (EN) ── */}
+            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">05 · Why Borrow Instead of Just Swapping?</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              A common first question: <strong>"Why deposit ETH and borrow USDT when you could just swap ETH → USDT directly?"</strong>
+            </p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              The key difference: swapping <em>disposes</em> of your ETH, borrowing lets you <em>keep</em> your ETH while still accessing liquidity.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-4 my-6">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-5">
+                <p className="text-sm font-bold text-red-700 dark:text-red-300 mb-3">❌ Swap ETH → USDT</p>
+                <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-2">
+                  <li>• ETH is gone</li>
+                  <li>• You miss any future ETH price gains</li>
+                  <li>• Triggers a <strong>taxable capital gains event</strong> in most jurisdictions</li>
+                  <li>• Re-entering requires another swap (slippage + fees)</li>
+                </ul>
+              </div>
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-5">
+                <p className="text-sm font-bold text-green-700 dark:text-green-300 mb-3">✅ Collateralize ETH → Borrow USDT</p>
+                <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-2">
+                  <li>• ETH stays locked as collateral</li>
+                  <li>• You benefit if ETH price rises</li>
+                  <li>• Borrowing is not a taxable event (tax deferral)</li>
+                  <li>• Repay USDT → get ETH back intact</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-5">4 Real-World Use Cases</p>
+              <div className="space-y-5">
+                <div className="flex gap-4">
+                  <span className="text-2xl flex-shrink-0">💰</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-1">Case 1 — Liquidity Without Selling</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">You need cash but don't want to sell your ETH. Deposit ETH → borrow USDT → spend. Repay later and get ETH back. <strong>Access liquidity without closing your position.</strong></p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-2xl flex-shrink-0">📈</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-1">Case 2 — Leveraged Long</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Bullish on ETH? Deposit ETH → borrow USDT → buy more ETH → deposit again → repeat. This creates a leveraged long position. Risk: if ETH drops, your Health Factor falls and liquidation looms.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-2xl flex-shrink-0">🏛️</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-1">Case 3 — Tax Deferral</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Swapping ETH = disposal = taxable gain. Borrowing against ETH is <strong>not a taxable event</strong>. If your ETH has significant unrealized gains, borrowing lets you access value without triggering tax — deferring it until you eventually sell.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <span className="text-2xl flex-shrink-0">📉</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white mb-1">Case 4 — Shorting Altcoins</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Deposit ETH → borrow an altcoin → immediately sell it. If the altcoin falls, buy it back cheaper, repay the loan, pocket the difference. This is DeFi's version of traditional short-selling.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 p-5 rounded-r-lg my-6">
+              <p className="text-sm font-bold text-yellow-800 dark:text-yellow-300 mb-2">⚠️ So why doesn't everyone do this?</p>
+              <p className="text-sm text-yellow-700 dark:text-yellow-200 leading-relaxed">
+                <strong>Liquidation risk.</strong> If ETH drops, your collateral value falls and if your Health Factor hits 1.0, your collateral gets forcibly liquidated. A simple swap means you lose ETH but nothing more. A leveraged borrow position can wipe out your collateral in a sharp downturn. <strong>Leverage cuts both ways.</strong>
+              </p>
+            </div>
+
+            <hr className="border-gray-200 dark:border-gray-700 my-10" />
+
+            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">06 · Borrow Structure</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Once deposited assets become collateral, you can borrow other assets. Borrowed assets accrue interest, which flows back to depositors as yield.
             </p>
