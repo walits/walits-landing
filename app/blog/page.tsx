@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'aave-deep-dive',
+          category: 'DeFi 시리즈 1',
+          categoryColor: 'bg-purple-100 text-purple-800',
+          title: 'DeFi 시리즈 1 — AAVE: DeFi 최대 렌딩 프로토콜 완전 해부',
+          excerpt: 'Aave에 USDT를 예치하면 온체인에서 정확히 무슨 일이 일어나나. aToken·과담보·플래시론·청산봇·GHO 스테이블코인까지. Aave v3의 모든 기능을 온체인 구조와 함께 완전 해부한다.',
+          date: '2026년 3월 24일',
+          readTime: '20분',
+          image: '/blog/aave.webp',
+        },
+        {
           id: 'mev-ethereum-deep-dive',
           category: 'DEEP DIVE · 이더리움',
           categoryColor: 'bg-blue-100 text-blue-800',
@@ -182,6 +192,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'aave-deep-dive',
+          category: 'DeFi Series 1',
+          categoryColor: 'bg-purple-100 text-purple-800',
+          title: 'DeFi Series 1 — AAVE: Complete Breakdown of DeFi\'s Largest Lending Protocol',
+          excerpt: 'What actually happens on-chain when you deposit USDT into Aave. aTokens, over-collateralization, flash loans, liquidation bots, GHO stablecoin — all of Aave v3\'s features dissected with on-chain mechanics.',
+          date: 'March 24, 2026',
+          readTime: '20 min read',
+          image: '/blog/aave.webp',
+        },
         {
           id: 'mev-ethereum-deep-dive',
           category: 'DEEP DIVE · Ethereum',
