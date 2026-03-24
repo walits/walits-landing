@@ -34,7 +34,7 @@ export default function AaveDeepDivePage() {
       {/* Hero image */}
       <div className="max-w-3xl mx-auto px-6 mb-8">
         <div className="relative w-full h-64 rounded-2xl overflow-hidden bg-gradient-to-br from-purple-600 to-blue-500">
-          <Image src="/blog/aave.webp" alt="Aave DeFi Protocol" fill className="object-cover" onError={() => {}} />
+          <Image src="/blog/aave.jpg" alt="Aave DeFi Protocol" fill className="object-cover" onError={() => {}} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute bottom-6 left-6">
             <span className="text-xs font-bold uppercase tracking-wider bg-purple-500/80 text-white px-3 py-1 rounded-full">DeFi 시리즈 1</span>

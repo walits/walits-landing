@@ -22,7 +22,7 @@ export default function BlogPage() {
           excerpt: 'Aave에 USDT를 예치하면 온체인에서 정확히 무슨 일이 일어나나. aToken·과담보·플래시론·청산봇·GHO 스테이블코인까지. Aave v3의 모든 기능을 온체인 구조와 함께 완전 해부한다.',
           date: '2026년 3월 24일',
           readTime: '20분',
-          image: '/blog/aave.webp',
+          image: '/blog/aave.jpg',
         },
         {
           id: 'mev-ethereum-deep-dive',
@@ -200,7 +200,7 @@ export default function BlogPage() {
           excerpt: 'What actually happens on-chain when you deposit USDT into Aave. aTokens, over-collateralization, flash loans, liquidation bots, GHO stablecoin — all of Aave v3\'s features dissected with on-chain mechanics.',
           date: 'March 24, 2026',
           readTime: '20 min read',
-          image: '/blog/aave.webp',
+          image: '/blog/aave.jpg',
         },
         {
           id: 'mev-ethereum-deep-dive',
