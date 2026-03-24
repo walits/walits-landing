@@ -313,43 +313,231 @@ export default function AaveDeepDivePage() {
 
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
 
-            {/* ── S6 대출 구조 (번호 변경) ── */}
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">06 · 대출(Borrow) 구조</h2>
+            {/* ── S6 대출 구조 ── */}
+            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">06 · 대출(Borrow) 구조 — 온체인에서 실제로 무슨 일이 일어나나</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              예치한 자산이 담보가 되면, 다른 자산을 빌릴 수 있다. 빌린 자산에는 이자가 붙고, 이 이자가 풀에 쌓여 예치자의 수익이 된다.
+              예치한 자산이 담보가 되면 다른 자산을 빌릴 수 있다. 단순히 "돈을 빌린다"고 표현하지만, 온체인에서는 정밀한 토큰 발행·소각 구조로 동작한다. 이자가 어떻게 쌓이고, 빚이 어떻게 추적되는지 처음부터 끝까지 따라가 보자.
             </p>
 
-            <div className="space-y-3 my-6">
+            {/* STEP 1 — 빌리기 전 상태 */}
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-5">📋 전체 흐름 한눈에 보기 — ETH $2,000 담보, USDT $1,200 대출 시나리오</p>
+              <div className="space-y-3">
+                {[
+                  {
+                    step: '① 담보 예치',
+                    desc: 'ETH $2,000 → Aave Pool에 supply() 호출',
+                    state: '내 지갑: aETH 2,000 수령 / ETH 사라짐',
+                    color: 'border-blue-300 dark:border-blue-700',
+                    badge: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
+                  },
+                  {
+                    step: '② 대출 실행',
+                    desc: 'borrow(USDT, 1200) 호출 → USDT $1,200 지갑으로 들어옴',
+                    state: '내 지갑: USDT 1,200 추가 / variableDebtUSDT 1,200 mint됨',
+                    color: 'border-orange-300 dark:border-orange-700',
+                    badge: 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300',
+                  },
+                  {
+                    step: '③ 이자 누적',
+                    desc: '매 블록(~12초)마다 variableDebtUSDT balance 자동 증가',
+                    state: '예: 연 5% → 1년 후 빚이 USDT 1,260으로 늘어남',
+                    color: 'border-red-300 dark:border-red-700',
+                    badge: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300',
+                  },
+                  {
+                    step: '④ 상환',
+                    desc: 'repay(USDT, 1260) 호출 → USDT 풀에 반납',
+                    state: 'variableDebtUSDT burn → 담보 ETH 자유롭게 출금 가능',
+                    color: 'border-green-300 dark:border-green-700',
+                    badge: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300',
+                  },
+                ].map((s, i) => (
+                  <div key={i} className={`border rounded-xl p-4 ${s.color} bg-white dark:bg-gray-900`}>
+                    <div className="flex flex-wrap items-start gap-3">
+                      <span className={`text-xs font-bold px-2 py-1 rounded flex-shrink-0 ${s.badge}`}>{s.step}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">{s.desc}</p>
+                        <p className="text-xs text-gray-500 mt-1 font-mono">{s.state}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* debtToken 설명 */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">variableDebtToken — 빚을 추적하는 특수 토큰</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              대출을 실행하면 USDT가 지갑으로 들어오는 동시에, <strong>variableDebtUSDT</strong>라는 토큰이 자동으로 발행된다. 이것이 핵심이다. 이 토큰은 "내가 Aave에 얼마를 빚지고 있는지"를 온체인에 기록한다.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 my-6">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5">
+                <p className="font-semibold text-gray-900 dark:text-white mb-3 text-sm">일반 토큰 vs debtToken</p>
+                <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex items-start gap-2">
+                    <span className="text-green-500 flex-shrink-0">✓</span>
+                    <p>일반 ERC-20: transfer 가능, 팔 수 있음</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-red-500 flex-shrink-0">✗</span>
+                    <p>debtToken: transfer 불가, 팔 수 없음. 오직 상환(repay)으로만 소각됨</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-500 flex-shrink-0">↗</span>
+                    <p>매 블록 balance가 자동으로 증가 (이자 누적)</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5">
+                <p className="font-semibold text-gray-900 dark:text-white mb-3 text-sm">Etherscan에서 보면</p>
+                <div className="space-y-2 font-mono text-xs text-gray-600 dark:text-gray-400">
+                  <div className="bg-white dark:bg-gray-900 rounded p-2">
+                    <span className="text-green-500">USDT Transfer</span><br />
+                    Pool → 내 지갑: +1,200
+                  </div>
+                  <div className="bg-white dark:bg-gray-900 rounded p-2">
+                    <span className="text-red-500">variableDebtUSDT Mint</span><br />
+                    0x000 → 내 지갑: +1,200
+                  </div>
+                  <p className="text-gray-400 pt-1">두 이벤트가 동시에 발생</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 이자율 모델 */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">금리는 어떻게 결정되나 — 이용률 기반 자동 조정</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Aave 금리는 은행처럼 위원회가 결정하지 않는다. <strong>이용률(Utilization Rate)</strong> 하나로 자동 계산된다.
+            </p>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-4">
+              <p className="text-xs font-mono text-gray-500 mb-4">이용률 = 현재 대출된 총량 ÷ 총 예치량</p>
+              <div className="space-y-3">
+                {[
+                  { util: '0%', rate: '~1%', bar: 'w-0', label: '아무도 빌리지 않음 → 최저 금리', color: 'bg-green-400' },
+                  { util: '50%', rate: '~4%', bar: 'w-1/2', label: '절반이 대출 중 → 완만한 상승', color: 'bg-green-400' },
+                  { util: '80%', rate: '~6%', bar: 'w-4/5', label: '최적 이용률(Kink) → 여기서 기울기가 꺾임', color: 'bg-yellow-400' },
+                  { util: '95%', rate: '~50%', bar: 'w-full', label: '위험 구간 → 금리 폭등, 차입 억제 + 상환 유도', color: 'bg-red-500' },
+                ].map((r, i) => (
+                  <div key={i} className="flex items-center gap-3 text-sm">
+                    <span className="w-8 text-xs font-mono text-gray-500 flex-shrink-0">{r.util}</span>
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2 relative">
+                      <div className={`${r.bar} ${r.color} h-2 rounded-full`} />
+                    </div>
+                    <span className="w-12 text-xs font-bold text-gray-700 dark:text-gray-300 flex-shrink-0">{r.rate}</span>
+                    <span className="text-xs text-gray-500 hidden md:block">{r.label}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-gray-500 mt-4">이용률 80%(Kink Point)까지는 금리가 완만하게 오르다가, 그 이후 급격히 치솟는다. 예치자에게는 높은 이자를 주고 차입자에게는 빠른 상환을 유도하는 설계다.</p>
+            </div>
+
+            {/* 변동금리 vs 고정금리 */}
+            <div className="grid md:grid-cols-2 gap-4 my-6">
+              <div className="border border-blue-200 dark:border-blue-800 rounded-xl p-5">
+                <p className="font-semibold text-blue-700 dark:text-blue-300 mb-2 text-sm">Variable Rate (변동금리)</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">이용률에 따라 매 블록 실시간 변동. 대부분의 사용자가 선택하는 방식. 금리가 낮을 때 유리하지만, 급등 가능성 있음.</p>
+                <p className="text-xs font-mono bg-gray-100 dark:bg-gray-900 rounded p-2 text-gray-500">USDT 대출 시 현재 APY: ~5%</p>
+              </div>
+              <div className="border border-purple-200 dark:border-purple-800 rounded-xl p-5">
+                <p className="font-semibold text-purple-700 dark:text-purple-300 mb-2 text-sm">Stable Rate (고정금리)</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">단기적으로 고정된 금리. 시장 급등 시 보호받지만 평소 변동금리보다 높다. 극단적 상황에서 리베이스 가능. 일부 자산만 지원.</p>
+                <p className="text-xs font-mono bg-gray-100 dark:bg-gray-900 rounded p-2 text-gray-500">같은 USDT 대출 시 Stable APY: ~7%</p>
+              </div>
+            </div>
+
+            {/* 구체적 이자 계산 예시 */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">실제 이자 계산 — 하루, 한 달, 1년 후</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              USDT $1,200을 연 5% Variable Rate로 빌렸다고 가정하자. 얼마씩 이자가 쌓일까?
+            </p>
+            <div className="overflow-x-auto my-4">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-800">
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">기간</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">누적 이자</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">총 상환액</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">비고</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { period: '1일', interest: '$0.16', total: '$1,200.16', note: 'variableDebtUSDT balance가 이만큼 늘어남' },
+                    { period: '1주', interest: '$1.15', total: '$1,201.15', note: '체감하기 힘든 수준' },
+                    { period: '1개월', interest: '$4.93', total: '$1,204.93', note: '월 커피값 수준' },
+                    { period: '6개월', interest: '$29.59', total: '$1,229.59', note: '담보 ETH 가격도 함께 변동' },
+                    { period: '1년', interest: '$60.00', total: '$1,260.00', note: '연 5% 단리 기준 (복리면 더 높음)' },
+                  ].map((r, i) => (
+                    <tr key={i} className={i % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-medium">{r.period}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 text-red-600 dark:text-red-400 font-mono">{r.interest}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-mono font-bold">{r.total}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 text-gray-500 text-xs">{r.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 p-4 rounded-r-lg my-4">
+              <p className="text-sm text-blue-800 dark:text-blue-300"><strong>중요:</strong> 이자율은 이용률에 따라 실시간 변동한다. 위 수치는 연 5% 고정 가정이며, 실제로는 매 블록 재계산된다. Aave 대시보드에서 현재 APY를 항상 확인해야 한다.</p>
+            </div>
+
+            {/* 상환 흐름 */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">상환(Repay) 흐름 — 빚을 갚으면 온체인에서 무슨 일이 생기나</h3>
+            <div className="space-y-3 my-4">
               {[
-                { n: '1', text: 'ETH $1,000 예치 → aETH 수령 (담보 활성화)', color: 'bg-blue-50 dark:bg-blue-900/20' },
-                { n: '2', text: 'borrow(USDT, 800) 호출 → USDT $800 지갑으로 전송', color: 'bg-orange-50 dark:bg-orange-900/20' },
-                { n: '3', text: '동시에 variableDebtUSDT 토큰이 내 지갑에 mint됨 (빚 영수증)', color: 'bg-red-50 dark:bg-red-900/20' },
-                { n: '4', text: '매 블록 이자 누적 → variableDebtUSDT balance 자동 증가', color: 'bg-red-50 dark:bg-red-900/20' },
-                { n: '5', text: '상환(repay) 시 USDT 반납 → debtToken burn', color: 'bg-green-50 dark:bg-green-900/20' },
+                { n: '1', title: 'repay(USDT, amount) 호출', desc: '갚을 USDT를 approve 후 repay 함수 호출. 전액 또는 일부 상환 모두 가능.', color: 'bg-blue-50 dark:bg-blue-900/20' },
+                { n: '2', title: 'USDT가 Pool로 이동', desc: 'USDT 컨트랙트에서 transferFrom으로 내 지갑 USDT → Aave Pool 주소로 이동. 이 USDT는 예치자들의 이자 + 원금이 된다.', color: 'bg-orange-50 dark:bg-orange-900/20' },
+                { n: '3', title: 'variableDebtUSDT burn', desc: '갚은 금액만큼 debtToken이 소각된다. 전액 상환이면 balance = 0이 되고, 빚이 완전히 사라진다.', color: 'bg-red-50 dark:bg-red-900/20' },
+                { n: '4', title: '담보 출금 가능', desc: 'debtToken이 0이 되면 담보로 잠겨있던 aETH를 withdraw()로 돌려받을 수 있다. 다시 ETH로 교환되어 지갑에 들어온다.', color: 'bg-green-50 dark:bg-green-900/20' },
               ].map((s, i) => (
-                <div key={i} className={`flex items-start gap-3 rounded-lg p-4 text-sm ${s.color}`}>
-                  <span className="font-mono text-gray-400 w-4 flex-shrink-0">{s.n}</span>
-                  <span className="text-gray-700 dark:text-gray-300">{s.text}</span>
+                <div key={i} className={`rounded-xl p-4 ${s.color}`}>
+                  <div className="flex items-start gap-3">
+                    <span className="font-mono font-bold text-gray-400 w-4 flex-shrink-0 mt-0.5">{s.n}</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white text-sm mb-1">{s.title}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{s.desc}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-6">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">금리 모델 — 이자율은 어떻게 결정되나</p>
-              <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-300">
-                <div>
-                  <p className="font-semibold text-gray-900 dark:text-white mb-2">Variable Rate (변동금리)</p>
-                  <p className="leading-relaxed">풀의 <strong>이용률(Utilization Rate)</strong>에 따라 실시간으로 변동. 이용률 = 대출된 양 ÷ 총 예치량. 이용률이 높을수록 금리가 올라 신규 차입을 억제하고 상환을 유도한다.</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900 dark:text-white mb-2">Stable Rate (고정금리)</p>
-                  <p className="leading-relaxed">단기적으로 고정된 금리. 시장 금리가 급등해도 영향받지 않는다. 단, 극단적인 상황에서 리베이스될 수 있다. 일부 자산에서만 제공.</p>
-                </div>
+            {/* Health Factor 실시간 변화 */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">내 포지션이 안전한지 — Health Factor 실시간 추적</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              대출 중에는 담보 가치 변동과 이자 누적으로 Health Factor가 계속 바뀐다. 이것을 모니터링하지 않으면 청산을 맞을 수 있다.
+            </p>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">ETH $2,000 담보 / USDT $1,200 대출 상황에서 ETH 가격이 내려갈 때</p>
+              <div className="space-y-3">
+                {[
+                  { price: 'ETH $2,000 (대출 시점)', hf: '1.33', status: '✅ 안전', color: 'text-green-600 dark:text-green-400', bar: 'bg-green-400', width: 'w-4/5' },
+                  { price: 'ETH $1,700', hf: '1.13', status: '⚠️ 주의', color: 'text-yellow-600 dark:text-yellow-400', bar: 'bg-yellow-400', width: 'w-3/5' },
+                  { price: 'ETH $1,500', hf: '1.00', status: '🔴 청산 경계', color: 'text-orange-600 dark:text-orange-400', bar: 'bg-orange-400', width: 'w-2/5' },
+                  { price: 'ETH $1,400', hf: '0.93', status: '💀 청산 실행됨', color: 'text-red-600 dark:text-red-400', bar: 'bg-red-500', width: 'w-1/4' },
+                ].map((r, i) => (
+                  <div key={i} className="flex items-center gap-3 text-sm">
+                    <span className="w-36 text-xs text-gray-600 dark:text-gray-400 flex-shrink-0">{r.price}</span>
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                      <div className={`${r.width} ${r.bar} h-3 rounded-full transition-all`} />
+                    </div>
+                    <span className={`w-10 text-xs font-bold flex-shrink-0 ${r.color}`}>{r.hf}</span>
+                    <span className={`text-xs flex-shrink-0 ${r.color}`}>{r.status}</span>
+                  </div>
+                ))}
               </div>
-              <div className="mt-4 bg-white dark:bg-gray-900 rounded-lg p-3 text-xs font-mono text-gray-600 dark:text-gray-400">
-                이용률 0% → 최소 금리(base rate)<br />
-                이용률 80%(optimal) → 기준 금리 (kink point)<br />
-                이용률 100% → 최대 금리 (급격한 상승, 차입 억제)
+              <p className="text-xs text-gray-500 mt-4">* ETH Liquidation Threshold 85% 기준. HF = (담보 가치 × 0.85) ÷ 총 빚. ETH $1,500이면 ($1,500 × 0.85) ÷ $1,200 = 1.0625 → 위험 구간 진입.</p>
+            </div>
+
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-300 dark:border-yellow-700 rounded-xl p-5 my-6">
+              <p className="font-semibold text-yellow-800 dark:text-yellow-300 mb-3 text-sm">💡 청산을 피하는 실용적인 방법</p>
+              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                <div className="flex items-start gap-2"><span className="text-yellow-600 flex-shrink-0">→</span><p><strong>보수적 LTV 유지:</strong> 최대 $1,600 빌릴 수 있어도 $800만 빌린다. 여유가 많을수록 안전 마진이 생긴다.</p></div>
+                <div className="flex items-start gap-2"><span className="text-yellow-600 flex-shrink-0">→</span><p><strong>담보 추가 공급:</strong> ETH 가격이 빠질 것 같으면 담보를 더 넣어 HF를 올린다.</p></div>
+                <div className="flex items-start gap-2"><span className="text-yellow-600 flex-shrink-0">→</span><p><strong>일부 상환:</strong> 빚 일부를 갚아 HF를 빠르게 회복시킨다.</p></div>
+                <div className="flex items-start gap-2"><span className="text-yellow-600 flex-shrink-0">→</span><p><strong>알림 설정:</strong> DeFi Saver, Instadapp 같은 도구로 HF 알림을 설정해두면 청산 전 대응 가능하다.</p></div>
               </div>
             </div>
 
@@ -977,42 +1165,220 @@ await flashbotsProvider.sendBundle(bundle, targetBlock);`,
 
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
 
-            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">06 · Borrow Structure</h2>
+            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">06 · Borrow Structure — What Actually Happens On-Chain</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Once deposited assets become collateral, you can borrow other assets. Borrowed assets accrue interest, which flows back to depositors as yield.
+              "Borrowing" sounds simple, but on-chain it's a precise token mint/burn mechanism. Let's walk through the full lifecycle — from the moment you call borrow() to repayment — with real numbers.
             </p>
 
-            <div className="space-y-3 my-6">
+            {/* Full flow overview */}
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-5">📋 Full Flow — ETH $2,000 Collateral, Borrow USDT $1,200</p>
+              <div className="space-y-3">
+                {[
+                  {
+                    step: '① Supply Collateral',
+                    desc: 'supply() with ETH $2,000 → Pool holds the ETH',
+                    state: 'Wallet: receives aETH 2,000 / ETH disappears',
+                    color: 'border-blue-300 dark:border-blue-700',
+                    badge: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
+                  },
+                  {
+                    step: '② Execute Borrow',
+                    desc: 'borrow(USDT, 1200) → $1,200 USDT lands in your wallet',
+                    state: 'Wallet: +USDT 1,200 / variableDebtUSDT 1,200 minted',
+                    color: 'border-orange-300 dark:border-orange-700',
+                    badge: 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300',
+                  },
+                  {
+                    step: '③ Interest Accrues',
+                    desc: 'variableDebtUSDT balance auto-increments every block (~12s)',
+                    state: 'e.g. 5% APY → after 1 year, debt grows to USDT 1,260',
+                    color: 'border-red-300 dark:border-red-700',
+                    badge: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300',
+                  },
+                  {
+                    step: '④ Repay',
+                    desc: 'repay(USDT, 1260) → USDT returned to Pool',
+                    state: 'variableDebtUSDT burned → collateral ETH withdrawable again',
+                    color: 'border-green-300 dark:border-green-700',
+                    badge: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300',
+                  },
+                ].map((s, i) => (
+                  <div key={i} className={`border rounded-xl p-4 ${s.color} bg-white dark:bg-gray-900`}>
+                    <div className="flex flex-wrap items-start gap-3">
+                      <span className={`text-xs font-bold px-2 py-1 rounded flex-shrink-0 ${s.badge}`}>{s.step}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">{s.desc}</p>
+                        <p className="text-xs text-gray-500 mt-1 font-mono">{s.state}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* debtToken */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">variableDebtToken — The On-Chain Debt Receipt</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              When you borrow, USDT arrives in your wallet <em>and simultaneously</em> a <strong>variableDebtUSDT</strong> token is minted. This token is your debt tracker — it records exactly how much you owe Aave.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 my-6">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5">
+                <p className="font-semibold text-gray-900 dark:text-white mb-3 text-sm">Regular ERC-20 vs debtToken</p>
+                <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex items-start gap-2"><span className="text-green-500 flex-shrink-0">✓</span><p>Normal ERC-20: transferable, tradeable</p></div>
+                  <div className="flex items-start gap-2"><span className="text-red-500 flex-shrink-0">✗</span><p>debtToken: non-transferable, non-tradeable. Only destroyed via repay()</p></div>
+                  <div className="flex items-start gap-2"><span className="text-blue-500 flex-shrink-0">↗</span><p>Balance auto-increases every block (interest accrual)</p></div>
+                </div>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5">
+                <p className="font-semibold text-gray-900 dark:text-white mb-3 text-sm">What Etherscan Shows</p>
+                <div className="space-y-2 font-mono text-xs text-gray-600 dark:text-gray-400">
+                  <div className="bg-white dark:bg-gray-900 rounded p-2">
+                    <span className="text-green-500">USDT Transfer</span><br />
+                    Pool → your wallet: +1,200
+                  </div>
+                  <div className="bg-white dark:bg-gray-900 rounded p-2">
+                    <span className="text-red-500">variableDebtUSDT Mint</span><br />
+                    0x000 → your wallet: +1,200
+                  </div>
+                  <p className="text-gray-400 pt-1">Both events happen in the same tx</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Interest rate model */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">How Interest Rates Are Set — Utilization-Based Automatic Adjustment</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Aave rates aren't set by a committee. They're calculated automatically from a single metric: <strong>Utilization Rate</strong>.
+            </p>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-4">
+              <p className="text-xs font-mono text-gray-500 mb-4">Utilization Rate = Total Borrowed ÷ Total Supplied</p>
+              <div className="space-y-3">
+                {[
+                  { util: '0%', rate: '~1%', bar: 'w-0', label: 'Nobody borrowing → minimum rate', color: 'bg-green-400' },
+                  { util: '50%', rate: '~4%', bar: 'w-1/2', label: 'Half borrowed → gradual rise', color: 'bg-green-400' },
+                  { util: '80%', rate: '~6%', bar: 'w-4/5', label: 'Optimal (Kink) → slope steepens here', color: 'bg-yellow-400' },
+                  { util: '95%', rate: '~50%', bar: 'w-full', label: 'Danger zone → rate spikes, forces repayment', color: 'bg-red-500' },
+                ].map((r, i) => (
+                  <div key={i} className="flex items-center gap-3 text-sm">
+                    <span className="w-8 text-xs font-mono text-gray-500 flex-shrink-0">{r.util}</span>
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2 relative">
+                      <div className={`${r.bar} ${r.color} h-2 rounded-full`} />
+                    </div>
+                    <span className="w-12 text-xs font-bold text-gray-700 dark:text-gray-300 flex-shrink-0">{r.rate}</span>
+                    <span className="text-xs text-gray-500 hidden md:block">{r.label}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-gray-500 mt-4">Up to 80% utilization (the kink), rates rise slowly. Beyond that, rates spike sharply — incentivizing depositors with high yield while pushing borrowers to repay.</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4 my-6">
+              <div className="border border-blue-200 dark:border-blue-800 rounded-xl p-5">
+                <p className="font-semibold text-blue-700 dark:text-blue-300 mb-2 text-sm">Variable Rate</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Changes every block based on utilization. Most users choose this. Lower on average, but can spike.</p>
+                <p className="text-xs font-mono bg-gray-100 dark:bg-gray-900 rounded p-2 text-gray-500">USDT borrow APY: ~5% (example)</p>
+              </div>
+              <div className="border border-purple-200 dark:border-purple-800 rounded-xl p-5">
+                <p className="font-semibold text-purple-700 dark:text-purple-300 mb-2 text-sm">Stable Rate</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Fixed short-term. Protected from spikes but costs a premium. Can be rebalanced under extreme conditions. Not available on all assets.</p>
+                <p className="text-xs font-mono bg-gray-100 dark:bg-gray-900 rounded p-2 text-gray-500">Same USDT Stable APY: ~7% (example)</p>
+              </div>
+            </div>
+
+            {/* Interest calculation example */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">Real Interest Calculation — Day, Month, Year</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              You borrowed USDT $1,200 at 5% APY Variable Rate. How does it accumulate?
+            </p>
+            <div className="overflow-x-auto my-4">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-800">
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">Period</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">Interest</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">Total Owed</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold">Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { period: '1 day', interest: '$0.16', total: '$1,200.16', note: 'variableDebtUSDT balance increases by this much' },
+                    { period: '1 week', interest: '$1.15', total: '$1,201.15', note: 'Barely noticeable' },
+                    { period: '1 month', interest: '$4.93', total: '$1,204.93', note: 'A coffee per week' },
+                    { period: '6 months', interest: '$29.59', total: '$1,229.59', note: 'ETH price volatility is a bigger risk' },
+                    { period: '1 year', interest: '$60.00', total: '$1,260.00', note: '5% simple interest (compound = slightly higher)' },
+                  ].map((r, i) => (
+                    <tr key={i} className={i % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-medium">{r.period}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 text-red-600 dark:text-red-400 font-mono">{r.interest}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-mono font-bold">{r.total}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 text-gray-500 text-xs">{r.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 p-4 rounded-r-lg my-4">
+              <p className="text-sm text-blue-800 dark:text-blue-300"><strong>Note:</strong> Rates change every block with utilization. The table assumes a fixed 5% APY. Always check the current APY on the Aave dashboard before borrowing.</p>
+            </div>
+
+            {/* Repay flow */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">Repayment Flow — What Happens On-Chain When You Pay Back</h3>
+            <div className="space-y-3 my-4">
               {[
-                { n: '1', text: 'Deposit ETH $1,000 → receive aETH (collateral enabled)', color: 'bg-blue-50 dark:bg-blue-900/20' },
-                { n: '2', text: 'Call borrow(USDT, 800) → $800 USDT sent to your wallet', color: 'bg-orange-50 dark:bg-orange-900/20' },
-                { n: '3', text: 'Simultaneously, variableDebtUSDT tokens minted to your wallet (debt receipt)', color: 'bg-red-50 dark:bg-red-900/20' },
-                { n: '4', text: 'Interest accrues every block → variableDebtUSDT balance grows automatically', color: 'bg-red-50 dark:bg-red-900/20' },
-                { n: '5', text: 'Repay: return USDT → debtToken burned, collateral unlocked', color: 'bg-green-50 dark:bg-green-900/20' },
+                { n: '1', title: 'Call repay(USDT, amount)', desc: 'Approve USDT then call repay(). Full or partial repayment both work.', color: 'bg-blue-50 dark:bg-blue-900/20' },
+                { n: '2', title: 'USDT moves to Pool', desc: 'transferFrom pulls USDT from your wallet → Aave Pool. This becomes interest + principal for depositors.', color: 'bg-orange-50 dark:bg-orange-900/20' },
+                { n: '3', title: 'variableDebtUSDT burned', desc: 'Debt tokens are burned equal to repaid amount. Full repayment → balance = 0 → debt is completely erased.', color: 'bg-red-50 dark:bg-red-900/20' },
+                { n: '4', title: 'Collateral unlocked', desc: 'With zero debt, aETH becomes withdrawable. Call withdraw() to get your ETH back.', color: 'bg-green-50 dark:bg-green-900/20' },
               ].map((s, i) => (
-                <div key={i} className={`flex items-start gap-3 rounded-lg p-4 text-sm ${s.color}`}>
-                  <span className="font-mono text-gray-400 w-4 flex-shrink-0">{s.n}</span>
-                  <span className="text-gray-700 dark:text-gray-300">{s.text}</span>
+                <div key={i} className={`rounded-xl p-4 ${s.color}`}>
+                  <div className="flex items-start gap-3">
+                    <span className="font-mono font-bold text-gray-400 w-4 flex-shrink-0 mt-0.5">{s.n}</span>
+                    <div>
+                      <p className="font-semibold text-gray-900 dark:text-white text-sm mb-1">{s.title}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{s.desc}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-6">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Interest Rate Model</p>
-              <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-300">
-                <div>
-                  <p className="font-semibold text-gray-900 dark:text-white mb-2">Variable Rate</p>
-                  <p className="leading-relaxed">Fluctuates in real time based on <strong>Utilization Rate</strong> (borrowed ÷ supplied). Higher utilization → higher rate → discourages borrowing, incentivizes repayment.</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900 dark:text-white mb-2">Stable Rate</p>
-                  <p className="leading-relaxed">Fixed short-term. Unaffected by market rate spikes. Can be rebalanced under extreme conditions. Only available on certain assets.</p>
-                </div>
+            {/* Health Factor tracker */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">Monitoring Your Position — Health Factor in Real Time</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              While you have an open borrow, your Health Factor changes constantly with collateral price and interest accumulation. Ignoring it means risking liquidation.
+            </p>
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 my-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">ETH $2,000 collateral / USDT $1,200 borrowed — as ETH price drops</p>
+              <div className="space-y-3">
+                {[
+                  { price: 'ETH $2,000 (open)', hf: '1.33', status: '✅ Safe', color: 'text-green-600 dark:text-green-400', bar: 'bg-green-400', width: 'w-4/5' },
+                  { price: 'ETH $1,700', hf: '1.13', status: '⚠️ Caution', color: 'text-yellow-600 dark:text-yellow-400', bar: 'bg-yellow-400', width: 'w-3/5' },
+                  { price: 'ETH $1,500', hf: '1.00', status: '🔴 Boundary', color: 'text-orange-600 dark:text-orange-400', bar: 'bg-orange-400', width: 'w-2/5' },
+                  { price: 'ETH $1,400', hf: '0.93', status: '💀 Liquidated', color: 'text-red-600 dark:text-red-400', bar: 'bg-red-500', width: 'w-1/4' },
+                ].map((r, i) => (
+                  <div key={i} className="flex items-center gap-3 text-sm">
+                    <span className="w-36 text-xs text-gray-600 dark:text-gray-400 flex-shrink-0">{r.price}</span>
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                      <div className={`${r.width} ${r.bar} h-3 rounded-full`} />
+                    </div>
+                    <span className={`w-10 text-xs font-bold flex-shrink-0 ${r.color}`}>{r.hf}</span>
+                    <span className={`text-xs flex-shrink-0 ${r.color}`}>{r.status}</span>
+                  </div>
+                ))}
               </div>
-              <div className="mt-4 bg-white dark:bg-gray-900 rounded-lg p-3 text-xs font-mono text-gray-600 dark:text-gray-400">
-                Utilization 0% → base rate (minimum)<br />
-                Utilization 80% (optimal) → slope 1 (moderate increase)<br />
-                Utilization 100% → slope 2 (steep increase, borrow deterrent)
+              <p className="text-xs text-gray-500 mt-4">* ETH Liquidation Threshold 85%. HF = ($1,500 × 0.85) ÷ $1,200 = 1.0625 → entering danger zone.</p>
+            </div>
+
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-300 dark:border-yellow-700 rounded-xl p-5 my-6">
+              <p className="font-semibold text-yellow-800 dark:text-yellow-300 mb-3 text-sm">💡 Practical Ways to Avoid Liquidation</p>
+              <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                <div className="flex items-start gap-2"><span className="text-yellow-600 flex-shrink-0">→</span><p><strong>Keep conservative LTV:</strong> If you can borrow $1,600, only borrow $800. More buffer = more safety margin.</p></div>
+                <div className="flex items-start gap-2"><span className="text-yellow-600 flex-shrink-0">→</span><p><strong>Add more collateral:</strong> If ETH drops, supply more ETH to push HF back up.</p></div>
+                <div className="flex items-start gap-2"><span className="text-yellow-600 flex-shrink-0">→</span><p><strong>Partial repayment:</strong> Repaying some of the debt quickly restores your HF.</p></div>
+                <div className="flex items-start gap-2"><span className="text-yellow-600 flex-shrink-0">→</span><p><strong>Set alerts:</strong> Tools like DeFi Saver or Instadapp can notify you when HF drops below a threshold — giving you time to act before liquidation hits.</p></div>
               </div>
             </div>
 
