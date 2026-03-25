@@ -8,7 +8,7 @@ export default function HomePage() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
   const [scrolled, setScrolled] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
-  const [noticeOpen, setNoticeOpen] = useState(true);
+  const [noticeOpen, setNoticeOpen] = useState(false);
 
   // Service URLs from environment variables
   const NON_CUSTODY_URL = process.env.NEXT_PUBLIC_NON_CUSTODY_URL || 'http://localhost:3101';
@@ -65,7 +65,7 @@ export default function HomePage() {
         proUseCases: '게임 아이템 거래소 | 크립토 결제 | 기업 재무 관리 | 토큰 발행사',
       },
       personalWallet: {
-        title: 'AI Chat(전송,투자,RWA) Wallet',
+        title: '개인 스테이블 코인 지갑',
         subtitle: 'AI, 투자, Chat, RWA - 하나의 지갑으로 모든 것을',
         desc: '채팅하듯 송금하고, AI가 자동으로 투자하고, 실물 자산 토큰에 투자하세요. 일상 결제부터 전문 투자까지 하나의 앱에서 모두 해결합니다.',
         features: [
@@ -138,7 +138,7 @@ export default function HomePage() {
         getStarted: '시작하기',
         plans: {
           personal: {
-            name: 'AI Chat(전송,투자,RWA) Wallet',
+            name: '개인 스테이블 코인 지갑',
             price: '무료',
             features: [
               '채팅 송금',
@@ -181,7 +181,7 @@ export default function HomePage() {
       },
       footer: {
         services: '서비스',
-        personal: 'AI Chat(전송,투자,RWA) Wallet',
+        personal: '개인 스테이블 코인 지갑',
         enterprise: '기업 고객',
         contact: '문의',
         email: '이메일: walits.co@gmail.com',
@@ -228,7 +228,7 @@ export default function HomePage() {
         proUseCases: 'Game Item Marketplace | Crypto Payments | Corporate Treasury | Token Issuers',
       },
       personalWallet: {
-        title: 'AI Chat(Transfer,Investment,RWA) Wallet',
+        title: 'Personal Stablecoin Wallet',
         subtitle: 'AI, Investment, Chat, RWA - Everything in One Wallet',
         desc: 'Send crypto like chatting, let AI invest automatically, and invest in real-world asset tokens. From daily payments to professional investing, all in one app.',
         features: [
@@ -301,7 +301,7 @@ export default function HomePage() {
         getStarted: 'Get Started',
         plans: {
           personal: {
-            name: 'AI Chat(Transfer,Investment,RWA) Wallet',
+            name: 'Personal Stablecoin Wallet',
             price: 'Free',
             features: [
               'Chat transfer',
@@ -344,7 +344,7 @@ export default function HomePage() {
       },
       footer: {
         services: 'Services',
-        personal: 'AI Chat(Transfer,Investment,RWA) Wallet',
+        personal: 'Personal Stablecoin Wallet',
         enterprise: 'Enterprise',
         contact: 'Contact',
         email: 'Email: walits.co@gmail.com',
@@ -358,8 +358,8 @@ export default function HomePage() {
     "@type": "Organization",
     name: "Walits",
     description: language === 'ko'
-      ? "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Virtual Balance 기반 대량 지급부터 실제 블록체인 자산 관리까지. AI Chat(전송,투자,RWA) Wallet으로 개인 투자 지원"
-      : "Enterprise crypto wallet platform featuring Virtual Balance mass distribution and real blockchain asset management. AI Chat(Transfer,Investment,RWA) Wallet for personal investment",
+      ? "기업용 가상자산 지갑, 토큰증권 거래, 코인지갑 플랫폼. Virtual Balance 기반 대량 지급부터 실제 블록체인 자산 관리까지. 개인 스테이블 코인 지갑으로 개인 투자 지원"
+      : "Enterprise crypto wallet platform featuring Virtual Balance mass distribution and real blockchain asset management. Personal Stablecoin Wallet for personal investment",
     url: "https://walits.com",
     logo: "https://walits.com/logo.png",
     sameAs: [
@@ -396,7 +396,7 @@ export default function HomePage() {
       },
       {
         "@type": "Offer",
-        name: language === 'ko' ? "AI Chat(전송,투자,RWA) Wallet" : "AI Chat(Transfer,Investment,RWA) Wallet",
+        name: language === 'ko' ? "개인 스테이블 코인 지갑" : "Personal Stablecoin Wallet",
         description: language === 'ko' ? "AI · 투자 · Chat · RWA - 하나의 지갑으로 모든 것을" : "AI, Investment, Chat, RWA - Everything in One Wallet",
         price: "0",
         priceCurrency: "KRW",
@@ -607,7 +607,7 @@ export default function HomePage() {
                 {language === 'ko' ? '개인용' : 'Personal'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-                {language === 'ko' ? 'AI Chat(전송,투자,RWA) Wallet' : 'AI Chat(Transfer,Investment,RWA) Wallet'}
+                {language === 'ko' ? '개인 스테이블 코인 지갑' : 'Personal Stablecoin Wallet'}
               </span>
             </div>
           </div>
@@ -690,7 +690,7 @@ export default function HomePage() {
                   <div className="w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
                     <div className="block px-4 py-3 opacity-60 cursor-not-allowed">
                       <div className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                        {language === 'ko' ? 'AI Chat(전송,투자,RWA) Wallet' : 'AI Chat(Transfer,Investment,RWA) Wallet'}
+                        {language === 'ko' ? '개인 스테이블 코인 지갑' : 'Personal Stablecoin Wallet'}
                         <span className="bg-yellow-500 text-white px-2 py-0.5 rounded-full text-xs font-semibold">
                           {language === 'ko' ? '준비중' : 'Soon'}
                         </span>
@@ -1027,7 +1027,7 @@ export default function HomePage() {
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-300 dark:border-gray-600 hover:shadow-lg transition-shadow relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                  {language === 'ko' ? '2026년 4월 출시' : 'Launch April 2026'}
+                  {language === 'ko' ? '런칭 준비중' : 'Coming Soon'}
                 </span>
               </div>
               <div className="text-center mb-6">
@@ -1066,7 +1066,7 @@ export default function HomePage() {
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-100 dark:to-gray-200 rounded-xl p-8 border-2 border-gray-700 dark:border-gray-400 hover:shadow-2xl transition-shadow relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 flex gap-2 whitespace-nowrap">
                 <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
-                  {language === 'ko' ? '2026년 5월 출시' : 'Launch May 2026'}
+                  {language === 'ko' ? '런칭 준비중' : 'Coming Soon'}
                 </span>
                 <span className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
                   {language === 'ko' ? '추천' : 'Recommended'}
