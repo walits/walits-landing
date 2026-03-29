@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'otc-deep-dive',
+          category: 'DeFi 시리즈 4',
+          categoryColor: 'bg-slate-100 text-slate-800',
+          title: 'DeFi 시리즈 4 — 크립토 OTC 데스크 완전 가이드',
+          excerpt: '비트코인 $5,000만어치를 거래소에서 사면 시장이 2~5% 움직인다. 기관들이 OTC 데스크를 통해 가격충격 없이 대규모 거래를 조용히 처리하는 방법. Principal/Agency 모델, RFQ, 결제 구조, 2025 트렌드까지.',
+          date: '2026년 3월 30일',
+          readTime: '22분',
+          image: '/blog/otc.jpg',
+        },
+        {
           id: 'oneinch-deep-dive',
           category: 'DeFi 시리즈 3',
           categoryColor: 'bg-orange-100 text-orange-800',
@@ -221,6 +231,16 @@ export default function BlogPage() {
           date: 'March 24, 2026',
           readTime: '22 min read',
           image: '/blog/uniswap.jpg',
+        },
+        {
+          id: 'otc-deep-dive',
+          category: 'DeFi Series 4',
+          categoryColor: 'bg-slate-100 text-slate-800',
+          title: 'DeFi Series 4 — Complete Guide to Crypto OTC Desks',
+          excerpt: 'Buying $50M of Bitcoin on an exchange moves the market 2–5%. How institutions execute large trades quietly through OTC desks. Principal/Agency models, RFQ, settlement structure, and 2025 trends.',
+          date: 'March 30, 2026',
+          readTime: '22 min read',
+          image: '/blog/otc.jpg',
         },
         {
           id: 'oneinch-deep-dive',
