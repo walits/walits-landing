@@ -27,7 +27,7 @@ export default function OtcDeepDivePage() {
       {/* Hero */}
       <div className="max-w-3xl mx-auto px-6 mb-8">
         <div className="relative w-full h-64 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-700 to-slate-900">
-          <Image src="/blog/otc.jpg" alt="Crypto OTC Desk" fill className="object-cover" />
+          <Image src="/blog/otc.jpg" alt="Crypto OTC Desk" fill className="object-cover" onError={() => {}} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute bottom-6 left-6">
             <span className="text-xs font-bold uppercase tracking-wider bg-slate-600/80 text-white px-3 py-1 rounded-full">DeFi 시리즈 4</span>
