@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'curve-deep-dive',
+          category: 'DeFi 시리즈 5',
+          categoryColor: 'bg-yellow-100 text-yellow-800',
+          title: 'DeFi 시리즈 5 — Curve Finance 완전 가이드',
+          excerpt: 'USDC→USDT 스왑에 Uniswap은 0.3%, Curve는 0.01% 슬리피지. StableSwap 알고리즘이 어떻게 스테이블코인 유동성을 혁신했는지. veCRV 거버넌스, 게이지 시스템, Convex와 Curve Wars까지. 스테이블코인 DEX의 심장을 완전 해부한다.',
+          date: '2026년 3월 30일',
+          readTime: '25분',
+          image: '/blog/curve.jpg',
+        },
+        {
           id: 'otc-deep-dive',
           category: 'DeFi 시리즈 4',
           categoryColor: 'bg-slate-100 text-slate-800',
@@ -231,6 +241,16 @@ export default function BlogPage() {
           date: 'March 24, 2026',
           readTime: '22 min read',
           image: '/blog/uniswap.jpg',
+        },
+        {
+          id: 'curve-deep-dive',
+          category: 'DeFi Series 5',
+          categoryColor: 'bg-yellow-100 text-yellow-800',
+          title: 'DeFi Series 5 — Curve Finance Complete Guide',
+          excerpt: 'Uniswap charges ~0.3% slippage for USDC→USDT, Curve charges 0.01%. How the StableSwap algorithm revolutionized stablecoin liquidity. veCRV governance, gauge system, Convex Finance, and the Curve Wars — the heart of stablecoin DEX fully dissected.',
+          date: 'March 30, 2026',
+          readTime: '25 min read',
+          image: '/blog/curve.jpg',
         },
         {
           id: 'otc-deep-dive',
