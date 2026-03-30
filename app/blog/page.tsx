@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'crypto-bot-trading',
+          category: 'DeFi 시리즈 6',
+          categoryColor: 'bg-green-100 text-green-800',
+          title: 'DeFi 시리즈 6 — 크립토 봇 트레이딩 실전 가이드',
+          excerpt: '실제로 돈을 벌 수 있는 봇 3가지. 플래시론·MEV·이더리움 청산봇이 왜 개인에게 불가능한지 비판적으로 분석하고, 현실적으로 가능한 펀딩비 차익봇(Python+ccxt), 신규 체인 청산봇(TypeScript+ethers.js), CEX-DEX 차익봇을 실제 코드와 함께 설명한다.',
+          date: '2026년 3월 30일',
+          readTime: '30분',
+          image: '/blog/hustle.jpg',
+        },
+        {
           id: 'curve-deep-dive',
           category: 'DeFi 시리즈 5',
           categoryColor: 'bg-yellow-100 text-yellow-800',
@@ -241,6 +251,16 @@ export default function BlogPage() {
           date: 'March 24, 2026',
           readTime: '22 min read',
           image: '/blog/uniswap.jpg',
+        },
+        {
+          id: 'crypto-bot-trading',
+          category: 'DeFi Series 6',
+          categoryColor: 'bg-green-100 text-green-800',
+          title: 'DeFi Series 6 — Crypto Bot Trading: A Practical Guide',
+          excerpt: 'Why flash loans, MEV bots, and Ethereum liquidation bots are essentially impossible for individuals in 2025 — and the three strategies that actually work: funding rate arbitrage (Python+ccxt), new-chain liquidation bots (TypeScript+ethers.js), and CEX-DEX arbitrage. Full code included.',
+          date: 'March 30, 2026',
+          readTime: '30 min read',
+          image: '/blog/hustle.jpg',
         },
         {
           id: 'curve-deep-dive',
