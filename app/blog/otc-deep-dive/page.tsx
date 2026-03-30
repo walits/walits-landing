@@ -194,6 +194,92 @@ export default function OtcDeepDivePage() {
             {/* ── S4 거래 프로세스 ── */}
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
             <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">04 · OTC 거래 프로세스 — 처음부터 끝까지</h2>
+
+            {/* 실제 자금 흐름 쉬운 설명 */}
+            <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 mb-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-5">💡 실제로 어떻게 돈과 코인이 오가나 — 쉬운 그림</p>
+
+              <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-5">
+                OTC 거래는 간단히 말하면 <strong>"협의는 전화로, 돈은 은행으로, 코인은 온체인으로"</strong> 입니다. 달러를 주고 BTC를 사는 구조입니다.
+              </p>
+
+              {/* 흐름도 */}
+              <div className="space-y-3">
+                {/* 1 */}
+                <div className="flex items-start gap-3">
+                  <span className="w-6 h-6 rounded-full bg-slate-300 dark:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                  <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">오프체인 — 전화/메시지로 협의</p>
+                    <p className="text-xs text-gray-500 leading-relaxed">기관: "BTC 100개 살게요" → 데스크: "$9,500,000에 드릴게요" → 기관: "OK"<br />이 과정은 블록체인과 무관. mempool에 아무것도 올라가지 않음.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 pl-3">
+                  <div className="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 ml-2.5" />
+                  <p className="text-xs text-slate-400">합의 완료 → 동시 결제 실행</p>
+                </div>
+
+                {/* 2 */}
+                <div className="flex items-start gap-3">
+                  <span className="w-6 h-6 rounded-full bg-blue-400 dark:bg-blue-700 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                  <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl p-4 border border-blue-200 dark:border-blue-700">
+                    <p className="text-sm font-semibold text-blue-700 dark:text-blue-300 mb-1">달러 이동 (오프체인)</p>
+                    <div className="flex items-center gap-2 text-xs font-mono text-gray-600 dark:text-gray-400 flex-wrap">
+                      <span className="bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded">기관 은행계좌</span>
+                      <span>→</span>
+                      <span className="bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded">OTC 데스크 은행계좌</span>
+                      <span className="text-blue-600 dark:text-blue-400 font-bold">$9,500,000</span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-2">일반 은행 와이어 전송. 블록체인 아님.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 pl-3">
+                  <div className="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 ml-2.5" />
+                </div>
+
+                {/* 3 */}
+                <div className="flex items-start gap-3">
+                  <span className="w-6 h-6 rounded-full bg-orange-400 dark:bg-orange-700 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                  <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl p-4 border border-orange-200 dark:border-orange-700">
+                    <p className="text-sm font-semibold text-orange-700 dark:text-orange-300 mb-1">BTC 이동 (온체인)</p>
+                    <div className="flex items-center gap-2 text-xs font-mono text-gray-600 dark:text-gray-400 flex-wrap">
+                      <span className="bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded">데스크 지갑 (0xABC…)</span>
+                      <span>→</span>
+                      <span className="bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded">기관 지갑 (0xDEF…)</span>
+                      <span className="text-orange-600 dark:text-orange-400 font-bold">BTC 100개</span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-2">이미 합의된 금액의 단순 전송. 온체인에는 "A → B로 BTC 이동"만 보임. 가격 정보 없음.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* MEV 설명 */}
+              <div className="mt-5 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-xl p-4">
+                <p className="text-sm font-bold text-green-700 dark:text-green-300 mb-2">🛡️ 왜 MEV 봇이 끼어들 수 없나?</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  DEX 스왑은 트랜잭션 안에 <strong>"나 BTC 살 예정, 최대 이 가격까지 허용"</strong>이라는 의도가 담겨 mempool에 공개됩니다. MEV 봇은 이걸 보고 앞뒤로 끼어듭니다.<br /><br />
+                  OTC는 협의 자체가 오프체인에서 끝납니다. 온체인에는 <strong>이미 거래가 완료된 후 단순 전송</strong>만 올라오기 때문에, "살 예정"이라는 정보가 한 번도 노출된 적이 없습니다. 공격할 정보 자체가 없는 것입니다.
+                </p>
+              </div>
+
+              {/* DVP 설명 */}
+              <div className="mt-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-4">
+                <p className="text-sm font-bold text-blue-700 dark:text-blue-300 mb-2">🔒 DVP — "달러 먼저 보냈는데 BTC 안 주면?" 해결</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                  달러와 BTC를 동시에 교환하지 않으면 한쪽이 먼저 보내고 상대가 잠적하는 리스크가 있습니다. 이를 막는 게 <strong>DVP(Delivery vs Payment)</strong>와 <strong>Tri-party 에스크로</strong>입니다.
+                </p>
+                <div className="bg-white dark:bg-gray-900 rounded-lg p-3 text-xs font-mono text-gray-600 dark:text-gray-400 space-y-1">
+                  <p>① Bitgo(제3자 에스크로)가 중간에 위치</p>
+                  <p>② 기관이 달러를 에스크로로 → 데스크가 BTC를 에스크로로</p>
+                  <p>③ 양쪽 모두 확인되면 <span className="text-green-500">동시 릴리즈</span></p>
+                  <p className="text-gray-400">→ 어느 한쪽만 손해보는 상황 원천 차단</p>
+                </div>
+              </div>
+
+              <p className="text-xs text-gray-400 mt-4 text-center">OTC는 DEX와 직접적인 관계는 없습니다. DEX가 "자동화된 공개 시장"이라면, OTC는 "기관들의 프라이빗 딜"로 전통 금융의 장외거래에 더 가깝습니다.</p>
+            </div>
+
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
               처음 OTC 데스크를 이용하는 기관 투자자가 거치는 5단계다. 각 단계별로 무슨 일이 일어나는지 상세히 살펴보자.
             </p>
@@ -784,6 +870,85 @@ export default function OtcDeepDivePage() {
             {/* S4 */}
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
             <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">04 · OTC Trade Process — Step by Step</h2>
+
+            {/* Simple flow explanation */}
+            <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 mb-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-5">💡 How Money and Crypto Actually Move — A Simple Picture</p>
+              <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-5">
+                OTC is simply: <strong>"negotiate by phone, pay in dollars via bank wire, receive crypto on-chain."</strong> You pay USD and receive BTC.
+              </p>
+
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <span className="w-6 h-6 rounded-full bg-slate-300 dark:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                  <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Off-chain — Negotiate by phone / message</p>
+                    <p className="text-xs text-gray-500 leading-relaxed">Institution: "I want to buy 100 BTC" → Desk: "We'll sell at $9,500,000" → Institution: "Deal."<br />Nothing touches the blockchain yet. Nothing is in the mempool.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 pl-3">
+                  <div className="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 ml-2.5" />
+                  <p className="text-xs text-slate-400">Agreement reached → simultaneous settlement</p>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <span className="w-6 h-6 rounded-full bg-blue-400 dark:bg-blue-700 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                  <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl p-4 border border-blue-200 dark:border-blue-700">
+                    <p className="text-sm font-semibold text-blue-700 dark:text-blue-300 mb-1">USD moves (off-chain)</p>
+                    <div className="flex items-center gap-2 text-xs font-mono text-gray-600 dark:text-gray-400 flex-wrap">
+                      <span className="bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded">Institution bank account</span>
+                      <span>→</span>
+                      <span className="bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded">OTC Desk bank account</span>
+                      <span className="text-blue-600 dark:text-blue-400 font-bold">$9,500,000</span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-2">Normal bank wire transfer. Not blockchain.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 pl-3">
+                  <div className="w-0.5 h-6 bg-slate-300 dark:bg-slate-600 ml-2.5" />
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <span className="w-6 h-6 rounded-full bg-orange-400 dark:bg-orange-700 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                  <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl p-4 border border-orange-200 dark:border-orange-700">
+                    <p className="text-sm font-semibold text-orange-700 dark:text-orange-300 mb-1">BTC moves (on-chain)</p>
+                    <div className="flex items-center gap-2 text-xs font-mono text-gray-600 dark:text-gray-400 flex-wrap">
+                      <span className="bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded">Desk wallet (0xABC…)</span>
+                      <span>→</span>
+                      <span className="bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded">Institution wallet (0xDEF…)</span>
+                      <span className="text-orange-600 dark:text-orange-400 font-bold">100 BTC</span>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-2">Simple transfer of a pre-agreed amount. On-chain only shows "A → B: 100 BTC". No price information visible.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-5 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-xl p-4">
+                <p className="text-sm font-bold text-green-700 dark:text-green-300 mb-2">🛡️ Why MEV Bots Can't Interfere</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  A DEX swap puts your intention — <strong>"I'm about to buy BTC, and I'll accept up to this price"</strong> — into the mempool, publicly visible. MEV bots read that and sandwich you.<br /><br />
+                  In OTC, the negotiation happens off-chain. By the time anything hits the blockchain, <strong>the trade is already done</strong> — it's just a plain transfer. The "I'm about to buy" signal never existed on-chain, so there's nothing for a bot to exploit.
+                </p>
+              </div>
+
+              <div className="mt-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-4">
+                <p className="text-sm font-bold text-blue-700 dark:text-blue-300 mb-2">🔒 DVP — "What if I send dollars but they don't send BTC?"</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                  Without a mechanism, whoever pays first takes all the risk. <strong>DVP (Delivery vs Payment)</strong> and tri-party escrow solve this.
+                </p>
+                <div className="bg-white dark:bg-gray-900 rounded-lg p-3 text-xs font-mono text-gray-600 dark:text-gray-400 space-y-1">
+                  <p>① Neutral escrow (e.g. Bitgo) sits in the middle</p>
+                  <p>② Institution sends USD to escrow → Desk sends BTC to escrow</p>
+                  <p>③ Both confirmed → <span className="text-green-500">simultaneous release</span></p>
+                  <p className="text-gray-400">→ Neither party can take the other's asset and run</p>
+                </div>
+              </div>
+
+              <p className="text-xs text-gray-400 mt-4 text-center">Note: OTC has little to do with DEX. DEX is an automated public market; OTC is a private institutional deal — closer to traditional finance's "over-the-counter" trading.</p>
+            </div>
+
             <div className="space-y-4 my-6">
               {[
                 {
