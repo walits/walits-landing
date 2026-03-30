@@ -59,6 +59,58 @@ export default function CurveDeepDivePage() {
 
             {/* ── S1 왜 Curve가 필요한가 ── */}
             <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">01 · 왜 Curve가 필요한가?</h2>
+
+            <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">먼저 — 스테이블코인을 왜 스왑해야 하나?</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              USDC, USDT, DAI는 전부 $1이다. 그런데 왜 서로 바꿔야 하는 상황이 생길까? 실제 현장에서는 생각보다 훨씬 자주 발생한다.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+              {[
+                {
+                  icon: '🏦',
+                  title: '프로토콜이 특정 코인만 허용',
+                  desc: 'Aave 특정 풀은 DAI만 받는다. 거래소 출금은 USDT만 지원하는 경우가 많다. 급여/결제 시스템이 USDC만 처리하기도 한다. 내가 가진 코인과 써야 하는 코인이 다를 때 스왑이 필요하다.',
+                },
+                {
+                  icon: '⚠️',
+                  title: '발행사 리스크 회피',
+                  desc: 'USDT는 Tether, USDC는 Circle이 발행한다. 2023년 실리콘밸리은행(SVB) 파산 당시 Circle이 SVB에 $33억을 예치한 사실이 알려지며 USDC가 $0.87까지 디페깅됐다. 리스크가 감지되면 다른 스테이블코인으로 즉시 전환해야 한다.',
+                },
+                {
+                  icon: '🔗',
+                  title: '체인별 유동성 차이',
+                  desc: 'Tron 체인은 USDT가 압도적이고 USDC 유동성이 거의 없다. Ethereum DeFi는 USDC/DAI가 강하다. 브리지로 다른 체인으로 이동한 후 해당 생태계 맞춤 스테이블코인이 필요해진다.',
+                },
+                {
+                  icon: '📈',
+                  title: '수익률 차이',
+                  desc: '같은 $1이지만 Aave에서 DAI 예치 APY 4% vs USDT 2%인 경우가 있다. 더 높은 yield를 제공하는 풀로 이동하려면 해당 스테이블코인으로 바꿔야 한다.',
+                },
+                {
+                  icon: '📋',
+                  title: '계약/정산 조건',
+                  desc: '기관 간 계약에서 "USDC로만 정산"처럼 특정 코인을 지정하는 경우가 있다. OTC 거래 정산, 법인 간 결제, 세금 보고 시 발행사별 구분이 필요한 경우도 해당된다.',
+                },
+                {
+                  icon: '🔄',
+                  title: 'DEX/프로토콜 인센티브',
+                  desc: '특정 스테이블코인 풀에 유동성 공급 시 더 높은 CRV/COMP 보상을 주는 경우, 해당 코인으로 전환해 LP로 참여한다. Curve Wars의 핵심 수요이기도 하다.',
+                },
+              ].map((card, i) => (
+                <div key={i} className="border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+                  <div className="text-xl mb-2">{card.icon}</div>
+                  <p className="text-sm font-bold text-gray-900 dark:text-white mb-1">{card.title}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{card.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              핵심은 <strong>"가치는 같아도 용도와 리스크가 다르다"</strong>는 것이다. $1억 규모 기관이 USDT→USDC 전환을 해야 할 때, Curve가 없으면 수백만 달러 손실이 생긴다. 이것이 Curve가 존재하는 이유다.
+            </p>
+
+            <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">그런데 Uniswap으로 스왑하면 안 되나?</h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Uniswap에서 USDC 100만 달러를 USDT로 스왑하면 얼마를 받을까? 직관적으로는 약 100만 USDT를 기대하겠지만, 실제로는 <strong>990,000~997,000 USDT</strong> 정도만 받는다. 같은 달러 가치의 스테이블코인끼리 교환하는데 왜 0.3~1%의 손실이 생기는가?
             </p>
@@ -650,6 +702,58 @@ export default function CurveDeepDivePage() {
 
             {/* S1 */}
             <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">01 · Why Does Curve Exist?</h2>
+
+            <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">First — Why Would You Ever Swap Stablecoins?</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              USDC, USDT, and DAI all equal $1. So why would you ever need to swap between them? In practice, it happens more often than you'd think.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+              {[
+                {
+                  icon: '🏦',
+                  title: 'Protocol Only Accepts One Coin',
+                  desc: 'A specific Aave pool might only accept DAI. An exchange may only support USDT withdrawals. A payroll or payment system might only process USDC. When the coin you have differs from the coin you need, you swap.',
+                },
+                {
+                  icon: '⚠️',
+                  title: 'Issuer Risk Avoidance',
+                  desc: 'USDT is issued by Tether, USDC by Circle. In 2023, when SVB collapsed and Circle had $3.3B there, USDC briefly depegged to $0.87. When risk is detected, users need to convert to another stablecoin immediately.',
+                },
+                {
+                  icon: '🔗',
+                  title: 'Chain-Specific Liquidity',
+                  desc: 'USDT dominates the Tron chain with almost no USDC liquidity. Ethereum DeFi is strong in USDC/DAI. After bridging to another chain, you often need the stablecoin that actually has liquidity there.',
+                },
+                {
+                  icon: '📈',
+                  title: 'Yield Differences',
+                  desc: 'Same $1, but Aave might offer 4% APY for DAI vs 2% for USDT. To move into a higher-yield pool, you need to convert to that stablecoin first.',
+                },
+                {
+                  icon: '📋',
+                  title: 'Settlement Contracts',
+                  desc: 'Institutional contracts sometimes specify "settle in USDC only." OTC deal settlements, corporate payments, and tax reporting may require distinguishing between stablecoin issuers.',
+                },
+                {
+                  icon: '🔄',
+                  title: 'Protocol Incentives',
+                  desc: 'When a specific stablecoin pool offers higher CRV/COMP rewards, LPs convert to that coin to participate. This is also a core demand driver behind the Curve Wars.',
+                },
+              ].map((card, i) => (
+                <div key={i} className="border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+                  <div className="text-xl mb-2">{card.icon}</div>
+                  <p className="text-sm font-bold text-gray-900 dark:text-white mb-1">{card.title}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{card.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              The key insight: <strong>"Same value, different purpose and risk."</strong> When a $100M institution needs to convert USDT to USDC, Curve's absence means millions of dollars in slippage losses. That's why Curve exists.
+            </p>
+
+            <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">So Why Not Just Use Uniswap?</h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               If you swap $1 million USDC for USDT on Uniswap, how much would you receive? Intuitively, you'd expect roughly $1 million USDT — but in reality you'd get somewhere between <strong>$990,000 and $997,000</strong>. Why does swapping between two stablecoins of identical value cause a 0.3–1% loss?
             </p>
