@@ -110,6 +110,37 @@ export default function CurveDeepDivePage() {
               핵심은 <strong>"가치는 같아도 용도와 리스크가 다르다"</strong>는 것이다. $1억 규모 기관이 USDT→USDC 전환을 해야 할 때, Curve가 없으면 수백만 달러 손실이 생긴다. 이것이 Curve가 존재하는 이유다.
             </p>
 
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 my-6">
+              <p className="text-sm font-bold text-blue-800 dark:text-blue-300 mb-3">참고 — 동남아 이주 노동자도 스테이블코인을 많이 쓰는데, Curve를 사용할까?</p>
+              <p className="text-sm text-blue-900 dark:text-blue-200 leading-relaxed mb-4">
+                한국에서 일하는 동남아 근로자들은 스테이블코인 송금을 많이 활용한다. 은행 국제 송금은 수수료가 비싸고 며칠이 걸리는 반면, USDT를 Tron/BNB Chain으로 보내면 <strong>수수료 $0.5 미만, 수 분 이내</strong>에 필리핀·베트남·인도네시아 가족에게 돈이 도착한다. 이것은 분명히 스테이블코인의 큰 수요다.
+              </p>
+              <p className="text-sm font-bold text-blue-800 dark:text-blue-300 mb-2">하지만 이들이 Curve를 직접 사용하지는 않는다. 이유는 세 가지다:</p>
+              <div className="space-y-2 mb-4">
+                {[
+                  { label: '체인 불일치', desc: 'Curve는 이더리움 메인넷 기반. 이주 노동자들은 수수료가 훨씬 싼 Tron·BNB Chain을 사용하며, 이 체인엔 Curve가 없다.' },
+                  { label: '가스비 역전', desc: '이더리움 메인넷에서 Curve 스왑 1회 가스비가 $5~20. 송금액이 $100~$1,000 수준이면 수수료 비율이 오히려 은행보다 높아진다.' },
+                  { label: 'UX 장벽', desc: 'Curve 사용에는 MetaMask 설치, 시드 구문 관리, 가스 설정 이해가 필요하다. 이들에게는 Binance·업비트 앱이 훨씬 직관적이다.' },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-3 items-start">
+                    <span className="w-5 h-5 rounded-full bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{i + 1}</span>
+                    <p className="text-xs text-blue-900 dark:text-blue-200"><strong>{item.label}:</strong> {item.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-white dark:bg-blue-950 rounded-lg p-4 font-mono text-xs">
+                <p className="text-gray-500 mb-1">{'// 이주 노동자의 실제 스테이블코인 흐름'}</p>
+                <p className="text-gray-900 dark:text-white">한국 급여 (원화)</p>
+                <p className="text-gray-900 dark:text-white">→ Binance/업비트에서 <span className="text-yellow-600 dark:text-yellow-400">USDT 구매</span></p>
+                <p className="text-gray-900 dark:text-white">→ <span className="text-green-600 dark:text-green-400">Tron/BNB Chain</span>으로 가족에게 전송 (수수료 $0.5 미만)</p>
+                <p className="text-gray-900 dark:text-white">→ 현지 거래소/P2P에서 <span className="text-blue-600 dark:text-blue-400">페소·킵·동으로 환전</span></p>
+                <p className="text-gray-500 mt-1">{'// Curve를 거치지 않음. 전혀 다른 레이어의 이야기.'}</p>
+              </div>
+              <p className="text-xs text-blue-700 dark:text-blue-400 mt-3">
+                <strong>Curve의 실제 수혜자:</strong> $100만+ 스왑이 필요한 기관 트레이더, DeFi yield farmer, 스테이블코인 발행 프로토콜. 이주 노동자에게 필요한 건 낮은 수수료 + 간단한 UX + Tron/BNB 지원이다.
+              </p>
+            </div>
+
             <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">그런데 Uniswap으로 스왑하면 안 되나?</h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Uniswap에서 USDC 100만 달러를 USDT로 스왑하면 얼마를 받을까? 직관적으로는 약 100만 USDT를 기대하겠지만, 실제로는 <strong>990,000~997,000 USDT</strong> 정도만 받는다. 같은 달러 가치의 스테이블코인끼리 교환하는데 왜 0.3~1%의 손실이 생기는가?
@@ -752,6 +783,37 @@ export default function CurveDeepDivePage() {
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
               The key insight: <strong>"Same value, different purpose and risk."</strong> When a $100M institution needs to convert USDT to USDC, Curve's absence means millions of dollars in slippage losses. That's why Curve exists.
             </p>
+
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 my-6">
+              <p className="text-sm font-bold text-blue-800 dark:text-blue-300 mb-3">Note — Migrant Workers Use Stablecoins Heavily. Do They Use Curve?</p>
+              <p className="text-sm text-blue-900 dark:text-blue-200 leading-relaxed mb-4">
+                Southeast Asian migrant workers in Korea rely heavily on stablecoins for remittances. International bank transfers are expensive and slow; sending USDT over Tron or BNB Chain costs <strong>under $0.50 and arrives in minutes</strong> to family in the Philippines, Vietnam, or Indonesia. This is clearly a massive stablecoin use case.
+              </p>
+              <p className="text-sm font-bold text-blue-800 dark:text-blue-300 mb-2">But they don't use Curve directly. Three reasons:</p>
+              <div className="space-y-2 mb-4">
+                {[
+                  { label: 'Chain mismatch', desc: 'Curve runs on Ethereum mainnet. Migrant workers use Tron and BNB Chain — chains with near-zero fees. Curve doesn\'t exist on those chains.' },
+                  { label: 'Gas fees flip the math', desc: 'One Curve swap on Ethereum mainnet costs $5–20 in gas. On a $100–$1,000 remittance, that\'s a higher fee percentage than the bank.' },
+                  { label: 'UX barrier', desc: 'Using Curve requires MetaMask, seed phrase management, and understanding gas settings. For these users, Binance or a local exchange app is far more accessible.' },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-3 items-start">
+                    <span className="w-5 h-5 rounded-full bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{i + 1}</span>
+                    <p className="text-xs text-blue-900 dark:text-blue-200"><strong>{item.label}:</strong> {item.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-white dark:bg-blue-950 rounded-lg p-4 font-mono text-xs">
+                <p className="text-gray-500 mb-1">{'// Migrant worker stablecoin flow (actual)'}</p>
+                <p className="text-gray-900 dark:text-white">Korean paycheck (KRW)</p>
+                <p className="text-gray-900 dark:text-white">→ Buy <span className="text-yellow-600 dark:text-yellow-400">USDT</span> on Binance or local exchange</p>
+                <p className="text-gray-900 dark:text-white">→ Send via <span className="text-green-600 dark:text-green-400">Tron / BNB Chain</span> to family (fee under $0.50)</p>
+                <p className="text-gray-900 dark:text-white">→ Family converts to <span className="text-blue-600 dark:text-blue-400">PHP / VND / IDR</span> at local exchange or P2P</p>
+                <p className="text-gray-500 mt-1">{'// Curve is never involved. Completely different layer.'}</p>
+              </div>
+              <p className="text-xs text-blue-700 dark:text-blue-400 mt-3">
+                <strong>Who actually benefits from Curve:</strong> institutional traders moving $1M+, DeFi yield farmers, and stablecoin issuers securing liquidity. Migrant workers need low fees + simple UX + Tron/BNB support — a different problem entirely.
+              </p>
+            </div>
 
             <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">So Why Not Just Use Uniswap?</h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
