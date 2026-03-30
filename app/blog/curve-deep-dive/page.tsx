@@ -576,6 +576,70 @@ export default function CurveDeepDivePage() {
               </p>
             </div>
 
+            {/* ── Curve Wars 현황 ── */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-800 dark:text-gray-200">그래서 지금 Curve Wars는? — 솔직한 현황</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              "USDT/USDC만 쓰인다면 Curve Wars가 무슨 의미인가?" 정당한 질문이다. 솔직히 말하면, <strong>Curve Wars는 사실상 끝났다.</strong>
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+              <div className="border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 rounded-xl p-5">
+                <p className="text-sm font-bold text-red-800 dark:text-red-300 mb-3">끝난 것들</p>
+                <ul className="space-y-2">
+                  {[
+                    'UST·MIM·FRAX 등 전쟁 주체들이 대부분 붕괴 또는 축소',
+                    'TVL $24B → $1.8B — 실험적 스테이블코인 풀들이 증발',
+                    'Votium 뇌물 시장 규모 80%+ 감소',
+                    '"내 코인 살리려고 CRV 사재기"하는 프로토콜 사라짐',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-2 text-xs text-red-900 dark:text-red-200">
+                      <span className="mt-1 flex-shrink-0">✕</span>{item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20 rounded-xl p-5">
+                <p className="text-sm font-bold text-green-800 dark:text-green-300 mb-3">여전히 살아있는 것들</p>
+                <ul className="space-y-2">
+                  {[
+                    '3pool (USDC/USDT/DAI) — 기관 대규모 스왑의 필수 경로',
+                    'crvUSD — 2023년 Curve 자체 스테이블코인 출시, 게이지 직결',
+                    'PYUSD(PayPal)·USDY(Ondo) 등 기관 코인이 Curve 유동성 확보 중',
+                    '대규모 스왑 인프라로서의 역할은 여전히 대체 불가',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-2 text-xs text-green-900 dark:text-green-200">
+                      <span className="mt-1 flex-shrink-0">✓</span>{item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">스테이블코인 시장 현실 (2025년 기준)</p>
+              <div className="space-y-2">
+                {[
+                  { label: 'USDT (Tether)', share: '70%', bar: 'w-10/12', color: 'bg-green-400' },
+                  { label: 'USDC (Circle)', share: '18%', bar: 'w-3/12', color: 'bg-blue-400' },
+                  { label: 'DAI / USDS (MakerDAO)', share: '5%', bar: 'w-1/12', color: 'bg-yellow-400' },
+                  { label: 'FRAX·crvUSD·기타 전체', share: '7%', bar: 'w-1/12', color: 'bg-gray-400' },
+                ].map((row, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-44 text-xs text-gray-600 dark:text-gray-400 flex-shrink-0">{row.label}</div>
+                    <div className="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                      <div className={`h-full ${row.bar} ${row.color} rounded-full`} />
+                    </div>
+                    <div className="w-10 text-xs font-mono text-gray-700 dark:text-gray-300 text-right">{row.share}</div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-gray-400 mt-3">USDT·USDC 둘이 시장의 88%를 차지. Curve Wars의 전쟁터였던 알고리즘 스테이블코인들은 대부분 사라졌다.</p>
+            </div>
+
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              결론: Curve Wars라는 <strong>드라마는 끝났지만</strong>, Curve라는 <strong>배관은 남아있다.</strong> 3pool은 여전히 DeFi에서 가장 깊은 스테이블코인 유동성 풀이고, 대규모 USDT↔USDC 스왑은 지금도 Curve를 경유한다. 게이지 시스템도 crvUSD와 신규 기관 스테이블코인들을 중심으로 조용히 작동 중이다.
+            </p>
+
             {/* ── S8 실제 사용 흐름 ── */}
             <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">08 · 실제 사용 흐름 — 스왑부터 수익까지</h2>
 
@@ -1052,6 +1116,70 @@ export default function CurveDeepDivePage() {
                 In 2022, Terra built deep Curve liquidity for UST through the UST-3CRV MetaPool, buying hundreds of millions in CRV. When UST began depegging, LFG (Luna Foundation Guard) suddenly withdrew this liquidity, causing the pool's UST:3CRV ratio to become severely unbalanced. This was read as an exit signal, accelerating UST's collapse. Winning the Curve Wars doesn't guarantee a stablecoin's safety.
               </p>
             </div>
+
+            {/* Curve Wars Status */}
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-800 dark:text-gray-200">So Where Do Curve Wars Stand Now? — The Honest Picture</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              "If USDT and USDC dominate, what's the point of Curve Wars?" That's a fair question. Honestly: <strong>Curve Wars are essentially over.</strong>
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+              <div className="border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 rounded-xl p-5">
+                <p className="text-sm font-bold text-red-800 dark:text-red-300 mb-3">What's gone</p>
+                <ul className="space-y-2">
+                  {[
+                    'UST, MIM, FRAX — the main combatants collapsed or shrunk',
+                    'TVL dropped from $24B → $1.8B as experimental stablecoin pools evaporated',
+                    'Votium bribe market down 80%+',
+                    'No more protocols buying CRV en masse to save their stablecoin',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-2 text-xs text-red-900 dark:text-red-200">
+                      <span className="mt-1 flex-shrink-0">✕</span>{item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20 rounded-xl p-5">
+                <p className="text-sm font-bold text-green-800 dark:text-green-300 mb-3">What remains</p>
+                <ul className="space-y-2">
+                  {[
+                    '3pool (USDC/USDT/DAI) — still the essential route for institutional-scale swaps',
+                    'crvUSD — Curve\'s own stablecoin launched 2023, directly tied to the gauge system',
+                    'PYUSD (PayPal), USDY (Ondo) — institutional coins now securing Curve liquidity',
+                    'As swap infrastructure, Curve remains irreplaceable at scale',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-2 text-xs text-green-900 dark:text-green-200">
+                      <span className="mt-1 flex-shrink-0">✓</span>{item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Stablecoin Market Reality (2025)</p>
+              <div className="space-y-2">
+                {[
+                  { label: 'USDT (Tether)', share: '70%', bar: 'w-10/12', color: 'bg-green-400' },
+                  { label: 'USDC (Circle)', share: '18%', bar: 'w-3/12', color: 'bg-blue-400' },
+                  { label: 'DAI / USDS (MakerDAO)', share: '5%', bar: 'w-1/12', color: 'bg-yellow-400' },
+                  { label: 'FRAX·crvUSD·others combined', share: '7%', bar: 'w-1/12', color: 'bg-gray-400' },
+                ].map((row, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-44 text-xs text-gray-600 dark:text-gray-400 flex-shrink-0">{row.label}</div>
+                    <div className="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                      <div className={`h-full ${row.bar} ${row.color} rounded-full`} />
+                    </div>
+                    <div className="w-10 text-xs font-mono text-gray-700 dark:text-gray-300 text-right">{row.share}</div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-gray-400 mt-3">USDT and USDC together hold 88% of the market. The algorithmic stablecoins that fought the Curve Wars are mostly gone.</p>
+            </div>
+
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Bottom line: the <strong>drama of Curve Wars is over</strong>, but the <strong>plumbing of Curve remains</strong>. The 3pool still holds DeFi's deepest stablecoin liquidity, and large-scale USDT↔USDC swaps still route through it. The gauge system quietly continues, now centered around crvUSD and new institutional stablecoins.
+            </p>
 
             {/* S8 */}
             <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">08 · Real-World Usage Scenarios</h2>
