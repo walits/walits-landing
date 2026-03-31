@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'stablecoin-yield-strategy',
+          category: 'DeFi 시리즈 7',
+          categoryColor: 'bg-emerald-100 text-emerald-800',
+          title: 'DeFi 시리즈 7 — 스테이블코인 수익 극대화 전략',
+          excerpt: '은행 3%인데 USDC로 연 10~25%? Aave 예치부터 Curve 3pool LP, Convex 자동 복리까지. $10,000 USDC 실전 시나리오와 리스크 분석 포함. 초보자도 따라할 수 있는 단계별 가이드.',
+          date: '2026년 3월 31일',
+          readTime: '20분',
+          image: '/blog/yield.jpg',
+        },
+        {
           id: 'crypto-bot-trading',
           category: 'DeFi 시리즈 6',
           categoryColor: 'bg-green-100 text-green-800',
@@ -251,6 +261,16 @@ export default function BlogPage() {
           date: 'March 24, 2026',
           readTime: '22 min read',
           image: '/blog/uniswap.jpg',
+        },
+        {
+          id: 'stablecoin-yield-strategy',
+          category: 'DeFi Series 7',
+          categoryColor: 'bg-emerald-100 text-emerald-800',
+          title: 'DeFi Series 7 — Stablecoin Yield Maximization',
+          excerpt: 'Bank rates at 3% but 10–25% on USDC? From Aave deposits to Curve 3pool LP and Convex auto-compounding. $10,000 real scenario with risk analysis. Step-by-step guide anyone can follow.',
+          date: 'March 31, 2026',
+          readTime: '20 min read',
+          image: '/blog/yield.jpg',
         },
         {
           id: 'crypto-bot-trading',
