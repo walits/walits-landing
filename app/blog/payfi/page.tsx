@@ -545,8 +545,246 @@ export default function PayFiPage() {
               </div>
             </div>
 
-            {/* S10 */}
-            <h2 className="text-3xl font-bold mt-12 mb-6">10 · 리스크 — PayFi가 해결해야 할 과제들</h2>
+            {/* S10 — What to Build */}
+            <h2 className="text-3xl font-bold mt-12 mb-6">10 · AgentKit + PayFi로 지금 만들 수 있는 것들</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              개념이 아니라 실제로 구현 가능한 제품들이다. AgentKit의 온체인 액션 능력과 PayFi 인프라(즉시 정산·수익 창출·공급망 금융)를 조합하면, 아래 다섯 가지는 지금 당장 MVP를 만들 수 있는 수준이다.
+            </p>
+
+            <div className="space-y-6 my-6">
+
+              {/* Product 1 */}
+              <div className="border border-teal-200 dark:border-teal-800 rounded-2xl overflow-hidden">
+                <div className="bg-teal-600 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-teal-200">Product 1</span>
+                    <h3 className="text-lg font-bold text-white mt-1">자율 기업 재무 에이전트</h3>
+                    <p className="text-teal-100 text-sm mt-0.5">Autonomous Treasury Agent</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">B2B · 즉시 구현 가능</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    CFO 없이 돌아가는 소기업 재무팀. 회사의 USDC 잔고를 AI 에이전트가 관리하며, 결제 일정을 분석해 남는 자금을 자동으로 최적 프로토콜에 배치한다. 인간은 정책(최소 잔고, 허용 프로토콜, 지출 한도)만 설정하면 된다.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-teal-400 font-bold mb-2">// 자금 흐름</p>
+                    <p className="text-white">회사 USDC 입금</p>
+                    <p className="text-gray-400">  → 에이전트: 결제 캘린더 조회 (미지급 청구서, 급여일, 세금)</p>
+                    <p className="text-gray-400">  → 7일 이상 여유 자금 → Ondo 국채 4.8% APY 자동 예치</p>
+                    <p className="text-gray-400">  → 3~7일 여유 자금 → Aave USDC 5.2% APY 예치</p>
+                    <p className="text-gray-400">  → 72시간 이내 필요 자금 → Huma PayFi Pool 단기 운용</p>
+                    <p className="text-white mt-2">결제 D-1일</p>
+                    <p className="text-gray-400">  → 에이전트: 해당 포지션 자동 회수</p>
+                    <p className="text-teal-300">  → 거래처 지갑으로 USDC 즉시 정산 (2초)</p>
+                    <p className="text-gray-400">  → 이자 포함 잔액 다시 운용 사이클 진입</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: '타겟', value: '연 매출 $1M~$50M 중소기업' },
+                      { label: '예상 추가 수익', value: '운용 자금의 연 3~8%' },
+                      { label: '핵심 스택', value: 'AgentKit + Ondo + Aave + Huma' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-3">
+                        <p className="text-xs text-teal-600 dark:text-teal-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Product 2 */}
+              <div className="border border-blue-200 dark:border-blue-800 rounded-2xl overflow-hidden">
+                <div className="bg-blue-600 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-blue-200">Product 2</span>
+                    <h3 className="text-lg font-bold text-white mt-1">AI 매출채권 파이낸싱 봇</h3>
+                    <p className="text-blue-100 text-sm mt-0.5">Invoice Financing Bot</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">B2B · 팩토링 대체</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    팩토링사에 3~5% 수수료를 내던 중소기업의 대안. 송장 발행과 동시에 에이전트가 매출채권을 온체인 토큰화해 PayFi Pool에 제출, 즉시 95%를 선수령한다. 만기 정산까지 전 과정 자동화.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-blue-400 font-bold mb-2">// 매출채권 → 즉시 현금 흐름</p>
+                    <p className="text-white">납품 완료 → 송장 발행 (Net-60)</p>
+                    <p className="text-gray-400">  → 에이전트: 송장 데이터 파싱 (금액, 바이어, 만기일)</p>
+                    <p className="text-gray-400">  → 신용도 평가 (바이어 온체인 히스토리, 오프체인 데이터)</p>
+                    <p className="text-gray-400">  → Huma Finance Pool에 매출채권 NFT 제출</p>
+                    <p className="text-teal-300">  → 즉시 95% USDC 수령 (수수료 1~2%)</p>
+                    <p className="text-white mt-2">만기일 (Day 60)</p>
+                    <p className="text-gray-400">  → 바이어 에이전트에 자동 상환 요청</p>
+                    <p className="text-gray-400">  → 상환 완료 → Pool 투자자에게 원금 + 이자 분배</p>
+                    <p className="text-teal-300">  → 공급자: 총 1~2% 비용으로 60일 → 즉시 현금화</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: '타겟', value: '수출·제조 중소기업' },
+                      { label: '비용 절감', value: '팩토링 3~5% → 1~2%' },
+                      { label: '핵심 스택', value: 'AgentKit + Huma Finance' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
+                        <p className="text-xs text-blue-600 dark:text-blue-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Product 3 */}
+              <div className="border border-emerald-200 dark:border-emerald-800 rounded-2xl overflow-hidden">
+                <div className="bg-emerald-600 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-200">Product 3</span>
+                    <h3 className="text-lg font-bold text-white mt-1">Idle Money Eliminator</h3>
+                    <p className="text-emerald-100 text-sm mt-0.5">개인 "돈 낭비 없는" 지갑</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">B2C · 일반 소비자</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    복잡한 DeFi 지식이 없는 일반 사용자용. 스테이블코인 지갑에 돈을 넣으면 에이전트가 알아서 최적 운용하고, 쓸 때만 자동 인출한다. "이번 달 이자로 커피 32잔 공짜"처럼 친근한 UX로 DeFi를 완전히 숨긴다.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-emerald-400 font-bold mb-2">// 사용자 경험 흐름</p>
+                    <p className="text-white">사용자: USDC 500 입금</p>
+                    <p className="text-gray-400">  → 에이전트: APY 실시간 비교</p>
+                    <p className="text-gray-400">     Aave: 5.1% | Compound: 4.8% | Morpho: 5.6%</p>
+                    <p className="text-teal-300">  → Morpho 자동 예치 (사용자는 아무것도 안 함)</p>
+                    <p className="text-white mt-2">사용자: 커피 $5 결제</p>
+                    <p className="text-gray-400">  → 에이전트: 최소 수익 포지션에서 $5 즉시 인출</p>
+                    <p className="text-teal-300">  → 결제 완료 (나머지 $495 계속 이자 발생)</p>
+                    <p className="text-white mt-2">월말 알림</p>
+                    <p className="text-teal-300">  → "이번 달 이자 $18.3 발생 ☕ 커피 36잔 값이에요"</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: '타겟', value: '스테이블코인 보유 일반인' },
+                      { label: '경험', value: 'DeFi 지식 0% 필요' },
+                      { label: '핵심 스택', value: 'AgentKit + Aave + Morpho + ERC-4337' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-3">
+                        <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Product 4 */}
+              <div className="border border-purple-200 dark:border-purple-800 rounded-2xl overflow-hidden">
+                <div className="bg-purple-600 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-purple-200">Product 4</span>
+                    <h3 className="text-lg font-bold text-white mt-1">글로벌 급여 자동화 에이전트</h3>
+                    <p className="text-purple-100 text-sm mt-0.5">Cross-Border Payroll Agent</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">HR·스타트업</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    해외 팀원에게 급여를 보내는 스타트업의 악몽 — 환전 스프레드, 은행 수수료, 3~5일 대기, 각국 다른 계좌 형식 — 을 에이전트 하나로 해결한다. 급여일 전까지 자금을 머니마켓에 운용하다 정확한 시점에 자동 집행.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-purple-400 font-bold mb-2">// 급여일 자동화 흐름</p>
+                    <p className="text-white">급여 예산 USDC 입금 (급여일 7일 전)</p>
+                    <p className="text-gray-400">  → 에이전트: 7일간 Aave 예치 → 이자 발생</p>
+                    <p className="text-white mt-2">급여일 당일 09:00</p>
+                    <p className="text-gray-400">  → 각 직원 Agentic Wallet 주소로 분배 계획 수립</p>
+                    <p className="text-gray-400">  → 한국 직원: USDC → 원화 오프램프 자동 라우팅</p>
+                    <p className="text-gray-400">  → 베트남 직원: USDC 직접 지급 (Binance P2P 오프램프)</p>
+                    <p className="text-gray-400">  → 미국 직원: USDC 직접 지급 (Coinbase 계좌 연동)</p>
+                    <p className="text-teal-300">  → 전원 동시 즉시 지급 완료 + 이자는 회사 수익</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: '타겟', value: '해외 원격팀 보유 스타트업' },
+                      { label: '절감', value: '환전·수수료 연 3~7% 절감' },
+                      { label: '핵심 스택', value: 'AgentKit + Circle CCTP + 각국 오프램프' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
+                        <p className="text-xs text-purple-600 dark:text-purple-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Product 5 */}
+              <div className="border border-orange-200 dark:border-orange-800 rounded-2xl overflow-hidden">
+                <div className="bg-orange-500 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-orange-100">Product 5</span>
+                    <h3 className="text-lg font-bold text-white mt-1">Earn Now Pay Later 구독 매니저</h3>
+                    <p className="text-orange-100 text-sm mt-0.5">Subscription Yield Manager</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">B2C · 구독 경제</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    BNPL(나중에 결제)의 역방향. 구독 서비스 결제일을 역산해 미리 자금을 예치하고, 이자로 구독료를 충당한다. 원금은 건드리지 않고 이자만으로 넷플릭스·AWS·SaaS 도구를 쓰는 경험. 충분한 원금이 쌓이면 이론상 구독료 전액 무료.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-orange-400 font-bold mb-2">// 구독료를 이자로 내는 구조</p>
+                    <p className="text-white">구독 목록 등록:</p>
+                    <p className="text-gray-400">  넷플릭스 $18/월, AWS $120/월, Figma $45/월 = $183/월</p>
+                    <p className="text-white mt-2">에이전트 계산:</p>
+                    <p className="text-gray-400">  연간 구독료 $2,196 / APY 6% = 원금 $36,600 필요</p>
+                    <p className="text-gray-400">  현재 예치금 $5,000 → 월 이자 $25 → 구독료 14% 충당</p>
+                    <p className="text-white mt-2">매월 자동 실행:</p>
+                    <p className="text-gray-400">  → 이자 $25 자동 인출 → 구독료 일부 자동 결제</p>
+                    <p className="text-teal-300">  → "이번 달 넷플릭스 + AWS 이자로 해결 ✓"</p>
+                    <p className="text-teal-300">  → 원금 $5,000 그대로 유지</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: '타겟', value: 'SaaS 구독 다수 보유자' },
+                      { label: '목표', value: '원금 이자로 구독 전액 무료화' },
+                      { label: '핵심 스택', value: 'AgentKit + Morpho + ERC-4337 Paymaster' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-3">
+                        <p className="text-xs text-orange-600 dark:text-orange-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* 공통 스택 */}
+            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">5가지 제품의 공통 기술 스택</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  { layer: 'AI 실행', tools: ['Coinbase AgentKit', 'LangChain / Vercel AI', 'Claude / GPT-4o'] },
+                  { layer: '지갑 인프라', tools: ['Coinbase Agentic Wallets', 'CDP SDK', 'ERC-4337 (Paymaster)'] },
+                  { layer: 'PayFi 레일', tools: ['Huma Finance', 'Ondo Finance', 'Aave / Morpho'] },
+                  { layer: '정산 네트워크', tools: ['Solana (속도)', 'Base (저비용)', 'Circle CCTP (크로스체인)'] },
+                ].map((col, i) => (
+                  <div key={i} className="bg-white dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+                    <p className="text-xs font-bold text-teal-600 dark:text-teal-400 mb-2">{col.layer}</p>
+                    <ul className="space-y-1">
+                      {col.tools.map((t, j) => (
+                        <li key={j} className="text-xs text-gray-600 dark:text-gray-400 flex gap-1.5">
+                          <span className="text-teal-400 flex-shrink-0">·</span>{t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* S11 */}
+            <h2 className="text-3xl font-bold mt-12 mb-6">11 · 리스크 — PayFi가 해결해야 할 과제들</h2>
             <div className="space-y-3 my-6">
               {[
                 {
@@ -934,6 +1172,237 @@ export default function PayFiPage() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            </div>
+
+            {/* What to Build EN */}
+            <h2 className="text-3xl font-bold mt-12 mb-6">08 · What You Can Build Right Now with AgentKit + PayFi</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              These aren't thought experiments. Combining AgentKit's onchain action capabilities with PayFi infrastructure (instant settlement, yield generation, supply chain finance), all five products below are at MVP-ready stage today.
+            </p>
+
+            <div className="space-y-6 my-6">
+
+              <div className="border border-teal-200 dark:border-teal-800 rounded-2xl overflow-hidden">
+                <div className="bg-teal-600 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-teal-200">Product 1</span>
+                    <h3 className="text-lg font-bold text-white mt-1">Autonomous Treasury Agent</h3>
+                    <p className="text-teal-100 text-sm mt-0.5">A CFO-less treasury for small businesses</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">B2B · Build today</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    An AI agent manages the company's USDC treasury, analyzes payment schedules, and automatically allocates idle funds to the best-yield protocol. Humans set policy (minimum reserve, allowed protocols, spending caps) — the agent runs the rest.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-teal-400 font-bold mb-2">// Cash flow logic</p>
+                    <p className="text-white">USDC received</p>
+                    <p className="text-gray-400">  → agent: query payment calendar (invoices, payroll, taxes)</p>
+                    <p className="text-gray-400">  → 7+ days idle → Ondo T-bill 4.8% APY auto-deposit</p>
+                    <p className="text-gray-400">  → 3–7 days idle → Aave USDC 5.2% APY</p>
+                    <p className="text-gray-400">  → needed in 72h → Huma PayFi Pool short-term</p>
+                    <p className="text-white mt-2">Payment D-1</p>
+                    <p className="text-gray-400">  → agent: auto-recall position</p>
+                    <p className="text-teal-300">  → USDC instant settlement to counterparty (2 sec)</p>
+                    <p className="text-gray-400">  → remaining balance re-enters yield cycle</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: 'Target', value: '$1M–$50M ARR SMEs' },
+                      { label: 'Upside', value: '3–8% annualized on idle funds' },
+                      { label: 'Stack', value: 'AgentKit + Ondo + Aave + Huma' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-3">
+                        <p className="text-xs text-teal-600 dark:text-teal-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="border border-blue-200 dark:border-blue-800 rounded-2xl overflow-hidden">
+                <div className="bg-blue-600 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-blue-200">Product 2</span>
+                    <h3 className="text-lg font-bold text-white mt-1">Invoice Financing Bot</h3>
+                    <p className="text-blue-100 text-sm mt-0.5">Replace factoring companies with DeFi liquidity</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">B2B · Factoring killer</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    The alternative for SMEs paying 3–5% to factoring companies. The moment an invoice is issued, the agent tokenizes the receivable and submits it to a PayFi Pool, instantly receiving 95% of the face value. Full automation through to maturity settlement.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-blue-400 font-bold mb-2">// Receivable → instant cash</p>
+                    <p className="text-white">Delivery complete → invoice issued (Net-60)</p>
+                    <p className="text-gray-400">  → agent: parse invoice (amount, buyer, maturity)</p>
+                    <p className="text-gray-400">  → credit assessment (onchain history, offchain data)</p>
+                    <p className="text-gray-400">  → submit receivable NFT to Huma Finance Pool</p>
+                    <p className="text-teal-300">  → receive 95% USDC instantly (1–2% fee)</p>
+                    <p className="text-white mt-2">Day 60 (maturity)</p>
+                    <p className="text-gray-400">  → buyer agent receives auto repayment request</p>
+                    <p className="text-teal-300">  → repayment → principal + yield distributed to Pool investors</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: 'Target', value: 'Export & manufacturing SMEs' },
+                      { label: 'Savings', value: 'Factoring 3–5% → 1–2%' },
+                      { label: 'Stack', value: 'AgentKit + Huma Finance' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
+                        <p className="text-xs text-blue-600 dark:text-blue-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="border border-emerald-200 dark:border-emerald-800 rounded-2xl overflow-hidden">
+                <div className="bg-emerald-600 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-200">Product 3</span>
+                    <h3 className="text-lg font-bold text-white mt-1">Idle Money Eliminator</h3>
+                    <p className="text-emerald-100 text-sm mt-0.5">Zero-effort yield for everyday users</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">B2C · Mass market</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    Designed for everyday users with zero DeFi knowledge. Deposit stablecoins, the agent handles everything — optimizing yield allocation and withdrawing from the lowest-earning position when you spend. DeFi is completely invisible.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-emerald-400 font-bold mb-2">// User experience flow</p>
+                    <p className="text-white">User deposits 500 USDC</p>
+                    <p className="text-gray-400">  → agent: real-time APY comparison</p>
+                    <p className="text-gray-400">     Aave: 5.1% | Compound: 4.8% | Morpho: 5.6%</p>
+                    <p className="text-teal-300">  → auto-deposit to Morpho (user does nothing)</p>
+                    <p className="text-white mt-2">User pays $5 for coffee</p>
+                    <p className="text-gray-400">  → agent: withdraw $5 from lowest-yield position</p>
+                    <p className="text-teal-300">  → payment complete ($495 still earning yield)</p>
+                    <p className="text-white mt-2">Month-end notification</p>
+                    <p className="text-teal-300">  → "$18.30 earned this month ☕ That's 36 coffees"</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: 'Target', value: 'Stablecoin holders, any level' },
+                      { label: 'UX', value: '0% DeFi knowledge required' },
+                      { label: 'Stack', value: 'AgentKit + Aave + Morpho + ERC-4337' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-3">
+                        <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="border border-purple-200 dark:border-purple-800 rounded-2xl overflow-hidden">
+                <div className="bg-purple-600 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-purple-200">Product 4</span>
+                    <h3 className="text-lg font-bold text-white mt-1">Cross-Border Payroll Agent</h3>
+                    <p className="text-purple-100 text-sm mt-0.5">Global team payroll, automated end-to-end</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">HR · Startups</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    The startup nightmare of paying overseas team members — FX spreads, wire fees, 3–5 day delays, different account formats per country — solved by a single agent. Funds earn yield until payday, then distribute simultaneously to every team member worldwide.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-purple-400 font-bold mb-2">// Payroll automation flow</p>
+                    <p className="text-white">Payroll USDC funded (7 days before payday)</p>
+                    <p className="text-gray-400">  → agent: deposit to Aave for 7 days → yield accrues</p>
+                    <p className="text-white mt-2">Payday 09:00</p>
+                    <p className="text-gray-400">  → Korean employee: USDC → KRW off-ramp auto-routed</p>
+                    <p className="text-gray-400">  → Vietnam employee: USDC direct (Binance P2P off-ramp)</p>
+                    <p className="text-gray-400">  → US employee: USDC direct (Coinbase account link)</p>
+                    <p className="text-teal-300">  → all paid simultaneously, instantly</p>
+                    <p className="text-teal-300">  → yield from 7-day hold → company keeps it</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: 'Target', value: 'Startups with remote global teams' },
+                      { label: 'Savings', value: 'FX + wire fees: 3–7% eliminated' },
+                      { label: 'Stack', value: 'AgentKit + Circle CCTP + local off-ramps' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3">
+                        <p className="text-xs text-purple-600 dark:text-purple-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="border border-orange-200 dark:border-orange-800 rounded-2xl overflow-hidden">
+                <div className="bg-orange-500 px-6 py-4 flex items-start justify-between gap-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-orange-100">Product 5</span>
+                    <h3 className="text-lg font-bold text-white mt-1">Subscription Yield Manager</h3>
+                    <p className="text-orange-100 text-sm mt-0.5">Earn Now Pay Later for SaaS subscriptions</p>
+                  </div>
+                  <span className="text-xs font-bold bg-white/20 text-white px-3 py-1 rounded-full whitespace-nowrap">B2C · Subscription economy</span>
+                </div>
+                <div className="px-6 py-5">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    BNPL in reverse. The agent reverse-engineers your subscription payment calendar, pre-deposits funds, and uses the yield to cover your bills. Principal stays intact — subscriptions are paid with interest. Enough principal, and you never pay for Netflix again.
+                  </p>
+                  <div className="bg-gray-900 rounded-xl p-4 mb-4 font-mono text-xs space-y-1">
+                    <p className="text-orange-400 font-bold mb-2">// Pay subscriptions with yield</p>
+                    <p className="text-white">Subscriptions registered:</p>
+                    <p className="text-gray-400">  Netflix $18/mo, AWS $120/mo, Figma $45/mo = $183/mo</p>
+                    <p className="text-white mt-2">Agent calculates:</p>
+                    <p className="text-gray-400">  Annual cost $2,196 / 6% APY = $36,600 principal needed</p>
+                    <p className="text-gray-400">  Current deposit $5,000 → $25/mo yield → covers 14%</p>
+                    <p className="text-white mt-2">Monthly auto-execution:</p>
+                    <p className="text-gray-400">  → withdraw $25 yield → auto-pay subscription portion</p>
+                    <p className="text-teal-300">  → "Netflix + AWS paid by yield this month ✓"</p>
+                    <p className="text-teal-300">  → principal $5,000 untouched</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: 'Target', value: 'Heavy SaaS subscription users' },
+                      { label: 'Goal', value: 'All subscriptions covered by yield' },
+                      { label: 'Stack', value: 'AgentKit + Morpho + ERC-4337 Paymaster' },
+                    ].map((item, i) => (
+                      <div key={i} className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-3">
+                        <p className="text-xs text-orange-600 dark:text-orange-400 font-bold mb-0.5">{item.label}</p>
+                        <p className="text-xs text-gray-700 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Common Tech Stack Across All 5 Products</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  { layer: 'AI Execution', tools: ['Coinbase AgentKit', 'LangChain / Vercel AI', 'Claude / GPT-4o'] },
+                  { layer: 'Wallet Infra', tools: ['Coinbase Agentic Wallets', 'CDP SDK', 'ERC-4337 (Paymaster)'] },
+                  { layer: 'PayFi Rails', tools: ['Huma Finance', 'Ondo Finance', 'Aave / Morpho'] },
+                  { layer: 'Settlement', tools: ['Solana (speed)', 'Base (low cost)', 'Circle CCTP (cross-chain)'] },
+                ].map((col, i) => (
+                  <div key={i} className="bg-white dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+                    <p className="text-xs font-bold text-teal-600 dark:text-teal-400 mb-2">{col.layer}</p>
+                    <ul className="space-y-1">
+                      {col.tools.map((t, j) => (
+                        <li key={j} className="text-xs text-gray-600 dark:text-gray-400 flex gap-1.5">
+                          <span className="text-teal-400 flex-shrink-0">·</span>{t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
             </div>
 
