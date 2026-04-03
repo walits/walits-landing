@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'payfi',
+          category: 'Payment Finance',
+          categoryColor: 'bg-teal-100 text-teal-800',
+          title: 'PayFi — 돈이 이동하는 모든 순간에 수익이 발생한다',
+          excerpt: 'Payment + DeFi의 융합. Lily Liu가 제시한 화폐의 시간 가치 개념부터 Huma Finance·Ondo·Visa × Solana 파일럿까지. SWIFT 2~5일 대기를 2초로 단축하고, 결제 대기 자금에서 이자를 발생시키는 새로운 금융 패러다임을 완전 해부한다.',
+          date: '2026년 4월 3일',
+          readTime: '25분',
+          image: '/blog/payfi.jpg',
+        },
+        {
           id: 'agentic-wallets',
           category: 'AI × Web3',
           categoryColor: 'bg-violet-100 text-violet-800',
@@ -262,6 +272,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'payfi',
+          category: 'Payment Finance',
+          categoryColor: 'bg-teal-100 text-teal-800',
+          title: 'PayFi — Yield on Every Dollar in Motion',
+          excerpt: 'Payment + DeFi fused. From Lily Liu\'s time-value-of-money thesis to Huma Finance, Ondo, and the Visa × Solana USDC pilot. A complete breakdown of the new financial paradigm that compresses SWIFT\'s 2–5 day settlement to 2 seconds — and earns yield on every dollar waiting to settle.',
+          date: 'April 3, 2026',
+          readTime: '25 min read',
+          image: '/blog/payfi.jpg',
+        },
         {
           id: 'agentic-wallets',
           category: 'AI × Web3',
