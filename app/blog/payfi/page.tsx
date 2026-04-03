@@ -434,8 +434,119 @@ export default function PayFiPage() {
               특히 주목할 것은 <strong>신흥 시장</strong>이다. 아프리카·동남아·라틴아메리카에서 USDT 기반 거래는 이미 일상화됐다. 은행 계좌가 없는 인구도 스마트폰과 스테이블코인 지갑 하나로 글로벌 금융 시스템에 접근할 수 있다. PayFi는 이들에게 단순한 결제 수단을 넘어 <strong>금융 포용(Financial Inclusion)의 도구</strong>가 되고 있다.
             </p>
 
-            {/* S9 */}
-            <h2 className="text-3xl font-bold mt-12 mb-6">09 · 리스크 — PayFi가 해결해야 할 과제들</h2>
+            {/* S9 — PayFi × Agentic Wallets */}
+            <h2 className="text-3xl font-bold mt-12 mb-6">09 · PayFi × Agentic Wallets — 자율 결제 에이전트의 등장</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              PayFi가 "결제 인프라의 재설계"라면, Agentic Wallets는 그 인프라 위에서 움직이는 <strong>자율 결제 행위자</strong>다. 둘의 융합은 단순한 기술 조합이 아니다. 인간이 결제 결정을 내리는 마지막 병목마저 제거하는 것이다.
+            </p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              Coinbase의 Agentic Wallets와 AgentKit은 AI 에이전트에게 독립된 온체인 지갑과 결제 능력을 부여한다. 이 에이전트가 PayFi 인프라(즉시 정산, 수익 창출, 공급망 금융)와 연결되면, <strong>24시간 스스로 판단하고 실행하는 금융 에이전트</strong>가 탄생한다.
+            </p>
+
+            <div className="bg-gradient-to-r from-teal-50 to-violet-50 dark:from-teal-900/20 dark:to-violet-900/20 border border-teal-200 dark:border-teal-700 rounded-xl p-5 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 mb-4">PayFi × Agentic Wallets 융합 구조</p>
+              <div className="space-y-0">
+                {[
+                  { layer: 'AI 에이전트 (LLM)', desc: '목표 수신: "USDC 수익 극대화 + 30분 내 해외 거래처 정산"', color: 'bg-violet-500' },
+                  { layer: 'AgentKit', desc: 'PayFi 툴 선택 — APY 스캔, 즉시 송금, 머니마켓 예치, 매출채권 토큰화', color: 'bg-indigo-500' },
+                  { layer: 'Agentic Wallet', desc: '에이전트 전용 USDC 지갑 — 자율 서명, 지출 정책 내 실행, Gasless 트랜잭션', color: 'bg-teal-500' },
+                  { layer: 'PayFi 레일', desc: 'Huma Finance Pool (공급망), Ondo 국채 예치, Solana USDC 즉시 정산', color: 'bg-cyan-500' },
+                  { layer: '결과', desc: '인간 개입 없이 — 정산 완료 + 대기 중 수익 발생 + 최적 프로토콜 자동 선택', color: 'bg-emerald-500' },
+                ].map((s, i, arr) => (
+                  <div key={i} className="flex gap-4 items-stretch">
+                    <div className="flex flex-col items-center">
+                      <span className={`w-2.5 h-2.5 rounded-full ${s.color} flex-shrink-0 mt-1`} />
+                      {i < arr.length - 1 && <div className="w-0.5 bg-gray-200 dark:bg-gray-700 flex-1 my-1" />}
+                    </div>
+                    <div className="pb-4 flex-1">
+                      <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{s.layer}</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4 my-6">
+              {[
+                {
+                  title: '자율 수익 최적화 에이전트',
+                  tag: '즉시 구현 가능',
+                  tagColor: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
+                  border: 'border-emerald-200 dark:border-emerald-800',
+                  desc: '기업 지갑의 USDC 잔고를 AI 에이전트가 실시간 모니터링. 결제 일정과 잔고를 분석해 당장 필요 없는 자금을 Aave·Ondo·Huma 중 현재 APY가 가장 높은 곳에 자동 배치. 결제 기한 1시간 전 자동 회수해 즉시 정산.',
+                  flow: ['잔고 감지 → APY 스캔 (Aave 5%, Ondo 4.8%, Huma 11%)', '결제 일정 분석 → "7일 여유 있음" 판단', 'Huma PayFi Pool 자동 예치 → 7일 후 자동 회수 + 이자', '거래처에 즉시 USDC 정산 (2초)'],
+                },
+                {
+                  title: '글로벌 공급망 자동 정산 에이전트',
+                  tag: 'B2B 핵심 사례',
+                  tagColor: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
+                  border: 'border-blue-200 dark:border-blue-800',
+                  desc: '수입업체의 AI 에이전트가 선하증권(B/L) 수령과 동시에 Huma Finance PayFi Pool에 매출채권 토큰화 요청. 글로벌 유동성 공급자로부터 즉시 95% 선수금. 만기에 바이어 에이전트가 자동 상환. 양 기업 모두 에이전트가 처리 — 사람은 계약 조건만 설정.',
+                  flow: ['선하증권 수령 → 에이전트가 온체인 토큰화 자동 실행', 'PayFi Pool → 즉시 95% 선지급 수령', '만기일 캘린더 등록 → D-1일 바이어 에이전트에 자동 알림', '바이어 에이전트 → 자동 상환 실행 → 이자 포함 정산 완료'],
+                },
+                {
+                  title: 'Earn Now Pay Later 자동화',
+                  tag: '소비자·프리랜서',
+                  tagColor: 'bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-300',
+                  border: 'border-violet-200 dark:border-violet-800',
+                  desc: '프리랜서가 수금한 USDC를 Agentic Wallet이 자동으로 최적 머니마켓에 예치. 이후 지출이 발생할 때마다 에이전트가 수익이 가장 적게 발생하는 포지션에서 우선 인출. 원금을 최대한 유지하면서 생활비를 이자로 충당하는 구조를 사람이 신경 쓰지 않아도 자동 운용.',
+                  flow: ['수금 즉시 → 에이전트가 APY 비교 후 자동 예치', '지출 발생 시 → 가장 수익 낮은 포지션에서 우선 인출', '월말 결산 → 수익 리포트 자동 생성', '목표 잔고 이하 시 → 유저에게 알림 후 추가 입금 요청'],
+                },
+              ].map((card, i) => (
+                <div key={i} className={`border rounded-xl overflow-hidden ${card.border}`}>
+                  <div className="px-5 py-3 flex items-center justify-between bg-gray-50 dark:bg-gray-800">
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">{card.title}</p>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${card.tagColor}`}>{card.tag}</span>
+                  </div>
+                  <div className="px-5 py-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-3">{card.desc}</p>
+                    <div className="bg-gray-900 rounded-lg p-3 space-y-1">
+                      {card.flow.map((f, j) => (
+                        <div key={j} className="flex gap-2 text-xs font-mono">
+                          <span className="text-teal-400 flex-shrink-0">{j + 1}.</span>
+                          <span className="text-gray-300">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">PayFi 단독 vs PayFi + Agentic Wallets 비교</p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-gray-200 dark:bg-gray-700">
+                      <th className="px-3 py-2 text-left font-bold text-gray-700 dark:text-gray-300">상황</th>
+                      <th className="px-3 py-2 text-left font-bold text-teal-700 dark:text-teal-300">PayFi만</th>
+                      <th className="px-3 py-2 text-left font-bold text-violet-700 dark:text-violet-300">PayFi + Agentic Wallets</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                    {[
+                      ['APY 최적화', '사람이 주기적으로 확인·이동', 'AI가 24/7 실시간 자동 이동'],
+                      ['결제 타이밍', '사람이 결제 버튼 클릭', '에이전트가 조건 달성 시 자동 실행'],
+                      ['공급망 정산', '담당자가 서류 확인 후 처리', '선하증권 수령 즉시 에이전트 자동 처리'],
+                      ['리스크 모니터링', '포트폴리오 알림 설정', 'AI가 프로토콜 리스크 감지 시 자동 회수'],
+                      ['운용 시간', '근무 시간 내', '24시간 365일'],
+                      ['오류 가능성', '인적 실수 가능', '정책 범위 내 완전 자동화'],
+                    ].map(([situation, payfiOnly, combined], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white dark:bg-gray-950' : 'bg-gray-50 dark:bg-gray-900'}>
+                        <td className="px-3 py-2 font-semibold text-gray-700 dark:text-gray-300">{situation}</td>
+                        <td className="px-3 py-2 text-gray-500 dark:text-gray-400">{payfiOnly}</td>
+                        <td className="px-3 py-2 text-violet-700 dark:text-violet-300 font-medium">{combined}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* S10 */}
+            <h2 className="text-3xl font-bold mt-12 mb-6">10 · 리스크 — PayFi가 해결해야 할 과제들</h2>
             <div className="space-y-3 my-6">
               {[
                 {
@@ -713,6 +824,117 @@ export default function PayFiPage() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* PayFi × Agentic Wallets EN */}
+            <h2 className="text-3xl font-bold mt-12 mb-6">07 · PayFi × Agentic Wallets — The Autonomous Payment Agent</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              If PayFi is the redesign of payment infrastructure, Agentic Wallets are the <strong>autonomous actors</strong> that operate on top of it. Their fusion isn't just a tech combination — it eliminates the last human bottleneck in the payment decision loop.
+            </p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              Coinbase's Agentic Wallets and AgentKit give AI agents independent onchain wallets and full payment capability. When these agents connect to PayFi infrastructure — instant settlement, yield generation, supply chain finance — the result is a <strong>24/7 autonomous financial agent</strong> that decides and executes without human intervention.
+            </p>
+
+            <div className="bg-gradient-to-r from-teal-50 to-violet-50 dark:from-teal-900/20 dark:to-violet-900/20 border border-teal-200 dark:border-teal-700 rounded-xl p-5 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 mb-4">PayFi × Agentic Wallets Stack</p>
+              <div className="space-y-0">
+                {[
+                  { layer: 'AI Agent (LLM)', desc: 'Goal: "Maximize USDC yield + settle overseas payment within 30 minutes"', color: 'bg-violet-500' },
+                  { layer: 'AgentKit', desc: 'Selects PayFi tools — APY scan, instant transfer, money market deposit, receivable tokenization', color: 'bg-indigo-500' },
+                  { layer: 'Agentic Wallet', desc: 'Agent-owned USDC wallet — autonomous signing, policy-bound execution, gasless transactions', color: 'bg-teal-500' },
+                  { layer: 'PayFi Rails', desc: 'Huma Finance Pool (supply chain), Ondo T-bill deposit, Solana USDC instant settlement', color: 'bg-cyan-500' },
+                  { layer: 'Outcome', desc: 'Zero human intervention — settlement complete + yield earned during transit + best protocol auto-selected', color: 'bg-emerald-500' },
+                ].map((s, i, arr) => (
+                  <div key={i} className="flex gap-4 items-stretch">
+                    <div className="flex flex-col items-center">
+                      <span className={`w-2.5 h-2.5 rounded-full ${s.color} flex-shrink-0 mt-1`} />
+                      {i < arr.length - 1 && <div className="w-0.5 bg-gray-200 dark:bg-gray-700 flex-1 my-1" />}
+                    </div>
+                    <div className="pb-4 flex-1">
+                      <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{s.layer}</p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4 my-6">
+              {[
+                {
+                  title: 'Autonomous Yield Optimizer',
+                  tag: 'Immediately buildable',
+                  tagColor: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
+                  border: 'border-emerald-200 dark:border-emerald-800',
+                  desc: 'An AI agent monitors a company\'s USDC balance in real time. It analyzes payment schedules and idle funds, automatically placing them in the highest-APY protocol (Aave, Ondo, Huma). Funds are recalled automatically 1 hour before payment is due.',
+                  flow: ['Balance detected → APY scan (Aave 5%, Ondo 4.8%, Huma 11%)', 'Analyze payment schedule → "7 days free" determined', 'Auto-deposit to Huma PayFi Pool → auto-recall in 7 days + yield', 'Instant USDC settlement to counterparty (2 sec)'],
+                },
+                {
+                  title: 'Global Supply Chain Auto-Settlement',
+                  tag: 'Core B2B use case',
+                  tagColor: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
+                  border: 'border-blue-200 dark:border-blue-800',
+                  desc: 'An importer\'s AI agent automatically tokenizes the Bill of Lading the moment it\'s received, submitting it to Huma Finance\'s PayFi Pool. Global liquidity providers fund 95% immediately. At maturity, the buyer\'s agent auto-repays. Both companies handled by agents — humans only set the contract terms.',
+                  flow: ['B/L received → agent auto-tokenizes onchain', 'PayFi Pool → 95% pre-payment received instantly', 'Maturity date calendared → D-1 auto-alert to buyer agent', 'Buyer agent → auto-repayment + interest settlement'],
+                },
+                {
+                  title: 'Earn Now Pay Later — Automated',
+                  tag: 'Consumer & freelancer',
+                  tagColor: 'bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-300',
+                  border: 'border-violet-200 dark:border-violet-800',
+                  desc: 'A freelancer\'s received USDC is automatically deposited into the optimal money market by their Agentic Wallet. When expenses arise, the agent withdraws from the lowest-yield position first — maximizing remaining yield without any manual management.',
+                  flow: ['Payment received → agent compares APY, auto-deposits', 'Expense triggered → withdrawal from lowest-yield position first', 'Month-end → auto-generate yield report', 'Balance below target → alert user, request top-up'],
+                },
+              ].map((card, i) => (
+                <div key={i} className={`border rounded-xl overflow-hidden ${card.border}`}>
+                  <div className="px-5 py-3 flex items-center justify-between bg-gray-50 dark:bg-gray-800">
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">{card.title}</p>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${card.tagColor}`}>{card.tag}</span>
+                  </div>
+                  <div className="px-5 py-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-3">{card.desc}</p>
+                    <div className="bg-gray-900 rounded-lg p-3 space-y-1">
+                      {card.flow.map((f, j) => (
+                        <div key={j} className="flex gap-2 text-xs font-mono">
+                          <span className="text-teal-400 flex-shrink-0">{j + 1}.</span>
+                          <span className="text-gray-300">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 my-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">PayFi alone vs PayFi + Agentic Wallets</p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-gray-200 dark:bg-gray-700">
+                      <th className="px-3 py-2 text-left font-bold text-gray-700 dark:text-gray-300">Situation</th>
+                      <th className="px-3 py-2 text-left font-bold text-teal-700 dark:text-teal-300">PayFi only</th>
+                      <th className="px-3 py-2 text-left font-bold text-violet-700 dark:text-violet-300">PayFi + Agentic Wallets</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                    {[
+                      ['APY optimization', 'Human checks & moves periodically', 'AI auto-moves 24/7 in real time'],
+                      ['Payment timing', 'Human clicks the send button', 'Agent executes when conditions are met'],
+                      ['Supply chain settlement', 'Staff reviews docs & processes', 'Agent auto-processes on B/L receipt'],
+                      ['Risk monitoring', 'Alert on portfolio settings', 'AI detects protocol risk, auto-withdraws'],
+                      ['Operating hours', 'Business hours only', '24/7/365'],
+                      ['Error risk', 'Human error possible', 'Fully automated within policy bounds'],
+                    ].map(([situation, payfiOnly, combined], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white dark:bg-gray-950' : 'bg-gray-50 dark:bg-gray-900'}>
+                        <td className="px-3 py-2 font-semibold text-gray-700 dark:text-gray-300">{situation}</td>
+                        <td className="px-3 py-2 text-gray-500 dark:text-gray-400">{payfiOnly}</td>
+                        <td className="px-3 py-2 text-violet-700 dark:text-violet-300 font-medium">{combined}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             {/* Conclusion EN */}
