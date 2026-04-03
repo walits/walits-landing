@@ -436,11 +436,32 @@ export default function PayFiPage() {
 
             {/* S9 — PayFi × Agentic Wallets */}
             <h2 className="text-3xl font-bold mt-12 mb-6">09 · PayFi × Agentic Wallets — 자율 결제 에이전트의 등장</h2>
+
+            {/* 핵심 관계 선언 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 my-6 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+              <div className="bg-teal-600 px-5 py-4 text-center">
+                <p className="text-xs font-bold uppercase tracking-wider text-teal-200 mb-1">PayFi</p>
+                <p className="text-white font-bold text-sm">"전략"</p>
+                <p className="text-teal-100 text-xs mt-1">결제 중 돈이 놀면 안 된다.<br />이자 내고, 즉시 정산해라.</p>
+              </div>
+              <div className="bg-gray-100 dark:bg-gray-800 px-5 py-4 text-center flex items-center justify-center">
+                <div>
+                  <p className="text-2xl font-bold text-gray-400">+</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">결합하면</p>
+                </div>
+              </div>
+              <div className="bg-violet-600 px-5 py-4 text-center">
+                <p className="text-xs font-bold uppercase tracking-wider text-violet-200 mb-1">AgentKit + Agentic Wallets</p>
+                <p className="text-white font-bold text-sm">"자율 실행 레이어"</p>
+                <p className="text-violet-100 text-xs mt-1">그 전략을 사람 없이<br />24시간 자동으로 실행.</p>
+              </div>
+            </div>
+
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              PayFi가 "결제 인프라의 재설계"라면, Agentic Wallets는 그 인프라 위에서 움직이는 <strong>자율 결제 행위자</strong>다. 둘의 융합은 단순한 기술 조합이 아니다. 인간이 결제 결정을 내리는 마지막 병목마저 제거하는 것이다.
+              PayFi만 있으면 사람이 매번 수동으로 예치·회수·정산해야 한다. AgentKit + Agentic Wallets를 붙이면 그 실행을 에이전트가 대신한다. <strong>PayFi는 "무엇을 할 것인가"이고, AgentKit + Agentic Wallets는 "그것을 자율적으로 실행하는 방법"이다.</strong>
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              Coinbase의 Agentic Wallets와 AgentKit은 AI 에이전트에게 독립된 온체인 지갑과 결제 능력을 부여한다. 이 에이전트가 PayFi 인프라(즉시 정산, 수익 창출, 공급망 금융)와 연결되면, <strong>24시간 스스로 판단하고 실행하는 금융 에이전트</strong>가 탄생한다.
+              둘의 결합은 단순한 기술 조합이 아니다. 인간이 결제 결정을 내리는 마지막 병목마저 제거해, <strong>24시간 스스로 판단하고 실행하는 금융 에이전트</strong>가 탄생한다.
             </p>
 
             <div className="bg-gradient-to-r from-teal-50 to-violet-50 dark:from-teal-900/20 dark:to-violet-900/20 border border-teal-200 dark:border-teal-700 rounded-xl p-5 my-6">
@@ -1066,11 +1087,32 @@ export default function PayFiPage() {
 
             {/* PayFi × Agentic Wallets EN */}
             <h2 className="text-3xl font-bold mt-12 mb-6">07 · PayFi × Agentic Wallets — The Autonomous Payment Agent</h2>
+
+            {/* Core relationship */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 my-6 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+              <div className="bg-teal-600 px-5 py-4 text-center">
+                <p className="text-xs font-bold uppercase tracking-wider text-teal-200 mb-1">PayFi</p>
+                <p className="text-white font-bold text-sm">"The Strategy"</p>
+                <p className="text-teal-100 text-xs mt-1">Money must never sit idle.<br />Earn yield. Settle instantly.</p>
+              </div>
+              <div className="bg-gray-100 dark:bg-gray-800 px-5 py-4 text-center flex items-center justify-center">
+                <div>
+                  <p className="text-2xl font-bold text-gray-400">+</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">combined with</p>
+                </div>
+              </div>
+              <div className="bg-violet-600 px-5 py-4 text-center">
+                <p className="text-xs font-bold uppercase tracking-wider text-violet-200 mb-1">AgentKit + Agentic Wallets</p>
+                <p className="text-white font-bold text-sm">"The Autonomous Execution Layer"</p>
+                <p className="text-violet-100 text-xs mt-1">That strategy, running itself<br />24/7 without human input.</p>
+              </div>
+            </div>
+
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              If PayFi is the redesign of payment infrastructure, Agentic Wallets are the <strong>autonomous actors</strong> that operate on top of it. Their fusion isn't just a tech combination — it eliminates the last human bottleneck in the payment decision loop.
+              PayFi alone still requires a human to manually deposit, recall, and settle every time. Add AgentKit + Agentic Wallets, and an agent handles all of that execution. <strong>PayFi is the "what to do" — AgentKit + Agentic Wallets is the "how to do it autonomously."</strong>
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              Coinbase's Agentic Wallets and AgentKit give AI agents independent onchain wallets and full payment capability. When these agents connect to PayFi infrastructure — instant settlement, yield generation, supply chain finance — the result is a <strong>24/7 autonomous financial agent</strong> that decides and executes without human intervention.
+              Together, they eliminate the last human bottleneck in the payment loop — creating a <strong>24/7 autonomous financial agent</strong> that decides and executes without intervention.
             </p>
 
             <div className="bg-gradient-to-r from-teal-50 to-violet-50 dark:from-teal-900/20 dark:to-violet-900/20 border border-teal-200 dark:border-teal-700 rounded-xl p-5 my-6">
