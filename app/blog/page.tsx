@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'agentic-wallets',
+          category: 'AI × Web3',
+          categoryColor: 'bg-violet-100 text-violet-800',
+          title: 'Agentic Wallets — AI 에이전트가 스스로 결제하는 시대',
+          excerpt: 'Coinbase가 만든 AI 에이전트 전용 지갑 인프라. AgentKit과 Agentic Wallets의 차이, 온체인 AI 에이전트 아키텍처, 스테이블코인 지갑에 AgentKit을 붙이는 방법까지. 자율 결제·DeFi 자동화의 실전 가이드.',
+          date: '2026년 4월 3일',
+          readTime: '22분',
+          image: '/blog/agent.jpg',
+        },
+        {
           id: 'stablecoin-yield-strategy',
           category: 'DeFi 시리즈 7',
           categoryColor: 'bg-emerald-100 text-emerald-800',
@@ -252,6 +262,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'agentic-wallets',
+          category: 'AI × Web3',
+          categoryColor: 'bg-violet-100 text-violet-800',
+          title: 'Agentic Wallets — When AI Agents Pay for Themselves',
+          excerpt: 'Coinbase\'s AI agent-specific wallet infrastructure explained. The difference between AgentKit and Agentic Wallets, onchain AI agent architecture, and how to integrate AgentKit into a stablecoin wallet. A practical guide to autonomous payments and DeFi automation.',
+          date: 'April 3, 2026',
+          readTime: '22 min read',
+          image: '/blog/agent.jpg',
+        },
         {
           id: 'uniswap-deep-dive',
           category: 'DeFi Series 2',
