@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'DeFi 시리즈 7 — 스테이블코인 수익 극대화 전략',
     description: 'Aave + Curve + Convex 조합으로 내 USDC 최대한 굴리기. 실전 가이드.',
-    images: ['/blog/yield.jpg'],
+    images: [{ url: 'https://walits.com/blog/yield.jpg', width: 1200, height: 630 }],
   },
 };
 

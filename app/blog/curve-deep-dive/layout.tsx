@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'DeFi 시리즈 5 — Curve Finance 완전 가이드',
     description: '스테이블코인 유동성의 심장 Curve Finance. StableSwap 알고리즘부터 Curve Wars까지.',
-    images: ['/blog/curve.jpg'],
+    images: [{ url: 'https://walits.com/blog/curve.jpg', width: 1200, height: 630 }],
   },
 };
 

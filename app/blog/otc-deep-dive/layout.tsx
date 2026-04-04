@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'DeFi 시리즈 4 - 크립토 OTC 데스크 완전 가이드',
     description: '기관들이 대규모 크립토 거래를 조용히 처리하는 방법. OTC 데스크의 모든 것.',
-    images: ['/blog/otc.jpg'],
+    images: [{ url: 'https://walits.com/blog/otc.jpg', width: 1200, height: 630 }],
   },
 };
 

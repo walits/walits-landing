@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'DeFi 시리즈 6 — 크립토 봇 트레이딩 실전 가이드',
     description: '펀딩비 차익·청산봇·CEX-DEX 차익. 실제 코드로 배우는 크립토 봇 트레이딩.',
-    images: ['/blog/hustle.jpg'],
+    images: [{ url: 'https://walits.com/blog/hustle.jpg', width: 1200, height: 630 }],
   },
 };
 

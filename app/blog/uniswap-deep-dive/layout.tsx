@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'DeFi 시리즈 2 - Uniswap: AMM과 유동성 혁명 완전 해부',
     description: 'x*y=k 공식 하나로 금융을 재정의한 Uniswap. v1~v4 전체 아키텍처, 집중 유동성, 비영구 손실, 수수료 구조를 완전 해부한다.',
-    images: ['/blog/uniswap.jpg'],
+    images: [{ url: 'https://walits.com/blog/uniswap.jpg', width: 1200, height: 630 }],
   },
 };
 

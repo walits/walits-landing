@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'DeFi 시리즈 3 - 1inch: DEX 애그리게이터 완전 튜토리얼',
     description: 'Pathfinder 라우팅, 스플릿 실행, Fusion Mode, Limit Order — 1inch의 모든 기능을 튜토리얼로 해부한다.',
-    images: ['/blog/1inch.jpg'],
+    images: [{ url: 'https://walits.com/blog/1inch.jpg', width: 1200, height: 630 }],
   },
 };
 
