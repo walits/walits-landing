@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'walits-payfi-architecture',
+          category: 'walits 아키텍처',
+          categoryColor: 'bg-slate-100 text-slate-800',
+          title: 'walits — PayFi + AI 에이전트 통합 아키텍처',
+          excerpt: '잔고가 24시간 알아서 일하는 지갑. Idle Time 감지기, 오렌지·애플·칠리 투자 프리셋, AI Agent + Turnkey MPC, Aave·Morpho·Ondo·Huma PayFi 레일까지. walits 전체 아키텍처를 완전 해부한다.',
+          date: '2026년 4월 5일',
+          readTime: '25분',
+          image: '/blog/walits_payfi.jpg',
+        },
+        {
           id: 'ondo-deep-dive',
           category: 'DeFi 시리즈 8',
           categoryColor: 'bg-blue-100 text-blue-800',
@@ -282,6 +292,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'walits-payfi-architecture',
+          category: 'walits Architecture',
+          categoryColor: 'bg-slate-100 text-slate-800',
+          title: 'walits — PayFi + AI Agent Integrated Architecture',
+          excerpt: 'A wallet where your balance works 24/7. Idle Time Detector, Orange/Apple/Chili investment presets, AI Agent + Turnkey MPC, Aave · Morpho · Ondo · Huma PayFi rails. A complete breakdown of the walits architecture.',
+          date: 'April 5, 2026',
+          readTime: '25 min read',
+          image: '/blog/walits_payfi.jpg',
+        },
         {
           id: 'ondo-deep-dive',
           category: 'DeFi Series 8',
