@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'ondo-deep-dive',
+          category: 'DeFi 시리즈 8',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: 'DeFi 시리즈 8 — Ondo Finance: 미국 국채를 DeFi로 가져오다',
+          excerpt: 'OUSG와 USDY로 연 4~5% 미국 국채 수익을 온체인에서. BlackRock BUIDL 연동 구조, USDY 리베이스 메커니즘, PayFi와의 결합까지. RWA 토큰화 선두주자 Ondo Finance를 완전 해부한다.',
+          date: '2026년 4월 3일',
+          readTime: '22분',
+          image: '/blog/ondo.jpg',
+        },
+        {
           id: 'payfi',
           category: 'Payment Finance',
           categoryColor: 'bg-teal-100 text-teal-800',
@@ -272,6 +282,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'ondo-deep-dive',
+          category: 'DeFi Series 8',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: 'DeFi Series 8 — Ondo Finance: Bringing US Treasuries to DeFi',
+          excerpt: '4–5% US Treasury yield onchain via OUSG and USDY. BlackRock BUIDL integration, USDY rebase mechanics, and the PayFi connection. A complete breakdown of Ondo Finance — the RWA tokenization frontrunner.',
+          date: 'April 3, 2026',
+          readTime: '22 min read',
+          image: '/blog/ondo.jpg',
+        },
         {
           id: 'payfi',
           category: 'Payment Finance',
