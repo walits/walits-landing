@@ -226,6 +226,234 @@ export default function MorphoDeepDivePage() {
               </p>
             </div>
 
+            {/* S3-B: 기술 심화 */}
+            <h2 className="text-3xl font-bold mt-14 mb-6">03-B · 스마트컨트랙트 레벨 해부 — Aave 안에서 무슨 일이 일어나나</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              P2P 매칭이 왜 가능한지 이해하려면 먼저 Aave가 스마트컨트랙트 수준에서 어떻게 작동하는지 알아야 한다. 그 구조를 이해하면 Morpho가 왜 "위에서" 동작하는지, 그리고 왜 금리 스프레드가 줄어드는지가 자연스럽게 보인다.
+            </p>
+
+            {/* STEP 1: Aave 예치 내부 */}
+            <div className="my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 1 — Aave에 예치할 때 스마트컨트랙트에서 일어나는 일</p>
+              <div className="space-y-3">
+                {[
+                  {
+                    num: '①',
+                    title: 'LendingPool.supply() 호출',
+                    desc: '유저가 100 USDC를 Aave에 예치하면 LendingPool 컨트랙트의 supply() 함수가 호출된다. 컨트랙트는 유저 지갑에서 USDC를 가져가고, 그 대신 aUSDC(aToken)를 발행해 유저에게 돌려준다.',
+                    tag: 'aToken 발행',
+                    tagColor: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+                  },
+                  {
+                    num: '②',
+                    title: 'aToken = "예치 증서 + 이자 자동 복리"',
+                    desc: 'aUSDC는 단순한 영수증이 아니다. 시간이 지날수록 잔고가 자동으로 증가한다. 1 aUSDC를 받았어도 1년 후엔 1.048 aUSDC가 된다 (APY 4.8% 가정). 이자를 클레임할 필요 없이 토큰 잔고 자체가 늘어난다.',
+                    tag: 'Rebase Token',
+                    tagColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
+                  },
+                  {
+                    num: '③',
+                    title: '이용률(Utilization Rate)이 금리를 결정한다',
+                    desc: 'Aave의 금리는 고정이 아니다. "이용률 = 대출된 금액 ÷ 전체 예치금"에 따라 실시간으로 변한다. 이용률이 80%면 금리가 낮고, 95%에 가까워질수록 금리가 급격히 오른다 (Kink 모델). 대출 수요가 많아질수록 예치자는 더 많이 받고 대출자는 더 많이 낸다.',
+                    tag: 'Interest Rate Model',
+                    tagColor: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
+                  },
+                  {
+                    num: '④',
+                    title: '항상 유동성 버퍼를 남겨야 한다',
+                    desc: '풀에 있는 USDC 전부를 대출해줄 수 없다. 언제든 예치자가 인출할 수 있어야 하기 때문이다. 보통 풀의 5~20%는 항상 유휴 상태로 남는다. 이 유휴 자금은 이자를 거의 못 받지만, 예치된 전체 금액에 대해 평균 금리가 계산되므로 예치자 수익률이 내려간다. 이것이 스프레드의 핵심 원인이다.',
+                    tag: '스프레드 원인',
+                    tagColor: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+                  },
+                ].map((item) => (
+                  <div key={item.num} className="flex gap-4 bg-gray-50 dark:bg-gray-800/60 rounded-xl p-4">
+                    <div className="text-2xl font-black text-gray-300 dark:text-gray-600 w-8 shrink-0 mt-0.5">{item.num}</div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <span className="font-bold text-gray-900 dark:text-white text-sm">{item.title}</span>
+                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${item.tagColor}`}>{item.tag}</span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 이용률-금리 그래프 */}
+            <div className="bg-slate-900 rounded-2xl p-6 my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-5">Aave 금리 모델 — Kink 구조</p>
+              <div className="flex items-end gap-1 h-28 mb-3">
+                {[
+                  { util: '0%', lend: 5, borrow: 7 },
+                  { util: '20%', lend: 8, borrow: 12 },
+                  { util: '40%', lend: 14, borrow: 20 },
+                  { util: '60%', lend: 22, borrow: 32 },
+                  { util: '80%', lend: 34, borrow: 50 },
+                  { util: '90%', lend: 50, borrow: 75 },
+                  { util: '95%', lend: 65, borrow: 95 },
+                  { util: '99%', lend: 80, borrow: 110 },
+                ].map((d) => (
+                  <div key={d.util} className="flex-1 flex flex-col items-center gap-0.5">
+                    <div className="w-full flex gap-0.5 items-end" style={{ height: '90px' }}>
+                      <div className="flex-1 bg-blue-500/60 rounded-t" style={{ height: `${d.lend}%` }} title={`예치 ${d.lend}%`} />
+                      <div className="flex-1 bg-red-500/60 rounded-t" style={{ height: `${Math.min(d.borrow, 100)}%` }} title={`대출 ${d.borrow}%`} />
+                    </div>
+                    <span className="text-slate-500 text-[9px]">{d.util}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-4 text-xs text-slate-400">
+                <span className="flex items-center gap-1"><span className="w-3 h-3 bg-blue-500/60 rounded-sm inline-block" />예치 금리</span>
+                <span className="flex items-center gap-1"><span className="w-3 h-3 bg-red-500/60 rounded-sm inline-block" />대출 금리</span>
+                <span className="ml-auto text-slate-500">이용률 80% 이상 → 금리 급등 (Kink 지점)</span>
+              </div>
+            </div>
+
+            {/* STEP 2: Morpho가 Aave 위에서 하는 일 */}
+            <div className="my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 2 — Morpho Optimizer가 Aave 컨트랙트 위에서 하는 일</p>
+
+              <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-5 mb-6">
+                <p className="text-sm font-bold text-indigo-700 dark:text-indigo-300 mb-2">핵심 트릭: Morpho 컨트랙트 자체가 Aave의 "슈퍼 예치자"가 된다</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  유저가 Morpho에 USDC를 예치하면, Morpho 스마트컨트랙트가 그 돈을 받아 <strong>자신의 이름으로 Aave에 예치</strong>한다.
+                  즉, Aave 입장에서는 "Morpho 컨트랙트"라는 하나의 거대한 예치자가 있는 것처럼 보인다.
+                  실제 유저들이 누구인지 Aave는 모른다.
+                </p>
+              </div>
+
+              <div className="space-y-0">
+                {[
+                  {
+                    phase: '예치자가 Morpho에 100 USDC 예치',
+                    detail: 'Morpho 컨트랙트가 유저의 USDC를 받아 Aave LendingPool.supply() 를 직접 호출. Morpho 컨트랙트 명의로 aUSDC가 발행됨. 유저는 Morpho 내부 장부에 "100 USDC 예치" 기록.',
+                    icon: '💰',
+                    color: 'bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800',
+                  },
+                  {
+                    phase: '대출자가 Morpho에서 80 USDC 차용 요청',
+                    detail: 'Morpho는 내부 FIFO 큐를 확인. 매칭 가능한 예치자 발견. Aave에서 withdraw()를 호출해 80 USDC를 꺼냄 (aUSDC 80개 소각). 그 80 USDC를 대출자에게 직접 전달. 이 순간 P2P 매칭 성립.',
+                    icon: '🔄',
+                    color: 'bg-indigo-50 dark:bg-indigo-900/10 border-indigo-200 dark:border-indigo-800',
+                  },
+                  {
+                    phase: '담보와 청산은 여전히 Aave가 담당',
+                    detail: '대출자가 맡긴 담보(ETH 등)는 Aave 컨트랙트에 lock됨. 건강도(Health Factor) 계산, 청산 트리거, 오라클 가격 피드 — 모두 Aave 인프라를 그대로 사용. Morpho는 보안 레이어를 새로 만들지 않는다.',
+                    icon: '🔒',
+                    color: 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700',
+                  },
+                  {
+                    phase: '예치자가 인출 요청할 때',
+                    detail: '시나리오 A: 다른 예치자로 재매칭 가능 → 새 예치자와 기존 대출자를 연결, A에게 USDC 돌려줌. 시나리오 B: 재매칭 불가 → Morpho가 Aave 풀에서 직접 인출해 A에게 돌려줌. Aave 전체 풀이 유동성 백스탑 역할.',
+                    icon: '↩️',
+                    color: 'bg-emerald-50 dark:bg-emerald-900/10 border-emerald-200 dark:border-emerald-800',
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="relative">
+                    <div className={`border rounded-xl p-4 mb-3 ${item.color}`}>
+                      <div className="flex items-start gap-3">
+                        <span className="text-xl shrink-0">{item.icon}</span>
+                        <div>
+                          <p className="font-bold text-sm text-gray-900 dark:text-white mb-1">{item.phase}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">{item.detail}</p>
+                        </div>
+                      </div>
+                    </div>
+                    {i < 3 && <div className="text-center text-gray-300 dark:text-gray-700 text-lg -mt-1 mb-1">↓</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* STEP 3: 왜 금리가 줄어드나 */}
+            <div className="my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 3 — 왜 스프레드(금리 차이)가 줄어드나</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800 rounded-xl p-4">
+                  <p className="font-bold text-red-700 dark:text-red-400 text-sm mb-3">Aave 스프레드가 큰 이유 (2가지)</p>
+                  <div className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
+                    <div>
+                      <span className="font-bold text-red-600">① 유동성 버퍼 비용</span>
+                      <p className="mt-1">풀의 10~20%는 항상 유휴 상태. 이 돈은 이자를 벌지 못하지만 전체 예치금으로 계산되어 평균 수익률을 낮춘다. 대출자는 많이 내는데 예치자는 덜 받는 이유.</p>
+                    </div>
+                    <div>
+                      <span className="font-bold text-red-600">② 프로토콜 수수료</span>
+                      <p className="mt-1">Aave는 대출 이자의 일부를 프로토콜 DAO 재무로 가져간다. 이 부분이 스프레드에 포함되어 예치자와 대출자 사이의 간극을 더 넓힌다.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4">
+                  <p className="font-bold text-indigo-700 dark:text-indigo-400 text-sm mb-3">Morpho가 스프레드를 없애는 이유 (2가지)</p>
+                  <div className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
+                    <div>
+                      <span className="font-bold text-indigo-600">① 유동성 버퍼 불필요</span>
+                      <p className="mt-1">P2P 매칭된 자금은 100% 대출자에게 가고 100% 이자를 받는다. 유휴 자금이 없다. 인출 요청이 와도 Aave 풀 전체가 백스탑 역할을 하므로 Morpho 자체 버퍼가 필요 없다.</p>
+                    </div>
+                    <div>
+                      <span className="font-bold text-indigo-600">② 수수료 0%</span>
+                      <p className="mt-1">Morpho Optimizer는 수수료를 떼지 않는다. 스프레드 전체가 예치자·대출자에게 돌아간다. (Morpho Blue는 거버넌스 토큰으로 프로토콜 수익 분배)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 수식 시각화 */}
+              <div className="bg-slate-900 rounded-xl p-5 text-sm font-mono">
+                <p className="text-slate-400 text-xs mb-4">// P2P 금리 계산 공식</p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="text-slate-400 text-xs w-40 shrink-0">Aave 예치 금리</span>
+                    <span className="text-blue-400">4.8%</span>
+                  </div>
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="text-slate-400 text-xs w-40 shrink-0">Aave 대출 금리</span>
+                    <span className="text-red-400">7.5%</span>
+                  </div>
+                  <div className="border-t border-slate-700 pt-3 flex items-center gap-3 flex-wrap">
+                    <span className="text-slate-400 text-xs w-40 shrink-0">Morpho P2P 금리</span>
+                    <span className="text-indigo-400 font-bold">= (4.8 + 7.5) ÷ 2 = <span className="text-white">6.15%</span></span>
+                  </div>
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="text-slate-400 text-xs w-40 shrink-0">예치자 수령</span>
+                    <span className="text-green-400">6.15% <span className="text-slate-500 text-xs">(Aave 4.8% → +1.35%p)</span></span>
+                  </div>
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="text-slate-400 text-xs w-40 shrink-0">대출자 납부</span>
+                    <span className="text-green-400">6.15% <span className="text-slate-500 text-xs">(Aave 7.5% → -1.35%p)</span></span>
+                  </div>
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="text-slate-400 text-xs w-40 shrink-0">Morpho 수수료</span>
+                    <span className="text-yellow-400">0%</span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">
+                * 실제 P2P 금리는 Aave 금리 변동에 따라 실시간으로 조정된다. 위 수치는 개념 설명을 위한 예시이며, 실제 적용 금리는 P2P Index Rate로 계산된다.
+              </p>
+            </div>
+
+            {/* 전체 아키텍처 요약 */}
+            <div className="bg-gradient-to-br from-slate-900 to-indigo-950 rounded-2xl p-6 my-8 text-white">
+              <p className="text-xs font-bold uppercase tracking-wider text-indigo-300 mb-4">전체 아키텍처 한눈에 보기</p>
+              <div className="space-y-2 text-sm">
+                {[
+                  { layer: '유저 레이어', desc: 'Morpho 컨트랙트에 USDC 예치 / 인출 요청', color: 'bg-blue-800/50 border-blue-700' },
+                  { layer: 'Morpho 레이어', desc: 'FIFO 큐 관리 · P2P 매칭 실행 · 포지션 위임 · 재매칭', color: 'bg-indigo-800/50 border-indigo-700' },
+                  { layer: 'Aave 레이어', desc: 'aToken 발행/소각 · 담보 관리 · 청산 · 금리 계산 · 유동성 백스탑', color: 'bg-slate-700/50 border-slate-600' },
+                  { layer: '블록체인', desc: 'Ethereum · Base · Polygon — 모든 컨트랙트가 온체인에서 투명하게 실행', color: 'bg-slate-800/50 border-slate-700' },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-0 flex-col">
+                    <div className={`border rounded-lg px-4 py-2 ${item.color}`}>
+                      <span className="text-xs font-bold text-slate-300 mr-3">{item.layer}</span>
+                      <span className="text-xs text-slate-400">{item.desc}</span>
+                    </div>
+                    {i < 3 && <div className="text-slate-600 text-center text-sm">↓</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* S4 */}
             <h2 className="text-3xl font-bold mt-12 mb-6">04 · Morpho Blue 구조 — 4가지 요소로 마켓 정의</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
@@ -686,6 +914,199 @@ export default function MorphoDeepDivePage() {
               <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
                 Unmatched funds automatically flow into Aave or Compound pools, earning the baseline rate. <strong>Morpho can never be worse than Aave</strong> — at minimum you get Aave rates, and when matched you get better.
               </p>
+            </div>
+
+            {/* S3-B EN */}
+            <h2 className="text-3xl font-bold mt-14 mb-6">03-B · Smart Contract Deep Dive — What Happens Inside Aave, and How Morpho Sits on Top</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              To truly understand why P2P matching is possible, you need to see what Aave does at the smart contract level first. Once that structure is clear, it becomes obvious why Morpho can operate "on top" of it — and why the rate spread shrinks.
+            </p>
+
+            {/* STEP 1 EN */}
+            <div className="my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 1 — What happens inside Aave's smart contracts when you deposit</p>
+              <div className="space-y-3">
+                {[
+                  {
+                    num: '①',
+                    title: 'LendingPool.supply() is called',
+                    desc: 'When you deposit 100 USDC into Aave, the LendingPool contract\'s supply() function is invoked. It pulls USDC from your wallet and mints aUSDC (aToken) back to you in return.',
+                    tag: 'aToken Minted',
+                    tagColor: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+                  },
+                  {
+                    num: '②',
+                    title: 'aToken = "deposit receipt + auto-compounding interest"',
+                    desc: 'aUSDC is not a simple receipt. Its balance grows automatically over time. If you received 1 aUSDC today, in a year it becomes 1.048 aUSDC (at 4.8% APY). No manual claim needed — the token balance itself increases.',
+                    tag: 'Rebase Token',
+                    tagColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
+                  },
+                  {
+                    num: '③',
+                    title: 'Utilization Rate determines interest rates in real time',
+                    desc: 'Aave\'s rates aren\'t fixed. They update continuously based on Utilization Rate = Amount Borrowed ÷ Total Deposited. At 80% utilization rates are moderate; approaching 95% they spike sharply (the Kink model). Higher borrow demand = more for depositors, more cost for borrowers.',
+                    tag: 'Interest Rate Model',
+                    tagColor: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
+                  },
+                  {
+                    num: '④',
+                    title: 'A liquidity buffer must always be kept idle',
+                    desc: 'Not all pooled USDC can be lent out — depositors must be able to withdraw at any time. Typically 5–20% sits idle at all times. This idle capital earns almost nothing, but it\'s included in the total deposit base when calculating average APY — this is the core cause of the spread.',
+                    tag: 'Spread Root Cause',
+                    tagColor: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+                  },
+                ].map((item) => (
+                  <div key={item.num} className="flex gap-4 bg-gray-50 dark:bg-gray-800/60 rounded-xl p-4">
+                    <div className="text-2xl font-black text-gray-300 dark:text-gray-600 w-8 shrink-0 mt-0.5">{item.num}</div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <span className="font-bold text-gray-900 dark:text-white text-sm">{item.title}</span>
+                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${item.tagColor}`}>{item.tag}</span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* STEP 2 EN */}
+            <div className="my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 2 — What Morpho Optimizer does on top of Aave's contracts</p>
+
+              <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-5 mb-6">
+                <p className="text-sm font-bold text-indigo-700 dark:text-indigo-300 mb-2">The core trick: Morpho's contract becomes Aave's "super depositor"</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                  When a user deposits USDC into Morpho, the Morpho smart contract takes that USDC and <strong>deposits it into Aave under its own name</strong>. From Aave's perspective, there's just one giant depositor called "the Morpho contract." Aave has no idea who the individual users are.
+                </p>
+              </div>
+
+              <div className="space-y-0">
+                {[
+                  {
+                    phase: 'Depositor puts 100 USDC into Morpho',
+                    detail: 'The Morpho contract takes the user\'s USDC and calls Aave LendingPool.supply() directly — in its own name. aUSDC is minted to the Morpho contract. The user is recorded in Morpho\'s internal ledger as "100 USDC deposited."',
+                    icon: '💰',
+                    color: 'bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800',
+                  },
+                  {
+                    phase: 'Borrower requests 80 USDC from Morpho',
+                    detail: 'Morpho checks its internal FIFO queue, finds a matchable depositor. Calls Aave withdraw() to pull out 80 USDC (burning 80 aUSDC). Delivers that 80 USDC directly to the borrower. P2P match is now live.',
+                    icon: '🔄',
+                    color: 'bg-indigo-50 dark:bg-indigo-900/10 border-indigo-200 dark:border-indigo-800',
+                  },
+                  {
+                    phase: 'Collateral and liquidations are still handled by Aave',
+                    detail: 'The borrower\'s collateral (ETH, etc.) remains locked in Aave\'s contracts. Health Factor calculation, liquidation triggers, oracle price feeds — all run on Aave\'s infrastructure. Morpho doesn\'t rebuild any of this security layer.',
+                    icon: '🔒',
+                    color: 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700',
+                  },
+                  {
+                    phase: 'When a depositor requests withdrawal',
+                    detail: 'Scenario A: Another depositor available → re-match them with the existing borrower, return USDC to withdrawing user. Scenario B: No re-match available → Morpho pulls directly from Aave\'s pool to cover the withdrawal. Aave\'s entire pool acts as the liquidity backstop.',
+                    icon: '↩️',
+                    color: 'bg-emerald-50 dark:bg-emerald-900/10 border-emerald-200 dark:border-emerald-800',
+                  },
+                ].map((item, i) => (
+                  <div key={i} className="relative">
+                    <div className={`border rounded-xl p-4 mb-3 ${item.color}`}>
+                      <div className="flex items-start gap-3">
+                        <span className="text-xl shrink-0">{item.icon}</span>
+                        <div>
+                          <p className="font-bold text-sm text-gray-900 dark:text-white mb-1">{item.phase}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">{item.detail}</p>
+                        </div>
+                      </div>
+                    </div>
+                    {i < 3 && <div className="text-center text-gray-300 dark:text-gray-700 text-lg -mt-1 mb-1">↓</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* STEP 3 EN */}
+            <div className="my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 3 — Why the spread (rate gap) disappears</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800 rounded-xl p-4">
+                  <p className="font-bold text-red-700 dark:text-red-400 text-sm mb-3">Why Aave's spread is large (2 reasons)</p>
+                  <div className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
+                    <div>
+                      <span className="font-bold text-red-600">① Liquidity buffer cost</span>
+                      <p className="mt-1">10–20% of the pool sits idle at all times. This capital earns almost nothing but is included in the deposit base, dragging down the average APY. Borrowers pay a lot; depositors receive less.</p>
+                    </div>
+                    <div>
+                      <span className="font-bold text-red-600">② Protocol fees</span>
+                      <p className="mt-1">Aave takes a portion of borrow interest into its DAO treasury. This widens the gap between what borrowers pay and what depositors receive.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4">
+                  <p className="font-bold text-indigo-700 dark:text-indigo-400 text-sm mb-3">Why Morpho eliminates the spread (2 reasons)</p>
+                  <div className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
+                    <div>
+                      <span className="font-bold text-indigo-600">① No liquidity buffer needed</span>
+                      <p className="mt-1">P2P-matched funds are 100% deployed and 100% earning. No idle capital. When withdrawals come in, Aave's entire pool acts as the backstop — so Morpho doesn't need its own buffer.</p>
+                    </div>
+                    <div>
+                      <span className="font-bold text-indigo-600">② 0% protocol fee</span>
+                      <p className="mt-1">Morpho Optimizer charges no fees. The entire spread is returned to depositors and borrowers. (Morpho Blue distributes protocol revenue via governance tokens.)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-slate-900 rounded-xl p-5 text-sm font-mono">
+                <p className="text-slate-400 text-xs mb-4">// P2P rate calculation</p>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Aave supply APY', val: '4.8%', color: 'text-blue-400' },
+                    { label: 'Aave borrow APY', val: '7.5%', color: 'text-red-400' },
+                  ].map((r) => (
+                    <div key={r.label} className="flex items-center gap-3">
+                      <span className="text-slate-400 text-xs w-44 shrink-0">{r.label}</span>
+                      <span className={r.color}>{r.val}</span>
+                    </div>
+                  ))}
+                  <div className="border-t border-slate-700 pt-3 space-y-3">
+                    {[
+                      { label: 'Morpho P2P rate', val: '= (4.8 + 7.5) ÷ 2 = 6.15%', color: 'text-indigo-400' },
+                      { label: 'Depositor receives', val: '6.15%  (+1.35%p vs Aave)', color: 'text-green-400' },
+                      { label: 'Borrower pays', val: '6.15%  (−1.35%p vs Aave)', color: 'text-green-400' },
+                      { label: 'Morpho fee', val: '0%', color: 'text-yellow-400' },
+                    ].map((r) => (
+                      <div key={r.label} className="flex items-center gap-3">
+                        <span className="text-slate-400 text-xs w-44 shrink-0">{r.label}</span>
+                        <span className={`${r.color} font-bold`}>{r.val}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">
+                * Actual P2P rates adjust in real time with Aave rate movements. The figures above are illustrative; actual rates are calculated via Morpho's P2P Index Rate mechanism.
+              </p>
+            </div>
+
+            {/* Architecture summary EN */}
+            <div className="bg-gradient-to-br from-slate-900 to-indigo-950 rounded-2xl p-6 my-8 text-white">
+              <p className="text-xs font-bold uppercase tracking-wider text-indigo-300 mb-4">Full architecture at a glance</p>
+              <div className="space-y-2 text-sm">
+                {[
+                  { layer: 'User Layer', desc: 'Deposit / withdraw USDC via Morpho contract', color: 'bg-blue-800/50 border-blue-700' },
+                  { layer: 'Morpho Layer', desc: 'FIFO queue · P2P matching · position delegation · re-matching', color: 'bg-indigo-800/50 border-indigo-700' },
+                  { layer: 'Aave Layer', desc: 'aToken mint/burn · collateral · liquidation · rate model · liquidity backstop', color: 'bg-slate-700/50 border-slate-600' },
+                  { layer: 'Blockchain', desc: 'Ethereum · Base · Polygon — all contracts execute transparently onchain', color: 'bg-slate-800/50 border-slate-700' },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-0 flex-col">
+                    <div className={`border rounded-lg px-4 py-2 ${item.color}`}>
+                      <span className="text-xs font-bold text-slate-300 mr-3">{item.layer}</span>
+                      <span className="text-xs text-slate-400">{item.desc}</span>
+                    </div>
+                    {i < 3 && <div className="text-slate-600 text-center text-sm">↓</div>}
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* S4 EN */}
