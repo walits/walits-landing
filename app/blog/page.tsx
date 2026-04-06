@@ -75,6 +75,16 @@ export default function BlogPage() {
           image: '/blog/morpho.jpg',
         },
         {
+          id: 'walits-starter-guide',
+          category: 'walits 스타터 가이드',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: 'Walits 서비스 스타터 가이드 — 개인용 USDC 전문 지갑',
+          excerpt: '로그인 후 UI/UX 설계, 지갑 생성 기술(HD Wallet vs Turnkey MPC vs Coinbase CDP) 비교, USDC 충전 5가지 경로(거래소·MetaMask·카드 온램프·CCTP·P2P) 완전 가이드.',
+          date: '2026년 4월 7일',
+          readTime: '28분',
+          image: '/blog/walits_usdc.jpg',
+        },
+        {
           id: 'walits-payfi-architecture',
           category: 'walits 아키텍처',
           categoryColor: 'bg-slate-100 text-slate-800',
@@ -411,6 +421,16 @@ export default function BlogPage() {
           date: 'April 6, 2026',
           readTime: '20 min read',
           image: '/blog/morpho.jpg',
+        },
+        {
+          id: 'walits-starter-guide',
+          category: 'Walits Starter Guide',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: 'Walits Starter Guide — Your Personal USDC Wallet',
+          excerpt: 'Post-login UX design, wallet tech comparison (HD Wallet vs Turnkey MPC vs Coinbase CDP), and 5 ways to fund with USDC (exchange · MetaMask · card on-ramp · CCTP bridge · P2P). Everything you need to get started.',
+          date: 'April 7, 2026',
+          readTime: '28 min read',
+          image: '/blog/walits_usdc.jpg',
         },
         {
           id: 'walits-payfi-architecture',
