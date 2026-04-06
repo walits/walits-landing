@@ -368,68 +368,169 @@ export default function MorphoDeepDivePage() {
 
             {/* STEP 3: 왜 금리가 줄어드나 */}
             <div className="my-8">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 3 — 왜 스프레드(금리 차이)가 줄어드나</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 3 — 왜 레이어가 추가됐는데 오히려 비용이 줄어드나</p>
+
+              {/* 직관 반박 */}
+              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl p-4 mb-6">
+                <p className="text-sm font-bold text-amber-800 dark:text-amber-300 mb-1">❓ 많이 드는 의문</p>
+                <p className="text-sm text-amber-900 dark:text-amber-200">
+                  "Morpho가 Aave 위에 레이어를 하나 더 얹은 건데, 비용이 줄어든다고? 보통 레이어가 추가되면 비용이 늘어나지 않나?"
+                </p>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                맞는 의문이다. 정답은 이렇다: <strong>Morpho는 비용을 추가하는 레이어가 아니라, Aave 풀 안에 이미 존재하던 비용 2가지를 제거하는 레이어다.</strong> Morpho 자체는 돈을 가져가지 않는다. 단지 매칭 로직만 있을 뿐이다.
+              </p>
+
+              {/* Aave 비용 구조 해부 */}
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">먼저, Aave 풀 안에 있는 비용 2가지</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800 rounded-xl p-4">
-                  <p className="font-bold text-red-700 dark:text-red-400 text-sm mb-3">Aave 스프레드가 큰 이유 (2가지)</p>
-                  <div className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
-                    <div>
-                      <span className="font-bold text-red-600">① 유동성 버퍼 비용</span>
-                      <p className="mt-1">풀의 10~20%는 항상 유휴 상태. 이 돈은 이자를 벌지 못하지만 전체 예치금으로 계산되어 평균 수익률을 낮춘다. 대출자는 많이 내는데 예치자는 덜 받는 이유.</p>
+                  <p className="font-bold text-red-700 dark:text-red-400 text-sm mb-3">① 유동성 버퍼 희석 비용</p>
+                  <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                    풀의 10~20%는 항상 유휴 상태로 남아야 한다. 언제든 누군가 인출할 수 있어야 하기 때문이다. 이 유휴 자금은 이자를 거의 못 벌지만, 전체 예치금에 포함되어 평균 수익률을 끌어내린다.
+                  </p>
+                  <div className="bg-red-100 dark:bg-red-900/20 rounded-lg p-3 text-xs">
+                    <p className="text-red-700 dark:text-red-300 font-mono">
+                      예치자 수익 = Bob 이자 × (대출 잔액 / 전체 예치금)<br />
+                      <span className="text-red-500">= 7.5% × (800 / 1000) = 6%</span><br />
+                      <span className="text-gray-500">→ 유휴 200 USDC가 수익률을 희석</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-orange-50 dark:bg-orange-900/10 border border-orange-200 dark:border-orange-800 rounded-xl p-4">
+                  <p className="font-bold text-orange-700 dark:text-orange-400 text-sm mb-3">② 프로토콜 수수료 (Reserve Factor)</p>
+                  <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                    Aave는 대출 이자의 일정 비율(Reserve Factor, 약 10%)을 DAO 재무로 가져간다. 대출자가 7.5%를 내도 그 중 0.75%는 Aave DAO 몫이다.
+                  </p>
+                  <div className="bg-orange-100 dark:bg-orange-900/20 rounded-lg p-3 text-xs">
+                    <p className="text-orange-700 dark:text-orange-300 font-mono">
+                      예치자 실수령 = 대출 이자 × (1 - Reserve Factor)<br />
+                      <span className="text-orange-500">= 6% × 0.9 = 5.4%</span><br />
+                      <span className="text-gray-500">→ DAO가 0.6% 추가로 떼감</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 숫자 시뮬레이션 */}
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Alice와 Bob으로 보는 구체적 비교</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">가정: Aave 풀 전체 1,000 USDC 예치 / 800 USDC 대출 중 (이용률 80%) / Reserve Factor 10%</p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                {/* 케이스 A */}
+                <div className="border-2 border-red-200 dark:border-red-800 rounded-xl overflow-hidden">
+                  <div className="bg-red-600 text-white px-4 py-2 text-xs font-bold">케이스 A — Morpho 없이 Aave 직접 사용</div>
+                  <div className="p-4 bg-red-50 dark:bg-red-900/10 space-y-3 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Bob이 내는 이자</span>
+                      <span className="font-bold text-red-600">7.5 USDC/년</span>
                     </div>
-                    <div>
-                      <span className="font-bold text-red-600">② 프로토콜 수수료</span>
-                      <p className="mt-1">Aave는 대출 이자의 일부를 프로토콜 DAO 재무로 가져간다. 이 부분이 스프레드에 포함되어 예치자와 대출자 사이의 간극을 더 넓힌다.</p>
+                    <div className="border-t border-red-200 dark:border-red-800 pt-2 space-y-1">
+                      <p className="text-gray-500 font-medium">7.5 USDC가 쪼개지는 방식:</p>
+                      <div className="flex justify-between text-red-500"><span>→ Aave DAO 수수료 (10%)</span><span className="font-bold">- 0.75 USDC</span></div>
+                      <div className="flex justify-between text-orange-500"><span>→ 유휴 200 USDC 희석 (80% 이용률)</span><span className="font-bold">- 1.35 USDC</span></div>
+                      <div className="flex justify-between text-green-600 border-t border-red-200 dark:border-red-700 pt-1 mt-1"><span className="font-bold">Alice 실수령</span><span className="font-bold">5.4 USDC (5.4%)</span></div>
+                    </div>
+                    <div className="bg-red-100 dark:bg-red-900/30 rounded p-2 text-red-700 dark:text-red-300">
+                      Bob이 낸 7.5에서 Alice는 5.4만 받음<br />
+                      <strong>2.1 USDC가 사라짐</strong>
                     </div>
                   </div>
                 </div>
-                <div className="bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4">
-                  <p className="font-bold text-indigo-700 dark:text-indigo-400 text-sm mb-3">Morpho가 스프레드를 없애는 이유 (2가지)</p>
-                  <div className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
-                    <div>
-                      <span className="font-bold text-indigo-600">① 유동성 버퍼 불필요</span>
-                      <p className="mt-1">P2P 매칭된 자금은 100% 대출자에게 가고 100% 이자를 받는다. 유휴 자금이 없다. 인출 요청이 와도 Aave 풀 전체가 백스탑 역할을 하므로 Morpho 자체 버퍼가 필요 없다.</p>
+
+                {/* 케이스 B */}
+                <div className="border-2 border-indigo-300 dark:border-indigo-700 rounded-xl overflow-hidden">
+                  <div className="bg-indigo-600 text-white px-4 py-2 text-xs font-bold">케이스 B — Morpho P2P 매칭</div>
+                  <div className="p-4 bg-indigo-50 dark:bg-indigo-900/10 space-y-3 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Bob이 내는 이자</span>
+                      <span className="font-bold text-indigo-600">6.45 USDC/년</span>
                     </div>
-                    <div>
-                      <span className="font-bold text-indigo-600">② 수수료 0%</span>
-                      <p className="mt-1">Morpho Optimizer는 수수료를 떼지 않는다. 스프레드 전체가 예치자·대출자에게 돌아간다. (Morpho Blue는 거버넌스 토큰으로 프로토콜 수익 분배)</p>
+                    <div className="border-t border-indigo-200 dark:border-indigo-800 pt-2 space-y-1">
+                      <p className="text-gray-500 font-medium">6.45 USDC가 쪼개지는 방식:</p>
+                      <div className="flex justify-between text-gray-400"><span>→ Aave DAO 수수료</span><span className="font-bold">0 USDC</span></div>
+                      <div className="flex justify-between text-gray-400"><span>→ 유휴 자금 희석</span><span className="font-bold">0 USDC</span></div>
+                      <div className="flex justify-between text-green-600 border-t border-indigo-200 dark:border-indigo-700 pt-1 mt-1"><span className="font-bold">Alice 실수령</span><span className="font-bold">6.45 USDC (6.45%)</span></div>
+                    </div>
+                    <div className="bg-indigo-100 dark:bg-indigo-900/30 rounded p-2 text-indigo-700 dark:text-indigo-300">
+                      Bob이 낸 6.45가 Alice에게 전부 감<br />
+                      <strong>사라지는 돈 = 0</strong>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* 수식 시각화 */}
-              <div className="bg-slate-900 rounded-xl p-5 text-sm font-mono">
-                <p className="text-slate-400 text-xs mb-4">// P2P 금리 계산 공식</p>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-slate-400 text-xs w-40 shrink-0">Aave 예치 금리</span>
-                    <span className="text-blue-400">4.8%</span>
+              {/* 흐름도 비교 */}
+              <div className="bg-slate-900 rounded-xl p-5 my-5">
+                <p className="text-slate-400 text-xs font-bold mb-4">돈의 흐름 비교</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                  <div>
+                    <p className="text-red-400 font-bold mb-2">Aave 풀 방식</p>
+                    <div className="space-y-1 text-slate-300">
+                      <div className="bg-slate-800 rounded px-3 py-1.5">Alice 100 USDC 예치</div>
+                      <div className="text-slate-600 text-center">↓</div>
+                      <div className="bg-red-900/40 border border-red-800 rounded px-3 py-1.5">
+                        Aave 풀 1,000 USDC<br />
+                        <span className="text-red-400 text-[10px]">유휴 200 USDC 포함 · DAO 수수료 차감</span>
+                      </div>
+                      <div className="text-slate-600 text-center">↓</div>
+                      <div className="bg-slate-800 rounded px-3 py-1.5">Bob 대출</div>
+                    </div>
+                    <div className="mt-2 text-red-400 text-center text-[11px]">Alice 5.4% ← 2.1% 사라짐 → Bob 7.5%</div>
                   </div>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-slate-400 text-xs w-40 shrink-0">Aave 대출 금리</span>
-                    <span className="text-red-400">7.5%</span>
-                  </div>
-                  <div className="border-t border-slate-700 pt-3 flex items-center gap-3 flex-wrap">
-                    <span className="text-slate-400 text-xs w-40 shrink-0">Morpho P2P 금리</span>
-                    <span className="text-indigo-400 font-bold">= (4.8 + 7.5) ÷ 2 = <span className="text-white">6.15%</span></span>
-                  </div>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-slate-400 text-xs w-40 shrink-0">예치자 수령</span>
-                    <span className="text-green-400">6.15% <span className="text-slate-500 text-xs">(Aave 4.8% → +1.35%p)</span></span>
-                  </div>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-slate-400 text-xs w-40 shrink-0">대출자 납부</span>
-                    <span className="text-green-400">6.15% <span className="text-slate-500 text-xs">(Aave 7.5% → -1.35%p)</span></span>
-                  </div>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <span className="text-slate-400 text-xs w-40 shrink-0">Morpho 수수료</span>
-                    <span className="text-yellow-400">0%</span>
+                  <div>
+                    <p className="text-indigo-400 font-bold mb-2">Morpho P2P 방식</p>
+                    <div className="space-y-1 text-slate-300">
+                      <div className="bg-slate-800 rounded px-3 py-1.5">Alice 100 USDC 예치</div>
+                      <div className="text-slate-600 text-center">↓</div>
+                      <div className="bg-indigo-900/40 border border-indigo-700 rounded px-3 py-1.5">
+                        Morpho 매칭 레이어<br />
+                        <span className="text-indigo-400 text-[10px]">수수료 없음 · 매칭만 함 · 버퍼 없음</span>
+                      </div>
+                      <div className="text-slate-600 text-center">↓</div>
+                      <div className="bg-slate-800 rounded px-3 py-1.5">Bob 대출</div>
+                    </div>
+                    <div className="mt-2 text-indigo-400 text-center text-[11px]">Alice 6.45% ← 0% 사라짐 → Bob 6.45%</div>
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">
-                * 실제 P2P 금리는 Aave 금리 변동에 따라 실시간으로 조정된다. 위 수치는 개념 설명을 위한 예시이며, 실제 적용 금리는 P2P Index Rate로 계산된다.
+
+              {/* 아이러니 callout */}
+              <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-400 rounded-r-xl p-4 my-5">
+                <p className="text-sm font-bold text-amber-800 dark:text-amber-300 mb-1">😅 Aave 입장에서 보면 아이러니한 구조</p>
+                <p className="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
+                  Morpho는 Aave의 유동성을 그대로 사용하면서 Aave의 수익원(스프레드)을 줄인다. Aave 풀이 없으면 Morpho도 작동할 수 없는데, 그 Aave 풀을 백스탑으로 쓰면서 Aave가 버는 수수료를 유저에게 돌려준다. Aave 입장에서는 자신의 유동성이 자신의 수익을 갉아먹는 데 쓰이는 셈이다. 그래서 Morpho Blue는 아예 Aave 의존을 끊고 독립 프로토콜로 간 것이기도 하다.
+                </p>
+              </div>
+
+              {/* P2P 금리 공식 */}
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">P2P 금리 계산 공식</p>
+              <div className="bg-slate-900 rounded-xl p-5 text-sm font-mono mb-3">
+                <div className="space-y-3 text-xs">
+                  {[
+                    { label: 'Aave 예치 금리 (공급)', val: '5.4%', color: 'text-blue-400', note: '(유휴 버퍼 + DAO 수수료 반영 후)' },
+                    { label: 'Aave 대출 금리 (차용)', val: '7.5%', color: 'text-red-400', note: '' },
+                  ].map((r) => (
+                    <div key={r.label} className="flex items-center gap-2 flex-wrap">
+                      <span className="text-slate-400 w-44 shrink-0">{r.label}</span>
+                      <span className={r.color}>{r.val}</span>
+                      {r.note && <span className="text-slate-600">{r.note}</span>}
+                    </div>
+                  ))}
+                  <div className="border-t border-slate-700 pt-3 space-y-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-slate-400 w-44 shrink-0">Morpho P2P 금리</span>
+                      <span className="text-indigo-300 font-bold">= (5.4 + 7.5) ÷ 2 = <span className="text-white text-sm">6.45%</span></span>
+                    </div>
+                    <div className="flex items-center gap-2"><span className="text-slate-400 w-44 shrink-0">예치자 수령</span><span className="text-green-400 font-bold">6.45% <span className="text-slate-500">(+1.05%p)</span></span></div>
+                    <div className="flex items-center gap-2"><span className="text-slate-400 w-44 shrink-0">대출자 납부</span><span className="text-green-400 font-bold">6.45% <span className="text-slate-500">(-1.05%p)</span></span></div>
+                    <div className="flex items-center gap-2"><span className="text-slate-400 w-44 shrink-0">Morpho 수수료</span><span className="text-yellow-400 font-bold">0%</span></div>
+                    <div className="flex items-center gap-2"><span className="text-slate-400 w-44 shrink-0">사라지는 돈</span><span className="text-green-400 font-bold">0 USDC <span className="text-slate-500">(Aave는 2.1% 사라짐)</span></span></div>
+                  </div>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                * 실제 P2P 금리는 Aave 금리 변동에 따라 실시간으로 조정된다. 위 수치는 개념 설명을 위한 예시이며, 실제 적용 금리는 Morpho의 P2P Index Rate 메커니즘으로 계산된다.
               </p>
             </div>
 
@@ -1026,65 +1127,148 @@ export default function MorphoDeepDivePage() {
 
             {/* STEP 3 EN */}
             <div className="my-8">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 3 — Why the spread (rate gap) disappears</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 3 — Why adding a layer actually reduces costs</p>
+
+              <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl p-4 mb-6">
+                <p className="text-sm font-bold text-amber-800 dark:text-amber-300 mb-1">❓ The natural question</p>
+                <p className="text-sm text-amber-900 dark:text-amber-200">
+                  "Morpho adds a layer on top of Aave — shouldn't that mean more cost, not less?"
+                </p>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                It's a fair instinct. The answer: <strong>Morpho isn't a cost-adding layer — it's a layer that removes two costs that already existed inside Aave's pool structure.</strong> Morpho itself takes nothing. It only runs matching logic.
+              </p>
+
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">First: the two hidden costs inside Aave's pool</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800 rounded-xl p-4">
-                  <p className="font-bold text-red-700 dark:text-red-400 text-sm mb-3">Why Aave's spread is large (2 reasons)</p>
-                  <div className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
-                    <div>
-                      <span className="font-bold text-red-600">① Liquidity buffer cost</span>
-                      <p className="mt-1">10–20% of the pool sits idle at all times. This capital earns almost nothing but is included in the deposit base, dragging down the average APY. Borrowers pay a lot; depositors receive less.</p>
+                  <p className="font-bold text-red-700 dark:text-red-400 text-sm mb-3">① Idle buffer dilution</p>
+                  <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                    10–20% of the pool must always sit idle so depositors can withdraw at any time. That idle capital earns almost nothing, but it's included in the total deposit base — dragging down everyone's average APY.
+                  </p>
+                  <div className="bg-red-100 dark:bg-red-900/20 rounded-lg p-3 text-xs font-mono">
+                    <p className="text-red-700 dark:text-red-300">
+                      Depositor yield = Borrow rate × (Borrowed / Total deposits)<br />
+                      <span className="text-red-500">= 7.5% × (800 / 1000) = 6%</span><br />
+                      <span className="text-gray-500">↑ idle 200 USDC dilutes the rate</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-orange-50 dark:bg-orange-900/10 border border-orange-200 dark:border-orange-800 rounded-xl p-4">
+                  <p className="font-bold text-orange-700 dark:text-orange-400 text-sm mb-3">② Reserve Factor (protocol fee)</p>
+                  <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                    Aave routes a fixed percentage of borrow interest (~10%, the Reserve Factor) to its DAO treasury. Even after the idle dilution hit, depositors lose another cut to the DAO.
+                  </p>
+                  <div className="bg-orange-100 dark:bg-orange-900/20 rounded-lg p-3 text-xs font-mono">
+                    <p className="text-orange-700 dark:text-orange-300">
+                      Depositor net = Diluted rate × (1 - Reserve Factor)<br />
+                      <span className="text-orange-500">= 6% × 0.9 = 5.4%</span><br />
+                      <span className="text-gray-500">↑ DAO takes another 0.6%</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Alice & Bob — concrete comparison</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Assume: 1,000 USDC deposited in Aave / 800 USDC borrowed (80% utilization) / Reserve Factor 10%</p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="border-2 border-red-200 dark:border-red-800 rounded-xl overflow-hidden">
+                  <div className="bg-red-600 text-white px-4 py-2 text-xs font-bold">Case A — Aave directly, no Morpho</div>
+                  <div className="p-4 bg-red-50 dark:bg-red-900/10 space-y-3 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Bob's annual interest</span>
+                      <span className="font-bold text-red-600">7.5 USDC/yr</span>
                     </div>
-                    <div>
-                      <span className="font-bold text-red-600">② Protocol fees</span>
-                      <p className="mt-1">Aave takes a portion of borrow interest into its DAO treasury. This widens the gap between what borrowers pay and what depositors receive.</p>
+                    <div className="border-t border-red-200 dark:border-red-800 pt-2 space-y-1">
+                      <p className="text-gray-500 font-medium">Where does 7.5 USDC go?</p>
+                      <div className="flex justify-between text-red-500"><span>→ Aave DAO fee (10%)</span><span className="font-bold">− 0.75 USDC</span></div>
+                      <div className="flex justify-between text-orange-500"><span>→ Idle 200 USDC dilution</span><span className="font-bold">− 1.35 USDC</span></div>
+                      <div className="flex justify-between text-green-600 border-t border-red-200 dark:border-red-700 pt-1 mt-1"><span className="font-bold">Alice receives</span><span className="font-bold">5.4 USDC (5.4%)</span></div>
+                    </div>
+                    <div className="bg-red-100 dark:bg-red-900/30 rounded p-2 text-red-700 dark:text-red-300">
+                      Bob paid 7.5. Alice got 5.4.<br /><strong>2.1 USDC vanished.</strong>
                     </div>
                   </div>
                 </div>
-                <div className="bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4">
-                  <p className="font-bold text-indigo-700 dark:text-indigo-400 text-sm mb-3">Why Morpho eliminates the spread (2 reasons)</p>
-                  <div className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
-                    <div>
-                      <span className="font-bold text-indigo-600">① No liquidity buffer needed</span>
-                      <p className="mt-1">P2P-matched funds are 100% deployed and 100% earning. No idle capital. When withdrawals come in, Aave's entire pool acts as the backstop — so Morpho doesn't need its own buffer.</p>
+
+                <div className="border-2 border-indigo-300 dark:border-indigo-700 rounded-xl overflow-hidden">
+                  <div className="bg-indigo-600 text-white px-4 py-2 text-xs font-bold">Case B — Morpho P2P match</div>
+                  <div className="p-4 bg-indigo-50 dark:bg-indigo-900/10 space-y-3 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-400">Bob's annual interest</span>
+                      <span className="font-bold text-indigo-600">6.45 USDC/yr</span>
                     </div>
-                    <div>
-                      <span className="font-bold text-indigo-600">② 0% protocol fee</span>
-                      <p className="mt-1">Morpho Optimizer charges no fees. The entire spread is returned to depositors and borrowers. (Morpho Blue distributes protocol revenue via governance tokens.)</p>
+                    <div className="border-t border-indigo-200 dark:border-indigo-800 pt-2 space-y-1">
+                      <p className="text-gray-500 font-medium">Where does 6.45 USDC go?</p>
+                      <div className="flex justify-between text-gray-400"><span>→ Aave DAO fee</span><span className="font-bold">0 USDC</span></div>
+                      <div className="flex justify-between text-gray-400"><span>→ Idle dilution</span><span className="font-bold">0 USDC</span></div>
+                      <div className="flex justify-between text-green-600 border-t border-indigo-200 dark:border-indigo-700 pt-1 mt-1"><span className="font-bold">Alice receives</span><span className="font-bold">6.45 USDC (6.45%)</span></div>
+                    </div>
+                    <div className="bg-indigo-100 dark:bg-indigo-900/30 rounded p-2 text-indigo-700 dark:text-indigo-300">
+                      Bob paid 6.45. Alice got 6.45.<br /><strong>Nothing vanished.</strong>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-slate-900 rounded-xl p-5 text-sm font-mono">
-                <p className="text-slate-400 text-xs mb-4">// P2P rate calculation</p>
-                <div className="space-y-3">
-                  {[
-                    { label: 'Aave supply APY', val: '4.8%', color: 'text-blue-400' },
-                    { label: 'Aave borrow APY', val: '7.5%', color: 'text-red-400' },
-                  ].map((r) => (
-                    <div key={r.label} className="flex items-center gap-3">
-                      <span className="text-slate-400 text-xs w-44 shrink-0">{r.label}</span>
-                      <span className={r.color}>{r.val}</span>
-                    </div>
-                  ))}
-                  <div className="border-t border-slate-700 pt-3 space-y-3">
-                    {[
-                      { label: 'Morpho P2P rate', val: '= (4.8 + 7.5) ÷ 2 = 6.15%', color: 'text-indigo-400' },
-                      { label: 'Depositor receives', val: '6.15%  (+1.35%p vs Aave)', color: 'text-green-400' },
-                      { label: 'Borrower pays', val: '6.15%  (−1.35%p vs Aave)', color: 'text-green-400' },
-                      { label: 'Morpho fee', val: '0%', color: 'text-yellow-400' },
-                    ].map((r) => (
-                      <div key={r.label} className="flex items-center gap-3">
-                        <span className="text-slate-400 text-xs w-44 shrink-0">{r.label}</span>
-                        <span className={`${r.color} font-bold`}>{r.val}</span>
+              <div className="bg-slate-900 rounded-xl p-5 my-5">
+                <p className="text-slate-400 text-xs font-bold mb-4">Money flow comparison</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                  <div>
+                    <p className="text-red-400 font-bold mb-2">Aave pool model</p>
+                    <div className="space-y-1 text-slate-300">
+                      <div className="bg-slate-800 rounded px-3 py-1.5">Alice deposits 100 USDC</div>
+                      <div className="text-slate-600 text-center">↓</div>
+                      <div className="bg-red-900/40 border border-red-800 rounded px-3 py-1.5">
+                        Aave pool 1,000 USDC<br />
+                        <span className="text-red-400 text-[10px]">idle buffer included · DAO fee deducted</span>
                       </div>
-                    ))}
+                      <div className="text-slate-600 text-center">↓</div>
+                      <div className="bg-slate-800 rounded px-3 py-1.5">Bob borrows</div>
+                    </div>
+                    <div className="mt-2 text-red-400 text-center text-[11px]">Alice 5.4% ← 2.1% gone → Bob 7.5%</div>
+                  </div>
+                  <div>
+                    <p className="text-indigo-400 font-bold mb-2">Morpho P2P model</p>
+                    <div className="space-y-1 text-slate-300">
+                      <div className="bg-slate-800 rounded px-3 py-1.5">Alice deposits 100 USDC</div>
+                      <div className="text-slate-600 text-center">↓</div>
+                      <div className="bg-indigo-900/40 border border-indigo-700 rounded px-3 py-1.5">
+                        Morpho matching layer<br />
+                        <span className="text-indigo-400 text-[10px]">zero fee · zero buffer · matching only</span>
+                      </div>
+                      <div className="text-slate-600 text-center">↓</div>
+                      <div className="bg-slate-800 rounded px-3 py-1.5">Bob borrows</div>
+                    </div>
+                    <div className="mt-2 text-indigo-400 text-center text-[11px]">Alice 6.45% ← 0% gone → Bob 6.45%</div>
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">
-                * Actual P2P rates adjust in real time with Aave rate movements. The figures above are illustrative; actual rates are calculated via Morpho's P2P Index Rate mechanism.
+
+              <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-400 rounded-r-xl p-4 my-5">
+                <p className="text-sm font-bold text-amber-800 dark:text-amber-300 mb-1">😅 The irony — from Aave's perspective</p>
+                <p className="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
+                  Morpho relies entirely on Aave's liquidity to function — yet uses that same liquidity to undercut Aave's revenue. Aave's pool is what makes Morpho's instant withdrawals possible, but it's also what Morpho routes around to return the spread back to users. That's precisely why Morpho Blue eventually cut Aave dependency entirely and went standalone.
+                </p>
+              </div>
+
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">P2P rate formula</p>
+              <div className="bg-slate-900 rounded-xl p-5 mb-3 text-xs font-mono">
+                <div className="space-y-2">
+                  <div className="flex gap-2 flex-wrap"><span className="text-slate-400 w-44 shrink-0">Aave supply APY (net)</span><span className="text-blue-400">5.4% <span className="text-slate-600">(after dilution + DAO fee)</span></span></div>
+                  <div className="flex gap-2 flex-wrap"><span className="text-slate-400 w-44 shrink-0">Aave borrow APY</span><span className="text-red-400">7.5%</span></div>
+                  <div className="border-t border-slate-700 pt-2 space-y-2">
+                    <div className="flex gap-2 flex-wrap"><span className="text-slate-400 w-44 shrink-0">Morpho P2P rate</span><span className="text-indigo-300 font-bold">= (5.4 + 7.5) ÷ 2 = <span className="text-white text-sm">6.45%</span></span></div>
+                    <div className="flex gap-2"><span className="text-slate-400 w-44 shrink-0">Depositor receives</span><span className="text-green-400 font-bold">6.45% <span className="text-slate-500">(+1.05%p)</span></span></div>
+                    <div className="flex gap-2"><span className="text-slate-400 w-44 shrink-0">Borrower pays</span><span className="text-green-400 font-bold">6.45% <span className="text-slate-500">(−1.05%p)</span></span></div>
+                    <div className="flex gap-2"><span className="text-slate-400 w-44 shrink-0">Morpho fee</span><span className="text-yellow-400 font-bold">0%</span></div>
+                    <div className="flex gap-2"><span className="text-slate-400 w-44 shrink-0">Money that vanishes</span><span className="text-green-400 font-bold">0 USDC <span className="text-slate-500">(vs 2.1% in Aave)</span></span></div>
+                  </div>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                * Actual P2P rates adjust in real time with Aave rate movements. These figures are illustrative; actual rates use Morpho's P2P Index Rate mechanism.
               </p>
             </div>
 
