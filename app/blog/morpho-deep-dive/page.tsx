@@ -366,6 +366,217 @@ export default function MorphoDeepDivePage() {
               </div>
             </div>
 
+            {/* STEP 2-B: P2P 매칭 핵심 순간 + API */}
+            <div className="my-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 2-B — P2P 매칭의 핵심 순간: Alice 돈이 Bob에게 직접 가는 과정</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                매칭이 성립하는 바로 그 순간을 컨트랙트 함수 호출 단위로 따라가 보자. Aave와 Morpho의 어떤 함수가 어떤 순서로 호출되는지 보면, 돈이 어떻게 이동하는지가 명확해진다.
+              </p>
+
+              {/* 3단계 상태 변화 */}
+              <div className="space-y-4 mb-8">
+
+                {/* 상태 1: 매칭 전 */}
+                <div className="border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                  <div className="bg-slate-700 text-white px-4 py-2 text-xs font-bold flex items-center gap-2">
+                    <span className="bg-slate-500 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">1</span>
+                    매칭 전 — Alice가 Morpho에 예치한 상태
+                  </div>
+                  <div className="p-5 bg-slate-50 dark:bg-slate-800/30">
+                    <div className="flex flex-col md:flex-row items-center gap-3 mb-4 text-sm">
+                      <div className="bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-lg px-4 py-2 text-center">
+                        <div className="text-xs text-blue-600 dark:text-blue-400">Alice</div>
+                        <div className="font-bold text-blue-800 dark:text-blue-200">100 USDC 예치</div>
+                      </div>
+                      <div className="text-gray-400">→</div>
+                      <div className="bg-indigo-100 dark:bg-indigo-900/30 border border-indigo-300 dark:border-indigo-700 rounded-lg px-4 py-2 text-center">
+                        <div className="text-xs text-indigo-600 dark:text-indigo-400">Morpho 컨트랙트</div>
+                        <div className="font-bold text-indigo-800 dark:text-indigo-200">Alice 장부 기록</div>
+                      </div>
+                      <div className="text-gray-400">→</div>
+                      <div className="bg-orange-100 dark:bg-orange-900/30 border border-orange-300 dark:border-orange-700 rounded-lg px-4 py-2 text-center">
+                        <div className="text-xs text-orange-600 dark:text-orange-400">Aave Pool</div>
+                        <div className="font-bold text-orange-800 dark:text-orange-200">aUSDC 100개 보유</div>
+                        <div className="text-xs text-orange-500">5.4% 이자 발생 중</div>
+                      </div>
+                    </div>
+                    <div className="bg-white dark:bg-slate-900 rounded-xl p-4 font-mono text-xs space-y-2">
+                      <p className="text-slate-400 mb-2">// Alice가 Morpho.supply() 호출 시 내부적으로 실행되는 함수 흐름</p>
+                      <div className="flex gap-3">
+                        <span className="text-indigo-400 shrink-0">Morpho</span>
+                        <span className="text-slate-300">→ <span className="text-green-400">Aave.supply</span>(USDC, 100, <span className="text-yellow-400">morphoContract</span>, 0)</span>
+                      </div>
+                      <div className="flex gap-3">
+                        <span className="text-indigo-400 shrink-0">Aave</span>
+                        <span className="text-slate-300">→ aUSDC 100개 발행, 수취인 = <span className="text-yellow-400">morphoContract</span></span>
+                      </div>
+                      <div className="flex gap-3">
+                        <span className="text-indigo-400 shrink-0">Morpho</span>
+                        <span className="text-slate-300">→ 내부 장부: <span className="text-blue-400">suppliers[Alice] = 100 USDC</span></span>
+                      </div>
+                      <div className="mt-2 text-amber-400 text-[11px]">※ 이 시점에는 Alice 돈이 Aave 풀에 있음. Bob 없으면 Aave 금리(5.4%) 그대로.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-center text-2xl text-indigo-400">↓ Bob이 Morpho에서 대출 요청</div>
+
+                {/* 상태 2: 매칭 순간 */}
+                <div className="border-2 border-indigo-400 dark:border-indigo-600 rounded-2xl overflow-hidden">
+                  <div className="bg-indigo-600 text-white px-4 py-2 text-xs font-bold flex items-center gap-2">
+                    <span className="bg-indigo-400 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">2</span>
+                    매칭 순간 ⚡ — Morpho가 Aave에서 돈을 꺼내 Bob에게 직접 전달
+                  </div>
+                  <div className="p-5 bg-indigo-50 dark:bg-indigo-900/10">
+                    <div className="bg-white dark:bg-slate-900 rounded-xl p-4 font-mono text-xs space-y-3 mb-4">
+                      <p className="text-slate-400 mb-1">// Bob이 Morpho.borrow() 호출 → 내부 매칭 실행</p>
+
+                      <div className="border-l-2 border-indigo-400 pl-3 space-y-2">
+                        <p className="text-indigo-300 font-bold text-[11px] uppercase">① FIFO 큐 확인</p>
+                        <div className="flex gap-3">
+                          <span className="text-indigo-400 shrink-0">Morpho</span>
+                          <span className="text-slate-300">→ <span className="text-yellow-400">_matchSuppliers</span>(USDC, 100) 호출</span>
+                        </div>
+                        <div className="flex gap-3">
+                          <span className="text-indigo-400 shrink-0">결과</span>
+                          <span className="text-green-400">→ Alice 발견! 매칭 성립</span>
+                        </div>
+                      </div>
+
+                      <div className="border-l-2 border-red-400 pl-3 space-y-2">
+                        <p className="text-red-300 font-bold text-[11px] uppercase">② Aave에서 Alice 돈 꺼내기</p>
+                        <div className="flex gap-3">
+                          <span className="text-indigo-400 shrink-0">Morpho</span>
+                          <span className="text-slate-300">→ <span className="text-red-400">Aave.withdraw</span>(USDC, 100, <span className="text-yellow-400">morphoContract</span>)</span>
+                        </div>
+                        <div className="flex gap-3">
+                          <span className="text-indigo-400 shrink-0">Aave</span>
+                          <span className="text-slate-300">→ aUSDC 100개 소각, USDC 100개 반환</span>
+                        </div>
+                      </div>
+
+                      <div className="border-l-2 border-green-400 pl-3 space-y-2">
+                        <p className="text-green-300 font-bold text-[11px] uppercase">③ Bob에게 직접 전달</p>
+                        <div className="flex gap-3">
+                          <span className="text-indigo-400 shrink-0">Morpho</span>
+                          <span className="text-slate-300">→ USDC 100개 → <span className="text-blue-400">Bob</span> 지갑으로 직접 전송</span>
+                        </div>
+                        <div className="flex gap-3">
+                          <span className="text-indigo-400 shrink-0">Morpho</span>
+                          <span className="text-slate-300">→ 내부 장부: <span className="text-blue-400">borrowers[Bob] ↔ suppliers[Alice]</span> P2P 연결</span>
+                        </div>
+                      </div>
+
+                      <div className="border-l-2 border-purple-400 pl-3 space-y-2">
+                        <p className="text-purple-300 font-bold text-[11px] uppercase">④ Bob의 담보는 Aave에 lock</p>
+                        <div className="flex gap-3">
+                          <span className="text-indigo-400 shrink-0">Morpho</span>
+                          <span className="text-slate-300">→ <span className="text-purple-400">Aave.supply</span>(ETH, 담보, <span className="text-yellow-400">morphoContract</span>) — 담보만</span>
+                        </div>
+                        <div className="flex gap-3">
+                          <span className="text-indigo-400 shrink-0">Aave</span>
+                          <span className="text-slate-300">→ Health Factor 계산, 청산 감시 지속</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-indigo-100 dark:bg-indigo-900/30 rounded-lg p-3 text-xs text-indigo-800 dark:text-indigo-200">
+                      <strong>이 순간이 핵심이다.</strong> Alice의 돈은 더 이상 Aave 풀에 없다. Bob에게 직접 갔다. Aave는 담보만 들고 있다.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-center text-2xl text-green-400">↓ 이자 발생</div>
+
+                {/* 상태 3: 매칭 후 */}
+                <div className="border border-green-300 dark:border-green-700 rounded-2xl overflow-hidden">
+                  <div className="bg-green-700 text-white px-4 py-2 text-xs font-bold flex items-center gap-2">
+                    <span className="bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">3</span>
+                    매칭 후 — Bob이 Alice에게만 이자를 낸다
+                  </div>
+                  <div className="p-5 bg-green-50 dark:bg-green-900/10">
+                    <div className="flex flex-col md:flex-row items-center gap-3 mb-4 text-sm">
+                      <div className="bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-lg px-4 py-2 text-center">
+                        <div className="text-xs text-blue-600 dark:text-blue-400">Bob</div>
+                        <div className="font-bold text-blue-800 dark:text-blue-200">6.45% 이자 납부</div>
+                      </div>
+                      <div className="text-gray-400">→</div>
+                      <div className="bg-indigo-100 dark:bg-indigo-900/30 border border-indigo-300 dark:border-indigo-700 rounded-lg px-4 py-2 text-center">
+                        <div className="text-xs text-indigo-600 dark:text-indigo-400">Morpho (P2P 인덱스)</div>
+                        <div className="font-bold text-indigo-800 dark:text-indigo-200">이자 중계</div>
+                        <div className="text-xs text-indigo-500">수수료 0%</div>
+                      </div>
+                      <div className="text-gray-400">→</div>
+                      <div className="bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-lg px-4 py-2 text-center">
+                        <div className="text-xs text-green-600 dark:text-green-400">Alice</div>
+                        <div className="font-bold text-green-800 dark:text-green-200">6.45% 이자 수령</div>
+                      </div>
+                    </div>
+                    <div className="bg-white dark:bg-slate-900 rounded-xl p-4 font-mono text-xs space-y-2">
+                      <p className="text-slate-400 mb-2">// 이자 계산 방식 — P2P 인덱스 메커니즘</p>
+                      <div className="flex gap-3">
+                        <span className="text-indigo-400 shrink-0">매초마다</span>
+                        <span className="text-slate-300"><span className="text-yellow-400">p2pIndex</span> 업데이트 (Aave 금리 기반으로 실시간 계산)</span>
+                      </div>
+                      <div className="flex gap-3">
+                        <span className="text-indigo-400 shrink-0">Bob 채무</span>
+                        <span className="text-slate-300">= 원금 × <span className="text-red-400">p2pBorrowIndex</span> (6.45% 반영)</span>
+                      </div>
+                      <div className="flex gap-3">
+                        <span className="text-indigo-400 shrink-0">Alice 수령</span>
+                        <span className="text-slate-300">= 원금 × <span className="text-green-400">p2pSupplyIndex</span> (6.45% 반영)</span>
+                      </div>
+                      <div className="flex gap-3">
+                        <span className="text-indigo-400 shrink-0">Aave 역할</span>
+                        <span className="text-slate-300">= <span className="text-orange-400">담보 관리 + 청산만</span>. 이자 흐름에서는 제외됨.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* API 요약표 */}
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">사용되는 주요 컨트랙트 함수 요약</p>
+              <div className="overflow-x-auto mb-4">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-slate-100 dark:bg-slate-800">
+                      <th className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-left">호출 주체</th>
+                      <th className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-left font-mono">함수</th>
+                      <th className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-left">시점</th>
+                      <th className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-left">하는 일</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['유저 → Morpho', 'Morpho.supply()', '예치 시', 'Morpho에 USDC 예치, 내부 큐에 등록'],
+                      ['Morpho → Aave', 'Aave.supply()', '매칭 전 대기 중', '매칭 안 된 자금을 Aave에 임시 예치'],
+                      ['유저 → Morpho', 'Morpho.borrow()', '대출 요청 시', '대출 요청 + 매칭 트리거'],
+                      ['Morpho 내부', '_matchSuppliers()', '매칭 순간', 'FIFO 큐에서 예치자 찾아 P2P 연결'],
+                      ['Morpho → Aave', 'Aave.withdraw()', '매칭 성립 시', 'Alice 자금을 Aave에서 꺼냄 (aUSDC 소각)'],
+                      ['Morpho → Bob', 'ERC20.transfer()', '매칭 성립 직후', '꺼낸 USDC를 Bob에게 직접 전송'],
+                      ['유저 → Morpho', 'Morpho.repay()', '상환 시', 'Bob이 이자+원금 상환'],
+                      ['유저 → Morpho', 'Morpho.withdraw()', '인출 시', 'Alice 인출 → 재매칭 or Aave 백스탑'],
+                    ].map(([caller, fn, timing, desc], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white dark:bg-transparent' : 'bg-slate-50 dark:bg-slate-800/30'}>
+                        <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-slate-600 dark:text-slate-400">{caller}</td>
+                        <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 font-mono text-indigo-600 dark:text-indigo-400">{fn}</td>
+                        <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-slate-500 dark:text-slate-400">{timing}</td>
+                        <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-slate-700 dark:text-slate-300">{desc}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4">
+                <p className="text-xs font-bold text-indigo-700 dark:text-indigo-300 mb-2">결론: Morpho는 "Aave를 도구로 쓰는 매칭 엔진"</p>
+                <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+                  Aave의 <span className="font-mono text-orange-500">supply()</span> / <span className="font-mono text-orange-500">withdraw()</span>를 도구로 활용해 자금을 드나들게 하고, 매칭이 되는 순간엔 Aave를 완전히 우회해 유저끼리 직접 연결한다.
+                  Aave는 담보 보관소이자 유동성 백스탑 역할만 남는다. 이자 흐름은 Alice ↔ Bob 사이에서만 발생한다.
+                </p>
+              </div>
+            </div>
+
             {/* STEP 3: 왜 금리가 줄어드나 */}
             <div className="my-8">
               <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">STEP 3 — 왜 레이어가 추가됐는데 오히려 비용이 줄어드나</p>
@@ -408,89 +619,6 @@ export default function MorphoDeepDivePage() {
                       <span className="text-orange-500">= 6% × 0.9 = 5.4%</span><br />
                       <span className="text-gray-500">→ DAO가 0.6% 추가로 떼감</span>
                     </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* 숫자 시뮬레이션 */}
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Alice와 Bob으로 보는 구체적 비교</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">가정: Aave 풀 전체 1,000 USDC 예치 / 800 USDC 대출 중 (이용률 80%) / Reserve Factor 10%</p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
-                {/* 케이스 A */}
-                <div className="border-2 border-red-200 dark:border-red-800 rounded-xl overflow-hidden">
-                  <div className="bg-red-600 text-white px-4 py-2 text-xs font-bold">케이스 A — Morpho 없이 Aave 직접 사용</div>
-                  <div className="p-4 bg-red-50 dark:bg-red-900/10 space-y-3 text-xs">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">Bob이 내는 이자</span>
-                      <span className="font-bold text-red-600">7.5 USDC/년</span>
-                    </div>
-                    <div className="border-t border-red-200 dark:border-red-800 pt-2 space-y-1">
-                      <p className="text-gray-500 font-medium">7.5 USDC가 쪼개지는 방식:</p>
-                      <div className="flex justify-between text-red-500"><span>→ Aave DAO 수수료 (10%)</span><span className="font-bold">- 0.75 USDC</span></div>
-                      <div className="flex justify-between text-orange-500"><span>→ 유휴 200 USDC 희석 (80% 이용률)</span><span className="font-bold">- 1.35 USDC</span></div>
-                      <div className="flex justify-between text-green-600 border-t border-red-200 dark:border-red-700 pt-1 mt-1"><span className="font-bold">Alice 실수령</span><span className="font-bold">5.4 USDC (5.4%)</span></div>
-                    </div>
-                    <div className="bg-red-100 dark:bg-red-900/30 rounded p-2 text-red-700 dark:text-red-300">
-                      Bob이 낸 7.5에서 Alice는 5.4만 받음<br />
-                      <strong>2.1 USDC가 사라짐</strong>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 케이스 B */}
-                <div className="border-2 border-indigo-300 dark:border-indigo-700 rounded-xl overflow-hidden">
-                  <div className="bg-indigo-600 text-white px-4 py-2 text-xs font-bold">케이스 B — Morpho P2P 매칭</div>
-                  <div className="p-4 bg-indigo-50 dark:bg-indigo-900/10 space-y-3 text-xs">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">Bob이 내는 이자</span>
-                      <span className="font-bold text-indigo-600">6.45 USDC/년</span>
-                    </div>
-                    <div className="border-t border-indigo-200 dark:border-indigo-800 pt-2 space-y-1">
-                      <p className="text-gray-500 font-medium">6.45 USDC가 쪼개지는 방식:</p>
-                      <div className="flex justify-between text-gray-400"><span>→ Aave DAO 수수료</span><span className="font-bold">0 USDC</span></div>
-                      <div className="flex justify-between text-gray-400"><span>→ 유휴 자금 희석</span><span className="font-bold">0 USDC</span></div>
-                      <div className="flex justify-between text-green-600 border-t border-indigo-200 dark:border-indigo-700 pt-1 mt-1"><span className="font-bold">Alice 실수령</span><span className="font-bold">6.45 USDC (6.45%)</span></div>
-                    </div>
-                    <div className="bg-indigo-100 dark:bg-indigo-900/30 rounded p-2 text-indigo-700 dark:text-indigo-300">
-                      Bob이 낸 6.45가 Alice에게 전부 감<br />
-                      <strong>사라지는 돈 = 0</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 흐름도 비교 */}
-              <div className="bg-slate-900 rounded-xl p-5 my-5">
-                <p className="text-slate-400 text-xs font-bold mb-4">돈의 흐름 비교</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                  <div>
-                    <p className="text-red-400 font-bold mb-2">Aave 풀 방식</p>
-                    <div className="space-y-1 text-slate-300">
-                      <div className="bg-slate-800 rounded px-3 py-1.5">Alice 100 USDC 예치</div>
-                      <div className="text-slate-600 text-center">↓</div>
-                      <div className="bg-red-900/40 border border-red-800 rounded px-3 py-1.5">
-                        Aave 풀 1,000 USDC<br />
-                        <span className="text-red-400 text-[10px]">유휴 200 USDC 포함 · DAO 수수료 차감</span>
-                      </div>
-                      <div className="text-slate-600 text-center">↓</div>
-                      <div className="bg-slate-800 rounded px-3 py-1.5">Bob 대출</div>
-                    </div>
-                    <div className="mt-2 text-red-400 text-center text-[11px]">Alice 5.4% ← 2.1% 사라짐 → Bob 7.5%</div>
-                  </div>
-                  <div>
-                    <p className="text-indigo-400 font-bold mb-2">Morpho P2P 방식</p>
-                    <div className="space-y-1 text-slate-300">
-                      <div className="bg-slate-800 rounded px-3 py-1.5">Alice 100 USDC 예치</div>
-                      <div className="text-slate-600 text-center">↓</div>
-                      <div className="bg-indigo-900/40 border border-indigo-700 rounded px-3 py-1.5">
-                        Morpho 매칭 레이어<br />
-                        <span className="text-indigo-400 text-[10px]">수수료 없음 · 매칭만 함 · 버퍼 없음</span>
-                      </div>
-                      <div className="text-slate-600 text-center">↓</div>
-                      <div className="bg-slate-800 rounded px-3 py-1.5">Bob 대출</div>
-                    </div>
-                    <div className="mt-2 text-indigo-400 text-center text-[11px]">Alice 6.45% ← 0% 사라짐 → Bob 6.45%</div>
                   </div>
                 </div>
               </div>
@@ -1165,83 +1293,6 @@ export default function MorphoDeepDivePage() {
                       <span className="text-orange-500">= 6% × 0.9 = 5.4%</span><br />
                       <span className="text-gray-500">↑ DAO takes another 0.6%</span>
                     </p>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Alice & Bob — concrete comparison</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Assume: 1,000 USDC deposited in Aave / 800 USDC borrowed (80% utilization) / Reserve Factor 10%</p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div className="border-2 border-red-200 dark:border-red-800 rounded-xl overflow-hidden">
-                  <div className="bg-red-600 text-white px-4 py-2 text-xs font-bold">Case A — Aave directly, no Morpho</div>
-                  <div className="p-4 bg-red-50 dark:bg-red-900/10 space-y-3 text-xs">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">Bob's annual interest</span>
-                      <span className="font-bold text-red-600">7.5 USDC/yr</span>
-                    </div>
-                    <div className="border-t border-red-200 dark:border-red-800 pt-2 space-y-1">
-                      <p className="text-gray-500 font-medium">Where does 7.5 USDC go?</p>
-                      <div className="flex justify-between text-red-500"><span>→ Aave DAO fee (10%)</span><span className="font-bold">− 0.75 USDC</span></div>
-                      <div className="flex justify-between text-orange-500"><span>→ Idle 200 USDC dilution</span><span className="font-bold">− 1.35 USDC</span></div>
-                      <div className="flex justify-between text-green-600 border-t border-red-200 dark:border-red-700 pt-1 mt-1"><span className="font-bold">Alice receives</span><span className="font-bold">5.4 USDC (5.4%)</span></div>
-                    </div>
-                    <div className="bg-red-100 dark:bg-red-900/30 rounded p-2 text-red-700 dark:text-red-300">
-                      Bob paid 7.5. Alice got 5.4.<br /><strong>2.1 USDC vanished.</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-2 border-indigo-300 dark:border-indigo-700 rounded-xl overflow-hidden">
-                  <div className="bg-indigo-600 text-white px-4 py-2 text-xs font-bold">Case B — Morpho P2P match</div>
-                  <div className="p-4 bg-indigo-50 dark:bg-indigo-900/10 space-y-3 text-xs">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">Bob's annual interest</span>
-                      <span className="font-bold text-indigo-600">6.45 USDC/yr</span>
-                    </div>
-                    <div className="border-t border-indigo-200 dark:border-indigo-800 pt-2 space-y-1">
-                      <p className="text-gray-500 font-medium">Where does 6.45 USDC go?</p>
-                      <div className="flex justify-between text-gray-400"><span>→ Aave DAO fee</span><span className="font-bold">0 USDC</span></div>
-                      <div className="flex justify-between text-gray-400"><span>→ Idle dilution</span><span className="font-bold">0 USDC</span></div>
-                      <div className="flex justify-between text-green-600 border-t border-indigo-200 dark:border-indigo-700 pt-1 mt-1"><span className="font-bold">Alice receives</span><span className="font-bold">6.45 USDC (6.45%)</span></div>
-                    </div>
-                    <div className="bg-indigo-100 dark:bg-indigo-900/30 rounded p-2 text-indigo-700 dark:text-indigo-300">
-                      Bob paid 6.45. Alice got 6.45.<br /><strong>Nothing vanished.</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-slate-900 rounded-xl p-5 my-5">
-                <p className="text-slate-400 text-xs font-bold mb-4">Money flow comparison</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                  <div>
-                    <p className="text-red-400 font-bold mb-2">Aave pool model</p>
-                    <div className="space-y-1 text-slate-300">
-                      <div className="bg-slate-800 rounded px-3 py-1.5">Alice deposits 100 USDC</div>
-                      <div className="text-slate-600 text-center">↓</div>
-                      <div className="bg-red-900/40 border border-red-800 rounded px-3 py-1.5">
-                        Aave pool 1,000 USDC<br />
-                        <span className="text-red-400 text-[10px]">idle buffer included · DAO fee deducted</span>
-                      </div>
-                      <div className="text-slate-600 text-center">↓</div>
-                      <div className="bg-slate-800 rounded px-3 py-1.5">Bob borrows</div>
-                    </div>
-                    <div className="mt-2 text-red-400 text-center text-[11px]">Alice 5.4% ← 2.1% gone → Bob 7.5%</div>
-                  </div>
-                  <div>
-                    <p className="text-indigo-400 font-bold mb-2">Morpho P2P model</p>
-                    <div className="space-y-1 text-slate-300">
-                      <div className="bg-slate-800 rounded px-3 py-1.5">Alice deposits 100 USDC</div>
-                      <div className="text-slate-600 text-center">↓</div>
-                      <div className="bg-indigo-900/40 border border-indigo-700 rounded px-3 py-1.5">
-                        Morpho matching layer<br />
-                        <span className="text-indigo-400 text-[10px]">zero fee · zero buffer · matching only</span>
-                      </div>
-                      <div className="text-slate-600 text-center">↓</div>
-                      <div className="bg-slate-800 rounded px-3 py-1.5">Bob borrows</div>
-                    </div>
-                    <div className="mt-2 text-indigo-400 text-center text-[11px]">Alice 6.45% ← 0% gone → Bob 6.45%</div>
                   </div>
                 </div>
               </div>
