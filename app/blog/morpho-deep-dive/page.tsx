@@ -623,6 +623,70 @@ export default function MorphoDeepDivePage() {
                 </div>
               </div>
 
+              {/* API 호출 흐름 비교 */}
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3 mt-6">컨트랙트 레벨에서 비교 — Bob이 USDC 100개를 빌릴 때</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 mb-6 text-xs font-mono">
+                {/* Aave 직접 */}
+                <div className="bg-red-950/60 border-r border-slate-700">
+                  <div className="bg-red-800 text-white px-4 py-2 font-sans font-bold text-[11px] uppercase tracking-wider">Aave 직접 사용</div>
+                  <div className="p-4 space-y-3">
+                    {[
+                      { step: '1', actor: 'Alice', call: 'USDC.approve(lendingPool, 100)', note: '지출 허가' },
+                      { step: '2', actor: 'Alice', call: 'LendingPool.supply(USDC, 100, alice, 0)', note: 'aUSDC 발행 → Alice 지갑' },
+                      { step: '3', actor: 'Bob', call: 'LendingPool.borrow(USDC, 100, 2, 0, bob)', note: 'variableRateMode=2, debtToken 발행' },
+                      { step: '4', actor: 'Aave', call: 'currentBorrowRate = kinkModel(utilization)', note: '이율 계산: 이용률 80% → 7.5%' },
+                      { step: '5', actor: 'Aave', call: 'liquidityRate = borrowRate × U × (1 − RF)', note: '7.5% × 0.8 × 0.9 = 5.4%' },
+                      { step: '6', actor: 'Aave', call: 'aUSDC.balanceOf(alice) += interest', note: '이자 배분 — 전체 aUSDC 보유자에게 희석' },
+                    ].map(({ step, actor, call, note }) => (
+                      <div key={step} className="space-y-0.5">
+                        <div className="flex gap-2 items-start">
+                          <span className="bg-red-700 text-white rounded w-4 h-4 flex items-center justify-center shrink-0 text-[9px] font-sans mt-0.5">{step}</span>
+                          <div>
+                            <span className="text-slate-400 text-[10px] font-sans mr-1">{actor}</span>
+                            <span className="text-red-300">{call}</span>
+                          </div>
+                        </div>
+                        <p className="text-slate-500 text-[10px] font-sans pl-6">{note}</p>
+                      </div>
+                    ))}
+                    <div className="bg-red-900/40 border border-red-700 rounded p-2 mt-2 font-sans text-[10px] text-red-300">
+                      이자 경로: Bob → Aave pool → 전체 aUSDC 홀더 (유휴자금 희석 + DAO 10% 차감)<br />
+                      <span className="text-red-400 font-bold">Alice 실수령: 5.4% / Bob 납부: 7.5% / 사라진 돈: 2.1%</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Morpho P2P */}
+                <div className="bg-indigo-950/60">
+                  <div className="bg-indigo-700 text-white px-4 py-2 font-sans font-bold text-[11px] uppercase tracking-wider">Morpho P2P 매칭</div>
+                  <div className="p-4 space-y-3">
+                    {[
+                      { step: '1', actor: 'Alice', call: 'USDC.approve(morpho, 100)', note: '지출 허가' },
+                      { step: '2', actor: 'Alice', call: 'Morpho.supply(marketParams, 100, 0, alice, "")', note: '대기 중 → Aave에 임시 예치' },
+                      { step: '3', actor: 'Bob', call: 'Morpho.borrow(marketParams, 100, 0, bob, bob)', note: '대출 요청 + 매칭 트리거' },
+                      { step: '4', actor: 'Morpho', call: '_matchSuppliers(USDC, 100)', note: 'FIFO 큐 탐색 → Alice 발견, P2P 연결' },
+                      { step: '5', actor: 'Morpho', call: 'Aave.withdraw(USDC, 100, morpho)', note: 'aUSDC 소각, Alice 자금 Aave에서 회수' },
+                      { step: '6', actor: 'Morpho', call: 'ERC20(USDC).transfer(bob, 100)', note: 'Bob에게 직접 전송 — Aave 이자 흐름 우회' },
+                    ].map(({ step, actor, call, note }) => (
+                      <div key={step} className="space-y-0.5">
+                        <div className="flex gap-2 items-start">
+                          <span className="bg-indigo-600 text-white rounded w-4 h-4 flex items-center justify-center shrink-0 text-[9px] font-sans mt-0.5">{step}</span>
+                          <div>
+                            <span className="text-slate-400 text-[10px] font-sans mr-1">{actor}</span>
+                            <span className="text-indigo-300">{call}</span>
+                          </div>
+                        </div>
+                        <p className="text-slate-500 text-[10px] font-sans pl-6">{note}</p>
+                      </div>
+                    ))}
+                    <div className="bg-indigo-900/40 border border-indigo-700 rounded p-2 mt-2 font-sans text-[10px] text-indigo-300">
+                      이자 경로: Bob → p2pBorrowIndex → p2pSupplyIndex → Alice (유휴자금 없음, DAO 수수료 없음)<br />
+                      <span className="text-green-400 font-bold">Alice 실수령: 6.45% / Bob 납부: 6.45% / 사라진 돈: 0%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* 아이러니 callout */}
               <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-400 rounded-r-xl p-4 my-5">
                 <p className="text-sm font-bold text-amber-800 dark:text-amber-300 mb-1">😅 Aave 입장에서 보면 아이러니한 구조</p>
@@ -1293,6 +1357,70 @@ export default function MorphoDeepDivePage() {
                       <span className="text-orange-500">= 6% × 0.9 = 5.4%</span><br />
                       <span className="text-gray-500">↑ DAO takes another 0.6%</span>
                     </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* API call comparison EN */}
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3 mt-6">Contract-level comparison — Bob borrows 100 USDC</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 mb-6 text-xs font-mono">
+                {/* Aave direct */}
+                <div className="bg-red-950/60 border-r border-slate-700">
+                  <div className="bg-red-800 text-white px-4 py-2 font-sans font-bold text-[11px] uppercase tracking-wider">Aave directly</div>
+                  <div className="p-4 space-y-3">
+                    {[
+                      { step: '1', actor: 'Alice', call: 'USDC.approve(lendingPool, 100)', note: 'Spend approval' },
+                      { step: '2', actor: 'Alice', call: 'LendingPool.supply(USDC, 100, alice, 0)', note: 'Mint aUSDC → Alice wallet' },
+                      { step: '3', actor: 'Bob', call: 'LendingPool.borrow(USDC, 100, 2, 0, bob)', note: 'variableRateMode=2, debtToken minted' },
+                      { step: '4', actor: 'Aave', call: 'currentBorrowRate = kinkModel(utilization)', note: 'Rate calc: 80% utilization → 7.5%' },
+                      { step: '5', actor: 'Aave', call: 'liquidityRate = borrowRate × U × (1 − RF)', note: '7.5% × 0.8 × 0.9 = 5.4%' },
+                      { step: '6', actor: 'Aave', call: 'aUSDC.balanceOf(alice) += interest', note: 'Interest split across all aUSDC holders — diluted' },
+                    ].map(({ step, actor, call, note }) => (
+                      <div key={step} className="space-y-0.5">
+                        <div className="flex gap-2 items-start">
+                          <span className="bg-red-700 text-white rounded w-4 h-4 flex items-center justify-center shrink-0 text-[9px] font-sans mt-0.5">{step}</span>
+                          <div>
+                            <span className="text-slate-400 text-[10px] font-sans mr-1">{actor}</span>
+                            <span className="text-red-300">{call}</span>
+                          </div>
+                        </div>
+                        <p className="text-slate-500 text-[10px] font-sans pl-6">{note}</p>
+                      </div>
+                    ))}
+                    <div className="bg-red-900/40 border border-red-700 rounded p-2 mt-2 font-sans text-[10px] text-red-300">
+                      Interest path: Bob → Aave pool → all aUSDC holders (idle buffer dilution + 10% DAO cut)<br />
+                      <span className="text-red-400 font-bold">Alice gets: 5.4% / Bob pays: 7.5% / Vanished: 2.1%</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Morpho P2P */}
+                <div className="bg-indigo-950/60">
+                  <div className="bg-indigo-700 text-white px-4 py-2 font-sans font-bold text-[11px] uppercase tracking-wider">Morpho P2P match</div>
+                  <div className="p-4 space-y-3">
+                    {[
+                      { step: '1', actor: 'Alice', call: 'USDC.approve(morpho, 100)', note: 'Spend approval' },
+                      { step: '2', actor: 'Alice', call: 'Morpho.supply(marketParams, 100, 0, alice, "")', note: 'Pending → parked in Aave temporarily' },
+                      { step: '3', actor: 'Bob', call: 'Morpho.borrow(marketParams, 100, 0, bob, bob)', note: 'Borrow request + match trigger' },
+                      { step: '4', actor: 'Morpho', call: '_matchSuppliers(USDC, 100)', note: 'Scan FIFO queue → Alice found, P2P linked' },
+                      { step: '5', actor: 'Morpho', call: 'Aave.withdraw(USDC, 100, morpho)', note: 'Burn aUSDC, retrieve Alice funds from Aave' },
+                      { step: '6', actor: 'Morpho', call: 'ERC20(USDC).transfer(bob, 100)', note: 'Direct to Bob — Aave interest flow bypassed' },
+                    ].map(({ step, actor, call, note }) => (
+                      <div key={step} className="space-y-0.5">
+                        <div className="flex gap-2 items-start">
+                          <span className="bg-indigo-600 text-white rounded w-4 h-4 flex items-center justify-center shrink-0 text-[9px] font-sans mt-0.5">{step}</span>
+                          <div>
+                            <span className="text-slate-400 text-[10px] font-sans mr-1">{actor}</span>
+                            <span className="text-indigo-300">{call}</span>
+                          </div>
+                        </div>
+                        <p className="text-slate-500 text-[10px] font-sans pl-6">{note}</p>
+                      </div>
+                    ))}
+                    <div className="bg-indigo-900/40 border border-indigo-700 rounded p-2 mt-2 font-sans text-[10px] text-indigo-300">
+                      Interest path: Bob → p2pBorrowIndex → p2pSupplyIndex → Alice (no idle buffer, no DAO fee)<br />
+                      <span className="text-green-400 font-bold">Alice gets: 6.45% / Bob pays: 6.45% / Vanished: 0%</span>
+                    </div>
                   </div>
                 </div>
               </div>
