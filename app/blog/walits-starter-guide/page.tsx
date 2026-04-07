@@ -237,227 +237,183 @@ export default function WalitsStarterGuidePage() {
             </div>
 
             {/* S3 */}
-            <h2 className="text-3xl font-bold mt-12 mb-6">03 · 지갑 생성 기술 — 어떤 방식이 맞는가</h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              유저가 가입하는 순간 "USDC를 담을 수 있는 온체인 주소"가 만들어져야 한다. 이 주소를 어떻게 생성하고, 누가 키를 보관하고, 어떻게 서명하는지가 서비스의 보안성·UX·규제 리스크를 결정한다. 5가지 방식을 비교한다.
+            <h2 className="text-3xl font-bold mt-12 mb-6">03 · 지갑 생성 기술 — walits 자체 MPC 인프라</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              유저가 가입하는 순간 "USDC를 담을 수 있는 온체인 주소"가 만들어져야 한다. walits는 외부 서비스에 의존하지 않고 <strong>자체 MPC(Multi-Party Computation) 인프라</strong>를 직접 구축·운영한다. Rust로 작성된 CGGMP24 + FROST 프로토콜 기반이다. 그리고 이것은 시드 문자를 보여주지 않는 소셜 로그인과 완전히 결합된다.
             </p>
 
-            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">지갑 생성 방식 5가지 비교</p>
-            <div className="overflow-x-auto mb-8">
-              <table className="w-full text-xs border-collapse">
-                <thead>
-                  <tr className="bg-slate-100 dark:bg-slate-800">
-                    {['방식', '키 보관 주체', 'UX 난이도', '보안', '규제 리스크', '추천 케이스'].map((h) => (
-                      <th key={h} className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-left text-slate-700 dark:text-slate-300">{h}</th>
+            {/* 핵심 개념 구분 */}
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl p-4 mb-8">
+              <p className="text-sm font-bold text-amber-800 dark:text-amber-300 mb-2">소셜 로그인 ≠ 키 관리 — 둘은 완전히 별개의 레이어다</p>
+              <div className="grid grid-cols-2 gap-4 text-xs text-gray-700 dark:text-gray-300">
+                <div><span className="font-bold text-amber-700 dark:text-amber-300">인증 레이어 (소셜 로그인)</span><br />"이 사람이 맞다" — Google / Apple OAuth JWT 발급. 유저 식별과 세션 관리만 담당.</div>
+                <div><span className="font-bold text-blue-700 dark:text-blue-300">키 관리 레이어 (MPC)</span><br />"서명 권한을 어떻게 분산하는가" — 키 조각 보관, 분산 서명. 인증과 독립적으로 동작.</div>
+              </div>
+              <p className="text-xs text-amber-700 dark:text-amber-400 mt-3">→ 소셜 로그인으로 인증한 후 MPC로 서명한다. 시드 문자 없음. 두 레이어를 결합하면 일반 앱 수준의 UX + 크립토 수준의 키 보안이 동시에 가능하다.</p>
+            </div>
+
+            {/* 2-of-3 구조 다이어그램 */}
+            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">walits MPC 키 구조 — 2-of-3 Threshold</p>
+            <div className="bg-slate-900 rounded-2xl p-6 mb-8 text-white">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-xs">
+                {[
+                  { party: 'Party 0', role: 'walits MPC 서버', icon: '🖥️', color: 'border-blue-500 bg-blue-900/40', keyColor: 'text-blue-300', storage: 'walits 서버 파일시스템 / AWS S3', desc: '항상 온라인. 모든 서명에 참여. 단독으로는 서명 불가.', tag: '서버키' },
+                  { party: 'Party 1', role: '고객 브라우저 WASM', icon: '💻', color: 'border-green-500 bg-green-900/40', keyColor: 'text-green-300', storage: '브라우저 IndexedDB (암호화)', desc: '일상적 서명에 참여. 기기 분실 시 Party 0+2로 복구 가능.', tag: '고객키' },
+                  { party: 'Party 2', role: '백업 (복구 전용)', icon: '🔒', color: 'border-amber-500 bg-amber-900/40', keyColor: 'text-amber-300', storage: '백엔드 암호화 저장 (유저 계정 연결)', desc: '평소엔 잠들어 있음. 고객키 분실 시에만 활성화.', tag: '백업키' },
+                ].map((p) => (
+                  <div key={p.party} className={`border rounded-xl p-4 ${p.color}`}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xl">{p.icon}</span>
+                      <div>
+                        <p className={`font-bold text-sm ${p.keyColor}`}>{p.party} — {p.tag}</p>
+                        <p className="text-slate-400 text-[10px]">{p.role}</p>
+                      </div>
+                    </div>
+                    <p className="text-slate-300 text-[10px] leading-relaxed mb-2">{p.desc}</p>
+                    <p className="text-slate-500 text-[10px]">저장: {p.storage}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-slate-800/60 rounded-xl p-4 text-xs">
+                <p className="text-slate-400 font-bold mb-2">2-of-3 규칙</p>
+                <div className="space-y-1.5 font-mono">
+                  <div className="flex gap-3"><span className="text-green-400">✓</span><span className="text-slate-300">Party 0 + Party 1 → 정상 서명 (매일 사용)</span></div>
+                  <div className="flex gap-3"><span className="text-amber-400">✓</span><span className="text-slate-300">Party 0 + Party 2 → 고객 기기 분실 시 복구</span></div>
+                  <div className="flex gap-3"><span className="text-red-400">✗</span><span className="text-slate-500">Party 0 단독 → 서명 불가 (서버 해킹당해도 안전)</span></div>
+                  <div className="flex gap-3"><span className="text-red-400">✗</span><span className="text-slate-500">Party 1 + Party 2 → 서버 없이 서명 불가 (설계 의도)</span></div>
+                </div>
+              </div>
+            </div>
+
+            {/* 소셜 로그인 + MPC 결합 전체 흐름 */}
+            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">소셜 로그인 + MPC 전체 흐름 — 가입부터 서명까지</p>
+            <div className="space-y-3 mb-8">
+              {/* 1 가입 */}
+              <div className="border-2 border-indigo-300 dark:border-indigo-700 rounded-xl overflow-hidden">
+                <div className="bg-indigo-600 text-white px-5 py-2.5 flex items-center gap-2 text-xs font-bold">
+                  <span className="bg-indigo-400 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">1</span>
+                  최초 가입 — Google 로그인 → MPC 지갑 생성 (1회)
+                </div>
+                <div className="p-5 bg-indigo-50 dark:bg-indigo-900/10">
+                  <div className="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-300 mb-3">
+                    <p className="text-slate-500 mb-2">// 가입 흐름</p>
+                    {[
+                      ['유저', 'Google OAuth 로그인 → JWT 발급', 'text-blue-400'],
+                      ['백엔드', 'JWT 검증 → 신규 유저 확인 → userId 생성', 'text-slate-300'],
+                      ['WASM', 'MPC DKG 실행: Party 1 (브라우저) + Party 0 (서버)', 'text-green-400'],
+                      ['MPC 서버', 'CGGMP24 프로토콜 — 3-party Distributed Key Generation', 'text-yellow-400'],
+                      ['결과', 'Party 0 key share → 서버 저장 / Party 1 key share → IndexedDB', 'text-indigo-300'],
+                      ['결과', 'Party 2 key share → 백엔드 암호화 저장 (Google UID 연결)', 'text-amber-300'],
+                      ['백엔드', '공개키(hex) → Ethereum 주소 파생 → DB 저장', 'text-slate-300'],
+                    ].map(([actor, desc, color], i) => (
+                      <div key={i} className="flex gap-3 mb-1.5">
+                        <span className="text-slate-500 w-16 shrink-0">{actor}</span>
+                        <span className={color}>{desc}</span>
+                      </div>
                     ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ['HD Wallet (MetaMask류)', '유저 100%', '높음 (시드 관리)', '최고', '낮음', '크립토 고수'],
-                    ['자체 MPC 인프라', '유저+서버 분산', '낮음', '높음', '중간', '독립성 중시 팀'],
-                    ['Turnkey MPC', '유저+Turnkey TEE', '매우 낮음', '높음', '낮음', 'B2C 스타트업 권장'],
-                    ['Coinbase CDP / Smart Wallet', '유저+Coinbase', '매우 낮음', '높음', '낮음', 'Base 체인 우선 서비스'],
-                    ['Circle Programmable Wallets', 'Circle 관리 가능', '최저', '중간', '높음 (수탁 리스크)', '엔터프라이즈 B2B'],
-                  ].map(([method, custody, ux, sec, reg, rec], i) => (
-                    <tr key={i} className={i % 2 === 0 ? 'bg-white dark:bg-transparent' : 'bg-slate-50 dark:bg-slate-800/30'}>
-                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 font-medium text-slate-800 dark:text-slate-200">{method}</td>
-                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-slate-600 dark:text-slate-400">{custody}</td>
-                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2">{ux}</td>
-                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2">{sec}</td>
-                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2">{reg}</td>
-                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-blue-600 dark:text-blue-400">{rec}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* 각 방식 상세 */}
-            <div className="space-y-6 mb-8">
-
-              {/* HD Wallet */}
-              <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
-                <div className="bg-gray-100 dark:bg-gray-800 px-5 py-3 flex items-center gap-3">
-                  <span className="text-xl">🔐</span>
-                  <div>
-                    <p className="font-bold text-sm">① HD Wallet (Hierarchical Deterministic)</p>
-                    <p className="text-xs text-gray-500">BIP-39 니모닉 시드 → 무한 키 파생</p>
                   </div>
+                  <p className="text-xs text-indigo-700 dark:text-indigo-300">소요 시간: DKG 약 30~60초 (최초 1회만). 이후 재방문 시 즉시.</p>
                 </div>
-                <div className="p-5">
-                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                    12~24개 영어 단어(니모닉)로부터 모든 키를 수학적으로 파생한다. MetaMask, Ledger가 이 방식이다. 유저가 키를 완전히 소유하지만, 시드 유출 시 모든 자산을 잃는다. 일반 소비자 앱에 적합하지 않다.
-                  </p>
-                  <div className="bg-slate-900 rounded-lg p-4 font-mono text-xs text-slate-300 mb-4">
-                    <p className="text-slate-500 mb-2">// BIP-44 경로 구조</p>
-                    <p>m / purpose&apos; / coin_type&apos; / account&apos; / change / index</p>
-                    <p className="text-blue-400">m / 44&apos; / 60&apos; / 0&apos; / 0 / 0  <span className="text-slate-500">← ETH 첫 번째 주소</span></p>
-                    <p className="text-blue-400">m / 44&apos; / 60&apos; / 0&apos; / 0 / 1  <span className="text-slate-500">← ETH 두 번째 주소</span></p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="bg-green-50 dark:bg-green-900/10 rounded-lg p-3">
-                      <p className="font-bold text-green-700 dark:text-green-400 mb-1">장점</p>
-                      <ul className="space-y-1 text-gray-600 dark:text-gray-400">
-                        <li>• 완전한 자기 수탁 (Self-custody)</li>
-                        <li>• 서버 의존 없음</li>
-                        <li>• 오프라인 백업 가능</li>
-                      </ul>
-                    </div>
-                    <div className="bg-red-50 dark:bg-red-900/10 rounded-lg p-3">
-                      <p className="font-bold text-red-700 dark:text-red-400 mb-1">단점</p>
-                      <ul className="space-y-1 text-gray-600 dark:text-gray-400">
-                        <li>• 시드 분실 = 영구 자산 손실</li>
-                        <li>• 일반 유저 진입 장벽 높음</li>
-                        <li>• 소셜 로그인 불가</li>
-                      </ul>
-                    </div>
+              </div>
+
+              {/* 2 재방문 */}
+              <div className="border border-green-300 dark:border-green-700 rounded-xl overflow-hidden">
+                <div className="bg-green-700 text-white px-5 py-2.5 flex items-center gap-2 text-xs font-bold">
+                  <span className="bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">2</span>
+                  재방문 로그인 — Google 인증 → IndexedDB에서 키 로드
+                </div>
+                <div className="p-5 bg-green-50 dark:bg-green-900/10">
+                  <div className="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-300">
+                    {[
+                      ['유저', 'Google 로그인 (기존 기기)', 'text-blue-400'],
+                      ['백엔드', 'JWT 검증 → 기존 유저 확인 → 세션 발급', 'text-slate-300'],
+                      ['WASM', 'IndexedDB에서 Party 1 key share 로드', 'text-green-400'],
+                      ['완료', '즉시 서명 준비 완료 — DKG 없음, 대기 없음', 'text-green-300'],
+                    ].map(([actor, desc, color], i) => (
+                      <div key={i} className="flex gap-3 mb-1.5">
+                        <span className="text-slate-500 w-16 shrink-0">{actor}</span>
+                        <span className={color}>{desc}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* Turnkey MPC */}
-              <div className="border-2 border-blue-300 dark:border-blue-700 rounded-xl overflow-hidden">
-                <div className="bg-blue-600 text-white px-5 py-3 flex items-center gap-3">
-                  <span className="text-xl">⚡</span>
-                  <div>
-                    <p className="font-bold text-sm">② Turnkey MPC — walits 채택 방식</p>
-                    <p className="text-xs text-blue-200">키를 쪼개서 유저 기기 + Turnkey TEE에 분산 보관</p>
-                  </div>
-                  <span className="ml-auto bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded-full">walits 선택</span>
+              {/* 3 서명 */}
+              <div className="border border-blue-300 dark:border-blue-700 rounded-xl overflow-hidden">
+                <div className="bg-blue-700 text-white px-5 py-2.5 flex items-center gap-2 text-xs font-bold">
+                  <span className="bg-blue-500 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">3</span>
+                  트랜잭션 서명 — Party 0 + Party 1 → 2-of-3 MPC 서명
                 </div>
-                <div className="p-5">
-                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                    Turnkey는 MPC(Multi-Party Computation) 기반 키 관리 인프라다. 개인키를 생성하지 않는다. 대신 키를 수학적으로 분할(Secret Sharing)해 유저 기기(50%)와 Turnkey TEE(50%)에 나눠 보관한다. 서명 시 두 조각이 협력해 완전한 서명을 만들지만, 어느 쪽도 단독으로 키를 복원할 수 없다.
-                  </p>
-                  <div className="bg-slate-900 rounded-xl p-5 mb-4">
-                    <p className="text-slate-400 text-xs font-bold mb-4">Turnkey MPC 서명 흐름</p>
-                    <div className="space-y-2 text-xs">
-                      {[
-                        { step: '1', actor: '유저 앱', desc: 'Turnkey API에 서명 요청 (tx_hash, wallet_id)', color: 'text-blue-400' },
-                        { step: '2', actor: 'Turnkey TEE', desc: '정책 엔진 검증 (허용된 컨트랙트·금액 확인)', color: 'text-yellow-400' },
-                        { step: '3', actor: '유저 기기', desc: '기기 키 조각으로 MPC 서명 참여 (생체인증 트리거)', color: 'text-green-400' },
-                        { step: '4', actor: 'Turnkey TEE', desc: 'TEE 키 조각으로 MPC 서명 완성 → 완전한 서명 반환', color: 'text-indigo-400' },
-                        { step: '5', actor: '유저 앱', desc: '서명된 트랜잭션 브로드캐스트', color: 'text-slate-300' },
-                      ].map(({ step, actor, desc, color }) => (
-                        <div key={step} className="flex gap-3 items-start">
-                          <span className="bg-slate-700 text-white rounded w-5 h-5 flex items-center justify-center shrink-0 text-[10px] font-bold">{step}</span>
-                          <span className="text-slate-500 w-20 shrink-0">{actor}</span>
-                          <span className={color}>{desc}</span>
-                        </div>
-                      ))}
-                    </div>
+                <div className="p-5 bg-blue-50 dark:bg-blue-900/10">
+                  <div className="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-300 mb-3">
+                    <p className="text-slate-500 mb-2">// 서명 흐름 (walits-mpc API)</p>
+                    {[
+                      ['백엔드', 'POST /api/wallets/sign  {wallet_name, tx_hash, algorithm, chain}', 'text-blue-400'],
+                      ['MPC 서버', 'Party 0 서명 세션 시작 → WASM 클라이언트에 WebSocket 알림', 'text-yellow-400'],
+                      ['WASM', 'Party 1 key share 로드 → 서명 프로토콜 참여', 'text-green-400'],
+                      ['MPC 서버', 'CGGMP24 서명 완료 (Party 0+1) → (r, s) 반환', 'text-indigo-400'],
+                      ['백엔드', '서명된 트랜잭션 브로드캐스트 → Ethereum/Base에 전송', 'text-slate-300'],
+                    ].map(([actor, desc, color], i) => (
+                      <div key={i} className="flex gap-3 mb-1.5">
+                        <span className="text-slate-500 w-16 shrink-0">{actor}</span>
+                        <span className={color}>{desc}</span>
+                      </div>
+                    ))}
                   </div>
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="bg-green-50 dark:bg-green-900/10 rounded-lg p-3">
-                      <p className="font-bold text-green-700 dark:text-green-400 mb-1">장점</p>
-                      <ul className="space-y-1 text-gray-600 dark:text-gray-400">
-                        <li>• 소셜 로그인(Google·Apple)으로 지갑 생성</li>
-                        <li>• 시드 없음 → 유저 키 분실 리스크 없음</li>
-                        <li>• Policy Engine으로 AI 에이전트 권한 제어</li>
-                        <li>• SOC2 Type II 인증, TEE 보안</li>
-                      </ul>
-                    </div>
-                    <div className="bg-orange-50 dark:bg-orange-900/10 rounded-lg p-3">
-                      <p className="font-bold text-orange-700 dark:text-orange-400 mb-1">고려사항</p>
-                      <ul className="space-y-1 text-gray-600 dark:text-gray-400">
-                        <li>• Turnkey 서비스 의존성 존재</li>
-                        <li>• API 비용 (서명 건당 과금)</li>
-                        <li>• 완전 탈중앙은 아님</li>
-                      </ul>
-                    </div>
-                  </div>
+                  <p className="text-xs text-blue-700 dark:text-blue-300">소요 시간: 약 2~5초. 유저에게는 버튼 클릭 → 완료로 보인다.</p>
                 </div>
               </div>
 
-              {/* Coinbase CDP */}
-              <div className="border border-blue-200 dark:border-blue-800 rounded-xl overflow-hidden">
-                <div className="bg-blue-50 dark:bg-blue-900/20 px-5 py-3 flex items-center gap-3">
-                  <span className="text-xl">🔵</span>
-                  <div>
-                    <p className="font-bold text-sm text-blue-800 dark:text-blue-200">③ Coinbase CDP / Smart Wallet</p>
-                    <p className="text-xs text-blue-600 dark:text-blue-400">ERC-4337 기반 스마트 컨트랙트 지갑, Base 체인 네이티브</p>
-                  </div>
+              {/* 4 새 기기 복구 */}
+              <div className="border border-amber-300 dark:border-amber-700 rounded-xl overflow-hidden">
+                <div className="bg-amber-600 text-white px-5 py-2.5 flex items-center gap-2 text-xs font-bold">
+                  <span className="bg-amber-400 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">4</span>
+                  새 기기 / IndexedDB 초기화 → Google 재인증으로 복구
                 </div>
-                <div className="p-5">
-                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                    Coinbase Developer Platform(CDP)은 ERC-4337 Account Abstraction 기반 스마트 지갑을 제공한다. EOA(Externally Owned Account)가 아닌 스마트 컨트랙트 계정이라 배치 트랜잭션, 가스리스(스폰서), 소셜 로그인이 기본 지원된다. Base 체인에서 특히 강력하며 Coinbase 온램프와 깊이 통합된다.
-                  </p>
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="bg-green-50 dark:bg-green-900/10 rounded-lg p-3">
-                      <p className="font-bold text-green-700 dark:text-green-400 mb-1">장점</p>
-                      <ul className="space-y-1 text-gray-600 dark:text-gray-400">
-                        <li>• 가스비 스폰서 (유저가 ETH 불필요)</li>
-                        <li>• Coinbase 온램프 원클릭 연동</li>
-                        <li>• Base 에코시스템 최적화</li>
-                        <li>• SDK 성숙도 높음</li>
-                      </ul>
-                    </div>
-                    <div className="bg-red-50 dark:bg-red-900/10 rounded-lg p-3">
-                      <p className="font-bold text-red-700 dark:text-red-400 mb-1">단점</p>
-                      <ul className="space-y-1 text-gray-600 dark:text-gray-400">
-                        <li>• Base 체인 외 지원 제한적</li>
-                        <li>• Coinbase 생태계 락인</li>
-                        <li>• 규제 변화에 취약</li>
-                      </ul>
-                    </div>
+                <div className="p-5 bg-amber-50 dark:bg-amber-900/10">
+                  <div className="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-300">
+                    {[
+                      ['유저', '새 기기에서 Google 로그인', 'text-blue-400'],
+                      ['백엔드', 'JWT 검증 → 기존 유저 확인 → 암호화된 Party 2 key share 반환', 'text-amber-400'],
+                      ['WASM', 'Party 2 key share 복호화 → 새 IndexedDB에 저장', 'text-amber-300'],
+                      ['자동', 'Party 0 + Party 2 → 새 Party 1 key share 재생성 (re-keying)', 'text-green-400'],
+                      ['완료', '이 기기에서 Party 1 키 복원 완료 — 시드 문자 없이', 'text-slate-300'],
+                    ].map(([actor, desc, color], i) => (
+                      <div key={i} className="flex gap-3 mb-1.5">
+                        <span className="text-slate-500 w-16 shrink-0">{actor}</span>
+                        <span className={color}>{desc}</span>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              </div>
-
-              {/* 자체 MPC */}
-              <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
-                <div className="bg-gray-50 dark:bg-gray-800 px-5 py-3 flex items-center gap-3">
-                  <span className="text-xl">🏗️</span>
-                  <div>
-                    <p className="font-bold text-sm">④ 자체 MPC 인프라 (직접 구축)</p>
-                    <p className="text-xs text-gray-500">GG18/GG20 or CGGMP21 프로토콜 직접 운영</p>
-                  </div>
-                </div>
-                <div className="p-5">
-                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                    Fireblocks·Qredo 같은 기업용 MPC 인프라를 직접 구현하거나, 오픈소스 MPC 라이브러리(tss-lib, multi-party-ecdsa)를 사용해 직접 운영한다. 완전한 제어권을 가지지만 암호학적 전문성과 보안 감사 비용이 크다.
-                  </p>
-                  <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg p-3 text-xs text-amber-800 dark:text-amber-200">
-                    스타트업 초기에는 권장하지 않는다. 보안 감사, 고가용성 인프라, 암호학 전문가 채용 비용이 수억 원 이상 든다. 규모가 커진 후 점진적 이전이 현실적이다.
-                  </div>
-                </div>
-              </div>
-
-              {/* Circle Programmable */}
-              <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
-                <div className="bg-gray-50 dark:bg-gray-800 px-5 py-3 flex items-center gap-3">
-                  <span className="text-xl">⭕</span>
-                  <div>
-                    <p className="font-bold text-sm">⑤ Circle Programmable Wallets</p>
-                    <p className="text-xs text-gray-500">Circle이 키 관리 전담 — API로 지갑 생성</p>
-                  </div>
-                </div>
-                <div className="p-5">
-                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                    Circle이 제공하는 Programmable Wallets API를 통해 백엔드에서 한 줄로 지갑을 생성할 수 있다. USDC 중심 서비스에는 자연스러운 선택이지만, Circle이 키를 관리하는 "Custodial" 구조라 규제 환경에 따라 자금 동결·압류 리스크가 존재한다.
-                  </p>
-                  <div className="bg-slate-900 rounded-lg p-4 font-mono text-xs text-slate-300">
-                    <p className="text-slate-500 mb-2">// Circle API로 지갑 생성 (1줄)</p>
-                    <p><span className="text-blue-400">POST</span> /v1/w3s/wallets</p>
-                    <p className="text-slate-400">{'{ "blockchain": "ETH", "accountType": "SCA" }'}</p>
-                    <p className="text-green-400 mt-2">→ walletId, address 즉시 반환</p>
+                  <div className="bg-amber-100 dark:bg-amber-900/30 rounded-lg p-3 mt-3 text-xs text-amber-800 dark:text-amber-200">
+                    핵심: Google 계정이 "시드 문자" 역할을 대체한다. Google 계정에 접근할 수 있는 한, 어느 기기에서든 지갑을 복구할 수 있다.
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* 결론 박스 */}
-            <div className="bg-gradient-to-br from-blue-900 to-indigo-900 rounded-2xl p-6 my-8 text-white">
-              <p className="text-xs font-bold uppercase tracking-wider text-blue-300 mb-3">walits의 선택 — Turnkey MPC + ERC-4337 Smart Wallet</p>
-              <p className="text-sm leading-relaxed mb-4">
-                개인 소비자 서비스의 핵심은 <strong>시드 없이 소셜 로그인으로 지갑을 만들고, AI 에이전트에게 제한된 권한을 위임할 수 있는 것</strong>이다. Turnkey는 이 두 가지를 동시에 충족한다. Policy Engine으로 에이전트가 허용된 프로토콜에만 접근하게 제어하고, 생체인증으로 서명한다.
-              </p>
+            {/* 기술 스택 요약 */}
+            <div className="bg-gradient-to-br from-slate-900 to-blue-950 rounded-2xl p-6 my-8 text-white">
+              <p className="text-xs font-bold uppercase tracking-wider text-blue-300 mb-4">walits 자체 MPC 스택</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
+                {[
+                  { label: '프로토콜', val: 'CGGMP24 (ECDSA)\nFROST Ed25519' },
+                  { label: '언어', val: 'Rust + Tokio\nWASM (브라우저)' },
+                  { label: '구조', val: '2-of-3 threshold\nParty 0/1/2' },
+                  { label: '지원 체인', val: 'ETH · BTC · SOL\nXRP · Tron' },
+                ].map((item) => (
+                  <div key={item.label} className="bg-white/10 rounded-xl p-3">
+                    <p className="text-blue-300 text-[10px] mb-1">{item.label}</p>
+                    <p className="font-bold text-sm whitespace-pre-line">{item.val}</p>
+                  </div>
+                ))}
+              </div>
               <div className="grid grid-cols-3 gap-3 text-xs">
                 {[
                   { label: '로그인', val: 'Google / Apple / Email' },
-                  { label: '키 구조', val: 'MPC 2-of-2 (기기 + TEE)' },
-                  { label: '에이전트 권한', val: 'Policy Engine 화이트리스트' },
+                  { label: 'Party 1 저장', val: 'IndexedDB (암호화)' },
+                  { label: '복구', val: 'Google 재인증 → Party 2' },
                 ].map((item) => (
                   <div key={item.label} className="bg-white/10 rounded-xl p-3 text-center">
                     <p className="text-blue-300 text-[10px] mb-1">{item.label}</p>
@@ -465,6 +421,39 @@ export default function WalitsStarterGuidePage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* 다른 방식과 간단 비교 */}
+            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">다른 방식과 비교</p>
+            <div className="overflow-x-auto mb-8">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="bg-slate-100 dark:bg-slate-800">
+                    {['방식', '키 보관', '소셜 로그인', '외부 의존', '비용 구조'].map((h) => (
+                      <th key={h} className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-left text-slate-700 dark:text-slate-300">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ['walits 자체 MPC', '유저+walits서버 분산', '✅ 결합 가능', '없음 (완전 독립)', '서버 운영비 고정'],
+                    ['HD Wallet', '유저 100% (시드)', '❌ 불가', '없음', '무료 (서버 없음)'],
+                    ['Turnkey MPC', '유저+Turnkey TEE', '✅ 기본 지원', 'Turnkey SaaS', '서명 건당 과금'],
+                    ['Coinbase CDP', '유저+Coinbase', '✅ 기본 지원', 'Coinbase', '건당/월정액'],
+                    ['Circle Programmable', 'Circle 관리', '✅ 기본 지원', 'Circle', '건당 과금'],
+                  ].map(([method, custody, social, dep, cost], i) => (
+                    <tr key={i} className={i === 0 ? 'bg-blue-50 dark:bg-blue-900/20 font-medium' : i % 2 === 0 ? 'bg-white dark:bg-transparent' : 'bg-slate-50 dark:bg-slate-800/30'}>
+                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 font-medium text-slate-800 dark:text-slate-200">
+                        {method}{i === 0 && <span className="ml-2 bg-blue-600 text-white text-[9px] px-1.5 py-0.5 rounded-full">walits</span>}
+                      </td>
+                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-slate-600 dark:text-slate-400">{custody}</td>
+                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-slate-600 dark:text-slate-400">{social}</td>
+                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-slate-600 dark:text-slate-400">{dep}</td>
+                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-slate-600 dark:text-slate-400">{cost}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
 
             {/* S4 */}
@@ -787,80 +776,217 @@ export default function WalitsStarterGuidePage() {
             </div>
 
             {/* S3 EN */}
-            <h2 className="text-3xl font-bold mt-12 mb-6">03 · Wallet tech — which approach is right</h2>
+            <h2 className="text-3xl font-bold mt-12 mb-6">03 · Wallet tech — walits self-hosted MPC infrastructure</h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              The moment a user signs up, an on-chain address that can hold USDC must be created. How that address is generated, who holds the key, and how transactions are signed determines the service's security, UX, and regulatory exposure. Five approaches compared.
+              The moment a user signs up, an on-chain address that can hold USDC must be created. Walits does not rely on any external key management service — it operates its own <strong>MPC (Multi-Party Computation) infrastructure</strong> built in Rust using the CGGMP24 + FROST protocols. And it combines cleanly with social login — no seed phrase ever shown.
             </p>
 
+            {/* Key concept split */}
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl p-4 mb-8">
+              <p className="text-sm font-bold text-amber-800 dark:text-amber-300 mb-2">Social login ≠ key management — they are entirely separate layers</p>
+              <div className="grid grid-cols-2 gap-4 text-xs text-gray-700 dark:text-gray-300">
+                <div><span className="font-bold text-amber-700 dark:text-amber-300">Auth layer (social login)</span><br />"Prove who you are" — Google / Apple OAuth issues a JWT. Handles user identity and session only.</div>
+                <div><span className="font-bold text-blue-700 dark:text-blue-300">Key layer (MPC)</span><br />"How signing authority is distributed" — key share custody, threshold signing. Operates independently of auth.</div>
+              </div>
+              <p className="text-xs text-amber-700 dark:text-amber-400 mt-3">→ Authenticate with social login, then sign with MPC. No seed phrase. Combining both layers gives normal-app UX with crypto-grade key security simultaneously.</p>
+            </div>
+
+            {/* 2-of-3 structure */}
+            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">walits MPC key structure — 2-of-3 Threshold</p>
+            <div className="bg-slate-900 rounded-2xl p-6 mb-8 text-white">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-xs">
+                {[
+                  { party: 'Party 0', role: 'walits MPC server', icon: '🖥️', color: 'border-blue-500 bg-blue-900/40', keyColor: 'text-blue-300', storage: 'Server filesystem / AWS S3', desc: 'Always online. Participates in every signing. Cannot sign alone.', tag: 'Server key' },
+                  { party: 'Party 1', role: 'User browser WASM', icon: '💻', color: 'border-green-500 bg-green-900/40', keyColor: 'text-green-300', storage: 'Browser IndexedDB (encrypted)', desc: 'Participates in day-to-day signing. If device is lost, Party 0+2 can recover.', tag: 'Customer key' },
+                  { party: 'Party 2', role: 'Backup (recovery only)', icon: '🔒', color: 'border-amber-500 bg-amber-900/40', keyColor: 'text-amber-300', storage: 'Backend encrypted (linked to user account)', desc: 'Dormant normally. Activates only when customer key is lost.', tag: 'Backup key' },
+                ].map((p) => (
+                  <div key={p.party} className={`border rounded-xl p-4 ${p.color}`}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xl">{p.icon}</span>
+                      <div>
+                        <p className={`font-bold text-sm ${p.keyColor}`}>{p.party} — {p.tag}</p>
+                        <p className="text-slate-400 text-[10px]">{p.role}</p>
+                      </div>
+                    </div>
+                    <p className="text-slate-300 text-[10px] leading-relaxed mb-2">{p.desc}</p>
+                    <p className="text-slate-500 text-[10px]">Stored: {p.storage}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-slate-800/60 rounded-xl p-4 text-xs font-mono">
+                <p className="text-slate-400 font-sans font-bold mb-2">2-of-3 rules</p>
+                <div className="space-y-1.5">
+                  <div className="flex gap-3"><span className="text-green-400">✓</span><span className="text-slate-300">Party 0 + Party 1 → normal signing (everyday use)</span></div>
+                  <div className="flex gap-3"><span className="text-amber-400">✓</span><span className="text-slate-300">Party 0 + Party 2 → recovery when customer device is lost</span></div>
+                  <div className="flex gap-3"><span className="text-red-400">✗</span><span className="text-slate-500">Party 0 alone → cannot sign (server compromise is safe)</span></div>
+                  <div className="flex gap-3"><span className="text-red-400">✗</span><span className="text-slate-500">Party 1 + Party 2 → cannot sign without server (by design)</span></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Full flow */}
+            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Social login + MPC full lifecycle — signup to signing</p>
+            <div className="space-y-3 mb-8">
+              <div className="border-2 border-indigo-300 dark:border-indigo-700 rounded-xl overflow-hidden">
+                <div className="bg-indigo-600 text-white px-5 py-2.5 flex items-center gap-2 text-xs font-bold">
+                  <span className="bg-indigo-400 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">1</span>
+                  First signup — Google login → MPC wallet created (once only)
+                </div>
+                <div className="p-5 bg-indigo-50 dark:bg-indigo-900/10">
+                  <div className="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-300 mb-3">
+                    {[
+                      ['User', 'Google OAuth login → JWT issued', 'text-blue-400'],
+                      ['Backend', 'JWT verified → new user detected → userId created', 'text-slate-300'],
+                      ['WASM', 'MPC DKG: Party 1 (browser) + Party 0 (server)', 'text-green-400'],
+                      ['MPC server', 'CGGMP24 — 3-party Distributed Key Generation', 'text-yellow-400'],
+                      ['Result', 'Party 0 key share → server storage', 'text-indigo-300'],
+                      ['Result', 'Party 1 key share → browser IndexedDB (encrypted)', 'text-green-300'],
+                      ['Result', 'Party 2 key share → backend encrypted (linked to Google UID)', 'text-amber-300'],
+                      ['Backend', 'pubkey (hex) → Ethereum address derived → saved to DB', 'text-slate-300'],
+                    ].map(([actor, desc, color], i) => (
+                      <div key={i} className="flex gap-3 mb-1.5">
+                        <span className="text-slate-500 w-16 shrink-0">{actor}</span>
+                        <span className={color}>{desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-indigo-700 dark:text-indigo-300">Time: DKG ~30–60 sec (one time only). Subsequent logins are instant.</p>
+                </div>
+              </div>
+
+              <div className="border border-green-300 dark:border-green-700 rounded-xl overflow-hidden">
+                <div className="bg-green-700 text-white px-5 py-2.5 flex items-center gap-2 text-xs font-bold">
+                  <span className="bg-green-500 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">2</span>
+                  Return visit — Google auth → load key from IndexedDB
+                </div>
+                <div className="p-5 bg-green-50 dark:bg-green-900/10">
+                  <div className="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-300">
+                    {[
+                      ['User', 'Google login (existing device)', 'text-blue-400'],
+                      ['Backend', 'JWT verified → existing user → session issued', 'text-slate-300'],
+                      ['WASM', 'Load Party 1 key share from IndexedDB', 'text-green-400'],
+                      ['Done', 'Immediately ready to sign — no DKG, no wait', 'text-green-300'],
+                    ].map(([actor, desc, color], i) => (
+                      <div key={i} className="flex gap-3 mb-1.5">
+                        <span className="text-slate-500 w-16 shrink-0">{actor}</span>
+                        <span className={color}>{desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="border border-blue-300 dark:border-blue-700 rounded-xl overflow-hidden">
+                <div className="bg-blue-700 text-white px-5 py-2.5 flex items-center gap-2 text-xs font-bold">
+                  <span className="bg-blue-500 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">3</span>
+                  Transaction signing — Party 0 + Party 1 → 2-of-3 MPC sign
+                </div>
+                <div className="p-5 bg-blue-50 dark:bg-blue-900/10">
+                  <div className="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-300 mb-3">
+                    {[
+                      ['Backend', 'POST /api/wallets/sign  {wallet_name, tx_hash, algorithm, chain}', 'text-blue-400'],
+                      ['MPC server', 'Party 0 starts signing session → notifies WASM via WebSocket', 'text-yellow-400'],
+                      ['WASM', 'Load Party 1 key share → join signing protocol', 'text-green-400'],
+                      ['MPC server', 'CGGMP24 signing (Party 0+1) → returns (r, s)', 'text-indigo-400'],
+                      ['Backend', 'Broadcast signed transaction → Ethereum / Base', 'text-slate-300'],
+                    ].map(([actor, desc, color], i) => (
+                      <div key={i} className="flex gap-3 mb-1.5">
+                        <span className="text-slate-500 w-16 shrink-0">{actor}</span>
+                        <span className={color}>{desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-blue-700 dark:text-blue-300">Time: ~2–5 seconds. The user sees: button click → done.</p>
+                </div>
+              </div>
+
+              <div className="border border-amber-300 dark:border-amber-700 rounded-xl overflow-hidden">
+                <div className="bg-amber-600 text-white px-5 py-2.5 flex items-center gap-2 text-xs font-bold">
+                  <span className="bg-amber-400 rounded-full w-5 h-5 flex items-center justify-center text-[10px]">4</span>
+                  New device / IndexedDB cleared → recover via Google re-auth
+                </div>
+                <div className="p-5 bg-amber-50 dark:bg-amber-900/10">
+                  <div className="bg-slate-900 rounded-xl p-4 font-mono text-xs text-slate-300">
+                    {[
+                      ['User', 'Google login on new device', 'text-blue-400'],
+                      ['Backend', 'JWT verified → existing user → return encrypted Party 2 key share', 'text-amber-400'],
+                      ['WASM', 'Decrypt Party 2 key share → save to new IndexedDB', 'text-amber-300'],
+                      ['Auto', 'Party 0 + Party 2 → re-generate Party 1 key share (re-keying)', 'text-green-400'],
+                      ['Done', 'Party 1 key restored on this device — no seed phrase needed', 'text-slate-300'],
+                    ].map(([actor, desc, color], i) => (
+                      <div key={i} className="flex gap-3 mb-1.5">
+                        <span className="text-slate-500 w-16 shrink-0">{actor}</span>
+                        <span className={color}>{desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="bg-amber-100 dark:bg-amber-900/30 rounded-lg p-3 mt-3 text-xs text-amber-800 dark:text-amber-200">
+                    Key insight: your Google account replaces the seed phrase. As long as you can access your Google account, you can recover your wallet on any device.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tech stack summary EN */}
+            <div className="bg-gradient-to-br from-slate-900 to-blue-950 rounded-2xl p-6 my-8 text-white">
+              <p className="text-xs font-bold uppercase tracking-wider text-blue-300 mb-4">walits self-hosted MPC stack</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
+                {[
+                  { label: 'Protocol', val: 'CGGMP24 (ECDSA)\nFROST Ed25519' },
+                  { label: 'Language', val: 'Rust + Tokio\nWASM (browser)' },
+                  { label: 'Structure', val: '2-of-3 threshold\nParty 0/1/2' },
+                  { label: 'Chains', val: 'ETH · BTC · SOL\nXRP · Tron' },
+                ].map((item) => (
+                  <div key={item.label} className="bg-white/10 rounded-xl p-3">
+                    <p className="text-blue-300 text-[10px] mb-1">{item.label}</p>
+                    <p className="font-bold text-sm whitespace-pre-line">{item.val}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-3 gap-3 text-xs">
+                {[
+                  { label: 'Login', val: 'Google / Apple / Email' },
+                  { label: 'Party 1 storage', val: 'IndexedDB (encrypted)' },
+                  { label: 'Recovery', val: 'Google re-auth → Party 2' },
+                ].map((item) => (
+                  <div key={item.label} className="bg-white/10 rounded-xl p-3 text-center">
+                    <p className="text-blue-300 text-[10px] mb-1">{item.label}</p>
+                    <p className="font-bold text-sm">{item.val}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Comparison table EN */}
+            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Comparison with other approaches</p>
             <div className="overflow-x-auto mb-8">
               <table className="w-full text-xs border-collapse">
                 <thead>
                   <tr className="bg-slate-100 dark:bg-slate-800">
-                    {['Approach', 'Key custody', 'UX friction', 'Security', 'Reg risk', 'Best for'].map((h) => (
+                    {['Approach', 'Key custody', 'Social login', 'External dependency', 'Cost model'].map((h) => (
                       <th key={h} className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-left">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    ['HD Wallet (MetaMask-style)', 'User 100%', 'High (seed phrase)', 'Highest', 'Low', 'Crypto-native power users'],
-                    ['Self-hosted MPC', 'User + server split', 'Low', 'High', 'Medium', 'Teams prioritizing independence'],
-                    ['Turnkey MPC', 'User + Turnkey TEE', 'Very low', 'High', 'Low', 'B2C startups (recommended)'],
-                    ['Coinbase CDP / Smart Wallet', 'User + Coinbase', 'Very low', 'High', 'Low', 'Base-first services'],
-                    ['Circle Programmable Wallets', 'Circle-managed', 'Lowest', 'Medium', 'High (custody risk)', 'Enterprise B2B'],
+                    ['walits self-hosted MPC', 'User + walits server', '✅ combinable', 'None (fully independent)', 'Fixed server ops cost'],
+                    ['HD Wallet', 'User 100% (seed)', '❌ not possible', 'None', 'Free (no server)'],
+                    ['Turnkey MPC', 'User + Turnkey TEE', '✅ built-in', 'Turnkey SaaS', 'Per-signature fee'],
+                    ['Coinbase CDP', 'User + Coinbase', '✅ built-in', 'Coinbase', 'Per-call / monthly'],
+                    ['Circle Programmable', 'Circle-managed', '✅ built-in', 'Circle', 'Per-call fee'],
                   ].map((row, i) => (
-                    <tr key={i} className={i % 2 === 0 ? 'bg-white dark:bg-transparent' : 'bg-slate-50 dark:bg-slate-800/30'}>
-                      {row.map((cell, j) => (
-                        <td key={j} className={`border border-slate-200 dark:border-slate-700 px-3 py-2 ${j === 0 ? 'font-medium' : ''} ${j === 5 ? 'text-blue-600 dark:text-blue-400' : 'text-slate-600 dark:text-slate-400'}`}>{cell}</td>
+                    <tr key={i} className={i === 0 ? 'bg-blue-50 dark:bg-blue-900/20' : i % 2 === 0 ? 'bg-white dark:bg-transparent' : 'bg-slate-50 dark:bg-slate-800/30'}>
+                      <td className="border border-slate-200 dark:border-slate-700 px-3 py-2 font-medium text-slate-800 dark:text-slate-200">
+                        {row[0]}{i === 0 && <span className="ml-2 bg-blue-600 text-white text-[9px] px-1.5 py-0.5 rounded-full">walits</span>}
+                      </td>
+                      {row.slice(1).map((cell, j) => (
+                        <td key={j} className="border border-slate-200 dark:border-slate-700 px-3 py-2 text-slate-600 dark:text-slate-400">{cell}</td>
                       ))}
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </div>
-
-            {/* Turnkey highlight EN */}
-            <div className="border-2 border-blue-300 dark:border-blue-700 rounded-xl overflow-hidden mb-6">
-              <div className="bg-blue-600 text-white px-5 py-3 flex items-center gap-3">
-                <span className="text-xl">⚡</span>
-                <div>
-                  <p className="font-bold text-sm">Turnkey MPC — walits choice</p>
-                  <p className="text-xs text-blue-200">Split key: user device (50%) + Turnkey TEE (50%)</p>
-                </div>
-                <span className="ml-auto bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded-full">walits pick</span>
-              </div>
-              <div className="p-5">
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  Turnkey never generates a private key. Instead it mathematically splits the key (Secret Sharing) between the user's device (50%) and a Turnkey TEE enclave (50%). Signing requires both halves to cooperate — but neither half alone can reconstruct the key.
-                </p>
-                <div className="bg-slate-900 rounded-xl p-5 mb-4">
-                  <p className="text-slate-400 text-xs font-bold mb-4">Turnkey MPC signing flow</p>
-                  <div className="space-y-2 text-xs font-mono">
-                    {[
-                      ['1', 'User app', 'Turnkey API sign request (tx_hash, wallet_id)', 'text-blue-400'],
-                      ['2', 'Turnkey TEE', 'Policy engine check (allowed contracts · amount limits)', 'text-yellow-400'],
-                      ['3', 'User device', 'Device key shard participates in MPC signing (biometric auth)', 'text-green-400'],
-                      ['4', 'Turnkey TEE', 'TEE key shard completes MPC signature → full signature returned', 'text-indigo-400'],
-                      ['5', 'User app', 'Broadcast signed transaction', 'text-slate-300'],
-                    ].map(([step, actor, desc, color]) => (
-                      <div key={step} className="flex gap-3 items-start">
-                        <span className="bg-slate-700 text-white rounded w-5 h-5 flex items-center justify-center shrink-0 text-[10px] font-bold font-sans">{step}</span>
-                        <span className="text-slate-500 w-24 shrink-0 font-sans">{actor}</span>
-                        <span className={color}>{desc}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="bg-gradient-to-br from-blue-900 to-indigo-900 rounded-xl p-4 text-white text-xs">
-                  <p className="font-bold mb-2">Why Turnkey for a consumer USDC wallet</p>
-                  <ul className="space-y-1 text-blue-200">
-                    <li>• Social login (Google / Apple / Email) → wallet created, no seed phrase shown</li>
-                    <li>• Policy Engine → AI agent gets a whitelist: only allowed contracts, only USDC, amount caps</li>
-                    <li>• SOC2 Type II certified, TEE hardware isolation</li>
-                    <li>• No key recovery headaches — user can always re-auth via social login</li>
-                  </ul>
-                </div>
-              </div>
             </div>
 
             {/* S4 EN */}
