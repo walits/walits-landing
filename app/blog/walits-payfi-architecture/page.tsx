@@ -84,7 +84,7 @@ export default function WalitsPayfiArchitecturePage() {
                   { label: 'AI Agent 레이어 — Claude + LangChain', sub: '의도 파악 → PayFi 전략 결정 → 툴 선택 → 실행 계획', color: 'bg-violet-500' },
                   { label: 'AgentKit + PayFi 툴 레이어', sub: '기본 온체인 툴 + PayFi 커스텀 툴 (yield, 정산, RWA, 공급망)', color: 'bg-indigo-500' },
                   { label: '정책 엔진 + Idle Time 감지기', sub: '지출 정책 체크 + 놀고 있는 자금 감지 → 자동 예치 트리거', color: 'bg-sky-500' },
-                  { label: 'walits MPC — Turnkey', sub: '키 관리 + 서명 (Coinbase 의존 없음, 탈중앙 유지)', color: 'bg-teal-500' },
+                  { label: 'walits 자체 MPC', sub: '키 관리 + 서명 (외부 의존 없음, 2-of-3 분산 보관)', color: 'bg-teal-500' },
                   { label: 'PayFi 프로토콜 레이어', sub: 'Aave · Morpho · Ondo USDY · Huma Finance · Circle CCTP', color: 'bg-emerald-500' },
                   { label: '블록체인 — ETH / Base / SOL', sub: '', color: 'bg-green-500' },
                 ].map((item, i) => (
@@ -202,29 +202,34 @@ export default function WalitsPayfiArchitecturePage() {
             </div>
 
             {/* 섹션 4: MPC */}
-            <h2 className="text-2xl font-black text-slate-900 mb-4">4. MPC 키 관리 — Turnkey</h2>
+            <h2 className="text-2xl font-black text-slate-900 mb-4">4. MPC 키 관리 — walits 자체 인프라</h2>
             <p className="text-slate-700 leading-relaxed mb-4">
-              walits는 Coinbase CDP에 의존하지 않고 <strong>Turnkey</strong>를 통해 탈중앙 MPC 키 관리를 구현한다.
-              프라이빗 키를 쪼개 분산 보관하는 방식으로, 서버가 해킹당해도 키 절반만 있어 안전하고
-              유저 기기를 분실해도 서버 조각으로 복구할 수 있다.
+              walits는 외부 서비스에 의존하지 않고 <strong>자체 MPC 인프라</strong>를 직접 구축·운영한다 (Rust, CGGMP24 + FROST 프로토콜).
+              키를 3개 조각으로 나눠 서버·브라우저·백업에 분산 보관하는 <strong>2-of-3 threshold</strong> 구조로,
+              서버가 해킹당해도 단독 서명이 불가능하고, 기기를 분실해도 백업 조각으로 복구할 수 있다.
+              소셜 로그인(Google/Apple)은 인증 레이어로만 동작하며, MPC 키 관리와 완전히 결합된다.
             </p>
-            <div className="bg-slate-900 rounded-xl p-5 mb-6 text-center">
-              <div className="flex items-center justify-center gap-4 flex-wrap">
+            <div className="bg-slate-900 rounded-xl p-5 mb-6">
+              <div className="flex items-center justify-center gap-3 flex-wrap text-center">
                 <div className="bg-blue-600 rounded-lg px-4 py-3 text-white">
-                  <div className="text-xs text-blue-200">유저 기기</div>
-                  <div className="font-bold">키 조각 50%</div>
+                  <div className="text-xs text-blue-200">Party 0 — walits 서버</div>
+                  <div className="font-bold text-sm">서버 키 조각</div>
+                  <div className="text-xs text-blue-300 mt-1">항상 온라인</div>
                 </div>
-                <div className="text-slate-400 text-2xl font-bold">+</div>
-                <div className="bg-violet-600 rounded-lg px-4 py-3 text-white">
-                  <div className="text-xs text-violet-200">walits 서버 (TEE)</div>
-                  <div className="font-bold">키 조각 50%</div>
-                </div>
-                <div className="text-slate-400 text-2xl font-bold">=</div>
+                <div className="text-slate-400 text-xl font-bold">+</div>
                 <div className="bg-green-600 rounded-lg px-4 py-3 text-white">
-                  <div className="text-xs text-green-200">둘 다 있어야</div>
-                  <div className="font-bold">서명 가능</div>
+                  <div className="text-xs text-green-200">Party 1 — 브라우저 WASM</div>
+                  <div className="font-bold text-sm">고객 키 조각</div>
+                  <div className="text-xs text-green-300 mt-1">IndexedDB 저장</div>
+                </div>
+                <div className="text-slate-400 text-xl font-bold">→</div>
+                <div className="bg-teal-600 rounded-lg px-4 py-3 text-white">
+                  <div className="text-xs text-teal-200">2-of-3 규칙</div>
+                  <div className="font-bold text-sm">서명 완성</div>
+                  <div className="text-xs text-teal-300 mt-1">단독 서명 불가</div>
                 </div>
               </div>
+              <div className="mt-3 text-center text-xs text-slate-500">Party 2 (백업 조각) — 기기 분실 시 복구용, 평소 잠금</div>
             </div>
             <div className="overflow-x-auto mb-10">
               <table className="w-full text-sm border-collapse">
@@ -233,22 +238,22 @@ export default function WalitsPayfiArchitecturePage() {
                     <th className="border border-slate-200 px-3 py-2 text-left">항목</th>
                     <th className="border border-slate-200 px-3 py-2 text-center">CDP Smart Wallet</th>
                     <th className="border border-slate-200 px-3 py-2 text-center">Viem (직접)</th>
-                    <th className="border border-slate-200 px-3 py-2 text-center font-bold text-blue-700">Turnkey (추천)</th>
+                    <th className="border border-slate-200 px-3 py-2 text-center font-bold text-teal-700">walits 자체 MPC (채택)</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    ['키 위치', 'Coinbase 서버', '내 서버 .env', 'TEE 분산'],
-                    ['탈중앙', '❌', '✅', '✅'],
+                    ['키 위치', 'Coinbase 서버', '서버 .env', '2-of-3 분산 (서버+브라우저+백업)'],
+                    ['외부 의존', '❌ Coinbase', '✅ 없음', '✅ 없음'],
                     ['멀티 유저', '△', '❌', '✅'],
-                    ['비용', '무료 티어', '무료', '무료 티어'],
+                    ['소셜 로그인', '✅', '❌', '✅ (OAuth + MPC 결합)'],
                     ['보안', '중간', '낮음', '높음'],
                   ].map(([item, a, b, c], i) => (
                     <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
                       <td className="border border-slate-200 px-3 py-2 font-medium">{item}</td>
                       <td className="border border-slate-200 px-3 py-2 text-center">{a}</td>
                       <td className="border border-slate-200 px-3 py-2 text-center">{b}</td>
-                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-blue-700">{c}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-teal-700">{c}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -618,7 +623,7 @@ export default function WalitsPayfiArchitecturePage() {
                 </thead>
                 <tbody>
                   {[
-                    ['1. 기본 지갑', 'ETH/SOL/USDC 잔고, 송금, Turnkey MPC', '완료 ✅'],
+                    ['1. 기본 지갑', 'ETH/SOL/USDC 잔고, 송금, walits 자체 MPC', '완료 ✅'],
                     ['2. AI + 기본 PayFi', 'Claude 연동 + Idle Detector + Aave/Morpho 자동 예치', '2~4주'],
                     ['2-1. 투자 프리셋', '오렌지/애플/칠리/슬리핑 4종 + 온보딩 UI', '1~2주'],
                     ['3. RWA + 즉시 정산', 'Ondo USDY + Circle CCTP + B2B 정산', '4~8주'],
@@ -642,7 +647,7 @@ export default function WalitsPayfiArchitecturePage() {
                 <div className="space-y-2 text-sm">
                   {[
                     ['AI 레이어', 'AgentKit + LangChain + Claude API'],
-                    ['키 관리', 'Turnkey MPC (탈중앙)'],
+                    ['키 관리', '자체 MPC (CGGMP24 + FROST, 2-of-3)'],
                     ['PayFi 레일', 'Aave / Morpho / Ondo USDY / Huma'],
                     ['정산 네트워크', 'Base (2초) / Solana / Circle CCTP'],
                     ['프론트엔드', 'Next.js + TypeScript'],
@@ -661,7 +666,7 @@ export default function WalitsPayfiArchitecturePage() {
                     ['AgentKit', '$0 (오픈소스)'],
                     ['LangChain', '$0 (오픈소스)'],
                     ['Claude API', '~$10~30/월'],
-                    ['Turnkey', '$0 (무료 티어)'],
+                    ['MPC 서버', '자체 운영 (서버 비용)'],
                     ['Aave/Morpho/Ondo', '컨트랙트 직접 연동'],
                   ].map(([k, v]) => (
                     <div key={k} className="flex justify-between">
@@ -711,7 +716,7 @@ export default function WalitsPayfiArchitecturePage() {
                   { label: 'AI Agent Layer — Claude + LangChain', sub: 'Intent parsing → PayFi strategy → tool selection → execution plan', color: 'bg-violet-500' },
                   { label: 'AgentKit + PayFi Tool Layer', sub: 'Base onchain tools + PayFi custom tools (yield, settlement, RWA, supply chain)', color: 'bg-indigo-500' },
                   { label: 'Policy Engine + Idle Time Detector', sub: 'Spending policy check + idle fund detection → auto-deposit trigger', color: 'bg-sky-500' },
-                  { label: 'walits MPC — Turnkey', sub: 'Key management + signing (no Coinbase dependency, decentralized)', color: 'bg-teal-500' },
+                  { label: 'walits Self-hosted MPC', sub: 'Key management + signing (no external dependency, 2-of-3 distributed)', color: 'bg-teal-500' },
                   { label: 'PayFi Protocol Layer', sub: 'Aave · Morpho · Ondo USDY · Huma Finance · Circle CCTP', color: 'bg-emerald-500' },
                   { label: 'Blockchain — ETH / Base / SOL', sub: '', color: 'bg-green-500' },
                 ].map((item, i) => (
@@ -827,29 +832,34 @@ export default function WalitsPayfiArchitecturePage() {
             </div>
 
             {/* Section 4 */}
-            <h2 className="text-2xl font-black text-slate-900 mb-4">4. MPC Key Management — Turnkey</h2>
+            <h2 className="text-2xl font-black text-slate-900 mb-4">4. MPC Key Management — walits Self-hosted Infrastructure</h2>
             <p className="text-slate-700 leading-relaxed mb-4">
-              walits uses <strong>Turnkey</strong> for decentralized MPC key management — no Coinbase dependency.
-              The private key is split and stored across two parties. If the server is hacked, only half the key is exposed.
-              If the user device is lost, recovery is possible via the server shard.
+              walits runs its own <strong>MPC infrastructure</strong> in-house — no external key management service (Rust, CGGMP24 + FROST protocols).
+              Keys are split into 3 shards distributed across server, browser, and backup in a <strong>2-of-3 threshold</strong> structure.
+              Even if the server is compromised, it cannot sign alone. If a device is lost, the backup shard enables recovery.
+              Social login (Google/Apple) acts as the authentication layer and combines cleanly with MPC key management.
             </p>
-            <div className="bg-slate-900 rounded-xl p-5 mb-6 text-center">
-              <div className="flex items-center justify-center gap-4 flex-wrap">
+            <div className="bg-slate-900 rounded-xl p-5 mb-6">
+              <div className="flex items-center justify-center gap-3 flex-wrap text-center">
                 <div className="bg-blue-600 rounded-lg px-4 py-3 text-white">
-                  <div className="text-xs text-blue-200">User Device</div>
-                  <div className="font-bold">Key Shard 50%</div>
+                  <div className="text-xs text-blue-200">Party 0 — walits Server</div>
+                  <div className="font-bold text-sm">Server key shard</div>
+                  <div className="text-xs text-blue-300 mt-1">Always online</div>
                 </div>
-                <div className="text-slate-400 text-2xl font-bold">+</div>
-                <div className="bg-violet-600 rounded-lg px-4 py-3 text-white">
-                  <div className="text-xs text-violet-200">walits Server (TEE)</div>
-                  <div className="font-bold">Key Shard 50%</div>
-                </div>
-                <div className="text-slate-400 text-2xl font-bold">=</div>
+                <div className="text-slate-400 text-xl font-bold">+</div>
                 <div className="bg-green-600 rounded-lg px-4 py-3 text-white">
-                  <div className="text-xs text-green-200">Both required to</div>
-                  <div className="font-bold">Sign Tx</div>
+                  <div className="text-xs text-green-200">Party 1 — Browser WASM</div>
+                  <div className="font-bold text-sm">Customer key shard</div>
+                  <div className="text-xs text-green-300 mt-1">IndexedDB storage</div>
+                </div>
+                <div className="text-slate-400 text-xl font-bold">→</div>
+                <div className="bg-teal-600 rounded-lg px-4 py-3 text-white">
+                  <div className="text-xs text-teal-200">2-of-3 rule</div>
+                  <div className="font-bold text-sm">Signing complete</div>
+                  <div className="text-xs text-teal-300 mt-1">No single-party sign</div>
                 </div>
               </div>
+              <div className="mt-3 text-center text-xs text-slate-500">Party 2 (backup shard) — recovery only when device is lost, dormant otherwise</div>
             </div>
             <div className="overflow-x-auto mb-10">
               <table className="w-full text-sm border-collapse">
@@ -858,22 +868,22 @@ export default function WalitsPayfiArchitecturePage() {
                     <th className="border border-slate-200 px-3 py-2 text-left">Criteria</th>
                     <th className="border border-slate-200 px-3 py-2 text-center">CDP Smart Wallet</th>
                     <th className="border border-slate-200 px-3 py-2 text-center">Viem</th>
-                    <th className="border border-slate-200 px-3 py-2 text-center font-bold text-blue-700">Turnkey (Recommended)</th>
+                    <th className="border border-slate-200 px-3 py-2 text-center font-bold text-teal-700">walits Self-hosted MPC (adopted)</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    ['Key location', 'Coinbase servers', 'Your server .env', 'TEE distributed'],
-                    ['Decentralized', '❌', '✅', '✅'],
+                    ['Key location', 'Coinbase servers', 'Server .env', '2-of-3 distributed (server + browser + backup)'],
+                    ['External dependency', '❌ Coinbase', '✅ None', '✅ None'],
                     ['Multi-user', '△', '❌', '✅'],
-                    ['Cost', 'Free tier', 'Free', 'Free tier'],
+                    ['Social login', '✅', '❌', '✅ (OAuth + MPC combined)'],
                     ['Security', 'Medium', 'Low', 'High'],
                   ].map(([item, a, b, c], i) => (
                     <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
                       <td className="border border-slate-200 px-3 py-2 font-medium">{item}</td>
                       <td className="border border-slate-200 px-3 py-2 text-center">{a}</td>
                       <td className="border border-slate-200 px-3 py-2 text-center">{b}</td>
-                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-blue-700">{c}</td>
+                      <td className="border border-slate-200 px-3 py-2 text-center font-bold text-teal-700">{c}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1030,7 +1040,7 @@ export default function WalitsPayfiArchitecturePage() {
                 </thead>
                 <tbody>
                   {[
-                    ['1. Base Wallet', 'ETH/SOL/USDC balance, transfer, Turnkey MPC', 'Done ✅'],
+                    ['1. Base Wallet', 'ETH/SOL/USDC balance, transfer, walits self-hosted MPC', 'Done ✅'],
                     ['2. AI + Basic PayFi', 'Claude integration + Idle Detector + Aave/Morpho auto-deposit', '2–4 weeks'],
                     ['2-1. Presets', 'Orange/Apple/Chili/Sleeping 4 presets + onboarding UI', '1–2 weeks'],
                     ['3. RWA + Instant Settle', 'Ondo USDY + Circle CCTP + B2B settlement', '4–8 weeks'],
@@ -1053,7 +1063,7 @@ export default function WalitsPayfiArchitecturePage() {
                 <div className="space-y-2 text-sm">
                   {[
                     ['AI Layer', 'AgentKit + LangChain + Claude API'],
-                    ['Key Mgmt', 'Turnkey MPC (decentralized)'],
+                    ['Key Mgmt', 'Self-hosted MPC (CGGMP24 + FROST, 2-of-3)'],
                     ['PayFi Rails', 'Aave / Morpho / Ondo USDY / Huma'],
                     ['Settlement', 'Base (2 sec) / Solana / Circle CCTP'],
                     ['Frontend', 'Next.js + TypeScript'],
@@ -1072,7 +1082,7 @@ export default function WalitsPayfiArchitecturePage() {
                     ['AgentKit', '$0 (open-source)'],
                     ['LangChain', '$0 (open-source)'],
                     ['Claude API', '~$10–30/mo'],
-                    ['Turnkey', '$0 (free tier)'],
+                    ['MPC Server', 'Self-operated (server cost)'],
                     ['Protocols', 'Direct contract integration'],
                   ].map(([k, v]) => (
                     <div key={k} className="flex justify-between">
