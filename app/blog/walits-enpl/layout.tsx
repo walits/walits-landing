@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'ENPL — Earn Now Pay Later: 이자로 결제하는 새로운 금융 구조',
     description: '부채 없이, 원금 소비 없이. 이자만으로 구독료를 결제하는 walits ENPL 완전 해부.',
-    images: [{ url: 'https://walits.com/blog/walits_payfi.jpg', width: 1200, height: 630, alt: 'walits ENPL' }],
+    images: [{ url: 'https://walits.com/blog/walits-enpl.jpg', width: 1200, height: 630, alt: 'walits ENPL' }],
     type: 'article',
     siteName: 'Walits',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ENPL — 원금은 그대로, 이자로 결제',
     description: 'BNPL의 역발상. walits ENPL Agent로 구독료를 이자로 자동 결제하는 방법.',
-    images: ['https://walits.com/blog/walits_payfi.jpg'],
+    images: ['https://walits.com/blog/walits-enpl.jpg'],
   },
 };
 

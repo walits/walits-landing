@@ -82,7 +82,7 @@ export default function BlogPage() {
           excerpt: 'BNPL의 역발상. 원금을 DeFi에 예치하고 매달 발생하는 이자로 구독료를 자동 결제한다. 부채 없이, 원금 소비 없이. 필요 원금 계산 수식부터 ENPL Agent 온체인 실행 구조까지.',
           date: '2026년 4월 10일',
           readTime: '18분',
-          image: '/blog/walits_payfi.jpg',
+          image: '/blog/walits-enpl.jpg',
         },
         {
           id: 'walits-idle-time-detector',
@@ -92,7 +92,7 @@ export default function BlogPage() {
           excerpt: '입금 감지 → 유휴 기간 예측 → 프로토콜 선택 → 온체인 예치. 24h 미만→Aave 5.1%, 1-7일→Morpho 5.6%, 7일+→Ondo USDY 5.0%. APY Scanner와 Policy Engine 연동 구조 완전 해부.',
           date: '2026년 4월 10일',
           readTime: '20분',
-          image: '/blog/walits_payfi.jpg',
+          image: '/blog/walits-idle.jpg',
         },
         {
           id: 'walits-starter-guide',
@@ -450,7 +450,7 @@ export default function BlogPage() {
           excerpt: 'The opposite of BNPL. Deposit principal into DeFi and auto-pay subscriptions with monthly yield. No debt, no principal consumption. From the required principal formula to the ENPL Agent on-chain execution structure.',
           date: 'April 10, 2026',
           readTime: '18 min read',
-          image: '/blog/walits_payfi.jpg',
+          image: '/blog/walits-enpl.jpg',
         },
         {
           id: 'walits-idle-time-detector',
@@ -460,7 +460,7 @@ export default function BlogPage() {
           excerpt: 'Deposit detected → idle duration predicted → protocol selected → on-chain deposit. Under 24h→Aave 5.1%, 1-7d→Morpho 5.6%, 7d+→Ondo USDY 5.0%. Full breakdown of APY Scanner and Policy Engine integration.',
           date: 'April 10, 2026',
           readTime: '20 min read',
-          image: '/blog/walits_payfi.jpg',
+          image: '/blog/walits-idle.jpg',
         },
         {
           id: 'walits-starter-guide',

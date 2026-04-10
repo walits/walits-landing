@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Idle Time Detector — 유휴 USDC 자동 수익 메커니즘',
     description: '24h 미만→Aave, 1-7일→Morpho, 7일+→Ondo USDY. walits가 유휴 자금을 실시간으로 감지하고 최적 프로토콜에 자동 예치하는 방법.',
-    images: [{ url: 'https://walits.com/blog/walits_payfi.jpg', width: 1200, height: 630, alt: 'walits Idle Time Detector' }],
+    images: [{ url: 'https://walits.com/blog/walits-idle.jpg', width: 1200, height: 630, alt: 'walits Idle Time Detector' }],
     type: 'article',
     siteName: 'Walits',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Idle Time Detector — 유휴 USDC 자동 수익',
     description: 'Aave·Morpho·Ondo USDY 3단계 선택 로직. walits 자동 예치 메커니즘 완전 해부.',
-    images: ['https://walits.com/blog/walits_payfi.jpg'],
+    images: ['https://walits.com/blog/walits-idle.jpg'],
   },
 };
 
