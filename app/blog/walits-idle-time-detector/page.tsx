@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function WalitsIdleTimeDetectorPage() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
@@ -46,6 +47,13 @@ export default function WalitsIdleTimeDetectorPage() {
             <span>·</span>
             <span>{isKo ? '20분 읽기' : '20 min read'}</span>
           </div>
+        </div>
+      </div>
+
+      {/* Hero Image */}
+      <div className="max-w-4xl mx-auto px-6 -mt-4">
+        <div className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl">
+          <Image src="/blog/walits-idle.jpg" alt="walits Idle Time Detector" fill className="object-cover" />
         </div>
       </div>
 

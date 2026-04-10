@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function WalitsEnplPage() {
   const [language, setLanguage] = useState<'ko' | 'en'>('ko');
@@ -53,6 +54,13 @@ export default function WalitsEnplPage() {
             <span>·</span>
             <span>{isKo ? '18분 읽기' : '18 min read'}</span>
           </div>
+        </div>
+      </div>
+
+      {/* Hero Image */}
+      <div className="max-w-4xl mx-auto px-6 -mt-4">
+        <div className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl">
+          <Image src="/blog/walits-enpl.jpg" alt="walits ENPL — Earn Now Pay Later" fill className="object-cover" />
         </div>
       </div>
 
