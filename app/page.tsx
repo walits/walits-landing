@@ -726,7 +726,12 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
             {/* Left — Enterprise Wallet */}
-            <div className="rounded-3xl p-8 bg-slate-900 text-white shadow-xl flex flex-col">
+            <div className="rounded-3xl p-8 bg-slate-900 text-white shadow-xl flex flex-col relative">
+              <div className="absolute -top-3 right-6">
+                <span className="px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full">
+                  {language === 'ko' ? '런칭 준비중' : 'Coming Soon'}
+                </span>
+              </div>
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-blue-600 shrink-0">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -754,12 +759,12 @@ export default function HomePage() {
               <div className="text-xs text-slate-400 mb-5 leading-relaxed">
                 {copy.enterpriseWallet.useCases}
               </div>
-              <Link
-                href="/inquiry"
-                className="block w-full text-center py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors"
+              <button
+                disabled
+                className="block w-full text-center py-3 bg-slate-700 text-slate-400 font-semibold rounded-xl cursor-not-allowed"
               >
-                {language === 'ko' ? '도입 문의' : 'Contact Sales'}
-              </Link>
+                {language === 'ko' ? '준비중' : 'Coming Soon'}
+              </button>
             </div>
 
             {/* Right — Personal Wallet */}
