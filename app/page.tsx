@@ -39,30 +39,21 @@ export default function HomePage() {
         login: '로그인',
       },
       enterpriseWallet: {
-        title: '기업용 지갑',
-        subtitle: 'Virtual Balance 기반 포인트 지급부터 실제 블록체인 자산 관리까지',
-        basicTitle: 'Basic',
-        basicSubtitle: 'Virtual Balance 기반 대량 지급',
-        basicDesc: 'Virtual Balance로 가스비 없이 즉시 포인트/리워드 지급. 대규모 에어드랍과 ICO/커스텀 토큰 발행에 최적화.',
-        basicFeatures: [
-          'Virtual Balance: 가스비 없이 즉시 지급',
-          'API 기반: API 키만으로 바로 시작',
-          '대량 처리: TEE 환경에서 동시 트랜잭션 처리',
-          '계정별 독립: 각 계정은 독립된 지갑으로 완전 격리',
-          'ICO 지원: 커스텀 토큰 발행 및 자동 배포',
+        title: '기업용 USDC 지갑',
+        subtitle: 'API 하나로 USDC 결제·운용·정산을 자동화하는 기업 전용 스테이블코인 지갑',
+        desc: '개인용 지갑과 동일한 walits MPC 인프라 위에서, 기업의 USDC 자금을 자동으로 운용·정산·지급합니다. Idle Time Detector로 유휴 자금을 수익화하고, AI Agent로 B2B 결제와 급여를 자동화합니다.',
+        features: [
+          'USDC 전용: 스테이블코인 중심 기업 재무 관리',
+          'Virtual Balance: 가스비 없이 즉시 내부 포인트·보상 지급',
+          'API 기반: API 키 하나로 즉시 연동, 무제한 트랜잭션',
+          '실시간 입금 감지: 블록체인 입금 즉시 추적 (1 confirmation)',
+          'Idle Time Detector: 유휴 USDC 자동 예치 → Aave / Morpho / Ondo',
+          'AI Agent: 자연어 명령으로 B2B 결제·급여·구독 자동 실행',
+          '자체 MPC 인프라: CGGMP24 + FROST, 2-of-3 키 분산 보관',
+          '기업 재무 대시보드: 자산 현황·수익·거래 내역 실시간 조회',
+          '고급 리포팅: 상세 거래 분석 및 전담 계정 매니저',
         ],
-        basicUseCases: '게임 보상 | NFT 에어드랍 | ICO/토큰 발행 | 리워드 포인트',
-        proTitle: 'Pro',
-        proSubtitle: '실제 블록체인 입금 감지 + 기업 재무 관리',
-        proDesc: 'Basic의 모든 기능 + 실제 암호화폐 입금 감지 및 추적. 기업 재무 관리 기능 포함.',
-        proFeatures: [
-          'Basic 모든 기능 포함',
-          '실시간 입금 감지: 블록체인 입금 즉시 추적',
-          '기업 재무 관리: 자산 현황 대시보드',
-          '수동 집금: 필요 시 수동으로 자산 이동',
-          '고급 리포팅: 상세한 거래 내역 및 분석',
-        ],
-        proUseCases: '게임 아이템 거래소 | 크립토 결제 | 기업 재무 관리 | 토큰 발행사',
+        useCases: 'B2B 결제 자동화 | 글로벌 급여 | 게임 보상·에어드랍 | 구독 자동 결제 | ICO / 토큰 발행',
       },
       personalWallet: {
         title: '개인 스테이블 코인 지갑',
@@ -150,31 +141,19 @@ export default function HomePage() {
               '다중 토큰 지원',
             ],
           },
-          basic: {
-            name: '기업용 지갑 Basic',
-            originalPrice: '₩200,000',
-            price: '₩99,000',
+          enterprise: {
+            name: '기업용 USDC 지갑',
+            price: '₩200,000',
             features: [
+              'USDC 전용 기업 재무 관리',
               'Virtual Balance 즉시 지급',
-              'API 기반 대량 처리',
-              '계정별 독립 지갑',
-              '무제한 트랜잭션',
-              'ICO/커스텀 토큰 지원',
-              '개발자 기술 지원',
-            ],
-          },
-          pro: {
-            name: '기업용 지갑 Pro',
-            originalPrice: '₩500,000',
-            price: '₩300,000',
-            features: [
-              'Basic 모든 기능 포함',
+              'API 기반 무제한 트랜잭션',
               '실시간 블록체인 입금 감지',
-              '기업 재무 관리 대시보드',
-              '수동 집금 기능',
-              '고급 리포팅 및 분석',
-              '전담 계정 매니저',
-              '우선 기술 지원',
+              'Idle Time Detector 자동 수익화',
+              'AI Agent B2B 결제·급여 자동화',
+              '자체 MPC 인프라 (2-of-3)',
+              '기업 재무 대시보드',
+              '전담 계정 매니저 + 우선 기술 지원',
             ],
           },
         },
@@ -202,30 +181,21 @@ export default function HomePage() {
         login: 'Login',
       },
       enterpriseWallet: {
-        title: 'Enterprise Wallet',
-        subtitle: 'From Virtual Balance points to real blockchain asset management',
-        basicTitle: 'Basic',
-        basicSubtitle: 'Virtual Balance Mass Distribution',
-        basicDesc: 'Instant points/rewards distribution with Virtual Balance and zero gas fees. Optimized for large-scale airdrops and ICO/custom token issuance.',
-        basicFeatures: [
-          'Virtual Balance: Instant distribution with zero gas fees',
-          'API-based: Start immediately with just API key',
-          'Mass Processing: Simultaneous transactions in TEE environment',
-          'Account Isolation: Each account with independent wallet',
-          'ICO Support: Custom token issuance and auto-distribution',
+        title: 'Enterprise USDC Wallet',
+        subtitle: 'Automate USDC payments, yield, and settlements with a single API',
+        desc: 'Built on the same walits MPC infrastructure as the personal wallet. Automatically earn yield on idle USDC, automate B2B payments and payroll with AI Agent, and manage corporate treasury in real time.',
+        features: [
+          'USDC-focused: Stablecoin-centric corporate treasury',
+          'Virtual Balance: Instant internal points/rewards with zero gas fees',
+          'API-based: Single API key for instant integration, unlimited transactions',
+          'Real-time Deposit Detection: Instant blockchain tracking (1 confirmation)',
+          'Idle Time Detector: Auto-deposit idle USDC → Aave / Morpho / Ondo',
+          'AI Agent: Natural language commands for B2B payments, payroll, subscriptions',
+          'Self-hosted MPC: CGGMP24 + FROST, 2-of-3 distributed key management',
+          'Treasury Dashboard: Real-time asset status, yield, and transaction history',
+          'Advanced Reporting: Detailed analytics + dedicated account manager',
         ],
-        basicUseCases: 'Game Rewards | NFT Airdrops | ICO/Token Issuance | Reward Points',
-        proTitle: 'Pro',
-        proSubtitle: 'Real Blockchain Deposit Detection + Treasury',
-        proDesc: 'All Basic features + real crypto deposit detection and tracking. Includes corporate treasury management.',
-        proFeatures: [
-          'All Basic features included',
-          'Real-time Deposit Detection: Instant blockchain deposit tracking',
-          'Corporate Treasury: Asset status dashboard',
-          'Manual Sweep: Manual asset movement when needed',
-          'Advanced Reporting: Detailed transaction history and analytics',
-        ],
-        proUseCases: 'Game Item Marketplace | Crypto Payments | Corporate Treasury | Token Issuers',
+        useCases: 'B2B Payment Automation | Global Payroll | Game Rewards & Airdrops | Auto Subscriptions | ICO / Token Issuance',
       },
       personalWallet: {
         title: 'Personal Stablecoin Wallet',
@@ -313,31 +283,19 @@ export default function HomePage() {
               'Multi-token support',
             ],
           },
-          basic: {
-            name: 'Enterprise Wallet Basic',
-            originalPrice: '$150',
-            price: '$58',
+          enterprise: {
+            name: 'Enterprise USDC Wallet',
+            price: '$149',
             features: [
+              'USDC-focused corporate treasury',
               'Virtual Balance instant distribution',
-              'API-based mass processing',
-              'Independent wallet per account',
-              'Unlimited transactions',
-              'ICO/Custom token support',
-              'Developer support',
-            ],
-          },
-          pro: {
-            name: 'Enterprise Wallet Pro',
-            originalPrice: '$380',
-            price: '$220',
-            features: [
-              'All Basic features included',
+              'API-based unlimited transactions',
               'Real-time blockchain deposit detection',
-              'Corporate treasury dashboard',
-              'Manual sweep operations',
-              'Advanced reporting & analytics',
-              'Dedicated account manager',
-              'Priority technical support',
+              'Idle Time Detector auto yield',
+              'AI Agent for payments & payroll',
+              'Self-hosted MPC (2-of-3)',
+              'Treasury dashboard',
+              'Dedicated account manager + priority support',
             ],
           },
         },
@@ -771,65 +729,35 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Basic Plan Card */}
-            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-md border border-gray-900 dark:border-gray-600">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-blue-600">
-                  <span className="text-white font-bold text-xl">B</span>
+          <div className="max-w-3xl mx-auto">
+            {/* Unified Enterprise Wallet Card */}
+            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-lg border-2 border-gray-900 dark:border-gray-500">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-slate-800 to-blue-700">
+                  <span className="text-white font-bold text-2xl">W</span>
                 </div>
                 <div>
                   <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {copy.enterpriseWallet.basicTitle}
+                    {copy.enterpriseWallet.title}
                   </h3>
-                  <p className="text-base text-gray-700 dark:text-gray-300">
-                    {copy.enterpriseWallet.basicSubtitle}
+                  <p className="text-base text-gray-600 dark:text-gray-400">
+                    {copy.enterpriseWallet.subtitle}
                   </p>
                 </div>
               </div>
-              <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
-                {copy.enterpriseWallet.basicDesc}
+              <p className="text-lg mb-8 leading-relaxed text-gray-600 dark:text-gray-400">
+                {copy.enterpriseWallet.desc}
               </p>
-              <ul className="space-y-3 text-base text-gray-800 dark:text-gray-300">
-                {copy.enterpriseWallet.basicFeatures.map((feature, i) => (
-                  <li key={i}>• {feature}</li>
+              <div className="grid sm:grid-cols-2 gap-3 mb-8">
+                {copy.enterpriseWallet.features.map((feature, i) => (
+                  <div key={i} className="flex items-start gap-2 text-sm text-gray-800 dark:text-gray-300">
+                    <span className="text-blue-600 font-bold mt-0.5 shrink-0">✓</span>
+                    <span>{feature}</span>
+                  </div>
                 ))}
-              </ul>
-              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-900/30 shadow-sm border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
-                {copy.enterpriseWallet.basicUseCases}
               </div>
-            </div>
-
-            {/* Pro Plan Card */}
-            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-md border border-gray-900 dark:border-gray-600 relative">
-              <div className="absolute -top-3 right-6">
-                <span className="px-3 py-1 bg-gradient-to-r from-purple-600 to-purple-500 text-white text-sm font-semibold rounded-full shadow-lg">
-                  {language === 'ko' ? '추천' : 'Recommended'}
-                </span>
-              </div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-purple-600 to-purple-700">
-                  <span className="text-white font-bold text-xl">P</span>
-                </div>
-                <div>
-                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {copy.enterpriseWallet.proTitle}
-                  </h3>
-                  <p className="text-base text-gray-700 dark:text-gray-300">
-                    {copy.enterpriseWallet.proSubtitle}
-                  </p>
-                </div>
-              </div>
-              <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
-                {copy.enterpriseWallet.proDesc}
-              </p>
-              <ul className="space-y-3 text-base text-gray-800 dark:text-gray-300">
-                {copy.enterpriseWallet.proFeatures.map((feature, i) => (
-                  <li key={i}>• {feature}</li>
-                ))}
-              </ul>
-              <div className="mt-8 inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-purple-50 dark:bg-purple-900/30 shadow-sm border border-purple-200 dark:border-purple-700 text-gray-900 dark:text-white">
-                {copy.enterpriseWallet.proUseCases}
+              <div className="inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-gray-700 dark:text-gray-300">
+                {copy.enterpriseWallet.useCases}
               </div>
             </div>
           </div>
@@ -988,7 +916,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {/* Personal Wallet Plan */}
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -1023,82 +951,35 @@ export default function HomePage() {
               </button>
             </div>
 
-            {/* Basic Plan */}
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-300 dark:border-gray-600 hover:shadow-lg transition-shadow relative">
+            {/* Enterprise Plan */}
+            <div className="bg-gradient-to-br from-slate-900 to-blue-900 rounded-xl p-8 border-2 border-slate-700 hover:shadow-2xl transition-shadow relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                   {language === 'ko' ? '런칭 준비중' : 'Coming Soon'}
                 </span>
               </div>
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                  {copy.pricing.plans.basic.name}
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  {copy.pricing.plans.enterprise.name}
                 </h3>
-                <div className="flex flex-col items-center">
-                  <span className="text-lg text-gray-400 line-through">
-                    {copy.pricing.plans.basic.originalPrice}/{copy.pricing.monthly}
+                <div className="flex items-baseline justify-center gap-1">
+                  <span className="text-4xl font-bold text-blue-300">
+                    {copy.pricing.plans.enterprise.price}
                   </span>
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-bold text-red-600">
-                      {copy.pricing.plans.basic.price}
-                    </span>
-                    <span className="text-gray-600 dark:text-gray-400">/{copy.pricing.monthly}</span>
-                  </div>
+                  <span className="text-gray-400">/{copy.pricing.monthly}</span>
                 </div>
               </div>
               <ul className="space-y-3 mb-8">
-                {copy.pricing.plans.basic.features.map((feature, i) => (
-                  <li key={i} className="flex items-start text-sm text-gray-600 dark:text-gray-400">
-                    <span className="text-gray-900 dark:text-white mr-2 mt-1">✓</span>
+                {copy.pricing.plans.enterprise.features.map((feature, i) => (
+                  <li key={i} className="flex items-start text-sm text-gray-300">
+                    <span className="text-blue-400 mr-2 mt-1">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
               <Link
                 href="/inquiry"
-                className="block w-full text-center py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 font-medium transition-colors"
-              >
-                {copy.pricing.getStarted}
-              </Link>
-            </div>
-
-            {/* Pro Plan */}
-            <div className="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-100 dark:to-gray-200 rounded-xl p-8 border-2 border-gray-700 dark:border-gray-400 hover:shadow-2xl transition-shadow relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 flex gap-2 whitespace-nowrap">
-                <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
-                  {language === 'ko' ? '런칭 준비중' : 'Coming Soon'}
-                </span>
-                <span className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap">
-                  {language === 'ko' ? '추천' : 'Recommended'}
-                </span>
-              </div>
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-white dark:text-gray-900 mb-2">
-                  {copy.pricing.plans.pro.name}
-                </h3>
-                <div className="flex flex-col items-center">
-                  <span className="text-lg text-gray-500 line-through">
-                    {copy.pricing.plans.pro.originalPrice}/{copy.pricing.monthly}
-                  </span>
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-bold text-yellow-500 dark:text-yellow-600">
-                      {copy.pricing.plans.pro.price}
-                    </span>
-                    <span className="text-gray-400 dark:text-gray-600">/{copy.pricing.monthly}</span>
-                  </div>
-                </div>
-              </div>
-              <ul className="space-y-3 mb-8">
-                {copy.pricing.plans.pro.features.map((feature, i) => (
-                  <li key={i} className="flex items-start text-sm text-gray-300 dark:text-gray-600">
-                    <span className="text-yellow-500 dark:text-yellow-600 mr-2 mt-1">✓</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/inquiry"
-                className="block w-full text-center py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 font-semibold transition-colors shadow-md"
+                className="block w-full text-center py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold transition-colors shadow-md"
               >
                 {copy.pricing.getStarted}
               </Link>
