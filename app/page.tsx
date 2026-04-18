@@ -39,15 +39,15 @@ export default function HomePage() {
         login: '로그인',
       },
       enterpriseWallet: {
-        title: '기업용 USDC 지갑',
-        subtitle: 'API 하나로 USDC 결제·운용·정산을 자동화하는 기업 전용 스테이블코인 지갑',
-        desc: '개인용 지갑과 동일한 walits MPC 인프라 위에서, 기업의 USDC 자금을 자동으로 운용·정산·지급합니다. Idle Time Detector로 유휴 자금을 수익화하고, AI Agent로 B2B 결제와 급여를 자동화합니다.',
+        title: '기업용 지갑',
+        subtitle: 'API 하나로 결제·운용·정산·보상을 자동화하는 기업 전용 블록체인 지갑',
+        desc: 'walits 자체 MPC 인프라 위에서, 기업의 가상자산 자금을 자동으로 운용·정산·지급합니다. Idle Time Detector로 유휴 자금을 수익화하고, AI Agent로 B2B 결제와 급여를 자동화합니다.',
         features: [
-          'USDC 전용: 스테이블코인 중심 기업 재무 관리',
+          '멀티체인 자산 관리: USDC, USDT, ETH, SOL 등 주요 자산',
           'Virtual Balance: 가스비 없이 즉시 내부 포인트·보상 지급',
           'API 기반: API 키 하나로 즉시 연동, 무제한 트랜잭션',
           '실시간 입금 감지: 블록체인 입금 즉시 추적 (1 confirmation)',
-          'Idle Time Detector: 유휴 USDC 자동 예치 → Aave / Morpho / Ondo',
+          'Idle Time Detector: 유휴 자금 자동 예치 → Aave / Morpho / Ondo',
           'AI Agent: 자연어 명령으로 B2B 결제·급여·구독 자동 실행',
           '자체 MPC 인프라: CGGMP24 + FROST, 2-of-3 키 분산 보관',
           '기업 재무 대시보드: 자산 현황·수익·거래 내역 실시간 조회',
@@ -56,7 +56,7 @@ export default function HomePage() {
         useCases: 'B2B 결제 자동화 | 글로벌 급여 | 게임 보상·에어드랍 | 구독 자동 결제 | ICO / 토큰 발행',
       },
       personalWallet: {
-        title: '개인 스테이블 코인 지갑',
+        title: '개인 스테이블 코인 지갑 (USDC)',
         subtitle: 'AI, 투자, Chat, RWA - 하나의 지갑으로 모든 것을',
         desc: '채팅하듯 송금하고, AI가 자동으로 투자하고, 실물 자산 토큰에 투자하세요. 일상 결제부터 전문 투자까지 하나의 앱에서 모두 해결합니다.',
         features: [
@@ -129,7 +129,7 @@ export default function HomePage() {
         getStarted: '시작하기',
         plans: {
           personal: {
-            name: '개인 스테이블 코인 지갑',
+            name: '개인 스테이블 코인 지갑 (USDC)',
             price: '무료',
             features: [
               '채팅 송금',
@@ -142,10 +142,10 @@ export default function HomePage() {
             ],
           },
           enterprise: {
-            name: '기업용 USDC 지갑',
+            name: '기업용 지갑',
             price: '₩200,000',
             features: [
-              'USDC 전용 기업 재무 관리',
+              '멀티체인 기업 재무 관리',
               'Virtual Balance 즉시 지급',
               'API 기반 무제한 트랜잭션',
               '실시간 블록체인 입금 감지',
@@ -160,7 +160,7 @@ export default function HomePage() {
       },
       footer: {
         services: '서비스',
-        personal: '개인 스테이블 코인 지갑',
+        personal: '개인 스테이블 코인 지갑 (USDC)',
         enterprise: '기업 고객',
         contact: '문의',
         email: '이메일: walits.co@gmail.com',
@@ -181,15 +181,15 @@ export default function HomePage() {
         login: 'Login',
       },
       enterpriseWallet: {
-        title: 'Enterprise USDC Wallet',
-        subtitle: 'Automate USDC payments, yield, and settlements with a single API',
-        desc: 'Built on the same walits MPC infrastructure as the personal wallet. Automatically earn yield on idle USDC, automate B2B payments and payroll with AI Agent, and manage corporate treasury in real time.',
+        title: 'Enterprise Wallet',
+        subtitle: 'Automate payments, yield, settlements, and rewards with a single API',
+        desc: 'Built on walits self-hosted MPC infrastructure. Automatically earn yield on idle assets, automate B2B payments and payroll with AI Agent, and manage corporate treasury in real time.',
         features: [
-          'USDC-focused: Stablecoin-centric corporate treasury',
+          'Multi-chain asset management: USDC, USDT, ETH, SOL and more',
           'Virtual Balance: Instant internal points/rewards with zero gas fees',
           'API-based: Single API key for instant integration, unlimited transactions',
           'Real-time Deposit Detection: Instant blockchain tracking (1 confirmation)',
-          'Idle Time Detector: Auto-deposit idle USDC → Aave / Morpho / Ondo',
+          'Idle Time Detector: Auto-deposit idle assets → Aave / Morpho / Ondo',
           'AI Agent: Natural language commands for B2B payments, payroll, subscriptions',
           'Self-hosted MPC: CGGMP24 + FROST, 2-of-3 distributed key management',
           'Treasury Dashboard: Real-time asset status, yield, and transaction history',
@@ -198,7 +198,7 @@ export default function HomePage() {
         useCases: 'B2B Payment Automation | Global Payroll | Game Rewards & Airdrops | Auto Subscriptions | ICO / Token Issuance',
       },
       personalWallet: {
-        title: 'Personal Stablecoin Wallet',
+        title: 'Personal Stablecoin Wallet (USDC)',
         subtitle: 'AI, Investment, Chat, RWA - Everything in One Wallet',
         desc: 'Send crypto like chatting, let AI invest automatically, and invest in real-world asset tokens. From daily payments to professional investing, all in one app.',
         features: [
@@ -271,7 +271,7 @@ export default function HomePage() {
         getStarted: 'Get Started',
         plans: {
           personal: {
-            name: 'Personal Stablecoin Wallet',
+            name: 'Personal Stablecoin Wallet (USDC)',
             price: 'Free',
             features: [
               'Chat transfer',
@@ -284,10 +284,10 @@ export default function HomePage() {
             ],
           },
           enterprise: {
-            name: 'Enterprise USDC Wallet',
+            name: 'Enterprise Wallet',
             price: '$149',
             features: [
-              'USDC-focused corporate treasury',
+              'Multi-chain corporate treasury',
               'Virtual Balance instant distribution',
               'API-based unlimited transactions',
               'Real-time blockchain deposit detection',
@@ -302,7 +302,7 @@ export default function HomePage() {
       },
       footer: {
         services: 'Services',
-        personal: 'Personal Stablecoin Wallet',
+        personal: 'Personal Stablecoin Wallet (USDC)',
         enterprise: 'Enterprise',
         contact: 'Contact',
         email: 'Email: walits.co@gmail.com',
@@ -338,17 +338,9 @@ export default function HomePage() {
     offers: [
       {
         "@type": "Offer",
-        name: language === 'ko' ? "기업용 지갑 Basic" : "Enterprise Wallet Basic",
-        description: language === 'ko' ? "Virtual Balance 기반 대량 지급" : "Virtual Balance mass distribution",
-        price: "99000",
-        priceCurrency: "KRW",
-        category: language === 'ko' ? "기업용 코인 지갑" : "Enterprise Crypto Wallet"
-      },
-      {
-        "@type": "Offer",
-        name: language === 'ko' ? "기업용 지갑 Pro" : "Enterprise Wallet Pro",
-        description: language === 'ko' ? "Virtual Balance + 실제 블록체인 입금 감지 및 재무 관리" : "Virtual Balance + Real blockchain deposit detection and treasury management",
-        price: "300000",
+        name: language === 'ko' ? "기업용 지갑" : "Enterprise Wallet",
+        description: language === 'ko' ? "API 기반 멀티체인 기업 자산 관리. Virtual Balance, 실시간 입금 감지, Idle Time Detector, AI Agent 결제 자동화 포함" : "API-based multi-chain enterprise asset management. Includes Virtual Balance, real-time deposit detection, Idle Time Detector, and AI Agent payment automation",
+        price: "200000",
         priceCurrency: "KRW",
         category: language === 'ko' ? "기업용 코인 지갑" : "Enterprise Crypto Wallet"
       },
@@ -372,15 +364,15 @@ export default function HomePage() {
         name: "가상자산 지갑이란 무엇인가요?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "가상자산 지갑은 비트코인, 이더리움 등 암호화폐를 보관하고 관리하는 디지털 지갑입니다. Walits는 기업용 지갑(Basic/Pro)과 개인용 AI Chat 지갑을 제공하여 안전한 자산 관리를 지원합니다."
+          text: "가상자산 지갑은 비트코인, 이더리움 등 암호화폐를 보관하고 관리하는 디지털 지갑입니다. Walits는 기업용 지갑과 개인 스테이블 코인 지갑 (USDC)을 제공하여 안전한 자산 관리를 지원합니다."
         }
       },
       {
         "@type": "Question",
-        name: "기업용 지갑 Basic과 Pro의 차이는 무엇인가요?",
+        name: "기업용 지갑에는 어떤 기능이 포함되나요?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Basic 플랜은 Virtual Balance를 활용한 가스비 없는 즉시 포인트/리워드 지급에 최적화되어 있습니다. Pro 플랜은 Basic의 모든 기능에 더해 실제 블록체인 입금 감지, 기업 재무 관리 대시보드, 수동 집금 기능 등 고급 기능을 제공합니다."
+          text: "walits 기업용 지갑은 Virtual Balance 즉시 지급, 실시간 블록체인 입금 감지, Idle Time Detector(유휴 자금 자동 수익화), AI Agent B2B 결제·급여 자동화, 자체 MPC 인프라(2-of-3), 기업 재무 대시보드, 전담 계정 매니저 등 모든 기능을 단일 플랜으로 제공합니다."
         }
       },
       {
@@ -426,10 +418,10 @@ export default function HomePage() {
       },
       {
         "@type": "Question",
-        name: "What's the difference between Enterprise Wallet Basic and Pro?",
+        name: "What features does the Enterprise Wallet include?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Basic plan is optimized for instant points/rewards distribution with Virtual Balance and zero gas fees. Pro plan includes all Basic features plus real blockchain deposit detection, corporate treasury dashboard, and manual sweep operations for advanced asset management."
+          text: "The walits Enterprise Wallet includes Virtual Balance instant distribution, real-time blockchain deposit detection, Idle Time Detector (auto yield on idle assets), AI Agent for B2B payment and payroll automation, self-hosted MPC infrastructure (2-of-3), corporate treasury dashboard, and a dedicated account manager — all in a single unified plan."
         }
       },
       {
@@ -555,7 +547,7 @@ export default function HomePage() {
                 {language === 'ko' ? '기업용' : 'Enterprise'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-                {language === 'ko' ? '기업용 지갑 (Basic, Pro)' : 'Enterprise Wallet (Basic, Pro)'}
+                {language === 'ko' ? '기업용 지갑' : 'Enterprise Wallet'}
               </span>
             </div>
 
@@ -565,7 +557,7 @@ export default function HomePage() {
                 {language === 'ko' ? '개인용' : 'Personal'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-                {language === 'ko' ? '개인 스테이블 코인 지갑' : 'Personal Stablecoin Wallet'}
+                {language === 'ko' ? '개인 스테이블 코인 지갑 (USDC)' : 'Personal Stablecoin Wallet (USDC)'}
               </span>
             </div>
           </div>
@@ -648,7 +640,7 @@ export default function HomePage() {
                   <div className="w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
                     <div className="block px-4 py-3 opacity-60 cursor-not-allowed">
                       <div className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                        {language === 'ko' ? '개인 스테이블 코인 지갑' : 'Personal Stablecoin Wallet'}
+                        {language === 'ko' ? '개인 스테이블 코인 지갑 (USDC)' : 'Personal Stablecoin Wallet (USDC)'}
                         <span className="bg-yellow-500 text-white px-2 py-0.5 rounded-full text-xs font-semibold">
                           {language === 'ko' ? '준비중' : 'Soon'}
                         </span>
