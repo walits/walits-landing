@@ -709,114 +709,112 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Enterprise Wallet Section */}
+      {/* Wallet Solutions Section */}
       <section id="solutions" className="py-24 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-              {copy.enterpriseWallet.title}
+              {language === 'ko' ? 'Walits 지갑 솔루션' : 'Walits Wallet Solutions'}
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              {copy.enterpriseWallet.subtitle}
+              {language === 'ko'
+                ? '기업과 개인 모두를 위한 블록체인 지갑 — 용도에 맞게 선택하세요'
+                : 'Blockchain wallets for both enterprises and individuals — choose what fits your needs'}
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            {/* Unified Enterprise Wallet Card */}
-            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-lg border-2 border-gray-900 dark:border-gray-500">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-slate-800 to-blue-700">
-                  <span className="text-white font-bold text-2xl">W</span>
+          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+            {/* Left — Enterprise Wallet */}
+            <div className="rounded-3xl p-8 bg-slate-900 text-white shadow-xl flex flex-col">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-blue-600 shrink-0">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {copy.enterpriseWallet.title}
-                  </h3>
-                  <p className="text-base text-gray-600 dark:text-gray-400">
-                    {copy.enterpriseWallet.subtitle}
-                  </p>
+                  <div className="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-0.5">
+                    {language === 'ko' ? '기업용' : 'Enterprise'}
+                  </div>
+                  <h3 className="text-2xl font-bold">{copy.enterpriseWallet.title}</h3>
                 </div>
               </div>
-              <p className="text-lg mb-8 leading-relaxed text-gray-600 dark:text-gray-400">
+              <p className="text-slate-300 text-sm leading-relaxed mb-6">
                 {copy.enterpriseWallet.desc}
               </p>
-              <div className="grid sm:grid-cols-2 gap-3 mb-8">
+              <div className="space-y-2 mb-6 flex-1">
                 {copy.enterpriseWallet.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-2 text-sm text-gray-800 dark:text-gray-300">
-                    <span className="text-blue-600 font-bold mt-0.5 shrink-0">✓</span>
+                  <div key={i} className="flex items-start gap-2 text-sm text-slate-200">
+                    <span className="text-blue-400 font-bold mt-0.5 shrink-0">✓</span>
                     <span>{feature}</span>
                   </div>
                 ))}
               </div>
-              <div className="inline-flex items-center gap-3 text-sm font-medium px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-gray-700 dark:text-gray-300">
+              <div className="text-xs text-slate-400 mb-5 leading-relaxed">
                 {copy.enterpriseWallet.useCases}
               </div>
+              <Link
+                href="/inquiry"
+                className="block w-full text-center py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors"
+              >
+                {language === 'ko' ? '도입 문의' : 'Contact Sales'}
+              </Link>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Personal Wallet Section */}
-      <section id="personal" className="py-24 bg-gray-50 dark:bg-gray-800">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-              {copy.personalWallet.title}
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              {copy.personalWallet.subtitle}
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            {/* Unified Personal Wallet Card */}
-            <div className="rounded-3xl p-10 bg-white dark:bg-gray-800 shadow-xl border border-gray-900 dark:border-gray-600 relative">
+            {/* Right — Personal Wallet */}
+            <div className="rounded-3xl p-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-800 border-2 border-blue-200 dark:border-gray-600 shadow-xl flex flex-col relative">
               <div className="absolute -top-3 right-6">
-                <span className="px-3 py-1 bg-yellow-500 text-white text-sm font-semibold rounded-full">
+                <span className="px-3 py-1 bg-yellow-500 text-white text-xs font-semibold rounded-full">
                   {language === 'ko' ? '런칭 준비중' : 'Coming Soon'}
                 </span>
               </div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 shrink-0">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    {copy.personalWallet.title}
-                  </h3>
-                  <p className="text-base text-gray-700 dark:text-gray-300">
-                    {language === 'ko' ? 'AI · 투자 · Chat · RWA · MPC 2-of-2' : 'AI · Investment · Chat · RWA · MPC 2-of-2'}
-                  </p>
+                  <div className="text-xs font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-0.5">
+                    {language === 'ko' ? '개인용' : 'Personal'}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{copy.personalWallet.title}</h3>
                 </div>
               </div>
-              <p className="text-lg mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
                 {copy.personalWallet.desc}
               </p>
-              <div className="grid md:grid-cols-2 gap-3 text-base text-gray-800 dark:text-gray-300">
+              <div className="space-y-2 mb-6 flex-1">
                 {copy.personalWallet.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
+                  <div key={i} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+                    <span className="text-purple-500 font-bold mt-0.5 shrink-0">✓</span>
                     <span>{feature}</span>
                   </div>
                 ))}
               </div>
-              <div className="mt-8 flex flex-wrap gap-2">
-                <span className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
-                  {language === 'ko' ? '채팅 송금' : 'Chat Transfer'}
-                </span>
-                <span className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
-                  {language === 'ko' ? 'AI 자동 결제' : 'AI Auto Payment'}
-                </span>
-                <span className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
-                  {language === 'ko' ? 'AI 포트폴리오' : 'AI Portfolio'}
-                </span>
-                <span className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-700 text-gray-900 dark:text-white">
-                  {language === 'ko' ? 'RWA 투자' : 'RWA Investment'}
-                </span>
+              <div className="flex flex-wrap gap-2 mb-5">
+                {[
+                  language === 'ko' ? '채팅 송금' : 'Chat Transfer',
+                  language === 'ko' ? 'AI 자동 결제' : 'AI Auto Payment',
+                  language === 'ko' ? 'AI 포트폴리오' : 'AI Portfolio',
+                  language === 'ko' ? 'RWA 투자' : 'RWA Investment',
+                  'ENPL',
+                  language === 'ko' ? 'Idle 수익화' : 'Idle Yield',
+                ].map((tag, i) => (
+                  <span key={i} className="text-xs font-medium px-3 py-1 rounded-full bg-white dark:bg-gray-700 border border-blue-200 dark:border-gray-600 text-gray-700 dark:text-gray-300">
+                    {tag}
+                  </span>
+                ))}
               </div>
+              <button
+                disabled
+                className="block w-full text-center py-3 bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 font-semibold rounded-xl cursor-not-allowed"
+              >
+                {language === 'ko' ? '준비중' : 'Coming Soon'}
+              </button>
             </div>
+
           </div>
         </div>
       </section>
