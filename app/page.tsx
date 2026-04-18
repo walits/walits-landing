@@ -56,7 +56,7 @@ export default function HomePage() {
         useCases: 'B2B 결제 자동화 | 글로벌 급여 | 게임 보상·에어드랍 | 구독 자동 결제 | ICO / 토큰 발행',
       },
       personalWallet: {
-        title: '개인 스테이블 코인 지갑 (USDC)',
+        title: '개인 스테이블 코인 지갑',
         subtitle: 'AI, 투자, Chat, RWA - 하나의 지갑으로 모든 것을',
         desc: '채팅하듯 송금하고, AI가 자동으로 투자하고, 실물 자산 토큰에 투자하세요. 일상 결제부터 전문 투자까지 하나의 앱에서 모두 해결합니다.',
         features: [
@@ -129,7 +129,7 @@ export default function HomePage() {
         getStarted: '시작하기',
         plans: {
           personal: {
-            name: '개인 스테이블 코인 지갑 (USDC)',
+            name: '개인 스테이블 코인 지갑',
             price: '무료',
             features: [
               '채팅 송금',
@@ -160,7 +160,7 @@ export default function HomePage() {
       },
       footer: {
         services: '서비스',
-        personal: '개인 스테이블 코인 지갑 (USDC)',
+        personal: '개인 스테이블 코인 지갑',
         enterprise: '기업 고객',
         contact: '문의',
         email: '이메일: walits.co@gmail.com',
@@ -198,7 +198,7 @@ export default function HomePage() {
         useCases: 'B2B Payment Automation | Global Payroll | Game Rewards & Airdrops | Auto Subscriptions | ICO / Token Issuance',
       },
       personalWallet: {
-        title: 'Personal Stablecoin Wallet (USDC)',
+        title: 'Personal Stablecoin Wallet',
         subtitle: 'AI, Investment, Chat, RWA - Everything in One Wallet',
         desc: 'Send crypto like chatting, let AI invest automatically, and invest in real-world asset tokens. From daily payments to professional investing, all in one app.',
         features: [
@@ -271,7 +271,7 @@ export default function HomePage() {
         getStarted: 'Get Started',
         plans: {
           personal: {
-            name: 'Personal Stablecoin Wallet (USDC)',
+            name: 'Personal Stablecoin Wallet',
             price: 'Free',
             features: [
               'Chat transfer',
@@ -302,7 +302,7 @@ export default function HomePage() {
       },
       footer: {
         services: 'Services',
-        personal: 'Personal Stablecoin Wallet (USDC)',
+        personal: 'Personal Stablecoin Wallet',
         enterprise: 'Enterprise',
         contact: 'Contact',
         email: 'Email: walits.co@gmail.com',
@@ -364,7 +364,7 @@ export default function HomePage() {
         name: "가상자산 지갑이란 무엇인가요?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "가상자산 지갑은 비트코인, 이더리움 등 암호화폐를 보관하고 관리하는 디지털 지갑입니다. Walits는 기업용 지갑과 개인 스테이블 코인 지갑 (USDC)을 제공하여 안전한 자산 관리를 지원합니다."
+          text: "가상자산 지갑은 비트코인, 이더리움 등 암호화폐를 보관하고 관리하는 디지털 지갑입니다. Walits는 기업용 지갑과 개인 스테이블 코인 지갑을 제공하여 안전한 자산 관리를 지원합니다."
         }
       },
       {
@@ -557,7 +557,7 @@ export default function HomePage() {
                 {language === 'ko' ? '개인용' : 'Personal'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
-                {language === 'ko' ? '개인 스테이블 코인 지갑 (USDC)' : 'Personal Stablecoin Wallet (USDC)'}
+                {language === 'ko' ? '개인 스테이블 코인 지갑' : 'Personal Stablecoin Wallet'}
               </span>
             </div>
           </div>
@@ -640,7 +640,7 @@ export default function HomePage() {
                   <div className="w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
                     <div className="block px-4 py-3 opacity-60 cursor-not-allowed">
                       <div className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                        {language === 'ko' ? '개인 스테이블 코인 지갑 (USDC)' : 'Personal Stablecoin Wallet (USDC)'}
+                        {language === 'ko' ? '개인 스테이블 코인 지갑' : 'Personal Stablecoin Wallet'}
                         <span className="bg-yellow-500 text-white px-2 py-0.5 rounded-full text-xs font-semibold">
                           {language === 'ko' ? '준비중' : 'Soon'}
                         </span>
