@@ -75,6 +75,16 @@ export default function BlogPage() {
           image: '/blog/morpho.jpg',
         },
         {
+          id: 'prediction-markets-polymarket',
+          category: '기술 심층 분석',
+          categoryColor: 'bg-emerald-100 text-emerald-800',
+          title: '예측 시장과 Polymarket — 기술자가 알아야 할 온체인 구현 세부',
+          excerpt: 'Conditional Tokens Framework(ERC-1155), CLOB 오더북, UMA Optimistic Oracle을 컨트랙트 수준으로 해부한다. splitPosition/redeemPositions 흐름, EIP-712 서명 오더 매칭, Polygon 실제 컨트랙트 주소까지.',
+          date: '2026년 4월 26일',
+          readTime: '25분',
+          image: '/blog/prediction.jpg',
+        },
+        {
           id: 'usde-synthetic-dollar-payfi',
           category: 'DeFi 심층 분석',
           categoryColor: 'bg-violet-100 text-violet-800',
@@ -451,6 +461,16 @@ export default function BlogPage() {
           date: 'April 6, 2026',
           readTime: '20 min read',
           image: '/blog/morpho.jpg',
+        },
+        {
+          id: 'prediction-markets-polymarket',
+          category: 'Tech Deep Dive',
+          categoryColor: 'bg-emerald-100 text-emerald-800',
+          title: 'Prediction Markets & Polymarket — On-Chain Implementation Details for Engineers',
+          excerpt: 'Conditional Tokens Framework (ERC-1155), CLOB order book, and UMA Optimistic Oracle dissected at the contract level. splitPosition/redeemPositions flow, EIP-712 signed order matching, and real Polygon contract addresses.',
+          date: 'April 26, 2026',
+          readTime: '25 min read',
+          image: '/blog/prediction.jpg',
         },
         {
           id: 'usde-synthetic-dollar-payfi',
