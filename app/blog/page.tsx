@@ -75,6 +75,16 @@ export default function BlogPage() {
           image: '/blog/morpho.jpg',
         },
         {
+          id: 'usde-synthetic-dollar-payfi',
+          category: 'DeFi 심층 분석',
+          categoryColor: 'bg-violet-100 text-violet-800',
+          title: 'USDe — 스테이블코인이 아닌 합성 달러, 그리고 PayFi 고수익 전략',
+          excerpt: 'USDe는 스테이블코인이 아니다. 델타 중립 헤지로 달러 가치를 유지하면서 펀딩비로 연 8~25%를 번다. UST와의 결정적 차이, 리스크, walits Chili 프리셋 sUSDe 통합 전략까지.',
+          date: '2026년 4월 26일',
+          readTime: '22분',
+          image: '/blog/usde.jpg',
+        },
+        {
           id: 'walits-enpl',
           category: 'walits 기술 심층 분석',
           categoryColor: 'bg-orange-100 text-orange-800',
@@ -441,6 +451,16 @@ export default function BlogPage() {
           date: 'April 6, 2026',
           readTime: '20 min read',
           image: '/blog/morpho.jpg',
+        },
+        {
+          id: 'usde-synthetic-dollar-payfi',
+          category: 'DeFi Deep Dive',
+          categoryColor: 'bg-violet-100 text-violet-800',
+          title: 'USDe — Not a Stablecoin, a Synthetic Dollar: PayFi High-Yield Strategy',
+          excerpt: 'USDe is not a stablecoin. It maintains dollar value via delta-neutral hedge while earning 8–25% APY from funding rates. Key differences from UST, real risks, and walits Chili preset sUSDe integration.',
+          date: 'April 26, 2026',
+          readTime: '22 min read',
+          image: '/blog/usde.jpg',
         },
         {
           id: 'walits-enpl',
