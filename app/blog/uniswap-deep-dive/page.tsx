@@ -828,7 +828,7 @@ export default function UniswapDeepDivePage() {
 
             {/* ── walits 실 구현 ── */}
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
-            <h2 className="text-3xl font-bold mt-12 mb-2 text-gray-900 dark:text-white">13 · walits에서의 실 구현 — ETH → USDC 스왑</h2>
+            <h2 className="text-3xl font-bold mt-12 mb-2 text-gray-900 dark:text-white">13 · walits에서의 실 구현 — ETH ↔ USDC 양방향 스왑</h2>
             <p className="text-gray-500 dark:text-gray-400 text-sm font-mono mb-8">Uniswap V3 SwapRouter02 + Chainlink + MPC 서명</p>
 
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
@@ -1641,7 +1641,7 @@ toAmountRaw     = floor(299.85 × 1e6)           // = 299,850,000 (6 decimals)`}
 
             {/* ── walits implementation ── */}
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
-            <h2 className="text-3xl font-bold mt-12 mb-2 text-gray-900 dark:text-white">13 · walits Integration — ETH → USDC Swap</h2>
+            <h2 className="text-3xl font-bold mt-12 mb-2 text-gray-900 dark:text-white">13 · walits Integration — ETH ↔ USDC Bidirectional Swap</h2>
             <p className="text-gray-500 dark:text-gray-400 text-sm font-mono mb-8">Uniswap V3 SwapRouter02 + Chainlink + MPC signing</p>
 
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
