@@ -33,6 +33,11 @@ export const metadata: Metadata = {
     "에어드랍",
     "게임 리워드",
   ],
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
   authors: [{ name: "Walits" }],
   creator: "Walits",
   publisher: "Walits",
