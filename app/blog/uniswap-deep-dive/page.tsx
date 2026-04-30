@@ -832,7 +832,7 @@ export default function UniswapDeepDivePage() {
             <p className="text-gray-500 dark:text-gray-400 text-sm font-mono mb-8">Uniswap V3 SwapRouter02 + Chainlink + MPC 서명</p>
 
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              walits는 Uniswap V3를 실제 서비스에 통합해 ETH → USDC 단방향 스왑 기능을 제공한다. Ethereum과 Base 체인을 지원하며, 견적은 Chainlink 가격 피드로 계산하고 실행은 SwapRouter02, 서명은 MPC로 처리한다. 이 섹션에서는 Uniswap을 앱에 붙일 때 실제로 무엇을 결정해야 하는지를 다룬다.
+              walits는 Uniswap V3를 실제 서비스에 통합해 ETH ↔ USDC 양방향 스왑 기능을 제공한다. Ethereum과 Base 체인을 지원하며, 견적은 Chainlink 가격 피드로 계산하고 실행은 SwapRouter02, 서명은 MPC로 처리한다. 이 섹션에서는 Uniswap을 앱에 붙일 때 실제로 무엇을 결정해야 하는지를 다룬다.
             </p>
 
             <div className="bg-gray-900 dark:bg-black rounded-2xl p-6 mb-8 font-mono text-sm overflow-x-auto">
@@ -941,7 +941,6 @@ toAmountRaw     = floor(299.85 × 1e6)           // = 299,850,000 (6 decimals)`}
             <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">현재 한계</h3>
             <div className="space-y-2 my-4">
               {[
-                { label: '단방향만 지원', desc: 'ETH → USDC만 가능. USDC → ETH 역방향은 미구현.', level: '구현 예정' },
                 { label: '가격 기반 견적', desc: 'Chainlink 추정치 사용. 실제 풀 시뮬레이션(Quoter 컨트랙트)이 아님.', level: '개선 예정' },
                 { label: '체인 간 스왑 없음', desc: 'Ethereum ETH → Base USDC 같은 크로스체인 스왑 불가. 브릿지 후 스왑 필요.', level: '미정' },
                 { label: '상태 추적 미완성', desc: 'TX는 PENDING으로만 저장. 체인 컨펌 여부 자동 반영 미구현.', level: '구현 예정' },
@@ -1646,7 +1645,7 @@ toAmountRaw     = floor(299.85 × 1e6)           // = 299,850,000 (6 decimals)`}
             <p className="text-gray-500 dark:text-gray-400 text-sm font-mono mb-8">Uniswap V3 SwapRouter02 + Chainlink + MPC signing</p>
 
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              walits integrates Uniswap V3 to offer a one-way ETH → USDC swap. Supported on both Ethereum and Base. Quotes come from Chainlink price feeds, execution goes through SwapRouter02, and signing is handled by MPC. This section covers the decisions you actually have to make when integrating Uniswap into a production app.
+              walits integrates Uniswap V3 to offer bidirectional ETH ↔ USDC swaps. Supported on both Ethereum and Base. Quotes come from Chainlink price feeds, execution goes through SwapRouter02, and signing is handled by MPC. This section covers the decisions you actually have to make when integrating Uniswap into a production app.
             </p>
 
             <div className="bg-gray-900 dark:bg-black rounded-2xl p-6 mb-8 font-mono text-sm overflow-x-auto">
@@ -1755,7 +1754,6 @@ toAmountRaw     = floor(299.85 × 1e6)             // = 299,850,000 (6 decimals)
             <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">Current limitations</h3>
             <div className="space-y-2 my-4">
               {[
-                { label: 'One-way only', desc: 'ETH → USDC only. USDC → ETH reverse direction not yet implemented.', level: 'Planned' },
                 { label: 'Estimate-based quote', desc: 'Uses Chainlink price estimate. Not a real pool simulation (Quoter contract).', level: 'To improve' },
                 { label: 'No cross-chain swap', desc: 'Ethereum ETH → Base USDC not possible in one step. Bridge first, then swap.', level: 'TBD' },
                 { label: 'Status tracking incomplete', desc: 'TX saved as PENDING only. Auto-updating DB on chain confirmation not yet built.', level: 'Planned' },
