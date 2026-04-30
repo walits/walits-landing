@@ -52,10 +52,157 @@ export default function CctpBridgeReliabilityPage() {
 
       <div className="max-w-4xl mx-auto px-6 py-12 space-y-16">
 
-        {/* Section 1: CCTP 동작 원리 */}
+        {/* Section 0: Circle과 CCTP 배경 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '1. Circle CCTP 동작 원리' : '1. How Circle CCTP Works'}
+            {isKo ? '1. Circle — 인터넷의 달러를 만들려는 회사' : '1. Circle — The Company Building the Internet\'s Dollar'}
+          </h2>
+          <p className="text-slate-600 leading-relaxed mb-6">
+            {isKo
+              ? 'Circle은 2013년 설립된 금융 인프라 회사다. 비트코인 결제 앱으로 시작했지만 지금은 완전히 다른 정체성을 갖는다. Circle의 핵심 제품은 USDC — 달러와 1:1로 페깅된 스테이블코인이다. 발행량 550억 달러 이상, 매일 수백억 달러가 결제·DeFi·기업 재무에 쓰이는 실질적인 달러 인프라다.'
+              : 'Circle was founded in 2013 as a financial infrastructure company. It started as a Bitcoin payment app but has since become something entirely different. Circle\'s core product is USDC — a stablecoin pegged 1:1 to the US dollar. With over $55B in circulation and hundreds of billions in daily volume across payments, DeFi, and corporate treasury, USDC is real dollar infrastructure.'}
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-8">
+            {[
+              {
+                name: 'USDC',
+                desc: isKo ? '달러 담보 스테이블코인. 매월 독립 회계법인 감사, NYDFS 규제 준수. Coinbase와 공동 발행.' : 'Dollar-backed stablecoin. Monthly independent audits, NYDFS regulated. Co-issued with Coinbase.',
+                tag: isKo ? '핵심 제품' : 'Core product',
+                tagColor: 'bg-blue-100 text-blue-700',
+              },
+              {
+                name: 'Circle Mint',
+                desc: isKo ? '기관 전용 USDC 발행·소각 창구. 달러 입금 → USDC 발행, USDC 소각 → 달러 반환.' : 'Institutional USDC minting/redemption. Deposit dollars → get USDC, burn USDC → get dollars back.',
+                tag: isKo ? '기관용' : 'Institutional',
+                tagColor: 'bg-slate-100 text-slate-700',
+              },
+              {
+                name: 'CCTP',
+                desc: isKo ? '크로스체인 USDC 전송 프로토콜. 제3자 브릿지 없이 체인 간 네이티브 USDC 이동.' : 'Cross-chain USDC transfer. Native USDC across chains without third-party bridges.',
+                tag: isKo ? '인프라' : 'Infrastructure',
+                tagColor: 'bg-orange-100 text-orange-700',
+              },
+              {
+                name: 'Programmable Wallets',
+                desc: isKo ? '개발자용 MPC 지갑 API. 키 관리·서명·온체인 실행을 API 한 줄로.' : 'Developer MPC wallet API. Key management, signing, on-chain execution via a single API.',
+                tag: isKo ? '개발자 API' : 'Dev API',
+                tagColor: 'bg-violet-100 text-violet-700',
+              },
+            ].map((item, i) => (
+              <div key={i} className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-black text-slate-900">{item.name}</span>
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${item.tagColor}`}>{item.tag}</span>
+                </div>
+                <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-slate-600 leading-relaxed">
+            {isKo
+              ? 'Circle의 전략은 명확하다. B2B 금융 인프라 회사로서 "USDC가 달러처럼 어디서나 쓰이도록" 만드는 것이다. Visa·BlackRock·Coinbase와 파트너십을 맺고, 미국 IPO를 추진하며, 규제 당국과 적극적으로 협력한다. CCTP는 그 전략의 핵심 레고 블록이다 — USDC가 체인에 갇히지 않도록.'
+              : 'Circle\'s strategy is clear: be the B2B financial infrastructure company that makes USDC work like dollars everywhere. It has partnered with Visa, BlackRock, and Coinbase, is pursuing a US IPO, and actively engages with regulators. CCTP is a key building block of that strategy — ensuring USDC is never locked to a single chain.'}
+          </p>
+        </section>
+
+        {/* Section 1.5: 브릿지 전쟁과 CCTP 탄생 */}
+        <section>
+          <h2 className="text-2xl font-black text-slate-900 mb-6">
+            {isKo ? '2. 왜 CCTP를 만들었나 — 브릿지 해킹과 래핑 USDC 문제' : '2. Why Circle Built CCTP — Bridge Hacks and the Wrapped USDC Problem'}
+          </h2>
+          <p className="text-slate-600 leading-relaxed mb-6">
+            {isKo
+              ? '2021~2022년, 멀티체인 수요가 폭발하면서 크로스체인 브릿지 시장이 급성장했다. 그리고 연달아 대형 해킹이 터졌다.'
+              : 'In 2021–2022, the explosion of multi-chain demand created a booming cross-chain bridge market. Then the hacks started.'}
+          </p>
+
+          <div className="bg-red-50 border border-red-200 rounded-2xl p-6 mb-8">
+            <div className="font-bold text-red-800 mb-4">{isKo ? '2022년 브릿지 해킹 연표' : '2022 Bridge Hack Timeline'}</div>
+            <div className="space-y-3">
+              {[
+                { date: '2022.02', name: 'Wormhole', amount: '$320M', method: isKo ? '서명 검증 취약점' : 'Signature verification exploit' },
+                { date: '2022.03', name: 'Ronin (Axie)', amount: '$625M', method: isKo ? '검증자 개인 키 탈취' : 'Validator private key compromise' },
+                { date: '2022.08', name: 'Nomad Bridge', amount: '$190M', method: isKo ? '루트 해시 초기화 버그' : 'Root hash initialization bug' },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-4 font-mono text-sm">
+                  <span className="text-slate-400 w-20 shrink-0">{item.date}</span>
+                  <span className="text-red-700 font-bold w-32 shrink-0">{item.name}</span>
+                  <span className="text-red-600 font-black w-20 shrink-0">{item.amount}</span>
+                  <span className="text-slate-500">{item.method}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p className="text-slate-600 leading-relaxed mb-6">
+            {isKo
+              ? '기존 브릿지들은 대부분 Lock-and-Mint 방식이었다. Ethereum에 USDC를 잠가두고 다른 체인에 "wrapped USDC"를 발행하는 구조다. 잠겨 있는 유동성 풀 자체가 해커의 타깃이 됐다. 그리고 두 번째 문제가 생겼다 — "어떤 USDC가 진짜인가?"'
+              : 'Most bridges used a Lock-and-Mint model: lock USDC on Ethereum and mint "wrapped USDC" on another chain. The locked liquidity pool itself became the attack target. And a second problem emerged: "which USDC is the real one?"'}
+          </p>
+
+          <div className="overflow-x-auto mb-8">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="bg-slate-900 text-white">
+                  <th className="text-left px-4 py-3 font-semibold rounded-tl-xl">{isKo ? '방식' : 'Method'}</th>
+                  <th className="text-left px-4 py-3 font-semibold">{isKo ? '대표 브릿지' : 'Examples'}</th>
+                  <th className="text-left px-4 py-3 font-semibold">{isKo ? '원리' : 'How it works'}</th>
+                  <th className="text-left px-4 py-3 font-semibold rounded-tr-xl">{isKo ? '리스크' : 'Risk'}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {[
+                  {
+                    method: 'Lock-and-Mint',
+                    examples: 'Wormhole, LayerZero',
+                    how: isKo ? '소스 체인에 원본 잠금 + 목적지에 래핑 발행' : 'Lock original on source + mint wrapped on destination',
+                    risk: isKo ? '잠긴 유동성 풀이 해킹 타깃. 래핑 토큰 파편화' : 'Locked pool is a hack target. Wrapped token fragmentation',
+                    riskColor: 'text-red-600',
+                  },
+                  {
+                    method: isKo ? '유동성 네트워크' : 'Liquidity Network',
+                    examples: 'Hop, Across',
+                    how: isKo ? 'LP가 목적지에서 즉시 유동성 제공, 나중에 정산' : 'LPs provide immediate liquidity on destination, settle later',
+                    risk: isKo ? '유동성 부족 시 슬리피지. LP 리스크 전가' : 'Slippage when illiquid. LP bears risk',
+                    riskColor: 'text-yellow-600',
+                  },
+                  {
+                    method: 'Burn-and-Mint (CCTP)',
+                    examples: 'Circle CCTP',
+                    how: isKo ? '소스 체인에서 소각, Circle 증명 후 목적지에서 네이티브 발행' : 'Burn on source, Circle attests, native mint on destination',
+                    risk: isKo ? '발행사(Circle) 신뢰 필요. 그게 전부' : 'Requires trust in Circle as issuer. That\'s it',
+                    riskColor: 'text-green-600',
+                  },
+                ].map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                    <td className="px-4 py-3 font-bold text-slate-800 text-xs">{row.method}</td>
+                    <td className="px-4 py-3 text-slate-500 text-xs">{row.examples}</td>
+                    <td className="px-4 py-3 text-slate-600 text-xs">{row.how}</td>
+                    <td className={`px-4 py-3 text-xs font-medium ${row.riskColor}`}>{row.risk}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-slate-900 text-white rounded-2xl p-6">
+            <div className="font-black text-lg mb-3">
+              {isKo ? 'CCTP가 가능한 이유 — Circle이 발행사이기 때문' : 'Why CCTP works — Circle is the issuer'}
+            </div>
+            <p className="text-slate-300 text-sm leading-relaxed">
+              {isKo
+                ? 'Burn-and-Mint 방식은 발행사만 할 수 있다. Wormhole이나 LayerZero는 USDC 발행사가 아니라서 이 방식을 쓸 수 없다. Circle은 USDC 발행사이기 때문에 어느 체인에서든 USDC를 소각하고 다른 체인에서 같은 양을 새로 발행할 권한을 갖는다. 제3자 브릿지가 필요 없고, 유동성 풀이 없고, 래핑 토큰이 없다. 어느 체인에서 발행됐든 USDC는 항상 Circle이 발행한 동일한 USDC다.'
+                : 'Only the issuer can do Burn-and-Mint. Wormhole and LayerZero can\'t use this approach because they don\'t issue USDC. Circle, as the issuer, has the authority to burn USDC on any chain and freshly mint the same amount on another. No third-party bridge, no liquidity pool, no wrapped tokens. Regardless of which chain it was minted on, USDC is always the same USDC issued by Circle.'}
+            </p>
+          </div>
+        </section>
+
+        {/* Section 2: CCTP 동작 원리 (renumbered) */}
+        <section>
+          <h2 className="text-2xl font-black text-slate-900 mb-6">
+            {isKo ? '3. Circle CCTP 동작 원리' : '3. How Circle CCTP Works'}
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
@@ -94,7 +241,7 @@ export default function CctpBridgeReliabilityPage() {
         {/* Section 2: 위험 구간 분석 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '2. 자금 손실 시나리오 — 어느 구간이 위험한가?' : '2. Fund Loss Scenarios — Which Phase Is Dangerous?'}
+            {isKo ? '4. 자금 손실 시나리오 — 어느 구간이 위험한가?' : '4. Fund Loss Scenarios — Which Phase Is Dangerous?'}
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
@@ -139,7 +286,7 @@ DB: burnTxHash = null
         {/* Section 3: 해결책 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-2">
-            {isKo ? '3. 해결책 — broadcast 전에 txHash를 먼저 저장하라' : '3. The Fix — Save txHash Before Broadcast'}
+            {isKo ? '5. 해결책 — broadcast 전에 txHash를 먼저 저장하라' : '5. The Fix — Save txHash Before Broadcast'}
           </h2>
           <p className="text-slate-500 text-sm mb-6">{isKo ? '단 세 줄의 순서 변경' : 'Three lines, reordered'}</p>
 
@@ -270,7 +417,7 @@ await resumeFromAttestation(jobId, burnTxHash);`}</pre>
         {/* Section 4: 서버 재시작 자동 복구 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '4. 서버 재시작 시 자동 복구 패턴' : '4. Auto-Recovery on Server Restart'}
+            {isKo ? '6. 서버 재시작 시 자동 복구 패턴' : '6. Auto-Recovery on Server Restart'}
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
@@ -329,12 +476,60 @@ await resumeFromAttestation(jobId, burnTxHash);`}</pre>
           </div>
 
           <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5">
-            <div className="font-bold text-blue-800 mb-2">{isKo ? 'Circle 릴레이어 자동 처리' : 'Circle relayer auto-processing'}</div>
-            <p className="text-blue-700 text-sm leading-relaxed">
+            <div className="font-bold text-blue-800 mb-3">{isKo ? 'Circle 공식 릴레이어 — 네가 안 해도 해준다' : 'Circle\'s Official Relayer — It May Do the Mint for You'}</div>
+            <p className="text-blue-700 text-sm leading-relaxed mb-4">
               {isKo
-                ? 'Circle은 자체 릴레이어를 운영해서 mint를 자동으로 처리하기도 한다. 이미 처리된 경우 receiveMessage 호출 시 "Nonce already used" 에러가 발생한다. 이 에러는 실패가 아니라 성공이다 — job을 DONE으로 처리해야 한다.'
-                : 'Circle operates its own relayer that sometimes processes mints automatically. If already handled, calling receiveMessage returns a "Nonce already used" error. This is not a failure — it\'s a success. Treat it as DONE.'}
+                ? 'Circle은 CCTP 생태계 확산을 위해 공식 릴레이어 서비스를 직접 운영한다. burn이 컨펌되고 attestation이 발급되면, Circle 릴레이어가 목적지 체인에서 receiveMessage를 자동으로 호출해준다. 즉, 개발자가 mint 트랜잭션을 직접 전송하지 않아도 USDC가 도착하는 경우가 있다.'
+                : 'Circle runs an official relayer service to grow the CCTP ecosystem. Once a burn is confirmed and an attestation is issued, the Circle relayer automatically calls receiveMessage on the destination chain — meaning USDC can arrive without the developer sending the mint transaction themselves.'}
             </p>
+            <div className="bg-white border border-blue-200 rounded-xl p-4 mb-4">
+              <div className="font-semibold text-blue-800 text-sm mb-3">{isKo ? '릴레이어 처리 흐름' : 'Relayer processing flow'}</div>
+              <div className="space-y-1 font-mono text-xs text-slate-700">
+                {(isKo ? [
+                  'burn tx 컨펌',
+                  '→ Circle IRIS API가 감지 + attestation 서명 발급',
+                  '→ Circle 릴레이어가 목적지 체인 감시 중',
+                  '→ receiveMessage(message, attestation) 자동 호출',
+                  '→ USDC 발행 완료 (개발자 개입 없이)',
+                ] : [
+                  'burn tx confirmed',
+                  '→ Circle IRIS API detects it + issues attestation signature',
+                  '→ Circle relayer is watching destination chain',
+                  '→ receiveMessage(message, attestation) called automatically',
+                  '→ USDC minted (no developer action needed)',
+                ]).map((line, i) => (
+                  <div key={i} className="text-slate-600">{line}</div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+              <div className="font-semibold text-amber-800 text-sm mb-2">{isKo ? '⚠ 릴레이어가 먼저 처리했을 때 — 이미 성공이다' : '⚠ When the relayer acted first — it\'s already a success'}</div>
+              <p className="text-amber-700 text-xs leading-relaxed mb-3">
+                {isKo
+                  ? '내 서버도 receiveMessage를 시도하고, Circle 릴레이어도 시도하면 둘 중 하나가 먼저 처리된다. 나중에 시도하는 쪽은 컨트랙트에서 에러가 발생한다. 이 에러가 "Nonce already used"다.'
+                  : 'If both your server and the Circle relayer attempt receiveMessage, whichever arrives first wins. The second attempt gets an error from the contract: "Nonce already used."'}
+              </p>
+              <pre className="text-xs font-mono text-amber-800 bg-amber-100 rounded p-3 overflow-x-auto">{isKo
+? `// MessageTransmitter 컨트랙트 내부
+// 각 burn에 대해 nonce는 단 한 번만 사용 가능
+mapping(bytes32 => bool) public usedNonces;
+
+// 두 번째 receiveMessage 호출 시:
+require(!usedNonces[nonceHash], "Nonce already used");
+// → revert 발생`
+: `// Inside MessageTransmitter contract
+// Each burn nonce can only be used once
+mapping(bytes32 => bool) public usedNonces;
+
+// On the second receiveMessage call:
+require(!usedNonces[nonceHash], "Nonce already used");
+// → reverts`}</pre>
+              <p className="text-amber-700 text-xs leading-relaxed mt-3">
+                {isKo
+                  ? '"Nonce already used"는 실패가 아니다 — 이미 USDC가 발행됐다는 증거다. 코드에서 이 에러를 반드시 성공으로 간주하고 job을 DONE 처리해야 한다.'
+                  : '"Nonce already used" is not a failure — it\'s proof that USDC was already minted. Your code must treat this error as success and mark the job DONE.'}
+              </p>
+            </div>
           </div>
 
           <div className="mt-6 bg-slate-50 border border-slate-200 rounded-2xl p-5">
@@ -368,7 +563,7 @@ await resumeFromAttestation(jobId, burnTxHash);`}</pre>
         {/* Section 5: 수동 복구 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '5. DB가 날아갔을 때 — 수동 복구 방법' : '5. When the DB Is Gone — Manual Recovery'}
+            {isKo ? '7. DB가 날아갔을 때 — 수동 복구 방법' : '7. When the DB Is Gone — Manual Recovery'}
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
@@ -435,7 +630,7 @@ await transmitter.receiveMessage(
         {/* Section 6: 전체 안전성 요약 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '6. 전체 안전성 매트릭스' : '6. Full Safety Matrix'}
+            {isKo ? '8. 전체 안전성 매트릭스' : '8. Full Safety Matrix'}
           </h2>
 
           <div className="overflow-x-auto mb-6">
@@ -475,7 +670,7 @@ await transmitter.receiveMessage(
         {/* Section 7: 남은 한계와 권장 사항 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '7. 남은 한계와 권장 대응' : '7. Remaining Limitations & Recommendations'}
+            {isKo ? '9. 남은 한계와 권장 대응' : '9. Remaining Limitations & Recommendations'}
           </h2>
 
           <div className="space-y-4">
@@ -519,7 +714,7 @@ await transmitter.receiveMessage(
         {/* Section 8: 설계 원칙 정리 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '8. 설계 원칙 — 블록체인 서비스의 내결함성' : '8. Design Principles — Fault Tolerance in Blockchain Services'}
+            {isKo ? '10. 설계 원칙 — 블록체인 서비스의 내결함성' : '10. Design Principles — Fault Tolerance in Blockchain Services'}
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
