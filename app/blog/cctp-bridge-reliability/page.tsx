@@ -187,11 +187,84 @@ await this.evm.broadcastTx(
             </div>
           </div>
 
-          <p className="text-slate-600 leading-relaxed">
+          <p className="text-slate-600 leading-relaxed mb-8">
             {isKo
               ? '이 패턴은 데이터베이스 설계에서 WAL(Write-Ahead Logging)과 동일한 사상이다. 실제 작업을 수행하기 전에 무엇을 할 것인지를 먼저 기록하고, 크래시 후 재시작 시 그 기록을 보고 복구한다.'
               : 'This pattern mirrors WAL (Write-Ahead Logging) from database design — record what you\'re about to do before you do it, so a crash-and-restart can recover by reading that record.'}
           </p>
+
+          {/* 중요한 함정 */}
+          <div className="border-l-4 border-red-400 bg-red-50 rounded-r-2xl p-5 mb-6">
+            <div className="font-black text-red-700 mb-3">
+              {isKo ? '⚠ 중요한 함정 — burnTxHash가 있다고 burn이 성공한 게 아니다' : '⚠ Critical gotcha — burnTxHash in DB does not mean burn succeeded'}
+            </div>
+            <p className="text-red-700 text-sm leading-relaxed mb-4">
+              {isKo
+                ? 'txHash는 네트워크와 무관한 로컬 계산값이다. keccak256(서명된 tx 바이트)를 계산하는 순간 결정되므로, broadcast 전 크래시나 tx revert가 발생해도 DB에는 burnTxHash가 남아 있다.'
+                : 'txHash is a local computation — completely independent of the network. It\'s determined the moment you compute keccak256(signed tx bytes), so a pre-broadcast crash or an on-chain revert still leaves burnTxHash in the DB.'}
+            </p>
+            <div className="bg-slate-900 rounded-xl p-4 mb-4">
+              <div className="text-slate-400 text-xs font-mono mb-3">{isKo ? '같은 burnTxHash, 세 가지 실제 상태' : 'Same burnTxHash, three possible realities'}</div>
+              <pre className="text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto">{isKo
+? `sign 완료
+    │
+    ▼
+burnTxHash = keccak256(signedTx)  ← DB 저장 (여기까지는 동일)
+    │
+    ├─ [케이스 A] broadcast 전 크래시
+    │       체인에 tx 자체가 없음
+    │       receipt 조회 → null
+    │       USDC 안전 ✓
+    │
+    ├─ [케이스 B] broadcast 했지만 revert
+    │       잔액 부족 / allowance 부족 / 컨트랙트 에러
+    │       receipt.status = 0
+    │       USDC 소각 안 됨, 안전 ✓
+    │
+    └─ [케이스 C] broadcast + 성공
+            receipt.status = 1
+            USDC 실제로 소각됨 → attestation 재개 필수`
+: `sign complete
+    │
+    ▼
+burnTxHash = keccak256(signedTx)  ← saved to DB (same up to here)
+    │
+    ├─ [Case A] crash before broadcast
+    │       tx never sent to chain
+    │       getTransactionReceipt → null
+    │       USDC safe ✓
+    │
+    ├─ [Case B] broadcast but reverted
+    │       insufficient balance / allowance / contract error
+    │       receipt.status = 0
+    │       USDC not burned, safe ✓
+    │
+    └─ [Case C] broadcast + success
+            receipt.status = 1
+            USDC actually burned → must resume attestation`}</pre>
+            </div>
+            <p className="text-red-700 text-sm leading-relaxed mb-3">
+              {isKo
+                ? '따라서 재시작 복구 시 burnTxHash만 믿어선 안 된다. 반드시 온체인 receipt로 실제 성공 여부를 검증해야 한다.'
+                : 'Therefore, during recovery, burnTxHash alone cannot be trusted. On-chain receipt verification is mandatory to determine the actual outcome.'}
+            </p>
+            <div className="bg-slate-900 rounded-xl p-4">
+              <pre className="text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto">{`const receipt = await provider.getTransactionReceipt(burnTxHash);
+
+if (!receipt) {
+  // 케이스 A: broadcast 안 됨 → USDC 안전 → FAILED
+  return markFailed(jobId);
+}
+
+if (receipt.status === 0) {
+  // 케이스 B: tx revert → USDC 안전 → FAILED
+  return markFailed(jobId);
+}
+
+// 케이스 C: receipt.status === 1 → 진짜 소각됨
+await resumeFromAttestation(jobId, burnTxHash);`}</pre>
+            </div>
+          </div>
         </section>
 
         {/* Section 4: 서버 재시작 자동 복구 */}
