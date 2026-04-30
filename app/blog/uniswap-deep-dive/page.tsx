@@ -825,6 +825,136 @@ export default function UniswapDeepDivePage() {
                 Uniswap은 <strong>x × y = k 공식 하나로 중앙화 거래소의 오더북을 대체한 프로토콜</strong>이다. v2가 기초를 완성했고, v3가 집중 유동성으로 자본 효율을 혁신했으며, v4는 훅으로 풀 자체를 프로그래밍 가능하게 만들었다. 단순한 수식이 $2.4T 거래량의 인프라가 됐다.
               </p>
             </div>
+
+            {/* ── walits 실 구현 ── */}
+            <hr className="border-gray-200 dark:border-gray-700 my-10" />
+            <h2 className="text-3xl font-bold mt-12 mb-2 text-gray-900 dark:text-white">13 · walits에서의 실 구현 — ETH → USDC 스왑</h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm font-mono mb-8">Uniswap V3 SwapRouter02 + Chainlink + MPC 서명</p>
+
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              walits는 Uniswap V3를 실제 서비스에 통합해 ETH → USDC 단방향 스왑 기능을 제공한다. Ethereum과 Base 체인을 지원하며, 견적은 Chainlink 가격 피드로 계산하고 실행은 SwapRouter02, 서명은 MPC로 처리한다. 이 섹션에서는 Uniswap을 앱에 붙일 때 실제로 무엇을 결정해야 하는지를 다룬다.
+            </p>
+
+            <div className="bg-gray-900 dark:bg-black rounded-2xl p-6 mb-8 font-mono text-sm overflow-x-auto">
+              <p className="text-gray-400 text-xs mb-4">전체 아키텍처</p>
+              <div className="space-y-1 text-gray-300">
+                <p><span className="text-pink-400">유저 브라우저</span></p>
+                <p className="pl-4 text-gray-500">├── GET /api/swap/quote &nbsp;&nbsp;&nbsp;← 견적 조회 (읽기 전용)</p>
+                <p className="pl-4 text-gray-500">└── POST /api/swap/execute ← 실제 스왑 실행</p>
+                <p className="mt-3"><span className="text-blue-400">Walits 서버 (NestJS)</span></p>
+                <p className="pl-4 text-gray-500">├── Chainlink ETH/USD 피드 ← 견적 계산용 가격 조회</p>
+                <p className="pl-4 text-gray-500">├── Uniswap V3 SwapRouter02 ← 실제 스왑 컨트랙트</p>
+                <p className="pl-4 text-gray-500">└── MPC 서버 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← 트랜잭션 서명</p>
+                <p className="mt-3"><span className="text-green-400">온체인 흐름</span></p>
+                <p className="pl-4 text-gray-500">유저 지갑 → SwapRouter02 → Uniswap V3 Pool (ETH/USDC 0.05%) → USDC</p>
+              </div>
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">ETH → WETH → USDC 내부 흐름</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Uniswap V3 풀은 native ETH가 아닌 WETH(Wrapped ETH)를 사용한다. 직접 ETH로 스왑하려면 WETH 변환이 필요한데, <strong>SwapRouter02가 이 과정을 자동 처리</strong>한다. 유저는 그냥 ETH를 보내기만 하면 된다.
+            </p>
+
+            <div className="bg-gray-900 dark:bg-black rounded-xl p-5 mb-6 font-mono text-sm overflow-x-auto">
+              <p className="text-gray-400 text-xs mb-3">exactInputSingle 파라미터</p>
+              <pre className="text-gray-300 leading-relaxed">{`exactInputSingle({
+  tokenIn:           WETH,       // 입력: WETH 주소
+  tokenOut:          USDC,       // 출력: USDC 주소
+  fee:               500,        // 풀 fee tier: 0.05%
+  recipient:         userWallet, // USDC 받을 주소
+  amountIn:          ethAmount,  // msg.value로 전달한 ETH
+  amountOutMinimum:  amountOutMin, // 슬리피지 보호 하한선
+  sqrtPriceLimitX96: 0,          // 0 = 가격 제한 없음
+})`}</pre>
+            </div>
+
+            <div className="overflow-x-auto mb-8">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-100 dark:bg-gray-800">
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-700 dark:text-gray-300">항목</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-700 dark:text-gray-300">Ethereum</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-700 dark:text-gray-300">Base</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { item: 'SwapRouter02', eth: '0x68b3465...Fc45', base: '0x2626664...481' },
+                    { item: 'WETH', eth: '0xC02aaA3...Cc2', base: '0x4200...0006' },
+                    { item: 'USDC', eth: '0xA0b869...B48', base: '0x833589...913' },
+                    { item: 'Chainlink ETH/USD', eth: '0x5f4eC3...419', base: '0x71041d...b70' },
+                    { item: 'Fee Tier', eth: '0.05% (500)', base: '0.05% (500)' },
+                  ].map((r, i) => (
+                    <tr key={i} className={i % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-medium text-pink-700 dark:text-pink-300">{r.item}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-600 dark:text-gray-400">{r.eth}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-600 dark:text-gray-400">{r.base}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">견적 계산 — Chainlink + 0.05% 수수료</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              실제 Uniswap Quoter 컨트랙트를 호출하는 대신 Chainlink 가격 피드로 추정치를 계산한다. 가스비가 들지 않고 빠르다. 단, 이 견적은 <strong>풀 상태(슬리피지)에 따라 실제 체결가와 다를 수 있는 추정치</strong>임을 명심해야 한다.
+            </p>
+
+            <div className="bg-gray-900 dark:bg-black rounded-xl p-5 mb-4 font-mono text-sm overflow-x-auto">
+              <p className="text-gray-400 text-xs mb-3">견적 계산 공식</p>
+              <pre className="text-gray-300 leading-relaxed">{`ETH 가격 (USD)  = Chainlink answer / 1e8       // 예: $3,000.00
+예상 USDC       = ETH 수량 × ETH 가격           // 0.1 × 3000 = $300.00
+수수료 차감     = 예상 금액 × (1 - 0.0005)       // $300 × 0.9995 = $299.85
+toAmountRaw     = floor(299.85 × 1e6)           // = 299,850,000 (6 decimals)`}</pre>
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">슬리피지 보호</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              견적 시점과 실제 체결 시점 사이에 풀 상태가 바뀔 수 있다. <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-pink-600 dark:text-pink-400">amountOutMinimum</code>을 설정해두면 예상보다 USDC를 적게 받을 경우 트랜잭션이 자동으로 revert된다 — 가스비만 소진되고 ETH는 돌아온다.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-3 my-6">
+              {[
+                { pct: '0.1%', when: '변동성 낮을 때 / 소액 거래', color: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700' },
+                { pct: '0.5%', when: '기본값 / 일반적인 상황', color: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700' },
+                { pct: '1.0%', when: '변동성 높을 때 / 대액 거래', color: 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-700' },
+              ].map((s, i) => (
+                <div key={i} className={`border rounded-xl p-4 ${s.color}`}>
+                  <p className="text-2xl font-black text-gray-900 dark:text-white mb-1">{s.pct}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">{s.when}</p>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">MPC 서명 + FallbackProvider</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              스왑 트랜잭션은 MPC(Multi-Party Computation) 서버로 서명한다. 개인 키가 단일 서버에 존재하지 않는 방식이다. RPC는 Alchemy를 Primary, Infura를 Fallback으로 구성해 고가용성을 확보한다. Primary가 1,500ms 내 응답하지 않으면 자동으로 Fallback으로 전환된다.
+            </p>
+
+            <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-5 rounded-r-lg mb-6">
+              <p className="text-sm text-amber-800 dark:text-amber-300 font-semibold mb-1">MAX 금액 계산 시 주의</p>
+              <p className="text-sm text-amber-700 dark:text-amber-300">
+                ETH 잔액 전체를 스왑하면 가스비를 낼 ETH가 없어진다. walits는 <code className="bg-amber-100 dark:bg-amber-900 px-1 rounded">잔액 - 0.0005 ETH</code>를 MAX로 설정해 가스비($1.5 @ $3,000)를 예약한다.
+              </p>
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">현재 한계</h3>
+            <div className="space-y-2 my-4">
+              {[
+                { label: '단방향만 지원', desc: 'ETH → USDC만 가능. USDC → ETH 역방향은 미구현.', level: '구현 예정' },
+                { label: '가격 기반 견적', desc: 'Chainlink 추정치 사용. 실제 풀 시뮬레이션(Quoter 컨트랙트)이 아님.', level: '개선 예정' },
+                { label: '체인 간 스왑 없음', desc: 'Ethereum ETH → Base USDC 같은 크로스체인 스왑 불가. 브릿지 후 스왑 필요.', level: '미정' },
+                { label: '상태 추적 미완성', desc: 'TX는 PENDING으로만 저장. 체인 컨펌 여부 자동 반영 미구현.', level: '구현 예정' },
+              ].map((r, i) => (
+                <div key={i} className="flex items-start gap-4 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+                  <span className="text-xs font-bold text-gray-400 w-16 flex-shrink-0 mt-0.5">{r.level}</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">{r.label}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 leading-relaxed">{r.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </>
         ) : (
           <>
@@ -1508,6 +1638,136 @@ export default function UniswapDeepDivePage() {
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Uniswap replaced the order book with a single formula — <strong>x × y = k</strong>. v2 completed the foundation, v3 revolutionized capital efficiency with concentrated liquidity, and v4 made pools themselves programmable through hooks. A simple equation became the infrastructure for $2.4 trillion in trading volume.
               </p>
+            </div>
+
+            {/* ── walits implementation ── */}
+            <hr className="border-gray-200 dark:border-gray-700 my-10" />
+            <h2 className="text-3xl font-bold mt-12 mb-2 text-gray-900 dark:text-white">13 · walits Integration — ETH → USDC Swap</h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm font-mono mb-8">Uniswap V3 SwapRouter02 + Chainlink + MPC signing</p>
+
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              walits integrates Uniswap V3 to offer a one-way ETH → USDC swap. Supported on both Ethereum and Base. Quotes come from Chainlink price feeds, execution goes through SwapRouter02, and signing is handled by MPC. This section covers the decisions you actually have to make when integrating Uniswap into a production app.
+            </p>
+
+            <div className="bg-gray-900 dark:bg-black rounded-2xl p-6 mb-8 font-mono text-sm overflow-x-auto">
+              <p className="text-gray-400 text-xs mb-4">Architecture overview</p>
+              <div className="space-y-1 text-gray-300">
+                <p><span className="text-pink-400">User browser</span></p>
+                <p className="pl-4 text-gray-500">├── GET /api/swap/quote &nbsp;&nbsp;&nbsp;← quote (read-only)</p>
+                <p className="pl-4 text-gray-500">└── POST /api/swap/execute ← execute swap</p>
+                <p className="mt-3"><span className="text-blue-400">Walits server (NestJS)</span></p>
+                <p className="pl-4 text-gray-500">├── Chainlink ETH/USD feed ← price for quote calculation</p>
+                <p className="pl-4 text-gray-500">├── Uniswap V3 SwapRouter02 ← swap contract</p>
+                <p className="pl-4 text-gray-500">└── MPC server &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← transaction signing</p>
+                <p className="mt-3"><span className="text-green-400">On-chain flow</span></p>
+                <p className="pl-4 text-gray-500">user wallet → SwapRouter02 → Uniswap V3 Pool (ETH/USDC 0.05%) → USDC</p>
+              </div>
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">ETH → WETH → USDC internal flow</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Uniswap V3 pools use WETH (Wrapped ETH), not native ETH. Converting ETH to WETH before swapping is normally required — but <strong>SwapRouter02 handles this automatically</strong>. The user just sends ETH.
+            </p>
+
+            <div className="bg-gray-900 dark:bg-black rounded-xl p-5 mb-6 font-mono text-sm overflow-x-auto">
+              <p className="text-gray-400 text-xs mb-3">exactInputSingle params</p>
+              <pre className="text-gray-300 leading-relaxed">{`exactInputSingle({
+  tokenIn:           WETH,         // input token address
+  tokenOut:          USDC,         // output token address
+  fee:               500,          // pool fee tier: 0.05%
+  recipient:         userWallet,   // where USDC is sent
+  amountIn:          ethAmount,    // ETH passed as msg.value
+  amountOutMinimum:  amountOutMin, // slippage floor
+  sqrtPriceLimitX96: 0,            // 0 = no price cap
+})`}</pre>
+            </div>
+
+            <div className="overflow-x-auto mb-8">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-100 dark:bg-gray-800">
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-700 dark:text-gray-300">Contract</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-700 dark:text-gray-300">Ethereum</th>
+                    <th className="border border-gray-200 dark:border-gray-700 p-3 text-left font-semibold text-gray-700 dark:text-gray-300">Base</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { item: 'SwapRouter02', eth: '0x68b3465...Fc45', base: '0x2626664...481' },
+                    { item: 'WETH', eth: '0xC02aaA3...Cc2', base: '0x4200...0006' },
+                    { item: 'USDC', eth: '0xA0b869...B48', base: '0x833589...913' },
+                    { item: 'Chainlink ETH/USD', eth: '0x5f4eC3...419', base: '0x71041d...b70' },
+                    { item: 'Fee Tier', eth: '0.05% (500)', base: '0.05% (500)' },
+                  ].map((r, i) => (
+                    <tr key={i} className={i % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-medium text-pink-700 dark:text-pink-300">{r.item}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-600 dark:text-gray-400">{r.eth}</td>
+                      <td className="border border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-600 dark:text-gray-400">{r.base}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">Quote calculation — Chainlink + 0.05% fee</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Instead of calling the Uniswap Quoter contract on-chain (which costs gas), walits estimates the quote from Chainlink price feeds. It&apos;s fast and free. The trade-off: <strong>this is an estimate — actual fill price depends on pool state (slippage)</strong>.
+            </p>
+
+            <div className="bg-gray-900 dark:bg-black rounded-xl p-5 mb-4 font-mono text-sm overflow-x-auto">
+              <p className="text-gray-400 text-xs mb-3">Quote formula</p>
+              <pre className="text-gray-300 leading-relaxed">{`ETH price (USD) = Chainlink answer / 1e8         // e.g. $3,000.00
+expected USDC   = ETH amount × ETH price          // 0.1 × 3000 = $300.00
+fee deduction   = expected × (1 - 0.0005)         // $300 × 0.9995 = $299.85
+toAmountRaw     = floor(299.85 × 1e6)             // = 299,850,000 (6 decimals)`}</pre>
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">Slippage protection</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Between quote and execution, the pool can shift. Setting <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded text-pink-600 dark:text-pink-400">amountOutMinimum</code> means if the actual USDC received falls below the threshold, the transaction automatically reverts — gas burned, ETH returned.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-3 my-6">
+              {[
+                { pct: '0.1%', when: 'Low volatility / small trades', color: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700' },
+                { pct: '0.5%', when: 'Default / normal conditions', color: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700' },
+                { pct: '1.0%', when: 'High volatility / large trades', color: 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-700' },
+              ].map((s, i) => (
+                <div key={i} className={`border rounded-xl p-4 ${s.color}`}>
+                  <p className="text-2xl font-black text-gray-900 dark:text-white mb-1">{s.pct}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">{s.when}</p>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">MPC signing + FallbackProvider</h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Swap transactions are signed via MPC (Multi-Party Computation) — the private key never exists on a single server. RPC uses Alchemy as primary and Infura as fallback. If Alchemy doesn&apos;t respond within 1,500 ms, the request automatically falls through to Infura.
+            </p>
+
+            <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-5 rounded-r-lg mb-6">
+              <p className="text-sm text-amber-800 dark:text-amber-300 font-semibold mb-1">MAX amount caveat</p>
+              <p className="text-sm text-amber-700 dark:text-amber-300">
+                Swapping the entire ETH balance leaves nothing for gas. walits reserves <code className="bg-amber-100 dark:bg-amber-900 px-1 rounded">balance - 0.0005 ETH</code> as the MAX amount (~$1.50 at $3,000/ETH).
+              </p>
+            </div>
+
+            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">Current limitations</h3>
+            <div className="space-y-2 my-4">
+              {[
+                { label: 'One-way only', desc: 'ETH → USDC only. USDC → ETH reverse direction not yet implemented.', level: 'Planned' },
+                { label: 'Estimate-based quote', desc: 'Uses Chainlink price estimate. Not a real pool simulation (Quoter contract).', level: 'To improve' },
+                { label: 'No cross-chain swap', desc: 'Ethereum ETH → Base USDC not possible in one step. Bridge first, then swap.', level: 'TBD' },
+                { label: 'Status tracking incomplete', desc: 'TX saved as PENDING only. Auto-updating DB on chain confirmation not yet built.', level: 'Planned' },
+              ].map((r, i) => (
+                <div key={i} className="flex items-start gap-4 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+                  <span className="text-xs font-bold text-gray-400 w-16 flex-shrink-0 mt-0.5">{r.level}</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-white text-sm">{r.label}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 leading-relaxed">{r.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </>
         )}
