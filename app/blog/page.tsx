@@ -75,6 +75,16 @@ export default function BlogPage() {
           image: '/blog/morpho.jpg',
         },
         {
+          id: 'cctp-bridge-reliability',
+          category: '인프라 설계',
+          categoryColor: 'bg-orange-100 text-orange-800',
+          title: 'CCTP 브릿지 안정성 — 서버 크래시에도 USDC를 잃지 않는 설계',
+          excerpt: 'Circle CCTP로 USDC를 체인 간 이동할 때 서버가 죽으면 어떻게 될까? broadcast 전 keccak256(signedTx) 저장 한 줄로 자금 손실 위험을 없앤다. WAL 패턴, onModuleInit 자동 복구, Circle IRIS API 수동 복구까지.',
+          date: '2026년 4월 30일',
+          readTime: '20분',
+          image: '/blog/cctp-bridge.jpg',
+        },
+        {
           id: 'prediction-markets-polymarket',
           category: '기술 심층 분석',
           categoryColor: 'bg-emerald-100 text-emerald-800',
@@ -461,6 +471,16 @@ export default function BlogPage() {
           date: 'April 6, 2026',
           readTime: '20 min read',
           image: '/blog/morpho.jpg',
+        },
+        {
+          id: 'cctp-bridge-reliability',
+          category: 'Infrastructure Design',
+          categoryColor: 'bg-orange-100 text-orange-800',
+          title: 'CCTP Bridge Reliability — Designing So USDC Is Never Lost on Server Crash',
+          excerpt: 'What happens when your server dies mid-flight during a Circle CCTP bridge? One line reordered — save keccak256(signedTx) before broadcast — eliminates fund-loss risk. WAL pattern, onModuleInit auto-recovery, Circle IRIS manual recovery.',
+          date: 'April 30, 2026',
+          readTime: '20 min read',
+          image: '/blog/cctp-bridge.jpg',
         },
         {
           id: 'prediction-markets-polymarket',
