@@ -336,6 +336,33 @@ await resumeFromAttestation(jobId, burnTxHash);`}</pre>
                 : 'Circle operates its own relayer that sometimes processes mints automatically. If already handled, calling receiveMessage returns a "Nonce already used" error. This is not a failure — it\'s a success. Treat it as DONE.'}
             </p>
           </div>
+
+          <div className="mt-6 bg-slate-50 border border-slate-200 rounded-2xl p-5">
+            <div className="font-bold text-slate-800 mb-3">
+              {isKo ? '서버 재시작은 트리거 중 하나일 뿐' : 'Server restart is just one trigger'}
+            </div>
+            <p className="text-slate-600 text-sm leading-relaxed mb-4">
+              {isKo
+                ? 'onModuleInit은 서버 시작 시 자동으로 호출되는 편의 장치다. 실제 복구를 담당하는 resumeFromAttestation()은 일반 메서드이기 때문에, 누가 언제 호출하든 동일하게 동작한다. 서버가 재시작될 때까지 기다릴 필요가 없다.'
+                : 'onModuleInit is just a convenience hook that fires on startup. The actual recovery logic — resumeFromAttestation() — is an ordinary method. It works the same regardless of who calls it or when. There\'s no need to wait for a server restart.'}
+            </p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                { trigger: 'onModuleInit()', when: isKo ? '서버 시작 시 자동' : 'Auto on server start', icon: '⚡' },
+                { trigger: isKo ? '어드민 수동 resume' : 'Admin manual resume', when: isKo ? 'jobId 입력 → 즉시 재개' : 'Enter jobId → resume now', icon: '🖥' },
+                { trigger: isKo ? '일괄 재개 스케줄러' : 'Batch resume scheduler', when: isKo ? 'cron으로 주기적 체크' : 'Periodic cron check', icon: '🔁' },
+                { trigger: 'retryJob() API', when: isKo ? '유저 직접 재시도 버튼' : 'User-triggered retry button', icon: '👆' },
+              ].map((item, i) => (
+                <div key={i} className="bg-white border border-slate-200 rounded-xl px-4 py-3 flex items-start gap-3">
+                  <span className="text-lg">{item.icon}</span>
+                  <div>
+                    <div className="font-mono text-xs font-bold text-slate-700">{item.trigger}</div>
+                    <div className="text-xs text-slate-500 mt-0.5">{item.when}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Section 5: 수동 복구 */}
