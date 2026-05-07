@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'stablecoin-dedicated-chains',
+          category: '인프라 심층 분석',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: '스테이블코인 전용 체인 — Base, Tether Plasma, Circle Arc, Stripe Tempo',
+          excerpt: '코인베이스, 테더, 써클, 스트라이프가 각자 전용 체인·레일을 만드는 이유. 왜 범용 L2로는 부족한가, 각각 무엇이 다른가, PayFi 인프라에 무엇을 의미하는가.',
+          date: '2026년 5월 7일',
+          readTime: '22분',
+          image: '/blog/stablecoin-chains.jpg',
+        },
+        {
           id: 'solana-defi-deep-dive',
           category: 'DeFi 시리즈 14',
           categoryColor: 'bg-purple-100 text-purple-800',
@@ -412,6 +422,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'stablecoin-dedicated-chains',
+          category: 'Infrastructure Deep Dive',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: 'Stablecoin-Dedicated Chains — Base, Tether Plasma, Circle Arc, Stripe Tempo',
+          excerpt: 'Why Coinbase, Tether, Circle, and Stripe are each building their own dedicated chain or rail. Why general-purpose L2s fall short, how each approach differs, and what it means for PayFi infrastructure.',
+          date: 'May 7, 2026',
+          readTime: '22 min read',
+          image: '/blog/stablecoin-chains.jpg',
+        },
         {
           id: 'solana-defi-deep-dive',
           category: 'DeFi Series 14',
