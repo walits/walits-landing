@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'stripe-tempo-stablecoin',
+          category: '인프라 심층 분석',
+          categoryColor: 'bg-indigo-100 text-indigo-800',
+          title: 'Stripe Tempo — Bridge 인수부터 스테이블코인 결제 인프라 완전 해부',
+          excerpt: 'Stripe가 $1.1B에 Bridge를 인수하고 만든 스테이블코인 결제 레일 Tempo. 기술 아키텍처, 수수료 구조, API, 실제 사용 사례, SWIFT와 비교, walits USDC 지갑과의 연결까지 2026년 최신 내용 완전 해부.',
+          date: '2026년 5월 10일',
+          readTime: '30분',
+          image: '/blog/tempo.jpg',
+        },
+        {
           id: 'stablecoin-dedicated-chains',
           category: '인프라 심층 분석',
           categoryColor: 'bg-blue-100 text-blue-800',
@@ -422,6 +432,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'stripe-tempo-stablecoin',
+          category: 'Infrastructure Deep Dive',
+          categoryColor: 'bg-indigo-100 text-indigo-800',
+          title: 'Stripe Tempo — Complete Deep Dive: From Bridge Acquisition to Stablecoin Payment Infrastructure',
+          excerpt: 'The stablecoin payment rail Stripe built after acquiring Bridge for $1.1B. Technical architecture, fee structure, API details, real-world use cases, SWIFT comparison, and the connection to walits USDC wallet — everything through 2026.',
+          date: 'May 10, 2026',
+          readTime: '30 min read',
+          image: '/blog/tempo.jpg',
+        },
         {
           id: 'stablecoin-dedicated-chains',
           category: 'Infrastructure Deep Dive',
