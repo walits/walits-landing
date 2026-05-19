@@ -170,8 +170,8 @@ export default function StripeTempoPage() {
               {
                 product: isKo ? '스테이블코인 계좌' : 'Stablecoin Accounts',
                 icon: '🏦',
-                desc: isKo ? '전 세계 누구든 USDC/USDT 기반 달러 계좌를 개설. 은행 계좌 없어도 됨.' : 'Anyone worldwide can open a USDC/USDT dollar account. No bank account needed.',
-                detail: isKo ? '101개국 → 150개국 이상 확장' : '101 → 150+ countries',
+                desc: isKo ? '일부 국가의 기업 고객에게 USDC/USDB 기반 스테이블코인 금융 계좌 제공. KYC 및 해당 국가 규제 준수 필요.' : 'Stablecoin financial accounts (USDC/USDB) for business customers in supported countries. KYC and local regulations apply.',
+                detail: isKo ? '101개국 → 150개국 이상 (기업 대상)' : '101 → 150+ countries (business-focused)',
               },
               {
                 product: isKo ? '크로스보더 결제' : 'Cross-Border Payments',
@@ -454,8 +454,8 @@ app.post('/webhook', (req, res) => {
                   {
                     company: isKo ? '아르헨티나·나이지리아·터키 사용 사례' : 'Argentina, Nigeria, Turkey use cases',
                     desc: isKo
-                      ? '자국 통화 인플레이션을 피해 USDC 계좌에 달러를 보관. Tempo를 통해 USDC 계좌에서 현지 통화로 즉시 전환 가능. 사실상 디지털 달러 저축 계좌 역할.'
-                      : 'Store dollars in USDC accounts to escape local currency inflation. Instant conversion from USDC account to local currency via Tempo. Acts as a digital dollar savings account.',
+                      ? '자국 통화 인플레이션이 심한 국가(아르헨티나, 나이지리아 등)에서 USDC로 가치 보존을 시도하는 수요가 실재한다. 다만 Stripe Tempo를 통한 서비스는 규제상 허용 여부가 국가마다 다르며, 실제 접근 가능성은 현지 규제에 달려 있다.'
+                      : 'In countries with severe local currency inflation (Argentina, Nigeria, etc.), real demand exists for preserving value in USDC. However, access through Stripe Tempo varies by country depending on local regulations.',
                   },
                 ],
               },
@@ -689,7 +689,7 @@ app.post('/webhook', (req, res) => {
               <div className="font-bold text-slate-900 mb-3">{isKo ? '현재 달성한 것' : 'What\'s been achieved'}</div>
               <div className="space-y-2">
                 {(isKo ? [
-                  '150개국 이상 스테이블코인 계좌 지원',
+                  '150개국 이상 기업 대상 스테이블코인 계좌 지원 (국가별 규제 적용)',
                   '8개 이상 체인에서 USDC/USDT 처리',
                   'Stripe 대시보드에서 스테이블코인 통합 관리',
                   '수천 개 기업 고객 활성 사용 중',
