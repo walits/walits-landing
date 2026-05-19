@@ -27,16 +27,16 @@ export default function StripeTempoPage() {
           </div>
           <h1 className="text-3xl md:text-4xl font-black mb-4 leading-tight">
             {isKo
-              ? 'Stripe Tempo — $1.1B Bridge 인수부터 스테이블코인 결제 인프라 완전 해부'
-              : 'Stripe Tempo — From the $1.1B Bridge Acquisition to Stablecoin Payment Infrastructure'}
+              ? 'Stripe Tempo — 결제 특화 L1 블록체인 완전 해부'
+              : 'Stripe Tempo — Complete Deep Dive into the Payments-First L1 Blockchain'}
           </h1>
           <p className="text-slate-300 text-lg leading-relaxed">
             {isKo
-              ? '연간 $1조 달러를 처리하는 결제 인프라 회사가 스테이블코인을 선택했다. SWIFT 5일을 수 초로, 수수료 3%를 0에 가깝게. Stripe Tempo의 탄생 배경, 기술 구조, 실제 사용 사례, 그리고 USDC 지갑에 무엇을 의미하는지.'
-              : 'The payment infrastructure company processing $1 trillion annually chose stablecoins. SWIFT\'s 5 days down to seconds, 3% fees down to near-zero. The backstory of Stripe Tempo, its technical architecture, real use cases, and what it means for USDC wallets.'}
+              ? 'Stripe와 Paradigm이 직접 만든 결제 특화 L1. 기존 블록체인이 결제에 맞지 않아서 새 체인을 만들었다. 100K+ TPS, 가스 토큰 없음, EVM 호환, AI 에이전트 결제. Visa·OpenAI·Shopify가 설계에 참여했고 2026년 3월 메인넷이 떴다.'
+              : 'A payments-first L1 built from scratch by Stripe and Paradigm because existing blockchains weren\'t fit for payments. 100K+ TPS, no gas token, EVM-compatible, AI agent payments. Visa, OpenAI, and Shopify helped design it. Mainnet launched March 2026.'}
           </p>
           <div className="flex items-center gap-4 mt-6 text-sm text-slate-400">
-            <span>{isKo ? '2026년 5월 18일' : 'May 18, 2026'}</span>
+            <span>{isKo ? '2026년 5월' : 'May 2026'}</span>
             <span>·</span>
             <span>{isKo ? '30분 읽기' : '30 min read'}</span>
           </div>
@@ -52,454 +52,394 @@ export default function StripeTempoPage() {
 
       <div className="max-w-4xl mx-auto px-6 py-12 space-y-16">
 
-        {/* Section 1: Stripe가 다시 크립토로 */}
+        {/* Section 1: 왜 새 체인을 만들었나 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '1. Stripe의 역사 — 크립토를 떠났다가 돌아온 이유' : '1. Stripe\'s History — Why They Left Crypto and Came Back'}
+            {isKo ? '1. 왜 Stripe와 Paradigm은 새 L1을 직접 만들었나' : '1. Why Stripe and Paradigm Built a New L1 From Scratch'}
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
-              ? 'Stripe는 2014년 세계 최초로 비트코인 결제를 지원한 주요 결제사 중 하나였다. 하지만 2018년, 비트코인 결제 지원을 종료했다. 이유는 단순했다 — 변동성이 너무 크고, 실제 결제 수단으로 아무도 쓰지 않는다.'
-              : 'Stripe was among the first major payment processors to support Bitcoin in 2014. Then in 2018, they dropped it. The reason was simple: too volatile, and nobody actually used it for payments.'}
+              ? 'Stripe는 연간 $1조 이상을 처리하는 결제 인프라 회사다. 내부적으로 초당 10,000건 이상의 피크 트래픽을 처리한다. 스테이블코인 수요가 커지면서 Stripe는 기존 블록체인을 결제 레일로 써보려 했다. 결론은 간단했다 — 기존 블록체인은 결제에 맞지 않는다.'
+              : 'Stripe processes over $1 trillion annually, with peak internal traffic exceeding 10,000 transactions per second. As stablecoin demand grew, Stripe tried using existing blockchains as payment rails. The conclusion was simple: existing blockchains aren\'t built for payments.'}
           </p>
 
-          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-8">
+          <div className="bg-slate-900 rounded-2xl p-6 mb-6">
+            <div className="text-slate-400 text-xs font-mono mb-4">{isKo ? 'Patrick Collison (Stripe CEO)' : 'Patrick Collison, Stripe CEO'}</div>
+            <p className="text-slate-200 text-sm leading-relaxed italic">
+              {isKo
+                ? '"스테이블코인과 크립토의 사용이 Stripe, Bridge, Privy 전반에서 늘어나면서, 기존 블록체인이 이런 사용 사례에 최적화되어 있지 않다는 것을 발견했다. 예를 들어 서로 다른 스테이블코인 플랫폼 중립성을 확보하는 것, 그리고 결제 수수료를 어떻게 처리할지가 중요한데 기존 체인은 이를 해결하지 못한다."'
+                : '"As the use of stablecoins and crypto grows across Stripe, Bridge, and Privy, we found that existing blockchains are not optimized for these use cases — for example, platform neutrality with respect to different stablecoins, and how to handle payment fees."'}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-6">
+            {[
+              {
+                problem: isKo ? '가스 토큰 문제' : 'Gas token problem',
+                desc: isKo ? 'ETH·SOL 같은 변동성 자산으로 수수료를 내야 한다. 결제 서비스에 변동성 자산 의존은 치명적이다.' : 'Fees must be paid in volatile assets like ETH or SOL. Volatile dependencies are fatal for payment services.',
+                color: 'bg-red-50 border-red-200 text-red-800',
+              },
+              {
+                problem: isKo ? '스테이블코인 중립성 부재' : 'No stablecoin neutrality',
+                desc: isKo ? 'USDC냐 USDT냐를 체인 레벨에서 강요받는다. 결제 인프라는 특정 스테이블코인에 중립적이어야 한다.' : 'Chains force a choice between USDC and USDT at the protocol level. Payment infrastructure must be stablecoin-neutral.',
+                color: 'bg-amber-50 border-amber-200 text-amber-800',
+              },
+              {
+                problem: isKo ? '결제 최적화 부재' : 'No payment optimization',
+                desc: isKo ? '메모, 배치 결제, 예약 결제, 정책 컴플라이언스가 프로토콜 레벨에 없다. DeFi용 체인에 결제를 억지로 구겨 넣는 꼴이다.' : 'No protocol-level memos, batch payments, scheduled payments, or policy compliance. Forcing payments into DeFi-optimized chains.',
+                color: 'bg-orange-50 border-orange-200 text-orange-800',
+              },
+            ].map((item, i) => (
+              <div key={i} className={`border rounded-xl p-4 ${item.color}`}>
+                <div className="font-bold text-sm mb-2">{item.problem}</div>
+                <p className="text-xs leading-relaxed opacity-80">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-slate-600 leading-relaxed">
+            {isKo
+              ? '해결책은 기존 체인을 수정하거나 L2를 올리는 것이 아니었다. 결제를 위해 처음부터 설계한 L1을 직접 만드는 것이었다. Stripe의 Patrick Collison과 Paradigm의 Matt Huang이 손을 잡았다.'
+              : 'The solution wasn\'t to patch an existing chain or build an L2. It was to build a new L1 designed from the ground up for payments. Stripe\'s Patrick Collison and Paradigm\'s Matt Huang joined forces.'}
+          </p>
+        </section>
+
+        {/* Section 2: Stripe 크립토 역사와 Bridge */}
+        <section>
+          <h2 className="text-2xl font-black text-slate-900 mb-6">
+            {isKo ? '2. Stripe의 크립토 역사와 Bridge.xyz 인수' : '2. Stripe\'s Crypto History and the Bridge.xyz Acquisition'}
+          </h2>
+
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-6">
             <div className="font-bold text-slate-900 mb-4">{isKo ? 'Stripe × 크립토 연표' : 'Stripe × crypto timeline'}</div>
             <div className="space-y-3">
               {[
                 { year: '2014', event: isKo ? 'Bitcoin 결제 지원 시작 — 가맹점에 BTC 수취 허용' : 'Launch Bitcoin payments — merchants can accept BTC' },
-                { year: '2018', event: isKo ? 'Bitcoin 지원 종료 — "결제 수단으로 부적합"' : 'Drop Bitcoin — "not suitable as a payment method"' },
-                { year: '2022', event: isKo ? '크립토 팀 내부 조용히 재가동 — 스테이블코인 연구 시작' : 'Internal crypto team quietly restarts — stablecoin research begins' },
+                { year: '2018', event: isKo ? 'Bitcoin 지원 종료 — "결제 수단으로 부적합 (변동성)"' : 'Drop Bitcoin — "not suitable as payment (volatility)"' },
                 { year: '2024.03', event: isKo ? 'USDC 페이아웃 재출시 — 크리에이터·기업에 USDC로 지급' : 'USDC payouts relaunch — pay creators and businesses in USDC' },
                 { year: '2024.10', event: isKo ? 'Bridge.xyz 인수 ($1.1B) — Stripe 역사상 최대 인수' : 'Acquire Bridge.xyz ($1.1B) — largest acquisition in Stripe history' },
-                { year: '2024.11', event: isKo ? 'Stripe 결제창에 USDC·USDT 수취 기능 추가' : 'Add USDC/USDT acceptance to Stripe checkout' },
-                { year: '2025.01', event: isKo ? 'Stablecoin Financial Accounts 출시 (101개국)' : 'Launch Stablecoin Financial Accounts (101 countries)' },
-                { year: '2025.Q2', event: isKo ? 'Tempo 브랜드로 통합·공식 런칭' : 'Unified under Tempo brand, official launch' },
-                { year: '2026', event: isKo ? 'Tempo 글로벌 확장 — 150개국 이상 지원' : 'Tempo global expansion — 150+ countries supported' },
+                { year: '2024.11', event: isKo ? '결제창에 USDC·USDT 수취 기능 추가 (Privy 지갑 통합)' : 'Add USDC/USDT acceptance to checkout (Privy wallet integration)' },
+                { year: '2025.08', event: isKo ? 'Matt Huang (Paradigm 공동 창업자), Tempo CEO로 발표' : 'Matt Huang (Paradigm co-founder) announced as Tempo CEO' },
+                { year: '2025.09', event: isKo ? 'Tempo 공식 발표 — 결제 특화 L1 블록체인' : 'Tempo officially announced — payments-first L1 blockchain' },
+                { year: '2025.10', event: isKo ? '$500M Series A ($5B 밸류에이션) — Thrive Capital, Greenoaks, Sequoia' : '$500M Series A at $5B valuation — Thrive Capital, Greenoaks, Sequoia' },
+                { year: '2025.12', event: isKo ? '공개 테스트넷 런칭. UBS, Mastercard, Kalshi 파트너 추가' : 'Public testnet launch. UBS, Mastercard, Kalshi added as partners' },
+                { year: '2026.03', event: isKo ? '메인넷 런칭 + MPP (Machine Payment Protocol) 공개' : 'Mainnet launch + MPP (Machine Payment Protocol) released' },
+                { year: '2026.04', event: isKo ? 'Visa, Tempo 밸리데이터 노드 공식 런칭' : 'Visa officially launches validator node on Tempo' },
+                { year: '2026.05', event: isKo ? 'World Liberty Financial, USD1 스테이블코인 Tempo 네이티브 출시' : 'World Liberty Financial launches USD1 stablecoin natively on Tempo' },
               ].map((row, i) => (
                 <div key={i} className="flex gap-4 text-sm">
-                  <span className="font-mono text-violet-600 font-bold w-20 shrink-0">{row.year}</span>
+                  <span className="font-mono text-violet-600 font-bold w-24 shrink-0">{row.year}</span>
                   <span className="text-slate-600">{row.event}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <p className="text-slate-600 leading-relaxed">
-            {isKo
-              ? '2018년 Stripe가 비트코인을 떠난 이유는 "크립토"가 싫어서가 아니었다. "변동성 있는 자산"이 결제에 맞지 않아서였다. USDC처럼 달러와 1:1로 페깅된 스테이블코인은 그 문제를 해결한다. 결제 수단으로서 달러의 안정성 + 블록체인의 속도·비용 효율. Stripe는 6년을 기다렸다가 정확한 시점에 돌아왔다.'
-              : 'When Stripe left Bitcoin in 2018, it wasn\'t because they hated crypto — it was because a volatile asset doesn\'t work for payments. USDC, pegged 1:1 to the dollar, solves that problem. The stability of dollars + the speed and cost efficiency of blockchain. Stripe waited 6 years and came back at exactly the right moment.'}
-          </p>
-        </section>
-
-        {/* Section 2: Bridge 인수 */}
-        <section>
-          <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '2. Bridge.xyz 인수 $1.1B — 무엇을 샀나?' : '2. The $1.1B Bridge.xyz Acquisition — What Did Stripe Buy?'}
-          </h2>
-          <p className="text-slate-600 leading-relaxed mb-6">
-            {isKo
-              ? '2024년 10월 Stripe가 Bridge를 인수했다. 크립토 스타트업 역사상 최대 규모의 인수였다. Bridge는 2022년 Zach Abrams와 Sean Yu가 창업한 스테이블코인 오케스트레이션 플랫폼이다.'
-              : 'In October 2024, Stripe acquired Bridge — the largest acquisition in crypto startup history. Bridge was founded in 2022 by Zach Abrams and Sean Yu as a stablecoin orchestration platform.'}
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-violet-50 border border-violet-200 rounded-2xl p-5">
-              <div className="font-bold text-violet-800 mb-3">{isKo ? 'Bridge가 해결한 문제' : 'What Bridge solved'}</div>
-              <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                {isKo
-                  ? '스테이블코인을 실제 비즈니스에 통합하려면 수십 개의 체인, 수십 개의 스테이블코인, 각국 컴플라이언스, 법정화폐 환전을 모두 처리해야 한다. Bridge는 이것을 단일 API로 추상화했다.'
-                  : 'Integrating stablecoins into a real business means handling dozens of chains, dozens of stablecoins, per-country compliance, and fiat conversion. Bridge abstracted all of this into a single API.'}
-              </p>
-              <div className="space-y-2 text-sm">
-                {[
-                  isKo ? '멀티체인 USDC/USDT 통합 API' : 'Multi-chain USDC/USDT unified API',
-                  isKo ? '법정화폐 ↔ 스테이블코인 자동 환전' : 'Automatic fiat ↔ stablecoin conversion',
-                  isKo ? '150개국 컴플라이언스 처리' : 'Compliance handling for 150+ countries',
-                  isKo ? 'KYC/AML 내장' : 'Built-in KYC/AML',
-                  isKo ? 'USDB (Bridge 자체 스테이블코인) 발행' : 'USDB issuance (Bridge\'s own stablecoin)',
-                ].map((item, i) => (
-                  <div key={i} className="flex gap-2 text-slate-600">
-                    <span className="text-violet-400 shrink-0">✓</span>{item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-              <div className="font-bold text-slate-800 mb-3">{isKo ? 'Bridge의 실 사용 사례 (인수 전)' : 'Bridge real use cases (pre-acquisition)'}</div>
-              <div className="space-y-3">
-                {[
-                  { org: 'SpaceX', desc: isKo ? '해외 자회사로 달러 송금 — 수수료와 환율 손실 제거' : 'Dollar transfers to overseas subsidiaries — eliminated fees and FX slippage' },
-                  { org: isKo ? '미국 국무부' : 'US State Department', desc: isKo ? '우크라이나 지원금 USDC로 즉시 지급' : 'Instant USDC disbursement for Ukraine aid' },
-                  { org: 'Mercury', desc: isKo ? '스타트업 은행 계좌에 스테이블코인 레일 연결' : 'Connected stablecoin rails to startup bank accounts' },
-                  { org: 'Bitso', desc: isKo ? '라틴아메리카 크립토 거래소 달러 결제 처리' : 'Dollar payment processing for Latin America crypto exchange' },
-                ].map((item, i) => (
-                  <div key={i} className="border-b border-slate-200 last:border-0 py-2">
-                    <span className="font-semibold text-slate-800 text-sm">{item.org}</span>
-                    <p className="text-slate-500 text-xs mt-0.5">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-slate-900 rounded-2xl p-6">
-            <div className="text-slate-400 text-xs font-mono mb-3">{isKo ? 'Stripe가 $1.1B를 쓴 진짜 이유' : 'The real reason Stripe paid $1.1B'}</div>
-            <p className="text-slate-300 text-sm leading-relaxed">
+          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 mb-6">
+            <div className="font-bold text-blue-800 mb-3">{isKo ? 'Bridge.xyz vs Tempo — 역할 구분' : 'Bridge.xyz vs Tempo — Role Distinction'}</div>
+            <p className="text-slate-600 text-sm leading-relaxed mb-4">
               {isKo
-                ? 'Stripe가 산 것은 코드가 아니다. Bridge의 인프라는 Stripe가 직접 만들 수 있다. Stripe가 산 것은 세 가지다: (1) 150개국 규제 라이선스와 컴플라이언스 네트워크 — 이것은 돈으로도 수년이 걸린다. (2) SpaceX·국무부 같은 대형 기관 고객과의 레퍼런스 — 신뢰는 구매할 수 없지만 Bridge는 이미 가지고 있었다. (3) Zach Abrams 팀 — 스테이블코인 결제 인프라 구축 경험을 가진 최고 수준의 팀.'
-                : 'Stripe didn\'t buy code — they could have built that. What Stripe bought was three things: (1) Regulatory licenses and compliance networks across 150 countries — impossible to build in less than years. (2) Reference customers like SpaceX and the State Department — trust can\'t be purchased, but Bridge already had it. (3) Zach Abrams\'s team — world-class experience building stablecoin payment infrastructure.'}
+                ? 'Bridge와 Tempo는 모두 Stripe 생태계에 속하지만 서로 다른 레이어를 담당한다. Bridge를 "Tempo의 미들웨어"로 읽으면 안 된다. 이 둘은 상호 보완적인 별개의 제품이다.'
+                : 'Bridge and Tempo both belong to the Stripe ecosystem but serve different layers. Don\'t read Bridge as "Tempo\'s middleware" — they are separate, complementary products.'}
             </p>
-          </div>
-        </section>
-
-        {/* Section 3: Tempo란 무엇인가 */}
-        <section>
-          <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '3. Stripe Tempo — 정확히 무엇인가?' : '3. Stripe Tempo — What Exactly Is It?'}
-          </h2>
-          <p className="text-slate-600 leading-relaxed mb-6">
-            {isKo
-              ? 'Tempo는 Stripe의 스테이블코인 금융 플랫폼이다. 새로운 블록체인이 아니다. 새로운 스테이블코인도 아니다. 기존 스테이블코인 인프라(USDC, USDT, Ethereum, Base, Solana 등) 위에 결제·계좌·환전을 통합한 API 레이어다.'
-              : 'Tempo is Stripe\'s stablecoin financial platform. It\'s not a new blockchain. It\'s not a new stablecoin. It\'s an API layer that unifies payments, accounts, and conversion on top of existing stablecoin infrastructure (USDC, USDT, Ethereum, Base, Solana, etc.).'}
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-4 mb-8">
-            {[
-              {
-                product: isKo ? '스테이블코인 계좌' : 'Stablecoin Accounts',
-                icon: '🏦',
-                desc: isKo ? '일부 국가의 기업 고객에게 USDC/USDB 기반 스테이블코인 금융 계좌 제공. KYC 및 해당 국가 규제 준수 필요.' : 'Stablecoin financial accounts (USDC/USDB) for business customers in supported countries. KYC and local regulations apply.',
-                detail: isKo ? '101개국 → 150개국 이상 (기업 대상)' : '101 → 150+ countries (business-focused)',
-              },
-              {
-                product: isKo ? '크로스보더 결제' : 'Cross-Border Payments',
-                icon: '⚡',
-                desc: isKo ? 'SWIFT 대신 스테이블코인 레일로 수 초 내 국제 송금. 수신자는 현지 통화로 수취 가능.' : 'International transfers in seconds via stablecoin rails instead of SWIFT. Recipients can receive in local currency.',
-                detail: isKo ? '약 30초 완료, 수수료 0.1% 내외' : '~30 sec completion, ~0.1% fee',
-              },
-              {
-                product: isKo ? '머천트 결제 통합' : 'Merchant Payment Integration',
-                icon: '🛒',
-                desc: isKo ? '기존 Stripe 가맹점이 스테이블코인 수취 즉시 추가. Stripe 대시보드에서 USDC 잔액 관리.' : 'Existing Stripe merchants add stablecoin acceptance instantly. Manage USDC balance in Stripe dashboard.',
-                detail: isKo ? '5분 연동, 코드 변경 최소' : '5 min integration, minimal code change',
-              },
-            ].map((item, i) => (
-              <div key={i} className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-                <div className="text-3xl mb-3">{item.icon}</div>
-                <div className="font-bold text-slate-900 mb-2">{item.product}</div>
-                <p className="text-slate-500 text-sm leading-relaxed mb-3">{item.desc}</p>
-                <div className="text-xs font-mono text-violet-600 bg-violet-50 px-2 py-1 rounded">{item.detail}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="bg-violet-50 border border-violet-200 rounded-2xl p-6">
-            <div className="font-bold text-violet-800 mb-4">{isKo ? 'Tempo vs 기존 Stripe 결제의 차이' : 'Tempo vs traditional Stripe payments'}</div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-violet-200">
-                    <th className="text-left py-2 pr-4 text-violet-600 font-semibold">{isKo ? '항목' : 'Item'}</th>
-                    <th className="text-left py-2 pr-4 text-violet-600 font-semibold">{isKo ? '기존 Stripe (카드)' : 'Traditional Stripe (card)'}</th>
-                    <th className="text-left py-2 text-violet-600 font-semibold">Stripe Tempo</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-violet-100">
-                  {[
-                    { item: isKo ? '국내 결제 수수료' : 'Domestic fee', old: '2.9% + $0.30', new: '~0.1%' },
-                    { item: isKo ? '해외 결제 수수료' : 'International fee', old: '3.9% + $0.30 + FX', new: '~0.1–0.5%' },
-                    { item: isKo ? '정산 시간' : 'Settlement time', old: isKo ? '2–7 영업일' : '2–7 business days', new: isKo ? '수 초–수 분' : 'Seconds to minutes' },
-                    { item: isKo ? '24/7 처리' : '24/7 processing', old: '❌', new: '✅' },
-                    { item: isKo ? '프로그래머블' : 'Programmable', old: '제한적', new: isKo ? '완전 (조건부 결제, 자동화)' : 'Full (conditional, automated)' },
-                    { item: isKo ? '환율 손실' : 'FX slippage', old: isKo ? '1–3% 내외' : '1–3%', new: isKo ? '거의 없음 (USDC 기준)' : 'Near zero (USDC denominated)' },
-                  ].map((row, i) => (
-                    <tr key={i}>
-                      <td className="py-2 pr-4 font-medium text-slate-700">{row.item}</td>
-                      <td className="py-2 pr-4 text-red-600 text-xs">{row.old}</td>
-                      <td className="py-2 text-green-600 text-xs font-semibold">{row.new}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 4: 기술 아키텍처 */}
-        <section>
-          <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '4. 기술 아키텍처 — Bridge 오케스트레이션 레이어' : '4. Technical Architecture — The Bridge Orchestration Layer'}
-          </h2>
-          <p className="text-slate-600 leading-relaxed mb-6">
-            {isKo
-              ? 'Tempo의 핵심 기술은 Bridge에서 왔다. Bridge는 스테이블코인 오케스트레이션 레이어를 표방한다 — 복잡한 멀티체인·멀티통화 처리를 단일 API 뒤로 숨긴다.'
-              : 'Tempo\'s core technology comes from Bridge. Bridge calls itself a stablecoin orchestration layer — hiding complex multi-chain, multi-currency processing behind a single API.'}
-          </p>
-
-          <div className="bg-slate-900 rounded-2xl p-6 mb-6 font-mono text-sm overflow-x-auto">
-            <div className="text-slate-400 text-xs mb-4">{isKo ? '전체 아키텍처 스택' : 'Full architecture stack'}</div>
-            <div className="space-y-1">
-              <div className="text-violet-400 font-bold">{isKo ? '[ 애플리케이션 레이어 ]' : '[ Application Layer ]'}</div>
-              <div className="text-slate-400 pl-4">{isKo ? 'Stripe Dashboard / Tempo API / 파트너 앱' : 'Stripe Dashboard / Tempo API / Partner apps'}</div>
-              <div className="text-slate-600 pl-4">↕ REST API + Webhooks</div>
-              <div className="text-blue-400 font-bold mt-2">{isKo ? '[ Bridge 오케스트레이션 레이어 ]' : '[ Bridge Orchestration Layer ]'}</div>
-              <div className="text-slate-400 pl-4">{isKo ? '라우팅 엔진  컴플라이언스  KYC/AML  FX 환전  잔액 관리' : 'Routing engine  Compliance  KYC/AML  FX conversion  Balance mgmt'}</div>
-              <div className="text-slate-600 pl-4">↕ {isKo ? '체인별 어댑터' : 'Chain-specific adapters'}</div>
-              <div className="text-green-400 font-bold mt-2">{isKo ? '[ 블록체인 / 레일 레이어 ]' : '[ Blockchain / Rail Layer ]'}</div>
-              <div className="text-slate-400 pl-4">Ethereum (USDC)  Base (USDC)  Solana (USDC/PYUSD)  Tron (USDT)  Stellar (USDC)</div>
-              <div className="text-slate-600 pl-4">↕ {isKo ? '온/오프 램프' : 'On/off ramps'}</div>
-              <div className="text-amber-400 font-bold mt-2">{isKo ? '[ 법정화폐 레이어 ]' : '[ Fiat Layer ]'}</div>
-              <div className="text-slate-400 pl-4">{isKo ? '은행 파트너  ACH  SEPA  현지 결제 레일  법정화폐 계좌' : 'Banking partners  ACH  SEPA  Local payment rails  Fiat accounts'}</div>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4 mb-8">
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
-              <div className="font-bold text-slate-800 mb-3">{isKo ? '라우팅 엔진 — 최적 경로 자동 선택' : 'Routing engine — automatic optimal path'}</div>
-              <p className="text-slate-500 text-sm leading-relaxed mb-3">
-                {isKo
-                  ? 'USDC를 보낼 때 어느 체인으로 보낼지 자동으로 결정한다. 수신자 국가, 금액, 속도, 수수료를 종합해 최적 경로를 선택한다.'
-                  : 'When sending USDC, automatically decides which chain to route through. Considers recipient country, amount, speed, and fees to pick the optimal path.'}
-              </p>
-              <div className="bg-slate-900 rounded-lg p-3 font-mono text-xs text-slate-300">
-                {isKo
-                  ? `예: 나이지리아 $500 송금\n→ Base (수수료 $0.001, 2초)\n→ 현지 NGN 환전 후 계좌 입금`
-                  : `e.g. Send $500 to Nigeria\n→ Base (fee $0.001, 2 sec)\n→ Convert to NGN, deposit to account`}
-              </div>
-            </div>
-
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
-              <div className="font-bold text-slate-800 mb-3">{isKo ? '컴플라이언스 엔진 — 150개국 실시간 처리' : 'Compliance engine — 150 countries real-time'}</div>
-              <p className="text-slate-500 text-sm leading-relaxed mb-3">
-                {isKo
-                  ? '각국의 자금이동 규제, OFAC 제재 목록, AML 규칙을 실시간으로 적용한다. 이 네트워크를 구축하는 데만 수년이 걸린다.'
-                  : 'Applies each country\'s money transfer regulations, OFAC sanctions, and AML rules in real time. Building this network alone takes years.'}
-              </p>
-              <div className="space-y-1 text-xs text-slate-600">
-                {(isKo ? [
-                  '• OFAC SDN 목록 실시간 스크리닝',
-                  '• 거래 패턴 이상 탐지 (AML)',
-                  '• 국가별 송금 한도 자동 적용',
-                  '• 고객 위험도 자동 평가',
-                ] : [
-                  '• Real-time OFAC SDN list screening',
-                  '• Transaction pattern anomaly detection (AML)',
-                  '• Per-country transfer limit enforcement',
-                  '• Automated customer risk assessment',
-                ]).map((item, i) => (
-                  <div key={i}>{item}</div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5">
-            <div className="font-bold text-blue-800 mb-3">{isKo ? '지원 체인 및 스테이블코인 (2026년 기준)' : 'Supported chains and stablecoins (as of 2026)'}</div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid md:grid-cols-3 gap-3 text-sm">
               {[
-                { chain: 'Ethereum', coins: 'USDC, USDT', speed: '~12초' },
-                { chain: 'Base', coins: 'USDC', speed: '~2초' },
-                { chain: 'Solana', coins: 'USDC, PYUSD', speed: '~0.4초' },
-                { chain: 'Tron', coins: 'USDT', speed: '~3초' },
-                { chain: 'Stellar', coins: 'USDC', speed: '~5초' },
-                { chain: 'Arbitrum', coins: 'USDC', speed: '~2초' },
-                { chain: 'Polygon', coins: 'USDC, USDT', speed: '~2초' },
-                { chain: 'Avalanche', coins: 'USDC', speed: '~2초' },
+                { layer: 'Privy', role: isKo ? '지갑 레이어 — 엔드유저 키 관리, 임베디드 지갑' : 'Wallet layer — end-user key management, embedded wallets', color: 'bg-white border-blue-200' },
+                { layer: 'Bridge.xyz', role: isKo ? '스테이블코인 컴플라이언스·뱅킹 레이어 — KYC/AML, 법정화폐 환전, 150개국 규제 처리' : 'Stablecoin compliance & banking layer — KYC/AML, fiat conversion, 150-country compliance', color: 'bg-white border-blue-200' },
+                { layer: 'Tempo', role: isKo ? '온체인 결제 레이어 — 블록체인 장부, 최종 정산, 프로토콜' : 'On-chain payment layer — blockchain ledger, final settlement, protocol', color: 'bg-violet-50 border-violet-300' },
               ].map((item, i) => (
-                <div key={i} className="bg-white rounded-lg p-3 text-center border border-blue-100">
-                  <div className="font-bold text-slate-800 text-sm">{item.chain}</div>
-                  <div className="text-xs text-blue-600 mt-0.5">{item.coins}</div>
-                  <div className="text-xs text-slate-400 mt-0.5">{item.speed}</div>
+                <div key={i} className={`border rounded-lg p-3 ${item.color}`}>
+                  <div className="font-bold text-slate-800 text-sm mb-1">{item.layer}</div>
+                  <p className="text-slate-500 text-xs leading-relaxed">{item.role}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Section 5: API */}
+        {/* Section 3: Tempo L1 — 무엇인가 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '5. Tempo API — 개발자가 실제로 쓰는 방법' : '5. Tempo API — How Developers Actually Use It'}
+            {isKo ? '3. Tempo L1 — 정확히 무엇인가?' : '3. Tempo L1 — What Exactly Is It?'}
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
-              ? 'Tempo의 가장 강력한 점은 기존 Stripe API와 동일한 패턴을 따른다는 것이다. Stripe를 이미 쓰는 개발자라면 학습 비용이 거의 없다.'
-              : 'Tempo\'s greatest strength is that it follows the same patterns as the existing Stripe API. Developers already using Stripe face almost no learning curve.'}
+              ? 'Tempo는 결제 특화 목적으로 처음부터 설계된 독립적인 L1 블록체인이다. EVM과 호환되지만 이더리움의 복사본이 아니다. 기존 체인에서 결제에 불필요한 것을 제거하고, 결제에 필수적인 것을 프로토콜 레벨에 내장했다.'
+              : 'Tempo is an independent L1 blockchain designed from scratch specifically for payments. It\'s EVM-compatible but not a copy of Ethereum. It strips out what\'s unnecessary for payments from existing chains and bakes what\'s essential directly into the protocol.'}
           </p>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-8">
+            {[
+              {
+                title: isKo ? 'Tempo는 이것이다' : 'What Tempo IS',
+                items: isKo ? [
+                  '결제 특화 L1 블록체인 (독립 네트워크)',
+                  'EVM 호환 (Ethereum 툴 그대로 사용 가능)',
+                  'Reth SDK 기반 고성능 실행 레이어',
+                  '스테이블코인 전용 결제 인프라',
+                  'AI 에이전트 자율 결제를 위한 MPP 프로토콜',
+                  'Stripe + Paradigm 공동 창립, 독립 기업',
+                ] : [
+                  'Payments-first L1 blockchain (independent network)',
+                  'EVM-compatible (use existing Ethereum tooling)',
+                  'Reth SDK-based high-performance execution layer',
+                  'Stablecoin-dedicated payment infrastructure',
+                  'MPP protocol for autonomous AI agent payments',
+                  'Co-founded by Stripe + Paradigm, independent company',
+                ],
+                color: 'bg-green-50 border-green-200',
+                textColor: 'text-green-800',
+                icon: '✓',
+                iconColor: 'text-green-500',
+              },
+              {
+                title: isKo ? 'Tempo는 이것이 아니다' : 'What Tempo is NOT',
+                items: isKo ? [
+                  '범용 스마트컨트랙트 플랫폼 (DeFi 포커스 아님)',
+                  'Stripe의 API 미들웨어 레이어',
+                  'Bridge.xyz의 연장선',
+                  'Ethereum L2 (독립 L1)',
+                  '퍼블릭 크립토 투기 플랫폼',
+                  '기존 스테이블코인 (새 스테이블코인 발행하지 않음)',
+                ] : [
+                  'General-purpose smart contract platform (not DeFi-focused)',
+                  'Stripe\'s API middleware layer',
+                  'An extension of Bridge.xyz',
+                  'Ethereum L2 (it\'s an independent L1)',
+                  'Public crypto speculation platform',
+                  'A new stablecoin (doesn\'t issue its own)',
+                ],
+                color: 'bg-red-50 border-red-200',
+                textColor: 'text-red-800',
+                icon: '✗',
+                iconColor: 'text-red-400',
+              },
+            ].map((col, i) => (
+              <div key={i} className={`border rounded-xl p-5 ${col.color}`}>
+                <div className={`font-bold mb-3 ${col.textColor}`}>{col.title}</div>
+                <div className="space-y-2">
+                  {col.items.map((item, j) => (
+                    <div key={j} className="flex gap-2 text-sm text-slate-600">
+                      <span className={`shrink-0 ${col.iconColor}`}>{col.icon}</span>{item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Section 4: 기술 아키텍처 */}
+        <section>
+          <h2 className="text-2xl font-black text-slate-900 mb-6">
+            {isKo ? '4. 기술 아키텍처 — Reth, TIP-20, FeeAMM, TIP-403, MPP' : '4. Technical Architecture — Reth, TIP-20, FeeAMM, TIP-403, MPP'}
+          </h2>
 
           <div className="space-y-4 mb-8">
             {[
               {
-                title: isKo ? '스테이블코인 계좌 생성' : 'Create a stablecoin account',
-                desc: isKo ? '고객에게 USDC 계좌 발급. Virtual IBAN 또는 가상 계좌 연동 가능.' : 'Issue a USDC account to a customer. Can link to Virtual IBAN or virtual account.',
-                code: `// 스테이블코인 계좌 생성
-const account = await stripe.financialAccounts.create({
-  features: {
-    financial_addresses: { aba: { requested: true } },
-    inbound_transfers: { ach: { requested: true } },
-    outbound_payments: {
-      ach: { requested: true },
-      us_domestic_wire: { requested: true },
-    },
-  },
-  stablecoin_currency: 'usdc',
-});
-// → account.id, account.financial_addresses[0].aba`,
+                name: 'Reth SDK + Simplex Consensus',
+                badge: isKo ? '실행 레이어' : 'Execution layer',
+                badgeColor: 'bg-blue-100 text-blue-700',
+                desc: isKo
+                  ? 'Rust 기반 EVM 실행 클라이언트 Reth를 기반으로, Commonware의 Simplex 합의 알고리즘을 결합했다. 목표 처리량 100,000+ TPS, 최종성 ~0.6초. EVM 호환이므로 기존 Solidity 스마트컨트랙트, ethers.js, Hardhat 등을 그대로 사용할 수 있다. Osaka EVM 하드포크를 타겟으로 한다.'
+                  : 'Built on Reth, the Rust-based EVM execution client, combined with Commonware\'s Simplex consensus algorithm. Target throughput: 100,000+ TPS, finality ~0.6 seconds. EVM-compatible means existing Solidity contracts, ethers.js, and Hardhat work without modification. Targets the Osaka EVM hard fork.',
               },
               {
-                title: isKo ? '크로스보더 스테이블코인 송금' : 'Cross-border stablecoin transfer',
-                desc: isKo ? '수신자에게 USDC를 즉시 전송. 수신자 국가에 따라 현지 통화로 자동 환전 옵션.' : 'Instant USDC transfer to recipient. Automatic local currency conversion based on recipient country.',
-                code: `// 크로스보더 USDC 송금
-const transfer = await stripe.transfers.create({
-  amount: 50000,        // $500.00 (cents 단위)
-  currency: 'usd',
-  destination: 'acct_recipient_id',
-  transfer_group: 'payroll_2026_05',
-  metadata: {
-    settlement_currency: 'usdc',
-    destination_chain: 'base',  // 자동 라우팅 가능
-  },
-});`,
+                name: 'TIP-20 토큰 스탠다드',
+                badge: isKo ? '토큰 표준' : 'Token standard',
+                badgeColor: 'bg-violet-100 text-violet-700',
+                desc: isKo
+                  ? 'TIP-20은 Tempo의 결제 최적화 토큰 표준으로, Ethereum ERC-20과 호환되면서 결제에 필수적인 기능을 추가했다: (1) 결제 전용 블록 공간 확보 (payment lanes), (2) 온체인 메모 — 인보이스 번호·결제 참조 등을 거래에 포함, (3) 배치 결제 — 급여·정산에 활용, (4) 예약 결제 — 구독·자동이체, (5) TIP-403 정책 레지스트리와 연동. USDC, USDT 등 기존 스테이블코인은 TIP-20으로 네이티브 발행 가능하다.'
+                  : 'TIP-20 is Tempo\'s payment-optimized token standard, ERC-20 compatible but extended with payment essentials: (1) dedicated block space for token transfers (payment lanes), (2) on-chain memos — attach invoice numbers and payment references to transactions, (3) batch payments for payroll and settlements, (4) scheduled payments for subscriptions, (5) integration with the TIP-403 Policy Registry. Existing stablecoins like USDC and USDT can be issued natively as TIP-20.',
               },
               {
-                title: isKo ? '웹훅으로 스테이블코인 입금 감지' : 'Detect stablecoin deposits via webhook',
-                desc: isKo ? 'USDC가 계좌에 들어오면 웹훅으로 즉시 알림. 기존 Stripe 웹훅 인프라 그대로 재사용.' : 'Instant webhook notification when USDC arrives. Reuse existing Stripe webhook infrastructure.',
-                code: `// 웹훅 핸들러
-app.post('/webhook', (req, res) => {
-  const event = stripe.webhooks.constructEvent(
-    req.body, sig, process.env.STRIPE_WEBHOOK_SECRET
-  );
-
-  if (event.type === 'treasury.received_credit.created') {
-    const credit = event.data.object;
-    // credit.currency     → 'usdc'
-    // credit.amount       → 50000 ($500)
-    // credit.network      → 'base'
-    // credit.transaction  → 트랜잭션 ID
-    await handleUsdcDeposit(credit);
-  }
-  res.json({ received: true });
-});`,
+                name: 'FeeAMM (Enshrined AMM)',
+                badge: isKo ? '수수료 메커니즘' : 'Fee mechanism',
+                badgeColor: 'bg-green-100 text-green-700',
+                desc: isKo
+                  ? 'Tempo의 가장 중요한 혁신 중 하나. 네이티브 가스 토큰이 없다. 대신 TIP-20 스테이블코인 어떤 것으로도 트랜잭션 수수료를 낼 수 있다. FeeAMM은 프로토콜 레벨에 내장된 AMM으로, 사용자가 USDC로 수수료를 내면 FeeAMM이 자동으로 밸리데이터가 선호하는 스테이블코인으로 환전해 준다. 사용자도, 개발자도 수수료용 별도 토큰을 보유할 필요가 없다. 진정한 가스리스 UX가 가능하다.'
+                  : 'One of Tempo\'s most important innovations: no native gas token. Instead, transaction fees can be paid in any TIP-20 stablecoin. The FeeAMM is an AMM enshrined at the protocol level — if a user pays fees in USDC, the FeeAMM automatically converts to the validator\'s preferred stablecoin. Neither users nor developers need to hold a separate fee token. True gasless UX becomes possible.',
+              },
+              {
+                name: 'TIP-403 Policy Registry',
+                badge: isKo ? '컴플라이언스' : 'Compliance',
+                badgeColor: 'bg-amber-100 text-amber-700',
+                desc: isKo
+                  ? '스테이블코인 발행자가 프로토콜 레벨에서 화이트리스트/블랙리스트 정책을 적용할 수 있는 온체인 정책 레지스트리다. 예를 들어 Circle이 USDC를 Tempo에 TIP-20으로 발행할 때, OFAC 제재 주소로의 전송을 프로토콜 레벨에서 자동 차단할 수 있다. 기관 투자자·규제 기관이 요구하는 컴플라이언스를 체인 레벨에서 구현한다.'
+                  : 'An on-chain policy registry that allows stablecoin issuers to enforce whitelist or blacklist policies at the protocol level. For example, when Circle issues USDC as TIP-20 on Tempo, transfers to OFAC-sanctioned addresses can be automatically blocked at the protocol level. Implements the compliance requirements of institutional investors and regulators directly on-chain.',
+              },
+              {
+                name: 'MPP (Machine Payment Protocol)',
+                badge: isKo ? 'AI 에이전트' : 'AI agents',
+                badgeColor: 'bg-pink-100 text-pink-700',
+                desc: isKo
+                  ? 'Stripe와 Tempo가 공동 개발한 AI 에이전트 결제 오픈 스탠다드. "결제를 위한 HTTP"라고 불린다. HTTP 402 "Payment Required" 상태 코드를 활용해, AI 에이전트가 웹 서비스에 자율적으로 결제할 수 있는 표준 프로토콜이다. 개발자는 에이전트 지갑에 자금을 넣고 지출 한도를 설정하면, 에이전트가 사람 개입 없이 API 호출·서비스 이용 비용을 자동으로 결제한다. mpp.dev에 오픈 스탠다드로 공개되어 있다.'
+                  : 'An open standard for AI agent payments co-developed by Stripe and Tempo. Called "HTTP for payments." Uses the HTTP 402 "Payment Required" status code to create a standard protocol for AI agents to autonomously pay for web services. Developers fund an agent wallet and set spending limits — the agent then automatically pays for API calls and service usage without human intervention. Published as an open standard at mpp.dev.',
               },
             ].map((item, i) => (
               <div key={i} className="border border-slate-200 rounded-2xl overflow-hidden">
-                <div className="bg-slate-50 px-5 py-3">
-                  <div className="font-bold text-slate-800">{item.title}</div>
-                  <div className="text-slate-500 text-sm mt-0.5">{item.desc}</div>
+                <div className="bg-slate-50 px-5 py-3 flex items-center gap-3">
+                  <div className="font-bold text-slate-900">{item.name}</div>
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${item.badgeColor}`}>{item.badge}</span>
                 </div>
-                <div className="bg-slate-900 p-5">
-                  <pre className="text-xs font-mono text-green-300 leading-relaxed overflow-x-auto">{item.code}</pre>
+                <div className="px-5 py-4">
+                  <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
-            <div className="font-bold text-amber-800 mb-2">{isKo ? 'Tempo SDK vs 직접 온체인 연동 비교' : 'Tempo SDK vs direct on-chain integration'}</div>
-            <div className="grid md:grid-cols-2 gap-4 mt-3">
-              <div>
-                <div className="text-sm font-semibold text-slate-700 mb-2">{isKo ? 'Tempo API 사용 시' : 'Using Tempo API'}</div>
-                <ul className="space-y-1 text-xs text-slate-600">
-                  <li>✅ {isKo ? '체인 선택 자동 (라우팅 엔진)' : 'Auto chain selection (routing engine)'}</li>
-                  <li>✅ {isKo ? 'KYC/컴플라이언스 내장' : 'Built-in KYC/compliance'}</li>
-                  <li>✅ {isKo ? '법정화폐 환전 포함' : 'Fiat conversion included'}</li>
-                  <li>✅ {isKo ? '기존 Stripe 인프라 재사용' : 'Reuse existing Stripe infrastructure'}</li>
-                  <li>❌ {isKo ? '수수료 0.1~0.5%' : '0.1–0.5% fee'}</li>
-                  <li>❌ {isKo ? 'Stripe에 의존' : 'Dependent on Stripe'}</li>
-                </ul>
-              </div>
-              <div>
-                <div className="text-sm font-semibold text-slate-700 mb-2">{isKo ? '직접 온체인 (walits 방식)' : 'Direct on-chain (walits approach)'}</div>
-                <ul className="space-y-1 text-xs text-slate-600">
-                  <li>✅ {isKo ? '수수료 최소화 (가스만)' : 'Minimal fees (gas only)'}</li>
-                  <li>✅ {isKo ? '완전한 자기 보관' : 'Full self-custody'}</li>
-                  <li>✅ {isKo ? 'DeFi 수익 직접 접근' : 'Direct DeFi yield access'}</li>
-                  <li>❌ {isKo ? 'KYC/컴플라이언스 직접 구축' : 'Must build KYC/compliance'}</li>
-                  <li>❌ {isKo ? '법정화폐 환전 별도 필요' : 'Fiat conversion needed separately'}</li>
-                  <li>❌ {isKo ? '체인 관리 직접 필요' : 'Must manage chain integrations'}</li>
-                </ul>
-              </div>
+          <div className="bg-slate-900 rounded-2xl p-6 font-mono text-sm overflow-x-auto">
+            <div className="text-slate-400 text-xs mb-4">{isKo ? 'Tempo 아키텍처 스택' : 'Tempo architecture stack'}</div>
+            <div className="space-y-1 text-xs">
+              <div className="text-pink-400 font-bold">{isKo ? '[ AI 에이전트 레이어 ]' : '[ AI Agent Layer ]'}</div>
+              <div className="text-slate-400 pl-4">MPP (Machine Payment Protocol) — HTTP 402 기반 자율 결제</div>
+              <div className="text-slate-600 pl-4">↕</div>
+              <div className="text-violet-400 font-bold">{isKo ? '[ 애플리케이션 레이어 ]' : '[ Application Layer ]'}</div>
+              <div className="text-slate-400 pl-4">{isKo ? '지갑 앱 / 결제 서비스 / Stripe 대시보드 / EVM DApp' : 'Wallet apps / Payment services / Stripe Dashboard / EVM DApps'}</div>
+              <div className="text-slate-600 pl-4">↕ JSON-RPC (EVM 호환)</div>
+              <div className="text-amber-400 font-bold">{isKo ? '[ TIP-20 토큰 + TIP-403 정책 레이어 ]' : '[ TIP-20 Token + TIP-403 Policy Layer ]'}</div>
+              <div className="text-slate-400 pl-4">{isKo ? 'USDC/USDT/USD1 등 스테이블코인 — 결제 레인, 메모, 배치, 컴플라이언스' : 'USDC/USDT/USD1 stablecoins — payment lanes, memos, batches, compliance'}</div>
+              <div className="text-slate-600 pl-4">↕</div>
+              <div className="text-green-400 font-bold">{isKo ? '[ FeeAMM — 가스리스 수수료 레이어 ]' : '[ FeeAMM — Gasless Fee Layer ]'}</div>
+              <div className="text-slate-400 pl-4">{isKo ? '모든 스테이블코인으로 수수료 납부 → 자동 환전 → 밸리데이터 지급' : 'Any stablecoin for fees → auto-convert → pay validator'}</div>
+              <div className="text-slate-600 pl-4">↕</div>
+              <div className="text-blue-400 font-bold">{isKo ? '[ Reth SDK + Simplex 합의 — L1 실행 레이어 ]' : '[ Reth SDK + Simplex Consensus — L1 Execution Layer ]'}</div>
+              <div className="text-slate-400 pl-4">{isKo ? '100K+ TPS 목표 / ~0.6초 최종성 / EVM (Osaka 하드포크) / 밸리데이터: Visa, Stripe, Zodia Custody' : '100K+ TPS target / ~0.6s finality / EVM (Osaka HF) / Validators: Visa, Stripe, Zodia Custody'}</div>
             </div>
           </div>
         </section>
 
-        {/* Section 6: 실사용 사례 */}
+        {/* Section 5: 파트너와 자금 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '6. 실제 사용 사례 — 누가 어떻게 쓰고 있나?' : '6. Real Use Cases — Who Is Using It and How?'}
+            {isKo ? '5. 누가 참여했나 — 파트너·밸리데이터·자금' : '5. Who\'s Involved — Partners, Validators, and Funding'}
           </h2>
 
-          <div className="space-y-4 mb-8">
-            {[
-              {
-                category: isKo ? '글로벌 급여 지급 (Payroll)' : 'Global Payroll',
-                color: 'bg-blue-50 border-blue-200',
-                headerColor: 'text-blue-800',
-                examples: [
-                  {
-                    company: 'Remote.com / Deel',
-                    desc: isKo
-                      ? '해외 프리랜서·계약직에게 USDC로 즉시 급여 지급. 수신자가 40개국 현지 통화로 자동 환전 수취. 기존 SWIFT 대비 수수료 90% 절감.'
-                      : 'Instant USDC payroll to overseas freelancers and contractors. Recipients auto-convert to local currency in 40 countries. 90% fee reduction vs SWIFT.',
-                  },
-                ],
-              },
-              {
-                category: isKo ? '이머징 마켓 달러화 (Dollarization)' : 'Emerging Market Dollarization',
-                color: 'bg-green-50 border-green-200',
-                headerColor: 'text-green-800',
-                examples: [
-                  {
-                    company: isKo ? '아르헨티나·나이지리아·터키 사용 사례' : 'Argentina, Nigeria, Turkey use cases',
-                    desc: isKo
-                      ? '자국 통화 인플레이션이 심한 국가(아르헨티나, 나이지리아 등)에서 USDC로 가치 보존을 시도하는 수요가 실재한다. 다만 Stripe Tempo를 통한 서비스는 규제상 허용 여부가 국가마다 다르며, 실제 접근 가능성은 현지 규제에 달려 있다.'
-                      : 'In countries with severe local currency inflation (Argentina, Nigeria, etc.), real demand exists for preserving value in USDC. However, access through Stripe Tempo varies by country depending on local regulations.',
-                  },
-                ],
-              },
-              {
-                category: isKo ? '크로스보더 B2B 결제' : 'Cross-Border B2B Payments',
-                color: 'bg-violet-50 border-violet-200',
-                headerColor: 'text-violet-800',
-                examples: [
-                  {
-                    company: 'SpaceX (Bridge 시절)',
-                    desc: isKo
-                      ? '해외 자회사에서 발생한 달러 수익을 미국 본사로 이동할 때 USDC 레일 사용. 기존 은행 대비 정산 T+0, 수수료 대폭 절감.'
-                      : 'Used USDC rails to move dollar revenue from overseas subsidiaries to US HQ. T+0 settlement vs banks, dramatically lower fees.',
-                  },
-                ],
-              },
-              {
-                category: isKo ? '디지털 상품·구독 결제' : 'Digital Goods & Subscription Payments',
-                color: 'bg-orange-50 border-orange-200',
-                headerColor: 'text-orange-800',
-                examples: [
-                  {
-                    company: isKo ? 'SaaS / 미디어 / 게임' : 'SaaS / Media / Gaming',
-                    desc: isKo
-                      ? '카드 결제가 어려운 국가(인도, 동남아 등) 사용자에게 USDC 결제 옵션 제공. 결제 성공률 향상, 해외 카드 수수료 제거. 크리에이터 플랫폼의 글로벌 수익 지급에도 활용.'
-                      : 'Offer USDC payment option in countries where card payments are difficult (India, SE Asia, etc.). Higher payment success rates, no international card fees. Also used for global creator payouts.',
-                  },
-                ],
-              },
-            ].map((cat, i) => (
-              <div key={i} className={`border rounded-2xl p-5 ${cat.color}`}>
-                <div className={`font-bold text-sm mb-3 ${cat.headerColor}`}>{cat.category}</div>
-                {cat.examples.map((ex, j) => (
-                  <div key={j}>
-                    <div className="font-semibold text-slate-800 text-sm mb-1">{ex.company}</div>
-                    <p className="text-slate-600 text-sm leading-relaxed">{ex.desc}</p>
-                  </div>
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <div className="bg-violet-50 border border-violet-200 rounded-xl p-5">
+              <div className="font-bold text-violet-800 mb-3">{isKo ? '설계 파트너 (2025.09 발표)' : 'Design Partners (announced Sep 2025)'}</div>
+              <p className="text-slate-500 text-xs mb-3">{isKo ? '아키텍처 설계에 직접 인풋을 준 기업들' : 'Companies that directly contributed to architecture design'}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {['Anthropic', 'OpenAI', 'Visa', 'Shopify', 'Deutsche Bank', 'Standard Chartered', 'Revolut', 'Nubank', 'DoorDash', 'Mercury', 'Lead Bank', 'Coupang'].map((p) => (
+                  <span key={p} className="text-xs bg-white border border-violet-200 text-slate-700 px-2 py-0.5 rounded">{p}</span>
                 ))}
               </div>
-            ))}
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+              <div className="font-bold text-blue-800 mb-3">{isKo ? '테스트넷 파트너 (2025.12 추가)' : 'Testnet Partners (added Dec 2025)'}</div>
+              <p className="text-slate-500 text-xs mb-3">{isKo ? '공개 테스트넷에 합류한 추가 파트너' : 'Partners joining the public testnet'}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {['UBS', 'Mastercard', 'Kalshi', 'Ramp', 'Klarna'].map((p) => (
+                  <span key={p} className="text-xs bg-white border border-blue-200 text-slate-700 px-2 py-0.5 rounded">{p}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-xl p-5">
+              <div className="font-bold text-green-800 mb-3">{isKo ? '운영 밸리데이터 (메인넷)' : 'Active Validators (mainnet)'}</div>
+              <p className="text-slate-500 text-xs mb-3">{isKo ? '실제 블록 생성에 참여하는 밸리데이터' : 'Validators actively producing blocks'}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {['Visa', 'Stripe', 'Zodia Custody (Standard Chartered)'].map((p) => (
+                  <span key={p} className="text-xs bg-white border border-green-200 text-slate-700 px-2 py-0.5 rounded">{p}</span>
+                ))}
+              </div>
+              <p className="text-xs text-slate-400 mt-2">{isKo ? 'Visa: 2026년 4월 14일 공식 발표' : 'Visa: officially announced April 14, 2026'}</p>
+            </div>
+          </div>
+
+          <div className="bg-slate-900 rounded-2xl p-6 mb-6">
+            <div className="text-slate-400 text-xs font-mono mb-4">{isKo ? '자금 조달 현황' : 'Funding status'}</div>
+            <div className="grid md:grid-cols-3 gap-4">
+              {[
+                { label: isKo ? '시리즈 A 조달액' : 'Series A raised', value: '$500M', sub: isKo ? '2025년 10월' : 'October 2025' },
+                { label: isKo ? '밸류에이션' : 'Valuation', value: '$5B', sub: isKo ? 'Thrive Capital·Greenoaks·Sequoia 리드' : 'Led by Thrive Capital, Greenoaks, Sequoia' },
+                { label: isKo ? 'Stripe·Paradigm 출자' : 'Stripe & Paradigm invested', value: isKo ? '없음' : 'None', sub: isKo ? '설립자로서 지분 보유 (현금 출자 없음)' : 'Hold equity as founders (no cash invested)' },
+              ].map((item, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-3xl font-black text-violet-400 mb-1">{item.value}</div>
+                  <div className="text-white text-sm font-semibold">{item.label}</div>
+                  <div className="text-slate-400 text-xs mt-1">{item.sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+            <div className="font-bold text-amber-800 mb-2">{isKo ? 'CEO: Matt Huang' : 'CEO: Matt Huang'}</div>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              {isKo
+                ? 'Paradigm 공동 창업자 겸 Managing Partner이면서 동시에 Tempo CEO를 맡고 있다. Stripe 이사회 멤버이기도 하다 (2021년부터). Fortune이 단독 보도했고 Paradigm 공식 블로그에서 "Tempo의 창업자 겸 CEO"로 소개됐다.'
+                : 'Co-founder and Managing Partner of Paradigm while simultaneously serving as Tempo\'s CEO. Also a Stripe board member since 2021. Reported exclusively by Fortune and introduced as "founder and CEO of Tempo" in the official Paradigm blog post.'}
+            </p>
           </div>
         </section>
 
-        {/* Section 7: SWIFT와 비교 */}
+        {/* Section 6: 실제 수치와 현실 */}
+        <section>
+          <h2 className="text-2xl font-black text-slate-900 mb-6">
+            {isKo ? '6. 목표 수치 vs 메인넷 초기 현실' : '6. Target Numbers vs Early Mainnet Reality'}
+          </h2>
+          <p className="text-slate-600 leading-relaxed mb-6">
+            {isKo
+              ? 'Tempo에 대해 정직하게 말할 필요가 있다. 공식 발표 수치와 메인넷 초기 실제 사용량 사이에는 간극이 있다. 이는 기술 실패가 아니라 초기 채택 단계의 자연스러운 현상이다.'
+              : 'We need to be honest about Tempo. There\'s a gap between the official announced numbers and actual early mainnet usage. This isn\'t a technical failure — it\'s the natural state of early adoption.'}
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <div className="font-bold text-slate-900 mb-4">{isKo ? '공식 발표 목표 수치' : 'Official target numbers'}</div>
+              <div className="space-y-3">
+                {[
+                  { metric: 'TPS', target: '100,000+', note: isKo ? '이론적 최대 처리량' : 'Theoretical maximum throughput' },
+                  { metric: isKo ? '최종성 (Finality)' : 'Finality', target: '~0.6초', note: isKo ? 'Simplex 합의 기준' : 'Based on Simplex consensus' },
+                  { metric: isKo ? '수수료' : 'Fee', target: '<$0.001', note: isKo ? '목표 트랜잭션 비용' : 'Target transaction cost' },
+                  { metric: isKo ? '가스 토큰' : 'Gas token', target: isKo ? '없음' : 'None', note: isKo ? '스테이블코인으로 수수료 납부' : 'Pay fees in any stablecoin' },
+                ].map((row, i) => (
+                  <div key={i} className="flex items-center justify-between text-sm">
+                    <span className="text-slate-500">{row.metric}</span>
+                    <div className="text-right">
+                      <div className="font-bold text-green-700">{row.target}</div>
+                      <div className="text-xs text-slate-400">{row.note}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-5">
+              <div className="font-bold text-orange-900 mb-4">{isKo ? '메인넷 초기 실제 사용량' : 'Early mainnet actual usage'}</div>
+              <div className="space-y-3">
+                {[
+                  { metric: isKo ? '실제 TPS (런칭 초기)' : 'Actual TPS (early launch)', value: '~2.5', note: isKo ? 'Token Terminal 데이터 기준' : 'Based on Token Terminal data' },
+                  { metric: isKo ? '비교: Bitcoin 평균 TPS' : 'Comparison: Bitcoin avg TPS', value: '~5.1', note: isKo ? 'Tempo가 Bitcoin보다 낮다는 보도 존재' : 'Reports that Tempo was lower than Bitcoin' },
+                  { metric: isKo ? '메인넷 런칭일' : 'Mainnet launch date', value: '2026.03.18', note: isKo ? '메인넷 + MPP 동시 공개' : 'Mainnet + MPP released together' },
+                  { metric: isKo ? '평가' : 'Assessment', value: isKo ? '초기 단계' : 'Early stage', note: isKo ? '채택 진행 중, 기술적 문제 아님' : 'Adoption underway, not a technical failure' },
+                ].map((row, i) => (
+                  <div key={i} className="flex items-center justify-between text-sm">
+                    <span className="text-slate-600">{row.metric}</span>
+                    <div className="text-right">
+                      <div className="font-bold text-orange-700">{row.value}</div>
+                      <div className="text-xs text-slate-500">{row.note}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+            <p className="text-slate-600 text-sm leading-relaxed">
+              {isKo
+                ? '초기 TPS가 낮은 것은 인프라 성능 문제가 아니라 아직 Tempo 위에 올라온 사용자와 서비스가 적기 때문이다. 밸리데이터도 아직 Visa·Stripe·Zodia Custody 세 곳뿐이다. Visa가 2026년 4월에 밸리데이터를 시작했고, World Liberty Financial이 5월에 USD1을 Tempo에 네이티브 런칭하면서 생태계가 실질적으로 채워지기 시작했다.'
+                : 'The low early TPS reflects not infrastructure performance issues but the simple fact that few users and services have yet built on Tempo. There are only three validators: Visa, Stripe, and Zodia Custody. Visa launched its validator in April 2026, and World Liberty Financial natively launching USD1 in May 2026 marks the beginning of real ecosystem fill-in.'}
+            </p>
+          </div>
+        </section>
+
+        {/* Section 7: SWIFT vs Tempo vs 직접 온체인 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
             {isKo ? '7. SWIFT vs Stripe Tempo vs 직접 온체인 — 완전 비교' : '7. SWIFT vs Stripe Tempo vs Direct On-Chain — Full Comparison'}
@@ -511,21 +451,22 @@ app.post('/webhook', (req, res) => {
                 <tr className="bg-slate-900 text-white">
                   <th className="text-left px-4 py-3 font-semibold rounded-tl-xl">{isKo ? '항목' : 'Item'}</th>
                   <th className="text-left px-4 py-3 font-semibold">SWIFT</th>
-                  <th className="text-left px-4 py-3 font-semibold text-violet-300">Stripe Tempo</th>
+                  <th className="text-left px-4 py-3 font-semibold text-violet-300">Tempo L1</th>
                   <th className="text-left px-4 py-3 font-semibold text-blue-300 rounded-tr-xl">{isKo ? '직접 온체인 (Base)' : 'Direct on-chain (Base)'}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {[
-                  { item: isKo ? '처리 속도' : 'Speed', swift: '2–5 영업일', tempo: '수 초–수 분', chain: '~2초' },
-                  { item: isKo ? '수수료' : 'Fee', swift: '$25–50 + 1–3% FX', tempo: '~0.1–0.5%', chain: '~$0.001 (가스)' },
+                  { item: isKo ? '처리 속도' : 'Speed', swift: '2–5영업일', tempo: '~0.6초', chain: '~2초' },
+                  { item: isKo ? '목표 처리량' : 'Target TPS', swift: '수백 TPS', tempo: '100K+ TPS', chain: '~2K TPS' },
+                  { item: isKo ? '수수료' : 'Fee', swift: '$25–50 + 1–3% FX', tempo: '<$0.001', chain: '~$0.001' },
+                  { item: isKo ? '가스 토큰' : 'Gas token', swift: '해당없음', tempo: isKo ? '없음 (FeeAMM)' : 'None (FeeAMM)', chain: isKo ? 'ETH 필요' : 'ETH required' },
                   { item: isKo ? '24/7 운영' : '24/7 operation', swift: '❌', tempo: '✅', chain: '✅' },
-                  { item: isKo ? '법정화폐 환전' : 'Fiat conversion', swift: '✅ (느리고 비쌈)', tempo: '✅ (자동, 저렴)', chain: '❌ (별도 필요)' },
-                  { item: isKo ? 'KYC/컴플라이언스' : 'KYC/compliance', swift: '✅ (은행 처리)', tempo: '✅ (자동)', chain: '❌ (직접 구축)' },
-                  { item: isKo ? '프로그래머블' : 'Programmable', swift: '❌', tempo: '✅ (제한적)', chain: '✅ (완전)' },
-                  { item: isKo ? 'DeFi 수익' : 'DeFi yield', swift: '❌', tempo: '❌', chain: '✅' },
-                  { item: isKo ? '자기 보관' : 'Self-custody', swift: '❌', tempo: '❌ (Stripe 보관)', chain: '✅' },
-                  { item: isKo ? '개발 난이도' : 'Dev complexity', swift: '높음', tempo: '낮음 (Stripe SDK)', chain: '중간' },
+                  { item: isKo ? 'EVM 호환' : 'EVM-compatible', swift: '❌', tempo: '✅', chain: '✅' },
+                  { item: isKo ? '컴플라이언스 내장' : 'Built-in compliance', swift: '✅ (은행)', tempo: '✅ (TIP-403)', chain: '❌' },
+                  { item: isKo ? 'AI 에이전트 결제' : 'AI agent payments', swift: '❌', tempo: '✅ (MPP)', chain: '제한적' },
+                  { item: isKo ? 'DeFi 수익' : 'DeFi yield', swift: '❌', tempo: '초기 단계', chain: '✅' },
+                  { item: isKo ? '자기 보관' : 'Self-custody', swift: '❌', tempo: '✅', chain: '✅' },
                 ].map((row, i) => (
                   <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
                     <td className="px-4 py-3 font-semibold text-slate-700">{row.item}</td>
@@ -537,171 +478,36 @@ app.post('/webhook', (req, res) => {
               </tbody>
             </table>
           </div>
-
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
-            <p className="text-slate-600 text-sm leading-relaxed">
-              {isKo
-                ? '세 가지는 경쟁 관계가 아니라 각자의 포지션이 있다. SWIFT는 중앙화 금융기관 간 대형 기업 거래에 여전히 쓰인다. Stripe Tempo는 Stripe 생태계 안에서 비즈니스가 스테이블코인을 쉽게 쓰게 해주는 미들웨어다. 직접 온체인은 자기 보관과 DeFi 수익을 원하는 사용자에게 맞는 방식이다 — walits가 이 포지션이다.'
-                : 'These three aren\'t competing — each has its position. SWIFT still handles large enterprise transactions between centralized financial institutions. Stripe Tempo is middleware that makes it easy for businesses inside the Stripe ecosystem to use stablecoins. Direct on-chain suits users who want self-custody and DeFi yield — that\'s where walits sits.'}
-            </p>
-          </div>
         </section>
 
-        {/* Section 8: 수수료 구조 */}
+        {/* Section 8: 현황과 한계 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '8. 수수료 구조 상세' : '8. Fee Structure in Detail'}
-          </h2>
-          <p className="text-slate-600 leading-relaxed mb-6">
-            {isKo
-              ? 'Tempo의 수수료는 거래 유형과 경로에 따라 다르다. 완전 공개된 구조는 아니지만 알려진 내용을 정리한다.'
-              : 'Tempo fees vary by transaction type and route. The full structure isn\'t entirely public, but here\'s what\'s known.'}
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-4 mb-6">
-            {[
-              {
-                type: isKo ? '스테이블코인 → 스테이블코인 (동일 체인)' : 'Stablecoin → Stablecoin (same chain)',
-                fee: '~0.0%',
-                note: isKo ? '실질적으로 가스비만. 매우 저렴.' : 'Essentially gas only. Very cheap.',
-                color: 'bg-green-50 border-green-200 text-green-800',
-              },
-              {
-                type: isKo ? '스테이블코인 → 스테이블코인 (크로스체인)' : 'Stablecoin → Stablecoin (cross-chain)',
-                fee: '~0.1%',
-                note: isKo ? '브릿지 및 라우팅 수수료 포함.' : 'Includes bridge and routing fees.',
-                color: 'bg-blue-50 border-blue-200 text-blue-800',
-              },
-              {
-                type: isKo ? '스테이블코인 → 법정화폐 (출금)' : 'Stablecoin → Fiat (offramp)',
-                fee: '0.1–0.8%',
-                note: isKo ? '국가별 환전 마진 포함. 이머징 마켓일수록 높음.' : 'Includes country-specific FX margin. Higher for emerging markets.',
-                color: 'bg-amber-50 border-amber-200 text-amber-800',
-              },
-              {
-                type: isKo ? '법정화폐 → 스테이블코인 (입금)' : 'Fiat → Stablecoin (onramp)',
-                fee: '0.1–1.5%',
-                note: isKo ? 'ACH/SEPA는 저렴, 카드는 비쌈. 국가마다 다름.' : 'ACH/SEPA is cheap, card is expensive. Varies by country.',
-                color: 'bg-orange-50 border-orange-200 text-orange-800',
-              },
-            ].map((item, i) => (
-              <div key={i} className={`border rounded-xl p-4 ${item.color}`}>
-                <div className="text-3xl font-black mb-1">{item.fee}</div>
-                <div className="font-bold text-sm mb-1">{item.type}</div>
-                <div className="text-xs opacity-80">{item.note}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="bg-slate-900 rounded-2xl p-5">
-            <div className="text-slate-400 text-xs font-mono mb-3">{isKo ? '실제 수수료 시나리오 — $1,000 해외 송금' : 'Real fee scenario — $1,000 international transfer'}</div>
-            <div className="space-y-3 font-mono text-sm">
-              {[
-                { method: 'Bank wire (SWIFT)', fee: '$35 + $10–30 FX = ~$45–65', pct: '4.5–6.5%', color: 'text-red-400' },
-                { method: 'Western Union', fee: '$5–15 + 3–5% FX = ~$35–65', pct: '3.5–6.5%', color: 'text-red-400' },
-                { method: 'Wise (TransferWise)', fee: '~0.4–1.5% = ~$4–15', pct: '0.4–1.5%', color: 'text-yellow-400' },
-                { method: 'Stripe Tempo', fee: '~0.1–0.5% = ~$1–5', pct: '0.1–0.5%', color: 'text-green-400' },
-                { method: 'Direct on-chain (Base)', fee: '~$0.001 가스 = $0.001', pct: '~0.0001%', color: 'text-blue-400' },
-              ].map((row, i) => (
-                <div key={i} className="flex items-center justify-between">
-                  <span className="text-slate-400 text-xs w-40 shrink-0">{row.method}</span>
-                  <span className={`${row.color} text-xs`}>{row.fee}</span>
-                  <span className={`${row.color} font-bold text-sm w-20 text-right`}>{row.pct}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Section 9: 경쟁 구도 */}
-        <section>
-          <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '9. 경쟁 구도 — Tempo의 포지션' : '9. Competitive Landscape — Where Tempo Sits'}
-          </h2>
-          <div className="overflow-x-auto mb-6">
-            <table className="w-full text-sm border-collapse">
-              <thead>
-                <tr className="bg-slate-900 text-white">
-                  <th className="text-left px-4 py-3 font-semibold rounded-tl-xl">{isKo ? '플레이어' : 'Player'}</th>
-                  <th className="text-left px-4 py-3 font-semibold">{isKo ? '강점' : 'Strength'}</th>
-                  <th className="text-left px-4 py-3 font-semibold">{isKo ? '약점' : 'Weakness'}</th>
-                  <th className="text-left px-4 py-3 font-semibold rounded-tr-xl">{isKo ? 'Tempo와의 차이' : 'vs Tempo'}</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {[
-                  {
-                    player: 'Stripe Tempo',
-                    strength: isKo ? '가맹점 3M+ 네트워크, 개발자 친화적 API' : '3M+ merchant network, dev-friendly API',
-                    weakness: isKo ? '자기 보관 없음, DeFi 접근 없음' : 'No self-custody, no DeFi access',
-                    diff: isKo ? '기준점' : 'Baseline',
-                    highlight: true,
-                  },
-                  {
-                    player: 'Circle Payments Network',
-                    strength: isKo ? 'USDC 발행사 직접, 기관 신뢰도' : 'Direct USDC issuer, institutional trust',
-                    weakness: isKo ? '소비자·소규모 기업 접근 어려움' : 'Hard for consumers and small businesses to access',
-                    diff: isKo ? '기관 전용 vs Tempo의 중소기업 포커스' : 'Institutional-only vs Tempo\'s SMB focus',
-                    highlight: false,
-                  },
-                  {
-                    player: 'Wise (TransferWise)',
-                    strength: isKo ? '법정화폐 FX 전문, 낮은 환전 수수료' : 'Fiat FX specialist, low conversion fees',
-                    weakness: isKo ? '스테이블코인 없음, 블록체인 없음' : 'No stablecoins, no blockchain',
-                    diff: isKo ? '법정화폐 중심 vs Tempo의 스테이블코인 중심' : 'Fiat-centric vs Tempo\'s stablecoin-centric',
-                    highlight: false,
-                  },
-                  {
-                    player: 'Ripple / RLUSD',
-                    strength: isKo ? 'XRP Ledger 속도, 은행 파트너십' : 'XRP Ledger speed, bank partnerships',
-                    weakness: isKo ? '규제 불확실성, 생태계 한정' : 'Regulatory uncertainty, ecosystem limited',
-                    diff: isKo ? 'XRP 생태계 한정 vs Tempo의 멀티체인' : 'XRP ecosystem-bound vs Tempo\'s multi-chain',
-                    highlight: false,
-                  },
-                  {
-                    player: 'PayPal (PYUSD)',
-                    strength: isKo ? '4억 사용자 기반, 소비자 친화적' : '400M user base, consumer-friendly',
-                    weakness: isKo ? 'DeFi 생태계 매우 작음' : 'Very small DeFi ecosystem',
-                    diff: isKo ? '소비자 지갑 vs Tempo의 B2B 결제' : 'Consumer wallet vs Tempo\'s B2B payments',
-                    highlight: false,
-                  },
-                ].map((row, i) => (
-                  <tr key={i} className={row.highlight ? 'bg-violet-50' : i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
-                    <td className={`px-4 py-3 font-bold text-sm ${row.highlight ? 'text-violet-700' : 'text-slate-800'}`}>{row.player}</td>
-                    <td className="px-4 py-3 text-slate-600 text-xs">{row.strength}</td>
-                    <td className="px-4 py-3 text-slate-500 text-xs">{row.weakness}</td>
-                    <td className="px-4 py-3 text-slate-600 text-xs">{row.diff}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* Section 10: 현황과 한계 */}
-        <section>
-          <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '10. 2026년 현황과 남은 한계' : '10. 2026 Status and Remaining Limitations'}
+            {isKo ? '8. 2026년 5월 현황과 남은 과제' : '8. May 2026 Status and Outstanding Challenges'}
           </h2>
 
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             <div>
-              <div className="font-bold text-slate-900 mb-3">{isKo ? '현재 달성한 것' : 'What\'s been achieved'}</div>
+              <div className="font-bold text-slate-900 mb-3">{isKo ? '달성한 것' : 'What\'s been achieved'}</div>
               <div className="space-y-2">
                 {(isKo ? [
-                  '150개국 이상 기업 대상 스테이블코인 계좌 지원 (국가별 규제 적용)',
-                  '8개 이상 체인에서 USDC/USDT 처리',
-                  'Stripe 대시보드에서 스테이블코인 통합 관리',
-                  '수천 개 기업 고객 활성 사용 중',
-                  '기존 Stripe 가맹점 즉시 연동 가능',
-                  'USDC 페이아웃 글로벌 출시 완료',
+                  'L1 메인넷 런칭 완료 (2026.03.18)',
+                  'EVM 호환 — 기존 Solidity 에코시스템 호환',
+                  '가스 토큰 없는 스테이블코인 수수료 구현',
+                  'Visa·Stripe·Zodia Custody 밸리데이터 운영 중',
+                  'MPP 오픈 스탠다드 공개 (AI 에이전트 결제)',
+                  'USD1 (World Liberty Financial) 네이티브 런칭',
+                  'TIP-20·TIP-403 토큰 표준 명세 완성',
+                  '$500M 조달 완료, $5B 밸류에이션',
                 ] : [
-                  '150+ countries supported for stablecoin accounts',
-                  'USDC/USDT processing across 8+ chains',
-                  'Unified management in Stripe dashboard',
-                  'Thousands of active enterprise customers',
-                  'Instant integration for existing Stripe merchants',
-                  'USDC payouts globally launched',
+                  'L1 mainnet launched (March 18, 2026)',
+                  'EVM-compatible — existing Solidity ecosystem works',
+                  'Gasless stablecoin fee system live',
+                  'Visa, Stripe, Zodia Custody validators running',
+                  'MPP open standard released (AI agent payments)',
+                  'USD1 (World Liberty Financial) natively launched',
+                  'TIP-20 and TIP-403 token standards finalized',
+                  '$500M raised, $5B valuation',
                 ]).map((item, i) => (
                   <div key={i} className="flex gap-2 text-sm text-slate-600">
                     <span className="text-green-500 shrink-0">✓</span>{item}
@@ -711,19 +517,19 @@ app.post('/webhook', (req, res) => {
             </div>
 
             <div>
-              <div className="font-bold text-slate-900 mb-3">{isKo ? '남은 한계' : 'Remaining limitations'}</div>
+              <div className="font-bold text-slate-900 mb-3">{isKo ? '남은 과제' : 'Outstanding challenges'}</div>
               <div className="space-y-2">
                 {[
-                  { item: isKo ? '자기 보관 없음 — Stripe가 키 관리' : 'No self-custody — Stripe holds the keys', level: isKo ? '구조적' : 'Structural' },
-                  { item: isKo ? 'DeFi 수익 없음 — 유휴 USDC가 일하지 않음' : 'No DeFi yield — idle USDC doesn\'t work', level: isKo ? '중요' : 'Important' },
-                  { item: isKo ? '일부 국가 법정화폐 환전 느림' : 'Slow fiat conversion in some countries', level: isKo ? '개선 중' : 'Improving' },
-                  { item: isKo ? 'Stripe 의존성 — 중단 시 결제 불가' : 'Stripe dependency — outage means no payments', level: isKo ? '리스크' : 'Risk' },
-                  { item: isKo ? '가스비 추상화가 불완전 (일부 체인)' : 'Gas abstraction incomplete (some chains)', level: isKo ? '개선 중' : 'Improving' },
+                  { item: isKo ? '실제 TPS 저조 — 초기 사용량 ~2.5 TPS에 불과' : 'Low actual TPS — early usage only ~2.5 TPS', level: isKo ? '채택 과제' : 'Adoption' },
+                  { item: isKo ? '밸리데이터 수 적음 — 탈중앙화 수준 낮음' : 'Few validators — low decentralization level', level: isKo ? '구조적' : 'Structural' },
+                  { item: isKo ? 'DeFi 생태계 부재 — 결제 전용 설계로 DeFi 얇음' : 'Thin DeFi ecosystem — payment-focused design limits DeFi', level: isKo ? '설계 트레이드오프' : 'Design trade-off' },
+                  { item: isKo ? '한국 등 일부 국가 규제 접근성 미확인' : 'Regulatory access in Korea and some countries unconfirmed', level: isKo ? '규제' : 'Regulatory' },
+                  { item: isKo ? 'USDC·USDT TIP-20 네이티브 발행 공식 확인 필요' : 'USDC/USDT TIP-20 native issuance officially unconfirmed', level: isKo ? '확인 필요' : 'Pending' },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-2 text-sm">
-                    <span className="text-red-400 shrink-0">•</span>
-                    <span className="text-slate-600">{item.item}</span>
-                    <span className="text-xs text-slate-400 ml-auto shrink-0">{item.level}</span>
+                    <span className="text-orange-400 shrink-0">•</span>
+                    <span className="text-slate-600 flex-1">{item.item}</span>
+                    <span className="text-xs text-slate-400 shrink-0">{item.level}</span>
                   </div>
                 ))}
               </div>
@@ -731,53 +537,65 @@ app.post('/webhook', (req, res) => {
           </div>
         </section>
 
-        {/* Section 11: walits와의 관계 */}
+        {/* Section 9: walits + Tempo */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '11. walits와 Stripe Tempo — 왜 Tempo의 보편화가 중요한가?' : '11. walits and Stripe Tempo — Why Tempo\'s Adoption Matters'}
+            {isKo ? '9. walits + Tempo — 가스리스 멀티 스테이블코인 지갑의 미래' : '9. walits + Tempo — The Future of a Gasless Multi-Stablecoin Wallet'}
           </h2>
 
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
-              ? 'walits는 Ethereum과 Base 위에서 USDC를 다루는 자기 보관 지갑이다. Stripe Tempo와 직접 경쟁하지 않는다 — 포지션이 다르다. 그런데도 Tempo가 빨리 보편화될수록 walits에게 좋은 이유가 있다.'
-              : 'walits is a self-custody wallet handling USDC on Ethereum and Base. It doesn\'t directly compete with Stripe Tempo — they occupy different positions. Yet there are clear reasons why faster Tempo adoption benefits walits.'}
+              ? 'walits는 현재 Ethereum과 Base 위에서 USDC 전문 자기 보관 지갑으로 운영된다. Tempo는 EVM 호환 L1이다. 이 두 가지 사실이 맞닿으면 흥미로운 미래가 열린다.'
+              : 'walits currently runs as a USDC-specialized self-custody wallet on Ethereum and Base. Tempo is an EVM-compatible L1. When these two facts meet, an interesting future opens up.'}
           </p>
 
           <div className="space-y-4 mb-8">
             {[
               {
-                title: isKo ? 'USDC 유통량 폭발 = walits 가치 상승' : 'USDC circulation explosion = walits value up',
+                title: isKo ? '가스리스 UX — walits의 가장 큰 과제 해결' : 'Gasless UX — solving walits\' biggest challenge',
                 desc: isKo
-                  ? 'Stripe가 3M+ 가맹점에 USDC 결제를 보급하면, 시장 전체의 USDC 유통량이 급증한다. USDC가 범용 결제 수단이 될수록 USDC 전문 지갑인 walits의 필요성도 커진다. 더 많은 사람이 USDC를 받고, 더 많은 사람이 USDC를 관리할 지갑이 필요해진다.'
-                  : 'When Stripe rolls out USDC payments to 3M+ merchants, total USDC circulation surges. The more USDC becomes a universal payment method, the greater the need for a USDC-specialized wallet like walits.',
-                icon: '📈',
-              },
-              {
-                title: isKo ? 'Base 생태계 강화 = walits 인프라 강화' : 'Base ecosystem growth = walits infrastructure strengthened',
-                desc: isKo
-                  ? 'Tempo는 Base를 핵심 레일 중 하나로 사용한다. Stripe가 Base 위의 USDC 거래를 늘릴수록 Base 생태계가 성숙하고, Base 위에서 돌아가는 walits의 DeFi 수익 전략(Aave, Morpho 등)도 더 안정적이고 유동적이 된다.'
-                  : 'Tempo uses Base as one of its core rails. As Stripe drives more USDC transactions on Base, the Base ecosystem matures — making walits\' DeFi yield strategies (Aave, Morpho, etc.) more stable and liquid.',
-                icon: '⚡',
-              },
-              {
-                title: isKo ? '가스비 문제 완화' : 'Gas fee problem easing',
-                desc: isKo
-                  ? 'walits의 가장 큰 UX 문제 중 하나는 가스비다. Tempo가 Base 트래픽을 늘리면 Base의 생태계 투자(인프라, 가스 최적화)가 가속된다. 장기적으로 온체인 수수료가 더 낮아지는 방향으로 작용한다. Tempo 자체가 Base 위에서 가스를 추상화하는 방향으로도 가고 있다.'
-                  : 'One of walits\' biggest UX challenges is gas fees. As Tempo drives more Base traffic, ecosystem investment in infrastructure and gas optimization accelerates. Over time, this pushes on-chain fees lower.',
+                  ? 'walits 사용자가 가장 불편해하는 것 중 하나는 가스비다. ETH를 별도로 보유해야 USDC를 보낼 수 있는 구조. Tempo의 FeeAMM은 이 문제를 프로토콜 레벨에서 해결한다. USDC만 있으면 수수료도 USDC로 낸다. walits가 Tempo를 지원하면 진정한 "USDC 지갑" — ETH 없이도 USDC만으로 모든 것이 가능한 경험을 제공할 수 있다.'
+                  : 'One of the biggest UX pain points for walits users is gas fees — you need to hold ETH separately just to send USDC. Tempo\'s FeeAMM solves this at the protocol level. If you have USDC, you pay fees in USDC. If walits supports Tempo, it can deliver a true "USDC wallet" experience — everything possible with USDC alone, no ETH required.',
                 icon: '⛽',
+                highlight: true,
               },
               {
-                title: isKo ? '기업 고객 유입 경로' : 'Enterprise customer onboarding path',
+                title: isKo ? '멀티 스테이블코인 지갑 — USDC 넘어서' : 'Multi-stablecoin wallet — beyond USDC',
                 desc: isKo
-                  ? 'Stripe Tempo를 쓰는 기업 고객이 "USDC를 더 잘 관리하고 싶다", "유휴 USDC에서 수익을 내고 싶다"고 느끼면, walits 기업용 지갑이 그 다음 단계다. Tempo는 스테이블코인을 기업에 소개하는 첫 번째 레이어, walits는 그 자산을 더 잘 다루는 레이어다.'
-                  : 'When enterprise customers using Stripe Tempo want to better manage their USDC or earn yield on idle funds, walits enterprise wallets are the natural next step. Tempo introduces stablecoins to businesses; walits is the layer that maximizes what those assets can do.',
+                  ? 'Tempo의 TIP-20 표준 위에서 USDC, USDT, USD1, 그 이후 등장할 스테이블코인들이 동일한 방식으로 작동한다. walits는 USDC 전문 지갑에서 출발했지만, Tempo 위에서라면 모든 주요 스테이블코인을 단일 인터페이스로 관리하는 "스테이블코인 지갑"으로 확장할 수 있다. 사용자는 어떤 스테이블코인을 보유하든 동일한 경험을 받는다.'
+                  : 'On top of Tempo\'s TIP-20 standard, USDC, USDT, USD1, and future stablecoins all work identically. walits started as a USDC-specialized wallet, but on Tempo it could expand to a "stablecoin wallet" managing all major stablecoins through a single interface. Users get the same experience regardless of which stablecoin they hold.',
+                icon: '🏦',
+                highlight: false,
+              },
+              {
+                title: isKo ? 'EVM 호환 — 코드 재사용, 낮은 전환 비용' : 'EVM-compatible — code reuse, low migration cost',
+                desc: isKo
+                  ? 'walits의 스마트컨트랙트와 SDK는 EVM 기반으로 작성되어 있다. Tempo는 EVM 호환 L1이다. 즉 walits가 Tempo를 지원하려면 새 언어나 새 아키텍처를 배울 필요가 없다. 기존 컨트랙트를 Tempo에 배포하고, RPC 엔드포인트를 추가하는 정도로 지원이 가능하다. Ethereum·Base·Tempo를 동시에 지원하는 멀티체인 지갑이 기술적으로 무리 없는 로드맵이다.'
+                  : 'walits\' smart contracts and SDK are written for EVM. Tempo is EVM-compatible. That means supporting Tempo doesn\'t require learning a new language or rearchitecting. Deploy existing contracts to Tempo, add an RPC endpoint. A multi-chain wallet supporting Ethereum, Base, and Tempo simultaneously is a technically straightforward roadmap.',
+                icon: '⚡',
+                highlight: false,
+              },
+              {
+                title: isKo ? 'AI 에이전트 결제 — walits의 미래 기능' : 'AI agent payments — walits\' future feature',
+                desc: isKo
+                  ? 'MPP는 AI 에이전트가 자율적으로 결제하는 오픈 스탠다드다. walits가 Tempo 위에서 AI 에이전트 지갑을 제공하면, 에이전트가 사람 없이 스스로 서비스 비용을 지불하고 USDC를 운용하는 시나리오가 가능해진다. walits의 Idle Time Detector가 유휴 USDC를 DeFi에 넣는 것처럼, AI 에이전트가 walits 지갑을 직접 제어해 자율적으로 자산을 관리할 수 있다.'
+                  : 'MPP is the open standard for autonomous AI agent payments. If walits provides AI agent wallets on Tempo, agents can autonomously pay for services and manage USDC without human intervention. Just as walits\' Idle Time Detector deploys idle USDC into DeFi, AI agents could directly control walits wallets to autonomously manage assets.',
+                icon: '🤖',
+                highlight: false,
+              },
+              {
+                title: isKo ? '기업 고객 유입 경로' : 'Enterprise customer acquisition path',
+                desc: isKo
+                  ? 'Visa·Deutsche Bank·Shopify·Standard Chartered 같은 기업들이 Tempo 생태계로 들어오고 있다. Tempo 위에서 이들 기업의 결제를 처리하면, USDC 수익을 더 잘 관리하고 싶은 니즈가 자연스럽게 생긴다. walits 기업용 지갑이 그 다음 레이어다. Tempo가 스테이블코인을 기업에 도입하면, walits는 그 자산을 24시간 일하게 만드는 레이어가 된다.'
+                  : 'Companies like Visa, Deutsche Bank, Shopify, and Standard Chartered are entering the Tempo ecosystem. As they process payments on Tempo, the natural next need is to better manage and grow their USDC holdings. walits enterprise wallets become that next layer. Tempo brings stablecoins into enterprises; walits makes those assets work 24/7.',
                 icon: '🏢',
+                highlight: false,
               },
             ].map((item, i) => (
-              <div key={i} className="bg-slate-50 border border-slate-200 rounded-xl p-5 flex gap-4">
+              <div key={i} className={`border rounded-xl p-5 flex gap-4 ${item.highlight ? 'bg-violet-50 border-violet-200' : 'bg-slate-50 border-slate-200'}`}>
                 <div className="text-2xl shrink-0">{item.icon}</div>
                 <div>
-                  <div className="font-bold text-slate-800 mb-2">{item.title}</div>
+                  <div className={`font-bold mb-2 ${item.highlight ? 'text-violet-800' : 'text-slate-800'}`}>{item.title}</div>
                   <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </div>
@@ -785,28 +603,43 @@ app.post('/webhook', (req, res) => {
           </div>
 
           <div className="bg-gradient-to-r from-violet-600 to-blue-600 rounded-2xl p-6 text-white">
-            <div className="font-black text-lg mb-3">
-              {isKo ? 'Tempo + walits = 서로 다른 레이어, 같은 방향' : 'Tempo + walits = Different layers, same direction'}
+            <div className="font-black text-lg mb-4">
+              {isKo ? 'walits × Tempo 통합 로드맵 시나리오' : 'walits × Tempo integration roadmap scenario'}
             </div>
-            <div className="grid md:grid-cols-2 gap-4 text-sm">
-              <div className="bg-white/10 rounded-xl p-4">
-                <div className="font-bold mb-2">Stripe Tempo</div>
-                <ul className="space-y-1 text-violet-100 text-xs">
-                  <li>• {isKo ? '비즈니스용 스테이블코인 결제 레일' : 'Stablecoin payment rail for businesses'}</li>
-                  <li>• {isKo ? '법정화폐 ↔ 스테이블코인 환전' : 'Fiat ↔ stablecoin conversion'}</li>
-                  <li>• {isKo ? '기존 Stripe 인프라 통합' : 'Integration with existing Stripe infrastructure'}</li>
-                  <li>• {isKo ? '수탁형 (Stripe 관리)' : 'Custodial (Stripe manages)'}</li>
-                </ul>
-              </div>
-              <div className="bg-white/10 rounded-xl p-4">
-                <div className="font-bold mb-2">walits</div>
-                <ul className="space-y-1 text-blue-100 text-xs">
-                  <li>• {isKo ? 'USDC 자기 보관 + DeFi 수익' : 'USDC self-custody + DeFi yield'}</li>
-                  <li>• {isKo ? '유휴 USDC 자동 운용 (Idle Time Detector)' : 'Auto-deploy idle USDC (Idle Time Detector)'}</li>
-                  <li>• {isKo ? 'AI Agent 자동 결제' : 'AI Agent auto-payments'}</li>
-                  <li>• {isKo ? '비수탁형 (유저 보관)' : 'Non-custodial (user holds)'}</li>
-                </ul>
-              </div>
+            <div className="grid md:grid-cols-3 gap-4 text-sm">
+              {[
+                {
+                  step: isKo ? '1단계' : 'Step 1',
+                  title: isKo ? 'Tempo 지원 추가' : 'Add Tempo support',
+                  items: isKo
+                    ? ['Tempo RPC 엔드포인트 연결', 'TIP-20 USDC 송수신', '가스리스 USDC 전송']
+                    : ['Connect Tempo RPC endpoint', 'TIP-20 USDC send/receive', 'Gasless USDC transfers'],
+                },
+                {
+                  step: isKo ? '2단계' : 'Step 2',
+                  title: isKo ? '멀티 스테이블코인' : 'Multi-stablecoin',
+                  items: isKo
+                    ? ['USDT·USD1 지원 확장', '스테이블코인 간 FeeAMM 환전', '단일 UI로 모든 달러 자산 관리']
+                    : ['Expand to USDT, USD1', 'Inter-stablecoin FeeAMM swaps', 'Manage all dollar assets in one UI'],
+                },
+                {
+                  step: isKo ? '3단계' : 'Step 3',
+                  title: isKo ? 'AI 에이전트 지갑' : 'AI agent wallet',
+                  items: isKo
+                    ? ['MPP 기반 에이전트 결제', '자율 DeFi 수익 운용', '기업용 자동화 결제']
+                    : ['MPP-based agent payments', 'Autonomous DeFi yield deployment', 'Enterprise automated payments'],
+                },
+              ].map((phase, i) => (
+                <div key={i} className="bg-white/10 rounded-xl p-4">
+                  <div className="text-xs text-violet-200 mb-1">{phase.step}</div>
+                  <div className="font-bold mb-2">{phase.title}</div>
+                  <ul className="space-y-1">
+                    {phase.items.map((item, j) => (
+                      <li key={j} className="text-violet-100 text-xs">• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -819,8 +652,8 @@ app.post('/webhook', (req, res) => {
             </div>
             <p className="text-slate-500 text-sm leading-relaxed mb-4">
               {isKo
-                ? 'Stripe Tempo가 기업에 USDC를 소개한다면, walits는 그 USDC가 24시간 수익을 내도록 만든다. Ethereum과 Base 위에서, 자기 보관으로, DeFi 수익과 함께.'
-                : 'If Stripe Tempo introduces USDC to businesses, walits makes that USDC earn yield 24/7. On Ethereum and Base, self-custody, with DeFi yield.'}
+                ? 'Tempo가 가스리스 스테이블코인 결제 레일을 깔아준다면, walits는 그 위에서 USDC를 24시간 DeFi 수익과 함께 운용하는 자기 보관 지갑이다. Ethereum과 Base, 그리고 Tempo까지.'
+                : 'If Tempo lays the gasless stablecoin payment rail, walits is the self-custody wallet that runs USDC on it 24/7 alongside DeFi yield. Ethereum, Base, and eventually Tempo.'}
             </p>
             <Link href="/#solutions" className="inline-block bg-violet-600 text-white font-bold text-sm px-4 py-2 rounded-lg hover:bg-violet-700 transition-colors">
               {isKo ? '서비스 알아보기 →' : 'Learn more →'}
