@@ -552,14 +552,14 @@ export default function HomePage() {
             </div>
 
             {/* Personal Wallet */}
-            <div className="flex items-center gap-2">
+            <a href="https://stable.walits.com" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <span className={`text-sm font-normal ${scrolled ? 'text-gray-500' : 'text-white/50'}`}>
                 {language === 'ko' ? '개인용' : 'Personal'}
               </span>
               <span className={`text-lg font-medium ${scrolled ? 'text-gray-800' : 'text-white'}`}>
                 {language === 'ko' ? '개인 스테이블 코인 지갑' : 'Personal Stablecoin Wallet'}
               </span>
-            </div>
+            </a>
           </div>
           <div className="flex items-center space-x-6">
             <a href="#solutions" className={`text-lg font-semibold hover:underline transition-colors ${scrolled ? 'text-gray-800' : 'text-white'}`}>
@@ -638,17 +638,14 @@ export default function HomePage() {
               {loginOpen && (
                 <div className="absolute top-full right-0 pt-2 z-50">
                   <div className="w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2">
-                    <div className="block px-4 py-3 opacity-60 cursor-not-allowed">
+                    <a href="https://stable.walits.com" className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                       <div className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                         {language === 'ko' ? '개인 스테이블 코인 지갑' : 'Personal Stablecoin Wallet'}
-                        <span className="bg-yellow-500 text-white px-2 py-0.5 rounded-full text-xs font-semibold">
-                          {language === 'ko' ? '준비중' : 'Soon'}
-                        </span>
                       </div>
                       <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                         {language === 'ko' ? 'AI · 투자 · Chat · RWA' : 'AI · Investment · Chat · RWA'}
                       </div>
-                    </div>
+                    </a>
                     <div className="border-t border-gray-200 dark:border-gray-700 my-2"></div>
                     <a href={`${NON_CUSTODY_URL}/login`} className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                       <div className="font-semibold text-gray-900 dark:text-white">
@@ -812,12 +809,12 @@ export default function HomePage() {
                   </span>
                 ))}
               </div>
-              <button
-                disabled
-                className="block w-full text-center py-3 bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 font-semibold rounded-xl cursor-not-allowed"
+              <a
+                href="https://stable.walits.com"
+                className="block w-full text-center py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl transition-colors"
               >
-                {language === 'ko' ? '준비중' : 'Coming Soon'}
-              </button>
+                {language === 'ko' ? '시작하기 →' : 'Get Started →'}
+              </a>
             </div>
 
           </div>
