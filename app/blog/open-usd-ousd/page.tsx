@@ -580,10 +580,103 @@ export default function OpenUsdPage() {
           </div>
         </section>
 
-        {/* Section 10: 각국 규제와의 관계 */}
+        {/* Section 10: 파이 확장 테제 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '10. 각국 규제와의 관계 — OUSD가 넘어야 할 벽' : '10. Regulatory Landscape — The Walls OUSD Must Climb'}
+            {isKo ? '10. OUSD가 파이를 키운다 — USDC·USDT와의 관계 재정의' : '10. OUSD Expands the Pie — Redefining the Relationship with USDC and USDT'}
+          </h2>
+
+          <p className="text-slate-600 leading-relaxed mb-6">
+            {isKo
+              ? 'OUSD의 등장을 단순히 "USDC 점유율 빼앗기 전쟁"으로 보는 것은 절반의 그림이다. 더 중요한 효과는 따로 있다 — 스테이블코인 시장 전체의 신뢰성과 규모가 커지는 것이다.'
+              : 'Framing OUSD\'s emergence purely as a "war to steal USDC market share" misses half the picture. The more important effect may be elsewhere: expanding the credibility and scale of the entire stablecoin market.'}
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="bg-green-50 border border-green-200 rounded-xl p-5">
+              <div className="font-bold text-green-800 mb-3">{isKo ? 'OUSD의 시장 확장 효과' : 'OUSD\'s market expansion effect'}</div>
+              <div className="space-y-3 text-sm">
+                {(isKo ? [
+                  { icon: '📣', point: '신뢰 신호 전달', desc: 'Visa, BlackRock, DBS가 컨소시엄에 이름을 올린다는 사실 자체가 "스테이블코인은 이제 실험적 자산이 아니다"라는 메시지를 전통 금융권에 보낸다. 이 신호는 OUSD뿐 아니라 USDC·USDT 전체에 대한 기관 채택을 앞당긴다.' },
+                  { icon: '🏢', point: '기업 결제 시장 개척', desc: 'OUSD가 B2B 결제·급여 시장을 공략하면 그 시장 자체가 커진다. 기업들이 스테이블코인 결제를 도입하면 USDC·USDT의 수요도 같이 늘어난다. 마치 아이폰이 스마트폰 시장 전체를 키운 것처럼.' },
+                  { icon: '🌐', point: '달러 스테이블코인 글로벌화', desc: '140개 글로벌 기업의 참여는 "달러 스테이블코인을 국제 결제 인프라로 쓰자"는 암묵적 합의를 만든다. 이는 달러 스테이블코인 전체의 지위를 높이는 효과를 낸다.' },
+                ] : [
+                  { icon: '📣', point: 'Trust signal broadcast', desc: 'The mere fact that Visa, BlackRock, and DBS are joining the consortium sends a message to traditional finance: "stablecoins are no longer experimental assets." This signal accelerates institutional adoption not just for OUSD but for USDC and USDT as well.' },
+                  { icon: '🏢', point: 'Opening the corporate payments market', desc: 'When OUSD targets B2B payments and payroll, the market itself grows. As companies adopt stablecoin payments, demand for USDC and USDT also rises — much like how the iPhone grew the entire smartphone market.' },
+                  { icon: '🌐', point: 'Globalizing dollar stablecoins', desc: 'The participation of 140 global companies creates an implicit consensus to use dollar stablecoins as international payment infrastructure. This elevates the standing of dollar stablecoins as a category.' },
+                ]).map((item, i) => (
+                  <div key={i} className="flex gap-2">
+                    <span className="text-lg shrink-0">{item.icon}</span>
+                    <div>
+                      <div className="font-semibold text-slate-700 text-xs mb-0.5">{item.point}</div>
+                      <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
+              <div className="font-bold text-slate-800 mb-3">{isKo ? '그런데 진짜 병목은 여기다' : 'But here\'s the real bottleneck'}</div>
+              <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                {isKo
+                  ? 'OUSD가 파이를 키워도 그 파이를 먹을 수 없는 나라들이 있다. 문제는 단순히 법제화가 "느리다"가 아니다 — 법제화의 방향 자체가 글로벌 흐름과 어긋나는 경우가 더 큰 문제다.'
+                  : 'Even if OUSD expands the pie, some countries can\'t eat it. The problem isn\'t just that legislation is "slow" — countries where the direction of legislation diverges from global norms face a far bigger problem.'}
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="border-b border-slate-200">
+                      <th className="text-left py-1.5 text-slate-500 font-semibold">{isKo ? '국가' : 'Country'}</th>
+                      <th className="text-left py-1.5 text-slate-500 font-semibold">{isKo ? '속도' : 'Speed'}</th>
+                      <th className="text-left py-1.5 text-slate-500 font-semibold">{isKo ? '방향' : 'Direction'}</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {(isKo ? [
+                      { country: '🇺🇸 미국', speed: '빠름', direction: '달러 스테이블코인 제도화', ok: true },
+                      { country: '🇪🇺 EU', speed: '빠름', direction: '유로 + 외화 통합 수용 (MiCA)', ok: true },
+                      { country: '🇸🇬 싱가포르', speed: '빠름', direction: '결제 수단 공식 인정', ok: true },
+                      { country: '🇰🇷 한국', speed: '느림', direction: 'KRW 우선, 외화는 나중', ok: false },
+                    ] : [
+                      { country: '🇺🇸 US', speed: 'Fast', direction: 'Institutionalizing dollar stablecoins', ok: true },
+                      { country: '🇪🇺 EU', speed: 'Fast', direction: 'Accepts both Euro + foreign (MiCA)', ok: true },
+                      { country: '🇸🇬 Singapore', speed: 'Fast', direction: 'Official recognition as payment', ok: true },
+                      { country: '🇰🇷 Korea', speed: 'Slow', direction: 'KRW first, foreign currency later', ok: false },
+                    ]).map((row, i) => (
+                      <tr key={i}>
+                        <td className="py-1.5 text-slate-700 font-medium">{row.country}</td>
+                        <td className={`py-1.5 font-semibold ${row.ok ? 'text-green-600' : 'text-red-500'}`}>{row.speed}</td>
+                        <td className={`py-1.5 ${row.ok ? 'text-slate-600' : 'text-red-500'}`}>{row.direction}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-amber-50 border border-amber-300 rounded-2xl p-6 mb-4">
+            <div className="font-bold text-amber-900 mb-3 text-lg">
+              {isKo ? '한국의 아이러니 — 글로벌 시장이 커질수록 격차가 벌어진다' : 'Korea\'s irony — the bigger the global market grows, the wider the gap'}
+            </div>
+            <p className="text-slate-700 text-sm leading-relaxed mb-3">
+              {isKo
+                ? 'OUSD가 글로벌 결제 인프라로 자리잡아 달러 스테이블코인 시장 전체가 성장하는 동안, 한국은 KRW 스테이블코인 법제화에 에너지를 쏟는다. 그 사이 한국 기업과 개인의 달러화(dollarization) 수요 — 해외 결제, 수출입, 해외 급여 — 는 오히려 높아진다. 그런데 그 수요를 공식 제도 안에서 충족할 방법이 없으니, 사람들은 해외 서비스를 우회해서 사용한다.'
+                : 'While OUSD becomes global payment infrastructure and the entire dollar stablecoin market grows, Korea will be spending energy on KRW stablecoin legislation. Meanwhile, the demand from Korean businesses and individuals for dollarization — overseas payments, imports/exports, foreign payroll — only increases. But since there\'s no way to meet that demand within the official system, people route through overseas services.'}
+            </p>
+            <p className="text-slate-700 text-sm leading-relaxed">
+              {isKo
+                ? '법이 없어서 막는 사이, 수요가 제도 밖으로 새는 구조다. 역설적으로, 입법이 완성될 시점에 OUSD가 글로벌 표준으로 자리잡아 있다면 한국은 결국 수용할 수밖에 없는 흐름이 되고 — 그 시간 동안 한국 사용자들이 누릴 수 있었던 혜택은 사라진 셈이다. 법제화의 속도보다, 방향이 맞는지가 더 중요한 이유다.'
+                : 'While the law blocks participation, demand leaks outside the system. Paradoxically, if OUSD has become the global standard by the time Korean legislation is finalized, Korea will have no choice but to accept it — and the benefits Korean users could have enjoyed in the interim are simply lost. This is why the direction of legislation matters more than its speed.'}
+            </p>
+          </div>
+        </section>
+
+        {/* Section 11: 각국 규제와의 관계 */}
+        <section>
+          <h2 className="text-2xl font-black text-slate-900 mb-6">
+            {isKo ? '11. 각국 규제와의 관계 — OUSD가 넘어야 할 벽' : '11. Regulatory Landscape — The Walls OUSD Must Climb'}
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
@@ -687,10 +780,10 @@ export default function OpenUsdPage() {
           </div>
         </section>
 
-        {/* Section 11: 한국 스테이블코인 입법 */}
+        {/* Section 12: 한국 스테이블코인 입법 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '11. 한국 스테이블코인 입법화 — OUSD와 얼마나 안 맞나' : '11. Korea\'s Stablecoin Legislation — How Misaligned Is It with OUSD?'}
+            {isKo ? '12. 한국 스테이블코인 입법화 — OUSD와 얼마나 안 맞나' : '12. Korea\'s Stablecoin Legislation — How Misaligned Is It with OUSD?'}
           </h2>
           <p className="text-slate-600 leading-relaxed mb-6">
             {isKo
@@ -793,10 +886,10 @@ export default function OpenUsdPage() {
           </div>
         </section>
 
-        {/* Section 12: walits 관점 */}
+        {/* Section 13: walits 관점 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '12. walits 관점 — OUSD가 우리에게 무엇을 의미하나' : '12. walits Perspective — What OUSD Means for Us'}
+            {isKo ? '13. walits 관점 — OUSD가 우리에게 무엇을 의미하나' : '13. walits Perspective — What OUSD Means for Us'}
           </h2>
 
           <p className="text-slate-600 leading-relaxed mb-6">
