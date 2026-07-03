@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'open-usd-ousd',
+          category: '스테이블코인',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: 'Open USD (OUSD) — Visa·BlackRock·Coinbase 140개 기업이 Circle에 선전포고하다',
+          excerpt: '수수료 없음, 리저브 수익 파트너 공유, 컨소시엄 거버넌스. Visa·Mastercard·BlackRock·Stripe·Coinbase·Google 등 140개 이상 기업이 만든 스테이블코인 OUSD 완전 해부. Circle 주가 17% 폭락시킨 이유.',
+          date: '2026년 7월 3일',
+          readTime: '25분',
+          image: '/blog/openusd.jpg',
+        },
+        {
           id: 'stripe-tempo-stablecoin',
           category: '인프라 심층 분석',
           categoryColor: 'bg-indigo-100 text-indigo-800',
@@ -432,6 +442,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'open-usd-ousd',
+          category: 'Stablecoin',
+          categoryColor: 'bg-blue-100 text-blue-800',
+          title: 'Open USD (OUSD) — How 140 Companies Including Visa, BlackRock, and Coinbase Declared War on Circle',
+          excerpt: 'No fees, reserve revenue shared with partners, consortium governance. A complete breakdown of OUSD — the stablecoin built by 140+ companies including Visa, Mastercard, BlackRock, Stripe, Coinbase, and Google. Why Circle\'s stock dropped 17%.',
+          date: 'July 3, 2026',
+          readTime: '25 min read',
+          image: '/blog/openusd.jpg',
+        },
         {
           id: 'stripe-tempo-stablecoin',
           category: 'Infrastructure Deep Dive',
