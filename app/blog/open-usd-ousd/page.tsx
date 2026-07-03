@@ -38,7 +38,7 @@ export default function OpenUsdPage() {
           <div className="flex items-center gap-4 mt-6 text-sm text-slate-400">
             <span>{isKo ? '2026년 7월 3일' : 'July 3, 2026'}</span>
             <span>·</span>
-            <span>{isKo ? '25분 읽기' : '25 min read'}</span>
+            <span>{isKo ? '35분 읽기' : '35 min read'}</span>
           </div>
         </div>
       </div>
@@ -248,6 +248,15 @@ export default function OpenUsdPage() {
                 why: isKo
                   ? 'Coinbase는 Base 체인 채택 + 거래소 OUSD 유동성. Aave는 DeFi 프로토콜 통합. MetaMask는 지갑 기본 스테이블코인. Ripple은 결제 레일 연동.'
                   : 'Coinbase gets Base chain adoption + exchange OUSD liquidity. Aave gets DeFi protocol integration. MetaMask gets a default stablecoin for wallets. Ripple gets payment rail integration.',
+              },
+              {
+                category: isKo ? '한국 기업 (명단 포함)' : 'Korean companies (named on list)',
+                color: 'bg-red-50 border-red-200',
+                headerColor: 'text-red-800',
+                companies: ['삼성전자', '두나무', '신한금융', '카카오뱅크', '케이뱅크', '현대카드', 'KB국민카드', '삼성카드', '한화'],
+                why: isKo
+                  ? '⚠ 논란: 국내 기업 상당수가 공식 협의 없이 명단에 포함됐다. 삼성전자는 "공식 협의가 없었고 역할도 모른다", 신한금융·두나무·케이뱅크 등은 "검토하겠다고 했더니 구성원으로 이름이 올랐다"며 당혹감을 표했다. 실질적 참여 여부는 미확인 상태다.'
+                  : '⚠ Controversy: Many Korean companies were listed without formal consultation. Samsung Electronics said "there was no official consultation and we don\'t know our role." Shinhan, Dunamu, and K-bank said they only replied "we\'ll consider it" and found themselves listed as members — expressing surprise.',
               },
             ].map((cat, i) => (
               <div key={i} className={`border rounded-2xl p-5 ${cat.color}`}>
@@ -480,10 +489,314 @@ export default function OpenUsdPage() {
           </div>
         </section>
 
-        {/* Section 9: walits 관점 */}
+        {/* Section 9: USDC가 살아남을 수 있는 이유 */}
         <section>
           <h2 className="text-2xl font-black text-slate-900 mb-6">
-            {isKo ? '9. walits 관점 — OUSD가 우리에게 무엇을 의미하나' : '9. walits Perspective — What OUSD Means for Us'}
+            {isKo ? '9. OUSD vs USDC — 차별점과 Circle이 그럼에도 살아남을 수 있는 이유' : '9. OUSD vs USDC — Key Differences and Why Circle Can Still Survive'}
+          </h2>
+          <p className="text-slate-600 leading-relaxed mb-6">
+            {isKo
+              ? 'OUSD의 등장이 USDC의 즉각적인 소멸을 의미하지는 않는다. 두 스테이블코인은 구조가 근본적으로 다르고, 각자 강점이 있다. 차별점을 정확히 이해해야 USDC가 어떤 포지션을 유지할 수 있는지 보인다.'
+              : 'OUSD\'s emergence doesn\'t mean USDC\'s immediate extinction. The two stablecoins are fundamentally different in structure, each with distinct strengths. Understanding the differences precisely reveals what position USDC can still hold.'}
+          </p>
+
+          <div className="space-y-4 mb-8">
+            {[
+              {
+                aspect: isKo ? '투명성 — 지금은 USDC가 압도적' : 'Transparency — USDC dominates for now',
+                usdc: isKo ? 'Circle은 매월 독립 감사 법인의 리저브 증명(Attestation)을 공개한다. 어느 기관에 얼마를 맡겼는지, 어떤 자산으로 보유하는지 공개되어 있다. 기관 투자자·규제 기관이 요구하는 투명성 기준을 이미 충족한다.' : 'Circle publishes monthly independent attestations from auditing firms. Which institutions hold the reserves, and in what assets, are disclosed. It already meets the transparency standards required by institutional investors and regulators.',
+                ousd: isKo ? 'Open Standard는 출시 전 기준으로 "주요 금융기관, 미국 규제 준수"만 밝혔다. 커스터디 기관, 감사 주기, 발행 법인이 미공개다. 투명성에서 지금은 USDC에 뒤진다.' : 'Open Standard has only disclosed "major financial institutions, US regulatory compliant" pre-launch. Custody institutions, attestation cadence, and issuing entity are undisclosed. Currently behind USDC on transparency.',
+                winner: 'USDC',
+              },
+              {
+                aspect: isKo ? 'DeFi 유동성 — USDC의 독보적 해자' : 'DeFi liquidity — USDC\'s moat',
+                usdc: isKo ? 'Ethereum DeFi 생태계에서 USDC는 수년간 축적된 유동성 해자를 갖고 있다. Aave, Compound, Uniswap, Curve 등 주요 프로토콜에서 USDC는 기본 스테이블코인이다. 담보 자산으로서 신뢰도, 유동성 깊이, 이자율 모델 모두 검증됐다.' : 'USDC has a years-built liquidity moat in Ethereum DeFi. It\'s the default stablecoin in major protocols like Aave, Compound, Uniswap, and Curve. Its trustworthiness as collateral, liquidity depth, and interest rate models are all proven.',
+                ousd: isKo ? 'Aave가 OUSD 파트너지만, 실제 DeFi 유동성 풀이 생기고 유저들이 OUSD를 담보로 쓰기 시작하려면 수개월~수년이 필요하다. Ethereum 메인넷 초기 출시 체인에서 빠졌다는 점도 DeFi 채택에 불리하다.' : 'Aave is an OUSD partner, but it will take months to years before real DeFi liquidity pools form and users start using OUSD as collateral. Being absent from Ethereum mainnet at initial launch also disadvantages DeFi adoption.',
+                winner: 'USDC',
+              },
+              {
+                aspect: isKo ? '수익 모델 — OUSD의 구조적 우위' : 'Revenue model — OUSD\'s structural advantage',
+                usdc: isKo ? 'Circle이 리저브 이자를 거의 독식한다. 파트너사 입장에서 USDC를 유통시켜줄 경제적 인센티브가 약하다. 파트너는 "사용자 편의를 위해" 쓰는 것이지, 직접 이익이 없다.' : 'Circle keeps nearly all reserve interest. Partners have weak economic incentive to distribute USDC. Partners use it "for user convenience," not for direct benefit.',
+                ousd: isKo ? '리저브 이자를 파트너사가 대부분 가져간다. Visa·Mastercard·Stripe 같은 파트너들이 OUSD를 적극적으로 밀 경제적 이유가 생긴다. 시간이 지날수록 네트워크 효과가 OUSD에 유리하게 작용할 수 있다.' : 'Partners keep most of the reserve interest. Visa, Mastercard, Stripe, and others have economic reasons to actively push OUSD. Over time, network effects may favor OUSD.',
+                winner: 'OUSD',
+              },
+              {
+                aspect: isKo ? '규제 인가·법적 명확성' : 'Regulatory authorization & legal clarity',
+                usdc: isKo ? 'Circle은 수년에 걸쳐 뉴욕 NYDFS 허가, EU MiCA 준수, 다수 국가 라이선스를 취득했다. 기관 투자자·기업이 USDC를 쓸 때 법적 리스크가 낮다.' : 'Circle has obtained NYDFS approval, EU MiCA compliance, and licenses in multiple countries over years. Legal risk for institutions and businesses using USDC is low.',
+                ousd: isKo ? 'Open Standard는 미국 규제 준수를 선언했지만, 아직 구체적인 규제 인가 내역이 공개되지 않았다. 미출시 상태라 각국 규제 기관의 판단도 나오지 않았다. 기관이 OUSD를 쓰려면 이 부분이 먼저 해결돼야 한다.' : 'Open Standard has declared US regulatory compliance, but specific regulatory authorizations aren\'t yet disclosed. Pre-launch, no national regulators have issued rulings. Institutions need this resolved before using OUSD.',
+                winner: 'USDC',
+              },
+              {
+                aspect: isKo ? '브랜드·신뢰 — 검증된 시간' : 'Brand & trust — proven over time',
+                usdc: isKo ? '2018년 출시 이후 8년. FTX 사태, 실리콘밸리은행 사태 등 여러 위기를 겪고도 달러 페그를 유지했다. "Circle이 망하지 않는 한 USDC는 안전하다"는 인식이 기관 사이에 형성되어 있다.' : 'Launched in 2018, now 8 years old. Maintained its dollar peg through multiple crises including FTX and Silicon Valley Bank. Among institutions, the perception that "USDC is safe as long as Circle doesn\'t collapse" is established.',
+                ousd: isKo ? '아직 출시도 안 됐다. 위기 상황에서 어떻게 반응하는지, 리딤 프로세스가 실제로 매끄러운지, 컨소시엄 거버넌스가 긴급 상황에서 빠르게 작동하는지 — 모두 미검증이다.' : 'Not even launched yet. How it responds in a crisis, whether the redemption process is actually smooth, whether consortium governance moves fast in emergencies — all unproven.',
+                winner: 'USDC',
+              },
+            ].map((item, i) => (
+              <div key={i} className="border border-slate-200 rounded-2xl overflow-hidden">
+                <div className="bg-slate-50 px-5 py-3 flex items-center justify-between">
+                  <div className="font-bold text-slate-800 text-sm">{item.aspect}</div>
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${item.winner === 'USDC' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'}`}>
+                    {item.winner} {isKo ? '우위' : 'advantage'}
+                  </span>
+                </div>
+                <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                  <div className="p-4">
+                    <div className="text-xs font-bold text-blue-600 mb-2">USDC</div>
+                    <p className="text-slate-600 text-xs leading-relaxed">{item.usdc}</p>
+                  </div>
+                  <div className="p-4">
+                    <div className="text-xs font-bold text-green-600 mb-2">OUSD</div>
+                    <p className="text-slate-600 text-xs leading-relaxed">{item.ousd}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+            <div className="font-bold text-blue-800 mb-3">{isKo ? 'Circle이 살아남을 수 있는 현실적 시나리오' : 'Realistic scenarios where Circle survives'}</div>
+            <div className="space-y-3">
+              {(isKo ? [
+                { title: 'DeFi·개발자 생태계', desc: 'Ethereum 기반 DeFi는 OUSD가 단기간에 잠식하기 어렵다. 개발자·프로토콜 입장에서 기존에 USDC로 짜인 코드와 인프라를 바꾸는 비용이 크다. OUSD가 Ethereum 메인넷을 미지원한 점도 이 해자를 지킨다.' },
+                { title: '투명성·규제 준수 포지션', desc: '기관 투자자·국부펀드·ETF 등은 "감사된 스테이블코인"을 요구한다. Circle이 투명성에서 계속 앞서 나가면, 규제가 강한 시장(유럽·싱가포르·홍콩 등)에서 USDC는 프리미엄 포지션을 유지할 수 있다.' },
+                { title: '위기 대응 검증', desc: '다음번 크립토 시장 위기에서 OUSD보다 USDC가 안정적으로 버틴다면, 오히려 격차가 벌어질 수 있다. 컨소시엄 거버넌스의 느린 의사결정이 위기 시 약점으로 드러날 가능성이 있다.' },
+                { title: '공존 시나리오', desc: 'USDC와 OUSD가 용도를 나눠 공존할 수도 있다. USDC는 DeFi·개발자·투명성 중시 기관에, OUSD는 기업 결제·급여·크로스보더 파트너 생태계에 특화되는 구도다.' },
+              ] : [
+                { title: 'DeFi & developer ecosystem', desc: 'Ethereum-based DeFi is hard for OUSD to erode quickly. For developers and protocols, the cost of changing code and infrastructure built around USDC is high. OUSD\'s absence from Ethereum mainnet also preserves this moat.' },
+                { title: 'Transparency & regulatory compliance positioning', desc: 'Institutional investors, sovereign wealth funds, and ETFs demand "audited stablecoins." If Circle continues to lead on transparency, USDC can maintain a premium position in heavily regulated markets (EU, Singapore, Hong Kong, etc.).' },
+                { title: 'Crisis response validation', desc: 'If USDC weathers the next crypto market crisis more stably than OUSD, the gap could actually widen. The consortium governance\'s slow decision-making could emerge as a weakness in a crisis.' },
+                { title: 'Coexistence scenario', desc: 'USDC and OUSD may coexist by dividing use cases: USDC for DeFi, developers, and transparency-focused institutions; OUSD for enterprise payments, payroll, and cross-border partner ecosystems.' },
+              ]).map((item, i) => (
+                <div key={i} className="flex gap-3 text-sm">
+                  <span className="text-blue-500 font-bold shrink-0 mt-0.5">→</span>
+                  <div>
+                    <span className="font-semibold text-slate-800">{item.title}: </span>
+                    <span className="text-slate-600">{item.desc}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section 10: 각국 규제와의 관계 */}
+        <section>
+          <h2 className="text-2xl font-black text-slate-900 mb-6">
+            {isKo ? '10. 각국 규제와의 관계 — OUSD가 넘어야 할 벽' : '10. Regulatory Landscape — The Walls OUSD Must Climb'}
+          </h2>
+          <p className="text-slate-600 leading-relaxed mb-6">
+            {isKo
+              ? 'OUSD의 컨소시엄 구조와 리저브 수익 공유 모델은 기존 스테이블코인 규제 프레임에 깔끔하게 들어맞지 않는다. 주요 국가별로 OUSD가 마주할 규제 지형을 짚어본다.'
+              : 'OUSD\'s consortium structure and reserve revenue-sharing model doesn\'t fit cleanly into existing stablecoin regulatory frameworks. Here\'s the regulatory terrain OUSD faces in key jurisdictions.'}
+          </p>
+
+          <div className="space-y-4 mb-8">
+            {[
+              {
+                country: isKo ? '미국' : 'United States',
+                flag: '🇺🇸',
+                status: isKo ? '핵심 시장, 규제 진행 중' : 'Core market, regulation in progress',
+                statusColor: 'bg-amber-100 text-amber-700',
+                desc: isKo
+                  ? '2025년 GENIUS Act(스테이블코인법)가 미국에서 논의됐다. 핵심 요건은 1:1 리저브, 월간 감사, 발행사 명확화다. OUSD의 리저브 수익 공유 구조가 "이익 분배형 금융상품"으로 분류될 경우 증권법(SEC) 적용 가능성이 있다. Open Standard가 미국 법인이고 CEO가 Bridge 출신이므로 규제 당국과 긴밀하게 협의 중일 가능성이 높다. 미국에서 명확한 라이선스 없이는 기관 채택이 어렵다.'
+                  : '2025 saw discussions of the GENIUS Act (stablecoin legislation) in the US. Core requirements: 1:1 reserves, monthly audits, clear issuer identity. If OUSD\'s reserve revenue-sharing structure is classified as a "profit-distributing financial product," SEC securities law could apply. Since Open Standard is a US entity and the CEO comes from Bridge, close coordination with regulators is likely underway. Without clear US licensing, institutional adoption is difficult.',
+              },
+              {
+                country: isKo ? 'EU (유럽연합)' : 'EU (European Union)',
+                flag: '🇪🇺',
+                status: isKo ? 'MiCA 프레임 존재, 적용 복잡' : 'MiCA framework exists, complex application',
+                statusColor: 'bg-orange-100 text-orange-700',
+                desc: isKo
+                  ? 'EU는 2024년부터 MiCA(Markets in Crypto-Assets Regulation)가 시행됐다. EMT(전자화폐토큰)로 분류되면 EU 은행 면허 또는 전자화폐 면허가 필요하다. OUSD의 수익 공유 구조는 EMT보다 "자산참조토큰(ART)"에 가까울 수 있는데, ART는 규제 요건이 더 까다롭다. Deutsche Bank·Standard Chartered 같은 파트너가 EU 면허를 보유하고 있어 인가 경로는 있지만, 복잡한 구조가 승인을 늦출 수 있다. Tether USDT는 MiCA 요건을 충족하지 못해 EU 주요 거래소에서 상장폐지됐는데, OUSD가 이를 공략할 기회이기도 하다.'
+                  : 'MiCA (Markets in Crypto-Assets Regulation) has been in effect since 2024. If classified as an EMT (Electronic Money Token), an EU banking or e-money license is required. OUSD\'s revenue-sharing structure may fit closer to ART (Asset-Referenced Token), which has stricter requirements. Partner banks like Deutsche Bank and Standard Chartered hold EU licenses, providing a licensing pathway, but the complex structure could delay approval. USDT was delisted from major EU exchanges for failing MiCA requirements — an opportunity for OUSD to capture.',
+              },
+              {
+                country: isKo ? '영국' : 'United Kingdom',
+                flag: '🇬🇧',
+                status: isKo ? '스테이블코인법 제정 중, 기회 시장' : 'Stablecoin law forming, opportunity market',
+                statusColor: 'bg-green-100 text-green-700',
+                desc: isKo
+                  ? '영국은 2025~2026년 디지털자산 규제 프레임을 구축 중이다. FCA(금융행위감독청)가 스테이블코인을 결제 수단으로 인정하는 방향으로 가고 있다. Standard Chartered(런던 본사)가 파트너이므로 영국 시장 접근에 유리한 고지를 점하고 있다. 브렉시트 이후 EU MiCA와 별도 프레임을 만들고 있어, EU에서 막혀도 영국에서 먼저 인가받는 경로가 가능하다.'
+                  : 'The UK is building a digital asset regulatory framework in 2025–2026. The FCA (Financial Conduct Authority) is moving to recognize stablecoins as payment instruments. With Standard Chartered (London-headquartered) as a partner, OUSD has an advantageous position for UK market access. Post-Brexit UK is building a separate framework from EU MiCA, so even if blocked in the EU, the path to UK authorization first is viable.',
+              },
+              {
+                country: isKo ? '싱가포르·홍콩' : 'Singapore & Hong Kong',
+                flag: '🇸🇬',
+                status: isKo ? '친크립토 규제, 선점 기회' : 'Crypto-friendly regulation, early mover opportunity',
+                statusColor: 'bg-green-100 text-green-700',
+                desc: isKo
+                  ? '싱가포르 MAS는 2023년 스테이블코인 프레임워크를 도입했고, 홍콩도 VASP 라이선스 체계를 갖췄다. DBS(싱가포르 최대 은행)가 OUSD 파트너로 참여하고 있어, 싱가포르 인가 경로가 가장 빠를 수 있다. 아시아 크로스보더 결제 시장에서 OUSD의 조기 교두보가 될 수 있다. 한국은 2025~2026년 가상자산 관련 법률 시행 중이지만, 스테이블코인 발행·유통에 대한 명확한 프레임이 아직 완성되지 않아 OUSD 접근이 단기간 내 어려울 수 있다.'
+                  : 'Singapore\'s MAS introduced a stablecoin framework in 2023, and Hong Kong has a VASP licensing system. With DBS (Singapore\'s largest bank) as an OUSD partner, Singapore authorization may be the fastest path. OUSD could establish an early foothold in the Asian cross-border payments market. South Korea is enforcing crypto-related laws in 2025–2026, but a clear framework for stablecoin issuance and distribution isn\'t finalized yet, making near-term OUSD access potentially difficult.',
+              },
+              {
+                country: isKo ? '이머징 마켓 (라틴아메리카·아프리카·동남아)' : 'Emerging Markets (LatAm, Africa, SE Asia)',
+                flag: '🌍',
+                status: isKo ? '수요 높음, 규제 공백 다수' : 'High demand, many regulatory gaps',
+                statusColor: 'bg-blue-100 text-blue-700',
+                desc: isKo
+                  ? '아르헨티나·나이지리아·터키 같은 인플레이션 고통 국가들이 달러 스테이블코인 수요가 가장 크다. 이 시장들은 규제 프레임이 상대적으로 느슨하거나 아직 만들어지는 중이다. USDC와 USDT가 이미 이 시장에서 점유율을 높이고 있는 가운데, OUSD의 수수료 없는 모델과 Stripe·Visa 같은 익숙한 브랜드 파트너십이 채택을 앞당길 수 있다. 다만 규제 공백이 곧 리스크이기도 하다 — 특정 국가에서 OUSD를 막는 갑작스러운 규제가 나올 수 있다.'
+                  : 'Countries suffering high inflation like Argentina, Nigeria, and Turkey have the strongest demand for dollar stablecoins. These markets have relatively loose or still-forming regulatory frameworks. While USDC and USDT are already gaining share in these markets, OUSD\'s no-fee model and familiar brand partnerships like Stripe and Visa could accelerate adoption. But regulatory gaps are also risks — sudden regulations blocking OUSD in specific countries remain a possibility.',
+              },
+              {
+                country: isKo ? '한국' : 'South Korea',
+                flag: '🇰🇷',
+                status: isKo ? '규제 불명확, 단기 접근 어려움' : 'Regulatory unclear, near-term access difficult',
+                statusColor: 'bg-red-100 text-red-700',
+                desc: isKo
+                  ? '한국은 2025년 가상자산이용자보호법을 시행했고 2단계 입법이 논의 중이다. 스테이블코인 발행 및 유통에 대한 명시적 허용 규정이 아직 없다. 금융당국은 외화 스테이블코인의 국내 유통에 외국환 규제가 적용될 수 있다는 입장이다. OUSD가 국내에서 공식적으로 서비스되려면 별도 라이선스 또는 금융당국 승인이 필요할 가능성이 높다. 단기적으로는 국내 CEX에 상장되거나 기업 결제에 공식 사용되기 어려울 수 있다.'
+                  : 'South Korea enacted the Virtual Asset User Protection Act in 2025, with second-stage legislation under discussion. There are no explicit provisions permitting stablecoin issuance and distribution. The financial authorities have indicated that foreign exchange regulations may apply to domestic circulation of foreign-currency stablecoins. For OUSD to officially operate in Korea, separate licensing or regulatory approval is likely required. Short-term listing on domestic CEXs or official use in business payments may be difficult.',
+              },
+            ].map((item, i) => (
+              <div key={i} className="border border-slate-200 rounded-2xl overflow-hidden">
+                <div className="bg-slate-50 px-5 py-3 flex items-center gap-3">
+                  <span className="text-2xl">{item.flag}</span>
+                  <div className="flex-1">
+                    <div className="font-bold text-slate-900 text-sm">{item.country}</div>
+                  </div>
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${item.statusColor}`}>{item.status}</span>
+                </div>
+                <div className="px-5 py-4">
+                  <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-slate-900 rounded-2xl p-6">
+            <div className="text-slate-400 text-xs font-mono mb-4">{isKo ? '규제 준비도 매트릭스 (추정)' : 'Regulatory readiness matrix (estimated)'}</div>
+            <div className="grid grid-cols-3 gap-2 text-xs text-center">
+              <div className="text-slate-400 font-semibold py-2">{isKo ? '국가·지역' : 'Region'}</div>
+              <div className="text-slate-400 font-semibold py-2">{isKo ? 'OUSD 단기 접근' : 'OUSD near-term'}</div>
+              <div className="text-slate-400 font-semibold py-2">{isKo ? 'USDC 현황' : 'USDC status'}</div>
+              {[
+                { region: isKo ? '미국' : 'US', ousd: isKo ? '조건부 가능' : 'Conditional', usdc: isKo ? '허용' : 'Permitted', ousdColor: 'text-amber-400', usdcColor: 'text-green-400' },
+                { region: 'EU', ousd: isKo ? '협의 필요' : 'Needs negotiation', usdc: 'MiCA 준수', ousdColor: 'text-amber-400', usdcColor: 'text-green-400' },
+                { region: isKo ? '영국' : 'UK', ousd: isKo ? '가능성 있음' : 'Likely', usdc: isKo ? '허용' : 'Permitted', ousdColor: 'text-green-400', usdcColor: 'text-green-400' },
+                { region: isKo ? '싱가포르' : 'Singapore', ousd: isKo ? '가장 빠를 듯' : 'Fastest path', usdc: isKo ? '허용' : 'Permitted', ousdColor: 'text-green-400', usdcColor: 'text-green-400' },
+                { region: isKo ? '한국' : 'Korea', ousd: isKo ? '단기 어려움' : 'Difficult near-term', usdc: isKo ? '불명확' : 'Unclear', ousdColor: 'text-red-400', usdcColor: 'text-amber-400' },
+                { region: isKo ? '이머징 마켓' : 'Emerging', ousd: isKo ? '공백 활용 가능' : 'Gap opportunity', usdc: isKo ? '사실상 허용' : 'De facto OK', ousdColor: 'text-blue-400', usdcColor: 'text-green-400' },
+              ].map((row, i) => (
+                <>
+                  <div key={`r-${i}`} className="text-slate-300 py-2 border-t border-slate-800">{row.region}</div>
+                  <div key={`o-${i}`} className={`py-2 border-t border-slate-800 font-medium ${row.ousdColor}`}>{row.ousd}</div>
+                  <div key={`u-${i}`} className={`py-2 border-t border-slate-800 font-medium ${row.usdcColor}`}>{row.usdc}</div>
+                </>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section 11: 한국 스테이블코인 입법 */}
+        <section>
+          <h2 className="text-2xl font-black text-slate-900 mb-6">
+            {isKo ? '11. 한국 스테이블코인 입법화 — OUSD와 얼마나 안 맞나' : '11. Korea\'s Stablecoin Legislation — How Misaligned Is It with OUSD?'}
+          </h2>
+          <p className="text-slate-600 leading-relaxed mb-6">
+            {isKo
+              ? '한국의 스테이블코인 규제는 늦고, 방향도 OUSD 같은 글로벌 컨소시엄 스테이블코인과 맞지 않는 부분이 많다. OUSD가 글로벌 결제 인프라로 자리잡더라도 한국 사용자가 그 혜택을 누리려면 별도의 입법 해결이 필요한 상황이다.'
+              : 'Korea\'s stablecoin regulation is late, and in many ways misaligned with global consortium stablecoins like OUSD. Even if OUSD establishes itself as global payment infrastructure, Korean users would need separate legislative resolution to benefit from it.'}
+          </p>
+
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-6">
+            <div className="font-bold text-slate-900 mb-4">{isKo ? '한국 가상자산 입법 타임라인' : 'Korea virtual asset legislation timeline'}</div>
+            <div className="space-y-3">
+              {[
+                { year: '2023.07', event: isKo ? '가상자산 이용자보호법 제정 — 1단계: 불공정거래·이용자 보호 중심' : 'Virtual Asset User Protection Act enacted — Phase 1: focus on unfair trading and user protection' },
+                { year: '2025.01', event: isKo ? '가상자산위원회, 2단계 입법 계획 발표 — 스테이블코인 규율 포함 명시' : 'Virtual Asset Committee announces Phase 2 legislation plan — explicitly includes stablecoin regulation' },
+                { year: '2025', event: isKo ? '디지털자산기본법 발의 예고됐으나 국회 제출 지연' : 'Digital Asset Basic Act announced but national assembly submission delayed' },
+                { year: '2026 초', event: isKo ? '정부, 원화 스테이블코인·ICO 허용 담은 디지털자산기본법 국회 제출 전망' : 'Government expected to submit Digital Asset Basic Act to assembly (KRW stablecoin + ICO provisions)' },
+                { year: '2026~', event: isKo ? '22대 국회 일정·지방선거 등으로 실질 입법 지연 가능성 높음' : '22nd National Assembly schedule and local elections make actual legislation likely delayed' },
+              ].map((row, i) => (
+                <div key={i} className="flex gap-4 text-sm">
+                  <span className="font-mono text-blue-600 font-bold w-20 shrink-0">{row.year}</span>
+                  <span className="text-slate-600">{row.event}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-5">
+              <div className="font-bold text-red-800 mb-3">{isKo ? 'OUSD와 한국 규제의 충돌 지점' : 'Where OUSD clashes with Korean regulation'}</div>
+              <div className="space-y-3 text-sm">
+                {(isKo ? [
+                  { title: '외환 규제', desc: 'OUSD는 달러 표시 스테이블코인이다. 한국 외국환거래법상 달러 스테이블코인의 국내 유통은 외화 송금·보유와 같이 취급될 수 있다. 금융당국은 외화 스테이블코인 유통에 외환 규제 적용 가능성을 열어두고 있다.' },
+                  { title: '리저브 수익 공유 → 금융상품 여부', desc: 'OUSD 파트너사가 리저브 이자를 받는 구조는 "이자 배당형 금융상품"으로 해석될 수 있다. 한국에서 이자 지급형 상품은 은행법·자본시장법 규율 대상이 되어 스테이블코인 단독으로는 허용되기 어렵다.' },
+                  { title: '컨소시엄 거버넌스 → 발행사 불명확', desc: '한국 규제는 스테이블코인 발행사를 명확히 특정하도록 요구하는 방향이다. 140개사 컨소시엄 구조는 "누가 최종 책임 발행사인가"라는 질문에 쉽게 답하기 어렵다.' },
+                ] : [
+                  { title: 'Foreign exchange regulation', desc: 'OUSD is a dollar-denominated stablecoin. Under Korea\'s Foreign Exchange Transaction Act, domestic circulation of dollar stablecoins may be treated like foreign currency remittance/holding. Authorities have left open the possibility of applying forex regulations.' },
+                  { title: 'Reserve revenue sharing → financial product?', desc: 'OUSD partners receiving reserve interest may be interpreted as an "interest-paying financial product." In Korea, interest-paying products fall under the Banking Act and Capital Markets Act — difficult to permit as a stablecoin alone.' },
+                  { title: 'Consortium governance → unclear issuer', desc: 'Korean regulation is moving toward requiring a clearly identified stablecoin issuer. A 140-company consortium structure struggles to answer "who is the final responsible issuer?"' },
+                ]).map((item, i) => (
+                  <div key={i} className="border-b border-red-100 last:border-0 pb-2 last:pb-0">
+                    <div className="font-semibold text-slate-700 text-xs mb-0.5">{item.title}</div>
+                    <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+              <div className="font-bold text-amber-800 mb-3">{isKo ? '한국 입법의 방향과 한계' : 'Direction and limits of Korean legislation'}</div>
+              <div className="space-y-3 text-sm">
+                {(isKo ? [
+                  { title: '원화 스테이블코인 중심', desc: '현재 논의되는 디지털자산기본법은 원화(KRW) 스테이블코인 허용에 집중되어 있다. 달러 OUSD 같은 외화 스테이블코인은 논의의 주변부에 있다. 원화 스테이블코인이 먼저 자리잡으면 달러 스테이블코인 유통 허용은 더 늦어질 수 있다.' },
+                  { title: '결제 기능 규제가 핵심 변수', desc: '"투자 목적 보유는 허용하되 결제·송금 기능은 별도 규제"라는 분리 접근이 유력하다. 이 경우 OUSD를 한국 사용자가 투자 자산으로 보유할 수는 있어도, 실제 결제·급여 지급에 쓰는 것은 막힌다. OUSD의 핵심 가치가 결제·수익 공유인 만큼 치명적이다.' },
+                  { title: '글로벌 표준과 괴리', desc: '미국 GENIUS Act, EU MiCA, 싱가포르 MAS 프레임은 모두 달러 스테이블코인의 결제 수단 활용을 전제로 설계됐다. 한국만 유독 원화 스테이블코인 중심, 외화 스테이블코인 규제 방향으로 가면 글로벌 OUSD 생태계와 단절되는 구도가 된다.' },
+                ] : [
+                  { title: 'KRW stablecoin-centric', desc: 'The Digital Asset Basic Act currently under discussion focuses on permitting Korean won (KRW) stablecoins. Dollar-based foreign currency stablecoins like OUSD are at the periphery. If KRW stablecoins establish first, permitting foreign currency stablecoin circulation may be delayed further.' },
+                  { title: 'Payment function regulation is the key variable', desc: 'A bifurcated approach — "allow holding for investment but regulate payment/remittance functions separately" — is likely. In this case, Korean users might hold OUSD as an investment asset but not use it for actual payments or payroll. This is fatal given OUSD\'s core value is payments and revenue sharing.' },
+                  { title: 'Divergence from global standards', desc: 'US GENIUS Act, EU MiCA, and Singapore MAS frameworks are all designed assuming dollar stablecoins as payment instruments. If Korea uniquely moves toward KRW-stablecoin-first with restrictions on foreign currency stablecoins, Korea becomes disconnected from the global OUSD ecosystem.' },
+                ]).map((item, i) => (
+                  <div key={i} className="border-b border-amber-100 last:border-0 pb-2 last:pb-0">
+                    <div className="font-semibold text-slate-700 text-xs mb-0.5">{item.title}</div>
+                    <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-900 rounded-2xl p-6 mb-4">
+            <div className="text-slate-400 text-xs font-mono mb-4">{isKo ? '시나리오별 한국 OUSD 접근성' : 'Korea OUSD accessibility by scenario'}</div>
+            <div className="space-y-3 text-sm">
+              {(isKo ? [
+                { scenario: '시나리오 A — 외화 스테이블코인 결제 허용', result: 'OUSD 국내 결제·급여 활용 가능. 글로벌 표준 채택 시나리오. 가능성: 낮음 (단기)', color: 'text-green-400' },
+                { scenario: '시나리오 B — 투자 보유만 허용, 결제 금지', result: 'OUSD 거래소 상장 가능하나 핵심 기능(결제·수익공유) 불가. 반쪽짜리 허용. 가능성: 중간', color: 'text-amber-400' },
+                { scenario: '시나리오 C — 원화 스테이블코인 우선, 외화 추후 검토', result: 'OUSD 국내 서비스 사실상 불가. 입법 완료까지 2~3년 이상. 가능성: 높음 (단기)', color: 'text-red-400' },
+                { scenario: '시나리오 D — 규제 공백 지속', result: '법적 불확실성 유지. 기업 도입 불가, 개인은 해외 서비스 우회 사용. 가능성: 현재 상태', color: 'text-orange-400' },
+              ] : [
+                { scenario: 'Scenario A — Allow foreign currency stablecoin payments', result: 'OUSD usable for domestic payments and payroll. Global standards adoption scenario. Probability: Low (near-term)', color: 'text-green-400' },
+                { scenario: 'Scenario B — Allow holding only, ban payments', result: 'OUSD can list on exchanges but core functions (payments/revenue sharing) blocked. Half-permission. Probability: Medium', color: 'text-amber-400' },
+                { scenario: 'Scenario C — KRW stablecoin first, foreign currency later', result: 'OUSD effectively unavailable domestically. 2-3+ years until legislation complete. Probability: High (near-term)', color: 'text-red-400' },
+                { scenario: 'Scenario D — Regulatory gap persists', result: 'Legal uncertainty continues. No corporate adoption, individuals route through overseas services. Probability: Current state', color: 'text-orange-400' },
+              ]).map((item, i) => (
+                <div key={i} className="flex gap-3 border-t border-slate-800 pt-3 first:border-0 first:pt-0">
+                  <span className="text-slate-500 shrink-0 text-xs w-4">{i + 1}</span>
+                  <div className="flex-1">
+                    <div className="text-slate-300 text-xs font-semibold mb-0.5">{item.scenario}</div>
+                    <div className={`text-xs ${item.color}`}>{item.result}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+            <div className="font-bold text-blue-800 mb-2">{isKo ? '결론: 한국은 OUSD의 단기 공백 시장' : 'Conclusion: Korea is a near-term gap market for OUSD'}</div>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              {isKo
+                ? '한국 입법은 늦고, 방향도 달러 스테이블코인 활성화보다 원화 스테이블코인 육성에 무게가 실려 있다. OUSD가 미국·EU·싱가포르에서 결제 인프라로 자리잡아도 한국 사용자는 그 혜택을 제도적으로 누리기 어려울 수 있다. 글로벌 스테이블코인 경쟁에서 한국만 뒤처지는 구도가 될 위험이 있다. 반대로 보면, 입법이 완성되는 시점에 OUSD가 글로벌 표준으로 자리잡아 있다면 한국도 결국 수용할 수밖에 없는 흐름이 된다.'
+                : 'Korean legislation is slow, and its direction favors KRW stablecoin development over enabling dollar stablecoins. Even if OUSD establishes itself as payment infrastructure in the US, EU, and Singapore, Korean users may find it institutionally difficult to access those benefits. There\'s a risk of Korea alone falling behind in the global stablecoin competition. Looking at it the other way: if OUSD is the established global standard by the time Korean legislation is complete, Korea will have no choice but to adapt.'}
+            </p>
+          </div>
+        </section>
+
+        {/* Section 12: walits 관점 */}
+        <section>
+          <h2 className="text-2xl font-black text-slate-900 mb-6">
+            {isKo ? '12. walits 관점 — OUSD가 우리에게 무엇을 의미하나' : '12. walits Perspective — What OUSD Means for Us'}
           </h2>
 
           <p className="text-slate-600 leading-relaxed mb-6">
