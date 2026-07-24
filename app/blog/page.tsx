@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'walits-paymaster',
+          category: '가스리스 · EIP-3009',
+          categoryColor: 'bg-orange-100 text-orange-800',
+          title: 'Walits 가스리스 USDC — EIP-3009 릴레이어로 ETH 없이 전송하는 방법',
+          excerpt: '서명만 하면 Walits 릴레이어가 가스를 대납한다. EIP-3009 구현 완료, ERC-4337 Paymaster 로드맵. x402 AI 에이전트 결제에도 바로 적용 가능한 가스리스 인프라 완전 해부.',
+          date: '2026년 7월 25일',
+          readTime: '15분',
+          image: '/blog/paymaster.png',
+        },
+        {
           id: 'x402-protocol',
           category: 'AI 에이전트 결제',
           categoryColor: 'bg-violet-100 text-violet-800',
@@ -452,6 +462,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'walits-paymaster',
+          category: 'Gasless · EIP-3009',
+          categoryColor: 'bg-orange-100 text-orange-800',
+          title: 'Walits Gasless USDC — How EIP-3009 Relayer Lets You Transfer Without ETH',
+          excerpt: 'Just sign — Walits relayer pays the gas. EIP-3009 live, ERC-4337 Paymaster on roadmap. Full breakdown of the gasless infrastructure that\'s immediately connectable to x402 AI agent payments.',
+          date: 'July 25, 2026',
+          readTime: '15 min read',
+          image: '/blog/paymaster.png',
+        },
         {
           id: 'x402-protocol',
           category: 'AI Agent Payments',
