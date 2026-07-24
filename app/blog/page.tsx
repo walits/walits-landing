@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'x402-protocol',
+          category: 'AI 에이전트 결제',
+          categoryColor: 'bg-violet-100 text-violet-800',
+          title: 'x402 프로토콜 — HTTP 402의 30년 만의 부활, AI 에이전트가 USDC로 API를 즉시 결제한다',
+          excerpt: 'Coinbase + Cloudflare가 만든 x402로 AI 에이전트가 계정·카드·사람 개입 없이 API 1건당 USDC로 즉시 결제. Base 1.19억 건, 활성 에이전트 6.9만 개. Walits 인프라와 100% 호환되는 이유.',
+          date: '2026년 7월 25일',
+          readTime: '20분',
+          image: '/blog/x402.png',
+        },
+        {
           id: 'open-usd-ousd',
           category: '스테이블코인',
           categoryColor: 'bg-blue-100 text-blue-800',
@@ -442,6 +452,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'x402-protocol',
+          category: 'AI Agent Payments',
+          categoryColor: 'bg-violet-100 text-violet-800',
+          title: 'x402 Protocol — HTTP 402 Revived After 30 Years: AI Agents Pay for APIs Instantly in USDC',
+          excerpt: 'Coinbase + Cloudflare built x402 so AI agents pay for each API call in USDC — no account, no card, no human in the loop. 119M+ Base transactions, 69K active agents. Why Walits infrastructure is 100% compatible.',
+          date: 'July 25, 2026',
+          readTime: '20 min read',
+          image: '/blog/x402.png',
+        },
         {
           id: 'open-usd-ousd',
           category: 'Stablecoin',
