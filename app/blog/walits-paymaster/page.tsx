@@ -46,7 +46,7 @@ export default function WalitsPaymasterPage() {
       {/* Hero Image */}
       <div className="max-w-4xl mx-auto px-6 -mt-4">
         <div className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl">
-          <Image src="/blog/x402.png" alt="Walits Gasless USDC EIP-3009 Relayer" fill className="object-cover" />
+          <Image src="/blog/ico-wallet.jpg" alt="Walits Gasless USDC EIP-3009 Relayer" fill className="object-cover" />
         </div>
       </div>
 

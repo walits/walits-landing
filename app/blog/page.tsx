@@ -22,7 +22,7 @@ export default function BlogPage() {
           excerpt: '서명만 하면 Walits 릴레이어가 가스를 대납한다. EIP-3009 구현 완료, ERC-4337 Paymaster 로드맵. x402 AI 에이전트 결제에도 바로 적용 가능한 가스리스 인프라 완전 해부.',
           date: '2026년 7월 25일',
           readTime: '15분',
-          image: '/blog/x402.png',
+          image: '/blog/ico-wallet.jpg',
         },
         {
           id: 'x402-protocol',
@@ -470,7 +470,7 @@ export default function BlogPage() {
           excerpt: 'Just sign — Walits relayer pays the gas. EIP-3009 live, ERC-4337 Paymaster on roadmap. Full breakdown of the gasless infrastructure that\'s immediately connectable to x402 AI agent payments.',
           date: 'July 25, 2026',
           readTime: '15 min read',
-          image: '/blog/x402.png',
+          image: '/blog/ico-wallet.jpg',
         },
         {
           id: 'x402-protocol',
