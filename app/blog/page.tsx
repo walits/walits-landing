@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'eip-8141-frame-transaction',
+          category: '이더리움 개발자 가이드',
+          categoryColor: 'bg-purple-100 text-purple-800',
+          title: 'EIP-8141 Frame Transaction 완전 정복 — EIP-86에서 시작된 9년짜리 Account Abstraction의 종착점',
+          excerpt: 'EIP-86 → ERC-4337 → EIP-3074 → EIP-7702 → EIP-8141. 프레임 모드, APPROVE 오퍼코드, 원자적 배치, 2차원 가스, mempool 모델까지. 번들러 없이 프로토콜 레벨에서 AA를 완성하는 Frame Transaction 개발자 완전 가이드.',
+          date: '2026년 9월 11일',
+          readTime: '40분',
+          image: '/blog/eip8141.jpg',
+        },
+        {
           id: 'walits-paymaster',
           category: '가스리스 · EIP-3009',
           categoryColor: 'bg-orange-100 text-orange-800',
@@ -462,6 +472,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'eip-8141-frame-transaction',
+          category: 'Ethereum Developer Guide',
+          categoryColor: 'bg-purple-100 text-purple-800',
+          title: 'EIP-8141 Frame Transaction Deep Dive — The 9-Year Account Abstraction Journey Reaches Its Destination',
+          excerpt: 'EIP-86 → ERC-4337 → EIP-3074 → EIP-7702 → EIP-8141. Frame modes, APPROVE opcode, atomic batching, 2D gas, and the mempool model. The complete developer guide to Frame Transaction — Account Abstraction completed at the protocol level, no Bundler required.',
+          date: 'September 11, 2026',
+          readTime: '40 min read',
+          image: '/blog/eip8141.jpg',
+        },
         {
           id: 'walits-paymaster',
           category: 'Gasless · EIP-3009',
