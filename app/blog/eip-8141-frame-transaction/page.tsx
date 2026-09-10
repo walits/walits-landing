@@ -873,6 +873,1506 @@ Frame 4: batch_flag=0  ─┘`}</pre>
             </div>
           </section>
 
+          {/* ── Section 16: TypeScript Frame Tx 구성 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '16. TypeScript로 Frame Transaction 직접 만들기' : '16. Building a Frame Transaction in TypeScript'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? '실제로 Frame Transaction을 구성하고 서명해서 노드에 전송하기까지의 전체 흐름을 코드로 살펴보자. EIP-8141이 확정되면 viem/ethers 같은 라이브러리가 이를 추상화하겠지만, 내부 구조를 이해하는 게 핵심이다.'
+                : "Let's walk through the full flow of constructing, signing, and submitting a Frame Transaction in code. Once EIP-8141 is finalized, libraries like viem/ethers will abstract this — but understanding the internals is key."}
+            </p>
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '16.1 Frame Transaction RLP 인코딩' : '16.1 Frame Transaction RLP Encoding'}</h3>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <div className="text-slate-400 text-xs mb-3 font-mono">{isKo ? '// frame-tx.ts — Frame Transaction 구조 정의 및 인코딩' : '// frame-tx.ts — Frame Transaction structure & encoding'}</div>
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`import { RLP } from '@ethereumjs/rlp';
+import { keccak256, hexToBytes, bytesToHex } from 'viem';
+
+// Transaction type byte
+const TX_TYPE_FRAME = 0x06;
+
+// Frame modes
+const FRAME_MODE_DEFAULT = 0;
+const FRAME_MODE_VERIFY  = 1;
+const FRAME_MODE_SENDER  = 2;
+
+// APPROVE scope constants
+const APPROVE_PAYMENT             = 0x1;
+const APPROVE_EXECUTION           = 0x2;
+const APPROVE_EXECUTION_AND_PAYMENT = 0x3;
+
+// Signature schemes
+const SIG_ARBITRARY  = 0x0;
+const SIG_SECP256K1  = 0x1;
+const SIG_P256       = 0x2;
+
+interface Frame {
+  mode: number;
+  flags: bigint;        // 256-bit flags field
+  target: string | null; // address or null (= tx.sender)
+  executionGas: bigint;
+  stateGas: bigint;
+  value: bigint;
+  data: Uint8Array;
+}
+
+interface FrameSignature {
+  scheme: number;
+  signer: string;   // address (20 bytes)
+  message: Uint8Array;
+  signature: Uint8Array;
+}
+
+interface FrameTx {
+  chainId: bigint;
+  nonce: bigint;
+  sender: string;
+  frames: Frame[];
+  signatures: FrameSignature[];
+  maxPriorityFeePerGas: bigint;
+  maxFeePerGas: bigint;
+  maxFeePerBlobGas: bigint;
+  blobVersionedHashes: Uint8Array[];
+}
+
+function encodeFrame(f: Frame): Uint8Array[] {
+  return [
+    RLP.encode(f.mode),
+    RLP.encode(f.flags),
+    f.target ? hexToBytes(f.target as \`0x\${string}\`) : new Uint8Array(0),
+    RLP.encode([f.executionGas, f.stateGas]),
+    RLP.encode(f.value),
+    f.data,
+  ];
+}
+
+function encodeSignature(s: FrameSignature): Uint8Array[] {
+  return [
+    RLP.encode(s.scheme),
+    hexToBytes(s.signer as \`0x\${string}\`),
+    s.message,
+    s.signature,
+  ];
+}
+
+export function encodeFrameTx(tx: FrameTx): Uint8Array {
+  const encoded = RLP.encode([
+    tx.chainId,
+    tx.nonce,
+    hexToBytes(tx.sender as \`0x\${string}\`),
+    tx.frames.map(encodeFrame),
+    tx.signatures.map(encodeSignature),
+    [tx.maxPriorityFeePerGas, tx.maxFeePerGas, tx.maxFeePerBlobGas],
+    tx.blobVersionedHashes,
+  ]);
+  // Prepend transaction type byte 0x06
+  const result = new Uint8Array(1 + encoded.length);
+  result[0] = TX_TYPE_FRAME;
+  result.set(encoded, 1);
+  return result;
+}
+
+// Signing hash: keccak256(0x06 || rlp(payload))
+export function frameTxSigningHash(tx: FrameTx): \`0x\${string}\` {
+  return keccak256(encodeFrameTx(tx));
+}`}</pre>
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '16.2 가장 단순한 케이스: 기존 EOA가 ETH 전송' : '16.2 Simplest Case: Legacy EOA Sending ETH'}</h3>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`import { privateKeyToAccount } from 'viem/accounts';
+import { createWalletClient, http, parseEther } from 'viem';
+import { mainnet } from 'viem/chains';
+
+const account = privateKeyToAccount('0x...');
+
+// Simple ETH transfer as Frame Transaction
+// Frame 0: VERIFY (self-pay, self-authorize execution)
+// Frame 1: SENDER (actual transfer)
+const tx: FrameTx = {
+  chainId: 1n,
+  nonce: 0n,
+  sender: account.address,
+  frames: [
+    {
+      mode: FRAME_MODE_VERIFY,
+      flags: BigInt(APPROVE_EXECUTION_AND_PAYMENT), // scope 0x3
+      target: null,  // target = tx.sender (self)
+      executionGas: 50_000n,
+      stateGas: 0n,
+      value: 0n,
+      data: new Uint8Array(0),
+    },
+    {
+      mode: FRAME_MODE_SENDER,
+      flags: 0n,
+      target: '0xRecipientAddress',
+      executionGas: 21_000n,
+      stateGas: 0n,
+      value: parseEther('0.1'),
+      data: new Uint8Array(0),
+    },
+  ],
+  signatures: [
+    {
+      scheme: SIG_SECP256K1,
+      signer: account.address,
+      message: new Uint8Array(0), // auto-computed by protocol for self-verify
+      signature: new Uint8Array(0), // filled after signing
+    },
+  ],
+  maxPriorityFeePerGas: 1_000_000_000n,
+  maxFeePerGas: 30_000_000_000n,
+  maxFeePerBlobGas: 0n,
+  blobVersionedHashes: [],
+};
+
+// Sign the transaction
+const hash = frameTxSigningHash(tx);
+const sig = await account.sign({ hash });
+
+// Insert signature (v=1/0, r, s — 65 bytes)
+tx.signatures[0].signature = hexToBytes(sig);
+
+const rawTx = encodeFrameTx(tx);
+// Submit: eth_sendRawTransaction
+const txHash = await client.request({
+  method: 'eth_sendRawTransaction',
+  params: [bytesToHex(rawTx)],
+});`}</pre>
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '16.3 Paymaster 패턴 구성 (스폰서 가스 분리)' : '16.3 Paymaster Pattern (Separate Gas Sponsor)'}</h3>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`// Paymaster pattern:
+// Frame 0: VERIFY (userAccount → APPROVE_EXECUTION only)
+// Frame 1: VERIFY (paymasterContract → APPROVE_PAYMENT only)
+// Frame 2: SENDER (actual user action)
+
+const userTx: FrameTx = {
+  chainId: 1n,
+  nonce: 0n,
+  sender: userAddress,
+  frames: [
+    {
+      mode: FRAME_MODE_VERIFY,
+      flags: BigInt(APPROVE_EXECUTION), // scope 0x2 (execution only)
+      target: null,  // userAddress
+      executionGas: 50_000n,
+      stateGas: 0n,
+      value: 0n,
+      data: new Uint8Array(0),
+    },
+    {
+      mode: FRAME_MODE_VERIFY,
+      flags: BigInt(APPROVE_PAYMENT), // scope 0x1 (payment only)
+      target: PAYMASTER_ADDRESS,
+      executionGas: 80_000n,
+      stateGas: 0n,
+      value: 0n,
+      // paymasterData: ABI-encoded validation params
+      data: encodePaymasterData({ userAddress, expiry: BigInt(Date.now() / 1000 + 3600) }),
+    },
+    {
+      mode: FRAME_MODE_SENDER,
+      flags: 0n,
+      target: UNISWAP_ROUTER,
+      executionGas: 200_000n,
+      stateGas: 50_000n,
+      value: 0n,
+      data: encodeSwapData(...),
+    },
+  ],
+  signatures: [
+    // sig[0]: user's SECP256K1 signature (for VERIFY frame 0)
+    { scheme: SIG_SECP256K1, signer: userAddress, message: new Uint8Array(0), signature: userSig },
+    // sig[1]: paymaster's SECP256K1 signature (for VERIFY frame 1)
+    { scheme: SIG_SECP256K1, signer: paymasterSigner, message: new Uint8Array(0), signature: paymasterSig },
+  ],
+  maxPriorityFeePerGas: 1_000_000_000n,
+  maxFeePerGas: 30_000_000_000n,
+  maxFeePerBlobGas: 0n,
+  blobVersionedHashes: [],
+};
+
+// NOTE: In this pattern, payer = PAYMASTER_ADDRESS (set when APPROVE_PAYMENT is called)
+// Gas deducted from paymaster contract's ETH balance, not user's`}</pre>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+              <p className="text-blue-900 text-sm leading-relaxed m-0">
+                <strong>{isKo ? '💡 서명 순서 주의:' : '💡 Note on signature ordering:'}</strong>{' '}
+                {isKo
+                  ? '기본 코드(default code)는 실행 승인이 포함된 VERIFY 프레임이면 signatures[0]을, 결제 전용이면 signatures[1]을 사용한다. 스마트 계정은 SIGPARAM 오퍼코드로 직접 인덱스를 지정한다.'
+                  : 'Default code uses signatures[0] for VERIFY frames with execution approval, and signatures[1] for payment-only frames. Smart accounts use the SIGPARAM opcode to specify the index directly.'}
+              </p>
+            </div>
+          </section>
+
+          {/* ── Section 17: Solidity 스마트 계정 구현 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '17. Solidity로 스마트 계정 작성하기' : '17. Writing a Smart Account in Solidity'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? 'EIP-8141 스마트 계정의 핵심은 VERIFY 프레임에서 올바르게 APPROVE를 호출하는 것이다. 이 섹션에서는 최소 기능 스마트 계정부터 ERC-7579 모듈식 계정까지 단계별로 구현해본다.'
+                : "The heart of an EIP-8141 smart account is correctly calling APPROVE inside a VERIFY frame. This section walks through implementation from a minimal smart account to an ERC-7579 modular account."}
+            </p>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '17.1 최소 기능 스마트 계정 (secp256k1 서명 검증)' : '17.1 Minimal Smart Account (secp256k1 signature verification)'}</h3>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+// EIP-8141 opcodes as assembly constants
+// APPROVE    = 0xaa
+// TXPARAM    = 0xb0
+// FRAMEPARAM = 0xb3
+// SIGPARAM   = 0xb4
+
+contract MinimalSmartAccount {
+    // ── Storage ──────────────────────────────────────────────────────
+    address public owner;
+
+    constructor(address _owner) {
+        owner = _owner;
+    }
+
+    // ── VERIFY frame entry point ──────────────────────────────────────
+    // Called by ENTRY_POINT (0xaa) as STATICCALL
+    // Must call APPROVE to signal validation success
+    fallback() external {
+        // Read which frame mode we're in via FRAMEPARAM
+        uint8 frameMode;
+        assembly {
+            // FRAMEPARAM(0) returns frame mode
+            mstore(0x00, 0)
+            let ok := staticcall(gas(), 0xb3, 0x00, 0x20, 0x00, 0x20)
+            frameMode := mload(0x00)
+        }
+
+        if (frameMode == 1) {
+            // VERIFY frame: validate and APPROVE
+            _verify();
+        }
+        // SENDER frame: execution is handled by SENDER mode caller
+        // DEFAULT frame: post-op hooks can go here
+    }
+
+    function _verify() internal view {
+        // 1. Read the signing hash from TXPARAM
+        //    TXPARAM(4) = signing_hash (what the protocol computes over the tx)
+        bytes32 signingHash;
+        assembly {
+            mstore(0x00, 4)
+            staticcall(gas(), 0xb0, 0x00, 0x20, 0x00, 0x20)
+            signingHash := mload(0x00)
+        }
+
+        // 2. Read SECP256K1 signature from signatures list
+        //    SIGPARAM(0) = number of signatures
+        //    For SECP256K1: signature is (v, r, s) = 65 bytes
+        uint8 v;
+        bytes32 r;
+        bytes32 s;
+        assembly {
+            // SIGPARAM(sigIndex=0, field=0) → scheme
+            // For brevity, read SECP256K1 sig at index 0
+            // Real impl: read SIGPARAM to get scheme, then SIGDATACOPY
+            let ptr := mload(0x40)
+            // v = 27 or 28
+            mstore(ptr, 0)          // sig index = 0
+            mstore(add(ptr, 0x20), 1) // field = 1 (sig data start)
+            // SIGDATACOPY(destOffset, sigIndex, srcOffset, length)
+            // Stack: [sigIndex, destOffset, srcOffset, length]
+            // For secp256k1: v=1byte at offset 0, r=32 at offset 1, s=32 at offset 33
+        }
+        // NOTE: in practice use SIGDATACOPY via assembly to copy bytes
+        // Simplified here: assume sig loaded via library
+
+        // 3. ecrecover and check owner
+        address recovered = ecrecover(signingHash, v, r, s);
+        require(recovered == owner, "Invalid signature");
+
+        // 4. APPROVE — tell the protocol this frame is validated
+        //    APPROVE(offset=0, length=0, scope=0x3)
+        //    scope 0x3 = APPROVE_EXECUTION_AND_PAYMENT
+        uint8 scope = 0x3; // or read from frame flags
+        assembly {
+            // Stack: [offset, length, scope]
+            // APPROVE opcode = 0xaa
+            mstore(0x00, 0)    // offset
+            mstore(0x20, 0)    // length
+            mstore(0x40, scope) // scope
+            // Call APPROVE via assembly
+            // Note: APPROVE is a new opcode, not a precompile call
+            // In real EIP-8141 EVM it's a native opcode
+            pop(call(gas(), 0xaa, 0, 0, 0x60, 0, 0))
+        }
+    }
+}`}</pre>
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '17.2 분리된 결제/실행 APPROVE 패턴' : '17.2 Separated Payment/Execution APPROVE Pattern'}</h3>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`// Two separate VERIFY frames pattern:
+// Frame 0: userAccount verifies sig → APPROVE(scope=0x2) execution only
+// Frame 1: paymasterContract verifies policy → APPROVE(scope=0x1) payment only
+
+contract UserSmartAccount {
+    address public owner;
+
+    fallback() external {
+        uint8 frameMode = _getFrameMode();
+        if (frameMode != 1) return; // Only handle VERIFY frames
+
+        // Read allowed scope from frame flags
+        // flags & 0x3 = scope bits
+        uint256 flags = _getFrameFlags();
+        uint8 allowedScope = uint8(flags & 0x3);
+        require(allowedScope != 0, "No scope allowed");
+
+        // Verify signature
+        bytes32 sigHash = _getTxSigningHash();
+        require(_verifyOwnerSig(sigHash), "Bad sig");
+
+        // APPROVE only execution (not payment — paymaster handles that)
+        _approve(APPROVE_EXECUTION); // scope = 0x2
+    }
+
+    function _approve(uint8 scope) internal {
+        assembly {
+            // APPROVE opcode 0xaa
+            // Arguments pushed to stack: offset=0, length=0, scope
+            let ok := call(gas(), 0xaa, 0, 0, 0, 0, 0)
+            // The actual EIP-8141 APPROVE opcode takes scope from frame flags
+            // or from the call arguments depending on final spec
+        }
+    }
+
+    // Helper: read frame mode via FRAMEPARAM opcode
+    function _getFrameMode() internal view returns (uint8 mode) {
+        assembly {
+            mstore(0x00, 0) // param index 0 = mode
+            staticcall(gas(), 0xb3, 0x00, 0x20, 0x00, 0x20)
+            mode := and(mload(0x00), 0xff)
+        }
+    }
+
+    function _getFrameFlags() internal view returns (uint256 flags) {
+        assembly {
+            mstore(0x00, 1) // param index 1 = flags
+            staticcall(gas(), 0xb3, 0x00, 0x20, 0x00, 0x20)
+            flags := mload(0x00)
+        }
+    }
+
+    function _getTxSigningHash() internal view returns (bytes32 h) {
+        assembly {
+            mstore(0x00, 4) // TXPARAM index 4 = signing_hash
+            staticcall(gas(), 0xb0, 0x00, 0x20, 0x00, 0x20)
+            h := mload(0x00)
+        }
+    }
+
+    function _verifyOwnerSig(bytes32 hash) internal view returns (bool) {
+        // In practice: SIGDATACOPY to load sig bytes, then ecrecover
+        // Simplified: assume library call
+        return true; // placeholder
+    }
+
+    uint8 constant APPROVE_EXECUTION = 0x2;
+}`}</pre>
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '17.3 TXPARAM 파라미터 인덱스 레퍼런스' : '17.3 TXPARAM Parameter Index Reference'}</h3>
+            <div className="overflow-x-auto rounded-xl border border-slate-200 mb-6">
+              <table className="w-full text-sm">
+                <thead className="bg-slate-900 text-white">
+                  <tr>
+                    <th className="text-left px-4 py-3">{isKo ? '인덱스' : 'Index'}</th>
+                    <th className="text-left px-4 py-3">{isKo ? '반환값' : 'Returns'}</th>
+                    <th className="text-left px-4 py-3">{isKo ? '용도' : 'Use case'}</th>
+                  </tr>
+                </thead>
+                <tbody className="text-xs">
+                  {[
+                    { idx: '0', ret: 'tx.sender', use: isKo ? '사용자 주소 확인' : 'Verify user address' },
+                    { idx: '1', ret: 'tx.nonce', use: isKo ? '논스 검증 (재사용 방지)' : 'Nonce validation (replay protection)' },
+                    { idx: '2', ret: 'tx.max_cost', use: isKo ? 'Paymaster가 지불 가능한지 확인' : 'Paymaster checks if it can cover cost' },
+                    { idx: '3', ret: 'tx.chain_id', use: isKo ? '체인 분리 보장' : 'Chain isolation guarantee' },
+                    { idx: '4', ret: 'signing_hash', use: isKo ? '서명 검증용 해시' : 'Hash used for signature verification' },
+                    { idx: '5', ret: 'frame_count', use: isKo ? '총 프레임 수' : 'Total number of frames' },
+                    { idx: '6', ret: 'current_frame_idx', use: isKo ? '현재 실행 중인 프레임 인덱스' : 'Index of currently executing frame' },
+                  ].map((row, i) => (
+                    <tr key={row.idx} className={i % 2 === 0 ? 'bg-white border-b border-slate-100' : 'bg-slate-50 border-b border-slate-100'}>
+                      <td className="px-4 py-3 font-mono text-blue-700 font-bold">{row.idx}</td>
+                      <td className="px-4 py-3 font-mono text-green-700">{row.ret}</td>
+                      <td className="px-4 py-3 text-slate-600">{row.use}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* ── Section 18: Canonical Paymaster Solidity ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '18. Canonical Paymaster 완전 구현' : '18. Canonical Paymaster — Full Implementation'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? 'EIP-8141의 mempool 허용 패턴 중 [only_verify → pay]가 공식 Paymaster 패턴이다. Paymaster 컨트랙트는 VERIFY 프레임에서 APPROVE_PAYMENT를 호출한다. 아래는 최소 기능 Paymaster 전체 구현이다.'
+                : 'Among EIP-8141\'s allowed mempool patterns, [only_verify → pay] is the canonical Paymaster pattern. The Paymaster contract calls APPROVE_PAYMENT inside a VERIFY frame. Below is a full minimal Paymaster implementation.'}
+            </p>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+/// @title MinimalPaymaster
+/// @notice EIP-8141 Canonical Paymaster implementation
+/// @dev Receives VERIFY frames with scope=APPROVE_PAYMENT (0x1)
+///      Validates user policy and calls APPROVE to cover tx costs
+contract MinimalPaymaster {
+    // ── Constants ──────────────────────────────────────────────────────
+    uint8 constant FRAME_MODE_VERIFY = 1;
+    uint8 constant APPROVE_PAYMENT   = 0x1;
+
+    // EIP-8141 special address for ENTRY_POINT
+    address constant ENTRY_POINT = address(0xaa);
+
+    // ── Storage ────────────────────────────────────────────────────────
+    address public admin;
+    // user address → whether they are whitelisted for free gas
+    mapping(address => bool) public whitelist;
+    // user address → USDC allowance for gas payment
+    mapping(address => uint256) public usdcGasBalance;
+    // accumulated protocol fee in USDC
+    uint256 public feePool;
+
+    event GasSponsored(address indexed user, uint256 maxCost);
+    event GasPaidInUsdc(address indexed user, uint256 usdcAmount);
+
+    constructor() {
+        admin = msg.sender;
+    }
+
+    // ── Deposit / Admin ────────────────────────────────────────────────
+    receive() external payable {}  // Accept ETH to fund gas
+
+    function depositUsdcFor(address user, uint256 amount) external {
+        // Pull USDC from caller (requires ERC-20 approve first)
+        IERC20(USDC_ADDRESS).transferFrom(msg.sender, address(this), amount);
+        usdcGasBalance[user] += amount;
+    }
+
+    function setWhitelist(address user, bool allowed) external {
+        require(msg.sender == admin, "Not admin");
+        whitelist[user] = allowed;
+    }
+
+    // ── Main VERIFY frame handler ──────────────────────────────────────
+    fallback() external {
+        // Only handle VERIFY frames
+        require(_frameMode() == FRAME_MODE_VERIFY, "Not VERIFY frame");
+
+        // Read tx params via TXPARAM
+        address txSender = _txParam(0);
+        uint256 maxCost  = _txParam(2); // max ETH cost of entire tx
+
+        // ── Policy check: whitelist OR USDC prepayment ──────────────
+        if (whitelist[txSender]) {
+            // Free sponsorship for whitelisted users
+            emit GasSponsored(txSender, maxCost);
+            _approve(APPROVE_PAYMENT);
+        } else {
+            // Check USDC gas balance covers cost (using price oracle)
+            uint256 usdcRequired = _ethToUsdc(maxCost);
+            require(usdcGasBalance[txSender] >= usdcRequired, "Insufficient USDC gas balance");
+
+            // Deduct USDC upfront (debit during VERIFY, refund in post-op if needed)
+            usdcGasBalance[txSender] -= usdcRequired;
+            feePool += usdcRequired;
+
+            emit GasPaidInUsdc(txSender, usdcRequired);
+            _approve(APPROVE_PAYMENT);
+        }
+        // If we reach here without APPROVE, tx is rejected
+    }
+
+    // ── EIP-8141 Opcode wrappers ────────────────────────────────────────
+    function _approve(uint8 scope) internal {
+        assembly {
+            // APPROVE opcode 0xaa: sets payer = address(this), nonce++, deducts max_cost
+            pop(call(gas(), 0xaa, 0, 0, 0, 0, 0))
+        }
+    }
+
+    function _frameMode() internal view returns (uint8 mode) {
+        assembly {
+            mstore(0, 0)
+            staticcall(gas(), 0xb3, 0, 0x20, 0, 0x20)
+            mode := and(mload(0), 0xff)
+        }
+    }
+
+    function _txParam(uint256 idx) internal view returns (address val) {
+        assembly {
+            mstore(0, idx)
+            staticcall(gas(), 0xb0, 0, 0x20, 0, 0x20)
+            val := mload(0)
+        }
+    }
+
+    function _ethToUsdc(uint256 ethAmount) internal view returns (uint256) {
+        // Simplified: use a price oracle (Chainlink ETH/USD)
+        // Real impl: IPriceFeed(ORACLE).latestRoundData()
+        uint256 ethPriceInUsdc = 3000 * 1e6; // $3000 per ETH, 6 decimals
+        return (ethAmount * ethPriceInUsdc) / 1e18;
+    }
+
+    address constant USDC_ADDRESS = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48; // mainnet USDC
+}
+
+interface IERC20 {
+    function transferFrom(address, address, uint256) external returns (bool);
+    function transfer(address, uint256) external returns (bool);
+}`}</pre>
+            </div>
+
+            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-5">
+              <p className="text-yellow-900 text-sm leading-relaxed m-0">
+                <strong>{isKo ? '⚠️ Paymaster 보안 주의사항:' : '⚠️ Paymaster Security Notes:'}</strong>{' '}
+                {isKo
+                  ? 'VERIFY 프레임은 STATICCALL이라 상태 변경이 금지된다. usdcGasBalance 차감은 실제 구현에서 EVM 상태 변경이 필요해 구조적으로 다르게 설계해야 할 수 있다. 스펙 확정 후 재검토 필요.'
+                  : 'VERIFY frames run as STATICCALL, so state mutations are forbidden. The usdcGasBalance deduction requires state change — the actual implementation may need a different structure. Revisit after spec finalization.'}
+              </p>
+            </div>
+          </section>
+
+          {/* ── Section 19: P256 / WebAuthn / ARBITRARY 서명 검증 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '19. P256 / WebAuthn / ARBITRARY 서명 검증 구현' : '19. Implementing P256 / WebAuthn / ARBITRARY Signature Verification'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? 'ARBITRARY scheme(0x0)의 핵심은 SIGDATACOPY + SIGPARAM으로 서명 바이트를 EVM 메모리로 불러온 뒤 원하는 방식으로 검증하는 것이다. P256 scheme(0x2)은 프로토콜이 내장 검증을 수행하지만 signer 주소 도출 방식을 반드시 이해해야 한다.'
+                : 'The essence of ARBITRARY scheme (0x0) is loading signature bytes into EVM memory via SIGDATACOPY + SIGPARAM, then verifying in any way you want. P256 scheme (0x2) gets built-in protocol verification, but you must understand signer address derivation.'}
+            </p>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '19.1 P256 / 패스키 서명 스마트 계정' : '19.1 P256 / Passkey Signature Smart Account'}</h3>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`// P256 signer address derivation:
+// When signature scheme = P256 (0x2), signature encoding is:
+//   r(32) || s(32) || qx(32) || qy(32)  = 128 bytes
+//
+// Protocol derives signer address as:
+//   keccak256(qx || qy)[12:]  ← last 20 bytes of keccak hash
+//
+// This is analogous to ECDSA but uses P256 public key components.
+
+contract P256SmartAccount {
+    // The P256 "signer address" stored at construction
+    // = keccak256(pubKeyX || pubKeyY)[12:]
+    address public p256Signer;
+
+    uint8 constant FRAME_MODE_VERIFY = 1;
+
+    constructor(bytes32 pubKeyX, bytes32 pubKeyY) {
+        // Compute P256 signer address from public key
+        p256Signer = address(uint160(uint256(keccak256(abi.encodePacked(pubKeyX, pubKeyY)))));
+    }
+
+    fallback() external {
+        if (_frameMode() != FRAME_MODE_VERIFY) return;
+
+        // For P256 scheme, the protocol itself verifies the signature.
+        // The VERIFY frame's job is just to confirm the signer matches owner.
+        // Use SIGPARAM to read the signer address that the protocol resolved.
+
+        address resolvedSigner;
+        assembly {
+            // SIGPARAM(sigIndex=0, field=2) = signer address resolved by protocol
+            mstore(0x00, 0)  // sig index 0
+            mstore(0x20, 2)  // field 2 = resolved signer
+            staticcall(gas(), 0xb4, 0x00, 0x40, 0x00, 0x20)
+            resolvedSigner := mload(0x00)
+        }
+
+        require(resolvedSigner == p256Signer, "P256: wrong signer");
+
+        // Additional checks: nonce, expiry, scope
+        _approve(0x3); // APPROVE_EXECUTION_AND_PAYMENT
+    }
+
+    function _approve(uint8 scope) internal {
+        assembly { pop(call(gas(), 0xaa, 0, 0, 0, 0, 0)) }
+    }
+
+    function _frameMode() internal view returns (uint8 m) {
+        assembly {
+            mstore(0, 0)
+            staticcall(gas(), 0xb3, 0, 0x20, 0, 0x20)
+            m := and(mload(0), 0xff)
+        }
+    }
+}
+
+// ── ARBITRARY scheme: BLS / Custom Signature ──────────────────────────
+// Use SIGDATACOPY to pull arbitrary sig bytes and verify with EVM bytecode
+
+contract ArbitrarySignatureAccount {
+    // For example: a simple 2-of-2 multi-sig with BLS aggregation
+    bytes32 public blsPublicKeyHash; // hash of the aggregate BLS public key
+
+    fallback() external {
+        if (_frameMode() != 1) return;
+
+        // 1. Get ARBITRARY sig length via SIGPARAM
+        uint256 sigLen;
+        assembly {
+            mstore(0x00, 0)  // sig index 0
+            mstore(0x20, 3)  // field 3 = signature byte length (for ARBITRARY)
+            staticcall(gas(), 0xb4, 0x00, 0x40, 0x00, 0x20)
+            sigLen := mload(0x00)
+        }
+
+        // 2. Copy signature bytes to memory via SIGDATACOPY
+        bytes memory sigBytes = new bytes(sigLen);
+        assembly {
+            // SIGDATACOPY(sigIndex=0, destOffset=sigBytes+32, srcOffset=0, length=sigLen)
+            mstore(0x00, 0)              // sig index
+            mstore(0x20, add(sigBytes, 32)) // dest
+            mstore(0x40, 0)              // src offset
+            mstore(0x60, sigLen)         // length
+            staticcall(gas(), 0xb5, 0x00, 0x80, 0x00, 0x00)
+        }
+
+        // 3. Verify BLS signature in EVM bytecode
+        //    (In practice: call a BLS precompile or EIP-2537 G1/G2 operations)
+        bytes32 sigHash = _getTxSigningHash();
+        require(_verifyBLS(sigHash, sigBytes), "BLS: invalid signature");
+
+        _approve(0x3);
+    }
+
+    function _verifyBLS(bytes32 msgHash, bytes memory sig) internal view returns (bool) {
+        // EIP-2537 BLS precompile calls would go here
+        // Placeholder implementation
+        return sig.length > 0;
+    }
+
+    function _getTxSigningHash() internal view returns (bytes32 h) {
+        assembly {
+            mstore(0, 4)
+            staticcall(gas(), 0xb0, 0, 0x20, 0, 0x20)
+            h := mload(0)
+        }
+    }
+
+    function _frameMode() internal view returns (uint8 m) {
+        assembly {
+            mstore(0, 0)
+            staticcall(gas(), 0xb3, 0, 0x20, 0, 0x20)
+            m := and(mload(0), 0xff)
+        }
+    }
+
+    function _approve(uint8 scope) internal {
+        assembly { pop(call(gas(), 0xaa, 0, 0, 0, 0, 0)) }
+    }
+}`}</pre>
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '19.2 TypeScript: WebAuthn P256 서명 준비' : '19.2 TypeScript: Preparing a WebAuthn P256 Signature'}</h3>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`// WebAuthn passkey authentication → EIP-8141 P256 signature
+import { startAuthentication } from '@simplewebauthn/browser';
+import { keccak256, hexToBytes, bytesToHex, concatBytes } from 'viem';
+
+interface P256Signature {
+  r: Uint8Array;  // 32 bytes
+  s: Uint8Array;  // 32 bytes
+  qx: Uint8Array; // 32 bytes (public key X)
+  qy: Uint8Array; // 32 bytes (public key Y)
+}
+
+async function signFrameTxWithPasskey(
+  txHash: \`0x\${string}\`,
+  credentialId: string,
+): Promise<P256Signature> {
+  // Convert tx hash to WebAuthn challenge
+  const challenge = Buffer.from(hexToBytes(txHash)).toString('base64url');
+
+  // Request WebAuthn authentication
+  const assertion = await startAuthentication({
+    optionsJSON: {
+      challenge,
+      rpId: window.location.hostname,
+      allowCredentials: [{ id: credentialId, type: 'public-key' }],
+      userVerification: 'required',
+    },
+  });
+
+  // Parse the CBOR-encoded signature from WebAuthn response
+  // assertion.response.signature contains DER-encoded P256 sig
+  const derSig = Buffer.from(assertion.response.signature, 'base64url');
+
+  // Parse DER signature → (r, s)
+  const { r, s } = parseDerP256Signature(derSig);
+
+  // qx, qy come from the stored credential public key (registered at account creation)
+  const { qx, qy } = await getStoredPublicKey(credentialId);
+
+  return { r, s, qx, qy };
+}
+
+// Encode as EIP-8141 P256 signature bytes: r||s||qx||qy = 128 bytes
+function encodeP256Signature(sig: P256Signature): Uint8Array {
+  return concatBytes([sig.r, sig.s, sig.qx, sig.qy]); // 128 bytes total
+}
+
+// Derive the P256 "signer address" (matches what protocol computes)
+function deriveP256SignerAddress(qx: Uint8Array, qy: Uint8Array): \`0x\${string}\` {
+  const combined = concatBytes([qx, qy]); // 64 bytes
+  const hash = keccak256(combined);
+  // Take last 20 bytes
+  return \`0x\${hash.slice(-40)}\` as \`0x\${string}\`;
+}`}</pre>
+            </div>
+          </section>
+
+          {/* ── Section 20: 2D 가스 추정 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '20. 2D 가스 추정 — TypeScript 구현' : '20. 2D Gas Estimation — TypeScript Implementation'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? 'EIP-8141은 EIP-8037(2D 가스)에 의존한다. 각 프레임은 execution_gas와 state_gas 두 개의 독립적인 가스 예산을 가진다. 이 둘은 서로 교환 불가능하다. 올바른 가스 추정을 위해 각 프레임의 두 가스 버킷을 따로 계산해야 한다.'
+                : 'EIP-8141 depends on EIP-8037 (2D gas). Each frame has two independent gas budgets: execution_gas and state_gas. These are non-interchangeable. Correct gas estimation requires computing each gas bucket separately for each frame.'}
+            </p>
+            <div className="overflow-x-auto rounded-xl border border-slate-200 mb-6">
+              <table className="w-full text-sm">
+                <thead className="bg-slate-900 text-white">
+                  <tr>
+                    <th className="text-left px-4 py-3">{isKo ? '가스 타입' : 'Gas Type'}</th>
+                    <th className="text-left px-4 py-3">{isKo ? '측정 대상' : 'Measures'}</th>
+                    <th className="text-left px-4 py-3">{isKo ? '가격 결정 요인' : 'Price driver'}</th>
+                    <th className="text-left px-4 py-3">{isKo ? '메모리풀 상한' : 'Mempool cap'}</th>
+                  </tr>
+                </thead>
+                <tbody className="text-xs">
+                  <tr className="bg-white border-b">
+                    <td className="px-4 py-3 font-mono font-bold text-blue-700">execution_gas</td>
+                    <td className="px-4 py-3 text-slate-600">{isKo ? 'CPU / 계산 비용 (ADD, MUL, CALL 등)' : 'CPU / compute cost (ADD, MUL, CALL, etc.)'}</td>
+                    <td className="px-4 py-3 text-slate-600">{isKo ? '블록 수요 / 혼잡도' : 'Block demand / congestion'}</td>
+                    <td className="px-4 py-3 font-mono">100,000</td>
+                  </tr>
+                  <tr className="bg-slate-50">
+                    <td className="px-4 py-3 font-mono font-bold text-purple-700">state_gas</td>
+                    <td className="px-4 py-3 text-slate-600">{isKo ? '스토리지 I/O (SLOAD, SSTORE 등)' : 'Storage I/O (SLOAD, SSTORE, etc.)'}</td>
+                    <td className="px-4 py-3 text-slate-600">{isKo ? '상태 팽창 압력' : 'State growth pressure'}</td>
+                    <td className="px-4 py-3 font-mono">500,000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <div className="text-slate-400 text-xs mb-3 font-mono">{isKo ? '// gas-estimation.ts — 2D 가스 추정 유틸리티' : '// gas-estimation.ts — 2D gas estimation utilities'}</div>
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`import { createPublicClient, http } from 'viem';
+import { mainnet } from 'viem/chains';
+
+interface FrameGasEstimate {
+  frameIndex: number;
+  executionGas: bigint;
+  stateGas: bigint;
+}
+
+interface TxGasEstimate {
+  frames: FrameGasEstimate[];
+  totalExecutionGas: bigint;
+  totalStateGas: bigint;
+  // max_cost in ETH = (totalExecutionGas * max_fee_per_gas)
+  //                 + (totalStateGas * max_state_fee_per_gas) [EIP-8037]
+  maxCostWei: bigint;
+}
+
+// Estimate 2D gas for a Frame Transaction
+// EIP-8141 nodes will expose eth_estimateFrameTxGas (hypothetical)
+async function estimateFrameTxGas(
+  tx: FrameTx,
+  rpcUrl: string,
+): Promise<TxGasEstimate> {
+  const client = createPublicClient({ transport: http(rpcUrl) });
+
+  // In practice: call eth_estimateFrameTxGas (EIP-8141 new RPC method)
+  // For now, simulate by estimating each frame separately
+
+  const estimates: FrameGasEstimate[] = [];
+  let totalExec = 0n;
+  let totalState = 0n;
+
+  for (let i = 0; i < tx.frames.length; i++) {
+    const frame = tx.frames[i];
+
+    // Classify opcodes into execution vs state costs
+    // State gas: SLOAD=2100, SSTORE=20000 (warm), etc.
+    // Execution gas: everything else
+
+    // Simplified heuristic (replace with actual simulation):
+    const exec = await estimateExecutionGas(client, frame);
+    const state = await estimateStateGas(client, frame);
+
+    estimates.push({ frameIndex: i, executionGas: exec, stateGas: state });
+    totalExec += exec;
+    totalState += state;
+  }
+
+  // Mempool constraints check
+  // Validation prefix frames (VERIFY frames) must fit within limits
+  const verifyFrames = tx.frames.filter(f => f.mode === 1);
+  const verifyExecTotal = verifyFrames.reduce((sum, _, i) => sum + estimates.filter(e => tx.frames[e.frameIndex].mode === 1)[i]?.executionGas ?? 0n, 0n);
+  if (verifyExecTotal > 100_000n) {
+    console.warn(\`WARNING: VERIFY frames exec gas \${verifyExecTotal} exceeds mempool limit 100,000 — tx will not propagate via public mempool\`);
+  }
+
+  // Compute max_cost
+  // max_cost = exec_gas * max_fee_per_gas + state_gas * max_state_fee_per_gas
+  const maxFeePerGas = tx.maxFeePerGas;
+  const maxStateFeePerGas = 1_000_000n; // example: 0.001 gwei per state gas unit
+  const maxCostWei = totalExec * maxFeePerGas + totalState * maxStateFeePerGas;
+
+  return { frames: estimates, totalExecutionGas: totalExec, totalStateGas: totalState, maxCostWei };
+}
+
+async function estimateExecutionGas(client: any, frame: Frame): Promise<bigint> {
+  // Simulate with eth_call for the frame target
+  // State gas ops are excluded from execution gas in 2D model
+  return 21_000n; // baseline + estimated compute
+}
+
+async function estimateStateGas(client: any, frame: Frame): Promise<bigint> {
+  // Count storage operations in frame.data (ABI decode calldata, trace SLOADs/SSTOREs)
+  // SLOAD = 2100 state gas, SSTORE (set) = 20000 state gas, etc.
+  return 5_000n; // example
+}
+
+// Usage
+const estimate = await estimateFrameTxGas(myFrameTx, 'https://eth-mainnet.rpc.url');
+console.log('Total exec gas:', estimate.totalExecutionGas);
+console.log('Total state gas:', estimate.totalStateGas);
+console.log('Max cost:', estimate.maxCostWei, 'wei');
+
+// Set limits in frames with safety margin
+for (let i = 0; i < myFrameTx.frames.length; i++) {
+  myFrameTx.frames[i].executionGas = estimate.frames[i].executionGas * 120n / 100n; // 20% buffer
+  myFrameTx.frames[i].stateGas = estimate.frames[i].stateGas * 120n / 100n;
+}`}</pre>
+            </div>
+          </section>
+
+          {/* ── Section 21: ERC-4337 → EIP-8141 마이그레이션 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '21. ERC-4337에서 EIP-8141로 마이그레이션' : '21. Migrating from ERC-4337 to EIP-8141'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? 'ERC-4337 스마트 계정을 운용하고 있다면 EIP-8141이 활성화될 때 어떤 부분을 바꿔야 하는지 미리 파악해두는 게 중요하다. 개념 매핑부터 코드 비교까지 살펴본다.'
+                : 'If you operate an ERC-4337 smart account, it\'s important to understand in advance what needs to change when EIP-8141 activates. Let\'s look at concept mapping and code comparison.'}
+            </p>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '21.1 개념 대응표' : '21.1 Concept Mapping Table'}</h3>
+            <div className="overflow-x-auto rounded-xl border border-slate-200 mb-8">
+              <table className="w-full text-sm">
+                <thead className="bg-slate-900 text-white">
+                  <tr>
+                    <th className="text-left px-4 py-3">ERC-4337</th>
+                    <th className="text-left px-4 py-3">EIP-8141</th>
+                    <th className="text-left px-4 py-3">{isKo ? '변경 사항' : 'Changes'}</th>
+                  </tr>
+                </thead>
+                <tbody className="text-xs">
+                  {[
+                    { a: 'UserOperation', b: 'FrameTx (type 0x06)', c: isKo ? 'RLP 인코딩 구조 완전히 다름. alt mempool 불필요' : 'Completely different RLP structure. No alt mempool.' },
+                    { a: 'Bundler', b: '제거됨', c: isKo ? '공개 mempool에 직접 전송 가능' : 'Submit directly to public mempool' },
+                    { a: 'EntryPoint.handleOps()', b: '프로토콜 내장 처리', c: isKo ? '별도 컨트랙트 호출 불필요' : 'No separate contract call needed' },
+                    { a: 'validateUserOp()', b: 'fallback() VERIFY 분기', c: isKo ? 'IAccount 인터페이스 대신 FRAMEPARAM 체크' : 'Use FRAMEPARAM check instead of IAccount interface' },
+                    { a: 'IPaymaster.validatePaymasterUserOp()', b: 'fallback() VERIFY (APPROVE_PAYMENT)', c: isKo ? 'paymaster 컨트랙트 구조는 유사하나 EntryPoint 없음' : 'Similar paymaster contract structure, but no EntryPoint' },
+                    { a: 'postOp()', b: 'DEFAULT mode 프레임', c: isKo ? 'postOp 로직은 DEFAULT 프레임으로 이동' : 'postOp logic moves to DEFAULT frame' },
+                    { a: 'callData()', b: 'SENDER frame data', c: isKo ? 'SENDER 프레임 data 필드에 callData 포함' : 'callData goes in SENDER frame data field' },
+                    { a: 'nonce', b: 'tx.nonce (TXPARAM)', c: isKo ? '논스 관리 프로토콜로 이관. 키드 논스는 EIP-8250' : 'Nonce management moves to protocol. Keyed nonces in EIP-8250' },
+                  ].map((row, i) => (
+                    <tr key={row.a} className={i % 2 === 0 ? 'bg-white border-b border-slate-100' : 'bg-slate-50 border-b border-slate-100'}>
+                      <td className="px-4 py-3 font-mono text-blue-700 font-semibold">{row.a}</td>
+                      <td className="px-4 py-3 font-mono text-purple-700 font-semibold">{row.b}</td>
+                      <td className="px-4 py-3 text-slate-600">{row.c}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '21.2 Before / After 코드 비교' : '21.2 Before / After Code Comparison'}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div>
+                <div className="bg-red-900 text-red-200 text-xs font-mono px-4 py-2 rounded-t-xl">ERC-4337 스마트 계정</div>
+                <div className="bg-slate-800 rounded-b-xl p-4">
+                  <pre className="text-red-300 text-xs font-mono overflow-x-auto">{`// ERC-4337: IAccount interface
+contract MyAccount is IAccount {
+  function validateUserOp(
+    UserOperation calldata userOp,
+    bytes32 userOpHash,
+    uint256 missingAccountFunds
+  ) external returns (uint256 validationData) {
+
+    // Check caller is EntryPoint
+    require(msg.sender == address(entryPoint));
+
+    // Verify signature
+    bytes32 hash = userOpHash.toEthSignedMessageHash();
+    if (owner != hash.recover(userOp.signature))
+      return SIG_VALIDATION_FAILED;
+
+    // Pay missing funds to EntryPoint
+    if (missingAccountFunds != 0)
+      payable(msg.sender).call{value: missingAccountFunds}("");
+
+    return 0; // success
+  }
+
+  function execute(address dest, uint256 value, bytes calldata func)
+    external onlyEntryPoint {
+    dest.call{value: value}(func);
+  }
+}`}</pre>
+                </div>
+              </div>
+              <div>
+                <div className="bg-green-900 text-green-200 text-xs font-mono px-4 py-2 rounded-t-xl">EIP-8141 스마트 계정</div>
+                <div className="bg-slate-800 rounded-b-xl p-4">
+                  <pre className="text-green-400 text-xs font-mono overflow-x-auto">{`// EIP-8141: VERIFY frame pattern
+contract MyAccount {
+  address public owner;
+
+  fallback() external {
+    // No EntryPoint check needed —
+    // protocol guarantees caller = ENTRY_POINT (0xaa)
+    // for VERIFY frames
+
+    uint8 mode = _frameMode();
+    if (mode != 1) return; // not VERIFY
+
+    // Get signing hash via TXPARAM
+    bytes32 hash = _txParam(4);
+
+    // Verify owner signature directly
+    // (no IAccount interface, no missingFunds)
+    require(
+      owner == ECDSA.recover(hash, _getSecp256k1Sig()),
+      "Bad sig"
+    );
+
+    // APPROVE — signal protocol to proceed
+    // No ETH transfer needed!
+    _approve(0x3);
+  }
+  // No execute() needed: SENDER frames call target directly
+  // msg.sender = tx.sender guaranteed by protocol
+}`}</pre>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-xl p-5">
+              <p className="text-green-900 text-sm leading-relaxed m-0">
+                <strong>{isKo ? '✅ 코드 감소 포인트:' : '✅ Code reduction points:'}</strong>{' '}
+                {isKo
+                  ? '① EntryPoint 주소 하드코딩 제거 ② missingAccountFunds ETH 전송 로직 제거 ③ execute() 함수 제거 (SENDER 프레임이 직접 target 호출) ④ IAccount 인터페이스 구현 불필요. 전체 계약 코드가 40~60% 줄어드는 효과.'
+                  : '① Remove EntryPoint address hardcoding ② Remove missingAccountFunds ETH transfer logic ③ Remove execute() function (SENDER frame calls target directly) ④ No IAccount interface needed. Overall contract code shrinks 40~60%.'}
+              </p>
+            </div>
+          </section>
+
+          {/* ── Section 22: Expiry Verifier 프리컴파일 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '22. Expiry Verifier — address(0x8141) 프리컴파일 활용' : '22. Expiry Verifier — Using the address(0x8141) Precompile'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? 'EIP-8141은 address(0x8141)에 만료 검증 프리컴파일을 추가한다. VERIFY 프레임 안에서 이 주소를 호출하면 Unix 타임스탬프를 검증하고 block.timestamp를 초과했을 때 revert한다. 세션 키, 임시 위임, 시간 제한 서명에 필수적인 원시 기능이다.'
+                : 'EIP-8141 adds an expiry verification precompile at address(0x8141). Call this inside a VERIFY frame to validate a Unix timestamp — it reverts if block.timestamp exceeds the expiry. This is an essential primitive for session keys, temporary delegation, and time-limited signatures.'}
+            </p>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`// EXPIRY_VERIFIER precompile at address(0x8141)
+// Input: 8 bytes = uint64 Unix timestamp
+// Output: nothing (reverts if expired)
+// Gas: 6 gas
+
+// ── Solidity usage ────────────────────────────────────────────────────
+contract ExpiringSmartAccount {
+    address constant EXPIRY_VERIFIER = address(0x8141);
+
+    fallback() external {
+        if (_frameMode() != 1) return;
+
+        // 1. Read expiry from frame calldata (first 8 bytes)
+        uint64 expiry;
+        assembly {
+            // FRAMEDATALOAD reads 32 bytes from frame data at offset 0
+            mstore(0, 0)
+            staticcall(gas(), 0xb1, 0, 0x20, 0, 0x20)
+            // expiry is in the first 8 bytes (big-endian)
+            expiry := shr(192, mload(0))  // shift right 192 bits to get uint64
+        }
+
+        // 2. Call EXPIRY_VERIFIER precompile
+        //    Input: 8-byte expiry timestamp
+        bytes memory input = abi.encodePacked(expiry);
+        (bool ok,) = EXPIRY_VERIFIER.staticcall(input);
+        require(ok, "Transaction expired");
+
+        // 3. Verify signature
+        bytes32 hash = _txParam(4);
+        require(_verifyOwnerSig(hash), "Bad sig");
+
+        // 4. Approve
+        _approve(0x3);
+    }
+
+    // ── TypeScript: building expiring transaction ─────────────────────
+    // On the client side, encode expiry in frame calldata:
+    // const expiry = BigInt(Math.floor(Date.now() / 1000) + 3600); // 1 hour
+    // const frameData = new Uint8Array(8);
+    // new DataView(frameData.buffer).setBigUint64(0, expiry, false); // big-endian
+
+    function _txParam(uint256 idx) internal view returns (bytes32 h) {
+        assembly {
+            mstore(0, idx)
+            staticcall(gas(), 0xb0, 0, 0x20, 0, 0x20)
+            h := mload(0)
+        }
+    }
+
+    function _frameMode() internal view returns (uint8 m) {
+        assembly {
+            mstore(0, 0)
+            staticcall(gas(), 0xb3, 0, 0x20, 0, 0x20)
+            m := and(mload(0), 0xff)
+        }
+    }
+
+    function _approve(uint8 scope) internal {
+        assembly { pop(call(gas(), 0xaa, 0, 0, 0, 0, 0)) }
+    }
+
+    function _verifyOwnerSig(bytes32) internal view returns (bool) {
+        return true; // placeholder
+    }
+}`}</pre>
+            </div>
+
+            <div className="bg-purple-50 border border-purple-200 rounded-xl p-5">
+              <p className="text-purple-900 text-sm leading-relaxed m-0">
+                <strong>{isKo ? '💡 실전 패턴 — 시간 제한 세션 서명:' : '💡 Production pattern — time-limited session signature:'}</strong>{' '}
+                {isKo
+                  ? '사용자가 "1시간 동안 이 DApp이 나 대신 스왑할 수 있다"는 서명을 오프체인에 생성한다. 서명 데이터에 expiry를 포함시키고, VERIFY 프레임 calldata에 전달. EXPIRY_VERIFIER가 만료를 온체인에서 강제한다. 사용자 재서명 없이 세션이 자동 만료된다.'
+                  : "A user creates an off-chain signature that says 'this DApp can swap on my behalf for 1 hour.' The signature data includes the expiry and is passed as VERIFY frame calldata. EXPIRY_VERIFIER enforces expiry on-chain. Sessions auto-expire without requiring user re-signature."}
+              </p>
+            </div>
+          </section>
+
+          {/* ── Section 23: 세션 키 패턴 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '23. 세션 키 패턴 구현' : '23. Session Key Pattern Implementation'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? '세션 키는 "특정 DApp이 제한된 범위 안에서 사용자 대신 행동할 수 있는 임시 키"다. EIP-8141에서는 VERIFY 프레임이 세션 키 정책을 완전히 EVM 레벨에서 집행할 수 있어 별도 위임 컨트랙트가 필요 없다.'
+                : "Session keys are 'temporary keys that allow a specific DApp to act on behalf of the user within a limited scope.' In EIP-8141, VERIFY frames can enforce session key policies entirely at the EVM level — no separate delegation contract needed."}
+            </p>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+/// @notice Session key policy smart account
+/// Allows a game/DApp to execute limited actions on behalf of the user
+contract SessionKeyAccount {
+    address public owner;
+    address constant EXPIRY_VERIFIER = address(0x8141);
+
+    struct SessionKey {
+        address key;           // temporary key address
+        uint64 expiry;         // Unix timestamp
+        address allowedTarget; // only this contract can be called in SENDER frames
+        uint256 maxValuePerTx; // max ETH per transaction
+        bool active;
+    }
+
+    // owner-authorized session keys
+    mapping(address => SessionKey) public sessions;
+
+    // ── Owner functions ───────────────────────────────────────────────
+    function authorizeSessionKey(
+        address sessionKey,
+        uint64 expiry,
+        address allowedTarget,
+        uint256 maxValue
+    ) external {
+        require(msg.sender == address(this), "Must call via SENDER frame");
+        sessions[sessionKey] = SessionKey({
+            key: sessionKey,
+            expiry: expiry,
+            allowedTarget: allowedTarget,
+            maxValuePerTx: maxValue,
+            active: true
+        });
+    }
+
+    function revokeSessionKey(address sessionKey) external {
+        require(msg.sender == address(this), "Must call via SENDER frame");
+        sessions[sessionKey].active = false;
+    }
+
+    // ── VERIFY frame handler ─────────────────────────────────────────
+    fallback() external {
+        if (_frameMode() != 1) return;
+
+        bytes32 sigHash = bytes32(_txParam(4));
+
+        // Try owner signature first (full permission)
+        if (_tryOwnerVerify(sigHash)) {
+            _approve(0x3);
+            return;
+        }
+
+        // Try session key verification (limited permission)
+        _sessionKeyVerify(sigHash);
+    }
+
+    function _tryOwnerVerify(bytes32 hash) internal view returns (bool) {
+        // SECP256K1 sig at index 0
+        address recovered = _ecrecoverFromSig(hash, 0);
+        return recovered == owner;
+    }
+
+    function _sessionKeyVerify(bytes32 hash) internal {
+        // Session key sig at index 0 (or index 1 if owner sig index is 0)
+        address sessionKeyAddr = _ecrecoverFromSig(hash, 0);
+        SessionKey storage session = sessions[sessionKeyAddr];
+
+        require(session.active, "Session key not active");
+
+        // Check expiry via EXPIRY_VERIFIER precompile
+        bytes memory expiryInput = abi.encodePacked(session.expiry);
+        (bool ok,) = EXPIRY_VERIFIER.staticcall(expiryInput);
+        require(ok, "Session key expired");
+
+        // Check frame target matches allowed target
+        // Read frame target via FRAMEPARAM
+        address frameTarget;
+        assembly {
+            mstore(0, 2) // FRAMEPARAM index 2 = target address
+            staticcall(gas(), 0xb3, 0, 0x20, 0, 0x20)
+            frameTarget := mload(0)
+        }
+        // For VERIFY frames target = self; check next SENDER frame target
+        // (In practice: read next frame via FRAMEPARAM)
+
+        // Check max value
+        uint256 txValue;
+        assembly {
+            mstore(0, 2) // TXPARAM index 2 = max_cost (simplified; use frame value)
+            staticcall(gas(), 0xb0, 0, 0x20, 0, 0x20)
+            txValue := mload(0)
+        }
+        require(txValue <= session.maxValuePerTx, "Exceeds session value limit");
+
+        // Session key can only approve execution (not payment — owner pays gas)
+        _approve(0x2); // APPROVE_EXECUTION only
+    }
+
+    function _ecrecoverFromSig(bytes32 hash, uint256 sigIdx) internal view returns (address) {
+        // Use SIGDATACOPY to get v, r, s from signature at sigIdx
+        // Simplified: return address(0) as placeholder
+        return address(0);
+    }
+
+    function _txParam(uint256 idx) internal view returns (uint256 v) {
+        assembly {
+            mstore(0, idx)
+            staticcall(gas(), 0xb0, 0, 0x20, 0, 0x20)
+            v := mload(0)
+        }
+    }
+
+    function _frameMode() internal view returns (uint8 m) {
+        assembly {
+            mstore(0, 0)
+            staticcall(gas(), 0xb3, 0, 0x20, 0, 0x20)
+            m := and(mload(0), 0xff)
+        }
+    }
+
+    function _approve(uint8 scope) internal {
+        assembly { pop(call(gas(), 0xaa, 0, 0, 0, 0, 0)) }
+    }
+}`}</pre>
+            </div>
+
+            <div className="bg-slate-50 rounded-xl p-5">
+              <h4 className="font-bold text-slate-900 mb-3 text-sm">{isKo ? '세션 키 수명 주기' : 'Session Key Lifecycle'}</h4>
+              <div className="space-y-2">
+                {(isKo ? [
+                  '① 사용자가 owner 키로 authorizeSessionKey() Frame Tx 전송 → 세션 키 등록',
+                  '② DApp이 세션 키로 서명한 Frame Tx 전송 → VERIFY 프레임에서 정책 검사 후 APPROVE_EXECUTION',
+                  '③ 가스는 별도 Paymaster가 APPROVE_PAYMENT (scope 0x1)',
+                  '④ expiry 지나면 EXPIRY_VERIFIER가 자동으로 revert → 사용자 재서명 없이 만료',
+                  '⑤ 사용자가 즉시 취소하려면 revokeSessionKey() Frame Tx 전송',
+                ] : [
+                  '① User sends authorizeSessionKey() Frame Tx signed with owner key → session key registered',
+                  '② DApp sends Frame Tx signed with session key → VERIFY frame checks policy, then APPROVE_EXECUTION',
+                  '③ Gas paid by a separate Paymaster with APPROVE_PAYMENT (scope 0x1)',
+                  '④ After expiry, EXPIRY_VERIFIER auto-reverts → expires without user re-signature',
+                  '⑤ For immediate revocation, user sends revokeSessionKey() Frame Tx',
+                ]).map((step, i) => (
+                  <div key={i} className="flex gap-3 bg-white rounded-lg p-3">
+                    <span className="text-purple-600 font-mono text-xs shrink-0 pt-0.5">{i + 1}.</span>
+                    <span className="text-slate-700 text-sm">{step}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── Section 24: Foundry 테스팅 전략 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '24. Foundry로 EIP-8141 계약 테스트하기' : '24. Testing EIP-8141 Contracts with Foundry'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? 'EIP-8141이 메인넷에 반영되기 전에는 EVM fork 모드 + 새 오퍼코드 모킹으로 테스트해야 한다. EIP-8141 지원 EVM(ethrex 등)이 출시되면 이 섹션을 업데이트한다.'
+                : 'Before EIP-8141 reaches mainnet, testing requires EVM fork mode + mocking new opcodes. This section will be updated when EIP-8141-capable EVMs (like ethrex) become widely available.'}
+            </p>
+            <div className="bg-slate-800 rounded-xl p-6 mb-6">
+              <pre className="text-green-400 text-sm font-mono overflow-x-auto">{`// test/SmartAccount.t.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+import "forge-std/Test.sol";
+import "../src/MinimalSmartAccount.sol";
+
+contract SmartAccountTest is Test {
+    MinimalSmartAccount account;
+    address owner;
+    uint256 ownerPk;
+
+    function setUp() public {
+        (owner, ownerPk) = makeAddrAndKey("owner");
+        account = new MinimalSmartAccount(owner);
+        vm.deal(address(account), 10 ether);
+    }
+
+    // ── Mock EIP-8141 opcodes via vm.etch + cheatcodes ──────────────
+    // Until a real EIP-8141 EVM exists, we mock:
+    // 1. FRAMEPARAM (0xb3) precompile behavior
+    // 2. TXPARAM (0xb0) precompile behavior
+    // 3. APPROVE (0xaa) call behavior
+
+    function _mockVerifyFrame(bytes32 sigHash) internal {
+        // Deploy a mock "FRAMEPARAM" contract at 0xb3
+        // Returns mode=1 (VERIFY) for param index 0
+        bytes memory frameParamCode = abi.encodePacked(
+            hex"6000351460085760005260206000f35b60015260206000f3"
+            // simplified: if(input==0) return 1 (VERIFY mode)
+        );
+        vm.etch(address(0xb3), frameParamCode);
+
+        // Deploy mock "TXPARAM" at 0xb0
+        // Returns sigHash for param index 4
+        bytes memory txParamCode = abi.encodePacked(
+            hex"600435146010576020526020600020f35b",
+            sigHash,
+            hex"60005260206000f3"
+        );
+        vm.etch(address(0xb0), txParamCode);
+
+        // Deploy mock "APPROVE" at 0xaa — just succeeds
+        vm.etch(address(0xaa), hex"600160005260206000f3");
+    }
+
+    function test_verifyWithOwnerSig() public {
+        // Build signing hash (what protocol would compute)
+        bytes32 txHash = keccak256(abi.encodePacked(
+            "FrameTx:", block.chainid, address(account), uint256(0)
+        ));
+
+        // Mock EIP-8141 opcodes
+        _mockVerifyFrame(txHash);
+
+        // Sign with owner key
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(ownerPk, txHash);
+
+        // Simulate ENTRY_POINT calling account.fallback() in VERIFY mode
+        // In real EIP-8141 EVM, this is protocol-driven
+        vm.prank(address(0xaa)); // ENTRY_POINT = 0xaa
+        (bool success,) = address(account).call(
+            abi.encodePacked(v, r, s) // pass sig in calldata (simplified)
+        );
+        assertTrue(success, "VERIFY frame should succeed with owner sig");
+    }
+
+    function test_verifyWithWrongSig() public {
+        (, uint256 wrongPk) = makeAddrAndKey("wrong");
+        bytes32 txHash = keccak256("test");
+        _mockVerifyFrame(txHash);
+
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(wrongPk, txHash);
+
+        vm.prank(address(0xaa));
+        (bool success,) = address(account).call(abi.encodePacked(v, r, s));
+        assertFalse(success, "Should reject wrong signature");
+    }
+
+    // ── Integration: Full Frame Transaction flow ──────────────────────
+    function test_fullFrameTxFlow() public {
+        // 1. Simulate VERIFY frame approval
+        bytes32 sigHash = keccak256("full_flow_test");
+        _mockVerifyFrame(sigHash);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(ownerPk, sigHash);
+
+        vm.prank(address(0xaa));
+        (bool verifyOk,) = address(account).call(abi.encodePacked(v, r, s));
+        assertTrue(verifyOk);
+
+        // 2. Simulate SENDER frame execution
+        address recipient = makeAddr("recipient");
+        uint256 startBalance = recipient.balance;
+
+        vm.prank(address(account)); // msg.sender = tx.sender in SENDER frame
+        (bool sendOk,) = recipient.call{value: 0.1 ether}("");
+        assertTrue(sendOk);
+        assertEq(recipient.balance, startBalance + 0.1 ether);
+    }
+
+    // ── Gas measurement ───────────────────────────────────────────────
+    function test_verifyGasCost() public {
+        bytes32 sigHash = keccak256("gas_test");
+        _mockVerifyFrame(sigHash);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(ownerPk, sigHash);
+
+        uint256 gasBefore = gasleft();
+        vm.prank(address(0xaa));
+        address(account).call(abi.encodePacked(v, r, s));
+        uint256 gasUsed = gasBefore - gasleft();
+
+        // VERIFY frame should stay well under 100,000 gas (mempool limit)
+        assertLt(gasUsed, 100_000, "VERIFY frame exceeds mempool gas limit");
+        console.log("VERIFY frame gas used:", gasUsed);
+    }
+}`}</pre>
+            </div>
+
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '24.1 ethrex 라이브 테스트넷 활용' : '24.1 Using the ethrex Live Testnet'}</h3>
+            <div className="bg-slate-50 rounded-xl p-5">
+              <div className="space-y-2">
+                {(isKo ? [
+                  '라이브 데모: https://demo.eip-8141.ethrex.xyz/ — 브라우저에서 Frame Tx 전송 가능',
+                  'ethrex는 EIP-8141을 실험적으로 구현한 Rust 기반 EVM 클라이언트',
+                  'Foundry의 --fork-url 옵션으로 ethrex 테스트넷을 포크해 로컬에서 테스트 가능',
+                  '오퍼코드 모킹 없이 실제 APPROVE/FRAMEPARAM/TXPARAM 오퍼코드 사용 가능',
+                  'CLI: forge test --fork-url https://ethrex-testnet.example.com --match-test testEIP8141',
+                ] : [
+                  'Live demo: https://demo.eip-8141.ethrex.xyz/ — send Frame Tx from your browser',
+                  'ethrex is a Rust-based EVM client with experimental EIP-8141 implementation',
+                  'Fork the ethrex testnet locally via Foundry\'s --fork-url option',
+                  'Use real APPROVE/FRAMEPARAM/TXPARAM opcodes without mocking',
+                  'CLI: forge test --fork-url https://ethrex-testnet.example.com --match-test testEIP8141',
+                ]).map((item, i) => (
+                  <div key={i} className="flex gap-3 items-start">
+                    <span className="text-green-500 font-bold shrink-0 text-sm">→</span>
+                    <span className="text-slate-700 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ── Section 25: 흔한 에러 & 디버깅 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo ? '25. 흔한 에러 & 디버깅 가이드' : '25. Common Errors & Debugging Guide'}
+            </h2>
+            <div className="space-y-6">
+              {[
+                {
+                  error: 'APPROVE called outside VERIFY frame',
+                  cause: isKo ? 'APPROVE 오퍼코드를 SENDER 또는 DEFAULT 프레임에서 호출함' : 'APPROVE opcode called in SENDER or DEFAULT frame',
+                  fix: isKo ? 'FRAMEPARAM(0)으로 현재 모드 확인 후 VERIFY(1)일 때만 APPROVE 호출. 모드를 확인하는 guard를 fallback() 최상단에 추가.' : 'Check mode with FRAMEPARAM(0) and only call APPROVE when mode == 1. Add a mode guard at the top of fallback().',
+                  severity: 'error',
+                },
+                {
+                  error: 'APPROVE called on non-self target (ADDRESS != resolved_target)',
+                  cause: isKo ? 'APPROVE는 자기 자신의 VERIFY 프레임에서만 호출 가능. 다른 주소의 VERIFY 프레임에서 APPROVE 호출 시도' : 'APPROVE can only be called in your own VERIFY frame. Attempted to call APPROVE in another address\'s VERIFY frame.',
+                  fix: isKo ? '프레임의 target 주소와 호출 중인 컨트랙트 주소(address(this))가 동일한지 확인. 체인 구성 검토.' : 'Verify that the frame\'s target address equals the calling contract address (address(this)). Review frame chain.',
+                  severity: 'error',
+                },
+                {
+                  error: 'APPROVE_PAYMENT already set — cannot re-approve',
+                  cause: isKo ? '동일한 tx에서 APPROVE_PAYMENT(scope 0x1 또는 0x3)가 두 번 이상 설정됨' : 'APPROVE_PAYMENT (scope 0x1 or 0x3) set more than once in the same tx',
+                  fix: isKo ? '하나의 트랜잭션에는 정확히 하나의 payer만 설정되어야 함. VERIFY 프레임 설계를 검토해 APPROVE_PAYMENT 호출이 단 하나뿐인지 확인.' : 'Exactly one payer must be set per transaction. Review VERIFY frame design to ensure APPROVE_PAYMENT is called exactly once.',
+                  severity: 'error',
+                },
+                {
+                  error: 'SENDER frame executed but sender_approved = false',
+                  cause: isKo ? 'SENDER 프레임 실행 전에 APPROVE_EXECUTION(scope 0x2 또는 0x3)이 호출되지 않음' : 'APPROVE_EXECUTION (scope 0x2 or 0x3) not called before SENDER frame executes',
+                  fix: isKo ? '프레임 순서 검토: SENDER 프레임보다 앞선 VERIFY 프레임이 반드시 APPROVE_EXECUTION을 설정해야 함. 프레임 배열 순서 확인.' : 'Review frame ordering: a VERIFY frame before SENDER must set APPROVE_EXECUTION. Check frame array order.',
+                  severity: 'error',
+                },
+                {
+                  error: 'Transaction rejected from public mempool (validation prefix mismatch)',
+                  cause: isKo ? '프레임 배열이 4가지 허용 검증 프리픽스 패턴 중 하나가 아님' : 'Frame array does not match one of the 4 allowed validation prefix patterns',
+                  fix: isKo ? '허용 패턴 재확인: [self_verify], [deploy→self_verify], [only_verify→pay], [deploy→only_verify→pay]. 복잡한 검증 로직은 private 채널(빌더 직송) 사용.' : 'Re-check allowed patterns: [self_verify], [deploy→self_verify], [only_verify→pay], [deploy→only_verify→pay]. Complex validation requires private channel (direct to builder).',
+                  severity: 'warning',
+                },
+                {
+                  error: 'VERIFY frame gas exceeded MAX_VERIFY_GAS (100,000)',
+                  cause: isKo ? 'VERIFY 프레임들의 execution gas 합계가 100,000을 초과함 — 주로 무거운 서명 검증 로직' : 'Sum of VERIFY frame execution gas exceeds 100,000 — usually heavy signature verification logic',
+                  fix: isKo ? '① BLS/Schnorr 대신 P256(내장) 또는 SECP256K1 사용 ② EIP-2537 프리컴파일 활용 ③ 검증 로직 최적화 ④ 불가피하면 private 채널 사용' : '① Use built-in P256 or SECP256K1 instead of BLS/Schnorr ② Leverage EIP-2537 precompiles ③ Optimize verification logic ④ If unavoidable, use private channel',
+                  severity: 'warning',
+                },
+                {
+                  error: 'STATICCALL inside VERIFY: state mutation attempted',
+                  cause: isKo ? 'VERIFY 프레임은 STATICCALL이므로 SSTORE, LOG 등 상태 변경 금지' : 'VERIFY frames run as STATICCALL — SSTORE, LOG, and other state mutations are forbidden',
+                  fix: isKo ? '검증 전용 로직만 VERIFY 프레임에. 상태 변경이 필요한 post-op 로직은 DEFAULT 프레임으로 분리.' : 'Put only read-only validation logic in VERIFY frames. Move state-changing post-op logic to DEFAULT frames.',
+                  severity: 'error',
+                },
+              ].map(item => (
+                <div key={item.error} className={`rounded-xl border p-5 ${item.severity === 'error' ? 'bg-red-50 border-red-200' : 'bg-yellow-50 border-yellow-200'}`}>
+                  <div className={`font-mono text-xs font-bold mb-2 ${item.severity === 'error' ? 'text-red-700' : 'text-yellow-700'}`}>
+                    {item.severity === 'error' ? '❌' : '⚠️'} {item.error}
+                  </div>
+                  <div className="mb-2">
+                    <span className={`text-xs font-semibold ${item.severity === 'error' ? 'text-red-800' : 'text-yellow-800'}`}>{isKo ? '원인: ' : 'Cause: '}</span>
+                    <span className={`text-xs ${item.severity === 'error' ? 'text-red-700' : 'text-yellow-700'}`}>{item.cause}</span>
+                  </div>
+                  <div>
+                    <span className="text-xs font-semibold text-green-800">{isKo ? '해결: ' : 'Fix: '}</span>
+                    <span className="text-xs text-green-700">{item.fix}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* References */}
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
