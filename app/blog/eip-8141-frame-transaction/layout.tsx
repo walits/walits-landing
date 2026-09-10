@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'EIP-8141 Frame Transaction 완전 해부 — 이더리움 AA 완성판',
     description: 'EIP-86 → ERC-4337 → EIP-3074 → EIP-7702 → EIP-8141. 9년짜리 Account Abstraction의 종착점.',
-    images: ['https://walits.com/blog/eip8141.jpg'],
+    images: [{ url: 'https://walits.com/blog/eip8141.jpg', width: 1200, height: 630 }],
     type: 'article',
   },
 };
