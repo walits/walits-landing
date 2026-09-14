@@ -873,6 +873,156 @@ await flashbotsProvider.sendBundle(bundle, targetBlock);`,
 
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
 
+            {/* ── S12-1 일반인 청산 수익 ── */}
+            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">12-1 · 일반인도 청산으로 돈을 벌 수 있을까?</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              Section 12를 읽고 이런 생각이 드는 게 당연하다. <strong>"그럼 나도 청산봇 돌리면 돈 벌 수 있는 거 아닌가?"</strong> 결론부터 말하면 — 가능은 하지만, 생각보다 훨씬 어렵다. 그리고 그 구조는 한국의 법원 경매와 놀랍도록 닮아 있다.
+            </p>
+
+            {/* 경매 비교 */}
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-6 my-6">
+              <p className="font-semibold text-amber-800 dark:text-amber-300 mb-4 text-lg">DeFi 청산 = 온체인 경매</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                한국에서 법원 경매로 돈을 버는 사람들의 로직을 생각해보자. 채무자가 대출을 못 갚으면 법원이 부동산을 압류하고 공매에 부친다. 시세보다 싼 가격에 낙찰받아 되팔거나 임대하면 수익이 난다. <strong>누군가의 위기가 나의 기회</strong>가 되는 구조다.
+              </p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                DeFi 청산도 정확히 같은 논리로 작동한다. ETH 가격이 빠져서 Health Factor가 1.0 아래로 내려간 포지션 = "담보를 법원이 압류한 상태". 청산자가 빚을 대신 갚아주고 담보를 시세보다 싸게(5~15% 할인) 가져가는 것 = "법원 경매 낙찰".
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs mt-2">
+                  <thead>
+                    <tr className="bg-amber-100 dark:bg-amber-900/40">
+                      <th className="text-left px-3 py-2 text-amber-900 dark:text-amber-200 font-semibold">항목</th>
+                      <th className="text-left px-3 py-2 text-amber-900 dark:text-amber-200 font-semibold">한국 법원 경매</th>
+                      <th className="text-left px-3 py-2 text-amber-900 dark:text-amber-200 font-semibold">DeFi 청산 (Aave)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-700 dark:text-gray-300">
+                    {[
+                      ['원인', '채무자 대출 연체', '차입자 HF < 1.0'],
+                      ['할인율', '시세 대비 20~40%', '청산 보너스 5~15%'],
+                      ['시간', '입찰~낙찰 수일~수주', '봇이 수 초 이내 처리'],
+                      ['참여 자격', '누구나 (법원 등록)', '누구나 (지갑만 있으면)'],
+                      ['경쟁', '입찰자 수십 명', '전 세계 수백 개 봇'],
+                      ['자본 필요', '낙찰가 전액 필요', '플래시론으로 0원 가능'],
+                      ['정보 우위', '권리분석, 현장 답사', '온체인 데이터 분석 + 코딩'],
+                    ].map(([item, auction, defi], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white dark:bg-gray-900/20' : 'bg-amber-50/50 dark:bg-amber-900/10'}>
+                        <td className="px-3 py-2 font-medium">{item}</td>
+                        <td className="px-3 py-2">{auction}</td>
+                        <td className="px-3 py-2">{defi}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* 일반인 참여 가능성 */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">일반인이 청산에 참여하는 3가지 방법</h3>
+            <div className="space-y-4 my-6">
+              {[
+                {
+                  level: '🟢 난이도 낮음',
+                  title: '청산 대시보드 + 수동 실행',
+                  color: 'border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20',
+                  content: 'Aave 공식 앱(app.aave.com)의 Liquidations 탭이나 defiexplore.com, aavescan.com 같은 서드파티 대시보드를 통해 청산 가능 포지션을 확인할 수 있다. MetaMask로 직접 청산 트랜잭션을 제출하면 된다. 단, 이 방식은 봇보다 훨씬 느려서 좋은 기회는 이미 봇들이 선점한 경우가 대부분이다.',
+                  reality: '현실: 경쟁에서 이기기 어렵다. 봇이 이미 청산한 뒤 발견하게 됨.',
+                },
+                {
+                  level: '🟡 난이도 중간',
+                  title: '오픈소스 청산봇 사용/수정',
+                  color: 'border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20',
+                  content: 'GitHub에는 Aave 청산봇 오픈소스가 여럿 있다 (aave/aave-liquidator 등). Node.js/Python 수준의 코딩 능력이 있으면 클론해서 설정만 바꿔 돌릴 수 있다. VPS(월 $10~30)에 올려놓으면 24시간 자동으로 돌아간다. 가스비 최적화와 RPC 속도가 수익을 결정한다.',
+                  reality: '현실: Base, Arbitrum 등 가스비 낮은 L2에서 수익이 더 쉽게 난다. Ethereum mainnet은 이미 포화 상태.',
+                },
+                {
+                  level: '🔴 난이도 높음',
+                  title: 'MEV-aware 고성능 봇 직접 개발',
+                  color: 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20',
+                  content: 'Flashbots, MEV-Boost, private mempool을 활용한 고성능 봇. Solidity + Rust/Go 개발 역량, 인프라 최적화, 가스 경쟁 전략까지 필요하다. 대형 포지션 청산 시 수천 달러 수익도 가능하지만, 진입 장벽이 매우 높다.',
+                  reality: '현실: 퀀트 개발자나 전업 MEV searcher 영역. 개인 투자자 수준을 넘어선다.',
+                },
+              ].map((m, i) => (
+                <div key={i} className={`border rounded-xl p-5 ${m.color}`}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm font-bold text-gray-500">{m.level}</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">{m.title}</span>
+                  </div>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">{m.content}</p>
+                  <p className="text-xs font-medium text-gray-500 dark:text-gray-400 border-t border-current/20 pt-2">{m.reality}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* 현실적 전망 */}
+            <div className="bg-gray-900 dark:bg-gray-950 rounded-xl p-6 my-6 text-white">
+              <p className="font-bold text-white mb-4">경매 투자자와의 핵심 차이 — 왜 DeFi 청산이 더 어려운가</p>
+              <div className="space-y-3 text-sm">
+                {[
+                  {
+                    icon: '⚡',
+                    title: '시간 단위가 다르다',
+                    desc: '법원 경매는 며칠에서 몇 주의 시간이 있다. 정보 조사, 현장 답사, 권리분석이 가능하다. DeFi 청산은 수 초 내에 처리된다. 사람이 직접 개입할 수 없고 코드가 경쟁한다.',
+                  },
+                  {
+                    icon: '🤖',
+                    title: '경쟁자가 봇이다',
+                    desc: '경매는 결국 사람과 사람의 경쟁이다. DeFi 청산은 코드 최적화와 인프라 경쟁이다. 더 빠른 RPC, 더 낮은 가스, 더 똑똑한 전략을 가진 봇이 이긴다. 일반인이 뛰어들기엔 진입 장벽이 다르다.',
+                  },
+                  {
+                    icon: '💧',
+                    title: '기회는 줄어들고 있다',
+                    desc: '시장이 성숙할수록 청산 기회당 수익은 줄어든다. 경쟁 봇이 많아지면 청산 보너스의 상당 부분이 가스비로 소진된다. 초기(2020~2021)에는 개인도 큰 수익이 가능했지만, 지금은 전문화된 팀들이 지배한다.',
+                  },
+                  {
+                    icon: '🌐',
+                    title: '기회는 L2에 있다',
+                    desc: 'Ethereum mainnet 청산 시장은 포화됐지만, Base, Arbitrum, Polygon 같은 L2의 Aave 마켓은 경쟁이 상대적으로 덜하다. 가스비도 낮아 소규모 포지션 청산도 수익이 난다. 일반인이 진입할 여지가 있다면 L2다.',
+                  },
+                ].map((p, i) => (
+                  <div key={i} className="flex gap-3">
+                    <span className="text-xl flex-shrink-0">{p.icon}</span>
+                    <div>
+                      <p className="font-semibold text-white mb-1">{p.title}</p>
+                      <p className="text-gray-400 leading-relaxed">{p.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 결론 */}
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-6 my-6">
+              <p className="font-semibold text-blue-900 dark:text-blue-300 mb-3">💡 결론: 경매와 같은 기회, 다른 진입 방법</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                한국 경매 투자자들은 남들보다 빠른 정보와 꼼꼼한 분석으로 수익을 낸다. DeFi 청산도 같은 논리지만, "분석력"이 아니라 <strong>"코드 실행 속도"가 경쟁력</strong>이다. 경매 고수가 되려면 권리분석을 공부해야 하듯, DeFi 청산으로 돈을 벌려면 봇 개발과 온체인 인프라를 익혀야 한다.
+              </p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                <strong>일반인에게 현실적인 접근:</strong> 직접 청산 실행보다는 Aave에 유동성을 공급해 예치 이자를 받는 것이 더 안정적이다. 청산은 프로토콜의 건전성을 유지하는 인프라 역할에 가깝다 — 그 역할을 대신하는 봇을 돌리는 것이 "청산으로 돈 버는" 실제적인 방법이다.
+              </p>
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-3">
+                  <p className="text-xs font-bold text-green-700 dark:text-green-400 mb-1">✅ 가능한 것</p>
+                  <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                    <li>• L2 Aave 마켓 청산봇 (오픈소스)</li>
+                    <li>• 소규모 포지션 수동 청산 (학습용)</li>
+                    <li>• 청산 보너스 arbitrage 전략 연구</li>
+                  </ul>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-3">
+                  <p className="text-xs font-bold text-red-600 dark:text-red-400 mb-1">❌ 어려운 것</p>
+                  <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                    <li>• Ethereum mainnet 대형 청산</li>
+                    <li>• 수동으로 봇과 경쟁</li>
+                    <li>• 코딩 없이 안정적 수익</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <hr className="border-gray-200 dark:border-gray-700 my-10" />
+
             {/* ── S13 리스크 ── */}
             <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">13 · 리스크 구조</h2>
 
@@ -1700,6 +1850,140 @@ await flashbotsProvider.sendBundle(bundle, targetBlock);`,
               <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                 Liquidation bots aren't just profit-seekers — they <strong>are the risk management infrastructure</strong>. Without them, bad debt accumulates and the protocol becomes insolvent. The liquidation bonus exists precisely as an incentive for this role. Decentralized protocols maintain system integrity through economic incentives, not centralized operations.
               </p>
+            </div>
+
+            <hr className="border-gray-200 dark:border-gray-700 my-10" />
+
+            {/* ── S12-1 EN ── */}
+            <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">12-1 · Can Regular People Make Money from Liquidations?</h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+              After reading Section 12, the natural question is: <strong>"Can I run a liquidation bot and make money?"</strong> The short answer — yes, but it's significantly harder than it looks. And the structure mirrors something very familiar in traditional finance: real estate foreclosure auctions.
+            </p>
+
+            {/* Auction comparison */}
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-6 my-6">
+              <p className="font-semibold text-amber-800 dark:text-amber-300 mb-4 text-lg">DeFi Liquidation = On-Chain Foreclosure Auction</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                In South Korea, a well-known investment strategy involves bidding on court-ordered foreclosure auctions (법원 경매). When a borrower defaults, the court seizes collateral and auctions it below market value. Winning bidders can resell or rent the asset for profit. <strong>Someone else's crisis becomes your opportunity.</strong>
+              </p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                DeFi liquidations follow the exact same logic. A position with HF below 1.0 = "collateral seized by the protocol." The liquidator repays the debt and claims the collateral at a 5–15% discount = "winning a foreclosure bid."
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs mt-2">
+                  <thead>
+                    <tr className="bg-amber-100 dark:bg-amber-900/40">
+                      <th className="text-left px-3 py-2 text-amber-900 dark:text-amber-200 font-semibold">Aspect</th>
+                      <th className="text-left px-3 py-2 text-amber-900 dark:text-amber-200 font-semibold">Foreclosure Auction (KR)</th>
+                      <th className="text-left px-3 py-2 text-amber-900 dark:text-amber-200 font-semibold">DeFi Liquidation (Aave)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-gray-700 dark:text-gray-300">
+                    {[
+                      ['Trigger', 'Borrower defaults on loan', 'Borrower HF drops below 1.0'],
+                      ['Discount', '20–40% below market', 'Liquidation bonus 5–15%'],
+                      ['Timeline', 'Days to weeks', 'Seconds (bots)'],
+                      ['Eligibility', 'Anyone (court registration)', 'Anyone (just a wallet)'],
+                      ['Competition', 'Dozens of bidders', 'Hundreds of global bots'],
+                      ['Capital needed', 'Full bid amount', 'Zero via flash loans'],
+                      ['Edge required', 'Due diligence, site visits', 'On-chain analytics + coding'],
+                    ].map(([item, auction, defi], i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white dark:bg-gray-900/20' : 'bg-amber-50/50 dark:bg-amber-900/10'}>
+                        <td className="px-3 py-2 font-medium">{item}</td>
+                        <td className="px-3 py-2">{auction}</td>
+                        <td className="px-3 py-2">{defi}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Three ways */}
+            <h3 className="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">3 Ways Regular People Can Participate in Liquidations</h3>
+            <div className="space-y-4 my-6">
+              {[
+                {
+                  level: '🟢 Low barrier',
+                  title: 'Liquidation Dashboard + Manual Execution',
+                  color: 'border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20',
+                  content: "Use the Aave app's Liquidations tab or third-party dashboards like defiexplore.com and aavescan.com to find liquidatable positions. Submit liquidation transactions directly via MetaMask. However, bots operate orders of magnitude faster — by the time you act, the opportunity is almost always already taken.",
+                  reality: 'Reality: Very hard to win against bots. Most opportunities are gone before you see them.',
+                },
+                {
+                  level: '🟡 Medium barrier',
+                  title: 'Open-Source Liquidation Bot',
+                  color: 'border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20',
+                  content: 'GitHub has several open-source Aave liquidation bots (aave/aave-liquidator, etc.). With basic Node.js or Python skills, you can clone, configure, and deploy on a VPS ($10–30/month). Gas optimization and RPC speed determine profitability.',
+                  reality: 'Reality: L2 markets (Base, Arbitrum) are more accessible than Ethereum mainnet — lower gas means small positions are still profitable.',
+                },
+                {
+                  level: '🔴 High barrier',
+                  title: 'MEV-Aware High-Performance Bot',
+                  color: 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20',
+                  content: 'Advanced bots using Flashbots, MEV-Boost, and private mempools. Requires Solidity + Rust/Go development skills, infrastructure optimization, and sophisticated gas strategies. Large liquidations can yield thousands of dollars, but the entry bar is extremely high.',
+                  reality: 'Reality: This is quant developer / full-time MEV searcher territory. Beyond typical retail scope.',
+                },
+              ].map((m, i) => (
+                <div key={i} className={`border rounded-xl p-5 ${m.color}`}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm font-bold text-gray-500">{m.level}</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">{m.title}</span>
+                  </div>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">{m.content}</p>
+                  <p className="text-xs font-medium text-gray-500 dark:text-gray-400 border-t border-current/20 pt-2">{m.reality}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Why harder */}
+            <div className="bg-gray-900 dark:bg-gray-950 rounded-xl p-6 my-6 text-white">
+              <p className="font-bold text-white mb-4">Why DeFi Liquidations Are Harder Than Foreclosure Auctions</p>
+              <div className="space-y-3 text-sm">
+                {[
+                  { icon: '⚡', title: 'Different timescales', desc: 'Foreclosure auctions give you days or weeks — time for due diligence, site visits, legal review. DeFi liquidations resolve in seconds. Humans cannot compete; only code can.' },
+                  { icon: '🤖', title: 'Your competition is software', desc: 'Auctions pit people against people — analytical edge wins. DeFi liquidations pit code against code — infrastructure speed wins. Faster RPC, lower gas, smarter strategy takes the prize.' },
+                  { icon: '💧', title: 'Opportunity yield is shrinking', desc: 'As the market matures, per-liquidation profit compresses. More competing bots means the bonus is increasingly consumed by gas fees. Early days (2020–2021) were accessible; now specialized teams dominate.' },
+                  { icon: '🌐', title: 'The opportunity is on L2', desc: 'Ethereum mainnet liquidation markets are saturated. L2 Aave markets (Base, Arbitrum, Polygon) have less competition and lower gas — even small positions are profitable. If there is an accessible entry point for individuals, it is here.' },
+                ].map((p, i) => (
+                  <div key={i} className="flex gap-3">
+                    <span className="text-xl flex-shrink-0">{p.icon}</span>
+                    <div>
+                      <p className="font-semibold text-white mb-1">{p.title}</p>
+                      <p className="text-gray-400 leading-relaxed">{p.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Conclusion */}
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl p-6 my-6">
+              <p className="font-semibold text-blue-900 dark:text-blue-300 mb-3">💡 Verdict: Same Opportunity Structure, Different Entry Requirements</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                Korean foreclosure auction investors win through faster information and sharper analysis. DeFi liquidators win through <strong>faster code execution</strong>. Becoming good at foreclosure requires learning legal due diligence; making money from DeFi liquidations requires learning bot development and on-chain infrastructure.
+              </p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                <strong>Practical path for regular people:</strong> Supplying liquidity to Aave for deposit interest is far more stable than chasing liquidation profits. Liquidation is closer to infrastructure than investment opportunity — running the bot that performs that infrastructure role is the realistic way to "earn from liquidations."
+              </p>
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-3">
+                  <p className="text-xs font-bold text-green-700 dark:text-green-400 mb-1">✅ Accessible</p>
+                  <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                    <li>• L2 Aave liquidation bot (open-source)</li>
+                    <li>• Small manual liquidations (for learning)</li>
+                    <li>• Studying liquidation bonus arbitrage</li>
+                  </ul>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-3">
+                  <p className="text-xs font-bold text-red-600 dark:text-red-400 mb-1">❌ Out of reach (for most)</p>
+                  <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                    <li>• Ethereum mainnet large liquidations</li>
+                    <li>• Manual competition against bots</li>
+                    <li>• Consistent profit without coding</li>
+                  </ul>
+                </div>
+              </div>
             </div>
 
             <hr className="border-gray-200 dark:border-gray-700 my-10" />
