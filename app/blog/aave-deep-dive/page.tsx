@@ -47,7 +47,7 @@ export default function AaveDeepDivePage() {
           <>
             {/* ── 제목 ── */}
             <h1 className="text-4xl font-bold mb-3 text-gray-900 dark:text-white leading-tight">
-              DeFi 시리즈 1 — AAVE
+              DeFi 시리즈 1 — AAVE (담보, 대출, 청산)
             </h1>
             <p className="text-gray-500 dark:text-gray-400 text-sm font-mono mb-10">DeFi 렌딩 프로토콜 완전 해부</p>
 
@@ -1058,7 +1058,7 @@ await flashbotsProvider.sendBundle(bundle, targetBlock);`,
           <>
             {/* ── EN ── */}
             <h1 className="text-4xl font-bold mb-3 text-gray-900 dark:text-white leading-tight">
-              DeFi Series 1 — AAVE
+              DeFi Series 1 — AAVE (Collateral, Lending, Liquidation)
             </h1>
             <p className="text-gray-500 dark:text-gray-400 text-sm font-mono mb-10">Complete breakdown of DeFi's largest lending protocol</p>
 
