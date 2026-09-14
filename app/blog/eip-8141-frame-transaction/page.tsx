@@ -2398,6 +2398,112 @@ contract SmartAccountTest is Test {
             </div>
           </section>
 
+          {/* ── Section 26: Walits 관점에서 본 EIP-8141 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2 pb-3 border-b border-slate-200">
+              {isKo ? '26. Walits 관점에서 본 EIP-8141 — 의미 있나?' : '26. EIP-8141 Through the Walits Lens — Does It Matter?'}
+            </h2>
+            <div className="text-xs text-slate-400 mb-6 font-mono">{isKo ? '업데이트 · 2026년 9월 14일' : 'Updated · September 14, 2026'}</div>
+
+            <div className="bg-slate-800 rounded-xl px-6 py-4 mb-8">
+              <p className="text-green-400 font-mono text-sm m-0">
+                {isKo
+                  ? '결론: 중장기적으로 의미 있고, 단기적으로 행동 불필요. 단 한 가지 포인트는 지금 주목할 만하다.'
+                  : 'Bottom line: Relevant in the medium-to-long term, no action needed short-term. One point deserves attention now.'}
+              </p>
+            </div>
+
+            <div className="space-y-6">
+
+              {/* 1. 가스리스 USDC */}
+              <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="bg-green-600 text-white text-xs font-bold px-2 py-1 rounded">1</span>
+                  <span className="font-bold text-slate-900 text-sm">{isKo ? '가스리스 USDC 송금 — Walits가 이미 앞서 있음' : 'Gasless USDC Transfer — Walits Already Ahead'}</span>
+                  <span className="text-green-600 text-xs font-bold ml-auto">{isKo ? '✅ 팩트 확인' : '✅ Verified'}</span>
+                </div>
+                <p className="text-slate-700 text-sm leading-relaxed m-0">
+                  {isKo
+                    ? 'EIP-8141의 주요 셀링포인트 중 하나가 "가스를 USDC 등 토큰으로 낼 수 있다"인데, Walits는 EIP-3009 + 릴레이어로 이미 이를 구현해 서비스 중이다. EIP-8141이 Base에 올라오면 오히려 릴레이어 인프라를 걷어내고 프로토콜에 위임할 수 있어 인프라가 단순해지는 방향이다. 위협이 아니라 구조 개선 기회.'
+                    : 'One of EIP-8141\'s key selling points is "pay gas in USDC or other tokens" — Walits already implements this via EIP-3009 + relayer and runs it in production. When EIP-8141 lands on Base, the relayer infrastructure can be retired in favor of the protocol, simplifying the stack. Not a threat — a structural simplification opportunity.'}
+                </p>
+              </div>
+
+              {/* 2. MPC 지갑 */}
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">2</span>
+                  <span className="font-bold text-slate-900 text-sm">{isKo ? 'MPC 지갑 — 가장 직접적인 연관' : 'MPC Wallet — Most Direct Connection'}</span>
+                  <span className="text-yellow-600 text-xs font-bold ml-auto">{isKo ? '⚠️ 일부 수정' : '⚠️ Partially corrected'}</span>
+                </div>
+                <p className="text-slate-700 text-sm leading-relaxed mb-3">
+                  {isKo
+                    ? 'EIP-8141은 ECDSA 외 서명 체계(P256, ARBITRARY)를 프로토콜이 직접 수용한다. Walits MPC는 현재 CGGMP21(secp256k1 기반)을 운용 중이며, CGGMP24는 로드맵 준비 단계다. 향후 서명 알고리즘 다양화 시 프로토콜 레벨 지원이 생긴다는 뜻으로, 지금 당장은 아니지만 MPC 인프라 로드맵에서 고려할 요소다.'
+                    : 'EIP-8141 natively supports signature schemes beyond ECDSA (P256, ARBITRARY). Walits MPC currently runs CGGMP21 (secp256k1-based); CGGMP24 is in roadmap preparation. This matters for future signature algorithm diversification — not immediate, but worth factoring into the MPC infrastructure roadmap.'}
+                </p>
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                  <p className="text-yellow-800 text-xs m-0">
+                    <strong>{isKo ? '팩트체크 수정:' : 'Fact-check correction:'}</strong>{' '}
+                    {isKo
+                      ? '원문의 "CGGMP24 + FROST 현재 운용"은 부정확. IR 자료 기준 현재 알고리즘은 CGGMP21이며, CGGMP24는 준비 중, FROST는 공개 로드맵에 미포함.'
+                      : 'The original "CGGMP24 + FROST currently in use" is inaccurate. Per IR materials, current algorithm is CGGMP21; CGGMP24 is in preparation; FROST is not in the public roadmap.'}
+                  </p>
+                </div>
+              </div>
+
+              {/* 3. PayFi */}
+              <div className="bg-purple-50 border border-purple-200 rounded-xl p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded">3</span>
+                  <span className="font-bold text-slate-900 text-sm">{isKo ? 'PayFi 원자적 배치 — UX 개선 여지' : 'PayFi Atomic Batching — UX Improvement Potential'}</span>
+                  <span className="text-green-600 text-xs font-bold ml-auto">{isKo ? '✅ 팩트 확인' : '✅ Verified'}</span>
+                </div>
+                <p className="text-slate-700 text-sm leading-relaxed m-0">
+                  {isKo
+                    ? '현재 PayFi에서 "예치 + 전략 선택"이 트랜잭션 여러 번인데, EIP-8141의 원자적 배치가 프로토콜 기본값이 되면 한 트랜잭션으로 묶어서 처리 가능하다. 실패 케이스가 줄고 UX도 개선된다. 단, EIP-8141이 Base에 활성화되는 시점이 전제 조건이다.'
+                    : 'Currently PayFi operations like "deposit + strategy selection" require multiple transactions. With EIP-8141 atomic batching as a protocol default, these can be bundled into one transaction — fewer failure cases, better UX. Contingent on EIP-8141 activation on Base.'}
+                </p>
+              </div>
+
+              {/* 4. x402 */}
+              <div className="bg-orange-50 border border-orange-200 rounded-xl p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">4</span>
+                  <span className="font-bold text-slate-900 text-sm">{isKo ? 'x402 연동 — 시너지 가능성' : 'x402 Integration — Synergy Potential'}</span>
+                  <span className="text-green-600 text-xs font-bold ml-auto">{isKo ? '✅ 팩트 확인' : '✅ Verified'}</span>
+                </div>
+                <p className="text-slate-700 text-sm leading-relaxed m-0">
+                  {isKo
+                    ? 'x402는 AI 에이전트가 ETH 없이 USDC만으로 API를 즉시 결제하는 프로토콜(Base 기본 레일)이다. EIP-8141이 활성화되면 에이전트 지갑이 ETH 잔고 없이도 USDC 가스 결제를 프로토콜 레벨에서 처리할 수 있어, Walits가 타겟하는 에이전트 지갑 포지셔닝이 더 강화된다. x402 + EIP-8141 조합은 "ETH 없는 에이전트 자율 결제" 시나리오를 인프라 없이 실현한다.'
+                    : 'x402 is a protocol letting AI agents pay for APIs instantly in USDC without ETH (Base as the default rail). When EIP-8141 activates, agent wallets can handle USDC gas payment at the protocol level without any ETH balance — strengthening Walits\'s agent wallet positioning. The x402 + EIP-8141 combination enables "ETH-free autonomous agent payments" without custom infrastructure.'}
+                </p>
+              </div>
+
+              {/* 타임라인 + 지금 해야 할 것 */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="bg-slate-700 text-white text-xs font-bold px-2 py-1 rounded">{isKo ? '타임라인' : 'Timeline'}</span>
+                  <span className="font-bold text-slate-900 text-sm">{isKo ? '지금 당장 해야 할 것 — 없다' : 'Action Required Right Now — None'}</span>
+                  <span className="text-green-600 text-xs font-bold ml-auto">{isKo ? '✅ 팩트 확인' : '✅ Verified'}</span>
+                </div>
+                <p className="text-slate-700 text-sm leading-relaxed mb-4">
+                  {isKo
+                    ? 'EIP-8141은 드래프트고, Base에 올라오려면 Ethereum 메인넷 확정 → 하드포크 → Base 포팅 순서라 2027년 이전 현실화는 어렵다.'
+                    : 'EIP-8141 is a draft. Reaching Base requires Ethereum mainnet finalization → hard fork → Base porting — unlikely before 2027.'}
+                </p>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-blue-900 text-sm leading-relaxed m-0">
+                    <strong>{isKo ? '💡 단, 지금 주목할 포인트 하나:' : '💡 One thing to watch now:'}</strong>{' '}
+                    {isKo
+                      ? '"코드 없는 EOA에 default code 제공" — 일반 MPC EOA가 별도 컨트랙트 배포 없이 AA 기능을 쓸 수 있게 된다는 부분은 Walits 지갑 구조와 직결된다. 스펙이 확정되는 시점에 한 번 깊게 검토할 가치가 있다.'
+                      : '"Default code for codeless EOAs" — ordinary MPC EOAs getting AA features without contract deployment is directly relevant to Walits\'s wallet architecture. Worth a deep review when the spec finalizes.'}
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
           {/* Walits CTA */}
           <div className="bg-gradient-to-br from-purple-900 to-slate-900 rounded-2xl p-8 text-white">
             <div className="text-purple-300 text-sm font-semibold mb-2">Walits × EIP-8141</div>
