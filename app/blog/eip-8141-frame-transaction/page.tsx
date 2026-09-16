@@ -1899,6 +1899,172 @@ contract MyAccount {
             </div>
           </section>
 
+          {/* ── Section 21-1: EIP-3009 vs ERC-4337 vs EIP-8141 결정 프레임워크 ── */}
+          <section className="mb-14">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
+              {isKo
+                ? '21-1. EIP-3009 / ERC-4337 / EIP-8141 — PayFi 개발자를 위한 선택 기준'
+                : '21-1. EIP-3009 / ERC-4337 / EIP-8141 — Decision Framework for PayFi Developers'}
+            </h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              {isKo
+                ? 'EIP-8141을 배웠으니 이제 자연스러운 질문이 생긴다. "그럼 기존 EIP-3009나 ERC-4337은 언제 쓰고, EIP-8141은 언제 써야 하나?" 특히 USDC 결제·송금이 핵심인 PayFi 서비스라면 이 선택이 인프라 복잡도를 결정한다. 정답은 의외로 단순하다.'
+                : "Now that you've learned EIP-8141, the natural question arises: 'When do I use EIP-3009 or ERC-4337, and when should I use EIP-8141?' For PayFi services where USDC payment and transfer is the core function, this choice determines infrastructure complexity. The answer is simpler than you'd expect."}
+            </p>
+
+            {/* EIP-3009 소개 */}
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-5 mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">EIP-3009</span>
+                <span className="font-bold text-slate-800 text-sm">{isKo ? 'USDC의 숨겨진 킬러 기능 — transferWithAuthorization' : "USDC's Hidden Killer Feature — transferWithAuthorization"}</span>
+              </div>
+              <p className="text-slate-700 text-sm leading-relaxed mb-3">
+                {isKo
+                  ? 'EIP-3009는 Circle USDC가 기본 지원하는 서명 기반 전송 표준이다. 사용자가 오프체인 서명(EIP-712)만 하면, 릴레이어가 그 서명을 담아 트랜잭션을 제출한다. 사용자는 ETH가 전혀 없어도 USDC를 전송할 수 있다.'
+                  : 'EIP-3009 is a signature-based transfer standard natively supported by Circle USDC. The user only signs off-chain (EIP-712); a relayer submits the transaction carrying that signature. The user can transfer USDC with zero ETH.'}
+              </p>
+              <div className="bg-slate-800 rounded-lg p-4">
+                <pre className="text-green-400 text-xs font-mono overflow-x-auto">{`// EIP-3009 핵심 함수 (USDC 컨트랙트에 이미 내장됨)
+function transferWithAuthorization(
+    address from,       // 보내는 사람
+    address to,         // 받는 사람
+    uint256 value,      // 금액
+    uint256 validAfter, // 유효 시작 시간
+    uint256 validBefore,// 유효 만료 시간
+    bytes32 nonce,      // 재사용 방지 nonce
+    uint8 v, bytes32 r, bytes32 s  // EIP-712 서명
+) external;
+
+// 릴레이어가 이 함수를 대신 호출 → 가스는 릴레이어 부담
+// 사용자 ETH 잔고: 0 이어도 됨`}</pre>
+              </div>
+            </div>
+
+            {/* 3-way 비교 테이블 */}
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '세 가지 접근법 비교' : 'Three-Way Comparison'}</h3>
+            <div className="overflow-x-auto rounded-xl border border-slate-200 mb-8">
+              <table className="w-full text-xs">
+                <thead className="bg-slate-900 text-white">
+                  <tr>
+                    <th className="text-left px-4 py-3">{isKo ? '항목' : 'Aspect'}</th>
+                    <th className="text-left px-4 py-3 text-orange-300">EIP-3009 릴레이어</th>
+                    <th className="text-left px-4 py-3 text-blue-300">ERC-4337 Paymaster</th>
+                    <th className="text-left px-4 py-3 text-purple-300">EIP-8141 (Draft)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(isKo ? [
+                    ['작동 방식', '사용자 서명 → 릴레이어 제출', 'UserOp → Bundler → EntryPoint', 'Frame Tx → 공개 mempool 직접'],
+                    ['커버 범위', 'USDC 전송만', '모든 컨트랙트 호출', '모든 컨트랙트 호출'],
+                    ['인프라 복잡도', '낮음 (릴레이어 서버)', '높음 (스마트 컨트랙트 + 번들러)', '없음 (프로토콜 내장)'],
+                    ['지금 쓸 수 있나', '✅ 지금 당장', '✅ 지금 당장', '❌ 드래프트 (2027년 이후)'],
+                    ['ETH 불필요', '✅ 릴레이어가 대납', '✅ Paymaster가 대납', '✅ APPROVE_PAYMENT 프레임'],
+                    ['USDC로 가스 정산', '❌ 릴레이어 ETH 선납', '✅ Token Paymaster', '✅ VERIFY 프레임'],
+                    ['배치 트랜잭션', '❌', '✅', '✅ 프로토콜 기본값'],
+                    ['서명 체계', 'ECDSA (secp256k1)', 'ECDSA (secp256k1)', 'ECDSA + P256 + ARBITRARY'],
+                    ['번들러 의존', '❌', '✅ 의존', '❌ 제거됨'],
+                  ] : [
+                    ['Mechanism', 'User signs → relayer submits', 'UserOp → Bundler → EntryPoint', 'Frame Tx → public mempool directly'],
+                    ['Coverage', 'USDC transfer only', 'Any contract call', 'Any contract call'],
+                    ['Infrastructure complexity', 'Low (relayer server)', 'High (smart contracts + bundler)', 'None (protocol-native)'],
+                    ['Available now?', '✅ Right now', '✅ Right now', '❌ Draft (post-2027)'],
+                    ['ETH not required', '✅ Relayer sponsors', '✅ Paymaster sponsors', '✅ APPROVE_PAYMENT frame'],
+                    ['Gas settled in USDC', '❌ Relayer pre-pays ETH', '✅ Token Paymaster', '✅ VERIFY frame'],
+                    ['Batch transactions', '❌', '✅', '✅ Protocol default'],
+                    ['Signature schemes', 'ECDSA (secp256k1)', 'ECDSA (secp256k1)', 'ECDSA + P256 + ARBITRARY'],
+                    ['Bundler dependency', '❌', '✅ Required', '❌ Eliminated'],
+                  ]).map((row, i) => (
+                    <tr key={i} className={i % 2 === 0 ? 'bg-white border-b border-slate-100' : 'bg-slate-50 border-b border-slate-100'}>
+                      <td className="px-4 py-2.5 font-semibold text-slate-700">{row[0]}</td>
+                      <td className="px-4 py-2.5 text-orange-700">{row[1]}</td>
+                      <td className="px-4 py-2.5 text-blue-700">{row[2]}</td>
+                      <td className="px-4 py-2.5 text-purple-700">{row[3]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* 결정 프레임워크 */}
+            <h3 className="text-lg font-bold text-slate-900 mb-4">{isKo ? '언제 무엇을 써야 하나 — 결정 기준' : 'When to Use What — Decision Criteria'}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-orange-50 border-2 border-orange-300 rounded-xl p-5">
+                <div className="font-black text-orange-800 mb-1">EIP-3009</div>
+                <div className="text-orange-600 text-xs font-semibold mb-3">{isKo ? '✅ 지금 당장 · 단순하게' : '✅ Right now · Keep it simple'}</div>
+                <p className="text-slate-700 text-xs leading-relaxed mb-3">
+                  {isKo
+                    ? 'USDC 결제·송금이 서비스의 핵심 액션인 경우. ERC-4337의 복잡한 스택을 굳이 다 쌓을 필요 없다.'
+                    : 'When USDC payment and transfer is your service\'s core action. No need to build out ERC-4337\'s full complex stack.'}
+                </p>
+                <div className="space-y-1">
+                  {(isKo
+                    ? ['PayFi 입출금 서비스', 'B2B USDC 정산·급여', 'x402 AI 에이전트 결제', '이주 노동자 송금앱']
+                    : ['PayFi deposit/withdrawal', 'B2B USDC settlement/payroll', 'x402 AI agent payments', 'Migrant worker remittance']
+                  ).map((item, i) => (
+                    <div key={i} className="text-xs text-slate-600 flex gap-1"><span className="text-orange-400">·</span>{item}</div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-5">
+                <div className="font-black text-blue-800 mb-1">ERC-4337</div>
+                <div className="text-blue-600 text-xs font-semibold mb-3">{isKo ? '✅ 지금 당장 · 범용' : '✅ Right now · General purpose'}</div>
+                <p className="text-slate-700 text-xs leading-relaxed mb-3">
+                  {isKo
+                    ? 'USDC 외 임의의 컨트랙트 호출까지 가스리스로 지원해야 할 때. 배치, 세션키, Token PM이 필요한 경우.'
+                    : 'When you need gasless support for arbitrary contract calls beyond USDC. Required for batching, session keys, Token PM.'}
+                </p>
+                <div className="space-y-1">
+                  {(isKo
+                    ? ['DeFi 가스리스 통합 (Aave/Uniswap)', '배치 트랜잭션 (approve+swap)', '세션 키 위임', 'USDC로 가스 직접 정산']
+                    : ['DeFi gasless integration (Aave/Uniswap)', 'Batch transactions (approve+swap)', 'Session key delegation', 'Pay gas directly in USDC']
+                  ).map((item, i) => (
+                    <div key={i} className="text-xs text-slate-600 flex gap-1"><span className="text-blue-400">·</span>{item}</div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-purple-50 border-2 border-purple-300 rounded-xl p-5">
+                <div className="font-black text-purple-800 mb-1">EIP-8141</div>
+                <div className="text-purple-600 text-xs font-semibold mb-3">{isKo ? '🔭 2027년 이후 · 프로토콜 네이티브' : '🔭 Post-2027 · Protocol-native'}</div>
+                <p className="text-slate-700 text-xs leading-relaxed mb-3">
+                  {isKo
+                    ? 'ERC-4337가 하는 모든 것을 번들러·EntryPoint 없이. P256/ARBITRARY 서명, 포스트 퀀텀, 2D 가스까지.'
+                    : "Everything ERC-4337 does, without Bundler or EntryPoint. P256/ARBITRARY signatures, post-quantum, 2D gas."}
+                </p>
+                <div className="space-y-1">
+                  {(isKo
+                    ? ['번들러 의존 제거', 'P256 패스키 네이티브 지원', '2D 가스 (실행+상태 분리)', 'ERC-4337 상위 호환 대체']
+                    : ['Bundler dependency eliminated', 'P256 passkey native support', '2D gas (execution+state split)', 'ERC-4337 superset replacement']
+                  ).map((item, i) => (
+                    <div key={i} className="text-xs text-slate-600 flex gap-1"><span className="text-purple-400">·</span>{item}</div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-slate-800 rounded-xl p-5">
+              <p className="text-green-400 font-mono text-sm font-bold mb-3">{isKo ? '// 판단 기준 한 줄 요약' : '// One-line decision rule'}</p>
+              <div className="space-y-2 text-sm">
+                <div className="flex gap-3">
+                  <span className="text-yellow-400 font-mono shrink-0">if</span>
+                  <span className="text-slate-300">{isKo ? '핵심 액션 == USDC 이동 뿐' : 'core action == USDC movement only'}</span>
+                  <span className="text-green-400 font-mono ml-auto shrink-0">→ EIP-3009</span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-yellow-400 font-mono shrink-0">elif</span>
+                  <span className="text-slate-300">{isKo ? '임의 컨트랙트 가스리스 + 지금 당장 필요' : 'arbitrary contract gasless + needed now'}</span>
+                  <span className="text-blue-400 font-mono ml-auto shrink-0">→ ERC-4337</span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-yellow-400 font-mono shrink-0">elif</span>
+                  <span className="text-slate-300">{isKo ? '번들러 제거 + P256/PQ 서명 + 2027년 이후' : 'no bundler + P256/PQ sigs + post-2027'}</span>
+                  <span className="text-purple-400 font-mono ml-auto shrink-0">→ EIP-8141</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* ── Section 22: Expiry Verifier 프리컴파일 ── */}
           <section className="mb-14">
             <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200">
