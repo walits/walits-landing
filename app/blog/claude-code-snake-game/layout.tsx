@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: '지렁이 게임으로 배우는 Claude Code 하네스 — 실전 예제',
     description: '실제 게임을 만들면서 git worktree, Notification/Stop 훅, 에이전트 팀이 어떻게 개발 속도를 높이는지 단계별로 보여준다. 완성 코드 포함.',
-    images: [{ url: 'https://walits.com/blog/game-rewards.jpg', width: 1200, height: 630 }],
+    images: [{ url: 'https://walits.com/blog/aigame.jpg', width: 1200, height: 630 }],
   },
 };
 

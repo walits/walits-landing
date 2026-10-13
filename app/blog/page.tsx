@@ -22,7 +22,7 @@ export default function BlogPage() {
           excerpt: 'worktree 격리, progress 파일, investigator/reviewer 에이전트, Stop 게이트를 지렁이 게임을 만들면서 실전으로 체험한다. 완성 게임 코드 포함.',
           date: '2026년 10월 13일',
           readTime: '30분',
-          image: '/blog/game-rewards.jpg',
+          image: '/blog/aigame.jpg',
         },
         {
           id: 'claude-code-multi-session-harness',
@@ -462,7 +462,7 @@ export default function BlogPage() {
           excerpt: '게임 이벤트, 출석 체크, 커뮤니티 활동, 친구 초대 등 모든 보상 시나리오를 단 하나의 API로 해결. 가스비 0원, 즉시 반영, 완벽한 추적.',
           date: '2024년 12월 15일',
           readTime: '7분',
-          image: '/blog/game-rewards.jpg',
+          image: '/blog/aigame.jpg',
         },
         {
           id: 'community-airdrop',
@@ -500,7 +500,7 @@ export default function BlogPage() {
           excerpt: 'Experience worktree isolation, progress files, investigator/reviewer agents, and Stop gate by building a snake game from scratch. Complete game code included.',
           date: 'October 13, 2026',
           readTime: '30 min read',
-          image: '/blog/game-rewards.jpg',
+          image: '/blog/aigame.jpg',
         },
         {
           id: 'claude-code-multi-session-harness',
@@ -940,7 +940,7 @@ export default function BlogPage() {
           excerpt: 'Solve all reward scenarios - game events, attendance, community activities, referrals - with just one API. Zero gas fees, instant reflection, perfect tracking.',
           date: 'December 15, 2024',
           readTime: '7 min read',
-          image: '/blog/game-rewards.jpg',
+          image: '/blog/aigame.jpg',
         },
         {
           id: 'community-airdrop',

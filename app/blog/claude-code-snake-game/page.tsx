@@ -48,7 +48,7 @@ export default function ClaudeCodeSnakeGamePage() {
       {/* Hero Image */}
       <div className="max-w-4xl mx-auto px-6 -mt-4">
         <div className="relative w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl">
-          <Image src="/blog/game-rewards.jpg" alt="Claude Code Snake Game Harness Example" fill className="object-cover" />
+          <Image src="/blog/aigame.jpg" alt="Claude Code Snake Game Harness Example" fill className="object-cover" />
         </div>
       </div>
 
