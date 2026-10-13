@@ -15,6 +15,16 @@ export default function BlogPage() {
       readMore: '자세히 보기 →',
       posts: [
         {
+          id: 'claude-code-multi-session-harness',
+          category: 'Claude Code 실전 가이드',
+          categoryColor: 'bg-green-100 text-green-800',
+          title: '멀티 세션 오케스트레이션 하네스 — Claude Code 실전 튜토리얼',
+          excerpt: 'Claude Code 5가지 고통(세션 오염·알림 누락·맥락 유실·미검증 커밋·결과 고립)을 git worktree, Notification/Stop 훅, progress 파일, sub-agent 팀으로 영구히 제거하는 실전 하네스 구축 가이드.',
+          date: '2026년 10월 12일',
+          readTime: '35분',
+          image: '/blog/harness.jpg',
+        },
+        {
           id: 'eip-8141-frame-transaction',
           category: '이더리움 개발자 가이드',
           categoryColor: 'bg-purple-100 text-purple-800',
@@ -472,6 +482,16 @@ export default function BlogPage() {
       backToHome: '← Back to Home',
       readMore: 'Read More →',
       posts: [
+        {
+          id: 'claude-code-multi-session-harness',
+          category: 'Claude Code Practical Guide',
+          categoryColor: 'bg-green-100 text-green-800',
+          title: 'Multi-Session Orchestration Harness — Claude Code Practical Tutorial',
+          excerpt: 'Permanently eliminate 5 Claude Code pains (session contamination, missed notifications, lost context, unverified commits, isolated results) with git worktree, Notification/Stop hooks, progress files, and sub-agent teams.',
+          date: 'October 12, 2026',
+          readTime: '35 min read',
+          image: '/blog/harness.jpg',
+        },
         {
           id: 'eip-8141-frame-transaction',
           category: 'Ethereum Developer Guide',
