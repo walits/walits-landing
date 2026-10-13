@@ -108,17 +108,17 @@ export default function ClaudeCodeMultiSessionHarnessPage() {
               <div className="text-xs font-mono text-slate-500 mb-2">{isKo ? '필수 조건' : 'Requirements'}</div>
               <ul className="space-y-2 text-sm text-slate-700">
                 {(isKo ? [
-                  'Claude Code CLI (claude --version ≥ 1.x)',
+                  'Claude Code CLI (claude --version으로 설치 확인)',
                   'git 저장소 (git init 또는 기존 repo)',
-                  'Node.js / Python — 프로젝트에 따라',
-                  'macOS: terminal-notifier 또는 osascript (내장)',
-                  'Linux: notify-send (libnotify-bin)',
+                  'jq — 훅 스크립트가 stdin JSON 파싱에 사용 (brew install jq)',
+                  'macOS: osascript 내장 (별도 설치 불필요)',
+                  'Node.js / Python — 프로젝트 유형에 따라',
                 ] : [
-                  'Claude Code CLI (claude --version ≥ 1.x)',
+                  'Claude Code CLI (verify with claude --version)',
                   'git repository (git init or existing repo)',
-                  'Node.js / Python — depending on project',
-                  'macOS: terminal-notifier or osascript (built-in)',
-                  'Linux: notify-send (libnotify-bin)',
+                  'jq — hook scripts use it to parse stdin JSON (brew install jq)',
+                  'macOS: osascript built-in (no separate install needed)',
+                  'Node.js / Python — depending on project type',
                 ]).map((item, i) => (
                   <li key={i} className="flex gap-2"><span className="text-green-600">✓</span>{item}</li>
                 ))}
@@ -315,10 +315,46 @@ git worktree list`}</pre>
           </p>
 
           <div className="space-y-6">
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+              <div className="text-blue-800 font-bold text-sm mb-2">🍎 {isKo ? 'macOS 실습 전 체크리스트' : 'macOS Pre-flight Checklist'}</div>
+              <ul className="text-blue-700 text-sm space-y-2">
+                <li className="flex gap-2 items-start">
+                  <span className="shrink-0 font-mono">1.</span>
+                  <span>
+                    {isKo ? (
+                      <>
+                        <strong>jq 설치</strong> — 훅 스크립트가 stdin JSON 파싱에 사용한다: <code className="bg-blue-100 px-1 rounded">brew install jq</code>
+                      </>
+                    ) : (
+                      <>
+                        <strong>Install jq</strong> — hook scripts use it to parse stdin JSON: <code className="bg-blue-100 px-1 rounded">brew install jq</code>
+                      </>
+                    )}
+                  </span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  <span className="shrink-0 font-mono">2.</span>
+                  <span>
+                    {isKo
+                      ? <><strong>터미널 알림 권한</strong> — 시스템 설정 → 알림 → Terminal(또는 iTerm2) → 알림 허용</>
+                      : <><strong>Terminal notification permission</strong> — System Settings → Notifications → Terminal (or iTerm2) → Allow notifications</>}
+                  </span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  <span className="shrink-0 font-mono">3.</span>
+                  <span>
+                    {isKo
+                      ? <><strong>스크립트 실행 권한</strong> — <code className="bg-blue-100 px-1 rounded">chmod +x .claude/scripts/*.sh</code> 반드시 실행</>
+                      : <><strong>Script execute permission</strong> — Run <code className="bg-blue-100 px-1 rounded">chmod +x .claude/scripts/*.sh</code> after creating files</>}
+                  </span>
+                </li>
+              </ul>
+            </div>
+
             <p className="text-slate-600 leading-relaxed">
               {isKo
-                ? 'Notification 훅은 Claude Code가 특정 상태가 될 때 셸 스크립트를 실행한다. `permission_prompt`(권한 승인 필요), `agent_needs_input`(에이전트가 입력 요청), `idle_prompt`(유휴 상태)에 반응해 OS 알림을 보낼 수 있다.'
-                : 'The Notification hook runs a shell script when Claude Code enters specific states: `permission_prompt` (needs permission approval), `agent_needs_input` (agent requesting input), `idle_prompt` (idle state). Use these to send OS notifications.'}
+                ? 'Notification 훅은 Claude Code가 특정 상태가 될 때 셸 스크립트를 실행한다. 데이터는 인수($1, $2)가 아닌 stdin으로 JSON이 전달된다. `notification_type` 필드에서 알림 종류를 확인하고 OS 알림을 보낼 수 있다.'
+                : 'The Notification hook runs a shell script when Claude Code enters specific states. Data is passed as JSON via stdin, NOT as command arguments ($1, $2). Check the `notification_type` field to determine the notification kind and send OS alerts.'}
             </p>
 
             <div>
@@ -326,31 +362,26 @@ git worktree list`}</pre>
               <pre className="bg-slate-900 text-green-400 rounded-xl p-5 text-xs overflow-x-auto">{`#!/bin/bash
 # .claude/scripts/notify.sh
 # Claude Code Notification 훅
+# ⚠️ 훅 데이터는 $1/$2/$3 인수가 아니라 stdin으로 JSON이 전달된다
 
-HOOK_TYPE="$1"          # permission_prompt | agent_needs_input | idle_prompt
-SESSION_NAME="$2"       # 세션 이름 (설정된 경우)
-MESSAGE="$3"            # 알림 메시지
+# stdin에서 JSON 읽기 (jq 필요: brew install jq)
+INPUT=$(cat)
+NOTIFICATION_TYPE=$(echo "$INPUT" | jq -r '.notification_type // empty')
+MESSAGE=$(echo "$INPUT" | jq -r '.message // empty')
 
-case "$HOOK_TYPE" in
+case "$NOTIFICATION_TYPE" in
   permission_prompt)
-    TITLE="🔐 권한 승인 필요"
-    BODY="\${SESSION_NAME:-Claude}: 권한 승인이 필요합니다"
-    ;;
-  agent_needs_input)
-    TITLE="🤖 에이전트 입력 요청"
-    BODY="\${SESSION_NAME:-Claude}: \${MESSAGE:-입력이 필요합니다}"
-    ;;
-  idle_prompt)
-    TITLE="💤 Claude 대기 중"
-    BODY="\${SESSION_NAME:-Claude}: 다음 작업을 기다립니다"
+    TITLE="🔐 Claude: 권한 승인 필요"
+    BODY="\${MESSAGE:-파일 쓰기 또는 셸 실행 권한이 필요합니다}"
     ;;
   *)
+    # notification_type이 없거나 다른 값이면 기본 알림
     TITLE="💬 Claude Code"
-    BODY="\${MESSAGE:-알림}"
+    BODY="\${MESSAGE:-알림이 있습니다}"
     ;;
 esac
 
-# macOS 알림
+# macOS 알림 (osascript는 macOS 내장)
 if command -v osascript &> /dev/null; then
   osascript -e "display notification \\"$BODY\\" with title \\"$TITLE\\" sound name \\"Ping\\""
 fi
@@ -394,7 +425,7 @@ EOF`}</pre>
   "hooks": {
     "Notification": [
       {
-        "matcher": "permission_prompt|agent_needs_input|idle_prompt",
+        "matcher": "permission_prompt",
         "hooks": [
           {
             "type": "command",
@@ -433,12 +464,10 @@ EOF`}</pre>
                   <tbody>
                     {(isKo ? [
                       ['permission_prompt', '파일 쓰기, 셸 실행 등 권한 승인 대기', 'OS 알림 + 탭 타이틀 🔐'],
-                      ['agent_needs_input', '서브에이전트가 추가 정보 요청', 'OS 알림 + 벨 알림'],
-                      ['idle_prompt', '작업 완료 후 다음 지시 대기', '탭 타이틀 ✅'],
+                      ['(기타 값)', 'Claude 버전에 따라 notification_type 값이 다를 수 있음', '공식 docs에서 최신 값 확인 권장'],
                     ] : [
                       ['permission_prompt', 'Waiting for approval: file write, shell exec, etc.', 'OS notification + tab title 🔐'],
-                      ['agent_needs_input', 'Sub-agent requesting additional information', 'OS notification + bell'],
-                      ['idle_prompt', 'Waiting for next instruction after task completion', 'Tab title ✅'],
+                      ['(other values)', 'notification_type values may vary by Claude version', 'Check official docs for the latest values'],
                     ]).map(([matcher, when, action], i) => (
                       <tr key={i} className="border-b border-slate-100">
                         <td className="py-2 pr-4 font-mono text-purple-700">{matcher}</td>
@@ -515,36 +544,47 @@ ioredis set() 메서드 시그니처 확인 필요.`}</pre>
             </div>
 
             <div>
-              <div className="text-sm font-bold text-slate-700 mb-3">.claude/scripts/session-start.sh</div>
+              <div className="text-sm font-bold text-slate-700 mb-3">.claude/scripts/session-start.sh <span className="text-slate-400 font-normal text-xs ml-2">stdin JSON → source 필드로 트리거 타입 확인</span></div>
               <pre className="bg-slate-900 text-green-400 rounded-xl p-5 text-xs overflow-x-auto">{`#!/bin/bash
 # .claude/scripts/session-start.sh
 # SessionStart 훅 — 세션 시작 시 맥락 주입
+# ⚠️ 데이터는 stdin JSON으로 옴. 'source' 필드에 트리거 타입이 있음
 
-HOOK_TYPE="$1"   # startup | resume | clear | compact | fork
+# stdin에서 JSON 읽기 (jq 필요: brew install jq)
+INPUT=$(cat)
+SOURCE=$(echo "$INPUT" | jq -r '.source // empty')  # startup|resume|clear|compact|fork
+
 PROJECT="$CLAUDE_PROJECT_DIR"
 PROGRESS_DIR="$PROJECT/docs/progress"
 
-# compact/fork 시에만 추가 맥락 주입 (startup은 CLAUDE.md로 충분)
-if [[ "$HOOK_TYPE" == "compact" || "$HOOK_TYPE" == "resume" ]]; then
+# compact 또는 resume 시에만 추가 맥락 주입
+# (startup은 CLAUDE.md로 충분)
+if [[ "$SOURCE" == "compact" || "$SOURCE" == "resume" ]]; then
 
   # 미완료 progress 파일 수집
   ACTIVE_PROGRESS=""
   for f in "$PROGRESS_DIR"/*.md; do
     [ -f "$f" ] || continue
     # 미완료 체크박스가 있는 파일만
-    if grep -q "\- \[ \]" "$f" 2>/dev/null; then
-      ACTIVE_PROGRESS="$ACTIVE_PROGRESS\n\n### $(basename $f)\n$(cat $f)"
+    if grep -q "- \[ \]" "$f" 2>/dev/null; then
+      ACTIVE_PROGRESS="$ACTIVE_PROGRESS\n\n### $(basename "$f")\n$(cat "$f")"
     fi
   done
 
   if [ -n "$ACTIVE_PROGRESS" ]; then
-    # additionalContext로 주입
-    cat <<EOF
-{
-  "additionalContext": "## 진행 중인 작업\n$ACTIVE_PROGRESS",
-  "sessionTitle": "재개: $(date '+%Y-%m-%d %H:%M')"
+    # additionalContext를 hookSpecificOutput으로 출력
+    # Claude Code가 이 JSON을 읽어 세션에 맥락을 주입함
+    python3 -c "
+import json, sys
+context = sys.argv[1]
+output = {
+  'hookSpecificOutput': {
+    'hookEventName': 'SessionStart',
+    'additionalContext': context
+  }
 }
-EOF
+print(json.dumps(output))
+" "## 재개: 진행 중인 작업$(printf '%b' "$ACTIVE_PROGRESS")"
   fi
 fi
 
@@ -644,6 +684,12 @@ exit 0`}</pre>
               <pre className="bg-slate-900 text-green-400 rounded-xl p-5 text-xs overflow-x-auto">{`#!/bin/bash
 # .claude/scripts/verify-done.sh
 # Stop 훅 — 세션 종료 전 검증 게이트
+# ⚠️ 데이터는 stdin JSON으로 옴 (stop_reason, last_assistant_message 등)
+# exit 0 → 종료 허용 / exit 2 → 종료 차단 (Claude 계속 실행)
+
+# stdin 읽기 (지금은 참고용, 필요 시 stop_reason 등 활용 가능)
+INPUT=$(cat)
+# STOP_REASON=$(echo "$INPUT" | jq -r '.stop_reason // empty')
 
 PROJECT="$CLAUDE_PROJECT_DIR"
 COUNTER_FILE="$PROJECT/.claude/.verify-retry-count"
@@ -655,55 +701,52 @@ MAX_RETRIES=3
 if [ "$RETRY_COUNT" -ge "$MAX_RETRIES" ]; then
   echo "⚠️  검증 게이트 최대 재시도 횟수 초과. 강제 종료 허용."
   echo "0" > "$COUNTER_FILE"
-  exit 0  # 종료 허용
+  exit 0
 fi
 
 FAILED=0
-MESSAGES=""
+REASON=""
 
-# 1. 타입 체크
-if [ -f "package.json" ] && grep -q "tsc\|typecheck" package.json; then
+# 1. 타입 체크 (package.json에 typecheck 스크립트가 있을 때만)
+if [ -f "package.json" ] && grep -q '"typecheck"' package.json; then
   echo "🔍 타입 체크 실행 중..."
   if ! npm run typecheck --silent 2>/dev/null; then
     FAILED=1
-    MESSAGES="$MESSAGES\n❌ 타입 오류가 있습니다. 수정 후 종료해주세요."
+    REASON="타입 오류가 있습니다. 수정 후 종료해주세요."
   fi
 fi
 
-# 2. 관련 테스트
-if [ -f "package.json" ] && grep -q '"test"' package.json; then
-  # 최근 수정된 파일과 관련된 테스트만 실행
-  CHANGED_FILES=$(git diff --name-only HEAD 2>/dev/null | head -10)
-  if [ -n "$CHANGED_FILES" ]; then
-    echo "🧪 관련 테스트 실행 중..."
+# 2. 변경된 파일이 있을 때만 테스트 실행
+if [ "$FAILED" -eq 0 ] && [ -f "package.json" ] && grep -q '"test"' package.json; then
+  CHANGED=$(git diff --name-only HEAD 2>/dev/null | grep -c '\.')
+  if [ "$CHANGED" -gt 0 ]; then
+    echo "🧪 테스트 실행 중..."
     if ! npm test --silent -- --passWithNoTests 2>/dev/null; then
       FAILED=1
-      MESSAGES="$MESSAGES\n❌ 테스트 실패가 있습니다."
+      REASON="테스트 실패가 있습니다."
     fi
   fi
 fi
 
-# 3. Progress 파일 체크
+# 3. Progress 파일 미완료 항목 경고 (차단은 아님)
 PROGRESS_DIR="$PROJECT/docs/progress"
 if [ -d "$PROGRESS_DIR" ]; then
-  UNCHECKED=$(grep -l "\- \[ \]" "$PROGRESS_DIR"/*.md 2>/dev/null)
+  UNCHECKED=$(grep -rl "- \[ \]" "$PROGRESS_DIR"/ 2>/dev/null | xargs -I{} basename {} 2>/dev/null | tr '\n' ', ')
   if [ -n "$UNCHECKED" ]; then
-    # 미완료 항목이 있어도 경고만 (강제 종료는 아님)
-    echo "⚠️  미완료 progress 항목이 있습니다: $UNCHECKED"
+    echo "⚠️  미완료 progress 항목: $UNCHECKED"
   fi
 fi
 
 if [ "$FAILED" -eq 1 ]; then
-  # 재시도 카운터 증가
-  echo $((RETRY_COUNT + 1)) > "$COUNTER_FILE"
-  echo -e "$MESSAGES"
-  echo ""
-  echo "🔄 문제를 수정한 후 다시 종료를 시도하세요. (재시도 $((RETRY_COUNT + 1))/$MAX_RETRIES)"
-  exit 2  # Claude 종료 차단
+  RETRY_COUNT=$((RETRY_COUNT + 1))
+  echo "$RETRY_COUNT" > "$COUNTER_FILE"
+  echo "🔄 재시도 $RETRY_COUNT/$MAX_RETRIES — $REASON"
+  # exit 2: Claude 종료 차단, 계속 실행 (Stop 훅만 지원)
+  exit 2
 else
   echo "✅ 모든 검증 통과"
   echo "0" > "$COUNTER_FILE"
-  exit 0  # 종료 허용
+  exit 0
 fi`}</pre>
             </div>
 
@@ -854,76 +897,40 @@ tools:
 
             <div>
               <h3 className="text-lg font-bold text-slate-800 mb-4">{isKo ? '5-2. 크로스 세션 메시지' : '5-2. Cross-Session Messaging'}</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                {isKo
-                  ? '병렬로 실행 중인 다른 Claude Code 세션에 직접 메시지를 보낼 수 있다. `/list-agents`로 활성 세션을 확인하고, `@세션명`으로 메시지를 전송한다.'
-                  : 'You can send messages directly to other Claude Code sessions running in parallel. Use `/list-agents` to see active sessions, and `@session-name` to send messages.'}
-              </p>
-              <pre className="bg-slate-900 text-green-400 rounded-xl p-5 text-xs overflow-x-auto">{`# 활성 세션 목록 확인
-/list-agents
-# 출력 예시:
-# main (active) — 메인 개발 세션
-# auth-feature (active) — 인증 기능 개발 중
-# reviewer (idle) — 코드 리뷰 대기 중
-
-# 특정 세션에 메시지 전송
-@auth-feature PR 준비됐어? 리뷰 요청 넣을게
-
-# 여러 세션에 브로드캐스트
-@all 배포 완료. 각자 테스트 결과 공유해줘`}</pre>
-
-              <div className="mt-4">
-                <div className="text-sm font-bold text-slate-700 mb-3">{isKo ? '크로스 세션 수신 정책 설정' : 'Cross-Session Inbound Policy'}</div>
-                <pre className="bg-slate-900 text-green-400 rounded-xl p-5 text-xs overflow-x-auto">{`// .claude/settings.json
-{
-  "crossSessionInbound": "accept",  // accept | hold | refuse
-  // accept: 즉시 수신하여 처리
-  // hold: 현재 작업 완료 후 처리
-  // refuse: 수신 거부
-}`}</pre>
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4">
+                <div className="text-amber-800 font-bold text-sm mb-1">⚗️ {isKo ? '개발 중인 기능' : 'Feature in Development'}</div>
+                <p className="text-amber-700 text-xs leading-relaxed">
+                  {isKo
+                    ? '크로스 세션 메시지는 Anthropic이 개발 중인 기능으로, 현재 공식 문서에서 상세 명세가 공개되지 않았다. `/list-agents`, `@세션명` 같은 명령은 향후 지원될 수 있으나 현재 버전에서는 동작하지 않을 수 있다. 실습 시 공식 릴리스 노트를 먼저 확인할 것.'
+                    : 'Cross-session messaging is a feature Anthropic is developing. Detailed specs are not yet publicly available. Commands like `/list-agents` and `@session-name` may be supported in future versions but may not work in the current release. Check official release notes before trying this.'}
+                </p>
               </div>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                {isKo
+                  ? '현재 여러 세션 간 결과를 공유하는 실용적인 방법은 progress 파일이다. 세션 A의 결과를 `docs/progress/`에 기록하면 세션 B가 그 파일을 읽어 이어받을 수 있다.'
+                  : 'The practical method for sharing results between sessions right now is progress files. Session A writes results to `docs/progress/`, and Session B reads that file to pick up from there.'}
+              </p>
             </div>
 
             <div>
               <h3 className="text-lg font-bold text-slate-800 mb-4">{isKo ? '5-3. Agent Teams (실험적)' : '5-3. Agent Teams (Experimental)'}</h3>
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4">
-                <div className="text-amber-800 font-bold text-sm mb-1">⚗️ {isKo ? '실험적 기능' : 'Experimental Feature'}</div>
-                <p className="text-amber-700 text-xs">
+                <div className="text-amber-800 font-bold text-sm mb-1">⚗️ {isKo ? '실험적 기능 — 현재 공식 문서 미공개' : 'Experimental Feature — Not Yet in Official Docs'}</div>
+                <p className="text-amber-700 text-xs leading-relaxed">
                   {isKo
-                    ? 'Agent Teams는 실험적 기능이다. `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` 환경 변수로 활성화한다. API가 변경될 수 있다.'
-                    : 'Agent Teams is experimental. Enable with `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. The API may change.'}
+                    ? 'Agent Teams는 현재 공식 문서에 환경 변수명 등 구체적인 설정 방법이 공개되지 않았다. Anthropic 릴리스 노트에서 최신 상태를 확인하고, 활성화 방법이 다를 수 있음을 감안하고 사용할 것.'
+                    : 'Agent Teams has no officially documented setup (including env var names) in current docs. Check Anthropic release notes for the latest status — activation method may differ from what\'s shown here.'}
                 </p>
               </div>
-              <pre className="bg-slate-900 text-green-400 rounded-xl p-5 text-xs overflow-x-auto">{`# 환경 변수로 활성화
+              <pre className="bg-slate-900 text-green-400 rounded-xl p-5 text-xs overflow-x-auto">{`# 공식 문서 확인 후 실제 환경 변수명으로 대체할 것
+# (아래는 개념 예시)
 export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 
-# settings.json에서 팀 모드 설정
-// .claude/settings.json
+# agent teams 활성화 시 settings.json 예상 형태
 {
   "agentTeams": {
-    "teammateMode": "auto",    // auto | manual
-    "teammates": [
-      "investigator",
-      "reviewer"
-    ]
-  },
-  "hooks": {
-    "TeammateIdle": [
-      {
-        "hooks": [{
-          "type": "command",
-          "command": "$CLAUDE_PROJECT_DIR/.claude/scripts/notify.sh teammate_idle"
-        }]
-      }
-    ],
-    "TaskCompleted": [
-      {
-        "hooks": [{
-          "type": "command",
-          "command": "$CLAUDE_PROJECT_DIR/.claude/scripts/notify.sh task_completed"
-        }]
-      }
-    ]
+    "teammateMode": "auto",
+    "teammates": ["investigator", "reviewer"]
   }
 }`}</pre>
             </div>
@@ -992,7 +999,7 @@ export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
     ],
     "Notification": [
       {
-        "matcher": "permission_prompt|agent_needs_input|idle_prompt",
+        "matcher": "permission_prompt",
         "hooks": [{
           "type": "command",
           "command": "$CLAUDE_PROJECT_DIR/.claude/scripts/notify.sh"
@@ -1016,7 +1023,6 @@ export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
               <pre className="bg-slate-900 text-green-400 rounded-xl p-5 text-xs overflow-x-auto">{`// ~/.claude/settings.json — 모든 프로젝트에 공통 적용
 {
   "sessionName": "personal",
-  "crossSessionInbound": "accept",
   "hooks": {
     "Notification": [
       {
